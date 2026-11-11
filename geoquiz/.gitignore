@@ -1,0 +1,8 @@
+node_modules/
+dist/
+data/raw/
+data/raw-demo/
+data/build/
+public/app.js
+public/data/
+.wrangler/
