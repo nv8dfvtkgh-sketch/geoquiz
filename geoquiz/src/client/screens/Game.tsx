@@ -1,0 +1,256 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { QuestionMsg, Reveal } from '../../shared/protocol';
+import { MapView, type Mark } from '../MapView';
+import { sfx } from '../sound';
+import { useApp } from '../state';
+import { FlagImg, Leaderboard } from './common';
+
+export function Game() {
+  const { s } = useApp();
+  const q = s.question;
+  if (!q || !s.room) return <div className="loading" />;
+  const presenter = s.isHost && !s.room.hostPlays;
+  return presenter ? <Presenter q={q} /> : <Play q={q} />;
+}
+
+/** Question courte + nom du lieu en grand (évite les accords : « la Chine », « de la Chine »…). */
+function Prompt({ q }: { q: QuestionMsg }) {
+  const { t } = useApp();
+  const label = t(q.promptKey);
+  return (
+    <div className="prompt" key={q.index}>
+      <div className="prompt-text">
+        {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto">{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
+      </div>
+      {q.flag && <FlagImg token={q.flag} className="flag big" />}
+    </div>
+  );
+}
+
+/** Révélation de la bonne réponse : immédiate en solo, en fin de manche à plusieurs. */
+function useReveal(q: QuestionMsg): Reveal | undefined {
+  const { s } = useApp();
+  if (s.room?.kind === 'solo') return s.fb?.q === q.index ? s.fb.reveal : undefined;
+  return s.reveal?.q === q.index ? s.reveal.reveal : undefined;
+}
+
+// ------------------------------------------------------------------ joueur
+function Play({ q }: { q: QuestionMsg }) {
+  const { t, s, send } = useApp();
+  const fb = s.fb?.q === q.index ? s.fb : undefined;
+  const reveal = useReveal(q);
+  const solo = s.room!.kind === 'solo';
+  const me = s.room!.players.find((p) => p.id === s.you);
+  const locked = !!fb?.done || !!reveal || (q.remaining !== null && s.reveal?.q === q.index);
+
+  // Sons au retour du serveur.
+  const lastSeen = useRef('');
+  useEffect(() => {
+    if (!fb) return;
+    const k = `${fb.q}:${fb.tried.length}`;
+    if (k === lastSeen.current) return;
+    lastSeen.current = k;
+    fb.correct ? sfx.good() : sfx.bad();
+  }, [fb]);
+
+  const answer = (value: string) => {
+    if (locked || fb?.tried.includes(value)) return;
+    send({ t: 'answer', q: q.index, value });
+  };
+
+  const marks = useMemo(() => {
+    const m: Record<string, Mark> = {};
+    for (const v of fb?.tried ?? []) m[v] = 'picked';
+    if (fb?.lastBad && !fb.done) m[fb.lastBad] = 'bad';
+    if (fb?.done && fb.correct && fb.value) m[fb.value] = 'good';
+    if (reveal?.id && !(fb?.correct)) m[reveal.id] = 'reveal';
+    if (reveal?.id && fb?.correct) m[reveal.id] = 'good';
+    return m;
+  }, [fb, reveal]);
+
+  return (
+    <div className={`play kind-${q.kind}`}>
+      <div className="hud">
+        <span className="qnum">{t('play.question', { i: q.index + 1, n: q.total })}</span>
+        {!solo && me && <span className="myscore">{t('play.score', { n: me.score })}</span>}
+        <Timer q={q} stopped={locked} />
+      </div>
+
+      <Prompt q={q} />
+
+      {q.kind === 'map' && q.map && (
+        <MapView spec={q.map} marks={marks} onPick={locked ? undefined : answer} t={t} />
+      )}
+
+      {q.kind !== 'map' && q.map && q.highlight && (
+        <MapView spec={q.map} highlight={q.highlight} marks={reveal?.id ? { [reveal.id]: fb?.correct ? 'good' : 'reveal' } : {}} t={t} />
+      )}
+
+      {q.kind === 'mcq' && <Options q={q} chosen={fb?.value} correctId={reveal?.optionId ?? (fb?.correct ? fb.value : undefined)} wrongId={fb && !fb.correct ? fb.value : undefined} onPick={locked ? undefined : answer} />}
+
+      {q.kind === 'type' && <TypeBox key={q.index} disabled={locked} onSubmit={answer} />}
+
+      <Status q={q} />
+    </div>
+  );
+}
+
+function Options({ q, chosen, correctId, wrongId, onPick }: { q: QuestionMsg; chosen?: string; correctId?: string; wrongId?: string; onPick?: (v: string) => void }) {
+  const flags = q.options!.some((o) => o.flag);
+  return (
+    <div className={`options ${flags ? 'flags' : ''}`}>
+      {q.options!.map((o, i) => {
+        const cls = o.id === correctId ? 'good' : o.id === wrongId ? 'bad' : o.id === chosen ? 'chosen' : '';
+        return (
+          <button type="button" key={o.id} className={`opt ${cls}`} disabled={!onPick && !cls} onClick={() => onPick?.(o.id)} style={{ '--i': i } as React.CSSProperties}>
+            {o.flag ? <FlagImg token={o.flag} /> : <span dir="auto">{o.label}</span>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function TypeBox({ disabled, onSubmit }: { disabled: boolean; onSubmit: (v: string) => void }) {
+  const { t } = useApp();
+  const [v, setV] = useState('');
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => { ref.current?.focus({ preventScroll: true }); }, []);
+  return (
+    <form className="typebox" onSubmit={(e) => { e.preventDefault(); if (v.trim()) onSubmit(v.trim()); }}>
+      <input ref={ref} value={v} onChange={(e) => setV(e.target.value)} disabled={disabled} placeholder={t('play.typeHere')} dir="auto" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="send" />
+      <button className="btn primary" disabled={disabled || !v.trim()}>{t('play.validate')}</button>
+    </form>
+  );
+}
+
+/** Ligne d'état sous la question + panneau de fin de manche. */
+function Status({ q }: { q: QuestionMsg }) {
+  const { t, s, send } = useApp();
+  const fb = s.fb?.q === q.index ? s.fb : undefined;
+  const room = s.room!;
+  const solo = room.kind === 'solo';
+  const reveal = useReveal(q);
+  const roundEnd = !solo && s.reveal?.q === q.index ? s.reveal : undefined;
+
+  if (solo && fb?.done) {
+    const last = q.index + 1 >= q.total;
+    return (
+      <div className={`result-bar ${fb.correct ? 'ok' : 'ko'}`} role="status">
+        <div>
+          <strong>{fb.correct ? t('play.correct') : t('play.wrong')}</strong>
+          {!fb.correct && reveal && <span dir="auto">{t('play.answerWas', { label: reveal.label })}</span>}
+        </div>
+        {reveal?.flag && <FlagImg token={reveal.flag} className="flag small" />}
+        {room.settings.soloMode !== 'timed' && (
+          <button type="button" className="btn primary" autoFocus onClick={() => send({ t: 'next' })}>{last ? t('play.finish') : t('play.next')}</button>
+        )}
+      </div>
+    );
+  }
+
+  if (roundEnd) {
+    const mine = roundEnd.results.find((r) => r.id === s.you);
+    const deltas = Object.fromEntries(roundEnd.results.map((r) => [r.id, r.points]));
+    return (
+      <div className={`sheet ${mine?.correct ? 'ok' : 'ko'}`} role="status">
+        <div className="sheet-head">
+          <div>
+            <strong>{mine?.correct ? t('play.correct') : fb ? t('play.wrong') : t('play.timeUp')}</strong>
+            <span dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</span>
+          </div>
+          {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
+          {mine?.correct && <span className="gain">{t('play.points', { n: mine.points })}</span>}
+        </div>
+        <Leaderboard players={roundEnd.players} you={s.you} limit={room.kind === 'duel' ? 2 : 5} deltas={deltas} />
+        {roundEnd.next !== null && <Countdown from={roundEnd.next} at={roundEnd.at} />}
+      </div>
+    );
+  }
+
+  return (
+    <div className="status" role="status" aria-live="polite">
+      {q.kind === 'map' && !fb?.done && <span className="tries">{Array.from({ length: q.attempts }, (_, i) => <i key={i} className={i < (fb?.attemptsLeft ?? q.attempts) ? 'on' : ''} />)}<span className="sr">{t('play.attempts', { n: fb?.attemptsLeft ?? q.attempts })}</span></span>}
+      {fb && !fb.done && !fb.correct && <span className="bad-txt">{t('play.wrong')}</span>}
+      {fb?.done && !solo && (
+        <span>
+          <strong className={fb.correct ? 'good-txt' : 'bad-txt'}>{fb.correct ? t('play.correct') : t('play.wrong')}</strong>{' '}
+          {s.progress && t('play.waiting', { a: s.progress.answered, n: s.progress.total })}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Countdown({ from, at }: { from: number; at: number }) {
+  const { t } = useApp();
+  const [n, setN] = useState(Math.ceil(from / 1000));
+  useEffect(() => {
+    const id = setInterval(() => setN(Math.max(0, Math.ceil((from - (performance.now() - at)) / 1000))), 200);
+    return () => clearInterval(id);
+  }, [from, at]);
+  return <p className="countdown">{t('play.nextIn', { n })}</p>;
+}
+
+function Timer({ q, stopped }: { q: QuestionMsg; stopped: boolean }) {
+  const { s } = useApp();
+  const [left, setLeft] = useState(q.remaining ?? 0);
+  const tickRef = useRef(-1);
+  useEffect(() => {
+    if (q.remaining === null) return;
+    const end = s.qAt + q.remaining;
+    const id = setInterval(() => {
+      const l = Math.max(0, end - performance.now());
+      setLeft(l);
+      const sec = Math.ceil(l / 1000);
+      if (!stopped && sec <= 3 && sec > 0 && sec !== tickRef.current) { tickRef.current = sec; sfx.tick(); }
+    }, 100);
+    return () => clearInterval(id);
+  }, [q, s.qAt, stopped]);
+  if (q.timeLimit === null || q.remaining === null) return <span className="timer-none" />;
+  const frac = left / q.timeLimit;
+  return (
+    <span className={`timer ${frac < 0.25 ? 'low' : ''}`} role="timer">
+      <span className="timer-bar"><span style={{ transform: `scaleX(${frac})` }} /></span>
+      <span className="timer-n">{Math.ceil(left / 1000)}</span>
+    </span>
+  );
+}
+
+// ------------------------------------------------------------------ animateur (écran principal)
+function Presenter({ q }: { q: QuestionMsg }) {
+  const { t, s, send } = useApp();
+  const reveal = useReveal(q);
+  const roundEnd = s.reveal?.q === q.index ? s.reveal : undefined;
+  const last = q.index + 1 >= q.total;
+  const marks: Record<string, Mark> = reveal?.id ? { [reveal.id]: 'reveal' } : {};
+  return (
+    <div className="presenter-game">
+      <div className="hud">
+        <span className="qnum">{t('play.question', { i: q.index + 1, n: q.total })}</span>
+        <span className="answered">{s.progress ? t('play.answered', { a: s.progress.answered, n: s.progress.total }) : ''}</span>
+        <Timer q={q} stopped={!!roundEnd} />
+      </div>
+      <Prompt q={q} />
+      <div className="presenter-body">
+        {q.map && <MapView spec={q.map} highlight={q.highlight} marks={marks} t={t} />}
+        {q.kind === 'mcq' && <Options q={q} correctId={reveal?.optionId} />}
+        {roundEnd && (
+          <aside className="presenter-board">
+            <p className="answer" dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</p>
+            {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
+            <h2>{t('play.leaderboard')}</h2>
+            <Leaderboard players={roundEnd.players} limit={10} deltas={Object.fromEntries(roundEnd.results.map((r) => [r.id, r.points]))} />
+          </aside>
+        )}
+      </div>
+      <div className="actions">
+        {roundEnd ? (
+          <button type="button" className="btn primary" onClick={() => send({ t: 'next' })}>{last ? t('play.finish') : t('play.next')}</button>
+        ) : (
+          <button type="button" className="btn ghost" onClick={() => send({ t: 'next' })}>{t('play.closeQuestion')}</button>
+        )}
+      </div>
+    </div>
+  );
+}
