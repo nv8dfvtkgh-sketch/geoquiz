@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { RoomMode } from '../../shared/protocol';
 import { net } from '../net';
 import { useApp } from '../state';
 import { SettingsSummary } from './common';
@@ -52,6 +53,7 @@ export function Lobby() {
             ))}
           </ul>
         )}
+        {room.kind === 'room' && <ModePicker />}
         <SettingsSummary settings={room.settings} />
         {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
         <div className="actions">
@@ -69,6 +71,39 @@ export function Lobby() {
           )}
         </div>
       </section>
+    </div>
+  );
+}
+
+/** Mode de la salle : l'hôte choisit, les joueurs voient le choix et la règle. */
+function ModePicker() {
+  const { t, s, send } = useApp();
+  const room = s.room!;
+  const mode: RoomMode = room.settings.mode ?? 'classic';
+  const teams = room.settings.teams ?? 2;
+  const set = (patch: { mode?: RoomMode; teams?: number }) => send({ t: 'settings', settings: { ...room.settings, ...patch } });
+  return (
+    <div className="mode-picker">
+      <h3>{t('mode.title')}</h3>
+      {s.isHost ? (
+        <div className="mode-list" role="radiogroup" aria-label={t('mode.title')}>
+          {(['classic', 'battle', 'teams'] as RoomMode[]).map((m) => (
+            <button type="button" key={m} role="radio" aria-checked={mode === m} className={`mode-card ${mode === m ? 'on' : ''}`} onClick={() => set({ mode: m })}>
+              <strong>{t(`mode.${m}`)}</strong>
+              <span>{t(`mode.${m}.hint`)}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <p className="mode-chosen"><strong>{t(`mode.${mode}`)}</strong> {t(`mode.${mode}.hint`)}</p>
+      )}
+      {mode === 'teams' && s.isHost && (
+        <div className="seg teams-seg" aria-label={t('mode.teamsCount')}>
+          {[2, 3, 4].map((n) => (
+            <button type="button" key={n} aria-pressed={teams === n} onClick={() => set({ teams: n })}>{t('mode.nTeams', { n })}</button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -245,3 +245,46 @@ test('nouveaux jeux : silhouettes, monnaies, langues, calcul mental', () => {
   const mcq = drawQuestions(settings({ category: 'calc', qtype: 'mcq', difficulty: 'easy', count: 10 }));
   assert.ok(mcq.every((q) => q.options!.length === 4 && new Set(q.options!.map((o) => o.target)).size === 4));
 });
+
+test('Battle Royale : duels par paires, cœurs perdus, dernier survivant', async () => {
+  const r = create('room', settings({ count: 20, timeLimit: 5, qtype: 'mcq', mode: 'battle' }), false);
+  const host = client();
+  onMessage(host.conn, r.code, { t: 'join', name: 'Prof', lang: 'fr' });
+  const ps = ['Ana', 'Ben', 'Chloé'].map((n) => { const c = client(); onMessage(c.conn, r.code, { t: 'join', name: n, lang: 'fr' }); return c; });
+  onMessage(host.conn, r.code, { t: 'start' });
+  let snap = host.last('room')!.room;
+  assert.equal(snap.pairs!.length, 2, '3 joueurs : un duel et un joueur seul');
+  assert.ok(snap.players.every((p) => p.lives === 3));
+  const anaId = ps[0].last('joined')!.you;
+  // Ana répond toujours juste et vite, les autres se trompent : elle doit rester seule en vie.
+  for (let i = 0; i < 6 && r.state !== 'finished'; i++) {
+    const correct = r.round!.q.revealOption!;
+    const wrong = r.round!.q.options!.find((o) => o.id !== correct)!.id;
+    ps.forEach((c, k) => onMessage(c.conn, r.code, { t: 'answer', q: r.qIndex, value: k === 0 ? correct : wrong }));
+    await new Promise((res) => setTimeout(res, 450));
+    const rv = host.last('reveal')!;
+    assert.ok(!rv.battle!.lost.includes(anaId), 'Ana ne perd jamais de cœur');
+    onMessage(host.conn, r.code, { t: 'next' });
+  }
+  assert.equal(r.state, 'finished');
+  const fin = host.last('finished')!;
+  assert.equal(fin.players[0].id, anaId, 'la survivante est première');
+  assert.ok(fin.players.slice(1).every((p) => p.out));
+  r.destroy();
+});
+
+test('Équipes : répartition équilibrée et score par équipe', async () => {
+  const r = create('room', settings({ count: 2, timeLimit: 5, qtype: 'mcq', mode: 'teams', teams: 2 }), true);
+  const cs = ['A', 'B', 'C', 'D'].map((n) => { const c = client(); onMessage(c.conn, r.code, { t: 'join', name: n, lang: 'fr' }); return c; });
+  onMessage(cs[0].conn, r.code, { t: 'start' });
+  const snap = cs[0].last('room')!.room;
+  const sizes = snap.teams!.map((t) => t.size).sort();
+  assert.deepEqual(sizes, [2, 2]);
+  const correct = r.round!.q.revealOption!;
+  cs.forEach((c) => onMessage(c.conn, r.code, { t: 'answer', q: 0, value: correct }));
+  await new Promise((res) => setTimeout(res, 450));
+  const rv = cs[0].last('reveal')!;
+  const total = rv.players.reduce((s, p) => s + p.score, 0);
+  assert.equal(rv.teams!.reduce((s, t) => s + t.score, 0), total, 'le score des équipes = somme des joueurs');
+  r.destroy();
+});

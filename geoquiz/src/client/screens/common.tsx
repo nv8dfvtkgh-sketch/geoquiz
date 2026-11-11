@@ -1,4 +1,4 @@
-import type { PublicPlayer, Settings } from '../../shared/protocol';
+import { BATTLE_LIVES, type PublicPlayer, type Settings, type TeamScore } from '../../shared/protocol';
 import { useApp } from '../state';
 
 export function SettingsSummary({ settings }: { settings: Settings }) {
@@ -38,4 +38,42 @@ export function Leaderboard({ players, you, limit = 50, deltas }: { players: Pub
 
 export function FlagImg({ token, className = 'flag' }: { token: string; className?: string }) {
   return <img className={className} src={`/api/img/${token}`} alt="" draggable={false} />;
+}
+
+/** Cœurs du Battle Royale. */
+export function Hearts({ lives = 0 }: { lives?: number }) {
+  const { t } = useApp();
+  return (
+    <span className="hearts" role="img" aria-label={t('battle.lives', { n: lives })}>
+      {Array.from({ length: BATTLE_LIVES }, (_, i) => (
+        <svg key={i} viewBox="0 0 24 24" aria-hidden="true">
+          <path className={i < lives ? 'full' : 'empty'} d="M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+export function TeamChip({ team }: { team: number }) {
+  const { t } = useApp();
+  return <span className="team-chip"><i className={`t${team}`} aria-hidden="true" />{t(`team.${team}`)}</span>;
+}
+
+/** Barres de score des équipes. */
+export function TeamBars({ teams, myTeam }: { teams: TeamScore[]; myTeam?: number }) {
+  const { t } = useApp();
+  const max = Math.max(1, ...teams.map((x) => x.score));
+  return (
+    <ol className="team-bars">
+      {teams.map((x) => (
+        <li key={x.id} className={x.id === myTeam ? 'me' : ''}>
+          <div className="row">
+            <strong><TeamChip team={x.id} /></strong>
+            <span>{t('play.score', { n: x.score })} · {t('team.players', { n: x.size })}</span>
+          </div>
+          <div className="bar"><span className={`t${x.id}`} style={{ width: `${(x.score / max) * 100}%` }} /></div>
+        </li>
+      ))}
+    </ol>
+  );
 }

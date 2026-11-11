@@ -1,7 +1,7 @@
 // Moteur de jeu : salles (solo, duel, multijoueur), manches, scores, reconnexion.
 // Le serveur fait autorité : il tire les questions, vérifie les réponses et compte les points.
 import {
-  DEFAULT_SETTINGS, LANGS, LIMITS, type ClientMsg, type Lang, type PlayerRound, type PublicPlayer,
+  BATTLE_LIVES, DEFAULT_SETTINGS, LANGS, LIMITS, type TeamScore, type ClientMsg, type Lang, type PlayerRound, type PublicPlayer,
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
   type ServerMsg, type Settings,
 } from '../shared/protocol';
@@ -30,6 +30,9 @@ interface Member {
   score: number;
   streak: number;
   joinedAt: number;
+  team?: number;
+  lives?: number;
+  outAt?: number; // Battle Royale : numéro de la question où le joueur a été éliminé
 }
 
 interface AnswerState {
@@ -84,6 +87,8 @@ export function validSettings(s: any): Settings | null {
     count: clamp(s.count, LIMITS.minCount, LIMITS.maxCount, DEFAULT_SETTINGS.count),
     timeLimit: clamp(s.timeLimit, LIMITS.minTime, LIMITS.maxTime, DEFAULT_SETTINGS.timeLimit),
     soloMode: s.soloMode === 'timed' ? 'timed' : 'training',
+    mode: ['battle', 'teams'].includes(s.mode) ? s.mode : 'classic',
+    teams: clamp(s.teams, 2, 4, 2),
   };
 }
 
@@ -126,7 +131,29 @@ export class Room {
   emptySince: number | null = null;
   rematchVotes = new Set<string>();
   lastReveal: { q: number; results: PlayerRound[] } | null = null;
+  lastBattle: { lost: string[]; out: string[] } | undefined;
   hostId = '';
+  pairs: [string, string | null][] = [];
+
+  /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
+  get mode() {
+    return this.kind === 'room' ? this.settings.mode ?? 'classic' : 'classic';
+  }
+  /** Joueurs encore en jeu (Battle Royale : non éliminés). */
+  alive() {
+    return this.players().filter((p) => this.mode !== 'battle' || (p.lives ?? 0) > 0);
+  }
+  teamScores(): TeamScore[] | undefined {
+    if (this.mode !== 'teams' || this.state === 'lobby') return undefined;
+    const n = this.settings.teams ?? 2;
+    const t = Array.from({ length: n }, (_, id) => ({ id, score: 0, size: 0 }));
+    for (const p of this.players()) {
+      if (p.team === undefined || !t[p.team]) continue;
+      t[p.team].score += Math.round(p.score);
+      t[p.team].size++;
+    }
+    return t.filter((x) => x.size > 0).sort((a, b) => b.score - a.score);
+  }
 
   constructor(
     public code: string,
@@ -226,7 +253,7 @@ export class Room {
       this.sendProgress();
     } else if (this.state === 'reveal' && this.round && this.lastReveal) {
       conn.send({ t: 'question', q: this.questionFor(m.lang) });
-      conn.send({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results: this.lastReveal.results, players: this.publicPlayers(), next: null });
+      conn.send({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results: this.lastReveal.results, players: this.publicPlayers(), next: null, teams: this.teamScores(), battle: this.lastBattle });
     } else if (this.state === 'finished') {
       conn.send(this.finishedMsg(m.lang));
     }
@@ -285,14 +312,22 @@ export class Room {
   // ---------------------------------------------------------------- diffusion
   publicPlayers(): PublicPlayer[] {
     return this.players()
-      .map((p) => ({ id: p.id, name: p.name, score: Math.round(p.score), connected: !!p.conn, lang: p.lang, streak: p.streak }))
-      .sort((a, b) => b.score - a.score);
+      .map((p) => ({
+        id: p.id, name: p.name, score: Math.round(p.score), connected: !!p.conn, lang: p.lang, streak: p.streak,
+        team: p.team, lives: p.lives, out: p.lives !== undefined ? p.lives <= 0 : undefined,
+        rank: p.lives !== undefined ? [p.lives > 0 ? 1 : 0, p.lives, p.outAt ?? 0] : [0, 0, 0],
+      }))
+      // Battle Royale : les survivants d'abord, puis les derniers éliminés ; ensuite les points.
+      .sort((a, b) => b.rank[0] - a.rank[0] || b.rank[1] - a.rank[1] || b.rank[2] - a.rank[2] || b.score - a.score)
+      .map(({ rank, ...p }) => p);
   }
   snapshot(): RoomSnapshot {
     return {
       code: this.code, kind: this.kind, state: this.state, settings: this.settings, hostId: this.hostId, hostPlays: this.hostPlays,
       players: this.publicPlayers(), maxPlayers: this.maxPlayers, qIndex: this.qIndex,
       rematchVotes: this.kind === 'duel' ? [...this.rematchVotes] : undefined,
+      teams: this.teamScores(),
+      pairs: this.mode === 'battle' && this.state !== 'lobby' ? this.pairs : undefined,
     };
   }
   broadcast(f: (m: Member) => ServerMsg | null) {
@@ -308,7 +343,7 @@ export class Room {
   }
   sendProgress() {
     if (!this.round) return;
-    const players = this.players();
+    const players = this.alive();
     const answered = players.filter((p) => this.round!.answers.get(p.id)?.done).length;
     this.broadcast(() => ({ t: 'progress', answered, total: players.length }));
   }
@@ -334,7 +369,7 @@ export class Room {
         break;
       case 'next':
         if (this.kind === 'solo' && this.state === 'reveal') this.nextQuestion();
-        else if (isHost && this.state === 'reveal') this.nextQuestion();
+        else if (isHost && this.state === 'reveal') this.advance();
         else if (isHost && this.state === 'question' && this.kind === 'room' && !this.hostPlays) this.endRound();
         break;
       case 'rematch':
@@ -363,7 +398,14 @@ export class Room {
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
     this.questions = drawQuestions(this.settings);
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
-    for (const p of players) { p.score = 0; p.streak = 0; }
+    for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
+    if (this.mode === 'teams') {
+      // Équipes formées au hasard et équilibrées en nombre.
+      const n = Math.min(this.settings.teams ?? 2, players.length);
+      shuffle(players, Math.random).forEach((p, i) => (p.team = i % n));
+    }
+    if (this.mode === 'battle') for (const p of players) p.lives = BATTLE_LIVES;
+    this.lastBattle = undefined;
     this.recap = [];
     this.rematchVotes.clear();
     this.qIndex = -1;
@@ -383,7 +425,8 @@ export class Room {
       this.state = 'lobby';
       this.qIndex = -1;
       this.round = null;
-      for (const p of this.players()) { p.score = 0; p.streak = 0; }
+      for (const p of this.players()) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
+      this.pairs = [];
       // On retire les joueurs partis pendant la partie.
       for (const p of this.players()) if (!p.conn && p.id !== this.hostId) this.members.delete(p.id);
       this.broadcastRoom();
@@ -398,6 +441,12 @@ export class Room {
     const q = this.questions[this.qIndex];
     const now = Date.now();
     const timed = this.kind !== 'solo';
+    if (this.mode === 'battle') {
+      // Duels tirés au hasard parmi les joueurs encore en jeu ; un nombre impair laisse un joueur seul.
+      const ids = shuffle(this.alive().map((p) => p.id), Math.random);
+      this.pairs = [];
+      for (let i = 0; i < ids.length; i += 2) this.pairs.push([ids[i], ids[i + 1] ?? null]);
+    }
     const flagTokens: Record<string, string> = {};
     const tok = (iso: string) => (flagTokens[iso] ??= this.flagToken(iso));
     if (q.flagIso) tok(q.flagIso);
@@ -462,6 +511,7 @@ export class Room {
     let a = r.answers.get(m.id);
     if (!a) { a = { attempts: 0, done: false, correct: false, points: 0, timeMs: null, credit: 0 }; r.answers.set(m.id, a); }
     if (a.done) return;
+    if (this.mode === 'battle' && (m.lives ?? 0) <= 0) return; // éliminé : il regarde
     a.attempts++;
     const ok = r.q.check(value);
     a.answer = r.q.kind === 'type' ? value : undefined;
@@ -490,7 +540,7 @@ export class Room {
   maybeEndRound() {
     const r = this.round;
     if (!r || this.state !== 'question') return;
-    const active = this.players().filter((p) => p.conn);
+    const active = this.alive().filter((p) => p.conn);
     if (active.length && active.every((p) => r.answers.get(p.id)?.done)) {
       if (this.timer) clearTimeout(this.timer);
       this.timer = setTimeout(() => this.endRound(), 400);
@@ -510,7 +560,11 @@ export class Room {
     });
     this.recap.push({ q: r.q, results });
     this.lastReveal = { q: this.qIndex, results };
-    const last = this.qIndex >= this.questions.length - 1;
+    let battle: { lost: string[]; out: string[] } | undefined;
+    if (this.mode === 'battle') battle = this.resolveDuels(results);
+    this.lastBattle = battle;
+    // Battle Royale : la partie s'arrête quand il ne reste qu'un joueur (ou plus aucun).
+    const last = this.qIndex >= this.questions.length - 1 || (this.mode === 'battle' && this.alive().length <= 1);
     if (this.kind === 'solo') {
       const auto = this.settings.soloMode === 'timed';
       const ok = results[0]?.correct;
@@ -521,8 +575,45 @@ export class Room {
     const wait = REVEAL_MS[this.kind];
     const players = this.publicPlayers();
     this.broadcastRoom();
-    this.broadcast((m) => ({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results, players, next: last ? 1500 : wait }));
-    this.timer = setTimeout(() => this.nextQuestion(), last ? 1500 : wait);
+    const teams = this.teamScores();
+    this.broadcast((m) => ({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results, players, next: last ? 1500 : wait, teams, battle }));
+    this.timer = setTimeout(() => this.advance(), last ? 1500 : wait);
+  }
+
+  /** Question suivante, ou fin de partie (dernière question, ou un seul survivant). */
+  advance() {
+    if (this.timer) clearTimeout(this.timer);
+    if (this.mode === 'battle' && this.alive().length <= 1 && this.players().length > 1) return this.finish();
+    this.nextQuestion();
+  }
+
+  /**
+   * Battle Royale : dans chaque duel, le plus rapide avec la bonne réponse gagne et l'autre
+   * perd un cœur ; deux mauvaises réponses font perdre un cœur aux deux. Un joueur seul
+   * (nombre impair) ne perd un cœur que s'il se trompe.
+   */
+  resolveDuels(results: PlayerRound[]) {
+    const res = new Map(results.map((r) => [r.id, r]));
+    const lost: string[] = [];
+    const ok = (id: string) => !!res.get(id)?.correct;
+    const time = (id: string) => res.get(id)?.timeMs ?? Infinity;
+    for (const [a, b] of this.pairs) {
+      if (!b) { if (!ok(a)) lost.push(a); continue; }
+      if (ok(a) && ok(b)) lost.push(time(a) <= time(b) ? b : a);
+      else if (ok(a)) lost.push(b);
+      else if (ok(b)) lost.push(a);
+      else lost.push(a, b);
+    }
+    const out: string[] = [];
+    for (const id of lost) {
+      const p = this.members.get(id);
+      if (!p || p.lives === undefined) continue;
+      p.lives = Math.max(0, p.lives - 1);
+      if (p.lives === 0) { p.outAt = this.qIndex + 1; out.push(id); }
+    }
+    // Tout le monde éliminé au même tour : on rend un cœur aux joueurs qui ont tenu le plus longtemps.
+    if (this.alive().length === 0) for (const id of out) { const p = this.members.get(id)!; p.lives = 1; p.outAt = undefined; }
+    return { lost, out: out.filter((id) => (this.members.get(id)?.lives ?? 0) <= 0) };
   }
 
   finishedMsg(lang: Lang): ServerMsg {
@@ -539,7 +630,7 @@ export class Room {
         total: this.recap.length,
       };
     }
-    return { t: 'finished', players: this.publicPlayers(), recap, solo };
+    return { t: 'finished', players: this.publicPlayers(), recap, solo, teams: this.teamScores() };
   }
 
   finish() {

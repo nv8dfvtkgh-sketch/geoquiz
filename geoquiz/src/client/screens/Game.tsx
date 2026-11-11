@@ -3,7 +3,7 @@ import type { QuestionMsg, Reveal } from '../../shared/protocol';
 import { MapView, type Mark } from '../MapView';
 import { sfx } from '../sound';
 import { useApp } from '../state';
-import { FlagImg, Leaderboard } from './common';
+import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Game() {
   const { s } = useApp();
@@ -58,7 +58,8 @@ function Play({ q }: { q: QuestionMsg }) {
   const reveal = useReveal(q);
   const solo = s.room!.kind === 'solo';
   const me = s.room!.players.find((p) => p.id === s.you);
-  const locked = !!fb?.done || !!reveal || (q.remaining !== null && s.reveal?.q === q.index);
+  // Battle Royale : un joueur éliminé regarde la partie sans pouvoir répondre.
+  const locked = !!fb?.done || !!reveal || (q.remaining !== null && s.reveal?.q === q.index) || !!me?.out;
 
   // Sons au retour du serveur.
   const lastSeen = useRef('');
@@ -92,6 +93,8 @@ function Play({ q }: { q: QuestionMsg }) {
         {!solo && me && <span className="myscore">{t('play.score', { n: me.score })}</span>}
         <Timer q={q} stopped={locked} />
       </div>
+
+      <ModeBar />
 
       <Prompt q={q} />
 
@@ -180,7 +183,9 @@ function Status({ q }: { q: QuestionMsg }) {
           {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
           {mine?.correct && <span className="gain">{t('play.points', { n: mine.points })}</span>}
         </div>
-        <Leaderboard players={roundEnd.players} you={s.you} limit={room.kind === 'duel' ? 2 : 5} deltas={deltas} />
+        {roundEnd.battle && <p className="battle-line">{battleLine(t, roundEnd.battle, s.you!, room)}</p>}
+        {roundEnd.teams ? <TeamBars teams={roundEnd.teams} myTeam={room.players.find((p) => p.id === s.you)?.team} />
+          : <Leaderboard players={roundEnd.players} you={s.you} limit={room.kind === 'duel' ? 2 : 5} deltas={deltas} />}
         {roundEnd.next !== null && <Countdown from={roundEnd.next} at={roundEnd.at} />}
       </div>
     );
@@ -236,6 +241,44 @@ function Timer({ q, stopped }: { q: QuestionMsg; stopped: boolean }) {
 }
 
 // ------------------------------------------------------------------ animateur (écran principal)
+/** Bandeau du mode de salle : duel en cours (Battle Royale) ou équipe du joueur. */
+function ModeBar() {
+  const { t, s } = useApp();
+  const room = s.room!;
+  const me = room.players.find((p) => p.id === s.you);
+  if (!me) return null;
+  if (room.settings.mode === 'battle' && room.kind === 'room') {
+    if (me.out) return <p className="out-banner">{t('battle.youOut')}</p>;
+    const pair = room.pairs?.find((p) => p.includes(me.id));
+    const oppId = pair ? (pair[0] === me.id ? pair[1] : pair[0]) : null;
+    const opp = oppId ? room.players.find((p) => p.id === oppId) : undefined;
+    return (
+      <div className="versus">
+        <div className="side"><strong>{t('battle.you')}</strong><Hearts lives={me.lives} /></div>
+        <span className="vs">{t('battle.vs')}</span>
+        <div className="side right">
+          {opp ? <><strong dir="auto">{opp.name}</strong><Hearts lives={opp.lives} /></> : <strong>{t('battle.bye')}</strong>}
+        </div>
+      </div>
+    );
+  }
+  if (room.settings.mode === 'teams' && room.kind === 'room' && me.team !== undefined) return <TeamChip team={me.team} />;
+  return null;
+}
+
+/** Résultat du duel pour ce joueur. */
+function battleLine(t: (k: string, p?: Record<string, string | number>) => string, b: { lost: string[]; out: string[] }, me: string, room: NonNullable<ReturnType<typeof useApp>['s']['room']>) {
+  const pair = room.pairs?.find((p) => p.includes(me));
+  if (!pair) return '';
+  const oppId = pair[0] === me ? pair[1] : pair[0];
+  const opp = room.players.find((p) => p.id === oppId);
+  if (b.out.includes(me)) return t('battle.eliminated');
+  if (b.lost.includes(me) && opp && b.lost.includes(opp.id)) return t('battle.bothLost');
+  if (b.lost.includes(me)) return opp ? t('battle.lostTo', { name: opp.name }) : t('battle.lostHeart');
+  if (opp && b.lost.includes(opp.id)) return t('battle.beat', { name: opp.name });
+  return t('battle.safe');
+}
+
 function Presenter({ q }: { q: QuestionMsg }) {
   const { t, s, send } = useApp();
   const reveal = useReveal(q);
@@ -257,6 +300,13 @@ function Presenter({ q }: { q: QuestionMsg }) {
           <aside className="presenter-board">
             <p className="answer" dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</p>
             {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
+            {roundEnd.battle && (
+              <p className="battle-line">
+                {t('battle.alive', { n: roundEnd.players.filter((p) => !p.out).length })}
+                {roundEnd.battle.out.length > 0 && <> · {t('battle.outNames', { names: roundEnd.players.filter((p) => roundEnd.battle!.out.includes(p.id)).map((p) => p.name).join(', ') })}</>}
+              </p>
+            )}
+            {roundEnd.teams && <><h2>{t('team.title')}</h2><TeamBars teams={roundEnd.teams} /></>}
             <h2>{t('play.leaderboard')}</h2>
             <Leaderboard players={roundEnd.players} limit={10} deltas={Object.fromEntries(roundEnd.results.map((r) => [r.id, r.points]))} />
           </aside>

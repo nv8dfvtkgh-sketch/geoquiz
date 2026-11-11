@@ -10,6 +10,9 @@ export type QType = 'auto' | 'map' | 'mcq' | 'type' | 'mix';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type RoomKind = 'solo' | 'duel' | 'room';
 export type SoloMode = 'training' | 'timed';
+/** Mode d'une salle : classique, Battle Royale (duels par paires, 3 cœurs) ou équipes. */
+export type RoomMode = 'classic' | 'battle' | 'teams';
+export const BATTLE_LIVES = 3;
 
 export interface Settings {
   category: CategoryId;
@@ -19,6 +22,8 @@ export interface Settings {
   count: number;
   timeLimit: number; // secondes par question (duel / salle)
   soloMode?: SoloMode;
+  mode?: RoomMode; // salles seulement
+  teams?: number; // nombre d'équipes (2 à 4)
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -91,7 +96,12 @@ export interface PublicPlayer {
   connected: boolean;
   lang: Lang;
   streak: number;
+  team?: number; // mode équipes
+  lives?: number; // Battle Royale
+  out?: boolean; // Battle Royale : éliminé
 }
+
+export interface TeamScore { id: number; score: number; size: number }
 
 export type RoomState = 'lobby' | 'question' | 'reveal' | 'finished';
 
@@ -106,6 +116,8 @@ export interface RoomSnapshot {
   maxPlayers: number;
   qIndex: number;
   rematchVotes?: string[];
+  teams?: TeamScore[]; // mode équipes, du premier au dernier
+  pairs?: [string, string | null][]; // Battle Royale : duels de la question en cours
 }
 
 export interface QOption {
@@ -180,8 +192,8 @@ export type ServerMsg =
   | { t: 'question'; q: QuestionMsg }
   | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal }
   | { t: 'progress'; answered: number; total: number }
-  | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null }
-  | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number } }
+  | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } }
+  | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }
   | { t: 'quickWaiting' }
   | { t: 'matched'; code: string } // partie rapide : adversaire trouvé, rejoindre /ws/<code>
   | { t: 'kicked' }

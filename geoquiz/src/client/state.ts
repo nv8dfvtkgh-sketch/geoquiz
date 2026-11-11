@@ -1,7 +1,7 @@
 // État de l'application côté navigateur, alimenté par les messages du serveur.
 import { createContext, useContext } from 'react';
 import type {
-  Catalog, ClientMsg, Lang, PublicPlayer, QuestionMsg, Reveal, RoomSnapshot, ServerMsg, Settings,
+  Catalog, ClientMsg, Lang, PublicPlayer, QuestionMsg, Reveal, RoomSnapshot, ServerMsg, Settings, TeamScore,
 } from '../shared/protocol';
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
@@ -32,7 +32,7 @@ export interface State {
   qAt: number;
   fb?: Feedback;
   progress?: { answered: number; total: number };
-  reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number };
+  reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } };
   finished?: Extract<ServerMsg, { t: 'finished' }>;
   error?: string;
   joinCode?: string;
@@ -94,7 +94,7 @@ function onServer(s: State, m: ServerMsg): State {
     case 'progress':
       return { ...s, progress: { answered: m.answered, total: m.total } };
     case 'reveal':
-      return { ...s, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q } };
+      return { ...s, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle } };
     case 'finished':
       return { ...s, finished: m, screen: 'final' };
     case 'quickWaiting':

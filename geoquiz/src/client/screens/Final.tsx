@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { formatTime } from '../i18n';
 import { sfx } from '../sound';
 import { useApp } from '../state';
-import { Leaderboard } from './common';
+import { Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Final() {
   const { t, s, send, leave } = useApp();
@@ -60,6 +60,15 @@ export function Final() {
   return (
     <div className="final panel">
       <h1>{t('final.title')}</h1>
+      {f.teams && f.teams.length > 0 && (
+        <>
+          <p className="record"><TeamChip team={f.teams[0].id} /> {t('team.wins')}</p>
+          <TeamBars teams={f.teams} myTeam={f.players.find((p) => p.id === s.you)?.team} />
+        </>
+      )}
+      {room.settings.mode === 'battle' && f.players[0] && !f.players[0].out && (
+        <p className="record" dir="auto">{t('battle.winner', { name: f.players[0].name })}</p>
+      )}
       <div className="podium">
         {[1, 0, 2].map((i) => podium[i] && (
           <div key={podium[i].id} className={`step s${i + 1} ${podium[i].id === s.you ? 'me' : ''}`}>
