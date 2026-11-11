@@ -11,7 +11,7 @@ import type { ClientMsg, RoomKind, ServerMsg, Settings } from '../src/shared/pro
 
 const BUILD = path.join(__dirname, '../data/build');
 const read = (f: string) => JSON.parse(fs.readFileSync(path.join(BUILD, f), 'utf8'));
-initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null));
+initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null), { languages: read('languages.json') });
 
 const rooms = new Map<string, Room>();
 function create(kind: RoomKind, s: Settings, hostPlays = true) {
@@ -34,6 +34,29 @@ function client() {
   return { conn, msgs, last };
 }
 const settings = (s: Partial<Settings> = {}): Settings => ({ category: 'countries', zone: 'world', difficulty: 'hard', qtype: 'map', count: 5, timeLimit: 10, soloMode: 'training', ...s });
+
+test('saisie : une ou deux fautes, sans confondre deux pays', () => {
+  const all = ['maroc', 'mali', 'niger', 'nigeria', 'iran', 'irak', 'autriche', 'australie', 'cuba'];
+  assert.ok(matches('Marok', ['Maroc'], all));
+  assert.ok(matches('Marrok', ['Maroc'], all), 'deux fautes');
+  assert.ok(!matches('Marrokk', ['Maroc'], all), 'trois fautes');
+  assert.ok(matches('Cubaa', ['Cuba'], all), 'une faute sur un nom court');
+  assert.ok(!matches('Niger', ['Nigeria'], all), 'Niger ≠ Nigeria');
+  assert.ok(!matches('Iran', ['Irak'], all), 'Iran ≠ Irak');
+  assert.ok(!matches('Autriche', ['Australie'], all));
+  assert.ok(matches('Australi', ['Australie'], all));
+});
+
+test('« selon le niveau » : facile = QCM, difficile = saisie ; facile = pays connus', () => {
+  const easy = drawQuestions(settings({ qtype: 'auto', difficulty: 'easy', count: 10 }));
+  assert.ok(easy.every((q) => q.kind === 'mcq'));
+  const hard = drawQuestions(settings({ qtype: 'auto', difficulty: 'hard', count: 10 }));
+  assert.ok(hard.every((q) => q.kind === 'type'));
+  const med = drawQuestions(settings({ qtype: 'auto', difficulty: 'medium', count: 30 }));
+  assert.ok(new Set(med.map((q) => q.kind)).size > 1, 'mélange en intermédiaire');
+  const pool = new Set(drawQuestions(settings({ difficulty: 'easy', count: 5 })).map((q) => q.target));
+  assert.ok(!pool.has('LS') && !pool.has('MC'), 'pas de micro-États en facile');
+});
 
 test('saisie tolérante', () => {
   assert.ok(matches('etats unis', ['États-Unis']));
@@ -191,4 +214,34 @@ test('partie rapide : deux joueurs sont associés dans un duel', async () => {
   const code = a.last('matched')!.code;
   assert.equal(b.last('matched')!.code, code);
   assert.equal(rooms.get(code)!.kind, 'duel');
+});
+
+test('nouveaux jeux : silhouettes, monnaies, langues, calcul mental', () => {
+  // Silhouettes : la forme est recentrée (pas les coordonnées de la carte) et la réponse n'y figure pas.
+  const sil = drawQuestions(settings({ category: 'silhouettes', qtype: 'mcq', count: 5 }));
+  assert.ok(sil.length && sil.every((q) => q.shape && q.shape.w > 0 && !q.shape.d.includes(q.target)));
+  // Monnaies : 4 monnaies différentes.
+  const cur = drawQuestions(settings({ category: 'currencies', qtype: 'mcq', count: 10 }));
+  for (const q of cur) {
+    const codes = q.options!.map((o) => countries[o.target].currency!.code);
+    assert.equal(new Set(codes).size, codes.length, 'pas deux fois la même monnaie');
+  }
+  const typed = drawQuestions(settings({ category: 'currencies', qtype: 'type', count: 30 })).find((q) => q.target === 'MA');
+  if (typed) assert.ok(typed.check('dirham') && typed.check('Dirham marocain') && typed.check('درهم مغربي'));
+  // Langues : salutation, accepte tous les pays où la langue est parlée.
+  const lang = drawQuestions(settings({ category: 'languages', qtype: 'map', difficulty: 'hard', count: 50 }));
+  const ar = lang.find((q) => q.target === 'ar');
+  assert.ok(ar && ar.check('MA') && ar.check('EG') && !ar.check('FR'));
+  const fr = drawQuestions(settings({ category: 'languages', qtype: 'type', difficulty: 'hard', count: 50 })).find((q) => q.target === 'fr');
+  assert.ok(fr && fr.check('francais') && fr.check('French') && fr.check('الفرنسية'));
+  // Calcul mental : réponse exacte, chiffres arabes acceptés.
+  const calc = drawQuestions(settings({ category: 'calc', qtype: 'type', difficulty: 'medium', count: 10 }));
+  for (const q of calc) {
+    const v = q.answer.fr;
+    assert.ok(q.check(v) && q.check(` ${v} `) && !q.check(String(+v + 1)));
+    const arabic = v.replace(/\d/g, (c) => '٠١٢٣٤٥٦٧٨٩'[+c]);
+    assert.ok(q.check(arabic), 'chiffres arabes ' + arabic);
+  }
+  const mcq = drawQuestions(settings({ category: 'calc', qtype: 'mcq', difficulty: 'easy', count: 10 }));
+  assert.ok(mcq.every((q) => q.options!.length === 4 && new Set(q.options!.map((o) => o.target)).size === 4));
 });
