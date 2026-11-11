@@ -9,6 +9,7 @@ import { categoryInfos } from './categories';
 import { catalog, ensureRegion, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
+import { QuizService, quizRoute, safeEqual, type KV } from './quizzes';
 
 // ------------------------------------------------------------------ données
 function findRoot(dir: string): string {
@@ -33,18 +34,46 @@ initData(readJson(path.join(BUILD, 'world.json')), readJson(path.join(BUILD, 'co
 config.maxPlayers = Number(process.env.MAX_PLAYERS ?? 50);
 const catalogJson = JSON.stringify(catalog(categoryInfos(), config.maxPlayers));
 
+// ------------------------------------------------------------------ quiz créés (stockés en fichiers)
+const STORE = process.env.STORE_DIR ? path.resolve(process.env.STORE_DIR) : path.join(ROOT, 'data/store');
+fs.mkdirSync(STORE, { recursive: true });
+const fileOf = (key: string) => path.join(STORE, key.replace(/:/g, '__') + '.json');
+const fileKV: KV = {
+  async get(key) { const f = fileOf(key); return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : undefined; },
+  async put(key, value) { fs.writeFileSync(fileOf(key), JSON.stringify(value)); },
+  async delete(key) { fs.rmSync(fileOf(key), { force: true }); },
+  async list(prefix) {
+    const p = prefix.replace(/:/g, '__');
+    return fs.readdirSync(STORE).filter((f) => f.startsWith(p) && f.endsWith('.json')).map((f) => f.slice(0, -5).replace(/__/g, ':'));
+  },
+};
+const quizzes = new QuizService(fileKV);
+config.loadQuiz = (id, token) => quizzes.playable(id, token);
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? '';
+
 // ------------------------------------------------------------------ salles
 const rooms = new Map<string, Room>();
 const emptySince = new Map<string, number>();
-function createRoom(body: any): string | null {
+async function createRoom(body: any): Promise<string | { error: string }> {
   const settings = validSettings(body?.settings);
-  if (!settings) return null;
+  if (!settings) return { error: 'settings.invalid' };
   const kind = ['solo', 'duel', 'room'].includes(body.kind) ? body.kind : 'room';
+  // Quiz créé : jouable par tous une fois validé ; avant, seulement par son créateur, en solo.
+  let quizToken: string | undefined;
+  if (settings.category === 'custom') {
+    const rec = await quizzes.record(settings.quiz!);
+    if (!rec) return { error: 'quiz.notFound' };
+    const owner = typeof body.quizToken === 'string' && body.quizToken === rec.token;
+    if (owner && kind === 'solo') quizToken = body.quizToken;
+    else if (!rec.live) return { error: 'quiz.notApproved' };
+  }
   const code = newCode((c) => rooms.has(c));
-  rooms.set(code, new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code)));
+  const room = new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code));
+  room.quizToken = quizToken;
+  rooms.set(code, room);
   return code;
 }
-const quick = new QuickQueue((settings) => createRoom({ kind: 'duel', settings })!);
+const quick = new QuickQueue(async (settings) => (await createRoom({ kind: 'duel', settings })) as string);
 
 // Ménage : salles créées mais jamais rejointes, ou abandonnées depuis 15 minutes.
 setInterval(() => {
@@ -65,10 +94,10 @@ function send(res: http.ServerResponse, status: number, body: string | Buffer, t
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': cache, 'X-Content-Type-Options': 'nosniff' });
   res.end(body);
 }
-function readBody(req: http.IncomingMessage): Promise<string> {
+function readBody(req: http.IncomingMessage, max = 4096): Promise<string> {
   return new Promise((resolve, reject) => {
     let data = '';
-    req.on('data', (c) => { data += c; if (data.length > 4096) { reject(new Error('too large')); req.destroy(); } });
+    req.on('data', (c) => { data += c; if (data.length > max) { reject(new Error('too large')); req.destroy(); } });
     req.on('end', () => resolve(data));
     req.on('error', reject);
   });
@@ -83,8 +112,17 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/rooms' && req.method === 'POST') {
       let body: any = null;
       try { body = JSON.parse(await readBody(req)); } catch {}
-      const code = createRoom(body);
-      return code ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify({ error: 'settings.invalid' }));
+      const code = await createRoom(body);
+      return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
+    }
+    if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) {
+      const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
+      const r = await quizRoute(quizzes, req.method ?? 'GET', p, url.searchParams,
+        async () => JSON.parse(await readBody(req, 12_000_000)), ADMIN_PASSWORD ? safeEqual(auth, ADMIN_PASSWORD) : null);
+      if (r) {
+        if (r.image) return send(res, 200, Buffer.from(r.image.b64, 'base64'), r.image.type, 'private, max-age=3600');
+        return send(res, r.status, JSON.stringify(r.json ?? {}));
+      }
     }
     if (p === '/api/map/world') return send(res, 200, worldJson, 'application/json', 'public, max-age=86400');
     let m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -96,6 +134,11 @@ const server = http.createServer(async (req, res) => {
     m = p.match(/^\/api\/img\/([A-Z0-9]{6})\.([\w-]{6,20})$/);
     if (m) {
       const iso = rooms.get(m[1])?.resolveImage(`${m[1]}.${m[2]}`);
+      if (iso?.startsWith('quiz:')) {
+        const [, qid, img] = iso.split(':');
+        const im = await quizzes.image(qid, img);
+        return im ? send(res, 200, Buffer.from(im.b64, 'base64'), im.type, 'private, max-age=3600') : send(res, 404, '');
+      }
       const f = iso && path.join(BUILD, 'flags', `${iso}.svg`);
       return f && fs.existsSync(f) ? send(res, 200, fs.readFileSync(f), 'image/svg+xml', 'private, max-age=3600') : send(res, 404, '');
     }

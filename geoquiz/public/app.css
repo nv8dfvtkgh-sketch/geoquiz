@@ -377,3 +377,50 @@ legend { margin-bottom: 6px; padding: 0; }
 .team-bars .bar span { display: block; height: 100%; transition: width .4s; }
 .team-bars li.me .row strong { text-decoration: underline; text-underline-offset: 3px; }
 .t0 { background: #1E5D75; } .t1 { background: #DDA032; } .t2 { background: #6E9FB1; } .t3 { background: #8A5A12; }
+
+/* ---- Crée ton quiz : mes quiz, éditeur, fiche, validation ---- */
+.create-quiz.ready { border-style: solid; border-color: var(--ink); color: var(--ink); cursor: pointer; transition: transform .08s, background .15s; }
+.create-quiz.ready:active { transform: scale(.98); }
+@media (hover: hover) { .create-quiz.ready:hover { background: var(--paper-2); } }
+.quizzes { display: flex; flex-direction: column; gap: 14px; padding-bottom: 40px; }
+.quizzes h1 { margin: 0; font-size: clamp(1.6rem, 5vw, 2.1rem); }
+.quizzes .join { flex-direction: column; margin: 0; }
+.back-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 0 12px 0 6px; border-radius: 999px; border: 1px solid var(--border); background: transparent; font-weight: 600; cursor: pointer; }
+[dir='rtl'] .back-link svg { transform: scaleX(-1); }
+.btn.wide { width: 100%; }
+.btn:disabled, .how-btn:disabled { opacity: .45; cursor: not-allowed; }
+.small { font-size: .85rem; }
+.quiz-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.quiz-list li { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+.quiz-list p { margin: 4px 0 0; font-size: .9rem; }
+.quiz-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.quiz-head strong { font-family: var(--font-display); font-size: 1.08rem; }
+.row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.row-actions .btn { min-height: 40px; padding: 6px 16px; }
+.badge { display: inline-block; font-size: .78rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.st-pending { color: var(--hl); }
+.st-approved { color: var(--good); }
+.st-rejected { color: var(--bad); }
+.reason { color: var(--bad); }
+.notice { margin: 0; padding: 12px 14px; border-radius: var(--radius); background: var(--paper-2); border-inline-start: 3px solid var(--hl); font-size: .9rem; line-height: 1.5; }
+.q-card { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px 14px; margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.q-card-head { display: flex; align-items: center; justify-content: space-between; }
+.q-card legend { float: left; padding: 0; font-family: var(--font-display); font-size: 1rem; color: var(--ink); font-weight: 600; }
+.q-upload { display: flex; flex-direction: column; gap: 2px; padding: 12px; border: 1px dashed var(--line); border-radius: var(--radius); cursor: pointer; text-align: center; }
+.q-upload span { font-weight: 600; color: var(--accent); }
+.q-upload small { color: var(--ink-2); }
+.q-upload:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.q-photo { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.q-photo img { max-width: 100%; max-height: 220px; border-radius: 8px; border: 1px solid var(--border); }
+.q-answer { display: flex; align-items: center; gap: 10px; padding: 4px 4px 4px 10px; border-radius: var(--radius); border: 1px solid var(--border); }
+.q-answer.on { border-color: var(--good); background: color-mix(in srgb, var(--good) 10%, transparent); }
+.q-answer input[type='radio'] { width: 20px; height: 20px; accent-color: var(--good); flex: none; }
+.q-answer input:not([type='radio']) { flex: 1; min-width: 0; border: 0; background: transparent; }
+.quizzes .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px; }
+.text-btn.danger { color: var(--bad); margin-inline-end: auto; }
+.quiz-photo { display: block; max-width: min(100%, 440px); max-height: 32vh; margin: 8px auto 0; border-radius: 10px; border: 1px solid var(--border); object-fit: contain; }
+.admin-questions { margin: 0; padding-inline-start: 22px; display: flex; flex-direction: column; gap: 14px; }
+.admin-questions > li { padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.admin-questions img { display: block; max-width: 100%; max-height: 320px; margin: 8px 0; border-radius: 8px; border: 1px solid var(--border); }
+.admin-questions ul { margin: 6px 0 0; padding-inline-start: 18px; }
+.admin-questions .loading { margin: 10px 0; }

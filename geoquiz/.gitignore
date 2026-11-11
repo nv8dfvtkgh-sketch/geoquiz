@@ -6,3 +6,4 @@ data/build/
 public/app.js
 public/data/
 .wrangler/
+data/store/

@@ -23,6 +23,7 @@ export interface Settings {
   timeLimit: number; // secondes par question (duel / salle)
   soloMode?: SoloMode;
   mode?: RoomMode; // salles seulement
+  quiz?: string; // catégorie « custom » : code du quiz créé
   teams?: number; // nombre d'équipes (2 à 4)
 }
 
@@ -137,6 +138,7 @@ export interface QuestionMsg {
   map?: MapSpec;
   highlight?: string; // entité surlignée (« quel est ce pays ? »)
   shape?: { d: string; w: number; h: number }; // silhouette à deviner (coordonnées recentrées)
+  image?: string; // jeton d'une photo de quiz créé
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono
@@ -167,7 +169,7 @@ export interface RecapItem {
 
 // Création d'une partie : POST /api/rooms (CreateRoomReq) → { code } ou { error }.
 // Ensuite, le navigateur ouvre le WebSocket /ws/<CODE> et envoie « join » (ou « resume »).
-export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean }
+export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string }
 
 // Messages navigateur → serveur
 export type ClientMsg =

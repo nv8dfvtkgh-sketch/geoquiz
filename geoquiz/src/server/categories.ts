@@ -21,6 +21,8 @@ export interface InternalQuestion {
   promptKey: string;
   promptName?: Names; // paramètre {name} traduit
   flagIso?: string;
+  imageRef?: string; // photo d'un quiz créé : « quiz:<code>:<image> »
+  extraParams?: Record<string, string>; // paramètres identiques dans toutes les langues
   map?: MapSpec;
   highlight?: string;
   shape?: { d: string; w: number; h: number };
@@ -421,8 +423,35 @@ const calcCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
+// Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
+// cette entrée sert au catalogue et à la validation des réglages.
+const customCat: Category = {
+  id: 'custom',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool: () => [],
+  make() { throw new Error('quiz créé : voir customQuestions'); },
+};
+
+/** Questions d'un quiz créé : QCM à 2-4 réponses, mélangées, avec photo facultative. */
+export function customQuestions(id: string, quiz: { title: string; questions: { text: string; image?: string; answers: string[]; correct: number }[] }, rnd: () => number): InternalQuestion[] {
+  const same = (s: string): Names => ({ fr: s, en: s, ar: s, es: s });
+  return shuffle(quiz.questions, rnd).map((q) => {
+    const opts = shuffle(q.answers.map((a, i) => ({ a, i })), rnd).map((o, k) => ({ id: `o${k}`, target: String(o.i), label: same(o.a) }));
+    const correct = opts.find((o) => o.target === String(q.correct))!.id;
+    return {
+      category: 'custom', kind: 'mcq', promptKey: 'q.custom', promptName: same(q.text), extraParams: { title: quiz.title },
+      imageRef: q.image ? `quiz:${id}:${q.image}` : undefined,
+      options: opts, revealOption: correct, attempts: 1, target: String(q.correct), answer: same(q.answers[q.correct]),
+      check: (v: string) => v === correct,
+    };
+  });
+}
+
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, calcCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, calcCat, customCat].map((c) => [c.id, c]),
 );
 
 export function categoryInfos(): CategoryInfo[] {

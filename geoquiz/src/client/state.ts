@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin';
 
 export interface Feedback {
   q: number;
@@ -36,6 +36,8 @@ export interface State {
   finished?: Extract<ServerMsg, { t: 'finished' }>;
   error?: string;
   joinCode?: string;
+  /** Quiz créé ouvert (éditeur ou fiche) : code, et jeton si on en est le créateur. */
+  quiz?: { id: string; token?: string };
 }
 
 export const initialState = (joinCode?: string): State => ({ screen: 'home', setupKind: 'game', game: 'countries', isHost: false, qAt: 0, joinCode });
@@ -44,6 +46,7 @@ export type Action =
   | { type: 'server'; msg: ServerMsg }
   | { type: 'go'; screen: Screen; setupKind?: State['setupKind'] }
   | { type: 'openGame'; game: string }
+  | { type: 'openQuiz'; screen: Screen; quiz?: { id: string; token?: string } }
   | { type: 'error'; code?: string }
   | { type: 'reset' };
 
@@ -51,6 +54,8 @@ export function reducer(s: State, a: Action): State {
   switch (a.type) {
     case 'go':
       return { ...s, screen: a.screen, setupKind: a.setupKind ?? s.setupKind, error: undefined };
+    case 'openQuiz':
+      return { ...s, screen: a.screen, quiz: a.quiz, error: undefined };
     case 'openGame':
       return { ...s, screen: 'setup', setupKind: 'game', game: a.game, error: undefined };
     case 'error':
@@ -117,6 +122,7 @@ export interface Ctx {
   send: (m: ClientMsg) => void;
   go: (screen: Screen, setupKind?: State['setupKind']) => void;
   openGame: (game: string) => void;
+  openQuiz: (screen: Screen, quiz?: { id: string; token?: string }) => void;
   catalog: Catalog | null;
   name: string;
   setName: (n: string) => void;

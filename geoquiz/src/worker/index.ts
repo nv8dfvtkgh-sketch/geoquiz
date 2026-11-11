@@ -9,12 +9,19 @@ import { categoryInfos } from '../server/categories';
 import { catalog, dataReady, ensureRegion, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
+import { QuizService, quizRoute, safeEqual, type KV } from '../server/quizzes';
 
 // Types minimaux de la plateforme (pour ne pas dépendre de @cloudflare/workers-types).
 interface Fetcher { fetch(input: Request | string, init?: RequestInit): Promise<Response> }
 interface DOStub { fetch(input: Request | string, init?: RequestInit): Promise<Response> }
 interface DONamespace { idFromName(name: string): unknown; get(id: unknown): DOStub }
-interface DOState { id: unknown }
+interface DOStorage {
+  get<T>(key: string): Promise<T | undefined>;
+  put(key: string, value: unknown): Promise<void>;
+  delete(key: string): Promise<boolean>;
+  list(opts: { prefix: string }): Promise<Map<string, unknown>>;
+}
+interface DOState { id: unknown; storage: DOStorage }
 interface CfWebSocket {
   accept(): void;
   send(data: string): void;
@@ -29,8 +36,17 @@ export interface Env {
   ASSETS: Fetcher;
   ROOMS: DONamespace;
   QUICK: DONamespace;
+  QUIZZES: DONamespace;
   MAX_PLAYERS?: string;
+  ADMIN_PASSWORD?: string; // secret : Paramètres › Variables et secrets
 }
+
+/** Tous les quiz créés vivent dans un Durable Object unique (stockage SQLite). */
+const quizStub = (env: Env) => env.QUIZZES.get(env.QUIZZES.idFromName('store'));
+const quizCall = async <T>(env: Env, op: string, body: unknown): Promise<T | null> => {
+  const r = await quizStub(env).fetch(`https://quiz/internal/${op}`, { method: 'POST', body: JSON.stringify(body) });
+  return r.ok ? ((await r.json()) as T) : null;
+};
 
 const json = (body: unknown, status = 200, cache = 'no-store') =>
   new Response(typeof body === 'string' ? body : JSON.stringify(body), {
@@ -62,20 +78,28 @@ function ensureData(env: Env): Promise<void> {
 const roomStub = (env: Env, code: string) => env.ROOMS.get(env.ROOMS.idFromName(code));
 
 /** Crée une partie dans un nouveau Durable Object et renvoie son code. */
-async function createRoom(env: Env, body: any): Promise<string | null> {
+async function createRoom(env: Env, body: any): Promise<string | { error: string }> {
   const settings = validSettings(body?.settings);
-  if (!settings) return null;
+  if (!settings) return { error: 'settings.invalid' };
   const kind = ['solo', 'duel', 'room'].includes(body.kind) ? body.kind : 'room';
+  // Quiz créé : jouable par tous une fois validé ; avant, seulement par son créateur, en solo.
+  let quizToken: string | undefined;
+  if (settings.category === 'custom') {
+    const st = await quizCall<{ exists: boolean; live: boolean; owner: boolean }>(env, 'check', { id: settings.quiz, token: body.quizToken });
+    if (!st?.exists) return { error: 'quiz.notFound' };
+    if (st.owner && kind === 'solo') quizToken = body.quizToken;
+    else if (!st.live) return { error: 'quiz.notApproved' };
+  }
   for (let i = 0; i < 5; i++) {
     const code = newCode();
     const res = await roomStub(env, code).fetch('https://room/init', {
       method: 'POST',
-      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false }),
+      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken }),
     });
     if (res.ok) return code;
-    if (res.status !== 409) return null; // 409 : code déjà pris, on en tire un autre
+    if (res.status !== 409) return { error: 'server' }; // 409 : code déjà pris, on en tire un autre
   }
-  return null;
+  return { error: 'server' };
 }
 
 // ------------------------------------------------------------------ Worker (point d'entrée HTTP)
@@ -103,8 +127,10 @@ export default {
           let body: unknown = null;
           try { body = JSON.parse(text); } catch {}
           const code = await createRoom(env, body);
-          return code ? json({ code }) : json({ error: 'settings.invalid' }, 400);
+          return typeof code === 'string' ? json({ code }) : json(code, 400);
         }
+        // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
+        if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
         if (m) {
@@ -164,6 +190,7 @@ export class RoomDO {
 
   async fetch(request: Request): Promise<Response> {
     await ensureData(this.env);
+    config.loadQuiz = (id, token) => quizCall(this.env, 'content', { id, token });
     const url = new URL(request.url);
 
     if (request.headers.get('Upgrade') === 'websocket') {
@@ -179,10 +206,11 @@ export class RoomDO {
 
     if (url.pathname === '/init' && request.method === 'POST') {
       if (this.room) return new Response('exists', { status: 409 });
-      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean };
+      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string };
       const settings = validSettings(b.settings);
       if (!settings) return new Response('invalid', { status: 400 });
       this.room = new Room(b.code, b.kind, settings, b.hostPlays, () => { this.room = null; });
+      this.room.quizToken = b.quizToken;
       return new Response('ok');
     }
 
@@ -192,6 +220,13 @@ export class RoomDO {
     if (img) {
       const iso = this.room?.resolveImage(img[1]);
       if (!iso) return new Response('', { status: 404 });
+      if (iso.startsWith('quiz:')) {
+        const [, id, imgId] = iso.split(':');
+        const im = await quizCall<{ type: string; b64: string }>(this.env, 'image', { id, img: imgId });
+        if (!im) return new Response('', { status: 404 });
+        const bin = Uint8Array.from(atob(im.b64), (c) => c.charCodeAt(0));
+        return new Response(bin, { headers: { 'Content-Type': im.type, 'Cache-Control': 'private, max-age=3600' } });
+      }
       const f = await asset(this.env, `flags/${iso}.svg`);
       return new Response(f.body, { status: f.status, headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'private, max-age=3600' } });
     }
@@ -204,7 +239,7 @@ export class QuickDO {
   queue: QuickQueue;
 
   constructor(private state: DOState, private env: Env) {
-    this.queue = new QuickQueue(async (settings) => (await createRoom(this.env, { kind: 'duel', settings }))!);
+    this.queue = new QuickQueue(async (settings) => (await createRoom(this.env, { kind: 'duel', settings })) as string);
   }
 
   async fetch(request: Request): Promise<Response> {
@@ -214,5 +249,53 @@ export class QuickDO {
       (conn, msg) => void this.queue.handle(conn, msg),
       (conn) => this.queue.remove(conn),
     );
+  }
+}
+
+// ------------------------------------------------------------------ quiz créés (instance unique)
+export class QuizDO {
+  svc: QuizService;
+
+  constructor(private state: DOState, private env: Env) {
+    const st = state.storage;
+    const kv: KV = {
+      get: (k) => st.get(k),
+      put: (k, v) => st.put(k, v),
+      delete: async (k) => { await st.delete(k); },
+      list: async (prefix) => [...(await st.list({ prefix })).keys()],
+    };
+    this.svc = new QuizService(kv);
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
+    // Appels internes (salles, Worker) : jamais exposés au public, l'URL vient du Worker.
+    const internal = url.pathname.match(/^\/internal\/(check|content|image)$/);
+    if (internal && url.hostname === 'quiz') {
+      const b = (await request.json()) as { id: string; token?: string; img?: string };
+      if (internal[1] === 'check') {
+        const rec = await this.svc.record(b.id);
+        return json({ exists: !!rec, live: !!rec?.live, owner: !!rec && !!b.token && b.token === rec.token });
+      }
+      if (internal[1] === 'content') {
+        const c = await this.svc.playable(b.id, b.token);
+        return c ? json(c) : json({}, 404);
+      }
+      const im = await this.svc.image(b.id, b.img ?? '');
+      return im ? json(im) : json({}, 404);
+    }
+    const pwd = this.env.ADMIN_PASSWORD ?? '';
+    const auth = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+    const r = await quizRoute(this.svc, request.method, url.pathname, url.searchParams, async () => {
+      const text = await request.text();
+      if (text.length > 12_000_000) throw new Error('too large');
+      return JSON.parse(text);
+    }, pwd ? safeEqual(auth, pwd) : null);
+    if (!r) return json({}, 404);
+    if (r.image) {
+      const bin = Uint8Array.from(atob(r.image.b64), (c) => c.charCodeAt(0));
+      return new Response(bin, { headers: { 'Content-Type': r.image.type, 'Cache-Control': 'private, max-age=3600' } });
+    }
+    return json(r.json ?? {}, r.status);
   }
 }

@@ -5,7 +5,7 @@ import { joinGame } from '../net';
 import { useApp } from '../state';
 
 export function Home() {
-  const { t, s, name, setName, lang, fail, openGame } = useApp();
+  const { t, s, name, setName, lang, fail, openGame, openQuiz } = useApp();
   const [code, setCode] = useState(s.joinCode ?? '');
   const [editingName, setEditingName] = useState(!name.trim());
   const [needName, setNeedName] = useState(false);
@@ -100,13 +100,12 @@ export function Home() {
 
       <section className="family">
         <h2>{t('family.mine')}</h2>
-        <button type="button" className="create-quiz" aria-disabled="true">
+        <button type="button" className="create-quiz ready" onClick={() => openQuiz('myquizzes')}>
           <Icon name="plus" size={32} />
           <span>
             <strong>{t('cat.create')}</strong>
             <small>{t('game.create')}</small>
           </span>
-          <span className="tile-soon">{t('home.soon')}</span>
         </button>
       </section>
     </div>

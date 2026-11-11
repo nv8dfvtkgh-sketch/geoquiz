@@ -5,7 +5,8 @@ import {
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
   type ServerMsg, type Settings,
 } from '../shared/protocol';
-import { CATEGORIES, localize, shuffle, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, localize, shuffle, type InternalQuestion } from './categories';
+import type { QuizContent } from './quizzes';
 import { countries, ensureRegion, regionLoaded, zones } from './data';
 
 export interface Conn {
@@ -15,7 +16,11 @@ export interface Conn {
 }
 
 /** Réglages modifiables par la plateforme (variable MAX_PLAYERS). */
-export const config = { maxPlayers: 50 };
+export const config: {
+  maxPlayers: number;
+  /** Charge un quiz créé : version validée, ou brouillon si le jeton du créateur est fourni. */
+  loadQuiz: (id: string, draftToken?: string) => Promise<QuizContent | null>;
+} = { maxPlayers: 50, loadQuiz: async () => null };
 export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // sans O/0, I/1/L
 const GRACE_MS = 600; // latence réseau tolérée après la fin du chrono
 const REVEAL_MS = { duel: 3500, room: 5000, solo: 0 };
@@ -79,6 +84,7 @@ export function validSettings(s: any): Settings | null {
   if (!cat || !zone || !cat.zoneKinds.includes(zone.info.kind)) return null;
   const qtype = s.qtype === 'mix' || s.qtype === 'auto' || cat.qtypes.includes(s.qtype) ? s.qtype : 'auto';
   const clamp = (v: any, lo: number, hi: number, d: number) => (Number.isFinite(+v) ? Math.min(hi, Math.max(lo, Math.round(+v))) : d);
+  if (cat.id === 'custom' && !(typeof s.quiz === 'string' && /^[A-Z0-9]{6}$/.test(s.quiz))) return null;
   return {
     category: cat.id,
     zone: s.zone,
@@ -88,6 +94,7 @@ export function validSettings(s: any): Settings | null {
     timeLimit: clamp(s.timeLimit, LIMITS.minTime, LIMITS.maxTime, DEFAULT_SETTINGS.timeLimit),
     soloMode: s.soloMode === 'timed' ? 'timed' : 'training',
     mode: ['battle', 'teams'].includes(s.mode) ? s.mode : 'classic',
+    quiz: cat.id === 'custom' ? (typeof s.quiz === 'string' && /^[A-Z0-9]{6}$/.test(s.quiz) ? s.quiz : undefined) : undefined,
     teams: clamp(s.teams, 2, 4, 2),
   };
 }
@@ -134,6 +141,9 @@ export class Room {
   lastBattle: { lost: string[]; out: string[] } | undefined;
   hostId = '';
   pairs: [string, string | null][] = [];
+  /** Quiz créé : jeton du créateur quand il teste son brouillon (solo), contenu chargé. */
+  quizToken?: string;
+  quizContent?: QuizContent;
 
   /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
   get mode() {
@@ -393,10 +403,17 @@ export class Room {
       ensureRegion(region.iso).then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' })));
       return;
     }
+    if (this.settings.category === 'custom' && !this.quizContent) {
+      config.loadQuiz(this.settings.quiz!, this.quizToken).then((c) => {
+        if (c) { this.quizContent = c; this.start(); }
+        else this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'quiz.notFound' });
+      });
+      return;
+    }
     const players = this.players();
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
-    this.questions = drawQuestions(this.settings);
+    this.questions = this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random) : drawQuestions(this.settings);
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
     if (this.mode === 'teams') {
@@ -450,6 +467,7 @@ export class Room {
     const flagTokens: Record<string, string> = {};
     const tok = (iso: string) => (flagTokens[iso] ??= this.flagToken(iso));
     if (q.flagIso) tok(q.flagIso);
+    if (q.imageRef) flagTokens[q.imageRef] = this.flagToken(q.imageRef);
     for (const o of q.options ?? []) if (o.flagIso) tok(o.flagIso);
     this.round = {
       q, sentAt: now, deadline: timed ? now + this.settings.timeLimit * 1000 : null,
@@ -475,7 +493,8 @@ export class Room {
       category: q.category,
       kind: q.kind,
       promptKey: q.promptKey,
-      params: q.promptName ? { name: localize(q.promptName, lang) } : {},
+      params: { ...(q.extraParams ?? {}), ...(q.promptName ? { name: localize(q.promptName, lang) } : {}) },
+      image: q.imageRef ? r.flagTokens[q.imageRef] : undefined,
       flag: q.flagIso ? r.flagTokens[q.flagIso] : undefined,
       map: q.map,
       highlight: q.highlight,

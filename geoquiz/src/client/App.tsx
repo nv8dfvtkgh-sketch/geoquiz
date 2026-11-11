@@ -9,11 +9,19 @@ import { Setup } from './screens/Setup';
 import { Lobby, QuickWait } from './screens/Lobby';
 import { Game } from './screens/Game';
 import { Final } from './screens/Final';
+import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
+const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
+const adminPage = location.pathname.startsWith('/admin');
 
 export function App() {
-  const [s, dispatch] = useReducer(reducer, initialState(joinMatch?.[1]?.toUpperCase()));
+  const [s, dispatch] = useReducer(reducer, undefined, () => {
+    const st = initialState(joinMatch?.[1]?.toUpperCase());
+    if (adminPage) return { ...st, screen: 'admin' as const };
+    if (quizMatch) return { ...st, screen: 'quizsheet' as const, quiz: { id: quizMatch[1].toUpperCase() } };
+    return st;
+  });
   const [lang, setLangState] = useState<Lang>(detectLang);
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [online, setOnline] = useState(true);
@@ -44,7 +52,8 @@ export function App() {
           ignoring = true;
           net.send({ t: 'leave' });
           saveSession(null);
-          setTimeout(() => { net.close(); ignoring = false; }, 50);
+          const old = msg.room.code;
+          setTimeout(() => { if (net.target === old) net.close(); ignoring = false; }, 50);
           return;
         }
       }
@@ -60,7 +69,7 @@ export function App() {
     net.statusListeners.add(setOnline);
     const session = savedSession();
     if (session) net.open(session.code);
-    if (joinMatch) history.replaceState(null, '', '/');
+    if (joinMatch || quizMatch) history.replaceState(null, '', '/');
     return () => { off(); };
   }, []);
 
@@ -70,6 +79,7 @@ export function App() {
     setLang: (l: Lang) => { setLangState(l); if (s.room) net.send({ t: 'lang', lang: l }); },
     go: (screen: typeof s.screen, setupKind?: typeof s.setupKind) => dispatch({ type: 'go', screen, setupKind }),
     openGame: (game: string) => { dispatch({ type: 'openGame', game }); window.scrollTo(0, 0); },
+    openQuiz: (screen: typeof s.screen, quiz?: { id: string; token?: string }) => { dispatch({ type: 'openQuiz', screen, quiz }); window.scrollTo(0, 0); },
     setName: (n: string) => { setNameState(n); try { localStorage.setItem('gq.name', n); } catch {} },
     setSettings: (x: Settings) => { setSettingsState(x); try { localStorage.setItem('gq.settings', JSON.stringify(x)); } catch {} },
     leave: () => { net.send({ t: 'leave' }); setTimeout(() => net.close(), 50); saveSession(null); dispatch({ type: 'reset' }); },
@@ -88,6 +98,10 @@ export function App() {
           {s.screen === 'quick' && <QuickWait />}
           {s.screen === 'game' && <Game />}
           {s.screen === 'final' && <Final />}
+          {s.screen === 'myquizzes' && <MyQuizzes />}
+          {s.screen === 'editor' && <QuizEditor />}
+          {s.screen === 'quizsheet' && <QuizSheet />}
+          {s.screen === 'admin' && <Admin />}
         </main>
       </div>
     </AppCtx.Provider>

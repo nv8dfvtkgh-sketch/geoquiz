@@ -61,6 +61,10 @@ partage utilisent automatiquement l'adresse affichée dans le navigateur.
 
 - **Joueurs max par salle** : variable `MAX_PLAYERS` dans `wrangler.jsonc` (ou dans
   *Settings → Variables*).
+- **Espace de validation des quiz** (`/admin`) : ajoutez un secret `ADMIN_PASSWORD`
+  (Worker `geoquiz` → **Paramètres** → **Variables et secrets** → **Ajouter** → type *Secret*).
+  Sans ce secret, la page `/admin` reste fermée. Les quiz créés par les joueurs sont stockés
+  dans le Durable Object `QuizDO` ; une photo est réduite à environ 120 Ko avant envoi.
 - **Journaux** : onglet **Observability** du Worker (activé dans `wrangler.jsonc`).
 
 ## Bon à savoir

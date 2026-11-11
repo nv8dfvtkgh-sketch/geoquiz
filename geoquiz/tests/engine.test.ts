@@ -75,6 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
+    if (cat === 'custom') continue; // quiz créés : test dédié plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -287,4 +288,46 @@ test('Équipes : répartition équilibrée et score par équipe', async () => {
   const total = rv.players.reduce((s, p) => s + p.score, 0);
   assert.equal(rv.teams!.reduce((s, t) => s + t.score, 0), total, 'le score des équipes = somme des joueurs');
   r.destroy();
+});
+
+test('Crée ton quiz : validation par l’admin, test solo du créateur, photo par jeton', async () => {
+  const { QuizService } = await import('../src/server/quizzes');
+  const { config } = await import('../src/server/rooms');
+  const mem = new Map<string, unknown>();
+  const svc = new QuizService({
+    get: async (k) => mem.get(k) as any, put: async (k, v) => void mem.set(k, JSON.parse(JSON.stringify(v))),
+    delete: async (k) => void mem.delete(k), list: async (p) => [...mem.keys()].filter((k) => k.startsWith(p)),
+  });
+  config.loadQuiz = (id, tok) => svc.playable(id, tok);
+  const png = 'data:image/png;base64,' + Buffer.from('fausse image').toString('base64');
+  const q = (text: string, image?: unknown) => ({ text, answers: ['A', 'B', 'C'], correct: 1, image });
+  await assert.rejects(svc.create({ title: 'X', questions: [q('1'), q('2')] }), /quiz.tooFew/);
+  const { id, token } = await svc.create({ title: 'Mon quiz', questions: [q('Un ?', { data: png }), q('Deux ?'), q('Trois ?')] });
+  assert.equal((await svc.view(id))?.title, undefined, 'invisible avant validation');
+  assert.equal((await svc.view(id, token))?.status, 'pending');
+  assert.equal(await svc.playable(id), null, 'pas jouable par les autres');
+
+  // Le créateur teste en solo son brouillon.
+  const solo = create('solo', settings({ category: 'custom', zone: 'world', quiz: id } as any));
+  solo.quizToken = token;
+  const a = client();
+  onMessage(a.conn, solo.code, { t: 'join', name: 'Ana', lang: 'ar' });
+  await new Promise((res) => setTimeout(res, 20));
+  const first = a.last('question')!.q;
+  assert.equal(first.kind, 'mcq');
+  assert.equal(first.options!.length, 3);
+  assert.equal(first.params.title, 'Mon quiz');
+  const withImg = solo.questions.find((x) => x.imageRef)!;
+  assert.match(withImg.imageRef!, new RegExp(`^quiz:${id}:`));
+
+  // Validation, puis modification : l'ancienne version reste jouable pendant la vérification.
+  await svc.approve(id);
+  assert.equal((await svc.view(id))?.title, 'Mon quiz');
+  await svc.update(id, token, { title: 'Mon quiz v2', questions: [q('Un ?'), q('Deux ?'), q('Trois ?'), q('Quatre ?')] });
+  assert.equal((await svc.view(id, token))?.status, 'pending');
+  assert.equal((await svc.playable(id))?.title, 'Mon quiz', 'version validée toujours jouable');
+  await svc.reject(id, 'Photo interdite');
+  assert.equal((await svc.view(id, token))?.reason, 'Photo interdite');
+  await assert.rejects(svc.update(id, 'mauvais', { title: 'x', questions: [] }), /quiz.forbidden/);
+  solo.destroy();
 });

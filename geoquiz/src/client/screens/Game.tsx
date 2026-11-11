@@ -16,13 +16,14 @@ export function Game() {
 /** Question courte + nom du lieu en grand (évite les accords : « la Chine », « de la Chine »…). */
 function Prompt({ q }: { q: QuestionMsg }) {
   const { t } = useApp();
-  const label = t(q.promptKey);
+  const label = t(q.promptKey, q.params);
   return (
     <div className="prompt" key={q.index}>
       <div className="prompt-text">
         {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto">{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
       </div>
       {q.flag && <FlagImg token={q.flag} className="flag big" />}
+      {q.image && <img className="quiz-photo" src={`/api/img/${q.image}`} alt="" draggable={false} />}
       {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}
     </div>
   );
