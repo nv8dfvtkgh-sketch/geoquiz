@@ -220,13 +220,51 @@ const regionsCat: Category = {
 };
 
 // ------------------------------------------------------------------ silhouettes de pays
-/** Recentre le chemin SVG d'un pays sur l'origine : la silhouette ne reprend pas les coordonnées de la carte. */
+/**
+ * Silhouette d'un pays : le territoire principal et les îles proches (de proche en proche),
+ * sans les territoires lointains qui écraseraient la forme (Guyane pour la France, Hawaï pour
+ * les États-Unis, Svalbard pour la Norvège…). Coordonnées recentrées : elles ne reprennent
+ * pas celles de la carte.
+ */
+const shapeCache = new Map<string, { d: string; w: number; h: number }>();
 function shapeOf(id: string) {
+  const hit = shapeCache.get(id);
+  if (hit) return hit;
   const f = worldById[id];
-  const [x0, y0, x1, y1] = f.b;
-  const r = (v: number) => Math.round(v * 10) / 10;
-  const d = f.d.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (_, x, y) => `${r(+x - x0)} ${r(+y - y0)}`);
-  return { d, w: r(x1 - x0), h: r(y1 - y0) };
+  type Ring = { d: string; area: number; b: [number, number, number, number] };
+  const rings: Ring[] = f.d.split('M').filter(Boolean).map((r) => {
+    const pts = r.replace(/Z$/, '').split('L').map((p) => p.trim().split(/\s+/).map(Number));
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity, a = 0;
+    pts.forEach(([x, y], i) => {
+      const [nx, ny] = pts[(i + 1) % pts.length];
+      a += x * ny - nx * y;
+      if (x < x0) x0 = x; if (y < y0) y0 = y; if (x > x1) x1 = x; if (y > y1) y1 = y;
+    });
+    return { d: 'M' + r, area: Math.abs(a / 2), b: [x0, y0, x1, y1] };
+  });
+  const main = rings.reduce((m, r) => (r.area > m.area ? r : m), rings[0]);
+  const kept = new Set([main]);
+  const box = [...main.b] as [number, number, number, number];
+  for (let grew = true; grew; ) {
+    grew = false;
+    const span = Math.max(box[2] - box[0], box[3] - box[1]);
+    for (const r of rings) {
+      if (kept.has(r)) continue;
+      const gap = Math.max(box[0] - r.b[2], r.b[0] - box[2], box[1] - r.b[3], r.b[1] - box[3], 0);
+      if (gap <= Math.max(span * 0.3, 3)) {
+        kept.add(r);
+        box[0] = Math.min(box[0], r.b[0]); box[1] = Math.min(box[1], r.b[1]);
+        box[2] = Math.max(box[2], r.b[2]); box[3] = Math.max(box[3], r.b[3]);
+        grew = true;
+      }
+    }
+  }
+  const rd = (v: number) => Math.round(v * 10) / 10;
+  const d = [...kept].map((r) => r.d).join('')
+    .replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (_, x, y) => `${rd(+x - box[0])} ${rd(+y - box[1])}`);
+  const out = { d, w: rd(box[2] - box[0]), h: rd(box[3] - box[1]) };
+  shapeCache.set(id, out);
+  return out;
 }
 const bigEnough = (id: string) => (worldById[id]?.a ?? 0) >= 12;
 const silhouettesCat: Category = {

@@ -158,7 +158,7 @@ legend { margin-bottom: 6px; padding: 0; }
 
 /* silhouette à deviner */
 .shape { display: block; width: 100%; max-width: 360px; height: min(34vh, 280px); margin-inline: auto; fill: var(--ink); background: var(--ocean); border-radius: 12px; padding: 12px; box-sizing: border-box; }
-.shape.small { width: 110px; height: 90px; margin: 0; padding: 6px; }
+.shape.small { width: 170px; height: 130px; margin: 0; padding: 8px; }
 
 /* ---------------------------------------------------------------- accueil : planche d'atlas */
 .home { display: grid; gap: 20px; }
