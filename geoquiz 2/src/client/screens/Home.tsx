@@ -1,89 +1,114 @@
-import { useEffect, useState } from 'react';
-import { DEFAULT_SETTINGS, LIMITS, type MapData } from '../../shared/protocol';
-import { loadMap } from '../MapView';
-import { joinGame, net } from '../net';
+import { useRef, useState } from 'react';
+import { LIMITS } from '../../shared/protocol';
+import { FAMILIES, Icon, type GameDef } from '../games';
+import { joinGame } from '../net';
 import { useApp } from '../state';
 
 export function Home() {
-  const { t, s, go, name, setName, lang, catalog, fail } = useApp();
+  const { t, s, name, setName, lang, fail, openGame } = useApp();
   const [code, setCode] = useState(s.joinCode ?? '');
-  const max = catalog?.maxPlayers ?? 50;
+  const [editingName, setEditingName] = useState(!name.trim());
+  const [needName, setNeedName] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
   const ready = name.trim().length > 0;
 
+  const askName = () => {
+    setEditingName(true);
+    setNeedName(true);
+    setTimeout(() => nameRef.current?.focus(), 0);
+  };
   const join = (e: React.FormEvent) => {
     e.preventDefault();
-    if (code.length === 6 && ready) joinGame(code, name, lang).then(fail);
+    if (!ready) return askName();
+    if (code.length === 6) joinGame(code, name, lang).then(fail);
+  };
+  const pick = (g: GameDef) => {
+    if (g.soon) return;
+    if (!ready) return askName();
+    openGame(g.id);
   };
 
   return (
     <div className="home">
-      <section className="plate">
-        <WorldPlate />
-        <div className="plate-title">
-          <h1>{t('app.title')}</h1>
-          <p>{t('app.tagline')}</p>
-        </div>
-      </section>
+      <div className="home-head">
+        <h1>{t('home.chooseGame')}</h1>
+        <p className="muted">{t('home.chooseHint')}</p>
+      </div>
 
-      <div className="home-body">
-        <label className="field">
+      {editingName ? (
+        <label className="field name-field">
           <span>{t('home.name')}</span>
           <input
+            ref={nameRef}
             value={name}
             maxLength={LIMITS.maxNameLength}
             placeholder={t('home.namePlaceholder')}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => { setName(e.target.value); setNeedName(false); }}
+            onBlur={() => name.trim() && setEditingName(false)}
+            onKeyDown={(e) => e.key === 'Enter' && name.trim() && setEditingName(false)}
             autoComplete="nickname"
-            className={!ready ? 'needs' : ''}
+            className={needName ? 'needs' : ''}
           />
+          {needName && <small className="error">{t('home.nameFirst')}</small>}
         </label>
+      ) : (
+        <div className="name-bar">
+          <span>{t('home.yourName')} <strong dir="auto">{name}</strong></span>
+          <button type="button" className="text-btn" onClick={() => setEditingName(true)}>{t('home.editName')}</button>
+        </div>
+      )}
 
-        {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
+      <form className="join" onSubmit={join}>
+        <label htmlFor="join-code" className="sr">{t('home.code')}</label>
+        <input
+          id="join-code"
+          className="code-input"
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
+          placeholder="ABC234"
+          inputMode="text"
+          autoCapitalize="characters"
+          autoComplete="off"
+          spellCheck={false}
+        />
+        <button className="btn primary" disabled={code.length !== 6}>{t('home.joinBtn')}</button>
+      </form>
+      {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
 
-        <form className="join" onSubmit={join}>
-          <h2>{t('home.join')}</h2>
-          <div className="join-row">
-            <input
-              className="code-input"
-              value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
-              placeholder="ABC234"
-              aria-label={t('home.code')}
-              inputMode="text"
-              autoCapitalize="characters"
-              autoComplete="off"
-              spellCheck={false}
-            />
-            <button className="btn primary" disabled={code.length !== 6 || !ready}>{t('home.joinBtn')}</button>
+      {FAMILIES.map((f) => (
+        <section key={f.id} className="family">
+          <h2>{t(`family.${f.id}`)}</h2>
+          <div className="tiles">
+            {f.games.map((g) => (
+              <button
+                type="button"
+                key={g.id}
+                className={`tile ${f.tint} ${g.soon ? 'soon' : ''}`}
+                onClick={() => pick(g)}
+                aria-disabled={g.soon || undefined}
+                title={t(`game.${g.id}`)}
+              >
+                <Icon name={g.icon} />
+                <span className="tile-name">{t(`cat.${g.id}`)}</span>
+                {g.soon && <span className="tile-soon">{t('home.soon')}</span>}
+                {g.fresh && !g.soon && <span className="tile-dot" aria-label={t('home.new')} />}
+              </button>
+            ))}
           </div>
-        </form>
+        </section>
+      ))}
 
-        <nav className="modes">
-          <button type="button" className="mode" disabled={!ready} onClick={() => go('setup', 'solo')}>
-            <strong>{t('home.solo')}</strong><span>{t('home.soloHint')}</span>
-          </button>
-          <button type="button" className="mode" disabled={!ready} onClick={() => go('setup', 'duel')}>
-            <strong>{t('home.duel')}</strong><span>{t('home.duelHint')}</span>
-          </button>
-          <button type="button" className="mode" disabled={!ready} onClick={() => { net.open('quick'); net.send({ t: 'quick', settings: { ...DEFAULT_SETTINGS, timeLimit: 15 } }); }}>
-            <strong>{t('home.quick')}</strong><span>{t('home.quickHint')}</span>
-          </button>
-          <button type="button" className="mode" disabled={!ready} onClick={() => go('setup', 'room')}>
-            <strong>{t('home.room')}</strong><span>{t('home.roomHint', { max })}</span>
-          </button>
-        </nav>
-      </div>
+      <section className="family">
+        <h2>{t('family.mine')}</h2>
+        <button type="button" className="create-quiz" aria-disabled="true">
+          <Icon name="plus" size={32} />
+          <span>
+            <strong>{t('cat.create')}</strong>
+            <small>{t('game.create')}</small>
+          </span>
+          <span className="tile-soon">{t('home.soon')}</span>
+        </button>
+      </section>
     </div>
-  );
-}
-
-/** Planche d'atlas décorative : la carte du monde, sans interaction. */
-function WorldPlate() {
-  const [map, setMap] = useState<MapData | null>(null);
-  useEffect(() => { loadMap('world').then(setMap).catch(() => {}); }, []);
-  return (
-    <svg className="plate-map" viewBox={map ? `0 0 ${map.w} ${map.h}` : '0 0 1000 520'} aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-      {map?.features.map((f) => <path key={f.id} d={f.d} />)}
-    </svg>
   );
 }

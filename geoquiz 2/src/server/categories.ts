@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, Lang, MapSpec, Names } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, nameSet, regionMap, worldById, ZoneCtx,
+  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx,
 } from './data';
 import { matches } from './text';
 
@@ -23,6 +23,7 @@ export interface InternalQuestion {
   flagIso?: string;
   map?: MapSpec;
   highlight?: string;
+  shape?: { d: string; w: number; h: number };
   options?: QOptionInternal[];
   attempts: number;
   target: string;
@@ -218,12 +219,176 @@ const regionsCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ silhouettes de pays
+/** Recentre le chemin SVG d'un pays sur l'origine : la silhouette ne reprend pas les coordonnées de la carte. */
+function shapeOf(id: string) {
+  const f = worldById[id];
+  const [x0, y0, x1, y1] = f.b;
+  const r = (v: number) => Math.round(v * 10) / 10;
+  const d = f.d.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (_, x, y) => `${r(+x - x0)} ${r(+y - y0)}`);
+  return { d, w: r(x1 - x0), h: r(y1 - y0) };
+}
+const bigEnough = (id: string) => (worldById[id]?.a ?? 0) >= 12;
+const silhouettesCat: Category = {
+  id: 'silhouettes',
+  qtypes: ['mcq', 'map', 'type'],
+  zoneKinds: ['world', 'continent', 'subregion'],
+  pool: (zone, d, n) => countryPool(zone, d, n, bigEnough),
+  make(target, kind, zone, rnd) {
+    const c = countries[target];
+    const base = { category: 'silhouettes', target, answer: c.names, revealId: target, shape: shapeOf(target) };
+    if (kind === 'map')
+      return { ...base, kind, promptKey: 'q.silhouettes.map', map: worldSpec(zone, 'shapes'), attempts: 3, check: (v) => v === target };
+    if (kind === 'mcq') {
+      const { options, correct } = optionsFrom(target, countryDistractors(target, 3, rnd, bigEnough), rnd, (id) => ({ label: countries[id].names }));
+      return { ...base, kind, promptKey: 'q.silhouettes.name', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    return { ...base, kind, promptKey: 'q.silhouettes.name', attempts: 1, check: typedCheck(allNames(c.names), countryNameSet) };
+  },
+};
+
+// ------------------------------------------------------------------ monnaies du monde
+const hasCurrency = (id: string) => !!countries[id]?.currency;
+let currencyNames: Set<string> | null = null;
+const currencyNameSet = () => (currencyNames ??= nameSet(Object.values(countries).flatMap((c) => (c.currency ? [c.currency.names] : []))));
+const currenciesCat: Category = {
+  id: 'currencies',
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world', 'continent', 'subregion'],
+  pool: (zone, d, n) => countryPool(zone, d, n, hasCurrency),
+  make(target, kind, zone, rnd) {
+    const c = countries[target];
+    const cur = c.currency!;
+    const base = { category: 'currencies', target, answer: cur.names, promptName: c.names, promptKey: 'q.currencies.ofCountry', revealId: undefined };
+    if (kind === 'mcq') {
+      // Pièges : monnaies de pays proches, toutes différentes (l'euro ne doit pas apparaître deux fois).
+      // Clé = nom affiché : le franc CFA d'Afrique de l'Ouest et celui d'Afrique centrale portent le même nom.
+      const key = (n: Names) => (n.en || n.fr).toLowerCase();
+      const seen = new Set([key(cur.names)]);
+      const others: string[] = [];
+      for (const id of countryDistractors(target, 40, rnd, hasCurrency)) {
+        const code = key(countries[id].currency!.names);
+        if (seen.has(code)) continue;
+        seen.add(code);
+        others.push(id);
+        if (others.length === 3) break;
+      }
+      const { options, correct } = optionsFrom(target, others, rnd, (id) => ({ label: countries[id].currency!.names }));
+      return { ...base, kind, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    // Saisie : le nom complet ou son premier mot (« dirham », « yen », « euro »).
+    const accepted = allNames(cur.names).flatMap((n) => [n, n.split(/\s+/)[0]]);
+    return { ...base, kind, attempts: 1, check: typedCheck(accepted, currencyNameSet()) };
+  },
+};
+
+// ------------------------------------------------------------------ langues du monde
+const langById = () => Object.fromEntries(extras.languages.map((l) => [l.id, l]));
+let langNames: Set<string> | null = null;
+const languagesCat: Category = {
+  id: 'languages',
+  noZone: true,
+  qtypes: ['mcq', 'map', 'type'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const maxTier = d === 'easy' ? 1 : d === 'medium' ? 2 : 3;
+    const list = extras.languages.slice().sort((a, b) => a.tier - b.tier);
+    const strict = list.filter((l) => l.tier <= maxTier);
+    return (strict.length >= Math.min(list.length, n) ? strict : list.slice(0, Math.max(n, strict.length))).map((l) => l.id);
+  },
+  make(target, kind, zone, rnd) {
+    const l = langById()[target];
+    const greeting = { fr: `« ${l.greeting} »`, en: `“${l.greeting}”`, ar: `« ${l.greeting} »`, es: `«${l.greeting}»` };
+    const base = { category: 'languages', target, answer: l.names, promptName: greeting };
+    if (kind === 'map') {
+      const ok = new Set(l.countries);
+      return {
+        ...base, kind, promptKey: 'q.languages.map', map: worldSpec(zones.get('world')!, 'shapes'), attempts: 3,
+        revealId: l.countries[0], check: (v) => ok.has(v),
+      };
+    }
+    if (kind === 'mcq') {
+      const others = shuffle(extras.languages.filter((x) => x.id !== target), rnd).slice(0, 3).map((x) => x.id);
+      const { options, correct } = optionsFrom(target, others, rnd, (id) => ({ label: langById()[id].names }));
+      return { ...base, kind, promptKey: 'q.languages.name', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    langNames ??= nameSet(extras.languages.map((x) => x.names));
+    return { ...base, kind, promptKey: 'q.languages.name', attempts: 1, check: typedCheck(allNames(l.names), langNames) };
+  },
+};
+
+// ------------------------------------------------------------------ calcul mental
+type Op = 'a' | 's' | 'm' | 'd';
+const SYMBOL: Record<Op, string> = { a: '+', s: '−', m: '×', d: '÷' };
+function calcValue(id: string): number {
+  const [op, x, y] = id.split(':');
+  const a = +x, b = +y;
+  return op === 'a' ? a + b : op === 's' ? a - b : op === 'm' ? a * b : a / b;
+}
+const randInt = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1));
+function calcItem(d: Difficulty): string {
+  const roll = Math.random();
+  if (d === 'easy') {
+    if (roll < 0.5) return `m:${randInt(2, 5)}:${randInt(1, 10)}`;
+    const a = randInt(2, 15), b = randInt(1, 20 - a);
+    return roll < 0.8 ? `a:${a}:${b}` : `s:${a + b}:${b}`;
+  }
+  if (d === 'medium') {
+    if (roll < 0.45) return `m:${randInt(2, 10)}:${randInt(2, 10)}`;
+    const a = randInt(10, 60), b = randInt(5, 39);
+    if (roll < 0.7) return `a:${a}:${b}`;
+    if (roll < 0.9) return `s:${a + b}:${b}`;
+    const q = randInt(2, 10), dv = randInt(2, 10);
+    return `d:${q * dv}:${dv}`;
+  }
+  if (roll < 0.35) return `m:${randInt(3, 12)}:${randInt(3, 12)}`;
+  if (roll < 0.55) return `m:${randInt(11, 49)}:${randInt(3, 9)}`;
+  if (roll < 0.75) { const q = randInt(3, 15), dv = randInt(3, 12); return `d:${q * dv}:${dv}`; }
+  const a = randInt(100, 900), b = randInt(30, 99);
+  return roll < 0.88 ? `a:${a}:${b}` : `s:${a}:${b}`;
+}
+const ARABIC_DIGITS = '٠١٢٣٤٥٦٧٨٩';
+const calcCat: Category = {
+  id: 'calc',
+  noZone: true,
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const set = new Set<string>();
+    for (let i = 0; set.size < n && i < n * 20; i++) set.add(calcItem(d));
+    return [...set];
+  },
+  make(target, kind, _zone, rnd) {
+    const [op, x, y] = target.split(':') as [Op, string, string];
+    const value = calcValue(target);
+    const expr = `${x} ${SYMBOL[op]} ${y}`;
+    const label = String(value);
+    const same = { fr: expr, en: expr, ar: expr, es: expr };
+    const base = { category: 'calc', target, answer: { fr: label, en: label, ar: label, es: label }, promptName: same, promptKey: 'q.calc' };
+    if (kind === 'mcq') {
+      // Pièges : erreurs typiques (±1, ±10, ± un opérande, chiffres inversés).
+      const cands = [value + 1, value - 1, value + 10, value - 10, value + +y, value - +y, +String(value).split('').reverse().join(''), value + 2];
+      const others = shuffle([...new Set(cands)].filter((v) => v >= 0 && v !== value && Number.isFinite(v)), rnd).slice(0, 3);
+      const opts = shuffle([value, ...others], rnd).map((v, i) => ({ id: `o${i}`, target: String(v), label: { fr: String(v), en: String(v), ar: String(v), es: String(v) } }));
+      const correct = opts.find((o) => o.target === label)!.id;
+      return { ...base, kind, options: opts, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    return {
+      ...base, kind, attempts: 1,
+      check: (v) => {
+        const t = v.replace(/[٠-٩]/g, (c) => String(ARABIC_DIGITS.indexOf(c))).replace(/[\s ]/g, '').replace(',', '.');
+        return t !== '' && Number(t) === value;
+      },
+    };
+  },
+};
+
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, calcCat].map((c) => [c.id, c]),
 );
 
 export function categoryInfos(): CategoryInfo[] {
-  return Object.values(CATEGORIES).map(({ id, qtypes, zoneKinds }) => ({ id, qtypes, zoneKinds }));
+  return Object.values(CATEGORIES).map(({ id, qtypes, zoneKinds, noZone }) => ({ id, qtypes, zoneKinds, noZone }));
 }
 
 export function localize(n: Names | undefined, lang: Lang): string {

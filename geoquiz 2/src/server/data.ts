@@ -14,6 +14,7 @@ export interface CountryMeta {
   names: Names;
   neighbors: string[];
   capital?: { names: Names; alts: string[] };
+  currency?: { code: string; names: Names };
   /** niveau → [nombre d'entités, largeur, hauteur] */
   regions?: Record<string, [number, number, number]>;
   regionLabel?: string;
@@ -25,7 +26,20 @@ export interface RegionLevel extends MapData {
 
 export type RegionLoader = (iso: string) => Promise<{ levels: Record<string, RegionLevel> } | null> | { levels: Record<string, RegionLevel> } | null;
 
+export interface Language {
+  id: string;
+  greeting: string;
+  countries: string[];
+  tier: number;
+  names: Names;
+}
+/** Données des jeux annexes (data/games/*.json). */
+export interface Extras {
+  languages: Language[];
+}
+
 export let world: MapData = { w: 0, h: 0, features: [] };
+export let extras: Extras = { languages: [] };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -98,8 +112,9 @@ export function nameSet(list: Names[]): Set<string> {
 let ready = false;
 export const dataReady = () => ready;
 
-export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoader: RegionLoader) {
+export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoader: RegionLoader, extra: Partial<Extras> = {}) {
   world = w;
+  extras = { languages: extra.languages ?? [] };
   countries = c;
   loader = regionLoader;
   worldById = Object.fromEntries(world.features.map((f) => [f.id, f]));
@@ -110,8 +125,8 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
   regionCache.clear();
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
-  const worldCats: CategoryId[] = ['countries', 'flags', 'capitals'];
-  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: worldCats }, countryIds: all, view: [0, 0, world.w, world.h] });
+  const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies'];
+  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();
   for (const id of all) {

@@ -11,7 +11,7 @@ import type { ClientMsg, RoomKind, ServerMsg, Settings } from '../src/shared/pro
 
 const BUILD = path.join(__dirname, '../data/build');
 const read = (f: string) => JSON.parse(fs.readFileSync(path.join(BUILD, f), 'utf8'));
-initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null));
+initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null), { languages: read('languages.json') });
 
 const rooms = new Map<string, Room>();
 function create(kind: RoomKind, s: Settings, hostPlays = true) {
@@ -214,4 +214,34 @@ test('partie rapide : deux joueurs sont associés dans un duel', async () => {
   const code = a.last('matched')!.code;
   assert.equal(b.last('matched')!.code, code);
   assert.equal(rooms.get(code)!.kind, 'duel');
+});
+
+test('nouveaux jeux : silhouettes, monnaies, langues, calcul mental', () => {
+  // Silhouettes : la forme est recentrée (pas les coordonnées de la carte) et la réponse n'y figure pas.
+  const sil = drawQuestions(settings({ category: 'silhouettes', qtype: 'mcq', count: 5 }));
+  assert.ok(sil.length && sil.every((q) => q.shape && q.shape.w > 0 && !q.shape.d.includes(q.target)));
+  // Monnaies : 4 monnaies différentes.
+  const cur = drawQuestions(settings({ category: 'currencies', qtype: 'mcq', count: 10 }));
+  for (const q of cur) {
+    const codes = q.options!.map((o) => countries[o.target].currency!.code);
+    assert.equal(new Set(codes).size, codes.length, 'pas deux fois la même monnaie');
+  }
+  const typed = drawQuestions(settings({ category: 'currencies', qtype: 'type', count: 30 })).find((q) => q.target === 'MA');
+  if (typed) assert.ok(typed.check('dirham') && typed.check('Dirham marocain') && typed.check('درهم مغربي'));
+  // Langues : salutation, accepte tous les pays où la langue est parlée.
+  const lang = drawQuestions(settings({ category: 'languages', qtype: 'map', difficulty: 'hard', count: 50 }));
+  const ar = lang.find((q) => q.target === 'ar');
+  assert.ok(ar && ar.check('MA') && ar.check('EG') && !ar.check('FR'));
+  const fr = drawQuestions(settings({ category: 'languages', qtype: 'type', difficulty: 'hard', count: 50 })).find((q) => q.target === 'fr');
+  assert.ok(fr && fr.check('francais') && fr.check('French') && fr.check('الفرنسية'));
+  // Calcul mental : réponse exacte, chiffres arabes acceptés.
+  const calc = drawQuestions(settings({ category: 'calc', qtype: 'type', difficulty: 'medium', count: 10 }));
+  for (const q of calc) {
+    const v = q.answer.fr;
+    assert.ok(q.check(v) && q.check(` ${v} `) && !q.check(String(+v + 1)));
+    const arabic = v.replace(/\d/g, (c) => '٠١٢٣٤٥٦٧٨٩'[+c]);
+    assert.ok(q.check(arabic), 'chiffres arabes ' + arabic);
+  }
+  const mcq = drawQuestions(settings({ category: 'calc', qtype: 'mcq', difficulty: 'easy', count: 10 }));
+  assert.ok(mcq.every((q) => q.options!.length === 4 && new Set(q.options!.map((o) => o.target)).size === 4));
 });

@@ -322,6 +322,11 @@ async function main() {
   }
   log(`Cartes de régions : ${regionCount} pays`);
 
+  // Monnaies (CLDR) et données des jeux annexes.
+  const currencies = readJson(path.join(ROOT, 'data/names/currencies.json'));
+  for (const [iso, m] of Object.entries<any>(meta)) if (currencies[iso]) m.currency = currencies[iso];
+  for (const f of fs.readdirSync(path.join(ROOT, 'data/games'))) fs.copyFileSync(path.join(ROOT, 'data/games', f), path.join(OUT, f));
+
   fs.writeFileSync(path.join(OUT, 'countries.json'), JSON.stringify(meta));
 
   // ---------------------------------------------------------------- drapeaux

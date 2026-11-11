@@ -1,0 +1,746 @@
+[
+ {
+  "id": "fr",
+  "greeting": "Bonjour",
+  "countries": [
+   "FR",
+   "BE",
+   "CH",
+   "CA",
+   "SN",
+   "CI"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "français",
+   "en": "French",
+   "ar": "الفرنسية",
+   "es": "francés"
+  }
+ },
+ {
+  "id": "en",
+  "greeting": "Hello",
+  "countries": [
+   "GB",
+   "US",
+   "AU",
+   "CA",
+   "IE",
+   "NZ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "anglais",
+   "en": "English",
+   "ar": "الإنجليزية",
+   "es": "inglés"
+  }
+ },
+ {
+  "id": "es",
+  "greeting": "Hola",
+  "countries": [
+   "ES",
+   "MX",
+   "AR",
+   "CO",
+   "PE",
+   "CL"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "espagnol",
+   "en": "Spanish",
+   "ar": "الإسبانية",
+   "es": "español"
+  }
+ },
+ {
+  "id": "ar",
+  "greeting": "Marhaban (مرحبا)",
+  "countries": [
+   "MA",
+   "EG",
+   "SA",
+   "DZ",
+   "TN",
+   "IQ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "arabe",
+   "en": "Arabic",
+   "ar": "العربية",
+   "es": "árabe"
+  }
+ },
+ {
+  "id": "de",
+  "greeting": "Guten Tag",
+  "countries": [
+   "DE",
+   "AT",
+   "CH"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "allemand",
+   "en": "German",
+   "ar": "الألمانية",
+   "es": "alemán"
+  }
+ },
+ {
+  "id": "it",
+  "greeting": "Ciao",
+  "countries": [
+   "IT",
+   "SM",
+   "VA"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "italien",
+   "en": "Italian",
+   "ar": "الإيطالية",
+   "es": "italiano"
+  }
+ },
+ {
+  "id": "pt",
+  "greeting": "Olá",
+  "countries": [
+   "PT",
+   "BR",
+   "AO",
+   "MZ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "portugais",
+   "en": "Portuguese",
+   "ar": "البرتغالية",
+   "es": "portugués"
+  }
+ },
+ {
+  "id": "ru",
+  "greeting": "Privet (Привет)",
+  "countries": [
+   "RU",
+   "BY",
+   "KZ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "russe",
+   "en": "Russian",
+   "ar": "الروسية",
+   "es": "ruso"
+  }
+ },
+ {
+  "id": "zh",
+  "greeting": "Nǐ hǎo (你好)",
+  "countries": [
+   "CN",
+   "TW",
+   "SG"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "chinois (mandarin)",
+   "en": "Chinese (Mandarin)",
+   "ar": "الصينية",
+   "es": "chino (mandarín)"
+  }
+ },
+ {
+  "id": "ja",
+  "greeting": "Konnichiwa (こんにちは)",
+  "countries": [
+   "JP"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "japonais",
+   "en": "Japanese",
+   "ar": "اليابانية",
+   "es": "japonés"
+  }
+ },
+ {
+  "id": "tr",
+  "greeting": "Merhaba",
+  "countries": [
+   "TR",
+   "CY"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "turc",
+   "en": "Turkish",
+   "ar": "التركية",
+   "es": "turco"
+  }
+ },
+ {
+  "id": "hi",
+  "greeting": "Namaste (नमस्ते)",
+  "countries": [
+   "IN"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "hindi",
+   "en": "Hindi",
+   "ar": "الهندية",
+   "es": "hindi"
+  }
+ },
+ {
+  "id": "zgh",
+  "greeting": "Azul (ⴰⵣⵓⵍ)",
+  "countries": [
+   "MA",
+   "DZ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "amazighe (tamazight)",
+   "en": "Amazigh (Tamazight)",
+   "ar": "الأمازيغية",
+   "es": "amazig (tamazight)"
+  }
+ },
+ {
+  "id": "ko",
+  "greeting": "Annyeonghaseyo (안녕하세요)",
+  "countries": [
+   "KR",
+   "KP"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "coréen",
+   "en": "Korean",
+   "ar": "الكورية",
+   "es": "coreano"
+  }
+ },
+ {
+  "id": "nl",
+  "greeting": "Goedendag",
+  "countries": [
+   "NL",
+   "BE"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "néerlandais",
+   "en": "Dutch",
+   "ar": "الهولندية",
+   "es": "neerlandés"
+  }
+ },
+ {
+  "id": "el",
+  "greeting": "Yia sou (Γεια σου)",
+  "countries": [
+   "GR",
+   "CY"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "grec",
+   "en": "Greek",
+   "ar": "اليونانية",
+   "es": "griego"
+  }
+ },
+ {
+  "id": "sv",
+  "greeting": "Hej",
+  "countries": [
+   "SE"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "suédois",
+   "en": "Swedish",
+   "ar": "السويدية",
+   "es": "sueco"
+  }
+ },
+ {
+  "id": "pl",
+  "greeting": "Cześć",
+  "countries": [
+   "PL"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "polonais",
+   "en": "Polish",
+   "ar": "البولندية",
+   "es": "polaco"
+  }
+ },
+ {
+  "id": "sw",
+  "greeting": "Jambo",
+  "countries": [
+   "KE",
+   "TZ"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "swahili",
+   "en": "Swahili",
+   "ar": "السواحلية",
+   "es": "suajili"
+  }
+ },
+ {
+  "id": "fa",
+  "greeting": "Dorud (درود)",
+  "countries": [
+   "IR",
+   "AF"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "persan",
+   "en": "Persian",
+   "ar": "الفارسية",
+   "es": "persa"
+  }
+ },
+ {
+  "id": "he",
+  "greeting": "Shalom (שלום)",
+  "countries": [
+   "IL"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "hébreu",
+   "en": "Hebrew",
+   "ar": "العبرية",
+   "es": "hebreo"
+  }
+ },
+ {
+  "id": "th",
+  "greeting": "Sawasdee (สวัสดี)",
+  "countries": [
+   "TH"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "thaï",
+   "en": "Thai",
+   "ar": "التايلاندية",
+   "es": "tailandés"
+  }
+ },
+ {
+  "id": "vi",
+  "greeting": "Xin chào",
+  "countries": [
+   "VN"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "vietnamien",
+   "en": "Vietnamese",
+   "ar": "الفيتنامية",
+   "es": "vietnamita"
+  }
+ },
+ {
+  "id": "id",
+  "greeting": "Selamat siang",
+  "countries": [
+   "ID"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "indonésien",
+   "en": "Indonesian",
+   "ar": "الإندونيسية",
+   "es": "indonesio"
+  }
+ },
+ {
+  "id": "uk",
+  "greeting": "Pryvit (Привіт)",
+  "countries": [
+   "UA"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "ukrainien",
+   "en": "Ukrainian",
+   "ar": "الأوكرانية",
+   "es": "ucraniano"
+  }
+ },
+ {
+  "id": "ro",
+  "greeting": "Bună ziua",
+  "countries": [
+   "RO",
+   "MD"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "roumain",
+   "en": "Romanian",
+   "ar": "الرومانية",
+   "es": "rumano"
+  }
+ },
+ {
+  "id": "wo",
+  "greeting": "Na nga def",
+  "countries": [
+   "SN"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "wolof",
+   "en": "Wolof",
+   "ar": "الولوفية",
+   "es": "wólof"
+  }
+ },
+ {
+  "id": "da",
+  "greeting": "Goddag",
+  "countries": [
+   "DK"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "danois",
+   "en": "Danish",
+   "ar": "الدانمركية",
+   "es": "danés"
+  }
+ },
+ {
+  "id": "fi",
+  "greeting": "Moi",
+  "countries": [
+   "FI"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "finnois",
+   "en": "Finnish",
+   "ar": "الفنلندية",
+   "es": "finés"
+  }
+ },
+ {
+  "id": "nb",
+  "greeting": "God dag",
+  "countries": [
+   "NO"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "norvégien",
+   "en": "Norwegian",
+   "ar": "النرويجية",
+   "es": "noruego"
+  }
+ },
+ {
+  "id": "cs",
+  "greeting": "Ahoj",
+  "countries": [
+   "CZ"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "tchèque",
+   "en": "Czech",
+   "ar": "التشيكية",
+   "es": "checo"
+  }
+ },
+ {
+  "id": "hu",
+  "greeting": "Szia",
+  "countries": [
+   "HU"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "hongrois",
+   "en": "Hungarian",
+   "ar": "الهنغارية",
+   "es": "húngaro"
+  }
+ },
+ {
+  "id": "zu",
+  "greeting": "Sawubona",
+  "countries": [
+   "ZA"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "zoulou",
+   "en": "Zulu",
+   "ar": "الزولو",
+   "es": "zulú"
+  }
+ },
+ {
+  "id": "am",
+  "greeting": "Selam (ሰላም)",
+  "countries": [
+   "ET"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "amharique",
+   "en": "Amharic",
+   "ar": "الأمهرية",
+   "es": "amárico"
+  }
+ },
+ {
+  "id": "bn",
+  "greeting": "Nomoshkar (নমস্কার)",
+  "countries": [
+   "BD",
+   "IN"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "bengali",
+   "en": "Bangla",
+   "ar": "البنغالية",
+   "es": "bengalí"
+  }
+ },
+ {
+  "id": "fil",
+  "greeting": "Kumusta",
+  "countries": [
+   "PH"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "filipino",
+   "en": "Filipino",
+   "ar": "الفلبينية",
+   "es": "filipino"
+  }
+ },
+ {
+  "id": "mg",
+  "greeting": "Salama",
+  "countries": [
+   "MG"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "malgache",
+   "en": "Malagasy",
+   "ar": "الملغاشي",
+   "es": "malgache"
+  }
+ },
+ {
+  "id": "ga",
+  "greeting": "Dia dhuit",
+  "countries": [
+   "IE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "irlandais",
+   "en": "Irish",
+   "ar": "الأيرلندية",
+   "es": "irlandés"
+  }
+ },
+ {
+  "id": "is",
+  "greeting": "Góðan daginn",
+  "countries": [
+   "IS"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "islandais",
+   "en": "Icelandic",
+   "ar": "الأيسلندية",
+   "es": "islandés"
+  }
+ },
+ {
+  "id": "ca",
+  "greeting": "Bon dia",
+  "countries": [
+   "ES",
+   "AD"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "catalan",
+   "en": "Catalan",
+   "ar": "الكتالانية",
+   "es": "catalán"
+  }
+ },
+ {
+  "id": "ms",
+  "greeting": "Selamat pagi",
+  "countries": [
+   "MY",
+   "BN"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "malais",
+   "en": "Malay",
+   "ar": "الماليزية",
+   "es": "malayo"
+  }
+ },
+ {
+  "id": "ha",
+  "greeting": "Sannu",
+  "countries": [
+   "NG",
+   "NE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "haoussa",
+   "en": "Hausa",
+   "ar": "الهوسا",
+   "es": "hausa"
+  }
+ },
+ {
+  "id": "yo",
+  "greeting": "Ẹ kú àárọ̀",
+  "countries": [
+   "NG"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "yoruba",
+   "en": "Yoruba",
+   "ar": "اليوروبا",
+   "es": "yoruba"
+  }
+ },
+ {
+  "id": "mi",
+  "greeting": "Kia ora",
+  "countries": [
+   "NZ"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "maori",
+   "en": "Māori",
+   "ar": "الماورية",
+   "es": "maorí"
+  }
+ },
+ {
+  "id": "haw",
+  "greeting": "Aloha",
+  "countries": [
+   "US"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "hawaïen",
+   "en": "Hawaiian",
+   "ar": "لغة هاواي",
+   "es": "hawaiano"
+  }
+ },
+ {
+  "id": "qu",
+  "greeting": "Allillanchu",
+  "countries": [
+   "PE",
+   "BO"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "quechua",
+   "en": "Quechua",
+   "ar": "كيشوا",
+   "es": "quechua"
+  }
+ },
+ {
+  "id": "ka",
+  "greeting": "Gamarjoba (გამარჯობა)",
+  "countries": [
+   "GE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "géorgien",
+   "en": "Georgian",
+   "ar": "الجورجية",
+   "es": "georgiano"
+  }
+ },
+ {
+  "id": "hy",
+  "greeting": "Barev (Բարև)",
+  "countries": [
+   "AM"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "arménien",
+   "en": "Armenian",
+   "ar": "الأرمنية",
+   "es": "armenio"
+  }
+ },
+ {
+  "id": "mn",
+  "greeting": "Sain baina uu (Сайн байна уу)",
+  "countries": [
+   "MN"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "mongol",
+   "en": "Mongolian",
+   "ar": "المنغولية",
+   "es": "mongol"
+  }
+ },
+ {
+  "id": "ne",
+  "greeting": "Namaskar (नमस्कार)",
+  "countries": [
+   "NP"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "népalais",
+   "en": "Nepali",
+   "ar": "النيبالية",
+   "es": "nepalí"
+  }
+ }
+]

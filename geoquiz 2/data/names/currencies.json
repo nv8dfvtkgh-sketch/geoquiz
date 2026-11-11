@@ -1,0 +1,2297 @@
+{
+"AC": {
+"code": "SHP",
+"names": {
+"ar": "جنيه سانت هيلين",
+"en": "St. Helena Pound",
+"es": "Libra de Santa Elena",
+"fr": "Livre de Sainte-Hélène"
+}
+},
+"AD": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"AE": {
+"code": "AED",
+"names": {
+"ar": "درهم إماراتي",
+"en": "United Arab Emirates Dirham",
+"es": "Dírham de los Emiratos Árabes Unidos",
+"fr": "Dirham des Émirats arabes unis"
+}
+},
+"AF": {
+"code": "AFN",
+"names": {
+"ar": "أفغاني",
+"en": "Afghan Afghani",
+"es": "Afgani afgano",
+"fr": "Afghani afghan"
+}
+},
+"AG": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"AI": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"AL": {
+"code": "ALL",
+"names": {
+"ar": "ليك ألباني",
+"en": "Albanian Lek",
+"es": "Lek albanés",
+"fr": "Lek albanais"
+}
+},
+"AM": {
+"code": "AMD",
+"names": {
+"ar": "درام أرميني",
+"en": "Armenian Dram",
+"es": "Dram armenio",
+"fr": "Dram arménien"
+}
+},
+"AO": {
+"code": "AOA",
+"names": {
+"ar": "كوانزا أنغولي",
+"en": "Angolan Kwanza",
+"es": "Kuanza angoleño",
+"fr": "Kwanza angolais"
+}
+},
+"AR": {
+"code": "ARS",
+"names": {
+"ar": "بيزو أرجنتيني",
+"en": "Argentine Peso",
+"es": "Peso argentino",
+"fr": "Peso argentin"
+}
+},
+"AS": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"AT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"AU": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"AW": {
+"code": "AWG",
+"names": {
+"ar": "فلورن أروبي",
+"en": "Aruban Florin",
+"es": "Florín arubeño",
+"fr": "Florin arubais"
+}
+},
+"AX": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"AZ": {
+"code": "AZN",
+"names": {
+"ar": "مانات أذربيجان",
+"en": "Azerbaijani Manat",
+"es": "Manat azerbaiyano",
+"fr": "Manat azéri"
+}
+},
+"BA": {
+"code": "BAM",
+"names": {
+"ar": "مارك البوسنة والهرسك قابل للتحويل",
+"en": "Bosnia-Herzegovina Convertible Mark",
+"es": "Marco convertible de Bosnia y Herzegovina",
+"fr": "Mark convertible bosniaque"
+}
+},
+"BB": {
+"code": "BBD",
+"names": {
+"ar": "دولار بربادوسي",
+"en": "Barbadian Dollar",
+"es": "Dólar barbadense",
+"fr": "Dollar barbadien"
+}
+},
+"BD": {
+"code": "BDT",
+"names": {
+"ar": "تاكا بنغلاديشي",
+"en": "Bangladeshi Taka",
+"es": "Taka bangladesí",
+"fr": "Taka bangladeshi"
+}
+},
+"BE": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"BF": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"BG": {
+"code": "BGN",
+"names": {
+"ar": "ليف بلغاري",
+"en": "Bulgarian Lev",
+"es": "Leva búlgara",
+"fr": "Lev bulgare"
+}
+},
+"BH": {
+"code": "BHD",
+"names": {
+"ar": "دينار بحريني",
+"en": "Bahraini Dinar",
+"es": "Dinar bareiní",
+"fr": "Dinar bahreïni"
+}
+},
+"BI": {
+"code": "BIF",
+"names": {
+"ar": "فرنك بروندي",
+"en": "Burundian Franc",
+"es": "Franco burundés",
+"fr": "Franc burundais"
+}
+},
+"BJ": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"BL": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"BM": {
+"code": "BMD",
+"names": {
+"ar": "دولار برمودي",
+"en": "Bermudan Dollar",
+"es": "Dólar bermudeño",
+"fr": "Dollar bermudien"
+}
+},
+"BN": {
+"code": "BND",
+"names": {
+"ar": "دولار بروناي",
+"en": "Brunei Dollar",
+"es": "Dólar bruneano",
+"fr": "Dollar brunéien"
+}
+},
+"BO": {
+"code": "BOB",
+"names": {
+"ar": "بوليفيانو بوليفي",
+"en": "Bolivian Boliviano",
+"es": "Boliviano",
+"fr": "Boliviano bolivien"
+}
+},
+"BQ": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"BR": {
+"code": "BRL",
+"names": {
+"ar": "ريال برازيلي",
+"en": "Brazilian Real",
+"es": "Real brasileño",
+"fr": "Réal brésilien"
+}
+},
+"BS": {
+"code": "BSD",
+"names": {
+"ar": "دولار باهامي",
+"en": "Bahamian Dollar",
+"es": "Dólar bahameño",
+"fr": "Dollar bahaméen"
+}
+},
+"BT": {
+"code": "INR",
+"names": {
+"ar": "روبية هندي",
+"en": "Indian Rupee",
+"es": "Rupia india",
+"fr": "Roupie indienne"
+}
+},
+"BV": {
+"code": "NOK",
+"names": {
+"ar": "كرونة نرويجية",
+"en": "Norwegian Krone",
+"es": "Corona noruega",
+"fr": "Couronne norvégienne"
+}
+},
+"BW": {
+"code": "BWP",
+"names": {
+"ar": "بولا بتسواني",
+"en": "Botswanan Pula",
+"es": "Pula botsuano",
+"fr": "Pula botswanais"
+}
+},
+"BY": {
+"code": "BYN",
+"names": {
+"ar": "روبل بيلاروسي",
+"en": "Belarusian Ruble",
+"es": "Rublo bielorruso",
+"fr": "Rouble biélorusse"
+}
+},
+"BZ": {
+"code": "BZD",
+"names": {
+"ar": "دولار بليزي",
+"en": "Belize Dollar",
+"es": "Dólar beliceño",
+"fr": "Dollar bélizéen"
+}
+},
+"CA": {
+"code": "CAD",
+"names": {
+"ar": "دولار كندي",
+"en": "Canadian Dollar",
+"es": "Dólar canadiense",
+"fr": "Dollar canadien"
+}
+},
+"CC": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"CD": {
+"code": "CDF",
+"names": {
+"ar": "فرنك كونغولي",
+"en": "Congolese Franc",
+"es": "Franco congoleño",
+"fr": "Franc congolais"
+}
+},
+"CF": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"CG": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"CH": {
+"code": "CHF",
+"names": {
+"ar": "فرنك سويسري",
+"en": "Swiss Franc",
+"es": "Franco suizo",
+"fr": "Franc suisse"
+}
+},
+"CI": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"CK": {
+"code": "NZD",
+"names": {
+"ar": "دولار نيوزيلندي",
+"en": "New Zealand Dollar",
+"es": "Dólar neozelandés",
+"fr": "Dollar néo-zélandais"
+}
+},
+"CL": {
+"code": "CLP",
+"names": {
+"ar": "بيزو تشيلي",
+"en": "Chilean Peso",
+"es": "Peso chileno",
+"fr": "Peso chilien"
+}
+},
+"CM": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"CN": {
+"code": "CNY",
+"names": {
+"ar": "يوان صيني",
+"en": "Chinese Yuan",
+"es": "Yuan renminbi",
+"fr": "Yuan renminbi chinois"
+}
+},
+"CO": {
+"code": "COP",
+"names": {
+"ar": "بيزو كولومبي",
+"en": "Colombian Peso",
+"es": "Peso colombiano",
+"fr": "Peso colombien"
+}
+},
+"CR": {
+"code": "CRC",
+"names": {
+"ar": "كولن كوستاريكي",
+"en": "Costa Rican Colón",
+"es": "Colón costarricense",
+"fr": "Colón costaricain"
+}
+},
+"CU": {
+"code": "CUP",
+"names": {
+"ar": "بيزو كوبي",
+"en": "Cuban Peso",
+"es": "Peso cubano",
+"fr": "Peso cubain"
+}
+},
+"CV": {
+"code": "CVE",
+"names": {
+"ar": "اسكودو الرأس الأخضر",
+"en": "Cape Verdean Escudo",
+"es": "Escudo de Cabo Verde",
+"fr": "Escudo capverdien"
+}
+},
+"CW": {
+"code": "XCG",
+"names": {
+"ar": "XCG",
+"en": "Caribbean guilder",
+"es": "Florín caribeño",
+"fr": "Florin caribéen"
+}
+},
+"CX": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"CY": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"CZ": {
+"code": "CZK",
+"names": {
+"ar": "كرونة تشيكية",
+"en": "Czech Koruna",
+"es": "Corona checa",
+"fr": "Couronne tchèque"
+}
+},
+"DE": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"DG": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"DJ": {
+"code": "DJF",
+"names": {
+"ar": "فرنك جيبوتي",
+"en": "Djiboutian Franc",
+"es": "Franco yibutiano",
+"fr": "Franc djiboutien"
+}
+},
+"DK": {
+"code": "DKK",
+"names": {
+"ar": "كرونة دنماركية",
+"en": "Danish Krone",
+"es": "Corona danesa",
+"fr": "Couronne danoise"
+}
+},
+"DM": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"DO": {
+"code": "DOP",
+"names": {
+"ar": "بيزو الدومنيكان",
+"en": "Dominican Peso",
+"es": "Peso dominicano",
+"fr": "Peso dominicain"
+}
+},
+"DZ": {
+"code": "DZD",
+"names": {
+"ar": "دينار جزائري",
+"en": "Algerian Dinar",
+"es": "Dinar argelino",
+"fr": "Dinar algérien"
+}
+},
+"EA": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"EC": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"EE": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"EG": {
+"code": "EGP",
+"names": {
+"ar": "جنيه مصري",
+"en": "Egyptian Pound",
+"es": "Libra egipcia",
+"fr": "Livre égyptienne"
+}
+},
+"EH": {
+"code": "MAD",
+"names": {
+"ar": "درهم مغربي",
+"en": "Moroccan Dirham",
+"es": "Dírham marroquí",
+"fr": "Dirham marocain"
+}
+},
+"ER": {
+"code": "ERN",
+"names": {
+"ar": "ناكفا أريتري",
+"en": "Eritrean Nakfa",
+"es": "Nakfa eritreo",
+"fr": "Nafka érythréen"
+}
+},
+"ES": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"ET": {
+"code": "ETB",
+"names": {
+"ar": "بير أثيوبي",
+"en": "Ethiopian Birr",
+"es": "Bir etíope",
+"fr": "Birr éthiopien"
+}
+},
+"EU": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"FI": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"FJ": {
+"code": "FJD",
+"names": {
+"ar": "دولار فيجي",
+"en": "Fijian Dollar",
+"es": "Dólar fiyiano",
+"fr": "Dollar fidjien"
+}
+},
+"FK": {
+"code": "FKP",
+"names": {
+"ar": "جنيه جزر فوكلاند",
+"en": "Falkland Islands Pound",
+"es": "Libra malvinense",
+"fr": "Livre des îles Malouines"
+}
+},
+"FM": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"FO": {
+"code": "DKK",
+"names": {
+"ar": "كرونة دنماركية",
+"en": "Danish Krone",
+"es": "Corona danesa",
+"fr": "Couronne danoise"
+}
+},
+"FR": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"GA": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"GB": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"GD": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"GE": {
+"code": "GEL",
+"names": {
+"ar": "لارى جورجي",
+"en": "Georgian Lari",
+"es": "Lari georgiano",
+"fr": "Lari géorgien"
+}
+},
+"GF": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"GG": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"GH": {
+"code": "GHS",
+"names": {
+"ar": "سيدي غانا",
+"en": "Ghanaian Cedi",
+"es": "Cedi ghanés",
+"fr": "Cédi ghanéen"
+}
+},
+"GI": {
+"code": "GIP",
+"names": {
+"ar": "جنيه جبل طارق",
+"en": "Gibraltar Pound",
+"es": "Libra gibraltareña",
+"fr": "Livre de Gibraltar"
+}
+},
+"GL": {
+"code": "DKK",
+"names": {
+"ar": "كرونة دنماركية",
+"en": "Danish Krone",
+"es": "Corona danesa",
+"fr": "Couronne danoise"
+}
+},
+"GM": {
+"code": "GMD",
+"names": {
+"ar": "دلاسي غامبي",
+"en": "Gambian Dalasi",
+"es": "Dalasi gambiano",
+"fr": "Dalasi gambien"
+}
+},
+"GN": {
+"code": "GNF",
+"names": {
+"ar": "فرنك غينيا",
+"en": "Guinean Franc",
+"es": "Franco guineano",
+"fr": "Franc guinéen"
+}
+},
+"GP": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"GQ": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"GR": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"GS": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"GT": {
+"code": "GTQ",
+"names": {
+"ar": "كوتزال غواتيمالا",
+"en": "Guatemalan Quetzal",
+"es": "Quetzal guatemalteco",
+"fr": "Quetzal guatémaltèque"
+}
+},
+"GU": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"GW": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"GY": {
+"code": "GYD",
+"names": {
+"ar": "دولار غيانا",
+"en": "Guyanaese Dollar",
+"es": "Dólar guyanés",
+"fr": "Dollar du Guyana"
+}
+},
+"HK": {
+"code": "HKD",
+"names": {
+"ar": "دولار هونغ كونغ",
+"en": "Hong Kong Dollar",
+"es": "Dólar hongkonés",
+"fr": "Dollar de Hong Kong"
+}
+},
+"HM": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"HN": {
+"code": "HNL",
+"names": {
+"ar": "ليمبيرا هنداروس",
+"en": "Honduran Lempira",
+"es": "Lempira hondureño",
+"fr": "Lempira hondurien"
+}
+},
+"HR": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"HT": {
+"code": "HTG",
+"names": {
+"ar": "جوردى هايتي",
+"en": "Haitian Gourde",
+"es": "Gurde haitiano",
+"fr": "Gourde haïtienne"
+}
+},
+"HU": {
+"code": "HUF",
+"names": {
+"ar": "فورينت هنغاري",
+"en": "Hungarian Forint",
+"es": "Forinto húngaro",
+"fr": "Forint hongrois"
+}
+},
+"IC": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"ID": {
+"code": "IDR",
+"names": {
+"ar": "روبية إندونيسية",
+"en": "Indonesian Rupiah",
+"es": "Rupia indonesia",
+"fr": "Roupie indonésienne"
+}
+},
+"IE": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"IL": {
+"code": "ILS",
+"names": {
+"ar": "شيكل إسرائيلي جديد",
+"en": "Israeli New Shekel",
+"es": "Nuevo séquel israelí",
+"fr": "Nouveau shekel israélien"
+}
+},
+"IM": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"IN": {
+"code": "INR",
+"names": {
+"ar": "روبية هندي",
+"en": "Indian Rupee",
+"es": "Rupia india",
+"fr": "Roupie indienne"
+}
+},
+"IO": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"IQ": {
+"code": "IQD",
+"names": {
+"ar": "دينار عراقي",
+"en": "Iraqi Dinar",
+"es": "Dinar iraquí",
+"fr": "Dinar irakien"
+}
+},
+"IR": {
+"code": "IRR",
+"names": {
+"ar": "ريال إيراني",
+"en": "Iranian Rial",
+"es": "Rial iraní",
+"fr": "Riyal iranien"
+}
+},
+"IS": {
+"code": "ISK",
+"names": {
+"ar": "كرونة أيسلندية",
+"en": "Icelandic Króna",
+"es": "Corona islandesa",
+"fr": "Couronne islandaise"
+}
+},
+"IT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"JE": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"JM": {
+"code": "JMD",
+"names": {
+"ar": "دولار جامايكي",
+"en": "Jamaican Dollar",
+"es": "Dólar jamaicano",
+"fr": "Dollar jamaïcain"
+}
+},
+"JO": {
+"code": "JOD",
+"names": {
+"ar": "دينار أردني",
+"en": "Jordanian Dinar",
+"es": "Dinar jordano",
+"fr": "Dinar jordanien"
+}
+},
+"JP": {
+"code": "JPY",
+"names": {
+"ar": "ين ياباني",
+"en": "Japanese Yen",
+"es": "Yen japonés",
+"fr": "Yen japonais"
+}
+},
+"KE": {
+"code": "KES",
+"names": {
+"ar": "شلن كينيي",
+"en": "Kenyan Shilling",
+"es": "Chelín keniano",
+"fr": "Shilling kényan"
+}
+},
+"KG": {
+"code": "KGS",
+"names": {
+"ar": "سوم قيرغستاني",
+"en": "Kyrgystani Som",
+"es": "Som kirguís",
+"fr": "Som kirghize"
+}
+},
+"KH": {
+"code": "KHR",
+"names": {
+"ar": "رييال كمبودي",
+"en": "Cambodian Riel",
+"es": "Riel camboyano",
+"fr": "Riel cambodgien"
+}
+},
+"KI": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"KM": {
+"code": "KMF",
+"names": {
+"ar": "فرنك جزر القمر",
+"en": "Comorian Franc",
+"es": "Franco comorense",
+"fr": "Franc comorien"
+}
+},
+"KN": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"KP": {
+"code": "KPW",
+"names": {
+"ar": "وون كوريا الشمالية",
+"en": "North Korean Won",
+"es": "Won norcoreano",
+"fr": "Won nord-coréen"
+}
+},
+"KR": {
+"code": "KRW",
+"names": {
+"ar": "وون كوريا الجنوبية",
+"en": "South Korean Won",
+"es": "Won surcoreano",
+"fr": "Won sud-coréen"
+}
+},
+"KW": {
+"code": "KWD",
+"names": {
+"ar": "دينار كويتي",
+"en": "Kuwaiti Dinar",
+"es": "Dinar kuwaití",
+"fr": "Dinar koweïtien"
+}
+},
+"KY": {
+"code": "KYD",
+"names": {
+"ar": "دولار جزر كيمن",
+"en": "Cayman Islands Dollar",
+"es": "Dólar de las Islas Caimán",
+"fr": "Dollar des îles Caïmans"
+}
+},
+"KZ": {
+"code": "KZT",
+"names": {
+"ar": "تينغ كازاخستاني",
+"en": "Kazakhstani Tenge",
+"es": "Tengue kazajo",
+"fr": "Tenge kazakh"
+}
+},
+"LA": {
+"code": "LAK",
+"names": {
+"ar": "كيب لاوسي",
+"en": "Laotian Kip",
+"es": "Kip laosiano",
+"fr": "Kip laotien"
+}
+},
+"LB": {
+"code": "LBP",
+"names": {
+"ar": "جنيه لبناني",
+"en": "Lebanese Pound",
+"es": "Libra libanesa",
+"fr": "Livre libanaise"
+}
+},
+"LC": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"LI": {
+"code": "CHF",
+"names": {
+"ar": "فرنك سويسري",
+"en": "Swiss Franc",
+"es": "Franco suizo",
+"fr": "Franc suisse"
+}
+},
+"LK": {
+"code": "LKR",
+"names": {
+"ar": "روبية سريلانكية",
+"en": "Sri Lankan Rupee",
+"es": "Rupia esrilanquesa",
+"fr": "Roupie srilankaise"
+}
+},
+"LR": {
+"code": "LRD",
+"names": {
+"ar": "دولار ليبيري",
+"en": "Liberian Dollar",
+"es": "Dólar liberiano",
+"fr": "Dollar libérien"
+}
+},
+"LS": {
+"code": "ZAR",
+"names": {
+"ar": "راند جنوب أفريقيا",
+"en": "South African Rand",
+"es": "Rand sudafricano",
+"fr": "Rand sud-africain"
+}
+},
+"LT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"LU": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"LV": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"LY": {
+"code": "LYD",
+"names": {
+"ar": "دينار ليبي",
+"en": "Libyan Dinar",
+"es": "Dinar libio",
+"fr": "Dinar libyen"
+}
+},
+"MA": {
+"code": "MAD",
+"names": {
+"ar": "درهم مغربي",
+"en": "Moroccan Dirham",
+"es": "Dírham marroquí",
+"fr": "Dirham marocain"
+}
+},
+"MC": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"MD": {
+"code": "MDL",
+"names": {
+"ar": "ليو مولدوفي",
+"en": "Moldovan Leu",
+"es": "Leu moldavo",
+"fr": "Leu moldave"
+}
+},
+"ME": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"MF": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"MG": {
+"code": "MGA",
+"names": {
+"ar": "أرياري مدغشقر",
+"en": "Malagasy Ariary",
+"es": "Ariari malgache",
+"fr": "Ariary malgache"
+}
+},
+"MH": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"MK": {
+"code": "MKD",
+"names": {
+"ar": "دينار مقدوني",
+"en": "Macedonian Denar",
+"es": "Dinar macedonio",
+"fr": "Denar macédonien"
+}
+},
+"ML": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"MM": {
+"code": "MMK",
+"names": {
+"ar": "كيات ميانمار",
+"en": "Myanmar Kyat",
+"es": "Kiat de Myanmar",
+"fr": "Kyat myanmarais"
+}
+},
+"MN": {
+"code": "MNT",
+"names": {
+"ar": "توغروغ منغولي",
+"en": "Mongolian Tugrik",
+"es": "Tugrik mongol",
+"fr": "Tugrik mongol"
+}
+},
+"MO": {
+"code": "MOP",
+"names": {
+"ar": "باتاكا ماكاوي",
+"en": "Macanese Pataca",
+"es": "Pataca macaense",
+"fr": "Pataca macanaise"
+}
+},
+"MP": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"MQ": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"MR": {
+"code": "MRU",
+"names": {
+"ar": "أوقية موريتانية",
+"en": "Mauritanian Ouguiya",
+"es": "Uguiya mauritano",
+"fr": "Ouguiya mauritanien"
+}
+},
+"MS": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"MT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"MU": {
+"code": "MUR",
+"names": {
+"ar": "روبية موريشيوسية",
+"en": "Mauritian Rupee",
+"es": "Rupia mauriciana",
+"fr": "Roupie mauricienne"
+}
+},
+"MV": {
+"code": "MVR",
+"names": {
+"ar": "روفيه جزر المالديف",
+"en": "Maldivian Rufiyaa",
+"es": "Rufiya maldiva",
+"fr": "Rufiyaa maldivienne"
+}
+},
+"MW": {
+"code": "MWK",
+"names": {
+"ar": "كواشا مالاوي",
+"en": "Malawian Kwacha",
+"es": "Kuacha malauí",
+"fr": "Kwacha malawite"
+}
+},
+"MX": {
+"code": "MXN",
+"names": {
+"ar": "بيزو مكسيكي",
+"en": "Mexican Peso",
+"es": "Peso mexicano",
+"fr": "Peso mexicain"
+}
+},
+"MY": {
+"code": "MYR",
+"names": {
+"ar": "رينغيت ماليزي",
+"en": "Malaysian Ringgit",
+"es": "Ringit malasio",
+"fr": "Ringgit malais"
+}
+},
+"MZ": {
+"code": "MZN",
+"names": {
+"ar": "متكال موزمبيقي",
+"en": "Mozambican Metical",
+"es": "Metical mozambiqueño",
+"fr": "Metical mozambicain"
+}
+},
+"NA": {
+"code": "ZAR",
+"names": {
+"ar": "راند جنوب أفريقيا",
+"en": "South African Rand",
+"es": "Rand sudafricano",
+"fr": "Rand sud-africain"
+}
+},
+"NC": {
+"code": "XPF",
+"names": {
+"ar": "فرنك سي إف بي",
+"en": "CFP Franc",
+"es": "Franco CFP",
+"fr": "Franc CFP"
+}
+},
+"NE": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"NF": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"NG": {
+"code": "NGN",
+"names": {
+"ar": "نايرا نيجيري",
+"en": "Nigerian Naira",
+"es": "Naira nigeriano",
+"fr": "Naira nigérian"
+}
+},
+"NI": {
+"code": "NIO",
+"names": {
+"ar": "قرطبة نيكاراغوا",
+"en": "Nicaraguan Córdoba",
+"es": "Córdoba oro",
+"fr": "Córdoba oro nicaraguayen"
+}
+},
+"NL": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"NO": {
+"code": "NOK",
+"names": {
+"ar": "كرونة نرويجية",
+"en": "Norwegian Krone",
+"es": "Corona noruega",
+"fr": "Couronne norvégienne"
+}
+},
+"NP": {
+"code": "NPR",
+"names": {
+"ar": "روبية نيبالي",
+"en": "Nepalese Rupee",
+"es": "Rupia nepalí",
+"fr": "Roupie népalaise"
+}
+},
+"NR": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"NU": {
+"code": "NZD",
+"names": {
+"ar": "دولار نيوزيلندي",
+"en": "New Zealand Dollar",
+"es": "Dólar neozelandés",
+"fr": "Dollar néo-zélandais"
+}
+},
+"NZ": {
+"code": "NZD",
+"names": {
+"ar": "دولار نيوزيلندي",
+"en": "New Zealand Dollar",
+"es": "Dólar neozelandés",
+"fr": "Dollar néo-zélandais"
+}
+},
+"OM": {
+"code": "OMR",
+"names": {
+"ar": "ريال عماني",
+"en": "Omani Rial",
+"es": "Rial omaní",
+"fr": "Riyal omanais"
+}
+},
+"PA": {
+"code": "PAB",
+"names": {
+"ar": "بالبوا بنمي",
+"en": "Panamanian Balboa",
+"es": "Balboa panameño",
+"fr": "Balboa panaméen"
+}
+},
+"PE": {
+"code": "PEN",
+"names": {
+"ar": "سول بيروفي",
+"en": "Peruvian Sol",
+"es": "Sol peruano",
+"fr": "Sol péruvien"
+}
+},
+"PF": {
+"code": "XPF",
+"names": {
+"ar": "فرنك سي إف بي",
+"en": "CFP Franc",
+"es": "Franco CFP",
+"fr": "Franc CFP"
+}
+},
+"PG": {
+"code": "PGK",
+"names": {
+"ar": "كينا بابوا غينيا الجديدة",
+"en": "Papua New Guinean Kina",
+"es": "Kina papú",
+"fr": "Kina papouan-néo-guinéen"
+}
+},
+"PH": {
+"code": "PHP",
+"names": {
+"ar": "بيزو فلبيني",
+"en": "Philippine Peso",
+"es": "Peso filipino",
+"fr": "Peso philippin"
+}
+},
+"PK": {
+"code": "PKR",
+"names": {
+"ar": "روبية باكستاني",
+"en": "Pakistani Rupee",
+"es": "Rupia pakistaní",
+"fr": "Roupie pakistanaise"
+}
+},
+"PL": {
+"code": "PLN",
+"names": {
+"ar": "زلوتي بولندي",
+"en": "Polish Zloty",
+"es": "Esloti polaco",
+"fr": "Zloty polonais"
+}
+},
+"PM": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"PN": {
+"code": "NZD",
+"names": {
+"ar": "دولار نيوزيلندي",
+"en": "New Zealand Dollar",
+"es": "Dólar neozelandés",
+"fr": "Dollar néo-zélandais"
+}
+},
+"PR": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"PS": {
+"code": "ILS",
+"names": {
+"ar": "شيكل إسرائيلي جديد",
+"en": "Israeli New Shekel",
+"es": "Nuevo séquel israelí",
+"fr": "Nouveau shekel israélien"
+}
+},
+"PT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"PW": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"PY": {
+"code": "PYG",
+"names": {
+"ar": "غواراني باراغواي",
+"en": "Paraguayan Guarani",
+"es": "Guaraní paraguayo",
+"fr": "Guaraní paraguayen"
+}
+},
+"QA": {
+"code": "QAR",
+"names": {
+"ar": "ريال قطري",
+"en": "Qatari Riyal",
+"es": "Rial catarí",
+"fr": "Riyal qatari"
+}
+},
+"RE": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"RO": {
+"code": "RON",
+"names": {
+"ar": "ليو روماني",
+"en": "Romanian Leu",
+"es": "Leu rumano",
+"fr": "Leu roumain"
+}
+},
+"RS": {
+"code": "RSD",
+"names": {
+"ar": "دينار صربي",
+"en": "Serbian Dinar",
+"es": "Dinar serbio",
+"fr": "Dinar serbe"
+}
+},
+"RU": {
+"code": "RUB",
+"names": {
+"ar": "روبل روسي",
+"en": "Russian Ruble",
+"es": "Rublo ruso",
+"fr": "Rouble russe"
+}
+},
+"RW": {
+"code": "RWF",
+"names": {
+"ar": "فرنك رواندي",
+"en": "Rwandan Franc",
+"es": "Franco ruandés",
+"fr": "Franc rwandais"
+}
+},
+"SA": {
+"code": "SAR",
+"names": {
+"ar": "ريال سعودي",
+"en": "Saudi Riyal",
+"es": "Rial saudí",
+"fr": "Riyal saoudien"
+}
+},
+"SB": {
+"code": "SBD",
+"names": {
+"ar": "دولار جزر سليمان",
+"en": "Solomon Islands Dollar",
+"es": "Dólar salomonense",
+"fr": "Dollar des îles Salomon"
+}
+},
+"SC": {
+"code": "SCR",
+"names": {
+"ar": "روبية سيشيلية",
+"en": "Seychellois Rupee",
+"es": "Rupia seychellense",
+"fr": "Roupie des Seychelles"
+}
+},
+"SD": {
+"code": "SDG",
+"names": {
+"ar": "جنيه سوداني",
+"en": "Sudanese Pound",
+"es": "Libra sudanesa",
+"fr": "Livre soudanaise"
+}
+},
+"SE": {
+"code": "SEK",
+"names": {
+"ar": "كرونة سويدية",
+"en": "Swedish Krona",
+"es": "Corona sueca",
+"fr": "Couronne suédoise"
+}
+},
+"SG": {
+"code": "SGD",
+"names": {
+"ar": "دولار سنغافوري",
+"en": "Singapore Dollar",
+"es": "Dólar singapurense",
+"fr": "Dollar de Singapour"
+}
+},
+"SH": {
+"code": "SHP",
+"names": {
+"ar": "جنيه سانت هيلين",
+"en": "St. Helena Pound",
+"es": "Libra de Santa Elena",
+"fr": "Livre de Sainte-Hélène"
+}
+},
+"SI": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"SJ": {
+"code": "NOK",
+"names": {
+"ar": "كرونة نرويجية",
+"en": "Norwegian Krone",
+"es": "Corona noruega",
+"fr": "Couronne norvégienne"
+}
+},
+"SK": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"SL": {
+"code": "SLE",
+"names": {
+"ar": "ليون سيراليوني",
+"en": "Sierra Leonean Leone",
+"es": "Leona sierraleonesa",
+"fr": "Leone sierra-léonais"
+}
+},
+"SM": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"SN": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"SO": {
+"code": "SOS",
+"names": {
+"ar": "شلن صومالي",
+"en": "Somali Shilling",
+"es": "Chelín somalí",
+"fr": "Shilling somalien"
+}
+},
+"SR": {
+"code": "SRD",
+"names": {
+"ar": "دولار سورينامي",
+"en": "Surinamese Dollar",
+"es": "Dólar surinamés",
+"fr": "Dollar surinamais"
+}
+},
+"SS": {
+"code": "SSP",
+"names": {
+"ar": "جنيه جنوب السودان",
+"en": "South Sudanese Pound",
+"es": "Libra sursudanesa",
+"fr": "Livre sud-soudanaise"
+}
+},
+"ST": {
+"code": "STN",
+"names": {
+"ar": "دوبرا ساو تومي وبرينسيبي",
+"en": "São Tomé & Príncipe Dobra",
+"es": "Dobra santotomense",
+"fr": "Dobra santoméen"
+}
+},
+"SV": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"SX": {
+"code": "XCG",
+"names": {
+"ar": "XCG",
+"en": "Caribbean guilder",
+"es": "Florín caribeño",
+"fr": "Florin caribéen"
+}
+},
+"SY": {
+"code": "SYP",
+"names": {
+"ar": "ليرة سورية",
+"en": "Syrian Pound",
+"es": "Libra siria",
+"fr": "Livre syrienne"
+}
+},
+"SZ": {
+"code": "SZL",
+"names": {
+"ar": "ليلانجيني سوازيلندي",
+"en": "Swazi Lilangeni",
+"es": "Lilangeni esuatiní",
+"fr": "Lilangeni swazi"
+}
+},
+"TA": {
+"code": "GBP",
+"names": {
+"ar": "جنيه إسترليني",
+"en": "British Pound",
+"es": "Libra esterlina",
+"fr": "Livre sterling"
+}
+},
+"TC": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"TD": {
+"code": "XAF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"TF": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"TG": {
+"code": "XOF",
+"names": {
+"ar": "فرنك أفريقي",
+"en": "CFA franc",
+"es": "Franco CFA",
+"fr": "Franc CFA"
+}
+},
+"TH": {
+"code": "THB",
+"names": {
+"ar": "باخت تايلاندي",
+"en": "Thai Baht",
+"es": "Bat tailandés",
+"fr": "Baht thaïlandais"
+}
+},
+"TJ": {
+"code": "TJS",
+"names": {
+"ar": "سوموني طاجيكستاني",
+"en": "Tajikistani Somoni",
+"es": "Somoni tayiko",
+"fr": "Somoni tadjik"
+}
+},
+"TK": {
+"code": "NZD",
+"names": {
+"ar": "دولار نيوزيلندي",
+"en": "New Zealand Dollar",
+"es": "Dólar neozelandés",
+"fr": "Dollar néo-zélandais"
+}
+},
+"TL": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"TM": {
+"code": "TMT",
+"names": {
+"ar": "مانات تركمانستان",
+"en": "Turkmenistani Manat",
+"es": "Manat turcomano",
+"fr": "Nouveau manat turkmène"
+}
+},
+"TN": {
+"code": "TND",
+"names": {
+"ar": "دينار تونسي",
+"en": "Tunisian Dinar",
+"es": "Dinar tunecino",
+"fr": "Dinar tunisien"
+}
+},
+"TO": {
+"code": "TOP",
+"names": {
+"ar": "بانغا تونغا",
+"en": "Tongan Paʻanga",
+"es": "Paanga tongano",
+"fr": "Pa’anga tongan"
+}
+},
+"TR": {
+"code": "TRY",
+"names": {
+"ar": "ليرة تركية",
+"en": "Turkish Lira",
+"es": "Lira turca",
+"fr": "Livre turque"
+}
+},
+"TT": {
+"code": "TTD",
+"names": {
+"ar": "دولار ترينداد وتوباغو",
+"en": "Trinidad & Tobago Dollar",
+"es": "Dólar de Trinidad y Tobago",
+"fr": "Dollar de Trinité-et-Tobago"
+}
+},
+"TV": {
+"code": "AUD",
+"names": {
+"ar": "دولار أسترالي",
+"en": "Australian Dollar",
+"es": "Dólar australiano",
+"fr": "Dollar australien"
+}
+},
+"TW": {
+"code": "TWD",
+"names": {
+"ar": "دولار تايواني",
+"en": "New Taiwan Dollar",
+"es": "Nuevo dólar taiwanés",
+"fr": "Nouveau dollar taïwanais"
+}
+},
+"TZ": {
+"code": "TZS",
+"names": {
+"ar": "شلن تنزاني",
+"en": "Tanzanian Shilling",
+"es": "Chelín tanzano",
+"fr": "Shilling tanzanien"
+}
+},
+"UA": {
+"code": "UAH",
+"names": {
+"ar": "هريفنيا أوكراني",
+"en": "Ukrainian Hryvnia",
+"es": "Grivna ucraniana",
+"fr": "Hryvnia ukrainienne"
+}
+},
+"UG": {
+"code": "UGX",
+"names": {
+"ar": "شلن أوغندي",
+"en": "Ugandan Shilling",
+"es": "Chelín ugandés",
+"fr": "Shilling ougandais"
+}
+},
+"UM": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"US": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"UY": {
+"code": "UYU",
+"names": {
+"ar": "بيزو اوروغواي",
+"en": "Uruguayan Peso",
+"es": "Peso uruguayo",
+"fr": "Peso uruguayen"
+}
+},
+"UZ": {
+"code": "UZS",
+"names": {
+"ar": "سوم أوزبكستاني",
+"en": "Uzbekistani Som",
+"es": "Sum uzbeko",
+"fr": "Sum ouzbek"
+}
+},
+"VA": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"VC": {
+"code": "XCD",
+"names": {
+"ar": "دولار شرق الكاريبي",
+"en": "East Caribbean Dollar",
+"es": "Dólar del Caribe Oriental",
+"fr": "Dollar des Caraïbes orientales"
+}
+},
+"VE": {
+"code": "VES",
+"names": {
+"ar": "بوليفار فنزويلي",
+"en": "Venezuelan Bolívar",
+"es": "Bolívar venezolano",
+"fr": "Bolivar vénézuélien"
+}
+},
+"VG": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"VI": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+},
+"VN": {
+"code": "VND",
+"names": {
+"ar": "دونج فيتنامي",
+"en": "Vietnamese Dong",
+"es": "Dong vietnamita",
+"fr": "Dông vietnamien"
+}
+},
+"VU": {
+"code": "VUV",
+"names": {
+"ar": "فاتو فانواتو",
+"en": "Vanuatu Vatu",
+"es": "Vatu vanuatense",
+"fr": "Vatu vanuatuan"
+}
+},
+"WF": {
+"code": "XPF",
+"names": {
+"ar": "فرنك سي إف بي",
+"en": "CFP Franc",
+"es": "Franco CFP",
+"fr": "Franc CFP"
+}
+},
+"WS": {
+"code": "WST",
+"names": {
+"ar": "تالا ساموا",
+"en": "Samoan Tala",
+"es": "Tala samoano",
+"fr": "Tala samoan"
+}
+},
+"XK": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"YE": {
+"code": "YER",
+"names": {
+"ar": "ريال يمني",
+"en": "Yemeni Rial",
+"es": "Rial yemení",
+"fr": "Riyal yéménite"
+}
+},
+"YT": {
+"code": "EUR",
+"names": {
+"ar": "يورو",
+"en": "Euro",
+"es": "Euro",
+"fr": "Euro"
+}
+},
+"ZA": {
+"code": "ZAR",
+"names": {
+"ar": "راند جنوب أفريقيا",
+"en": "South African Rand",
+"es": "Rand sudafricano",
+"fr": "Rand sud-africain"
+}
+},
+"ZM": {
+"code": "ZMW",
+"names": {
+"ar": "كواشا زامبي",
+"en": "Zambian Kwacha",
+"es": "Kuacha zambiano",
+"fr": "Kwacha zambien"
+}
+},
+"ZW": {
+"code": "USD",
+"names": {
+"ar": "دولار أمريكي",
+"en": "US Dollar",
+"es": "Dólar estadounidense",
+"fr": "Dollar des États-Unis"
+}
+}
+}

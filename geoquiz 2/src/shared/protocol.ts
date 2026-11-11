@@ -47,6 +47,8 @@ export interface ZoneInfo {
 
 export interface CategoryInfo {
   id: CategoryId;
+  /** true : pas de choix de zone (langues, calcul mental) */
+  noZone?: boolean;
   qtypes: Exclude<QType, 'mix' | 'auto'>[];
   zoneKinds: ZoneInfo['kind'][];
 }
@@ -122,6 +124,7 @@ export interface QuestionMsg {
   flag?: string; // jeton d'image de drapeau à afficher
   map?: MapSpec;
   highlight?: string; // entité surlignée (« quel est ce pays ? »)
+  shape?: { d: string; w: number; h: number }; // silhouette à deviner (coordonnées recentrées)
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono

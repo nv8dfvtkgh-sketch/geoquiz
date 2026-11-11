@@ -23,7 +23,24 @@ function Prompt({ q }: { q: QuestionMsg }) {
         {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto">{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
       </div>
       {q.flag && <FlagImg token={q.flag} className="flag big" />}
+      {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}
     </div>
+  );
+}
+
+/** Silhouette d'un pays (Silhouettes de pays). */
+function Shape({ shape, small }: { shape: NonNullable<QuestionMsg['shape']>; small?: boolean }) {
+  const pad = Math.max(shape.w, shape.h) * 0.06;
+  return (
+    <svg
+      className={`shape ${small ? 'small' : ''}`}
+      viewBox={`${-pad} ${-pad} ${shape.w + pad * 2} ${shape.h + pad * 2}`}
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-label="?"
+    >
+      <path d={shape.d} />
+    </svg>
   );
 }
 
@@ -88,7 +105,7 @@ function Play({ q }: { q: QuestionMsg }) {
 
       {q.kind === 'mcq' && <Options q={q} chosen={fb?.value} correctId={reveal?.optionId ?? (fb?.correct ? fb.value : undefined)} wrongId={fb && !fb.correct ? fb.value : undefined} onPick={locked ? undefined : answer} />}
 
-      {q.kind === 'type' && <TypeBox key={q.index} disabled={locked} onSubmit={answer} />}
+      {q.kind === 'type' && <TypeBox key={q.index} disabled={locked} onSubmit={answer} numeric={q.category === 'calc'} />}
 
       <Status q={q} />
     </div>
@@ -111,14 +128,14 @@ function Options({ q, chosen, correctId, wrongId, onPick }: { q: QuestionMsg; ch
   );
 }
 
-function TypeBox({ disabled, onSubmit }: { disabled: boolean; onSubmit: (v: string) => void }) {
+function TypeBox({ disabled, onSubmit, numeric }: { disabled: boolean; onSubmit: (v: string) => void; numeric?: boolean }) {
   const { t } = useApp();
   const [v, setV] = useState('');
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => { ref.current?.focus({ preventScroll: true }); }, []);
   return (
     <form className="typebox" onSubmit={(e) => { e.preventDefault(); if (v.trim()) onSubmit(v.trim()); }}>
-      <input ref={ref} value={v} onChange={(e) => setV(e.target.value)} disabled={disabled} placeholder={t('play.typeHere')} dir="auto" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="send" />
+      <input ref={ref} value={v} onChange={(e) => setV(e.target.value)} disabled={disabled} placeholder={t('play.typeHere')} dir="auto" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="send" inputMode={numeric ? 'numeric' : 'text'} />
       <button className="btn primary" disabled={disabled || !v.trim()}>{t('play.validate')}</button>
     </form>
   );

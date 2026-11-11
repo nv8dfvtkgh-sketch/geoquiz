@@ -29,7 +29,7 @@ if (!fs.existsSync(path.join(BUILD, 'world.json'))) {
 initData(readJson(path.join(BUILD, 'world.json')), readJson(path.join(BUILD, 'countries.json')), (iso) => {
   const f = path.join(BUILD, 'regions', `${iso}.json`);
   return fs.existsSync(f) ? readJson(f) : null;
-});
+}, { languages: fs.existsSync(path.join(BUILD, 'languages.json')) ? readJson(path.join(BUILD, 'languages.json')) : [] });
 config.maxPlayers = Number(process.env.MAX_PLAYERS ?? 50);
 const catalogJson = JSON.stringify(catalog(categoryInfos(), config.maxPlayers));
 

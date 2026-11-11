@@ -1,7 +1,7 @@
 // État de l'application côté navigateur, alimenté par les messages du serveur.
 import { createContext, useContext } from 'react';
 import type {
-  Catalog, ClientMsg, Lang, PublicPlayer, QuestionMsg, Reveal, RoomKind, RoomSnapshot, ServerMsg, Settings,
+  Catalog, ClientMsg, Lang, PublicPlayer, QuestionMsg, Reveal, RoomSnapshot, ServerMsg, Settings,
 } from '../shared/protocol';
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
@@ -22,7 +22,9 @@ export interface Feedback {
 
 export interface State {
   screen: Screen;
-  setupKind: RoomKind | 'edit';
+  /** « game » : fiche d'un jeu choisi à l'accueil ; « edit » : réglages depuis la salle d'attente */
+  setupKind: 'game' | 'edit';
+  game: string;
   room?: RoomSnapshot;
   you?: string;
   isHost: boolean;
@@ -36,11 +38,12 @@ export interface State {
   joinCode?: string;
 }
 
-export const initialState = (joinCode?: string): State => ({ screen: 'home', setupKind: 'solo', isHost: false, qAt: 0, joinCode });
+export const initialState = (joinCode?: string): State => ({ screen: 'home', setupKind: 'game', game: 'countries', isHost: false, qAt: 0, joinCode });
 
 export type Action =
   | { type: 'server'; msg: ServerMsg }
   | { type: 'go'; screen: Screen; setupKind?: State['setupKind'] }
+  | { type: 'openGame'; game: string }
   | { type: 'error'; code?: string }
   | { type: 'reset' };
 
@@ -48,10 +51,12 @@ export function reducer(s: State, a: Action): State {
   switch (a.type) {
     case 'go':
       return { ...s, screen: a.screen, setupKind: a.setupKind ?? s.setupKind, error: undefined };
+    case 'openGame':
+      return { ...s, screen: 'setup', setupKind: 'game', game: a.game, error: undefined };
     case 'error':
       return { ...s, error: a.code };
     case 'reset':
-      return { ...initialState(), screen: 'home' };
+      return { ...initialState(), screen: 'home', game: s.game };
     case 'server':
       return onServer(s, a.msg);
   }
@@ -111,6 +116,7 @@ export interface Ctx {
   setLang: (l: Lang) => void;
   send: (m: ClientMsg) => void;
   go: (screen: Screen, setupKind?: State['setupKind']) => void;
+  openGame: (game: string) => void;
   catalog: Catalog | null;
   name: string;
   setName: (n: string) => void;

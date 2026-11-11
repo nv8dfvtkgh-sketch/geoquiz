@@ -6,7 +6,7 @@ import {
   type ServerMsg, type Settings,
 } from '../shared/protocol';
 import { CATEGORIES, localize, shuffle, type InternalQuestion } from './categories';
-import { ensureRegion, regionLoaded, zones } from './data';
+import { countries, ensureRegion, regionLoaded, zones } from './data';
 
 export interface Conn {
   send(msg: ServerMsg): void;
@@ -103,7 +103,15 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   const auto: Record<string, Kind[]> = { easy: ['mcq'], medium: cat.qtypes, hard: ['type'] };
   const kinds: Kind[] = settings.qtype === 'auto' ? auto[settings.difficulty]
     : settings.qtype === 'mix' ? cat.qtypes : [settings.qtype as Kind];
-  return pool.map((t, i) => cat.make(t, kinds[(i + Math.floor(rnd() * kinds.length)) % kinds.length], zone, rnd));
+  return pool.map((t, i) => {
+    const q = cat.make(t, kinds[(i + Math.floor(rnd() * kinds.length)) % kinds.length], zone, rnd);
+    // Hors du niveau difficile, les territoires (Féroé, Jersey, Groenland…) sont grisés sur la
+    // carte : ils ne sont jamais demandés et allègent la carte des petites cibles.
+    if (settings.difficulty !== 'hard' && q.map?.map === 'world') {
+      q.map = { ...q.map, active: q.map.active.filter((id) => id === t || !countries[id]?.dependency) };
+    }
+    return q;
+  });
 }
 
 export class Room {
@@ -422,6 +430,7 @@ export class Room {
       flag: q.flagIso ? r.flagTokens[q.flagIso] : undefined,
       map: q.map,
       highlight: q.highlight,
+      shape: q.shape,
       options: q.options?.map((o) => ({ id: o.id, label: o.label ? localize(o.label, lang) : undefined, flag: o.flagIso ? r.flagTokens[o.flagIso] : undefined })),
       attempts: q.attempts,
       timeLimit: r.deadline ? this.settings.timeLimit * 1000 : null,

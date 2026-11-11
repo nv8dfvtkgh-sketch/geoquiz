@@ -36,7 +36,9 @@ interface Props {
 }
 
 const SMALL_PX = 9; // en dessous, un pays reçoit une cible ronde
-const TARGET_PX = 11;
+const DOT_PX = 5; // rond discret à l'écran
+const DOT_FOCUS_PX = 9; // rond mis en avant (réponse, erreur, pays surligné)
+const HIT_PX = 14; // zone tactile invisible, plus large que le rond
 
 export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
   const data = useMap(spec.map);
@@ -163,9 +165,11 @@ export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
       if (px >= SMALL_PX) continue;
       const show = interactive || f.id === highlight || marks[f.id];
       if (!show) continue;
+      const focus = f.id === highlight || !!marks[f.id];
       out.push(
-        <circle key={f.id} className={`dot ${f.id === highlight ? 'hl' : ''} ${marks[f.id] ?? ''}`} cx={f.c[0]} cy={f.c[1]} r={upp * TARGET_PX} data-id={interactive ? f.id : undefined} />,
+        <circle key={f.id} className={`dot ${f.id === highlight ? 'hl' : ''} ${marks[f.id] ?? ''}`} cx={f.c[0]} cy={f.c[1]} r={upp * (focus ? DOT_FOCUS_PX : DOT_PX)} />,
       );
+      if (interactive) out.push(<circle key={`${f.id}-hit`} className="hit" cx={f.c[0]} cy={f.c[1]} r={upp * HIT_PX} data-id={f.id} />);
     }
     return out;
   }, [data, active, capitals, marks, upp, interactive, highlight]);

@@ -11,7 +11,7 @@ export function SettingsSummary({ settings }: { settings: Settings }) {
   return (
     <dl className="summary">
       <div><dt>{t('setup.category')}</dt><dd>{t(`cat.${settings.category}`)}</dd></div>
-      <div><dt>{t('setup.zone')}</dt><dd>{zone}</dd></div>
+      {!catalog?.categories.find((c) => c.id === settings.category)?.noZone && <div><dt>{t('setup.zone')}</dt><dd>{zone}</dd></div>}
       <div><dt>{t('setup.difficulty')}</dt><dd>{t(`diff.${settings.difficulty}`)}</dd></div>
       <div><dt>{t('setup.qtype')}</dt><dd>{t(`qtype.${settings.qtype}`)}</dd></div>
       <div><dt>{t('setup.count')}</dt><dd>{settings.count}</dd></div>

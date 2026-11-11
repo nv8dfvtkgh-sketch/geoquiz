@@ -31,7 +31,24 @@ export function App() {
   who.current = { name, lang };
   useEffect(() => {
     fetch('/api/catalog').then((r) => r.json()).then(setCatalog).catch(() => {});
+    // Rechargement de la page : on ne revient dans une partie que si c'est une partie à
+    // plusieurs encore en cours (un joueur qui actualise ne perd pas sa place). Une partie
+    // solo ou terminée est abandonnée : on reste sur l'accueil.
+    let reloadCheck = !!savedSession();
+    let ignoring = false;
     const off = net.on((msg) => {
+      if (reloadCheck && msg.t !== 'joined' && msg.t !== 'pong') reloadCheck = false; // reprise refusée (partie expirée)
+      if (reloadCheck && msg.t === 'joined') {
+        reloadCheck = false;
+        if (msg.room.kind === 'solo' || msg.room.state === 'finished') {
+          ignoring = true;
+          net.send({ t: 'leave' });
+          saveSession(null);
+          setTimeout(() => { net.close(); ignoring = false; }, 50);
+          return;
+        }
+      }
+      if (ignoring) return;
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.
       if (msg.t === 'matched') {
         net.open(msg.code);
@@ -41,7 +58,6 @@ export function App() {
       dispatch({ type: 'server', msg });
     });
     net.statusListeners.add(setOnline);
-    // Rechargement de la page : on reprend la partie en cours.
     const session = savedSession();
     if (session) net.open(session.code);
     if (joinMatch) history.replaceState(null, '', '/');
@@ -53,6 +69,7 @@ export function App() {
     s, t, lang, catalog, name, settings, send,
     setLang: (l: Lang) => { setLangState(l); if (s.room) net.send({ t: 'lang', lang: l }); },
     go: (screen: typeof s.screen, setupKind?: typeof s.setupKind) => dispatch({ type: 'go', screen, setupKind }),
+    openGame: (game: string) => { dispatch({ type: 'openGame', game }); window.scrollTo(0, 0); },
     setName: (n: string) => { setNameState(n); try { localStorage.setItem('gq.name', n); } catch {} },
     setSettings: (x: Settings) => { setSettingsState(x); try { localStorage.setItem('gq.settings', JSON.stringify(x)); } catch {} },
     leave: () => { net.send({ t: 'leave' }); setTimeout(() => net.close(), 50); saveSession(null); dispatch({ type: 'reset' }); },

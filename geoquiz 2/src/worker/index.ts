@@ -48,12 +48,12 @@ let loading: Promise<void> | null = null;
 function ensureData(env: Env): Promise<void> {
   if (dataReady()) return Promise.resolve();
   loading ??= (async () => {
-    const [w, c] = await Promise.all([asset(env, 'world.json'), asset(env, 'countries.json')]);
+    const [w, c, l] = await Promise.all([asset(env, 'world.json'), asset(env, 'countries.json'), asset(env, 'languages.json')]);
     if (!w.ok || !c.ok) throw new Error('Données absentes : lancez « npm run build:cf » avant le déploiement.');
     initData(await w.json(), await c.json(), async (iso) => {
       const r = await asset(env, `regions/${iso}.json`);
       return r.ok ? r.json() : null;
-    });
+    }, { languages: l.ok ? await l.json() : [] });
     config.maxPlayers = Number(env.MAX_PLAYERS ?? 50) || 50;
   })().catch((e) => { loading = null; throw e; });
   return loading;
