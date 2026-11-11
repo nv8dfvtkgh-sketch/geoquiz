@@ -139,6 +139,7 @@ export interface QuestionMsg {
   highlight?: string; // entité surlignée (« quel est ce pays ? »)
   shape?: { d: string; w: number; h: number }; // silhouette à deviner (coordonnées recentrées)
   image?: string; // jeton d'une photo de quiz créé
+  emoji?: string; // grand pictogramme (plats, animaux)
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono

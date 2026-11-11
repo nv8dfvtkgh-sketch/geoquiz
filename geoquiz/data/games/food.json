@@ -1,0 +1,814 @@
+[
+ {
+  "id": "sushi",
+  "countries": [
+   "JP"
+  ],
+  "tier": 1,
+  "emoji": "🍣",
+  "names": {
+   "fr": "sushi",
+   "en": "sushi",
+   "es": "sushi",
+   "ar": "سوشي"
+  }
+ },
+ {
+  "id": "pizza",
+  "countries": [
+   "IT"
+  ],
+  "tier": 1,
+  "emoji": "🍕",
+  "names": {
+   "fr": "pizza",
+   "en": "pizza",
+   "es": "pizza",
+   "ar": "بيتزا"
+  }
+ },
+ {
+  "id": "tacos",
+  "countries": [
+   "MX"
+  ],
+  "tier": 1,
+  "emoji": "🌮",
+  "names": {
+   "fr": "tacos",
+   "en": "tacos",
+   "es": "tacos",
+   "ar": "تاكو"
+  }
+ },
+ {
+  "id": "paella",
+  "countries": [
+   "ES"
+  ],
+  "tier": 1,
+  "emoji": "🥘",
+  "names": {
+   "fr": "paella",
+   "en": "paella",
+   "es": "paella",
+   "ar": "باييلا"
+  }
+ },
+ {
+  "id": "couscous",
+  "countries": [
+   "MA",
+   "DZ",
+   "TN"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "couscous",
+   "en": "couscous",
+   "es": "cuscús",
+   "ar": "كسكس"
+  }
+ },
+ {
+  "id": "tajine",
+  "countries": [
+   "MA"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "tajine",
+   "en": "tagine",
+   "es": "tajín",
+   "ar": "طاجين"
+  }
+ },
+ {
+  "id": "croissant",
+  "countries": [
+   "FR"
+  ],
+  "tier": 1,
+  "emoji": "🥐",
+  "names": {
+   "fr": "croissant",
+   "en": "croissant",
+   "es": "cruasán",
+   "ar": "كرواسون"
+  }
+ },
+ {
+  "id": "hamburger",
+  "countries": [
+   "US"
+  ],
+  "tier": 1,
+  "emoji": "🍔",
+  "names": {
+   "fr": "hamburger",
+   "en": "hamburger",
+   "es": "hamburguesa",
+   "ar": "هامبرغر"
+  }
+ },
+ {
+  "id": "doner",
+  "countries": [
+   "TR"
+  ],
+  "tier": 1,
+  "emoji": "🥙",
+  "names": {
+   "fr": "döner kebab",
+   "en": "doner kebab",
+   "es": "döner kebab",
+   "ar": "دونر كباب"
+  }
+ },
+ {
+  "id": "butterchicken",
+  "countries": [
+   "IN"
+  ],
+  "tier": 1,
+  "emoji": "🍛",
+  "names": {
+   "fr": "poulet au beurre (butter chicken)",
+   "en": "butter chicken",
+   "es": "pollo a la mantequilla",
+   "ar": "دجاج بالزبدة"
+  }
+ },
+ {
+  "id": "padthai",
+  "countries": [
+   "TH"
+  ],
+  "tier": 1,
+  "emoji": "🍜",
+  "names": {
+   "fr": "pad thaï",
+   "en": "pad thai",
+   "es": "pad thai",
+   "ar": "باد تاي"
+  }
+ },
+ {
+  "id": "fishchips",
+  "countries": [
+   "GB"
+  ],
+  "tier": 1,
+  "emoji": "🐟",
+  "names": {
+   "fr": "fish and chips",
+   "en": "fish and chips",
+   "es": "fish and chips",
+   "ar": "سمك وبطاطا مقلية (فيش آند تشيبس)"
+  }
+ },
+ {
+  "id": "pretzel",
+  "countries": [
+   "DE"
+  ],
+  "tier": 1,
+  "emoji": "🥨",
+  "names": {
+   "fr": "bretzel",
+   "en": "pretzel",
+   "es": "pretzel",
+   "ar": "بريتزل"
+  }
+ },
+ {
+  "id": "pekingduck",
+  "countries": [
+   "CN"
+  ],
+  "tier": 1,
+  "emoji": "🦆",
+  "names": {
+   "fr": "canard laqué de Pékin",
+   "en": "Peking duck",
+   "es": "pato laqueado de Pekín",
+   "ar": "بطة بكين"
+  }
+ },
+ {
+  "id": "carbonara",
+  "countries": [
+   "IT"
+  ],
+  "tier": 1,
+  "emoji": "🍝",
+  "names": {
+   "fr": "spaghetti carbonara",
+   "en": "spaghetti carbonara",
+   "es": "espaguetis a la carbonara",
+   "ar": "سباغيتي كاربونارا"
+  }
+ },
+ {
+  "id": "ramen",
+  "countries": [
+   "JP"
+  ],
+  "tier": 2,
+  "emoji": "🍜",
+  "names": {
+   "fr": "ramen",
+   "en": "ramen",
+   "es": "ramen",
+   "ar": "رامن"
+  }
+ },
+ {
+  "id": "poutine",
+  "countries": [
+   "CA"
+  ],
+  "tier": 2,
+  "emoji": "🍟",
+  "names": {
+   "fr": "poutine",
+   "en": "poutine",
+   "es": "poutine",
+   "ar": "طبق البوتين"
+  }
+ },
+ {
+  "id": "feijoada",
+  "countries": [
+   "BR"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "feijoada",
+   "en": "feijoada",
+   "es": "feijoada",
+   "ar": "فيجوادا"
+  }
+ },
+ {
+  "id": "moussaka",
+  "countries": [
+   "GR"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "moussaka",
+   "en": "moussaka",
+   "es": "musaka",
+   "ar": "مسقعة يونانية (موساكا)"
+  }
+ },
+ {
+  "id": "kimchi",
+  "countries": [
+   "KR"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "kimchi",
+   "en": "kimchi",
+   "es": "kimchi",
+   "ar": "كيمتشي"
+  }
+ },
+ {
+  "id": "pho",
+  "countries": [
+   "VN"
+  ],
+  "tier": 2,
+  "emoji": "🍜",
+  "names": {
+   "fr": "phở",
+   "en": "pho",
+   "es": "pho",
+   "ar": "حساء فو"
+  }
+ },
+ {
+  "id": "goulash",
+  "countries": [
+   "HU"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "goulasch",
+   "en": "goulash",
+   "es": "gulash",
+   "ar": "غولاش"
+  }
+ },
+ {
+  "id": "ceviche",
+  "countries": [
+   "PE"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "ceviche",
+   "en": "ceviche",
+   "es": "ceviche",
+   "ar": "سيفيتشي"
+  }
+ },
+ {
+  "id": "schnitzel",
+  "countries": [
+   "AT"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "escalope viennoise (Wiener Schnitzel)",
+   "en": "Wiener schnitzel",
+   "es": "escalope vienés",
+   "ar": "شنيتزل فييني"
+  }
+ },
+ {
+  "id": "fondue",
+  "countries": [
+   "CH"
+  ],
+  "tier": 2,
+  "emoji": "🫕",
+  "names": {
+   "fr": "fondue au fromage",
+   "en": "cheese fondue",
+   "es": "fondue de queso",
+   "ar": "فوندو الجبن"
+  }
+ },
+ {
+  "id": "pierogi",
+  "countries": [
+   "PL"
+  ],
+  "tier": 2,
+  "emoji": "🥟",
+  "names": {
+   "fr": "pierogi",
+   "en": "pierogi",
+   "es": "pierogi",
+   "ar": "بيروغي"
+  }
+ },
+ {
+  "id": "injera",
+  "countries": [
+   "ET",
+   "ER"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "injera",
+   "en": "injera",
+   "es": "injera",
+   "ar": "إنجيرا"
+  }
+ },
+ {
+  "id": "koshari",
+  "countries": [
+   "EG"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "koshari",
+   "en": "koshari",
+   "es": "koshari",
+   "ar": "كشري"
+  }
+ },
+ {
+  "id": "mansaf",
+  "countries": [
+   "JO"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "mansaf",
+   "en": "mansaf",
+   "es": "mansaf",
+   "ar": "منسف"
+  }
+ },
+ {
+  "id": "kabsa",
+  "countries": [
+   "SA"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "kabsa",
+   "en": "kabsa",
+   "es": "kabsa",
+   "ar": "كبسة"
+  }
+ },
+ {
+  "id": "pastilla",
+  "countries": [
+   "MA"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "pastilla",
+   "en": "pastilla",
+   "es": "pastela",
+   "ar": "بسطيلة"
+  }
+ },
+ {
+  "id": "harira",
+  "countries": [
+   "MA"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "harira",
+   "en": "harira",
+   "es": "harira",
+   "ar": "حريرة"
+  }
+ },
+ {
+  "id": "nasigoreng",
+  "countries": [
+   "ID"
+  ],
+  "tier": 2,
+  "emoji": "🍚",
+  "names": {
+   "fr": "nasi goreng",
+   "en": "nasi goreng",
+   "es": "nasi goreng",
+   "ar": "ناسي غورينغ"
+  }
+ },
+ {
+  "id": "biryani",
+  "countries": [
+   "IN",
+   "PK"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "biryani",
+   "en": "biryani",
+   "es": "biryani",
+   "ar": "برياني"
+  }
+ },
+ {
+  "id": "churros",
+  "countries": [
+   "ES"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "churros",
+   "en": "churros",
+   "es": "churros",
+   "ar": "تشوروس"
+  }
+ },
+ {
+  "id": "ratatouille",
+  "countries": [
+   "FR"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "ratatouille",
+   "en": "ratatouille",
+   "es": "ratatouille",
+   "ar": "راتاتوي"
+  }
+ },
+ {
+  "id": "currywurst",
+  "countries": [
+   "DE"
+  ],
+  "tier": 2,
+  "emoji": "🌭",
+  "names": {
+   "fr": "currywurst",
+   "en": "currywurst",
+   "es": "currywurst",
+   "ar": "كاري فورست"
+  }
+ },
+ {
+  "id": "moules",
+  "countries": [
+   "BE"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "moules-frites",
+   "en": "moules-frites",
+   "es": "mejillones con patatas fritas",
+   "ar": "بلح البحر مع البطاطا المقلية"
+  }
+ },
+ {
+  "id": "tabbouleh",
+  "countries": [
+   "LB"
+  ],
+  "tier": 2,
+  "emoji": "🥗",
+  "names": {
+   "fr": "taboulé",
+   "en": "tabbouleh",
+   "es": "tabulé",
+   "ar": "تبولة"
+  }
+ },
+ {
+  "id": "banhmi",
+  "countries": [
+   "VN"
+  ],
+  "tier": 2,
+  "emoji": "🥖",
+  "names": {
+   "fr": "bánh mì",
+   "en": "banh mi",
+   "es": "bánh mì",
+   "ar": "بان مي"
+  }
+ },
+ {
+  "id": "jerk",
+  "countries": [
+   "JM"
+  ],
+  "tier": 2,
+  "emoji": "🍗",
+  "names": {
+   "fr": "poulet jerk",
+   "en": "jerk chicken",
+   "es": "pollo jerk",
+   "ar": "دجاج جيرك"
+  }
+ },
+ {
+  "id": "borscht",
+  "countries": [
+   "UA",
+   "RU"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "bortsch",
+   "en": "borscht",
+   "es": "borsch",
+   "ar": "بورش"
+  }
+ },
+ {
+  "id": "thieb",
+  "countries": [
+   "SN"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "thiéboudienne",
+   "en": "thieboudienne",
+   "es": "thieboudienne",
+   "ar": "تيبو جين"
+  }
+ },
+ {
+  "id": "bobotie",
+  "countries": [
+   "ZA"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "bobotie",
+   "en": "bobotie",
+   "es": "bobotie",
+   "ar": "بوبوتي"
+  }
+ },
+ {
+  "id": "jambalaya",
+  "countries": [
+   "US"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "jambalaya",
+   "en": "jambalaya",
+   "es": "jambalaya",
+   "ar": "جامبالايا"
+  }
+ },
+ {
+  "id": "arepa",
+  "countries": [
+   "VE",
+   "CO"
+  ],
+  "tier": 3,
+  "emoji": "🫓",
+  "names": {
+   "fr": "arepa",
+   "en": "arepa",
+   "es": "arepa",
+   "ar": "أريبا"
+  }
+ },
+ {
+  "id": "pupusa",
+  "countries": [
+   "SV"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "pupusa",
+   "en": "pupusa",
+   "es": "pupusa",
+   "ar": "بوبوسا"
+  }
+ },
+ {
+  "id": "bulgogi",
+  "countries": [
+   "KR"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "bulgogi",
+   "en": "bulgogi",
+   "es": "bulgogi",
+   "ar": "بولغوغي"
+  }
+ },
+ {
+  "id": "adobo",
+  "countries": [
+   "PH"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "adobo",
+   "en": "adobo",
+   "es": "adobo",
+   "ar": "أدوبو"
+  }
+ },
+ {
+  "id": "pavlova",
+  "countries": [
+   "NZ",
+   "AU"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "pavlova",
+   "en": "pavlova",
+   "es": "pavlova",
+   "ar": "بافلوفا"
+  }
+ },
+ {
+  "id": "pelmeni",
+  "countries": [
+   "RU"
+  ],
+  "tier": 3,
+  "emoji": "🥟",
+  "names": {
+   "fr": "pelmeni",
+   "en": "pelmeni",
+   "es": "pelmeni",
+   "ar": "بيلميني"
+  }
+ },
+ {
+  "id": "stroopwafel",
+  "countries": [
+   "NL"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "stroopwafel",
+   "en": "stroopwafel",
+   "es": "stroopwafel",
+   "ar": "ستروبوافل"
+  }
+ },
+ {
+  "id": "kottbullar",
+  "countries": [
+   "SE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "köttbullar",
+   "en": "köttbullar",
+   "es": "köttbullar",
+   "ar": "كوتبولار"
+  }
+ },
+ {
+  "id": "mole",
+  "countries": [
+   "MX"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "mole poblano",
+   "en": "mole poblano",
+   "es": "mole poblano",
+   "ar": "مولي بوبلانو"
+  }
+ },
+ {
+  "id": "khachapuri",
+  "countries": [
+   "GE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "khatchapouri",
+   "en": "khachapuri",
+   "es": "jachapuri",
+   "ar": "خاتشابوري"
+  }
+ },
+ {
+  "id": "plov",
+  "countries": [
+   "UZ"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "plov",
+   "en": "plov",
+   "es": "plov",
+   "ar": "بلوف"
+  }
+ },
+ {
+  "id": "haggis",
+  "countries": [
+   "GB"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "haggis",
+   "en": "haggis",
+   "es": "haggis",
+   "ar": "هاغيس"
+  }
+ },
+ {
+  "id": "gazpacho",
+  "countries": [
+   "ES"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "gaspacho",
+   "en": "gazpacho",
+   "es": "gazpacho",
+   "ar": "غازباتشو"
+  }
+ },
+ {
+  "id": "rendang",
+  "countries": [
+   "ID"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "rendang",
+   "en": "rendang",
+   "es": "rendang",
+   "ar": "ريندانغ"
+  }
+ },
+ {
+  "id": "tomyum",
+  "countries": [
+   "TH"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "tom yum",
+   "en": "tom yum",
+   "es": "tom yum",
+   "ar": "توم يام"
+  }
+ }
+]

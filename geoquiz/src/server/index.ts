@@ -6,7 +6,7 @@ import path from 'node:path';
 import { WebSocketServer, WebSocket } from 'ws';
 import type { ClientMsg, ServerMsg } from '../shared/protocol';
 import { categoryInfos } from './categories';
-import { catalog, ensureRegion, initData, regionMap, worldJson } from './data';
+import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from './quizzes';
@@ -30,7 +30,7 @@ if (!fs.existsSync(path.join(BUILD, 'world.json'))) {
 initData(readJson(path.join(BUILD, 'world.json')), readJson(path.join(BUILD, 'countries.json')), (iso) => {
   const f = path.join(BUILD, 'regions', `${iso}.json`);
   return fs.existsSync(f) ? readJson(f) : null;
-}, { languages: fs.existsSync(path.join(BUILD, 'languages.json')) ? readJson(path.join(BUILD, 'languages.json')) : [] });
+}, Object.fromEntries(EXTRA_FILES.map((k) => [k, fs.existsSync(path.join(BUILD, `${k}.json`)) ? readJson(path.join(BUILD, `${k}.json`)) : []])));
 config.maxPlayers = Number(process.env.MAX_PLAYERS ?? 50);
 const catalogJson = JSON.stringify(catalog(categoryInfos(), config.maxPlayers));
 

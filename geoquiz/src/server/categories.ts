@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, Lang, MapSpec, Names } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx,
+  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem,
 } from './data';
 import { matches } from './text';
 
@@ -21,6 +21,7 @@ export interface InternalQuestion {
   promptKey: string;
   promptName?: Names; // paramètre {name} traduit
   flagIso?: string;
+  emoji?: string; // grand pictogramme (plats, animaux)
   imageRef?: string; // photo d'un quiz créé : « quiz:<code>:<image> »
   extraParams?: Record<string, string>; // paramètres identiques dans toutes les langues
   map?: MapSpec;
@@ -423,6 +424,112 @@ const calcCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ plats et animaux du monde
+// Un objet (plat, animal emblème) → son pays. Plusieurs pays peuvent être acceptés
+// (le couscous : Maroc, Algérie, Tunisie) ; ils ne servent jamais de pièges.
+function tierPool<T extends { id: string; tier: number }>(list: T[], d: Difficulty, n: number): string[] {
+  const maxTier = d === 'easy' ? 1 : d === 'medium' ? 2 : 3;
+  const sorted = list.slice().sort((a, b) => a.tier - b.tier);
+  const strict = sorted.filter((x) => x.tier <= maxTier);
+  return (strict.length >= Math.min(sorted.length, n) ? strict : sorted.slice(0, Math.max(n, strict.length))).map((x) => x.id);
+}
+
+function countryItemCat(id: 'food' | 'animals'): Category {
+  const byId = () => Object.fromEntries(extras[id].map((x) => [x.id, x])) as Record<string, CountryItem>;
+  return {
+    id,
+    noZone: true,
+    qtypes: ['mcq', 'map', 'type'],
+    zoneKinds: ['world'],
+    pool: (_zone, d, n) => tierPool(extras[id], d, n),
+    make(target, kind, zone, rnd) {
+      const item = byId()[target];
+      const main = item.countries[0];
+      const ok = new Set(item.countries);
+      const answer = item.countries.length > 1
+        ? (Object.fromEntries((['fr', 'en', 'ar', 'es'] as const).map((l) => [l, item.countries.map((c) => countries[c].names[l]).join(' · ')])) as Names)
+        : countries[main].names;
+      const base = { category: id, target, answer, promptName: item.names, emoji: item.emoji, revealId: main };
+      // Pays trop petit pour être touché sur la carte du monde (Maurice…) : QCM à la place.
+      if (kind === 'map' && (worldById[main]?.a ?? 0) < 12) kind = 'mcq';
+      if (kind === 'map') {
+        return { ...base, kind, promptKey: `q.${id}.map`, map: worldSpec(zones.get('world')!, 'shapes'), attempts: 3, check: (v) => ok.has(v) };
+      }
+      if (kind === 'mcq') {
+        const others = countryDistractors(main, 3, rnd, (c) => !ok.has(c) && !countries[c].dependency);
+        const { options, correct } = optionsFrom(main, others, rnd, (c) => ({ label: countries[c].names }));
+        return { ...base, kind, promptKey: `q.${id}.name`, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+      }
+      const accepted = item.countries.flatMap((c) => allNames(countries[c].names));
+      return { ...base, kind, promptKey: `q.${id}.name`, attempts: 1, check: typedCheck(accepted, countryNameSet) };
+    },
+  };
+}
+const foodCat = countryItemCat('food');
+const animalsCat = countryItemCat('animals');
+
+// ------------------------------------------------------------------ vrai ou faux
+// Affirmations écrites à la main, plus des affirmations fabriquées à partir des données
+// (capitales et monnaies, vraies ou fausses au hasard).
+const TRUE_NAMES: Names = { fr: 'Vrai', en: 'True', ar: 'صحيح', es: 'Verdadero' };
+const FALSE_NAMES: Names = { fr: 'Faux', en: 'False', ar: 'خطأ', es: 'Falso' };
+const LANG_KEYS = ['fr', 'en', 'ar', 'es'] as const;
+const mapNames = (f: (l: (typeof LANG_KEYS)[number]) => string): Names => Object.fromEntries(LANG_KEYS.map((l) => [l, f(l)])) as Names;
+
+function tfQuestion(target: string, truth: boolean, promptKey: string, statement: Names, note: Names | undefined): InternalQuestion {
+  const options: QOptionInternal[] = [
+    { id: 'o0', target: 'true', label: TRUE_NAMES },
+    { id: 'o1', target: 'false', label: FALSE_NAMES },
+  ];
+  const correct = truth ? 'o0' : 'o1';
+  const verdict = truth ? TRUE_NAMES : FALSE_NAMES;
+  const answer = note ? mapNames((l) => `${verdict[l]} — ${note[l]}`) : verdict;
+  return {
+    category: 'truefalse', kind: 'mcq', promptKey, promptName: statement, target, answer,
+    options, revealOption: correct, attempts: 1, check: (v) => v === correct,
+  };
+}
+
+const truefalseCat: Category = {
+  id: 'truefalse',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const facts = tierPool(extras.truefalse, d, n).map((id) => `f:${id}`);
+    const world = zones.get('world')!;
+    const caps = countryPool(world, d, n, hasCapital).map((id) => `cap:${id}`);
+    const curs = countryPool(world, d, n, hasCurrency).map((id) => `cur:${id}`);
+    // Environ deux tiers d'affirmations écrites, un tiers fabriquées.
+    const extra = Math.max(4, Math.ceil(facts.length / 4));
+    const pick = <T,>(a: T[], k: number) => shuffle(a, Math.random).slice(0, k);
+    return [...facts, ...pick(caps, extra), ...pick(curs, extra)];
+  },
+  make(target, _kind, _zone, rnd) {
+    const [type, id] = target.split(':');
+    if (type === 'f') {
+      const f = extras.truefalse.find((x) => x.id === id)!;
+      return tfQuestion(target, f.answer, 'q.truefalse', f.text, f.note);
+    }
+    const c = countries[id];
+    const truth = rnd() < 0.5;
+    if (type === 'cap') {
+      const other = truth ? id : countryDistractors(id, 1, rnd, hasCapital)[0];
+      const shown = countries[other].capital!.names;
+      const statement = mapNames((l) => `${c.names[l]} — ${shown[l]}`);
+      return tfQuestion(target, truth, 'q.truefalse.capital', statement, truth ? undefined : c.capital!.names);
+    }
+    // Monnaie : le piège doit porter un autre nom (pas « euro » contre « euro »).
+    const key = (n: Names) => (n.en || n.fr).toLowerCase();
+    const own = key(c.currency!.names);
+    const other = truth ? id : countryDistractors(id, 40, rnd, hasCurrency).find((x) => key(countries[x].currency!.names) !== own) ?? id;
+    const real = truth || other === id;
+    const shown = countries[other].currency!.names;
+    const statement = mapNames((l) => `${c.names[l]} — ${shown[l]}`);
+    return tfQuestion(target, real, 'q.truefalse.currency', statement, real ? undefined : c.currency!.names);
+  },
+};
+
 // ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
 // Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
 // cette entrée sert au catalogue et à la validation des réglages.
@@ -451,7 +558,7 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 }
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, calcCat, customCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
 );
 
 export function categoryInfos(): CategoryInfo[] {

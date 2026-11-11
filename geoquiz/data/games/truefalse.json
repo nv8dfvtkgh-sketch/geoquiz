@@ -1,0 +1,791 @@
+[
+ {
+  "id": "f1",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Nil est le plus long fleuve d'Afrique.",
+   "en": "The Nile is the longest river in Africa.",
+   "es": "El Nilo es el río más largo de África.",
+   "ar": "نهر النيل هو أطول نهر في أفريقيا."
+  }
+ },
+ {
+  "id": "f2",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "L'Australie est plus petite que la France.",
+   "en": "Australia is smaller than France.",
+   "es": "Australia es más pequeña que Francia.",
+   "ar": "أستراليا أصغر من فرنسا."
+  },
+  "note": {
+   "fr": "Elle est environ 14 fois plus grande.",
+   "en": "It is about 14 times larger.",
+   "es": "Es unas 14 veces más grande.",
+   "ar": "إنها أكبر بنحو 14 مرة."
+  }
+ },
+ {
+  "id": "f3",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "L'Everest est le plus haut sommet du monde.",
+   "en": "Everest is the highest mountain in the world.",
+   "es": "El Everest es la montaña más alta del mundo.",
+   "ar": "جبل إيفرست هو أعلى قمة في العالم."
+  }
+ },
+ {
+  "id": "f4",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Le Sahara se trouve en Amérique du Sud.",
+   "en": "The Sahara is in South America.",
+   "es": "El Sáhara está en América del Sur.",
+   "ar": "تقع الصحراء الكبرى في أمريكا الجنوبية."
+  },
+  "note": {
+   "fr": "Il couvre le nord de l'Afrique.",
+   "en": "It covers northern Africa.",
+   "es": "Cubre el norte de África.",
+   "ar": "إنها تغطي شمال أفريقيا."
+  }
+ },
+ {
+  "id": "f5",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Japon est un archipel.",
+   "en": "Japan is an archipelago.",
+   "es": "Japón es un archipiélago.",
+   "ar": "اليابان أرخبيل من الجزر."
+  }
+ },
+ {
+  "id": "f6",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "La langue officielle du Brésil est l'espagnol.",
+   "en": "Brazil's official language is Spanish.",
+   "es": "El idioma oficial de Brasil es el español.",
+   "ar": "اللغة الرسمية في البرازيل هي الإسبانية."
+  },
+  "note": {
+   "fr": "C'est le portugais.",
+   "en": "It is Portuguese.",
+   "es": "Es el portugués.",
+   "ar": "إنها البرتغالية."
+  }
+ },
+ {
+  "id": "f7",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "La Russie est le plus grand pays du monde par la superficie.",
+   "en": "Russia is the largest country in the world by area.",
+   "es": "Rusia es el país más grande del mundo por superficie.",
+   "ar": "روسيا هي أكبر دولة في العالم من حيث المساحة."
+  }
+ },
+ {
+  "id": "f8",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "L'océan Atlantique est le plus grand océan du monde.",
+   "en": "The Atlantic is the largest ocean in the world.",
+   "es": "El Atlántico es el océano más grande del mundo.",
+   "ar": "المحيط الأطلسي هو أكبر محيط في العالم."
+  },
+  "note": {
+   "fr": "C'est le Pacifique.",
+   "en": "It is the Pacific.",
+   "es": "Es el Pacífico.",
+   "ar": "إنه المحيط الهادئ."
+  }
+ },
+ {
+  "id": "f9",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Maroc a des côtes sur l'Atlantique et sur la Méditerranée.",
+   "en": "Morocco has coasts on both the Atlantic and the Mediterranean.",
+   "es": "Marruecos tiene costas en el Atlántico y en el Mediterráneo.",
+   "ar": "للمغرب سواحل على المحيط الأطلسي والبحر الأبيض المتوسط."
+  }
+ },
+ {
+  "id": "f10",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Le Canada a une frontière avec le Mexique.",
+   "en": "Canada shares a border with Mexico.",
+   "es": "Canadá tiene frontera con México.",
+   "ar": "لكندا حدود مع المكسيك."
+  },
+  "note": {
+   "fr": "Les États-Unis se trouvent entre les deux.",
+   "en": "The United States lies between them.",
+   "es": "Estados Unidos está entre ambos.",
+   "ar": "تقع الولايات المتحدة بينهما."
+  }
+ },
+ {
+  "id": "f11",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "L'Antarctique est un continent.",
+   "en": "Antarctica is a continent.",
+   "es": "La Antártida es un continente.",
+   "ar": "القارة القطبية الجنوبية قارة."
+  }
+ },
+ {
+  "id": "f12",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Le Mexique se trouve en Amérique du Sud.",
+   "en": "Mexico is in South America.",
+   "es": "México está en América del Sur.",
+   "ar": "تقع المكسيك في أمريكا الجنوبية."
+  },
+  "note": {
+   "fr": "Il fait partie de l'Amérique du Nord.",
+   "en": "It is part of North America.",
+   "es": "Forma parte de América del Norte.",
+   "ar": "إنها جزء من أمريكا الشمالية."
+  }
+ },
+ {
+  "id": "f13",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "La Grande Muraille se trouve en Chine.",
+   "en": "The Great Wall is in China.",
+   "es": "La Gran Muralla está en China.",
+   "ar": "يقع سور الصين العظيم في الصين."
+  }
+ },
+ {
+  "id": "f14",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "La tour Eiffel se trouve à Rome.",
+   "en": "The Eiffel Tower is in Rome.",
+   "es": "La Torre Eiffel está en Roma.",
+   "ar": "يقع برج إيفل في روما."
+  },
+  "note": {
+   "fr": "Elle est à Paris.",
+   "en": "It is in Paris.",
+   "es": "Está en París.",
+   "ar": "إنه في باريس."
+  }
+ },
+ {
+  "id": "f15",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Machu Picchu se trouve au Pérou.",
+   "en": "Machu Picchu is in Peru.",
+   "es": "Machu Picchu está en Perú.",
+   "ar": "تقع ماتشو بيتشو في البيرو."
+  }
+ },
+ {
+  "id": "f16",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Les pyramides de Gizeh se trouvent au Mexique.",
+   "en": "The Pyramids of Giza are in Mexico.",
+   "es": "Las pirámides de Guiza están en México.",
+   "ar": "تقع أهرامات الجيزة في المكسيك."
+  },
+  "note": {
+   "fr": "Elles sont en Égypte.",
+   "en": "They are in Egypt.",
+   "es": "Están en Egipto.",
+   "ar": "إنها في مصر."
+  }
+ },
+ {
+  "id": "f17",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Vatican est le plus petit pays du monde.",
+   "en": "Vatican City is the smallest country in the world.",
+   "es": "El Vaticano es el país más pequeño del mundo.",
+   "ar": "الفاتيكان هي أصغر دولة في العالم."
+  }
+ },
+ {
+  "id": "f18",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "L'Amazone traverse le Brésil.",
+   "en": "The Amazon flows through Brazil.",
+   "es": "El Amazonas atraviesa Brasil.",
+   "ar": "يعبر نهر الأمازون البرازيل."
+  }
+ },
+ {
+  "id": "f19",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Le Portugal a une frontière avec la France.",
+   "en": "Portugal shares a border with France.",
+   "es": "Portugal tiene frontera con Francia.",
+   "ar": "للبرتغال حدود مع فرنسا."
+  },
+  "note": {
+   "fr": "Son seul voisin est l'Espagne.",
+   "en": "Its only neighbour is Spain.",
+   "es": "Su único vecino es España.",
+   "ar": "جارتها الوحيدة هي إسبانيا."
+  }
+ },
+ {
+  "id": "f20",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "Le Kilimandjaro est le plus haut sommet d'Afrique.",
+   "en": "Kilimanjaro is the highest mountain in Africa.",
+   "es": "El Kilimanjaro es la montaña más alta de África.",
+   "ar": "كليمنجارو هو أعلى قمة في أفريقيا."
+  }
+ },
+ {
+  "id": "f21",
+  "tier": 1,
+  "answer": true,
+  "text": {
+   "fr": "L'Islande compte de nombreux volcans actifs.",
+   "en": "Iceland has many active volcanoes.",
+   "es": "Islandia tiene muchos volcanes activos.",
+   "ar": "توجد في آيسلندا براكين نشطة كثيرة."
+  }
+ },
+ {
+  "id": "f22",
+  "tier": 1,
+  "answer": false,
+  "text": {
+   "fr": "Le Groenland est un pays indépendant.",
+   "en": "Greenland is an independent country.",
+   "es": "Groenlandia es un país independiente.",
+   "ar": "غرينلاند دولة مستقلة."
+  },
+  "note": {
+   "fr": "Il fait partie du royaume de Danemark.",
+   "en": "It is part of the Kingdom of Denmark.",
+   "es": "Forma parte del Reino de Dinamarca.",
+   "ar": "إنها جزء من مملكة الدنمارك."
+  }
+ },
+ {
+  "id": "f23",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "La mer Morte est le point le plus bas des terres émergées.",
+   "en": "The Dead Sea is the lowest point on land.",
+   "es": "El mar Muerto es el punto más bajo de las tierras emergidas.",
+   "ar": "البحر الميت هو أخفض نقطة على اليابسة."
+  }
+ },
+ {
+  "id": "f24",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le lac Baïkal se trouve au Canada.",
+   "en": "Lake Baikal is in Canada.",
+   "es": "El lago Baikal está en Canadá.",
+   "ar": "تقع بحيرة بايكال في كندا."
+  },
+  "note": {
+   "fr": "Il est en Russie, en Sibérie.",
+   "en": "It is in Russia, in Siberia.",
+   "es": "Está en Rusia, en Siberia.",
+   "ar": "إنها في روسيا، في سيبيريا."
+  }
+ },
+ {
+  "id": "f25",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "L'Indonésie compte plus de 17 000 îles.",
+   "en": "Indonesia has more than 17,000 islands.",
+   "es": "Indonesia tiene más de 17 000 islas.",
+   "ar": "تضم إندونيسيا أكثر من 17 ألف جزيرة."
+  }
+ },
+ {
+  "id": "f26",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "La Turquie se trouve entièrement en Asie.",
+   "en": "Turkey lies entirely in Asia.",
+   "es": "Turquía está completamente en Asia.",
+   "ar": "تقع تركيا بالكامل في آسيا."
+  },
+  "note": {
+   "fr": "Une petite partie, autour d'Istanbul, est en Europe.",
+   "en": "A small part, around Istanbul, is in Europe.",
+   "es": "Una pequeña parte, alrededor de Estambul, está en Europa.",
+   "ar": "جزء صغير منها، حول إسطنبول، يقع في أوروبا."
+  }
+ },
+ {
+  "id": "f27",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "Le Chili mesure plus de 4 000 km du nord au sud.",
+   "en": "Chile is more than 4,000 km long from north to south.",
+   "es": "Chile mide más de 4000 km de norte a sur.",
+   "ar": "يزيد طول تشيلي من الشمال إلى الجنوب على 4000 كم."
+  }
+ },
+ {
+  "id": "f28",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Kazakhstan a un accès à l'océan.",
+   "en": "Kazakhstan has access to the ocean.",
+   "es": "Kazajistán tiene salida al océano.",
+   "ar": "لكازاخستان منفذ على المحيط."
+  },
+  "note": {
+   "fr": "C'est le plus grand pays sans accès à la mer.",
+   "en": "It is the largest landlocked country.",
+   "es": "Es el país sin salida al mar más grande.",
+   "ar": "إنها أكبر دولة حبيسة بلا منفذ بحري."
+  }
+ },
+ {
+  "id": "f29",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "La Bolivie a deux capitales : Sucre et La Paz.",
+   "en": "Bolivia has two capitals: Sucre and La Paz.",
+   "es": "Bolivia tiene dos capitales: Sucre y La Paz.",
+   "ar": "لبوليفيا عاصمتان: سوكري ولاباز."
+  }
+ },
+ {
+  "id": "f30",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "Le détroit de Gibraltar sépare le Maroc de l'Espagne.",
+   "en": "The Strait of Gibraltar separates Morocco from Spain.",
+   "es": "El estrecho de Gibraltar separa Marruecos de España.",
+   "ar": "يفصل مضيق جبل طارق بين المغرب وإسبانيا."
+  }
+ },
+ {
+  "id": "f31",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "L'Afrique du Sud n'a qu'une seule capitale.",
+   "en": "South Africa has only one capital.",
+   "es": "Sudáfrica tiene una sola capital.",
+   "ar": "لجنوب أفريقيا عاصمة واحدة فقط."
+  },
+  "note": {
+   "fr": "Elle en a trois : Pretoria, Le Cap et Bloemfontein.",
+   "en": "It has three: Pretoria, Cape Town and Bloemfontein.",
+   "es": "Tiene tres: Pretoria, Ciudad del Cabo y Bloemfontein.",
+   "ar": "لها ثلاث عواصم: بريتوريا وكيب تاون وبلومفونتين."
+  }
+ },
+ {
+  "id": "f32",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "Le Lesotho est entièrement entouré par l'Afrique du Sud.",
+   "en": "Lesotho is completely surrounded by South Africa.",
+   "es": "Lesoto está completamente rodeado por Sudáfrica.",
+   "ar": "تحيط جنوب أفريقيا بليسوتو من كل الجهات."
+  }
+ },
+ {
+  "id": "f33",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Madagascar est la plus grande île du monde.",
+   "en": "Madagascar is the largest island in the world.",
+   "es": "Madagascar es la isla más grande del mundo.",
+   "ar": "مدغشقر هي أكبر جزيرة في العالم."
+  },
+  "note": {
+   "fr": "C'est le Groenland ; Madagascar est 4e.",
+   "en": "It's Greenland; Madagascar ranks 4th.",
+   "es": "Es Groenlandia; Madagascar es la 4.ª.",
+   "ar": "إنها غرينلاند، ومدغشقر في المرتبة الرابعة."
+  }
+ },
+ {
+  "id": "f34",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "Le Danube traverse Vienne, Bratislava, Budapest et Belgrade.",
+   "en": "The Danube flows through Vienna, Bratislava, Budapest and Belgrade.",
+   "es": "El Danubio atraviesa Viena, Bratislava, Budapest y Belgrado.",
+   "ar": "يمر نهر الدانوب عبر فيينا وبراتيسلافا وبودابست وبلغراد."
+  }
+ },
+ {
+  "id": "f35",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Sénégal se trouve en Afrique de l'Est.",
+   "en": "Senegal is in East Africa.",
+   "es": "Senegal está en África oriental.",
+   "ar": "تقع السنغال في شرق أفريقيا."
+  },
+  "note": {
+   "fr": "Il est en Afrique de l'Ouest.",
+   "en": "It is in West Africa.",
+   "es": "Está en África occidental.",
+   "ar": "إنها في غرب أفريقيا."
+  }
+ },
+ {
+  "id": "f36",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Népal a une côte maritime.",
+   "en": "Nepal has a coastline.",
+   "es": "Nepal tiene costa.",
+   "ar": "لنيبال ساحل بحري."
+  },
+  "note": {
+   "fr": "Il est enclavé entre l'Inde et la Chine.",
+   "en": "It is landlocked between India and China.",
+   "es": "No tiene salida al mar, entre India y China.",
+   "ar": "إنها دولة حبيسة بين الهند والصين."
+  }
+ },
+ {
+  "id": "f37",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "La ville d'Istanbul s'étend sur deux continents.",
+   "en": "Istanbul spans two continents.",
+   "es": "Estambul se extiende sobre dos continentes.",
+   "ar": "تمتد مدينة إسطنبول على قارتين."
+  }
+ },
+ {
+  "id": "f38",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Rhin prend sa source en Allemagne.",
+   "en": "The Rhine rises in Germany.",
+   "es": "El Rin nace en Alemania.",
+   "ar": "ينبع نهر الراين في ألمانيا."
+  },
+  "note": {
+   "fr": "Il naît dans les Alpes suisses.",
+   "en": "It rises in the Swiss Alps.",
+   "es": "Nace en los Alpes suizos.",
+   "ar": "ينبع من جبال الألب السويسرية."
+  }
+ },
+ {
+  "id": "f39",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "Le Sahara est plus grand que l'Australie.",
+   "en": "The Sahara is larger than Australia.",
+   "es": "El Sáhara es más grande que Australia.",
+   "ar": "الصحراء الكبرى أكبر من أستراليا."
+  }
+ },
+ {
+  "id": "f40",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Canada est le pays le plus peuplé d'Amérique.",
+   "en": "Canada is the most populous country in the Americas.",
+   "es": "Canadá es el país más poblado de América.",
+   "ar": "كندا هي أكثر دول القارة الأمريكية سكانًا."
+  },
+  "note": {
+   "fr": "Ce sont les États-Unis.",
+   "en": "It is the United States.",
+   "es": "Es Estados Unidos.",
+   "ar": "إنها الولايات المتحدة."
+  }
+ },
+ {
+  "id": "f41",
+  "tier": 2,
+  "answer": false,
+  "text": {
+   "fr": "Le Danube se jette dans la mer du Nord.",
+   "en": "The Danube flows into the North Sea.",
+   "es": "El Danubio desemboca en el mar del Norte.",
+   "ar": "يصب نهر الدانوب في بحر الشمال."
+  },
+  "note": {
+   "fr": "Il se jette dans la mer Noire.",
+   "en": "It flows into the Black Sea.",
+   "es": "Desemboca en el mar Negro.",
+   "ar": "يصب في البحر الأسود."
+  }
+ },
+ {
+  "id": "f42",
+  "tier": 2,
+  "answer": true,
+  "text": {
+   "fr": "La Chine a des frontières avec 14 pays.",
+   "en": "China borders 14 countries.",
+   "es": "China tiene frontera con 14 países.",
+   "ar": "للصين حدود مع 14 دولة."
+  }
+ },
+ {
+  "id": "f43",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "Le lac Titicaca est partagé entre le Pérou et la Bolivie.",
+   "en": "Lake Titicaca is shared by Peru and Bolivia.",
+   "es": "El lago Titicaca está compartido entre Perú y Bolivia.",
+   "ar": "تتقاسم البيرو وبوليفيا بحيرة تيتيكاكا."
+  }
+ },
+ {
+  "id": "f44",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "Le Liechtenstein et l'Ouzbékistan sont les deux seuls pays doublement enclavés.",
+   "en": "Liechtenstein and Uzbekistan are the only two doubly landlocked countries.",
+   "es": "Liechtenstein y Uzbekistán son los dos únicos países doblemente sin litoral.",
+   "ar": "ليختنشتاين وأوزبكستان هما الدولتان الوحيدتان المحاطتان بدول حبيسة."
+  }
+ },
+ {
+  "id": "f45",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "La ligne de l'équateur traverse le Mexique.",
+   "en": "The equator crosses Mexico.",
+   "es": "La línea del ecuador cruza México.",
+   "ar": "يمر خط الاستواء عبر المكسيك."
+  },
+  "note": {
+   "fr": "Elle passe plus au sud : Équateur, Colombie, Brésil…",
+   "en": "It passes further south: Ecuador, Colombia, Brazil…",
+   "es": "Pasa más al sur: Ecuador, Colombia, Brasil…",
+   "ar": "يمر جنوبًا أكثر: الإكوادور وكولومبيا والبرازيل…"
+  }
+ },
+ {
+  "id": "f46",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "Le Brésil touche tous les pays d'Amérique du Sud sauf le Chili et l'Équateur.",
+   "en": "Brazil borders every South American country except Chile and Ecuador.",
+   "es": "Brasil limita con todos los países de América del Sur salvo Chile y Ecuador.",
+   "ar": "تجاور البرازيل كل دول أمريكا الجنوبية ما عدا تشيلي والإكوادور."
+  }
+ },
+ {
+  "id": "f47",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "Le Nil se jette dans la mer Rouge.",
+   "en": "The Nile flows into the Red Sea.",
+   "es": "El Nilo desemboca en el mar Rojo.",
+   "ar": "يصب نهر النيل في البحر الأحمر."
+  },
+  "note": {
+   "fr": "Il se jette dans la Méditerranée.",
+   "en": "It flows into the Mediterranean.",
+   "es": "Desemboca en el Mediterráneo.",
+   "ar": "يصب في البحر الأبيض المتوسط."
+  }
+ },
+ {
+  "id": "f48",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "La Mongolie est le pays indépendant le moins densément peuplé du monde.",
+   "en": "Mongolia is the most sparsely populated independent country.",
+   "es": "Mongolia es el país independiente con menor densidad de población.",
+   "ar": "منغوليا هي الدولة المستقلة الأقل كثافة سكانية في العالم."
+  }
+ },
+ {
+  "id": "f49",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "Le Japon a une frontière terrestre avec la Corée du Sud.",
+   "en": "Japan shares a land border with South Korea.",
+   "es": "Japón tiene frontera terrestre con Corea del Sur.",
+   "ar": "لليابان حدود برية مع كوريا الجنوبية."
+  },
+  "note": {
+   "fr": "Le Japon n'a aucune frontière terrestre.",
+   "en": "Japan has no land borders.",
+   "es": "Japón no tiene fronteras terrestres.",
+   "ar": "ليس لليابان أي حدود برية."
+  }
+ },
+ {
+  "id": "f50",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "Le point le plus au nord de l'Afrique se trouve en Tunisie.",
+   "en": "Africa's northernmost point is in Tunisia.",
+   "es": "El punto más septentrional de África está en Túnez.",
+   "ar": "تقع أقصى نقطة في شمال أفريقيا في تونس."
+  }
+ },
+ {
+  "id": "f51",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "La Suède et la Norvège n'ont aucune frontière commune.",
+   "en": "Sweden and Norway share no border.",
+   "es": "Suecia y Noruega no tienen frontera común.",
+   "ar": "لا توجد حدود مشتركة بين السويد والنرويج."
+  },
+  "note": {
+   "fr": "Elles partagent une frontière de plus de 1 600 km.",
+   "en": "They share a border of over 1,600 km.",
+   "es": "Comparten una frontera de más de 1600 km.",
+   "ar": "تتقاسمان حدودًا يزيد طولها على 1600 كم."
+  }
+ },
+ {
+  "id": "f52",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "Le fleuve Congo traverse deux fois l'équateur.",
+   "en": "The Congo River crosses the equator twice.",
+   "es": "El río Congo cruza dos veces el ecuador.",
+   "ar": "يعبر نهر الكونغو خط الاستواء مرتين."
+  }
+ },
+ {
+  "id": "f53",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "La Bolivie a un accès à la mer.",
+   "en": "Bolivia has access to the sea.",
+   "es": "Bolivia tiene salida al mar.",
+   "ar": "لبوليفيا منفذ على البحر."
+  },
+  "note": {
+   "fr": "Elle l'a perdu face au Chili à la fin du XIXe siècle.",
+   "en": "It lost it to Chile in the late 19th century.",
+   "es": "La perdió frente a Chile a finales del siglo XIX.",
+   "ar": "فقدته لصالح تشيلي في أواخر القرن التاسع عشر."
+  }
+ },
+ {
+  "id": "f54",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "L'Algérie est le plus grand pays d'Afrique.",
+   "en": "Algeria is the largest country in Africa.",
+   "es": "Argelia es el país más grande de África.",
+   "ar": "الجزائر هي أكبر دولة في أفريقيا."
+  }
+ },
+ {
+  "id": "f55",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "L'Islande est plus grande que Cuba.",
+   "en": "Iceland is larger than Cuba.",
+   "es": "Islandia es más grande que Cuba.",
+   "ar": "آيسلندا أكبر من كوبا."
+  },
+  "note": {
+   "fr": "Cuba est un peu plus grande (110 000 km² contre 103 000).",
+   "en": "Cuba is slightly larger (110,000 km² vs 103,000).",
+   "es": "Cuba es algo más grande (110 000 km² frente a 103 000).",
+   "ar": "كوبا أكبر قليلًا (110 آلاف كم² مقابل 103 آلاف)."
+  }
+ },
+ {
+  "id": "f56",
+  "tier": 3,
+  "answer": false,
+  "text": {
+   "fr": "Le Mississippi coule au Canada.",
+   "en": "The Mississippi flows through Canada.",
+   "es": "El Misisipi pasa por Canadá.",
+   "ar": "يجري نهر المسيسيبي في كندا."
+  },
+  "note": {
+   "fr": "Il coule entièrement aux États-Unis.",
+   "en": "It flows entirely within the United States.",
+   "es": "Corre por completo en Estados Unidos.",
+   "ar": "يجري بالكامل داخل الولايات المتحدة."
+  }
+ },
+ {
+  "id": "f57",
+  "tier": 3,
+  "answer": true,
+  "text": {
+   "fr": "La Nouvelle-Zélande se trouve au sud-est de l'Australie.",
+   "en": "New Zealand lies south-east of Australia.",
+   "es": "Nueva Zelanda está al sureste de Australia.",
+   "ar": "تقع نيوزيلندا جنوب شرق أستراليا."
+  }
+ }
+]

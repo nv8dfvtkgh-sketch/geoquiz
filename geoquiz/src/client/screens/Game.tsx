@@ -20,8 +20,9 @@ function Prompt({ q }: { q: QuestionMsg }) {
   return (
     <div className="prompt" key={q.index}>
       <div className="prompt-text">
-        {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto">{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
+        {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto" className={q.category === 'truefalse' || q.params.name.length > 40 ? 'long' : ''}>{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
       </div>
+      {q.emoji && <span className="prompt-emoji" aria-hidden="true">{q.emoji}</span>}
       {q.flag && <FlagImg token={q.flag} className="flag big" />}
       {q.image && <img className="quiz-photo" src={`/api/img/${q.image}`} alt="" draggable={false} />}
       {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}

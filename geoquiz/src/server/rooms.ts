@@ -113,8 +113,11 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   type Kind = 'map' | 'mcq' | 'type';
   // « Selon la difficulté » : facile = 4 choix, moyen = mélange, difficile = réponse à écrire.
   const auto: Record<string, Kind[]> = { easy: ['mcq'], medium: cat.qtypes, hard: ['type'] };
-  const kinds: Kind[] = settings.qtype === 'auto' ? auto[settings.difficulty]
+  const wanted: Kind[] = settings.qtype === 'auto' ? auto[settings.difficulty]
     : settings.qtype === 'mix' ? cat.qtypes : [settings.qtype as Kind];
+  // Une catégorie sans saisie (Vrai ou faux) reste en QCM même en difficile.
+  const supported = wanted.filter((k) => cat.qtypes.includes(k));
+  const kinds: Kind[] = supported.length ? supported : (cat.qtypes as Kind[]);
   return pool.map((t, i) => {
     const q = cat.make(t, kinds[(i + Math.floor(rnd() * kinds.length)) % kinds.length], zone, rnd);
     // Hors du niveau difficile, les territoires (Féroé, Jersey, Groenland…) sont grisés sur la
@@ -499,6 +502,7 @@ export class Room {
       map: q.map,
       highlight: q.highlight,
       shape: q.shape,
+      emoji: q.emoji,
       options: q.options?.map((o) => ({ id: o.id, label: o.label ? localize(o.label, lang) : undefined, flag: o.flagIso ? r.flagTokens[o.flagIso] : undefined })),
       attempts: q.attempts,
       timeLimit: r.deadline ? this.settings.timeLimit * 1000 : null,

@@ -33,13 +33,33 @@ export interface Language {
   tier: number;
   names: Names;
 }
+/** Plat ou animal emblème : rattaché à un ou plusieurs pays (le premier est le principal). */
+export interface CountryItem {
+  id: string;
+  countries: string[];
+  tier: number;
+  emoji?: string;
+  names: Names;
+}
+/** Affirmation du jeu Vrai ou faux. */
+export interface TrueFalse {
+  id: string;
+  tier: number;
+  answer: boolean;
+  text: Names;
+  note?: Names;
+}
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
+  food: CountryItem[];
+  animals: CountryItem[];
+  truefalse: TrueFalse[];
 }
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [] };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -114,7 +134,14 @@ export const dataReady = () => ready;
 
 export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoader: RegionLoader, extra: Partial<Extras> = {}) {
   world = w;
-  extras = { languages: extra.languages ?? [] };
+  // Plats et animaux : seulement ceux dont le pays principal existe dans les données.
+  const known = (x: CountryItem) => x.countries.filter((id) => c[id]).length > 0;
+  extras = {
+    languages: extra.languages ?? [],
+    food: (extra.food ?? []).map((x) => ({ ...x, countries: x.countries.filter((id) => c[id]) })).filter(known),
+    animals: (extra.animals ?? []).map((x) => ({ ...x, countries: x.countries.filter((id) => c[id]) })).filter(known),
+    truefalse: extra.truefalse ?? [],
+  };
   countries = c;
   loader = regionLoader;
   worldById = Object.fromEntries(world.features.map((f) => [f.id, f]));
@@ -126,7 +153,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
   const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies'];
-  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
+  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();
   for (const id of all) {

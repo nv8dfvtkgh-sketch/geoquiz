@@ -6,12 +6,12 @@ import path from 'node:path';
 import { matches, normalize } from '../src/server/text';
 import { drawQuestions, newCode, Room, type Conn } from '../src/server/rooms';
 import { CATEGORIES } from '../src/server/categories';
-import { zones, countries, initData, ensureRegion } from '../src/server/data';
+import { zones, countries, initData, ensureRegion, EXTRA_FILES } from '../src/server/data';
 import type { ClientMsg, RoomKind, ServerMsg, Settings } from '../src/shared/protocol';
 
 const BUILD = path.join(__dirname, '../data/build');
 const read = (f: string) => JSON.parse(fs.readFileSync(path.join(BUILD, f), 'utf8'));
-initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null), { languages: read('languages.json') });
+initData(read('world.json'), read('countries.json'), (iso) => (fs.existsSync(path.join(BUILD, `regions/${iso}.json`)) ? read(`regions/${iso}.json`) : null), Object.fromEntries(EXTRA_FILES.map((k) => [k, read(`${k}.json`)])));
 
 const rooms = new Map<string, Room>();
 function create(kind: RoomKind, s: Settings, hostPlays = true) {
@@ -330,4 +330,43 @@ test('Crée ton quiz : validation par l’admin, test solo du créateur, photo p
   assert.equal((await svc.view(id, token))?.reason, 'Photo interdite');
   await assert.rejects(svc.update(id, 'mauvais', { title: 'x', questions: [] }), /quiz.forbidden/);
   solo.destroy();
+});
+
+test('Cuisine, Animaux, Vrai ou faux : données et questions cohérentes', async () => {
+  const { extras } = await import('../src/server/data');
+  for (const k of ['food', 'animals'] as const) {
+    // Les données de démo n'ont qu'une partie des pays : les éléments sans pays connu sont écartés.
+    const raw = read(`${k}.json`) as { id: string; countries: string[] }[];
+    assert.equal(extras[k].length, raw.filter((x) => x.countries.some((c) => countries[c])).length);
+    for (const x of extras[k]) for (const c of x.countries) assert.ok(countries[c]);
+    for (const d of ['easy', 'medium', 'hard'] as const) {
+      const qs = drawQuestions(settings({ category: k, zone: 'world', difficulty: d, qtype: 'mix', count: 20 }));
+      assert.ok(qs.length >= Math.min(10, extras[k].length), `${k}/${d}`);
+      for (const q of qs) {
+        const item = extras[k].find((x) => x.id === q.target)!;
+        if (q.kind === 'mcq') {
+          const good = q.options!.filter((o) => item.countries.includes(o.target));
+          assert.equal(good.length, 1, 'une seule bonne réponse parmi les choix');
+          assert.ok(q.check(q.revealOption!));
+        }
+        if (q.kind === 'map') assert.ok(q.check(item.countries[0]));
+        if (q.kind === 'type') assert.ok(q.check(countries[item.countries[0]].names.fr));
+      }
+    }
+  }
+  const couscous = drawQuestions(settings({ category: 'food', zone: 'world', qtype: 'type', difficulty: 'easy', count: 50 })).find((q) => q.target === 'couscous')!;
+  assert.ok(couscous.check('Maroc') && !couscous.check('Égypte'));
+  if (countries.DZ) assert.ok(couscous.check('Algérie'));
+
+  const tf = drawQuestions(settings({ category: 'truefalse', zone: 'world', difficulty: 'hard', qtype: 'auto', count: 50 }));
+  assert.ok(tf.length >= 20 && tf.every((q) => q.kind === 'mcq' && q.options!.length === 2));
+  assert.ok(tf.some((q) => q.target.startsWith('cap:')) && tf.some((q) => q.target.startsWith('cur:')));
+  for (const q of tf) {
+    const truth = q.revealOption === 'o0';
+    if (q.target.startsWith('f:')) assert.equal(truth, extras.truefalse.find((x) => `f:${x.id}` === q.target)!.answer);
+    if (q.target.startsWith('cap:')) {
+      const c = countries[q.target.slice(4)];
+      assert.equal(truth, q.promptName!.fr.endsWith(`— ${c.capital!.names.fr}`), q.promptName!.fr);
+    }
+  }
 });

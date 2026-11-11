@@ -110,14 +110,14 @@ export function Setup() {
 
       <details className="more" open={editing}>
         <summary>{t('setup.more')}</summary>
-        <fieldset className="seg-field">
+        {(cat?.qtypes.length ?? 0) > 1 && <fieldset className="seg-field">
           <legend>{t('setup.qtype')}</legend>
           <div className="seg">
             {(['auto', 'mix', ...(cat?.qtypes ?? [])] as QType[]).map((q) => (
               <button type="button" key={q} aria-pressed={cfg.qtype === q} onClick={() => set({ qtype: q })}>{t(`qtype.${q}`)}</button>
             ))}
           </div>
-        </fieldset>
+        </fieldset>}
         <div className="row2">
           <label className="field">
             <span>{t('setup.count')}</span>

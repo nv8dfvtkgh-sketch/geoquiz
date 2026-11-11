@@ -1,0 +1,450 @@
+[
+ {
+  "id": "kangaroo",
+  "countries": [
+   "AU"
+  ],
+  "tier": 1,
+  "emoji": "🦘",
+  "names": {
+   "fr": "kangourou",
+   "en": "kangaroo",
+   "es": "canguro",
+   "ar": "كنغر"
+  }
+ },
+ {
+  "id": "koala",
+  "countries": [
+   "AU"
+  ],
+  "tier": 1,
+  "emoji": "🐨",
+  "names": {
+   "fr": "koala",
+   "en": "koala",
+   "es": "koala",
+   "ar": "كوالا"
+  }
+ },
+ {
+  "id": "kiwi",
+  "countries": [
+   "NZ"
+  ],
+  "tier": 1,
+  "names": {
+   "fr": "kiwi (l'oiseau)",
+   "en": "kiwi (the bird)",
+   "es": "kiwi (el ave)",
+   "ar": "طائر الكيوي"
+  }
+ },
+ {
+  "id": "panda",
+  "countries": [
+   "CN"
+  ],
+  "tier": 1,
+  "emoji": "🐼",
+  "names": {
+   "fr": "panda géant",
+   "en": "giant panda",
+   "es": "panda gigante",
+   "ar": "الباندا العملاق"
+  }
+ },
+ {
+  "id": "baldeagle",
+  "countries": [
+   "US"
+  ],
+  "tier": 1,
+  "emoji": "🦅",
+  "names": {
+   "fr": "pygargue à tête blanche",
+   "en": "bald eagle",
+   "es": "águila calva",
+   "ar": "النسر الأصلع"
+  }
+ },
+ {
+  "id": "beaver",
+  "countries": [
+   "CA"
+  ],
+  "tier": 1,
+  "emoji": "🦫",
+  "names": {
+   "fr": "castor",
+   "en": "beaver",
+   "es": "castor",
+   "ar": "القندس"
+  }
+ },
+ {
+  "id": "rooster",
+  "countries": [
+   "FR"
+  ],
+  "tier": 1,
+  "emoji": "🐓",
+  "names": {
+   "fr": "coq gaulois",
+   "en": "Gallic rooster",
+   "es": "gallo galo",
+   "ar": "الديك الغالي"
+  }
+ },
+ {
+  "id": "tiger",
+  "countries": [
+   "IN",
+   "BD"
+  ],
+  "tier": 1,
+  "emoji": "🐅",
+  "names": {
+   "fr": "tigre du Bengale",
+   "en": "Bengal tiger",
+   "es": "tigre de Bengala",
+   "ar": "نمر البنغال"
+  }
+ },
+ {
+  "id": "atlaslion",
+  "countries": [
+   "MA"
+  ],
+  "tier": 1,
+  "emoji": "🦁",
+  "names": {
+   "fr": "lion de l'Atlas",
+   "en": "Atlas lion",
+   "es": "león del Atlas",
+   "ar": "أسد الأطلس"
+  }
+ },
+ {
+  "id": "unicorn",
+  "countries": [
+   "GB"
+  ],
+  "tier": 2,
+  "emoji": "🦄",
+  "names": {
+   "fr": "licorne (emblème de l'Écosse)",
+   "en": "unicorn (Scotland's emblem)",
+   "es": "unicornio (emblema de Escocia)",
+   "ar": "اليونيكورن (رمز إسكتلندا)"
+  }
+ },
+ {
+  "id": "komodo",
+  "countries": [
+   "ID"
+  ],
+  "tier": 2,
+  "emoji": "🦎",
+  "names": {
+   "fr": "dragon de Komodo",
+   "en": "Komodo dragon",
+   "es": "dragón de Komodo",
+   "ar": "تنين كومودو"
+  }
+ },
+ {
+  "id": "quetzal",
+  "countries": [
+   "GT"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "quetzal resplendissant",
+   "en": "resplendent quetzal",
+   "es": "quetzal",
+   "ar": "طائر الكيتزال"
+  }
+ },
+ {
+  "id": "springbok",
+  "countries": [
+   "ZA"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "springbok",
+   "en": "springbok",
+   "es": "springbok",
+   "ar": "ظبي القفاز (سبرينغبوك)"
+  }
+ },
+ {
+  "id": "condor",
+  "countries": [
+   "PE",
+   "BO",
+   "CL",
+   "CO",
+   "EC",
+   "AR"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "condor des Andes",
+   "en": "Andean condor",
+   "es": "cóndor andino",
+   "ar": "كندور الأنديز"
+  }
+ },
+ {
+  "id": "lemur",
+  "countries": [
+   "MG"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "maki catta (lémurien)",
+   "en": "ring-tailed lemur",
+   "es": "lémur de cola anillada",
+   "ar": "الليمور ذو الذيل الحلقي"
+  }
+ },
+ {
+  "id": "orangutan",
+  "countries": [
+   "ID",
+   "MY"
+  ],
+  "tier": 2,
+  "emoji": "🦧",
+  "names": {
+   "fr": "orang-outan",
+   "en": "orangutan",
+   "es": "orangután",
+   "ar": "إنسان الغاب"
+  }
+ },
+ {
+  "id": "dodo",
+  "countries": [
+   "MU"
+  ],
+  "tier": 2,
+  "emoji": "🦤",
+  "names": {
+   "fr": "dodo",
+   "en": "dodo",
+   "es": "dodo",
+   "ar": "طائر الدودو"
+  }
+ },
+ {
+  "id": "galapagos",
+  "countries": [
+   "EC"
+  ],
+  "tier": 2,
+  "emoji": "🐢",
+  "names": {
+   "fr": "tortue géante des Galápagos",
+   "en": "Galápagos giant tortoise",
+   "es": "tortuga gigante de Galápagos",
+   "ar": "سلحفاة غالاباغوس العملاقة"
+  }
+ },
+ {
+  "id": "okapi",
+  "countries": [
+   "CD"
+  ],
+  "tier": 2,
+  "names": {
+   "fr": "okapi",
+   "en": "okapi",
+   "es": "okapi",
+   "ar": "الأوكابي"
+  }
+ },
+ {
+  "id": "fennec",
+  "countries": [
+   "DZ"
+  ],
+  "tier": 2,
+  "emoji": "🦊",
+  "names": {
+   "fr": "fennec",
+   "en": "fennec fox",
+   "es": "fénec",
+   "ar": "ثعلب الفنك"
+  }
+ },
+ {
+  "id": "elephant",
+  "countries": [
+   "CI"
+  ],
+  "tier": 2,
+  "emoji": "🐘",
+  "names": {
+   "fr": "éléphant d'Afrique",
+   "en": "African elephant",
+   "es": "elefante africano",
+   "ar": "الفيل الأفريقي"
+  }
+ },
+ {
+  "id": "oryx",
+  "countries": [
+   "OM",
+   "QA",
+   "AE",
+   "JO",
+   "SA"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "oryx d'Arabie",
+   "en": "Arabian oryx",
+   "es": "órice de Arabia",
+   "ar": "المها العربي"
+  }
+ },
+ {
+  "id": "eagle_saladin",
+  "countries": [
+   "EG"
+  ],
+  "tier": 3,
+  "emoji": "🦅",
+  "names": {
+   "fr": "aigle de Saladin",
+   "en": "Eagle of Saladin",
+   "es": "águila de Saladino",
+   "ar": "عقاب صلاح الدين"
+  }
+ },
+ {
+  "id": "giraffe",
+  "countries": [
+   "TZ"
+  ],
+  "tier": 3,
+  "emoji": "🦒",
+  "names": {
+   "fr": "girafe",
+   "en": "giraffe",
+   "es": "jirafa",
+   "ar": "الزرافة"
+  }
+ },
+ {
+  "id": "zebra",
+  "countries": [
+   "BW"
+  ],
+  "tier": 3,
+  "emoji": "🦓",
+  "names": {
+   "fr": "zèbre",
+   "en": "zebra",
+   "es": "cebra",
+   "ar": "الحمار الوحشي"
+  }
+ },
+ {
+  "id": "harpy",
+  "countries": [
+   "PA"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "harpie féroce",
+   "en": "harpy eagle",
+   "es": "águila harpía",
+   "ar": "نسر الهاربي"
+  }
+ },
+ {
+  "id": "crane",
+  "countries": [
+   "UG"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "grue royale",
+   "en": "grey crowned crane",
+   "es": "grulla coronada cuelligrís",
+   "ar": "الكركي المتوج الرمادي"
+  }
+ },
+ {
+  "id": "brownbear",
+  "countries": [
+   "FI",
+   "RU"
+  ],
+  "tier": 3,
+  "emoji": "🐻",
+  "names": {
+   "fr": "ours brun",
+   "en": "brown bear",
+   "es": "oso pardo",
+   "ar": "الدب البني"
+  }
+ },
+ {
+  "id": "vicuna",
+  "countries": [
+   "PE"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "vigogne",
+   "en": "vicuña",
+   "es": "vicuña",
+   "ar": "الفيكونيا"
+  }
+ },
+ {
+  "id": "pheasant",
+  "countries": [
+   "JP"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "faisan versicolore",
+   "en": "green pheasant",
+   "es": "faisán verde",
+   "ar": "التدرج الأخضر"
+  }
+ },
+ {
+  "id": "snowleopard",
+  "countries": [
+   "AF",
+   "KG"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "léopard des neiges",
+   "en": "snow leopard",
+   "es": "leopardo de las nieves",
+   "ar": "نمر الثلج"
+  }
+ },
+ {
+  "id": "markhor",
+  "countries": [
+   "PK"
+  ],
+  "tier": 3,
+  "names": {
+   "fr": "markhor",
+   "en": "markhor",
+   "es": "markhor",
+   "ar": "الماعز البري (مارخور)"
+  }
+ }
+]

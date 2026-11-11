@@ -6,7 +6,7 @@
 // Le moteur de jeu (src/server/rooms.ts, categories.ts, data.ts) est le même que la version Node.
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos } from '../server/categories';
-import { catalog, dataReady, ensureRegion, initData, regionMap, worldJson } from '../server/data';
+import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from '../server/quizzes';
@@ -64,12 +64,12 @@ let loading: Promise<void> | null = null;
 function ensureData(env: Env): Promise<void> {
   if (dataReady()) return Promise.resolve();
   loading ??= (async () => {
-    const [w, c, l] = await Promise.all([asset(env, 'world.json'), asset(env, 'countries.json'), asset(env, 'languages.json')]);
+    const [w, c, ...ex] = await Promise.all([asset(env, 'world.json'), asset(env, 'countries.json'), ...EXTRA_FILES.map((k) => asset(env, `${k}.json`))]);
     if (!w.ok || !c.ok) throw new Error('Données absentes : lancez « npm run build:cf » avant le déploiement.');
     initData(await w.json(), await c.json(), async (iso) => {
       const r = await asset(env, `regions/${iso}.json`);
       return r.ok ? r.json() : null;
-    }, { languages: l.ok ? await l.json() : [] });
+    }, Object.fromEntries(await Promise.all(EXTRA_FILES.map(async (k, i) => [k, ex[i].ok ? await ex[i].json() : []]))));
     config.maxPlayers = Number(env.MAX_PLAYERS ?? 50) || 50;
   })().catch((e) => { loading = null; throw e; });
   return loading;
