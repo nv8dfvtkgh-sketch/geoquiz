@@ -7,7 +7,8 @@ import {
 } from '../shared/protocol';
 import { CATEGORIES, customQuestions, localize, shuffle, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
-import { countries, ensureRegion, regionLoaded, zones } from './data';
+import { countries, ensureRegion, extras, regionLoaded, zones } from './data';
+import { ensurePhotos, photosLoaded } from './photos';
 
 export interface Conn {
   send(msg: ServerMsg): void;
@@ -406,6 +407,11 @@ export class Room {
       ensureRegion(region.iso).then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' })));
       return;
     }
+    // Monuments : les photos libres sont cherchées sur Wikipédia à la première partie.
+    if (this.settings.category === 'monuments' && !photosLoaded()) {
+      ensurePhotos(extras.monuments).then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
+      return;
+    }
     if (this.settings.category === 'custom' && !this.quizContent) {
       config.loadQuiz(this.settings.quiz!, this.quizToken).then((c) => {
         if (c) { this.quizContent = c; this.start(); }
@@ -521,6 +527,7 @@ export class Room {
       optionId: q.revealOption,
       label: localize(q.answer, lang),
       flag: q.revealFlagIso ? (r.flagTokens[q.revealFlagIso] ??= this.flagToken(q.revealFlagIso)) : undefined,
+      credit: q.credit,
     };
     r.revealByLang[lang] = rv;
     return rv;

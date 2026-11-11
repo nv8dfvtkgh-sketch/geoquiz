@@ -151,6 +151,7 @@ export interface Reveal {
   optionId?: string;
   label: string;
   flag?: string;
+  credit?: string; // crédit de la photo (Monuments)
 }
 
 export interface PlayerRound {

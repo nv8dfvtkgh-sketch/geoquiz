@@ -3,8 +3,9 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, Lang, MapSpec, Names } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem,
+  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem,
 } from './data';
+import { photoFor } from './photos';
 import { matches } from './text';
 
 export interface QOptionInternal {
@@ -22,6 +23,7 @@ export interface InternalQuestion {
   promptName?: Names; // paramètre {name} traduit
   flagIso?: string;
   emoji?: string; // grand pictogramme (plats, animaux)
+  credit?: string; // crédit de la photo, affiché avec la réponse
   imageRef?: string; // photo d'un quiz créé : « quiz:<code>:<image> »
   extraParams?: Record<string, string>; // paramètres identiques dans toutes les langues
   map?: MapSpec;
@@ -530,6 +532,78 @@ const truefalseCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ rébus emojis
+// Un pays, une ville ou un film à deviner à partir d'emojis. Les pièges sont du même thème.
+const emojiNames = (x: EmojiItem): Names => (x.theme === 'country' ? countries[x.country!].names : x.names!);
+let emojiNameSets: Record<string, Set<string>> | null = null;
+const emojiCat: Category = {
+  id: 'emoji',
+  noZone: true,
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.emoji, d, n),
+  make(target, kind, _zone, rnd) {
+    const item = extras.emoji.find((x) => x.id === target)!;
+    const same = extras.emoji.filter((x) => x.theme === item.theme && x.id !== target);
+    const names = emojiNames(item);
+    const base = {
+      category: 'emoji', target, answer: names, promptKey: `q.emoji.${item.theme}`,
+      promptName: { fr: item.emoji, en: item.emoji, ar: item.emoji, es: item.emoji },
+    };
+    if (kind === 'mcq') {
+      // Pièges proches en difficulté d'abord.
+      const near = shuffle(same, rnd).sort((a, b) => Math.abs(a.tier - item.tier) - Math.abs(b.tier - item.tier));
+      const byId = Object.fromEntries(extras.emoji.map((x) => [x.id, x]));
+      const { options, correct } = optionsFrom(target, near.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: emojiNames(byId[id]) }));
+      return { ...base, kind, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    emojiNameSets ??= Object.fromEntries(['country', 'city', 'film'].map((t) => [t, nameSet(extras.emoji.filter((x) => x.theme === t).map(emojiNames))]));
+    const others = item.theme === 'country' ? countryNameSet : emojiNameSets[item.theme];
+    return { ...base, kind, attempts: 1, check: typedCheck(allNames(names, item.alts), others) };
+  },
+};
+
+// ------------------------------------------------------------------ monuments (photos libres)
+// La photo vient de Wikimedia Commons (voir photos.ts) ; les monuments sans photo libre sont écartés.
+const monumentById = () => Object.fromEntries(extras.monuments.map((m) => [m.id, m]));
+let monumentNames: Set<string> | null = null;
+const monumentsCat: Category = {
+  id: 'monuments',
+  noZone: true,
+  qtypes: ['mcq', 'map', 'type'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.monuments.filter((m) => photoFor(m.id)), d, n),
+  make(target, kind, _zone, rnd) {
+    const m = monumentById()[target];
+    const photo = photoFor(target)!;
+    const c = countries[m.country];
+    const base = { category: 'monuments', target, imageRef: `wiki:${target}`, credit: photo.credit, revealId: m.country };
+    if (kind === 'map' && (worldById[m.country]?.a ?? 0) < 12) kind = 'mcq';
+    if (kind === 'map') {
+      return { ...base, kind, answer: mapNames((l) => `${m.names[l]} — ${c.names[l]}`), promptKey: 'q.monuments.map', map: worldSpec(zones.get('world')!, 'shapes'), attempts: 3, check: (v) => v === m.country };
+    }
+    if (kind === 'mcq' && rnd() < 0.5) {
+      // « Quel est ce monument ? » : pièges pris parmi les monuments du même continent si possible.
+      const all = extras.monuments.filter((x) => x.id !== target && photoFor(x.id));
+      const cont = (x: { country: string }) => countries[x.country]?.continent;
+      const near = [...shuffle(all.filter((x) => cont(x) === cont(m)), rnd), ...shuffle(all.filter((x) => cont(x) !== cont(m)), rnd)];
+      const byId = monumentById();
+      const { options, correct } = optionsFrom(target, near.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: byId[id].names }));
+      return { ...base, kind, answer: m.names, promptKey: 'q.monuments.name', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    const answer = mapNames((l) => `${m.names[l]} — ${c.names[l]}`);
+    if (kind === 'mcq') {
+      const { options, correct } = optionsFrom(m.country, countryDistractors(m.country, 3, rnd, (x) => !countries[x].dependency), rnd, (id) => ({ label: countries[id].names }));
+      return { ...base, kind, answer, promptKey: 'q.monuments.country', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    // Saisie : le pays, ou le nom du monument dans l'une des langues.
+    monumentNames ??= nameSet(extras.monuments.map((x) => x.names));
+    const accepted = [...allNames(c.names), ...allNames(m.names)];
+    const others = new Set([...countryNameSet, ...monumentNames]);
+    return { ...base, kind, answer, promptKey: 'q.monuments.type', attempts: 1, check: typedCheck(accepted, others) };
+  },
+};
+
 // ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
 // Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
 // cette entrée sert au catalogue et à la validation des réglages.
@@ -558,7 +632,7 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 }
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
 );
 
 export function categoryInfos(): CategoryInfo[] {

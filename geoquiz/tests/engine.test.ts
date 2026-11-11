@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (cat === 'custom') continue; // quiz créés : test dédié plus bas
+    if (cat === 'custom' || cat === 'monuments') continue; // quiz créés, monuments (photos) : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -368,5 +368,56 @@ test('Cuisine, Animaux, Vrai ou faux : données et questions cohérentes', async
       const c = countries[q.target.slice(4)];
       assert.equal(truth, q.promptName!.fr.endsWith(`— ${c.capital!.names.fr}`), q.promptName!.fr);
     }
+  }
+});
+
+test('Rébus emojis et Monuments (photos Wikipédia simulées)', async () => {
+  const { extras } = await import('../src/server/data');
+  const { ensurePhotos, photoFor, resetPhotos } = await import('../src/server/photos');
+  // Rébus : un seul bon choix, pièges du même thème, saisie dans toutes les langues.
+  const emo = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'mix', count: 50 }));
+  assert.ok(emo.length >= 30);
+  for (const q of emo) {
+    const item = extras.emoji.find((x) => x.id === q.target)!;
+    if (q.kind === 'mcq') {
+      assert.ok(q.options!.every((o) => extras.emoji.find((x) => x.id === o.target)!.theme === item.theme));
+      assert.ok(q.check(q.revealOption!));
+    } else assert.ok(q.check(q.answer.fr) && q.check(q.answer.en), q.answer.fr);
+  }
+  const lion = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'easy', qtype: 'type', count: 50 })).find((q) => q.target === 'f-lionking')!;
+  assert.ok(lion.check('le roi lion') && lion.check('The Lion King') && lion.check('الأسد الملك') && !lion.check('Titanic'));
+
+  // Monuments : Wikipédia simulé (un monument sans photo libre).
+  resetPhotos();
+  const calls: string[] = [];
+  const fake = async (url: string) => {
+    calls.push(url);
+    const u = new URL(url);
+    const titles = u.searchParams.get('titles')!.split('|');
+    if (u.searchParams.get('prop') === 'pageimages') {
+      return new Response(JSON.stringify({ query: {
+        normalized: titles.filter((t) => t.includes('_')).map((t) => ({ from: t, to: t.replace(/_/g, ' ') })),
+        pages: titles.filter((t) => t !== 'Atomium').map((t) => ({ title: t.replace(/_/g, ' '), pageimage: `${t.replace(/ /g, '_')}.jpg`, thumbnail: { source: `https://upload.example/${encodeURIComponent(t)}.jpg` } })),
+      } }));
+    }
+    return new Response(JSON.stringify({ query: {
+      normalized: titles.map((t) => ({ from: t, to: t.replace(/_/g, ' ') })),
+      pages: titles.map((t) => ({ title: t.replace(/_/g, ' '), imageinfo: [{ extmetadata: { Artist: { value: '<a href="x">Jean Photo</a>' }, LicenseShortName: { value: 'CC BY-SA 4.0' } } }] })),
+    } }));
+  };
+  assert.ok(await ensurePhotos(extras.monuments, fake as any));
+  assert.ok(await ensurePhotos(extras.monuments, fake as any));
+  assert.ok(calls.length <= 6, 'chargé une seule fois');
+  assert.equal(photoFor('atomium'), undefined);
+  assert.equal(photoFor('eiffel')?.credit, 'Jean Photo · CC BY-SA 4.0 · Wikimedia Commons');
+  const mons = drawQuestions(settings({ category: 'monuments', zone: 'world', difficulty: 'hard', qtype: 'mix', count: 50 }));
+  assert.ok(mons.length >= Math.min(20, extras.monuments.length - 1) && !mons.some((q) => q.target === 'atomium'));
+  for (const q of mons) {
+    const m = extras.monuments.find((x) => x.id === q.target)!;
+    assert.equal(q.imageRef, `wiki:${m.id}`);
+    assert.ok(q.credit);
+    if (q.kind === 'map') assert.ok(q.check(m.country));
+    if (q.kind === 'mcq') assert.ok(q.check(q.revealOption!));
+    if (q.kind === 'type') assert.ok(q.check(countries[m.country].names.fr) && q.check(m.names.en));
   }
 });

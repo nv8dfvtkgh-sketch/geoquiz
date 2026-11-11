@@ -20,7 +20,7 @@ function Prompt({ q }: { q: QuestionMsg }) {
   return (
     <div className="prompt" key={q.index}>
       <div className="prompt-text">
-        {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto" className={q.category === 'truefalse' || q.params.name.length > 40 ? 'long' : ''}>{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
+        {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto" className={q.category === 'emoji' ? 'rebus' : q.category === 'truefalse' || q.params.name.length > 40 ? 'long' : ''}>{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
       </div>
       {q.emoji && <span className="prompt-emoji" aria-hidden="true">{q.emoji}</span>}
       {q.flag && <FlagImg token={q.flag} className="flag big" />}
@@ -163,6 +163,8 @@ function Status({ q }: { q: QuestionMsg }) {
           <strong>{fb.correct ? t('play.correct') : t('play.wrong')}</strong>
           {!fb.correct && reveal && <span dir="auto">{t('play.answerWas', { label: reveal.label })}</span>}
           {fb.correct && q.kind === 'type' && reveal && <span dir="auto">{t('play.spelling', { label: reveal.label })}</span>}
+          {fb.correct && q.kind !== 'type' && (q.category === 'monuments' || q.category === 'truefalse') && reveal && <span dir="auto">{reveal.label}</span>}
+          {reveal?.credit && <small className="credit" dir="auto">{t('play.photo', { credit: reveal.credit })}</small>}
         </div>
         {reveal?.flag && <FlagImg token={reveal.flag} className="flag small" />}
         {room.settings.soloMode !== 'timed' && (
@@ -181,6 +183,7 @@ function Status({ q }: { q: QuestionMsg }) {
           <div>
             <strong>{mine?.correct ? t('play.correct') : fb ? t('play.wrong') : t('play.timeUp')}</strong>
             <span dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</span>
+            {roundEnd.reveal.credit && <small className="credit" dir="auto">{t('play.photo', { credit: roundEnd.reveal.credit })}</small>}
           </div>
           {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
           {mine?.correct && <span className="gain">{t('play.points', { n: mine.points })}</span>}
@@ -301,6 +304,7 @@ function Presenter({ q }: { q: QuestionMsg }) {
         {roundEnd && (
           <aside className="presenter-board">
             <p className="answer" dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</p>
+            {roundEnd.reveal.credit && <small className="credit" dir="auto">{t('play.photo', { credit: roundEnd.reveal.credit })}</small>}
             {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
             {roundEnd.battle && (
               <p className="battle-line">

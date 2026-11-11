@@ -34,7 +34,7 @@ export const FAMILIES: Family[] = [
     games: [
       { id: 'food', icon: 'bowl', fresh: true },
       { id: 'animals', icon: 'paw', fresh: true },
-      { id: 'monuments', icon: 'columns', soon: true },
+      { id: 'monuments', icon: 'columns', fresh: true },
       { id: 'brands', icon: 'tag', soon: true },
     ],
   },
@@ -43,7 +43,7 @@ export const FAMILIES: Family[] = [
     tint: 'tint-violet',
     games: [
       { id: 'cinema', icon: 'clap', soon: true },
-      { id: 'emoji', icon: 'smile', soon: true },
+      { id: 'emoji', icon: 'smile', fresh: true },
     ],
   },
   {

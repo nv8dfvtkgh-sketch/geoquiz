@@ -49,17 +49,37 @@ export interface TrueFalse {
   text: Names;
   note?: Names;
 }
+/** Rébus en emojis : un pays (noms tirés des données) ou une ville / un film (noms fournis). */
+export interface EmojiItem {
+  id: string;
+  theme: 'country' | 'city' | 'film';
+  tier: number;
+  emoji: string;
+  country?: string;
+  names?: Names;
+  alts?: string[];
+}
+/** Monument : article Wikipédia (anglais) d'où vient sa photo libre. */
+export interface Monument {
+  id: string;
+  wiki: string;
+  country: string;
+  tier: number;
+  names: Names;
+}
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
   food: CountryItem[];
   animals: CountryItem[];
   truefalse: TrueFalse[];
+  emoji: EmojiItem[];
+  monuments: Monument[];
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse'] as const;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [] };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -141,6 +161,8 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     food: (extra.food ?? []).map((x) => ({ ...x, countries: x.countries.filter((id) => c[id]) })).filter(known),
     animals: (extra.animals ?? []).map((x) => ({ ...x, countries: x.countries.filter((id) => c[id]) })).filter(known),
     truefalse: extra.truefalse ?? [],
+    emoji: (extra.emoji ?? []).filter((x) => x.theme !== 'country' || c[x.country!]),
+    monuments: (extra.monuments ?? []).filter((x) => c[x.country]),
   };
   countries = c;
   loader = regionLoader;
@@ -153,7 +175,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
   const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies'];
-  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
+  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();
   for (const id of all) {

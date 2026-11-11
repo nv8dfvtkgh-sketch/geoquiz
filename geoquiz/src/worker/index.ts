@@ -6,6 +6,7 @@
 // Le moteur de jeu (src/server/rooms.ts, categories.ts, data.ts) est le même que la version Node.
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos } from '../server/categories';
+import { fetchPhoto } from '../server/photos';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
@@ -220,6 +221,10 @@ export class RoomDO {
     if (img) {
       const iso = this.room?.resolveImage(img[1]);
       if (!iso) return new Response('', { status: 404 });
+      if (iso.startsWith('wiki:')) {
+        const r = await fetchPhoto(iso.slice(5)).catch(() => null);
+        return r ? new Response(r.body, { headers: { 'Content-Type': r.headers.get('content-type') ?? 'image/jpeg', 'Cache-Control': 'private, max-age=3600' } }) : new Response('', { status: 404 });
+      }
       if (iso.startsWith('quiz:')) {
         const [, id, imgId] = iso.split(':');
         const im = await quizCall<{ type: string; b64: string }>(this.env, 'image', { id, img: imgId });

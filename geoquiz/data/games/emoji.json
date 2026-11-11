@@ -1,0 +1,790 @@
+[
+ {
+  "id": "p-it",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🍕🛵🏛️",
+  "country": "IT"
+ },
+ {
+  "id": "p-us",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🗽🍔🦅",
+  "country": "US"
+ },
+ {
+  "id": "p-ma",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🐫🏜️🕌🫖",
+  "country": "MA"
+ },
+ {
+  "id": "p-fr",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🥐🗼🧀",
+  "country": "FR"
+ },
+ {
+  "id": "p-jp",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🍣🗻🌸",
+  "country": "JP"
+ },
+ {
+  "id": "p-cn",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🐼🏯🥢",
+  "country": "CN"
+ },
+ {
+  "id": "p-au",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🦘🏄🐨",
+  "country": "AU"
+ },
+ {
+  "id": "p-br",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "⚽🏖️💃🦜",
+  "country": "BR"
+ },
+ {
+  "id": "p-mx",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🌮🌵🎺",
+  "country": "MX"
+ },
+ {
+  "id": "p-ca",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🍁🏒🫎",
+  "country": "CA"
+ },
+ {
+  "id": "p-in",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🐘🍛🧘",
+  "country": "IN"
+ },
+ {
+  "id": "p-eg",
+  "theme": "country",
+  "tier": 1,
+  "emoji": "🐪🔺🔺",
+  "country": "EG"
+ },
+ {
+  "id": "p-gb",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "💂☕🎡",
+  "country": "GB"
+ },
+ {
+  "id": "p-es",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🐂💃🥘",
+  "country": "ES"
+ },
+ {
+  "id": "p-de",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🍺🥨🚗",
+  "country": "DE"
+ },
+ {
+  "id": "p-nl",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🌷🚲🧀",
+  "country": "NL"
+ },
+ {
+  "id": "p-ch",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🍫⌚🏔️",
+  "country": "CH"
+ },
+ {
+  "id": "p-ru",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🪆🐻❄️",
+  "country": "RU"
+ },
+ {
+  "id": "p-th",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🐘🛕🍜",
+  "country": "TH"
+ },
+ {
+  "id": "p-tr",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🧿☕🕌",
+  "country": "TR"
+ },
+ {
+  "id": "p-ar",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🧉🥩💃⚽",
+  "country": "AR"
+ },
+ {
+  "id": "p-nz",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🥝🐑🏉",
+  "country": "NZ"
+ },
+ {
+  "id": "p-ie",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "☘️🍺🎻",
+  "country": "IE"
+ },
+ {
+  "id": "p-is",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🧊🌋♨️",
+  "country": "IS"
+ },
+ {
+  "id": "p-fi",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🎅🦌❄️",
+  "country": "FI"
+ },
+ {
+  "id": "p-pe",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🦙⛰️🏛️",
+  "country": "PE"
+ },
+ {
+  "id": "p-za",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🏉🦁💎",
+  "country": "ZA"
+ },
+ {
+  "id": "p-gr",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🏛️🫒🏝️",
+  "country": "GR"
+ },
+ {
+  "id": "c-paris",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🗼🥖❤️",
+  "names": {
+   "fr": "Paris",
+   "en": "Paris",
+   "es": "París",
+   "ar": "باريس"
+  }
+ },
+ {
+  "id": "c-newyork",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🍎🗽🚕",
+  "names": {
+   "fr": "New York",
+   "en": "New York",
+   "es": "Nueva York",
+   "ar": "نيويورك"
+  }
+ },
+ {
+  "id": "c-london",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "💂☔🎡",
+  "names": {
+   "fr": "Londres",
+   "en": "London",
+   "es": "Londres",
+   "ar": "لندن"
+  }
+ },
+ {
+  "id": "c-rome",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🏟️🍝🛵",
+  "names": {
+   "fr": "Rome",
+   "en": "Rome",
+   "es": "Roma",
+   "ar": "روما"
+  }
+ },
+ {
+  "id": "c-marrakech",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🐪🌴🕌🛍️",
+  "names": {
+   "fr": "Marrakech",
+   "en": "Marrakesh",
+   "es": "Marrakech",
+   "ar": "مراكش"
+  }
+ },
+ {
+  "id": "c-tokyo",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🗼🍣🚄",
+  "names": {
+   "fr": "Tokyo",
+   "en": "Tokyo",
+   "es": "Tokio",
+   "ar": "طوكيو"
+  }
+ },
+ {
+  "id": "c-venice",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🚣🎭🌉",
+  "names": {
+   "fr": "Venise",
+   "en": "Venice",
+   "es": "Venecia",
+   "ar": "البندقية"
+  }
+ },
+ {
+  "id": "c-lasvegas",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🎰🌵💰",
+  "names": {
+   "fr": "Las Vegas",
+   "en": "Las Vegas",
+   "es": "Las Vegas",
+   "ar": "لاس فيغاس"
+  }
+ },
+ {
+  "id": "c-sanfrancisco",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🌉🚋🌫️",
+  "names": {
+   "fr": "San Francisco",
+   "en": "San Francisco",
+   "es": "San Francisco",
+   "ar": "سان فرانسيسكو"
+  }
+ },
+ {
+  "id": "c-dubai",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏙️🐪🛍️",
+  "names": {
+   "fr": "Dubaï",
+   "en": "Dubai",
+   "es": "Dubái",
+   "ar": "دبي"
+  }
+ },
+ {
+  "id": "c-rio",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏖️🎉🙏",
+  "names": {
+   "fr": "Rio de Janeiro",
+   "en": "Rio de Janeiro",
+   "es": "Río de Janeiro",
+   "ar": "ريو دي جانيرو"
+  }
+ },
+ {
+  "id": "c-amsterdam",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🚲🛶🌷",
+  "names": {
+   "fr": "Amsterdam",
+   "en": "Amsterdam",
+   "es": "Ámsterdam",
+   "ar": "أمستردام"
+  }
+ },
+ {
+  "id": "c-athens",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏛️🦉🫒",
+  "names": {
+   "fr": "Athènes",
+   "en": "Athens",
+   "es": "Atenas",
+   "ar": "أثينا"
+  }
+ },
+ {
+  "id": "c-hollywood",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🎬⭐🌴",
+  "names": {
+   "fr": "Los Angeles",
+   "en": "Los Angeles",
+   "es": "Los Ángeles",
+   "ar": "لوس أنجلوس"
+  }
+ },
+ {
+  "id": "c-istanbul",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🕌🌉🐈",
+  "names": {
+   "fr": "Istanbul",
+   "en": "Istanbul",
+   "es": "Estambul",
+   "ar": "إسطنبول"
+  }
+ },
+ {
+  "id": "c-berlin",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🧱🐻🥨",
+  "names": {
+   "fr": "Berlin",
+   "en": "Berlin",
+   "es": "Berlín",
+   "ar": "برلين"
+  }
+ },
+ {
+  "id": "c-munich",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🍺🥨🎪",
+  "names": {
+   "fr": "Munich",
+   "en": "Munich",
+   "es": "Múnich",
+   "ar": "ميونخ"
+  }
+ },
+ {
+  "id": "c-neworleans",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🎺🐊🎭",
+  "names": {
+   "fr": "La Nouvelle-Orléans",
+   "en": "New Orleans",
+   "es": "Nueva Orleans",
+   "ar": "نيو أورلينز"
+  }
+ },
+ {
+  "id": "c-chefchaouen",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "💙🏘️⛰️",
+  "names": {
+   "fr": "Chefchaouen",
+   "en": "Chefchaouen",
+   "es": "Chauen",
+   "ar": "شفشاون"
+  }
+ },
+ {
+  "id": "c-pisa",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🗼↘️🍕",
+  "names": {
+   "fr": "Pise",
+   "en": "Pisa",
+   "es": "Pisa",
+   "ar": "بيزا"
+  }
+ },
+ {
+  "id": "f-lionking",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🦁👑",
+  "names": {
+   "fr": "Le Roi lion",
+   "en": "The Lion King",
+   "es": "El rey león",
+   "ar": "الأسد الملك"
+  }
+ },
+ {
+  "id": "f-titanic",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🚢🧊💔",
+  "names": {
+   "fr": "Titanic",
+   "en": "Titanic",
+   "es": "Titanic",
+   "ar": "تايتانيك"
+  },
+  "alts": [
+   "تيتانيك"
+  ]
+ },
+ {
+  "id": "f-nemo",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🔍🐠",
+  "names": {
+   "fr": "Le Monde de Nemo",
+   "en": "Finding Nemo",
+   "es": "Buscando a Nemo",
+   "ar": "البحث عن نيمو"
+  }
+ },
+ {
+  "id": "f-harrypotter",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "⚡🧙👓",
+  "names": {
+   "fr": "Harry Potter",
+   "en": "Harry Potter",
+   "es": "Harry Potter",
+   "ar": "هاري بوتر"
+  }
+ },
+ {
+  "id": "f-spiderman",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🕷️🧑🏙️",
+  "names": {
+   "fr": "Spider-Man",
+   "en": "Spider-Man",
+   "es": "Spider-Man",
+   "ar": "الرجل العنكبوت"
+  }
+ },
+ {
+  "id": "f-frozen",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "❄️👸⛄",
+  "names": {
+   "fr": "La Reine des neiges",
+   "en": "Frozen",
+   "es": "Frozen",
+   "ar": "ملكة الثلج"
+  },
+  "alts": [
+   "Frozen"
+  ]
+ },
+ {
+  "id": "f-shrek",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "👹🐴👸",
+  "names": {
+   "fr": "Shrek",
+   "en": "Shrek",
+   "es": "Shrek",
+   "ar": "شريك"
+  }
+ },
+ {
+  "id": "f-jurassic",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🦖🦕🏝️",
+  "names": {
+   "fr": "Jurassic Park",
+   "en": "Jurassic Park",
+   "es": "Parque Jurásico",
+   "ar": "الحديقة الجوراسية"
+  },
+  "alts": [
+   "Jurassic Park"
+  ]
+ },
+ {
+  "id": "f-toystory",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🧸🤠🚀",
+  "names": {
+   "fr": "Toy Story",
+   "en": "Toy Story",
+   "es": "Toy Story",
+   "ar": "حكاية لعبة"
+  }
+ },
+ {
+  "id": "f-starwars",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "⭐⚔️🌌",
+  "names": {
+   "fr": "Star Wars",
+   "en": "Star Wars",
+   "es": "La guerra de las galaxias",
+   "ar": "حرب النجوم"
+  },
+  "alts": [
+   "La guerra de las galaxias",
+   "Star Wars"
+  ]
+ },
+ {
+  "id": "f-pirates",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🏴‍☠️🏝️⚓",
+  "names": {
+   "fr": "Pirates des Caraïbes",
+   "en": "Pirates of the Caribbean",
+   "es": "Piratas del Caribe",
+   "ar": "قراصنة الكاريبي"
+  }
+ },
+ {
+  "id": "f-jaws",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦈🌊🏊",
+  "names": {
+   "fr": "Les Dents de la mer",
+   "en": "Jaws",
+   "es": "Tiburón",
+   "ar": "الفك المفترس"
+  }
+ },
+ {
+  "id": "f-kingkong",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦍🏙️✈️",
+  "names": {
+   "fr": "King Kong",
+   "en": "King Kong",
+   "es": "King Kong",
+   "ar": "كينغ كونغ"
+  }
+ },
+ {
+  "id": "f-mermaid",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🧜‍♀️🦀🐠",
+  "names": {
+   "fr": "La Petite Sirène",
+   "en": "The Little Mermaid",
+   "es": "La sirenita",
+   "ar": "حورية البحر الصغيرة"
+  }
+ },
+ {
+  "id": "f-beauty",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🌹👸🐃",
+  "names": {
+   "fr": "La Belle et la Bête",
+   "en": "Beauty and the Beast",
+   "es": "La bella y la bestia",
+   "ar": "الجميلة والوحش"
+  }
+ },
+ {
+  "id": "f-iceage",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🧊🦣🐿️",
+  "names": {
+   "fr": "L'Âge de glace",
+   "en": "Ice Age",
+   "es": "La era de hielo",
+   "ar": "العصر الجليدي"
+  }
+ },
+ {
+  "id": "f-ratatouille",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐀👨‍🍳🇫🇷",
+  "names": {
+   "fr": "Ratatouille",
+   "en": "Ratatouille",
+   "es": "Ratatouille",
+   "ar": "راتاتوي"
+  }
+ },
+ {
+  "id": "f-kungfupanda",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐼🥋",
+  "names": {
+   "fr": "Kung Fu Panda",
+   "en": "Kung Fu Panda",
+   "es": "Kung Fu Panda",
+   "ar": "كونغ فو باندا"
+  }
+ },
+ {
+  "id": "f-aladdin",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🧞🪔🐒",
+  "names": {
+   "fr": "Aladdin",
+   "en": "Aladdin",
+   "es": "Aladdín",
+   "ar": "علاء الدين"
+  }
+ },
+ {
+  "id": "f-batman",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦇🦸🌃",
+  "names": {
+   "fr": "Batman",
+   "en": "Batman",
+   "es": "Batman",
+   "ar": "باتمان"
+  }
+ },
+ {
+  "id": "f-up",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🎈🏠👴",
+  "names": {
+   "fr": "Là-haut",
+   "en": "Up",
+   "es": "Up",
+   "ar": "فوق"
+  }
+ },
+ {
+  "id": "f-oz",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🧙🌪️👠",
+  "names": {
+   "fr": "Le Magicien d'Oz",
+   "en": "The Wizard of Oz",
+   "es": "El mago de Oz",
+   "ar": "ساحر أوز"
+  }
+ },
+ {
+  "id": "f-snowwhite",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🍎👸⛏️",
+  "names": {
+   "fr": "Blanche-Neige",
+   "en": "Snow White",
+   "es": "Blancanieves",
+   "ar": "بياض الثلج"
+  }
+ },
+ {
+  "id": "f-backtofuture",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🚗⏰⚡",
+  "names": {
+   "fr": "Retour vers le futur",
+   "en": "Back to the Future",
+   "es": "Regreso al futuro",
+   "ar": "العودة إلى المستقبل"
+  },
+  "alts": [
+   "Volver al futuro"
+  ]
+ },
+ {
+  "id": "f-avatar",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "💙👽🌳",
+  "names": {
+   "fr": "Avatar",
+   "en": "Avatar",
+   "es": "Avatar",
+   "ar": "أفاتار"
+  }
+ },
+ {
+  "id": "f-cinderella",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "👠🎃🕛",
+  "names": {
+   "fr": "Cendrillon",
+   "en": "Cinderella",
+   "es": "La Cenicienta",
+   "ar": "سندريلا"
+  }
+ },
+ {
+  "id": "f-pinocchio",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🤥🪵",
+  "names": {
+   "fr": "Pinocchio",
+   "en": "Pinocchio",
+   "es": "Pinocho",
+   "ar": "بينوكيو"
+  }
+ },
+ {
+  "id": "f-cars",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🏎️⚡🏁",
+  "names": {
+   "fr": "Cars",
+   "en": "Cars",
+   "es": "Cars",
+   "ar": "سيارات"
+  }
+ }
+]

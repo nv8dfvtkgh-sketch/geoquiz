@@ -6,6 +6,7 @@ import path from 'node:path';
 import { WebSocketServer, WebSocket } from 'ws';
 import type { ClientMsg, ServerMsg } from '../shared/protocol';
 import { categoryInfos } from './categories';
+import { fetchPhoto } from './photos';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
@@ -134,6 +135,10 @@ const server = http.createServer(async (req, res) => {
     m = p.match(/^\/api\/img\/([A-Z0-9]{6})\.([\w-]{6,20})$/);
     if (m) {
       const iso = rooms.get(m[1])?.resolveImage(`${m[1]}.${m[2]}`);
+      if (iso?.startsWith('wiki:')) {
+        const r = await fetchPhoto(iso.slice(5)).catch(() => null);
+        return r ? send(res, 200, Buffer.from(await r.arrayBuffer()), r.headers.get('content-type') ?? 'image/jpeg', 'private, max-age=3600') : send(res, 404, '');
+      }
       if (iso?.startsWith('quiz:')) {
         const [, qid, img] = iso.split(':');
         const im = await quizzes.image(qid, img);

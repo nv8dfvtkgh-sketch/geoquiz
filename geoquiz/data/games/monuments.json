@@ -1,0 +1,830 @@
+[
+ {
+  "id": "eiffel",
+  "wiki": "Eiffel Tower",
+  "country": "FR",
+  "tier": 1,
+  "names": {
+   "fr": "Tour Eiffel",
+   "en": "Eiffel Tower",
+   "es": "Torre Eiffel",
+   "ar": "برج إيفل"
+  }
+ },
+ {
+  "id": "liberty",
+  "wiki": "Statue of Liberty",
+  "country": "US",
+  "tier": 1,
+  "names": {
+   "fr": "Statue de la Liberté",
+   "en": "Statue of Liberty",
+   "es": "Estatua de la Libertad",
+   "ar": "تمثال الحرية"
+  }
+ },
+ {
+  "id": "colosseum",
+  "wiki": "Colosseum",
+  "country": "IT",
+  "tier": 1,
+  "names": {
+   "fr": "Colisée",
+   "en": "Colosseum",
+   "es": "Coliseo",
+   "ar": "الكولوسيوم"
+  }
+ },
+ {
+  "id": "greatwall",
+  "wiki": "Great Wall of China",
+  "country": "CN",
+  "tier": 1,
+  "names": {
+   "fr": "Grande Muraille",
+   "en": "Great Wall",
+   "es": "Gran Muralla",
+   "ar": "سور الصين العظيم"
+  }
+ },
+ {
+  "id": "tajmahal",
+  "wiki": "Taj Mahal",
+  "country": "IN",
+  "tier": 1,
+  "names": {
+   "fr": "Taj Mahal",
+   "en": "Taj Mahal",
+   "es": "Taj Mahal",
+   "ar": "تاج محل"
+  }
+ },
+ {
+  "id": "pyramids",
+  "wiki": "Great Pyramid of Giza",
+  "country": "EG",
+  "tier": 1,
+  "names": {
+   "fr": "Pyramide de Khéops",
+   "en": "Great Pyramid of Giza",
+   "es": "Gran Pirámide de Guiza",
+   "ar": "هرم خوفو"
+  }
+ },
+ {
+  "id": "sphinx",
+  "wiki": "Great Sphinx of Giza",
+  "country": "EG",
+  "tier": 1,
+  "names": {
+   "fr": "Sphinx de Gizeh",
+   "en": "Great Sphinx of Giza",
+   "es": "Esfinge de Guiza",
+   "ar": "أبو الهول"
+  }
+ },
+ {
+  "id": "bigben",
+  "wiki": "Big Ben",
+  "country": "GB",
+  "tier": 1,
+  "names": {
+   "fr": "Big Ben",
+   "en": "Big Ben",
+   "es": "Big Ben",
+   "ar": "ساعة بيغ بن"
+  }
+ },
+ {
+  "id": "opera_sydney",
+  "wiki": "Sydney Opera House",
+  "country": "AU",
+  "tier": 1,
+  "names": {
+   "fr": "Opéra de Sydney",
+   "en": "Sydney Opera House",
+   "es": "Ópera de Sídney",
+   "ar": "دار أوبرا سيدني"
+  }
+ },
+ {
+  "id": "christ",
+  "wiki": "Christ the Redeemer (statue)",
+  "country": "BR",
+  "tier": 1,
+  "names": {
+   "fr": "Christ Rédempteur",
+   "en": "Christ the Redeemer",
+   "es": "Cristo Redentor",
+   "ar": "تمثال المسيح الفادي"
+  }
+ },
+ {
+  "id": "machupicchu",
+  "wiki": "Machu Picchu",
+  "country": "PE",
+  "tier": 1,
+  "names": {
+   "fr": "Machu Picchu",
+   "en": "Machu Picchu",
+   "es": "Machu Picchu",
+   "ar": "ماتشو بيتشو"
+  }
+ },
+ {
+  "id": "pisa",
+  "wiki": "Leaning Tower of Pisa",
+  "country": "IT",
+  "tier": 1,
+  "names": {
+   "fr": "Tour de Pise",
+   "en": "Leaning Tower of Pisa",
+   "es": "Torre de Pisa",
+   "ar": "برج بيزا المائل"
+  }
+ },
+ {
+  "id": "hassan2",
+  "wiki": "Hassan II Mosque",
+  "country": "MA",
+  "tier": 1,
+  "names": {
+   "fr": "Mosquée Hassan II",
+   "en": "Hassan II Mosque",
+   "es": "Mezquita Hassan II",
+   "ar": "مسجد الحسن الثاني"
+  }
+ },
+ {
+  "id": "sagrada",
+  "wiki": "Sagrada Família",
+  "country": "ES",
+  "tier": 1,
+  "names": {
+   "fr": "Sagrada Família",
+   "en": "Sagrada Família",
+   "es": "Sagrada Familia",
+   "ar": "ساغرادا فاميليا"
+  }
+ },
+ {
+  "id": "burjkhalifa",
+  "wiki": "Burj Khalifa",
+  "country": "AE",
+  "tier": 1,
+  "names": {
+   "fr": "Burj Khalifa",
+   "en": "Burj Khalifa",
+   "es": "Burj Khalifa",
+   "ar": "برج خليفة"
+  }
+ },
+ {
+  "id": "goldengate",
+  "wiki": "Golden Gate Bridge",
+  "country": "US",
+  "tier": 1,
+  "names": {
+   "fr": "Pont du Golden Gate",
+   "en": "Golden Gate Bridge",
+   "es": "Puente Golden Gate",
+   "ar": "جسر البوابة الذهبية"
+  }
+ },
+ {
+  "id": "petra",
+  "wiki": "Petra",
+  "country": "JO",
+  "tier": 1,
+  "names": {
+   "fr": "Petra",
+   "en": "Petra",
+   "es": "Petra",
+   "ar": "البتراء"
+  }
+ },
+ {
+  "id": "acropolis",
+  "wiki": "Acropolis of Athens",
+  "country": "GR",
+  "tier": 1,
+  "names": {
+   "fr": "Acropole d'Athènes",
+   "en": "Acropolis of Athens",
+   "es": "Acrópolis de Atenas",
+   "ar": "أكروبول أثينا"
+  }
+ },
+ {
+  "id": "chichenitza",
+  "wiki": "Chichen Itza",
+  "country": "MX",
+  "tier": 1,
+  "names": {
+   "fr": "Chichén Itzá",
+   "en": "Chichen Itza",
+   "es": "Chichén Itzá",
+   "ar": "تشيتشن إيتزا"
+  }
+ },
+ {
+  "id": "stbasil",
+  "wiki": "Saint Basil's Cathedral",
+  "country": "RU",
+  "tier": 1,
+  "names": {
+   "fr": "Cathédrale Saint-Basile",
+   "en": "Saint Basil's Cathedral",
+   "es": "Catedral de San Basilio",
+   "ar": "كاتدرائية القديس باسيل"
+  }
+ },
+ {
+  "id": "hagiasophia",
+  "wiki": "Hagia Sophia",
+  "country": "TR",
+  "tier": 1,
+  "names": {
+   "fr": "Sainte-Sophie",
+   "en": "Hagia Sophia",
+   "es": "Santa Sofía",
+   "ar": "آيا صوفيا"
+  }
+ },
+ {
+  "id": "arc",
+  "wiki": "Arc de Triomphe",
+  "country": "FR",
+  "tier": 2,
+  "names": {
+   "fr": "Arc de triomphe de l'Étoile",
+   "en": "Arc de Triomphe",
+   "es": "Arco de Triunfo de París",
+   "ar": "قوس النصر"
+  }
+ },
+ {
+  "id": "towerbridge",
+  "wiki": "Tower Bridge",
+  "country": "GB",
+  "tier": 2,
+  "names": {
+   "fr": "Tower Bridge",
+   "en": "Tower Bridge",
+   "es": "Puente de la Torre",
+   "ar": "جسر البرج"
+  }
+ },
+ {
+  "id": "brandenburg",
+  "wiki": "Brandenburg Gate",
+  "country": "DE",
+  "tier": 2,
+  "names": {
+   "fr": "Porte de Brandebourg",
+   "en": "Brandenburg Gate",
+   "es": "Puerta de Brandeburgo",
+   "ar": "بوابة براندنبورغ"
+  }
+ },
+ {
+  "id": "angkor",
+  "wiki": "Angkor Wat",
+  "country": "KH",
+  "tier": 2,
+  "names": {
+   "fr": "Angkor Vat",
+   "en": "Angkor Wat",
+   "es": "Angkor Wat",
+   "ar": "أنغكور وات"
+  }
+ },
+ {
+  "id": "stonehenge",
+  "wiki": "Stonehenge",
+  "country": "GB",
+  "tier": 2,
+  "names": {
+   "fr": "Stonehenge",
+   "en": "Stonehenge",
+   "es": "Stonehenge",
+   "ar": "ستونهنج"
+  }
+ },
+ {
+  "id": "neuschwanstein",
+  "wiki": "Neuschwanstein Castle",
+  "country": "DE",
+  "tier": 2,
+  "names": {
+   "fr": "Château de Neuschwanstein",
+   "en": "Neuschwanstein Castle",
+   "es": "Castillo de Neuschwanstein",
+   "ar": "قلعة نويشفانشتاين"
+  }
+ },
+ {
+  "id": "forbidden",
+  "wiki": "Forbidden City",
+  "country": "CN",
+  "tier": 2,
+  "names": {
+   "fr": "Cité interdite",
+   "en": "Forbidden City",
+   "es": "Ciudad Prohibida",
+   "ar": "المدينة المحرمة"
+  }
+ },
+ {
+  "id": "kinkakuji",
+  "wiki": "Kinkaku-ji",
+  "country": "JP",
+  "tier": 2,
+  "names": {
+   "fr": "Pavillon d'or (Kinkaku-ji)",
+   "en": "Kinkaku-ji",
+   "es": "Kinkaku-ji",
+   "ar": "المعبد الذهبي (كينكاكو-جي)"
+  }
+ },
+ {
+  "id": "bluemosque",
+  "wiki": "Sultan Ahmed Mosque",
+  "country": "TR",
+  "tier": 2,
+  "names": {
+   "fr": "Mosquée bleue",
+   "en": "Blue Mosque",
+   "es": "Mezquita Azul",
+   "ar": "المسجد الأزرق"
+  }
+ },
+ {
+  "id": "alhambra",
+  "wiki": "Alhambra",
+  "country": "ES",
+  "tier": 2,
+  "names": {
+   "fr": "Alhambra",
+   "en": "Alhambra",
+   "es": "Alhambra",
+   "ar": "قصر الحمراء"
+  }
+ },
+ {
+  "id": "moai",
+  "wiki": "Moai",
+  "country": "CL",
+  "tier": 2,
+  "names": {
+   "fr": "Moaï de l'île de Pâques",
+   "en": "Easter Island moai",
+   "es": "Moáis de la Isla de Pascua",
+   "ar": "تماثيل مواي"
+  }
+ },
+ {
+  "id": "petronas",
+  "wiki": "Petronas Towers",
+  "country": "MY",
+  "tier": 2,
+  "names": {
+   "fr": "Tours Petronas",
+   "en": "Petronas Towers",
+   "es": "Torres Petronas",
+   "ar": "برجا بتروناس"
+  }
+ },
+ {
+  "id": "koutoubia",
+  "wiki": "Koutoubia Mosque",
+  "country": "MA",
+  "tier": 2,
+  "names": {
+   "fr": "Koutoubia",
+   "en": "Koutoubia Mosque",
+   "es": "Mezquita Kutubía",
+   "ar": "جامع الكتبية"
+  }
+ },
+ {
+  "id": "abusimbel",
+  "wiki": "Abu Simbel",
+  "country": "EG",
+  "tier": 2,
+  "names": {
+   "fr": "Temples d'Abou Simbel",
+   "en": "Abu Simbel temples",
+   "es": "Templos de Abu Simbel",
+   "ar": "معبد أبو سمبل"
+  }
+ },
+ {
+  "id": "montstmichel",
+  "wiki": "Mont-Saint-Michel",
+  "country": "FR",
+  "tier": 2,
+  "names": {
+   "fr": "Mont-Saint-Michel",
+   "en": "Mont-Saint-Michel",
+   "es": "Monte Saint-Michel",
+   "ar": "جبل سان ميشيل"
+  }
+ },
+ {
+  "id": "versailles",
+  "wiki": "Palace of Versailles",
+  "country": "FR",
+  "tier": 2,
+  "names": {
+   "fr": "Château de Versailles",
+   "en": "Palace of Versailles",
+   "es": "Palacio de Versalles",
+   "ar": "قصر فرساي"
+  }
+ },
+ {
+  "id": "stpeter",
+  "wiki": "St. Peter's Basilica",
+  "country": "VA",
+  "tier": 2,
+  "names": {
+   "fr": "Basilique Saint-Pierre",
+   "en": "St. Peter's Basilica",
+   "es": "Basílica de San Pedro",
+   "ar": "كاتدرائية القديس بطرس"
+  }
+ },
+ {
+  "id": "trevi",
+  "wiki": "Trevi Fountain",
+  "country": "IT",
+  "tier": 2,
+  "names": {
+   "fr": "Fontaine de Trevi",
+   "en": "Trevi Fountain",
+   "es": "Fontana de Trevi",
+   "ar": "نافورة تريفي"
+  }
+ },
+ {
+  "id": "cntower",
+  "wiki": "CN Tower",
+  "country": "CA",
+  "tier": 2,
+  "names": {
+   "fr": "Tour CN",
+   "en": "CN Tower",
+   "es": "Torre CN",
+   "ar": "برج سي إن"
+  }
+ },
+ {
+  "id": "empirestate",
+  "wiki": "Empire State Building",
+  "country": "US",
+  "tier": 2,
+  "names": {
+   "fr": "Empire State Building",
+   "en": "Empire State Building",
+   "es": "Empire State Building",
+   "ar": "مبنى إمباير ستيت"
+  }
+ },
+ {
+  "id": "borobudur",
+  "wiki": "Borobudur",
+  "country": "ID",
+  "tier": 2,
+  "names": {
+   "fr": "Borobudur",
+   "en": "Borobudur",
+   "es": "Borobudur",
+   "ar": "بوروبودور"
+  }
+ },
+ {
+  "id": "sheikhzayed",
+  "wiki": "Sheikh Zayed Grand Mosque",
+  "country": "AE",
+  "tier": 2,
+  "names": {
+   "fr": "Grande mosquée Cheikh Zayed",
+   "en": "Sheikh Zayed Grand Mosque",
+   "es": "Gran Mezquita Sheikh Zayed",
+   "ar": "جامع الشيخ زايد الكبير"
+  }
+ },
+ {
+  "id": "kremlin",
+  "wiki": "Moscow Kremlin",
+  "country": "RU",
+  "tier": 2,
+  "names": {
+   "fr": "Kremlin de Moscou",
+   "en": "Moscow Kremlin",
+   "es": "Kremlin de Moscú",
+   "ar": "الكرملين"
+  }
+ },
+ {
+  "id": "aitbenhaddou",
+  "wiki": "Aït Benhaddou",
+  "country": "MA",
+  "tier": 3,
+  "names": {
+   "fr": "Ksar d'Aït-ben-Haddou",
+   "en": "Aït Benhaddou",
+   "es": "Ait Ben Haddou",
+   "ar": "قصر آيت بن حدو"
+  }
+ },
+ {
+  "id": "hassantower",
+  "wiki": "Hassan Tower",
+  "country": "MA",
+  "tier": 3,
+  "names": {
+   "fr": "Tour Hassan",
+   "en": "Hassan Tower",
+   "es": "Torre Hassan",
+   "ar": "صومعة حسان"
+  }
+ },
+ {
+  "id": "kairouan",
+  "wiki": "Great Mosque of Kairouan",
+  "country": "TN",
+  "tier": 3,
+  "names": {
+   "fr": "Grande Mosquée de Kairouan",
+   "en": "Great Mosque of Kairouan",
+   "es": "Gran Mezquita de Kairuán",
+   "ar": "جامع عقبة بن نافع"
+  }
+ },
+ {
+  "id": "eljem",
+  "wiki": "Amphitheatre of El Jem",
+  "country": "TN",
+  "tier": 3,
+  "names": {
+   "fr": "Amphithéâtre d'El Jem",
+   "en": "Amphitheatre of El Jem",
+   "es": "Anfiteatro de El Djem",
+   "ar": "مدرج الجم"
+  }
+ },
+ {
+  "id": "djenne",
+  "wiki": "Great Mosque of Djenné",
+  "country": "ML",
+  "tier": 3,
+  "names": {
+   "fr": "Grande Mosquée de Djenné",
+   "en": "Great Mosque of Djenné",
+   "es": "Gran Mezquita de Djenné",
+   "ar": "جامع جينيه الكبير"
+  }
+ },
+ {
+  "id": "lalibela",
+  "wiki": "Church of Saint George, Lalibela",
+  "country": "ET",
+  "tier": 3,
+  "names": {
+   "fr": "Église Saint-Georges de Lalibela",
+   "en": "Church of St. George, Lalibela",
+   "es": "Iglesia de San Jorge de Lalibela",
+   "ar": "كنيسة القديس جرجس في لاليبيلا"
+  }
+ },
+ {
+  "id": "cologne",
+  "wiki": "Cologne Cathedral",
+  "country": "DE",
+  "tier": 3,
+  "names": {
+   "fr": "Cathédrale de Cologne",
+   "en": "Cologne Cathedral",
+   "es": "Catedral de Colonia",
+   "ar": "كاتدرائية كولونيا"
+  }
+ },
+ {
+  "id": "charlesbridge",
+  "wiki": "Charles Bridge",
+  "country": "CZ",
+  "tier": 3,
+  "names": {
+   "fr": "Pont Charles",
+   "en": "Charles Bridge",
+   "es": "Puente de Carlos",
+   "ar": "جسر تشارلز"
+  }
+ },
+ {
+  "id": "budapestparl",
+  "wiki": "Hungarian Parliament Building",
+  "country": "HU",
+  "tier": 3,
+  "names": {
+   "fr": "Parlement hongrois",
+   "en": "Hungarian Parliament Building",
+   "es": "Parlamento de Budapest",
+   "ar": "مبنى البرلمان المجري"
+  }
+ },
+ {
+  "id": "hallgrims",
+  "wiki": "Hallgrímskirkja",
+  "country": "IS",
+  "tier": 3,
+  "names": {
+   "fr": "Hallgrímskirkja",
+   "en": "Hallgrímskirkja",
+   "es": "Hallgrímskirkja",
+   "ar": "كنيسة هالغريمسكيركيا"
+  }
+ },
+ {
+  "id": "belem",
+  "wiki": "Belém Tower",
+  "country": "PT",
+  "tier": 3,
+  "names": {
+   "fr": "Tour de Belém",
+   "en": "Belém Tower",
+   "es": "Torre de Belém",
+   "ar": "برج بيليم"
+  }
+ },
+ {
+  "id": "teotihuacan",
+  "wiki": "Pyramid of the Sun",
+  "country": "MX",
+  "tier": 3,
+  "names": {
+   "fr": "Pyramide du Soleil (Teotihuacan)",
+   "en": "Pyramid of the Sun",
+   "es": "Pirámide del Sol",
+   "ar": "هرم الشمس"
+  }
+ },
+ {
+  "id": "tikal",
+  "wiki": "Tikal",
+  "country": "GT",
+  "tier": 3,
+  "names": {
+   "fr": "Tikal",
+   "en": "Tikal",
+   "es": "Tikal",
+   "ar": "تيكال"
+  }
+ },
+ {
+  "id": "shwedagon",
+  "wiki": "Shwedagon Pagoda",
+  "country": "MM",
+  "tier": 3,
+  "names": {
+   "fr": "Pagode Shwedagon",
+   "en": "Shwedagon Pagoda",
+   "es": "Pagoda de Shwedagon",
+   "ar": "معبد شويداغون"
+  }
+ },
+ {
+  "id": "potala",
+  "wiki": "Potala Palace",
+  "country": "CN",
+  "tier": 3,
+  "names": {
+   "fr": "Palais du Potala",
+   "en": "Potala Palace",
+   "es": "Palacio de Potala",
+   "ar": "قصر بوتالا"
+  }
+ },
+ {
+  "id": "watarun",
+  "wiki": "Wat Arun",
+  "country": "TH",
+  "tier": 3,
+  "names": {
+   "fr": "Wat Arun",
+   "en": "Wat Arun",
+   "es": "Wat Arun",
+   "ar": "معبد وات أرون"
+  }
+ },
+ {
+  "id": "gyeongbokgung",
+  "wiki": "Gyeongbokgung",
+  "country": "KR",
+  "tier": 3,
+  "names": {
+   "fr": "Palais Gyeongbokgung",
+   "en": "Gyeongbokgung Palace",
+   "es": "Palacio Gyeongbokgung",
+   "ar": "قصر غيونغبوكغونغ"
+  }
+ },
+ {
+  "id": "itsukushima",
+  "wiki": "Itsukushima Shrine",
+  "country": "JP",
+  "tier": 3,
+  "names": {
+   "fr": "Sanctuaire d'Itsukushima",
+   "en": "Itsukushima Shrine",
+   "es": "Santuario de Itsukushima",
+   "ar": "ضريح إيتسوكوشيما"
+  }
+ },
+ {
+  "id": "persepolis",
+  "wiki": "Persepolis",
+  "country": "IR",
+  "tier": 3,
+  "names": {
+   "fr": "Persépolis",
+   "en": "Persepolis",
+   "es": "Persépolis",
+   "ar": "برسبوليس"
+  }
+ },
+ {
+  "id": "registan",
+  "wiki": "Registan",
+  "country": "UZ",
+  "tier": 3,
+  "names": {
+   "fr": "Régistan de Samarcande",
+   "en": "Registan",
+   "es": "Registán",
+   "ar": "ساحة ريجستان"
+  }
+ },
+ {
+  "id": "goldentemple",
+  "wiki": "Golden Temple",
+  "country": "IN",
+  "tier": 3,
+  "names": {
+   "fr": "Temple d'or d'Amritsar",
+   "en": "Golden Temple",
+   "es": "Templo Dorado",
+   "ar": "المعبد الذهبي"
+  }
+ },
+ {
+  "id": "sigiriya",
+  "wiki": "Sigiriya",
+  "country": "LK",
+  "tier": 3,
+  "names": {
+   "fr": "Sigiriya",
+   "en": "Sigiriya",
+   "es": "Sigiriya",
+   "ar": "سيجيريا"
+  }
+ },
+ {
+  "id": "gatewayarch",
+  "wiki": "Gateway Arch",
+  "country": "US",
+  "tier": 3,
+  "names": {
+   "fr": "Gateway Arch de Saint-Louis",
+   "en": "Gateway Arch",
+   "es": "Gateway Arch",
+   "ar": "قوس البوابة"
+  }
+ },
+ {
+  "id": "pena",
+  "wiki": "Pena Palace",
+  "country": "PT",
+  "tier": 3,
+  "names": {
+   "fr": "Palais de Pena",
+   "en": "Pena Palace",
+   "es": "Palacio da Pena",
+   "ar": "قصر بينا"
+  }
+ },
+ {
+  "id": "atomium",
+  "wiki": "Atomium",
+  "country": "BE",
+  "tier": 3,
+  "names": {
+   "fr": "Atomium",
+   "en": "Atomium",
+   "es": "Atomium",
+   "ar": "أتوميوم"
+  }
+ }
+]
