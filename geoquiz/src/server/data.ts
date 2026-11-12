@@ -104,7 +104,7 @@ export const PACK_GAMES: Record<string, string[]> = {
   maroc: ['maroc'], roadsigns: ['roadsigns'], vocab: ['vocab'], hello: ['hello'],
 };
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily'];
+export const NO_ZONE_GAMES = ['tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];

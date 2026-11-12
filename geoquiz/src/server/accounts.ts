@@ -38,7 +38,20 @@ export interface GameResult {
   found?: string[];
   /** Temps total de réponse (départage du défi du jour). */
   timeMs?: number;
+  /** Chaque question (jeu, cible, zone, réussie ?) : alimente le mode révision. */
+  items?: { c: string; t: string; z: string; ok: boolean }[];
 }
+
+/** Révision espacée : on revoit une question ratée après 1, 3, 7, 14 puis 30 jours. */
+export const REVIEW_STEPS = [1, 3, 7, 14, 30];
+/** Jeux dont les questions peuvent revenir en révision (pas de photo, de son ni de carte de région). */
+export const REVIEWABLE = new Set(['flags', 'capitals', 'countries', 'silhouettes', 'currencies', 'languages', 'food', 'animals', 'emoji', 'cinema', 'truefalse',
+  'space', 'body', 'dinos', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport', 'maroc', 'roadsigns', 'vocab', 'hello', 'kits', 'flagreveal', 'higher', 'timeline']);
+interface ReviewItem { c: string; t: string; z: string; step: number; due: number }
+/** Ligues : divisions de la semaine, groupes de 20, 5 montent et 5 descendent. */
+export const LEAGUE_DIVS = ['bronze', 'silver', 'gold', 'sapphire', 'diamond'] as const;
+const LEAGUE_SIZE = 20, LEAGUE_MOVE = 5;
+interface LeagueGroup { members: Record<string, { xp: number; pseudo: string; avatar: string }> }
 
 interface Account {
   id: string;
@@ -61,6 +74,10 @@ interface Account {
   badges: Record<string, number>;
   days: { last: string; streak: number; best: number };
   langs: string[];
+  /** Questions à revoir (clé « jeu|cible »). */
+  rev?: Record<string, ReviewItem>;
+  /** Ligue : division actuelle, groupe de la semaine, résultat de la semaine passée. */
+  league?: { div: number; week?: string; group?: string; last?: { week: string; div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' } };
 }
 
 export class AccountError extends Error {}
@@ -330,12 +347,94 @@ export class AccountService {
   async me(a: Account): Promise<Me> {
     const lv = levelOf(a.xp);
     const lb = await this.kv.get<Record<string, { xp: number }>>(`lb:${weekOf(this.now())}`);
+    if (await this.settleLeague(a)) await this.save(a);
     return {
       id: a.id, pseudo: a.pseudo, age: a.age, email: a.email, country: a.country, avatar: a.avatar, optin: a.optin, createdAt: a.createdAt,
       xp: a.xp, ...lv, title: titleOf(lv.level), games: a.games, correct: a.correct, answered: a.answered, wins: a.wins,
       cats: a.cats, badges: a.badges, days: { streak: a.days.streak, best: a.days.best }, weekXp: lb?.[a.id]?.xp ?? 0,
       hasPassword: !!a.pass, linked: Object.keys(a.oauth ?? {}),
+      reviewDue: this.dueItems(a).length,
+      league: { div: a.league?.div ?? 0, last: a.league?.last },
     };
+  }
+
+  // ---------------------------------------------------------------- révision
+  private today() { return Math.floor(this.now() / 86400000); }
+  dueItems(a: Account) {
+    const today = this.today();
+    return Object.values(a.rev ?? {}).filter((r) => r.due <= today).sort((x, y) => x.due - y.due);
+  }
+  /** Questions à revoir aujourd'hui (au plus 15) pour la partie « Révisions ». */
+  async reviewDue(token: string) {
+    const a = await this.byToken(token);
+    return a ? this.dueItems(a).slice(0, 15).map(({ c, t, z }) => ({ c, t, z })) : [];
+  }
+  private updateReview(a: Account, items: GameResult['items']) {
+    if (!Array.isArray(items)) return;
+    const today = this.today();
+    a.rev ??= {};
+    for (const it of items.slice(0, 60)) {
+      if (!it || typeof it.c !== 'string' || typeof it.t !== 'string' || !REVIEWABLE.has(it.c) || it.t.length > 80) continue;
+      const key = `${it.c}|${it.t}`;
+      const cur = a.rev[key];
+      if (!it.ok) a.rev[key] = { c: it.c, t: it.t, z: typeof it.z === 'string' ? it.z.slice(0, 24) : 'world', step: 0, due: today + REVIEW_STEPS[0] };
+      else if (cur && cur.due <= today) {
+        const step = cur.step + 1;
+        if (step >= REVIEW_STEPS.length) delete a.rev[key];
+        else a.rev[key] = { ...cur, step, due: today + REVIEW_STEPS[step] };
+      }
+    }
+    // Au plus 300 questions suivies : on oublie les plus anciennes.
+    const keys = Object.keys(a.rev);
+    if (keys.length > 300) for (const k of keys.sort((x, y) => a.rev![x].due - a.rev![y].due).slice(0, keys.length - 300)) delete a.rev[k];
+  }
+
+  // ---------------------------------------------------------------- ligues
+  /** Nouvelle semaine : on clôt le groupe de la semaine passée (montée, descente). */
+  private async settleLeague(a: Account): Promise<boolean> {
+    const lg = a.league;
+    const week = weekOf(this.now());
+    if (!lg?.week || lg.week === week || !lg.group) return false;
+    const g = await this.kv.get<LeagueGroup>(lg.group);
+    const rows = Object.entries(g?.members ?? {}).sort((x, y) => y[1].xp - x[1].xp);
+    const rank = rows.findIndex(([id]) => id === a.id) + 1;
+    const size = rows.length;
+    let move: 'up' | 'down' | 'stay' = 'stay';
+    if (rank > 0 && rank <= LEAGUE_MOVE && size >= 2 && lg.div < LEAGUE_DIVS.length - 1) move = 'up';
+    else if (rank > 0 && size >= 10 && rank > size - LEAGUE_MOVE && lg.div > 0) move = 'down';
+    const div = lg.div + (move === 'up' ? 1 : move === 'down' ? -1 : 0);
+    a.league = { div, last: { week: lg.week, div: lg.div, rank, size, move } };
+    return true;
+  }
+  /** XP gagnés : ajoutés au groupe de la semaine (créé ou rejoint au premier gain). */
+  private async addLeagueXp(a: Account, xp: number) {
+    await this.settleLeague(a);
+    const week = weekOf(this.now());
+    a.league ??= { div: 0 };
+    if (a.league.week !== week || !a.league.group) {
+      const div = a.league.div;
+      const idxKey = `lgi:${week}:${div}`;
+      let n = (await this.kv.get<number>(idxKey)) ?? 0;
+      let key = `lg:${week}:${div}:${n}`;
+      const cur = await this.kv.get<LeagueGroup>(key);
+      if (!cur || Object.keys(cur.members).length >= LEAGUE_SIZE) { n = cur ? n + 1 : n; key = `lg:${week}:${div}:${n}`; await this.kv.put(idxKey, n); }
+      a.league = { ...a.league, week, group: key };
+    }
+    const g = (await this.kv.get<LeagueGroup>(a.league.group!)) ?? { members: {} };
+    g.members[a.id] = { xp: (g.members[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar };
+    await this.kv.put(a.league.group!, g);
+  }
+  async leagueView(token: string) {
+    const a = await this.byToken(token);
+    if (!a) return null;
+    if (await this.settleLeague(a)) await this.save(a);
+    const week = weekOf(this.now());
+    const g = a.league?.week === week && a.league.group ? await this.kv.get<LeagueGroup>(a.league.group) : null;
+    const rows = Object.entries(g?.members ?? {}).sort((x, y) => y[1].xp - x[1].xp).map(([id, v], i) => ({ id, rank: i + 1, ...v }));
+    // Fin de semaine : lundi 00:00 UTC.
+    const d = new Date(this.now());
+    const end = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + ((8 - d.getUTCDay()) % 7 || 7));
+    return { week, div: a.league?.div ?? 0, rows, me: a.id, up: LEAGUE_MOVE, down: rows.length >= 10 ? LEAGUE_MOVE : 0, endsAt: end, last: a.league?.last };
   }
 
   async update(a: Account, body: any) {
@@ -439,6 +538,8 @@ export class AccountService {
       a.days.last = today;
     }
     if (r.lang && !a.langs.includes(r.lang)) a.langs = [...a.langs, r.lang].slice(0, 8);
+    this.updateReview(a, r.items);
+    if (xp > 0) await this.addLeagueXp(a, xp);
     a.lastSeen = this.now();
 
     // Badges.
@@ -675,6 +776,10 @@ export async function accountRoute(
       const m = path.match(/^\/api\/admin\/feedback\/([0-9a-z]{6,20})$/);
       if (m && method === 'DELETE') { await svc.adminFeedbackDelete(m[1]); return { status: 200, json: {} }; }
       return null;
+    }
+    if (path === '/api/league' && method === 'GET') {
+      const v = bearer ? await svc.leagueView(bearer) : null;
+      return v ? { status: 200, json: v } : { status: 401, json: { error: 'account.signedOut' } };
     }
     if (path === '/api/daily' && method === 'GET') return { status: 200, json: await svc.daily(bearer || null) };
     if (path.startsWith('/api/account')) {

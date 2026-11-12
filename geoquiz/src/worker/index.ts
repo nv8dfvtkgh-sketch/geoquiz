@@ -7,7 +7,7 @@
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
-import { flagPath, printSheet } from '../server/print';
+import { countryList, flagPath, printSheet } from '../server/print';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
@@ -91,6 +91,7 @@ async function createRoom(env: Env, body: any): Promise<string | { error: string
   const settings = validSettings(body?.settings);
   if (!settings) return { error: 'settings.invalid' };
   const kind = ['solo', 'duel', 'room'].includes(body.kind) ? body.kind : 'room';
+  if (settings.category === 'review' && kind !== 'solo') return { error: 'settings.invalid' };
   // Quiz créé : jouable par tous une fois validé ; avant, seulement par son créateur, en solo.
   let quizToken: string | undefined;
   if (settings.category === 'custom') {
@@ -103,7 +104,7 @@ async function createRoom(env: Env, body: any): Promise<string | { error: string
     const code = newCode();
     const res = await roomStub(env, code).fetch('https://room/init', {
       method: 'POST',
-      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined }),
+      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined, reviewToken: settings.category === 'review' ? String(body.reviewToken ?? '').slice(0, 64) : undefined }),
     });
     if (res.ok) return code;
     if (res.status !== 409) return { error: 'server' }; // 409 : code déjà pris, on en tire un autre
@@ -130,6 +131,7 @@ export default {
       if (p.startsWith('/api/')) {
         await ensureData(env);
         if (p === '/api/catalog') return json(catalog(categoryInfos(), config.maxPlayers, poolCounts()), 200, 'public, max-age=300');
+        if (p === '/api/countries') return json(countryList(url.searchParams.get('lang') ?? 'fr'), 200, 'public, max-age=3600');
         if (p === '/api/print' && request.method === 'POST') {
           const text = await request.text();
           let body: any = {};
@@ -152,7 +154,7 @@ export default {
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
         // Comptes joueurs, progression et classement : Durable Object des comptes.
-        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
+        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p === '/api/league' || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -221,6 +223,7 @@ export class RoomDO {
     config.createChallenge = (c) => acct<string>('challenge/create', c);
     config.loadChallenge = (code) => acct('challenge/load', { code });
     config.addChallengeResult = (code, e) => acct('challenge/result', { code, e });
+    config.loadReview = async (token) => (await acct<{ c: string; t: string; z: string }[]>('review', { token })) ?? [];
     config.recordGame = async (token, result) => {
       const r = await accountsStub(this.env).fetch('https://accounts/internal/record', { method: 'POST', body: JSON.stringify({ token, result }) });
       return r.ok ? r.json() : null;
@@ -240,12 +243,13 @@ export class RoomDO {
 
     if (url.pathname === '/init' && request.method === 'POST') {
       if (this.room) return new Response('exists', { status: 409 });
-      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string };
+      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string; reviewToken?: string };
       const settings = validSettings(b.settings);
       if (!settings) return new Response('invalid', { status: 400 });
       this.room = new Room(b.code, b.kind, settings, b.hostPlays, () => { this.room = null; });
       this.room.quizToken = b.quizToken;
       this.room.challenge = b.challenge;
+      this.room.reviewToken = b.reviewToken;
       return new Response('ok');
     }
 
@@ -367,6 +371,11 @@ export class AccountsDO {
       if (what === 'create') return json(await this.svc.createChallenge(b));
       if (what === 'load') return json(await this.svc.challengeData(String(b.code)));
       if (what === 'result') return json(await this.svc.addChallengeResult(String(b.code), b.e));
+      return json(null, 404);
+    }
+    if (url.hostname === 'accounts' && url.pathname === '/internal/review') {
+      const b = (await request.json()) as { token: string };
+      return json(await this.svc.reviewDue(String(b.token ?? '')));
       return json(null, 404);
     }
     if (url.hostname === 'accounts' && url.pathname === '/internal/record') {

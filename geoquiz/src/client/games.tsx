@@ -6,6 +6,7 @@ export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
   soon?: boolean; // affiché « Bientôt », pas encore jouable
+  screen?: 'passport' | 'league'; // ouvre une page plutôt qu'une partie
   fresh?: boolean; // pastille « Nouveau »
 }
 export interface Family {
@@ -18,7 +19,12 @@ export const FAMILIES: Family[] = [
   {
     id: 'today',
     tint: 'tint-gold',
-    games: [{ id: 'daily', icon: 'calendar', fresh: true }],
+    games: [
+      { id: 'daily', icon: 'calendar', fresh: true },
+      { id: 'review', icon: 'refresh', fresh: true },
+      { id: 'league', icon: 'trophy', fresh: true, screen: 'league' },
+      { id: 'passport', icon: 'passport', fresh: true, screen: 'passport' },
+    ],
   },
   {
     id: 'geo',
@@ -125,6 +131,9 @@ export const ICONS = {
   rugby: <g {...P}><ellipse cx="12" cy="12" rx="10" ry="5.5" transform="rotate(-35 12 12)" /><path d="M9 15l6-6M10.5 10.5l1.5 1.5M12 9l1.5 1.5M9 12l1.5 1.5" /></g>,
   basket: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3v18M5.6 5.6c2.5 2.5 2.5 10.3 0 12.8M18.4 5.6c-2.5 2.5-2.5 10.3 0 12.8" /></g>,
   rings: <g {...P}><circle cx="6" cy="10" r="3.3" /><circle cx="12" cy="10" r="3.3" /><circle cx="18" cy="10" r="3.3" /><circle cx="9" cy="14" r="3.3" /><circle cx="15" cy="14" r="3.3" /></g>,
+  refresh: <g {...P}><path d="M20 11a8 8 0 0 0-14.6-4.5M4 13a8 8 0 0 0 14.6 4.5" /><path d="M5 3v4h4M19 21v-4h-4" /></g>,
+  trophy: <g {...P}><path d="M7 4h10v5a5 5 0 0 1-10 0z" /><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8M9.5 18h5" /></g>,
+  passport: <g {...P}><rect x="5" y="3" width="14" height="18" rx="2" /><circle cx="12" cy="10" r="3.2" /><path d="M8.8 10h6.4M12 6.8c1 1 1 5.4 0 6.4M12 6.8c-1 1-1 5.4 0 6.4M9 17h6" /></g>,
   calendar: <g {...P}><rect x="3.5" y="5" width="17" height="15" rx="2" /><path d="M3.5 10h17M8 3v4M16 3v4" /><path d="M12 12.5l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3z" /></g>,
   target: <g {...P}><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="4.5" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></g>,
   flagq: <g {...P}><path d="M5 21V4h14v10H5" /><path d="M10.2 7.6a1.9 1.9 0 1 1 2.6 1.8c-.6.3-.8.6-.8 1.2M12 12.3h.01" /></g>,

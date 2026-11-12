@@ -15,6 +15,7 @@ import { LeaderboardScreen, OAuthFinish, Profile, SignIn } from './screens/Accou
 import { GeoScreen } from './screens/GeoHub';
 import { PrintScreen } from './screens/Print';
 import { ChallengeScreen } from './Challenge';
+import { LeagueScreen, PassportScreen } from './screens/Progress';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -164,6 +165,8 @@ export function App() {
           {s.screen === 'oauth' && <OAuthFinish />}
           {s.screen === 'print' && <PrintScreen />}
           {s.screen === 'challenge' && <ChallengeScreen />}
+          {s.screen === 'passport' && <PassportScreen />}
+          {s.screen === 'league' && <LeagueScreen />}
         </main>
       </div>
     </AppCtx.Provider>

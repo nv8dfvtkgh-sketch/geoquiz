@@ -28,7 +28,10 @@ export const config: {
   createChallenge: (c: ChallengeData) => Promise<string | null>;
   loadChallenge: (code: string) => Promise<ChallengeData | null>;
   addChallengeResult: (code: string, e: ChallengeEntry) => Promise<{ by: string; results: ChallengeEntry[] } | null>;
+  /** Révisions : questions à revoir aujourd'hui pour ce compte. */
+  loadReview: (accountToken: string) => Promise<{ c: string; t: string; z: string }[]>;
 } = {
+  loadReview: async () => [],
   maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null,
   createChallenge: async () => null, loadChallenge: async () => null, addChallengeResult: async () => null,
 };
@@ -170,6 +173,9 @@ export class Room {
   challengeItems?: ChallengeData['items'];
   /** Défi créé à partir de cette partie (solo), pour ne pas en créer deux. */
   madeChallenge?: string;
+  /** Révisions : jeton du compte, et questions chargées. */
+  reviewToken?: string;
+  reviewItems?: { c: string; t: string; z: string }[];
 
   /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
   get mode() {
@@ -442,6 +448,14 @@ export class Room {
       job.then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
       return;
     }
+    if (this.settings.category === 'review' && !this.reviewItems) {
+      config.loadReview(this.reviewToken ?? '').then((items) => {
+        this.reviewItems = items;
+        if (items.length) this.start();
+        else this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'review.empty' });
+      }).catch(() => this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'review.empty' }));
+      return;
+    }
     if (this.challenge && !this.challengeItems) {
       config.loadChallenge(this.challenge).then((c) => {
         if (c) { this.challengeItems = c.items; this.settings = { ...this.settings, ...c.settings, soloMode: this.settings.soloMode }; this.start(); }
@@ -460,7 +474,8 @@ export class Room {
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
     this.questions = this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
-      : this.challengeItems ? this.challengeQuestions() : drawQuestions(this.settings);
+      : this.challengeItems ? this.challengeQuestions()
+      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings);
     this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
@@ -486,6 +501,20 @@ export class Room {
       try { out.push(cat.make(it.target, it.kind as 'map' | 'mcq' | 'type', zone, Math.random)); } catch { /* élément disparu des données */ }
     }
     return out;
+  }
+
+  /** Révisions : chaque question revient de son jeu d'origine, en QCM. */
+  reviewQuestions(): InternalQuestion[] {
+    const out: InternalQuestion[] = [];
+    const kept: typeof this.reviewItems = [];
+    for (const it of this.reviewItems ?? []) {
+      const cat = CATEGORIES[it.c];
+      const zone = zones.get(it.z) ?? zones.get('world')!;
+      if (!cat || zone.region) continue;
+      try { out.push(cat.make(it.t, 'mcq', zone, Math.random)); kept.push(it); } catch { /* élément disparu des données */ }
+    }
+    this.reviewItems = kept;
+    return shuffle(out.map((q, i) => ({ q, i })), Math.random).map(({ q, i }) => { (q as any).reviewIndex = i; return q; });
   }
 
   /** Solo terminé : crée un défi à partager (ou renvoie celui déjà créé / joué). */
@@ -786,6 +815,10 @@ export class Room {
         teamWon: this.mode === 'teams' && p.team !== undefined && p.team === bestTeam,
         found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
         timeMs: res.reduce((t, x) => t + (x?.timeMs ?? (this.settings.timeLimit * 1000)), 0),
+        items: this.recap.map((x, i) => ({
+          c: x.q.category, t: x.q.target, ok: !!res[i]?.correct,
+          z: this.reviewItems?.[(x.q as any).reviewIndex ?? -1]?.z ?? (this.settings.category === 'daily' ? 'world' : this.settings.zone),
+        })),
       };
       config.recordGame(p.auth, result)
         .then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); })

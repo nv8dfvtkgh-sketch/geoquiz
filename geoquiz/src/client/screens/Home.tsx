@@ -49,6 +49,7 @@ function Games() {
   const pick = (g: GameDef) => {
     if (g.soon) return;
     if (!ready) return askName();
+    if (g.screen) { go(g.screen); window.scrollTo(0, 0); return; }
     openGame(g.id);
   };
 
@@ -135,6 +136,7 @@ function Games() {
                 <Icon name={g.icon} />
                 <span className="tile-name">{t(`cat.${g.id}`)}</span>
                 {g.soon && <span className="tile-soon">{t('home.soon')}</span>}
+                {g.id === 'review' && !!me?.reviewDue && <span className="tile-count">{me.reviewDue}</span>}
                 {g.fresh && !g.soon && !starsOf(me, g.id)?.some(Boolean) && <span className="tile-dot" aria-label={t('home.new')} />}
                 {!g.soon && <Stars list={starsOf(me, g.id)} />}
               </button>

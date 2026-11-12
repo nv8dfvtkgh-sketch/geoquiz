@@ -11,13 +11,14 @@ import { printableGame } from './Print';
  * (seul, en duel, en salle). Sert aussi à modifier les réglages depuis la salle d'attente.
  */
 export function Setup() {
-  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail, me } = useApp();
+  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail, me, auth } = useApp();
   const editing = s.setupKind === 'edit';
   const roomKind = editing ? s.room!.kind : null;
   const game = editing ? s.room!.settings.category : s.game;
   const [raw, setCfg] = useState<Settings>(() => (editing ? s.room!.settings : { ...settings, category: game }));
   // Défi du jour : questions imposées (10, même tirage pour tous).
-  const fixed = game === 'daily';
+  const review = game === 'review';
+  const fixed = game === 'daily' || review;
   const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed]);
   const [hostPlays, setHostPlays] = useState(true);
   const set = (patch: Partial<Settings>) => setCfg(fix({ ...cfg, ...patch }, catalog?.zones ?? []));
@@ -36,7 +37,7 @@ export function Setup() {
 
   const play = (kind: RoomKind) => {
     setSettings(cfg);
-    createGame({ kind, settings: cfg, hostPlays: kind === 'room' ? hostPlays : true }, name, lang).then(fail);
+    createGame({ kind, settings: cfg, hostPlays: kind === 'room' ? hostPlays : true, reviewToken: review ? auth ?? '' : undefined }, name, lang).then(fail);
   };
   const quick = () => {
     setSettings(cfg);
@@ -104,7 +105,14 @@ export function Setup() {
         </label>
       )}
 
-      {fixed && <DailyBoard />}
+      {game === 'daily' && <DailyBoard />}
+      {review && (
+        <div className="review-box">
+          {!me ? <><p>{t('review.signin')}</p><button type="button" className="btn primary" onClick={() => go('signin')}>{t('account.create')}</button></>
+            : me.reviewDue ? <p className="record">{t('review.due', { n: me.reviewDue })}</p>
+            : <p className="muted">{t('review.none')}</p>}
+        </div>
+      )}
 
       {!fixed && <fieldset className="seg-field">
         <legend>{t('setup.difficulty')}</legend>
@@ -171,8 +179,8 @@ export function Setup() {
         </div>
       ) : (
         <div className="how">
-          <h2>{t('setup.howToPlay')}</h2>
-          {locked ? (
+          {!(review && (!me || !me.reviewDue)) && <h2>{t('setup.howToPlay')}</h2>}
+          {review && (!me || !me.reviewDue) ? null : locked ? (
             <button type="button" className="how-btn primary" disabled>
               🔒 {t('setup.soloBtn')}<small>{t('lock.need', { diff: t(`diff.${locked}`) })}</small>
             </button>
@@ -182,6 +190,7 @@ export function Setup() {
             </button>
           )}
           {locked && <p className="hint">{t('lock.hint')}</p>}
+          {!review && <>
           <button type="button" className="how-btn" onClick={() => play('duel')}>
             {t('setup.duelBtn')}<small>{t('setup.duelHint')}</small>
           </button>
@@ -189,6 +198,7 @@ export function Setup() {
             {t('setup.roomBtn')}<small>{t('setup.roomHint', { max: catalog.maxPlayers })}</small>
           </button>
           <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>
+          </>}
           {printableGame(cfg.category) && <button type="button" className="text-btn quick-link" onClick={() => { go('print'); window.scrollTo(0, 0); }}>🖨️ {t('print.fromGame')}</button>}
         </div>
       )}

@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (cat === 'custom' || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
+    if (['custom', 'daily', 'review'].includes(cat) || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -862,4 +862,57 @@ test('Défi entre amis : mêmes questions, classement du défi', async () => {
   assert.equal(res.code, code);
   assert.deepEqual(res.results!.map((r) => r.name), ['Yasmine', 'Karim']);
   a.destroy(); b.destroy();
+});
+
+test('Révisions et ligues', async () => {
+  const { AccountService, REVIEW_STEPS } = await import('../src/server/accounts');
+  const { config } = await import('../src/server/rooms');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  let now = Date.UTC(2026, 10, 10, 10); // mardi
+  const svc = new AccountService(kv, () => now);
+  const reg = (pseudo: string) => svc.register({ pseudo, password: 'motdepasse1', age: 'u13' });
+  const a = await reg('Yasmine');
+  const base = { category: 'flags', difficulty: 'easy' as const, kind: 'solo' as const, mode: 'classic' as const, zone: 'world', lang: 'fr', total: 3, correct: 1, accuracy: 33, rank: 1, players: 1 };
+  await svc.record(a.token, { ...base, items: [{ c: 'flags', t: 'FR', z: 'world', ok: false }, { c: 'flags', t: 'MA', z: 'world', ok: true }, { c: 'monuments', t: 'eiffel', z: 'world', ok: false }] });
+  assert.deepEqual(await svc.reviewDue(a.token), [], 'rien à revoir le jour même');
+  now += 86400000;
+  assert.deepEqual(await svc.reviewDue(a.token), [{ c: 'flags', t: 'FR', z: 'world' }], 'FR revient le lendemain, pas les photos');
+  // Partie de révision dans une salle : questions du jeu d'origine.
+  config.loadReview = (tok) => svc.reviewDue(tok);
+  const room = create('solo', settings({ category: 'review', zone: 'world', difficulty: 'easy', qtype: 'auto', count: 10 }));
+  room.reviewToken = a.token;
+  const c = client();
+  onMessage(c.conn, room.code, { t: 'join', name: 'Y', lang: 'fr' });
+  await new Promise((r) => setTimeout(r, 20));
+  assert.equal(room.questions.length, 1);
+  assert.equal(room.questions[0].category, 'flags');
+  assert.equal(room.questions[0].target, 'FR');
+  room.destroy();
+  // Réussie : elle revient dans 3 jours.
+  await svc.record(a.token, { ...base, category: 'review', items: [{ c: 'flags', t: 'FR', z: 'world', ok: true }] });
+  assert.equal((await svc.reviewDue(a.token)).length, 0);
+  now += REVIEW_STEPS[1] * 86400000;
+  assert.equal((await svc.reviewDue(a.token)).length, 1);
+
+  // Ligues : 12 joueurs dans le même groupe ; à la semaine suivante, les 5 premiers montent.
+  const players = [a];
+  for (let i = 0; i < 11; i++) players.push(await reg(`Joueur${i}`));
+  for (const [i, p] of players.entries()) await svc.record(p.token, { ...base, total: 10, correct: 10 - (i % 10), accuracy: 100 });
+  const v = (await svc.leagueView(a.token))!;
+  assert.equal(v.rows.length, 12);
+  assert.equal(v.div, 0);
+  const firstId = v.rows[0].id, lastId = v.rows[11].id;
+  now += 7 * 86400000;
+  const tokOf = (id: string) => players.find((p) => p.me.id === id)!.token;
+  const up = (await svc.leagueView(tokOf(firstId)))!;
+  assert.equal(up.div, 1);
+  assert.equal(up.last!.move, 'up');
+  const down = (await svc.leagueView(tokOf(lastId)))!;
+  assert.equal(down.div, 0, 'Bronze : pas de descente');
 });

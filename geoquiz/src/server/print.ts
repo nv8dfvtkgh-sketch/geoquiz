@@ -64,5 +64,14 @@ export async function printSheet(req: PrintReq): Promise<{ status: number; json:
   return { status: 200, json: { kind: 'quiz', category: cat.id, questions } };
 }
 
+/** Liste des pays (passeport) : nom dans la langue, continent. */
+export function countryList(lang: string) {
+  const l: Lang = LANGS.includes(lang as Lang) ? (lang as Lang) : 'fr';
+  return Object.entries(countries)
+    .filter(([id, c]) => !c.dependency && worldById[id])
+    .map(([id, c]) => ({ iso: id, name: localize(c.names, l), continent: c.continent, capital: !!c.capital }))
+    .sort((a, b) => a.name.localeCompare(b.name, l));
+}
+
 /** Drapeau public pour les fiches (sur la fiche, le nom n'est pas un secret). */
 export const flagPath = (p: string) => p.match(/^\/api\/flag\/([A-Z]{2})\.svg$/)?.[1] ?? null;

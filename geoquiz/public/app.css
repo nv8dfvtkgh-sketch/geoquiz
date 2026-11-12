@@ -1147,3 +1147,33 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .ch-game { margin: 0; font-weight: 700; color: var(--ink-2); }
 .ch-target { margin: 0; font: 700 1.2rem var(--font-display); }
 .btn.big { padding: 14px 28px; font-size: 1.1rem; }
+
+/* ------------------------------------------------------------------ révisions, passeport, ligues */
+.review-box { display: grid; gap: 10px; justify-items: start; padding: 14px 16px; border-radius: 16px; background: var(--card); box-shadow: var(--shadow); margin: 0; }
+.review-box p { margin: 0; }
+.tile-count { position: absolute; top: 10px; inset-inline-end: 10px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: #E8590C; color: #fff; font: 800 .8rem/24px var(--font-ui); text-align: center; }
+.passport, .league { display: grid; gap: 14px; }
+.passport h1, .league h1 { margin: 0; }
+.passport-total { margin: 0; font-size: 1.05rem; }
+.passport-total strong { font: 800 1.8rem var(--font-display); }
+.passport-tabs { flex-wrap: wrap; }
+.passport-tabs small { opacity: .7; margin-inline-start: 4px; }
+.stamp-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 14px 10px; }
+.stamp-grid li { display: grid; justify-items: center; gap: 4px; text-align: center; }
+.stamp-ring { width: 76px; height: 76px; border-radius: 50%; border: 2px dashed var(--line); display: grid; place-items: center; overflow: hidden; }
+.stamped .stamp-ring { border: 3px double var(--ink); transform: rotate(var(--rot)); background: #fff; animation: stamp .4s cubic-bezier(.2, 1.4, .4, 1) both; }
+.stamp-ring img { width: 52px; height: auto; border-radius: 2px; }
+.stamp-q { font: 800 1.4rem var(--font-display); color: var(--ink-2); opacity: .5; }
+.stamp-name { font-size: .78rem; font-weight: 600; line-height: 1.2; }
+.stamp-dots { display: flex; gap: 4px; }
+.stamp-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--fill); border: 1px solid var(--line); }
+.stamp-dots i.on { background: var(--good); border-color: var(--good); }
+.league-head { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 20px; background: linear-gradient(135deg, var(--div), color-mix(in srgb, var(--div) 55%, #000)); color: #fff; }
+.league-head .muted { color: #ffffffcc; }
+.div-badge { font-size: 2.6rem; line-height: 1; }
+.league-last { margin: 0; padding: 10px 14px; border-radius: 12px; font-weight: 700; background: var(--card); }
+.league-last.up { color: var(--good); } .league-last.down { color: #E8590C; }
+.league-list li.up { box-shadow: inset 4px 0 0 var(--good); }
+.league-list li.down { box-shadow: inset 4px 0 0 #E8590C; }
+.league-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .85rem; font-weight: 700; margin: 0; }
+.league-legend .up { color: var(--good); } .league-legend .down { color: #E8590C; }

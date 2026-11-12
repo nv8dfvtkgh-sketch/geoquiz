@@ -190,7 +190,7 @@ export interface RecapItem {
 
 // Création d'une partie : POST /api/rooms (CreateRoomReq) → { code } ou { error }.
 // Ensuite, le navigateur ouvre le WebSocket /ws/<CODE> et envoie « join » (ou « resume »).
-export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string }
+export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string; reviewToken?: string }
 /** Défi entre amis : les mêmes questions, jouées chacun quand il veut. */
 export interface ChallengeEntry { name: string; correct: number; total: number; timeMs: number; at: number }
 export interface ChallengeView { code: string; settings: Settings; by: string; results: ChallengeEntry[] }
@@ -251,6 +251,9 @@ export interface Me {
   badges: Record<string, number>; days: { streak: number; best: number }; weekXp: number;
   /** false : compte Google / Facebook sans mot de passe. */
   hasPassword: boolean; linked: string[];
+  /** Questions à revoir aujourd'hui ; ligue de la semaine (division 0 = Bronze). */
+  reviewDue?: number;
+  league?: { div: number; last?: { week: string; div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' } };
 }
 /** Gains d'une partie, envoyés au joueur connecté à la fin. */
 export interface Reward {
