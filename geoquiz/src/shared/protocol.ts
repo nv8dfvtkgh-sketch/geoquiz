@@ -146,6 +146,7 @@ export interface QuestionMsg {
   shape?: { d: string; w: number; h: number }; // silhouette à deviner (coordonnées recentrées)
   image?: string; // jeton d'une photo de quiz créé
   emoji?: string; // grand pictogramme (plats, animaux)
+  sign?: string; // panneau du code de la route à dessiner
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono

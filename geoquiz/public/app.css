@@ -941,3 +941,13 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 [data-look='kids'] .social-btn { border-radius: 18px; min-height: 54px; font-weight: 700; box-shadow: 0 4px 0 #2B1B5A26; }
 [data-look='kids'] .social-btn.google { box-shadow: inset 0 0 0 2px #DADCE0, 0 4px 0 #2B1B5A1a; }
+
+/* ---- famille Sport ---- */
+.tint-rose { background: var(--card); color: var(--ink); }
+.tint-rose svg { color: #D70015; background: #FFE8EC; }
+@media (prefers-color-scheme: dark) { :root:not([data-look='kids']) .tint-rose svg { color: #FF453A; background: #3A0E14; } }
+.game-hero.tint-rose { background: linear-gradient(135deg, #FF6B6B, #C2001A); }
+[data-look='kids'] .tint-rose { background: #FF4D6D; --tile-dark: #C21E44; }
+[data-look='kids'] .game-hero.tint-rose { background: #FF4D6D; }
+/* ---- panneaux du code de la route ---- */
+.road-sign { display: block; width: clamp(110px, 32vw, 150px); height: auto; margin: 6px auto 0; filter: drop-shadow(0 4px 10px #00000026); }

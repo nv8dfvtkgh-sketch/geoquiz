@@ -638,3 +638,26 @@ test('Rébus : thème Séries TV, pièges du même thème, titres locaux accept�
   const casa = typed.find((q) => q.target === 's-casapapel')!;
   assert.ok(casa.check('la casa de papel') && casa.check('Money Heist'));
 });
+
+test('Packs : sciences, sport par discipline, Maroc, code de la route, vocabulaire', async () => {
+  const { extras, PACK_GAMES } = await import('../src/server/data');
+  for (const [game, packs] of Object.entries(PACK_GAMES)) {
+    const total = packs.reduce((s, p) => s + (extras.packs[p]?.length ?? 0), 0);
+    assert.ok(total >= 14, `${game} : ${total} questions`);
+    for (const d of ['easy', 'medium', 'hard'] as const) {
+      const qs = drawQuestions(settings({ category: game, zone: 'world', difficulty: d, qtype: 'auto', count: 10 }));
+      assert.equal(qs.length, 10, `${game}/${d}`);
+      for (const q of qs) {
+        assert.equal(q.kind, 'mcq');
+        const src = packs.flatMap((p) => extras.packs[p]).find((x) => x.id === q.target)!;
+        const good = q.options!.find((o) => o.id === q.revealOption)!;
+        assert.deepEqual(good.label, src.a[0], 'la première réponse est la bonne');
+        for (const l of ['fr', 'en', 'es', 'ar'] as const) assert.ok(src.q[l] && q.options!.every((o) => o.label[l]), `${src.id} ${l}`);
+      }
+    }
+  }
+  const sport = drawQuestions(settings({ category: 'sport', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 50 }));
+  assert.ok(new Set(sport.map((q) => q.target.split('-')[0])).size >= 4, 'le mélange sport couvre plusieurs disciplines');
+  const signs = drawQuestions(settings({ category: 'roadsigns', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 30 })).filter((q) => q.sign);
+  assert.ok(signs.length >= 15);
+});

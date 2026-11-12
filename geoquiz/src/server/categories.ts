@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, Lang, MapSpec, Names } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem,
+  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
 } from './data';
 import { photoFor } from './photos';
 import { matches } from './text';
@@ -24,6 +24,7 @@ export interface InternalQuestion {
   flagIso?: string;
   emoji?: string; // grand pictogramme (plats, animaux)
   credit?: string; // crédit de la photo, affiché avec la réponse
+  sign?: string; // panneau du code de la route dessiné par le navigateur
   imageRef?: string; // photo d'un quiz créé : « quiz:<code>:<image> »
   extraParams?: Record<string, string>; // paramètres identiques dans toutes les langues
   map?: MapSpec;
@@ -661,6 +662,30 @@ const cinemaCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ packs de questions
+// Sciences, sport par discipline, Spécial Maroc, code de la route, vocabulaire, « bonjour »…
+// Chaque question porte ses réponses (la première est la bonne), traduites dans les 4 langues.
+function packCat(id: string, packs: string[]): Category {
+  const all = () => packs.flatMap((p) => extras.packs[p] ?? []);
+  return {
+    id,
+    noZone: true,
+    qtypes: ['mcq'],
+    zoneKinds: ['world'],
+    pool: (_zone, d, n) => tierPool(all(), d, n),
+    make(target, _kind, _zone, rnd) {
+      const q = all().find((x) => x.id === target) as PackQ;
+      const ids = q.a.map((_, i) => `a${i}`);
+      const { options, correct } = optionsFrom('a0', ids.slice(1), rnd, (x) => ({ label: q.a[Number(x.slice(1))] }));
+      return {
+        category: id, kind: 'mcq', target, promptKey: `cat.${id}`, promptName: q.q, answer: q.a[0],
+        emoji: q.emoji, sign: q.sign, options, revealOption: correct, attempts: 1, check: (v) => v === correct,
+      };
+    },
+  };
+}
+const packCats = Object.entries(PACK_GAMES).map(([id, packs]) => packCat(id, packs));
+
 // ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
 // Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
 // cette entrée sert au catalogue et à la validation des réglages.
@@ -689,7 +714,7 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 }
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats].map((c) => [c.id, c]),
 );
 
 /**

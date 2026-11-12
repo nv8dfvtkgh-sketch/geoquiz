@@ -516,6 +516,7 @@ export class Room {
       highlight: q.highlight,
       shape: q.shape,
       emoji: q.emoji,
+      sign: q.sign,
       options: q.options?.map((o) => ({ id: o.id, label: o.label ? localize(o.label, lang) : undefined, flag: o.flagIso ? r.flagTokens[o.flagIso] : undefined })),
       attempts: q.attempts,
       timeLimit: r.deadline ? this.settings.timeLimit * 1000 : null,

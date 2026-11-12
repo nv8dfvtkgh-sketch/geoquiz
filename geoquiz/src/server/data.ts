@@ -80,6 +80,15 @@ export interface Film {
   noYear?: boolean; // année de sortie discutée : pas de question sur l'année
 }
 export interface Cinema { films: Film[]; people: Record<string, Names> }
+/** Question d'un « pack » (sciences, sport, Maroc…) : la première réponse est la bonne. */
+export interface PackQ { id: string; tier: number; q: Names; a: Names[]; emoji?: string; sign?: string }
+/** Jeux construits sur les packs ; « sport » mélange toutes les disciplines. */
+export const PACK_GAMES: Record<string, string[]> = {
+  space: ['space'], body: ['body'], dinos: ['dinos'],
+  sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport'],
+  football: ['football'], tennis: ['tennis'], rugby: ['rugby'], basketball: ['basketball'], olympics: ['olympics'], motorsport: ['motorsport'],
+  maroc: ['maroc'], roadsigns: ['roadsigns'], vocab: ['vocab'], hello: ['hello'],
+};
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
@@ -89,11 +98,12 @@ export interface Extras {
   emoji: EmojiItem[];
   monuments: Monument[];
   cinema: Cinema;
+  packs: Record<string, PackQ[]>;
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema'] as const;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} } };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {} };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -178,6 +188,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     emoji: (extra.emoji ?? []).filter((x) => x.theme !== 'country' || c[x.country!]),
     monuments: (extra.monuments ?? []).filter((x) => c[x.country]),
     cinema: (extra.cinema as unknown as Cinema)?.films ? (extra.cinema as unknown as Cinema) : { films: [], people: {} },
+    packs: extra.packs && !Array.isArray(extra.packs) ? (extra.packs as Record<string, PackQ[]>) : {},
   };
   countries = c;
   loader = regionLoader;
@@ -190,7 +201,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
   const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies'];
-  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'cinema', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
+  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'cinema', 'truefalse', 'calc', ...Object.keys(PACK_GAMES)] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();
   for (const id of all) {
