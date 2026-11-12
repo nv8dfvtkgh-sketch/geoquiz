@@ -620,3 +620,15 @@ test('Cinéma (texte) : 4 types de questions, une bonne réponse, pas de co-vede
   const red = tales.find((q) => q.target === 't-redridinghood')!;
   assert.ok(red.check('le petit chaperon rouge') && red.check('Caperucita Roja') && !red.check('Les Trois Petits Cochons'));
 });
+
+test('Rébus : thème Séries TV, pièges du même thème, titres locaux acceptés', () => {
+  const all = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'mix', count: 250 }));
+  const series = all.filter((q) => q.target.startsWith('s-'));
+  assert.ok(series.length >= 30);
+  for (const q of series) if (q.kind === 'mcq') assert.ok(q.options!.every((o) => o.target.startsWith('s-')));
+  const typed = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 250 }));
+  const majid = typed.find((q) => q.target === 's-tsubasa')!;
+  assert.ok(majid.check('Olive et Tom') && majid.check('Captain Majid') && majid.check('الكابتن ماجد') && !majid.check('Naruto'));
+  const casa = typed.find((q) => q.target === 's-casapapel')!;
+  assert.ok(casa.check('la casa de papel') && casa.check('Money Heist'));
+});

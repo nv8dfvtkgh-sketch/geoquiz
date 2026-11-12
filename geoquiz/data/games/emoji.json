@@ -1934,5 +1934,520 @@
    "es": "El flautista de Hamelín",
    "ar": "زمار هاملن"
   }
+ },
+ {
+  "id": "s-friends",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "👫☕🛋️",
+  "names": {
+   "fr": "Friends",
+   "en": "Friends",
+   "es": "Friends",
+   "ar": "فريندز"
+  }
+ },
+ {
+  "id": "s-stranger",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🚲🧇👾🔦",
+  "names": {
+   "fr": "Stranger Things",
+   "en": "Stranger Things",
+   "es": "Stranger Things",
+   "ar": "أشياء غريبة"
+  }
+ },
+ {
+  "id": "s-casapapel",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "💰🎭🔴",
+  "names": {
+   "fr": "La casa de papel",
+   "en": "Money Heist",
+   "es": "La casa de papel",
+   "ar": "البيت من ورق"
+  },
+  "alts": [
+   "Money Heist",
+   "La casa de papel"
+  ]
+ },
+ {
+  "id": "s-squid",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🦑🟢🔺🍬",
+  "names": {
+   "fr": "Squid Game",
+   "en": "Squid Game",
+   "es": "El juego del calamar",
+   "ar": "لعبة الحبار"
+  },
+  "alts": [
+   "Squid Game"
+  ]
+ },
+ {
+  "id": "s-got",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "👑🐉❄️🗡️",
+  "names": {
+   "fr": "Game of Thrones",
+   "en": "Game of Thrones",
+   "es": "Juego de tronos",
+   "ar": "صراع العروش"
+  },
+  "alts": [
+   "Le Trône de fer",
+   "Game of Thrones"
+  ]
+ },
+ {
+  "id": "s-breakingbad",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🧪👨‍🏫💵",
+  "names": {
+   "fr": "Breaking Bad",
+   "en": "Breaking Bad",
+   "es": "Breaking Bad",
+   "ar": "بريكنغ باد"
+  }
+ },
+ {
+  "id": "s-simpsons",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🍩💛👨‍👩‍👧‍👦",
+  "names": {
+   "fr": "Les Simpson",
+   "en": "The Simpsons",
+   "es": "Los Simpson",
+   "ar": "عائلة سمبسون"
+  },
+  "alts": [
+   "Simpson",
+   "Simpsons"
+  ]
+ },
+ {
+  "id": "s-spongebob",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🧽🍍🌊",
+  "names": {
+   "fr": "Bob l'éponge",
+   "en": "SpongeBob SquarePants",
+   "es": "Bob Esponja",
+   "ar": "سبونج بوب"
+  },
+  "alts": [
+   "SpongeBob"
+  ]
+ },
+ {
+  "id": "s-pokemon",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "⚡🐭🔴⚪",
+  "names": {
+   "fr": "Pokémon",
+   "en": "Pokémon",
+   "es": "Pokémon",
+   "ar": "بوكيمون"
+  }
+ },
+ {
+  "id": "s-walkingdead",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🧟🚶🏚️",
+  "names": {
+   "fr": "The Walking Dead",
+   "en": "The Walking Dead",
+   "es": "The Walking Dead",
+   "ar": "الموتى السائرون"
+  }
+ },
+ {
+  "id": "s-lupin",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🎩💎🕵️",
+  "names": {
+   "fr": "Lupin",
+   "en": "Lupin",
+   "es": "Lupin",
+   "ar": "لوبين"
+  }
+ },
+ {
+  "id": "s-sherlock",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🕵️🔍🎻",
+  "names": {
+   "fr": "Sherlock",
+   "en": "Sherlock",
+   "es": "Sherlock",
+   "ar": "شيرلوك"
+  }
+ },
+ {
+  "id": "s-crown",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "👑🫖📺",
+  "names": {
+   "fr": "The Crown",
+   "en": "The Crown",
+   "es": "The Crown",
+   "ar": "التاج"
+  }
+ },
+ {
+  "id": "s-wednesday",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🖤🎻✋",
+  "names": {
+   "fr": "Mercredi",
+   "en": "Wednesday",
+   "es": "Miércoles",
+   "ar": "وينزداي"
+  },
+  "alts": [
+   "Wednesday"
+  ]
+ },
+ {
+  "id": "s-peaky",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🧢🪒🥃",
+  "names": {
+   "fr": "Peaky Blinders",
+   "en": "Peaky Blinders",
+   "es": "Peaky Blinders",
+   "ar": "بيكي بلايندرز"
+  }
+ },
+ {
+  "id": "s-office",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🏢📎☕",
+  "names": {
+   "fr": "The Office",
+   "en": "The Office",
+   "es": "The Office",
+   "ar": "ذا أوفيس"
+  }
+ },
+ {
+  "id": "s-dragonball",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐉🟠🥋",
+  "names": {
+   "fr": "Dragon Ball",
+   "en": "Dragon Ball",
+   "es": "Dragon Ball",
+   "ar": "دراغون بول"
+  }
+ },
+ {
+  "id": "s-naruto",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🍥🦊🥷",
+  "names": {
+   "fr": "Naruto",
+   "en": "Naruto",
+   "es": "Naruto",
+   "ar": "ناروتو"
+  }
+ },
+ {
+  "id": "s-onepiece",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🏴‍☠️👒🍖",
+  "names": {
+   "fr": "One Piece",
+   "en": "One Piece",
+   "es": "One Piece",
+   "ar": "ون بيس"
+  }
+ },
+ {
+  "id": "s-greys",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🏥🩺❤️",
+  "names": {
+   "fr": "Grey's Anatomy",
+   "en": "Grey's Anatomy",
+   "es": "Anatomía de Grey",
+   "ar": "تشريح غراي"
+  },
+  "alts": [
+   "Grey's Anatomy"
+  ]
+ },
+ {
+  "id": "s-prisonbreak",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🔒🏃🗺️",
+  "names": {
+   "fr": "Prison Break",
+   "en": "Prison Break",
+   "es": "Prison Break",
+   "ar": "الهروب من السجن"
+  }
+ },
+ {
+  "id": "s-lost",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🏝️✈️🔢",
+  "names": {
+   "fr": "Lost : Les Disparus",
+   "en": "Lost",
+   "es": "Perdidos",
+   "ar": "لوست"
+  },
+  "alts": [
+   "Lost"
+  ]
+ },
+ {
+  "id": "s-vikings",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "⚔️🛶🪓",
+  "names": {
+   "fr": "Vikings",
+   "en": "Vikings",
+   "es": "Vikingos",
+   "ar": "الفايكنغ"
+  },
+  "alts": [
+   "Vikings"
+  ]
+ },
+ {
+  "id": "s-mandalorian",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🪖👶💚",
+  "names": {
+   "fr": "The Mandalorian",
+   "en": "The Mandalorian",
+   "es": "The Mandalorian",
+   "ar": "الماندالوريان"
+  }
+ },
+ {
+  "id": "s-doctorwho",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🕰️📦🔵",
+  "names": {
+   "fr": "Doctor Who",
+   "en": "Doctor Who",
+   "es": "Doctor Who",
+   "ar": "دكتور هو"
+  }
+ },
+ {
+  "id": "s-bridgerton",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "💃🎩💌",
+  "names": {
+   "fr": "La Chronique des Bridgerton",
+   "en": "Bridgerton",
+   "es": "Los Bridgerton",
+   "ar": "بريدجرتون"
+  },
+  "alts": [
+   "Bridgerton"
+  ]
+ },
+ {
+  "id": "s-mrbean",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🧸🚗🤪",
+  "names": {
+   "fr": "Mr. Bean",
+   "en": "Mr. Bean",
+   "es": "Mr. Bean",
+   "ar": "مستر بين"
+  },
+  "alts": [
+   "Mister Bean"
+  ]
+ },
+ {
+  "id": "s-tomjerry",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐱🐭🧀",
+  "names": {
+   "fr": "Tom et Jerry",
+   "en": "Tom and Jerry",
+   "es": "Tom y Jerry",
+   "ar": "توم وجيري"
+  },
+  "alts": [
+   "Tom & Jerry"
+  ]
+ },
+ {
+  "id": "s-scooby",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐶👻🚐",
+  "names": {
+   "fr": "Scooby-Doo",
+   "en": "Scooby-Doo",
+   "es": "Scooby-Doo",
+   "ar": "سكوبي دو"
+  }
+ },
+ {
+  "id": "s-peppa",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐷☔👢",
+  "names": {
+   "fr": "Peppa Pig",
+   "en": "Peppa Pig",
+   "es": "Peppa Pig",
+   "ar": "بيبا بيج"
+  }
+ },
+ {
+  "id": "s-pawpatrol",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐶🚒🚓",
+  "names": {
+   "fr": "Pat' Patrouille",
+   "en": "PAW Patrol",
+   "es": "La Patrulla Canina",
+   "ar": "دوريات المخلاب"
+  },
+  "alts": [
+   "Pat Patrouille",
+   "Paw Patrol"
+  ]
+ },
+ {
+  "id": "s-miraculous",
+  "theme": "series",
+  "tier": 1,
+  "emoji": "🐞🐱🗼",
+  "names": {
+   "fr": "Miraculous",
+   "en": "Miraculous",
+   "es": "Prodigiosa",
+   "ar": "الدعسوقة والقط الأسود"
+  },
+  "alts": [
+   "Ladybug",
+   "Miraculous"
+  ]
+ },
+ {
+  "id": "s-bluey",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🐶🔵🏡",
+  "names": {
+   "fr": "Bluey",
+   "en": "Bluey",
+   "es": "Bluey",
+   "ar": "بلوي"
+  }
+ },
+ {
+  "id": "s-grendizer",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🤖🛸⚔️",
+  "names": {
+   "fr": "Goldorak",
+   "en": "Grendizer",
+   "es": "Grendizer",
+   "ar": "غرندايزر"
+  },
+  "alts": [
+   "Grendizer",
+   "Goldorak"
+  ]
+ },
+ {
+  "id": "s-tsubasa",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "⚽👦⭐",
+  "names": {
+   "fr": "Olive et Tom",
+   "en": "Captain Tsubasa",
+   "es": "Oliver y Benji",
+   "ar": "الكابتن ماجد"
+  },
+  "alts": [
+   "Captain Tsubasa",
+   "Captain Majid",
+   "Captain Majed"
+  ]
+ },
+ {
+  "id": "s-heidi",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "👧🏔️🐐",
+  "names": {
+   "fr": "Heidi",
+   "en": "Heidi",
+   "es": "Heidi",
+   "ar": "هايدي"
+  }
+ },
+ {
+  "id": "s-conan",
+  "theme": "series",
+  "tier": 2,
+  "emoji": "🕵️👓🎀",
+  "names": {
+   "fr": "Détective Conan",
+   "en": "Detective Conan",
+   "es": "Detective Conan",
+   "ar": "المحقق كونان"
+  },
+  "alts": [
+   "Conan"
+  ]
+ },
+ {
+  "id": "s-babalhara",
+  "theme": "series",
+  "tier": 3,
+  "emoji": "🚪🏘️🗡️",
+  "names": {
+   "fr": "Bab al-Hara",
+   "en": "Bab Al-Hara",
+   "es": "Bab Al-Hara",
+   "ar": "باب الحارة"
+  }
  }
 ]

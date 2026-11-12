@@ -52,7 +52,7 @@ export interface TrueFalse {
 /** Rébus en emojis : un pays (noms tirés des données) ou une ville / un film (noms fournis). */
 export interface EmojiItem {
   id: string;
-  theme: 'country' | 'city' | 'film' | 'tale';
+  theme: 'country' | 'city' | 'film' | 'tale' | 'series';
   tier: number;
   emoji: string;
   country?: string;

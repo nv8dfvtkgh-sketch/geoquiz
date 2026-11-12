@@ -203,7 +203,7 @@
   "game.monuments": "Reconoce las maravillas en fotos",
   "game.brands": "¿De qué país es la marca?",
   "game.cinema": "Actores, directores, personajes",
-  "game.emoji": "Países, ciudades, películas y cuentos en emojis",
+  "game.emoji": "Países, ciudades, películas, series y cuentos en emojis",
   "game.truefalse": "Verdadero o falso sobre el mundo",
   "game.create": "Tus preguntas, compartidas con un código",
   "game.countries.long": "Sitúa los países en el mapa o nombra el país resaltado. Del mundo entero a una sola región.",
@@ -518,5 +518,6 @@
   "q.cinema.director": "¿Quién dirigió esta película?",
   "q.cinema.year": "¿En qué año se estrenó esta película?",
   "q.cinema.character": "¿En qué película aparece este personaje?",
-  "q.emoji.tale": "¿Qué cuento se esconde tras estos emojis?"
+  "q.emoji.tale": "¿Qué cuento se esconde tras estos emojis?",
+  "q.emoji.series": "¿Qué serie se esconde tras estos emojis?"
 }

@@ -203,7 +203,7 @@
   "game.monuments": "Recognise world wonders in photos",
   "game.brands": "Which country is the brand from?",
   "game.cinema": "Actors, directors, characters",
-  "game.emoji": "Countries, cities, films and tales in emojis",
+  "game.emoji": "Countries, cities, films, series and tales in emojis",
   "game.truefalse": "True or false about the world",
   "game.create": "Your questions, shared with a code",
   "game.countries.long": "Find countries on the map, or name the highlighted one. From the whole world down to a single region.",
@@ -518,5 +518,6 @@
   "q.cinema.director": "Who directed this film?",
   "q.cinema.year": "What year did this film come out?",
   "q.cinema.character": "Which film features this character?",
-  "q.emoji.tale": "Which tale is hiding behind these emojis?"
+  "q.emoji.tale": "Which tale is hiding behind these emojis?",
+  "q.emoji.series": "Which TV series is hiding behind these emojis?"
 }
