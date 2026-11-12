@@ -1,4 +1,4 @@
-# GéoQuiz
+# Quizellige
 
 Quiz de géographie multilingue (français, anglais, arabe, espagnol) et multijoueur :
 cartes cliquables façon Seterra, duels et salles en direct façon Blooket / Kahoot.

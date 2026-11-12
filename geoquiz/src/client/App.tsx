@@ -169,13 +169,15 @@ function TopBar() {
   );
 }
 
+/** Logo : étoile à huit branches de zellige (deux carrés croisés), en mosaïque de couleurs. */
 export function Compass() {
   return (
-    <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true" className="compass">
-      <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M16 4l3.2 12H12.8z" fill="var(--accent)" />
-      <path d="M16 28l-3.2-12h6.4z" fill="currentColor" opacity=".55" />
-      <circle cx="16" cy="16" r="1.8" fill="var(--paper)" stroke="currentColor" />
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" className="compass zellige">
+      <rect x="6" y="6" width="20" height="20" rx="2" fill="#0071E3" />
+      <rect x="6" y="6" width="20" height="20" rx="2" fill="#16A34A" transform="rotate(45 16 16)" />
+      <rect x="10.5" y="10.5" width="11" height="11" rx="1" fill="#FFC800" />
+      <rect x="10.5" y="10.5" width="11" height="11" rx="1" fill="#FF8A1F" transform="rotate(45 16 16)" />
+      <circle cx="16" cy="16" r="2.6" fill="#FFFFFF" />
     </svg>
   );
 }

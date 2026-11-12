@@ -216,4 +216,4 @@ const heartbeat = setInterval(() => {
 wss.on('close', () => clearInterval(heartbeat));
 
 const PORT = Number(process.env.PORT ?? 3000);
-server.listen(PORT, () => console.log(`• GéoQuiz prêt sur http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`• Quizellige prêt sur http://localhost:${PORT}`));

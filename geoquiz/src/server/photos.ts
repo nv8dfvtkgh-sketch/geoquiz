@@ -6,7 +6,7 @@
 export interface Photo { url: string; credit: string }
 
 const API = 'https://en.wikipedia.org/w/api.php';
-export const USER_AGENT = 'GeoQuiz/1.0 (https://geoquiz.bdyfyngg9c.workers.dev; quiz de géographie éducatif)';
+export const USER_AGENT = 'Quizellige/1.0 (https://geoquiz.bdyfyngg9c.workers.dev; quiz de géographie éducatif)';
 const THUMB = 960; // largeur standard des vignettes Wikimedia
 
 type Fetcher = (url: string, init?: RequestInit) => Promise<Response>;

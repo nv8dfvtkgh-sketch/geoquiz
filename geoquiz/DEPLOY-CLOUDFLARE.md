@@ -1,4 +1,4 @@
-# Mettre GéoQuiz en ligne sur Cloudflare
+# Mettre Quizellige en ligne sur Cloudflare
 
 Sur Cloudflare, le jeu tourne avec **Workers + Durable Objects** :
 
@@ -24,7 +24,7 @@ Le **forfait gratuit** suffit pour commencer (Durable Objects « SQLite » inclu
      ```bash
      git init
      git add .
-     git commit -m "GéoQuiz"
+     git commit -m "Quizellige"
      git branch -M main
      git remote add origin https://github.com/<votre-compte>/geoquiz.git
      git push -u origin main
