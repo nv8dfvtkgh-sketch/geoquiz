@@ -7,6 +7,7 @@ import { WebSocketServer, WebSocket } from 'ws';
 import type { ClientMsg, ServerMsg } from '../shared/protocol';
 import { categoryInfos, poolCounts } from './categories';
 import { fetchPhoto } from './photos';
+import { flagPath, printSheet } from './print';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
@@ -117,6 +118,17 @@ const server = http.createServer(async (req, res) => {
   try {
     if (p === '/healthz') return send(res, 200, JSON.stringify({ ok: true, rooms: rooms.size }));
     if (p === '/api/catalog') return send(res, 200, catalogJson, 'application/json', 'public, max-age=300');
+    if (p === '/api/print' && req.method === 'POST') {
+      let body: any = null;
+      try { body = JSON.parse(await readBody(req)); } catch {}
+      const r = await printSheet(body ?? {});
+      return send(res, r.status, JSON.stringify(r.json));
+    }
+    const flagIso = flagPath(p);
+    if (flagIso) {
+      const f = path.join(BUILD, 'flags', `${flagIso}.svg`);
+      return fs.existsSync(f) ? send(res, 200, fs.readFileSync(f), 'image/svg+xml', 'public, max-age=86400') : send(res, 404, '');
+    }
     if (p === '/api/rooms' && req.method === 'POST') {
       let body: any = null;
       try { body = JSON.parse(await readBody(req)); } catch {}

@@ -7,6 +7,7 @@
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
+import { flagPath, printSheet } from '../server/print';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
@@ -129,6 +130,18 @@ export default {
       if (p.startsWith('/api/')) {
         await ensureData(env);
         if (p === '/api/catalog') return json(catalog(categoryInfos(), config.maxPlayers, poolCounts()), 200, 'public, max-age=300');
+        if (p === '/api/print' && request.method === 'POST') {
+          const text = await request.text();
+          let body: any = {};
+          try { body = JSON.parse(text.slice(0, 2048)); } catch {}
+          const r = await printSheet(body ?? {});
+          return json(r.json, r.status);
+        }
+        const flagIso = flagPath(p);
+        if (flagIso) {
+          const f = await asset(env, `flags/${flagIso}.svg`);
+          return new Response(f.body, { status: f.status, headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'public, max-age=86400' } });
+        }
         if (p === '/api/rooms' && request.method === 'POST') {
           const text = await request.text();
           if (text.length > 4096) return json({ error: 'settings.invalid' }, 400);

@@ -151,6 +151,13 @@ function Games() {
             <small>{t('game.create')}</small>
           </span>
         </button>
+        <button type="button" className="create-quiz ready print-card" onClick={() => { go('print'); window.scrollTo(0, 0); }}>
+          <span className="print-card-art" aria-hidden="true">🖨️</span>
+          <span>
+            <strong>{t('print.title')}</strong>
+            <small>{t('print.cta')}</small>
+          </span>
+        </button>
       </section>
     </div>
   );

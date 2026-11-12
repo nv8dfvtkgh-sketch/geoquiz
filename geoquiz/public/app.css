@@ -1027,3 +1027,68 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 /* Salle d'attente sur téléphone : le code et le lien ne débordent plus. */
 .lobby > * { min-width: 0; }
 .code span { flex: 1 1 0; min-width: 0; max-width: 2.6ch; width: auto; }
+
+/* ------------------------------------------------------------------ fiches à imprimer */
+.print-card-art { font-size: 1.8rem; line-height: 1; }
+.print-card { margin-top: 10px; }
+.print-page { display: grid; gap: 18px; }
+@media (min-width: 1000px) { .print-page { grid-template-columns: 340px 1fr; align-items: start; } .print-controls { position: sticky; top: 76px; } }
+.print-controls { display: grid; gap: 12px; }
+.print-controls h1 { margin: 0; }
+.sheets { display: grid; gap: 18px; justify-items: center; min-width: 0; }
+.ws-page { width: 100%; max-width: 210mm; background: #fff; color: #111; padding: 12mm 12mm 14mm; box-shadow: var(--shadow-up); border-radius: 6px; font-family: var(--font-ui); }
+.ws-head { display: grid; gap: 6px; border-bottom: 2px solid #111; padding-bottom: 8px; margin-bottom: 10px; }
+.ws-brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: .95rem; }
+.ws-head h2 { margin: 0; font-size: 1.35rem; color: #111; }
+.ws-fields { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .9rem; }
+.ws-fields span { display: inline-flex; align-items: flex-end; gap: 6px; }
+.ws-fields i, .answer-lines i, .flag-grid i { display: inline-block; width: 150px; border-bottom: 1px solid #555; height: 1.1em; }
+.ws-fields i.short { width: 50px; }
+.print-map { display: block; width: 100%; max-height: 150mm; margin: 4px 0 10px; }
+.print-map path { stroke: #333; stroke-width: .35; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.print-map path.on { fill: #fff; }
+.print-map path.in { fill: #f4f4f4; }
+.print-map path.off { fill: #dcdcdc; stroke: #aaa; }
+.print-map circle { fill: #111; }
+.print-map text { fill: #fff; font-weight: 700; text-anchor: middle; font-family: Arial, sans-serif; }
+.answer-lines { list-style: none; margin: 0; padding: 0; columns: 3 150px; column-gap: 18px; font-size: .9rem; }
+.answer-lines li { display: flex; align-items: flex-end; gap: 6px; padding: 5px 0; break-inside: avoid; }
+.answer-lines li span { width: 2.2em; text-align: end; font-weight: 700; }
+.answer-lines i { flex: 1; width: auto; }
+.flag-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px 16px; }
+.flag-grid li { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 8px; break-inside: avoid; }
+.flag-grid .n { font-weight: 800; }
+.flag-grid img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; border: 1px solid #ccc; }
+.flag-grid i { grid-column: 1 / -1; width: 100%; height: 1.4em; }
+.print-quiz { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+.print-quiz > li { break-inside: avoid; display: grid; gap: 6px; padding-bottom: 8px; border-bottom: 1px dashed #bbb; }
+.pq-head { display: flex; gap: 8px; align-items: flex-start; }
+.pq-head .n { flex: none; width: 24px; height: 24px; border-radius: 50%; background: #111; color: #fff; display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.pq-head small { display: block; color: #555; font-size: .78rem; }
+.pq-head strong { font-size: .95rem; }
+.pq-emoji { margin-inline-start: auto; font-size: 1.6rem; }
+.pq-media { display: flex; justify-content: center; }
+.pq-media .road-sign, .pq-media .jersey { width: 90px; height: auto; margin: 0; filter: none; }
+.pq-flag { width: 110px; border: 1px solid #ccc; }
+.pq-shape { width: 110px; height: 80px; } .pq-shape path { fill: #555; }
+.pq-hint { margin: 0; font-size: .78rem; color: #555; }
+.pq-options { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .88rem; }
+.pq-options.flags { grid-template-columns: 1fr 1fr; }
+.pq-options li { display: flex; align-items: center; gap: 6px; }
+.pq-options .box { flex: none; width: 18px; height: 18px; border: 1.5px solid #111; border-radius: 4px; display: grid; place-items: center; font-size: .7rem; font-weight: 700; }
+.pq-options img { width: 48px; border: 1px solid #ccc; }
+.key-list { margin: 0; padding-inline-start: 1.6em; display: grid; gap: 4px; font-size: .92rem; }
+.key-list.cols { display: block; columns: 3 160px; }
+@media (max-width: 600px) { .print-quiz { grid-template-columns: 1fr; } .ws-page { padding: 16px; } }
+[data-look='kids'] .ws-head h2 { font-family: var(--font-display); }
+
+@media print {
+  @page { size: A4; margin: 10mm; }
+  html, body { background: #fff !important; }
+  body * { visibility: hidden; }
+  .sheets, .sheets * { visibility: visible; }
+  .sheets { position: absolute; inset: 0 auto auto 0; width: 100%; display: block; }
+  .ws-page { box-shadow: none; border-radius: 0; padding: 0; max-width: none; break-after: page; }
+  .ws-page:last-child { break-after: auto; }
+  .print-quiz > li, .flag-grid li { break-inside: avoid; }
+}

@@ -13,11 +13,13 @@ import { Final } from './screens/Final';
 import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
 import { LeaderboardScreen, OAuthFinish, Profile, SignIn } from './screens/Account';
 import { GeoScreen } from './screens/GeoHub';
+import { PrintScreen } from './screens/Print';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
 const adminPage = location.pathname.startsWith('/admin');
 const hubPreview = /^\/(apercu|geographie)/.test(location.pathname);
+const printPage = /^\/imprimer/.test(location.pathname);
 // Retour de Google / Facebook : #auth=<session>, #oauth=<ticket> ou #autherr=<code>.
 const authHash = new URLSearchParams(location.hash.slice(1));
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
@@ -28,6 +30,7 @@ export function App() {
     const st = initialState(joinMatch?.[1]?.toUpperCase());
     if (adminPage) return { ...st, screen: 'admin' as const };
     if (hubPreview) return { ...st, screen: 'geo' as const };
+    if (printPage) return { ...st, screen: 'print' as const };
     if (authHash.get('oauth')) return { ...st, screen: 'oauth' as const, oauthTicket: authHash.get('oauth')! };
     if (authHash.get('autherr')) return { ...st, screen: 'signin' as const, error: authHash.get('autherr')! };
     if (quizMatch) return { ...st, screen: 'quizsheet' as const, quiz: { id: quizMatch[1].toUpperCase() } };
@@ -156,6 +159,7 @@ export function App() {
           {s.screen === 'signin' && <SignIn />}
           {s.screen === 'geo' && <GeoScreen />}
           {s.screen === 'oauth' && <OAuthFinish />}
+          {s.screen === 'print' && <PrintScreen />}
         </main>
       </div>
     </AppCtx.Provider>

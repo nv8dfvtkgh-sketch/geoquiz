@@ -4,6 +4,7 @@ import { findGame, Icon } from '../games';
 import { createGame, net } from '../net';
 import { useApp } from '../state';
 import { api, lockedFor } from '../account';
+import { printableGame } from './Print';
 
 /**
  * Fiche d'un jeu : description, niveau, zone, options, puis « Comment jouer ? »
@@ -188,6 +189,7 @@ export function Setup() {
             {t('setup.roomBtn')}<small>{t('setup.roomHint', { max: catalog.maxPlayers })}</small>
           </button>
           <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>
+          {printableGame(cfg.category) && <button type="button" className="text-btn quick-link" onClick={() => { go('print'); window.scrollTo(0, 0); }}>🖨️ {t('print.fromGame')}</button>}
         </div>
       )}
     </div>

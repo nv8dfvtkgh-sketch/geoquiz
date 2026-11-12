@@ -78,7 +78,7 @@ function byDifficulty<T>(sorted: T[], difficulty: Difficulty, wanted: number): T
   return sorted.slice(0, n);
 }
 
-function countryPool(zone: ZoneCtx, difficulty: Difficulty, wanted: number, filter: (id: string) => boolean = () => true) {
+export function countryPool(zone: ZoneCtx, difficulty: Difficulty, wanted: number, filter: (id: string) => boolean = () => true) {
   const ids = (zone.countryIds ?? []).filter(filter);
   if (difficulty === 'hard') return ids;
   // Du plus connu au moins connu ; territoires dépendants seulement en difficile.
