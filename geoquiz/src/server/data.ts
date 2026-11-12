@@ -98,6 +98,7 @@ export interface Stadium { id: string; wiki: string; country: string; tier: numb
 export interface Kit { p: string; c: string[]; sh: string }
 export interface KitTeam { id: string; tier: number; names: Names; kit: Kit }
 /** Ville du Maroc à placer sur la carte des régions. */
+export interface Landscape { id: string; wiki: string; lat: number; lon: number; country: string; tier: number; names: Names }
 export interface MaCity { id: string; lat: number; lon: number; tier: number; names: Names }
 /** Cri d'animal : enregistrement libre cherché sur Wikimedia Commons. */
 export interface AnimalSound { id: string; tier: number; emoji?: string; q: string; names: Names }
@@ -116,7 +117,7 @@ export function activeEvent(now = Date.now()): GameEvent | undefined {
   return extras.events.find((e) => e.start <= day && day <= e.end);
 }
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
+export const NO_ZONE_GAMES = ['whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
@@ -134,11 +135,12 @@ export interface Extras {
   sounds: AnimalSound[];
   macities: MaCity[];
   events: GameEvent[];
+  landscapes: Landscape[];
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds', 'macities', 'events'] as const;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds', 'macities', 'events', 'landscapes'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [], macities: [], events: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [], macities: [], events: [], landscapes: [] };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -231,6 +233,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     sounds: extra.sounds ?? [],
     macities: extra.macities ?? [],
     events: extra.events ?? [],
+    landscapes: ((extra.landscapes ?? []) as Landscape[]).filter((x) => c[x.country]),
   };
   countries = c;
   loader = regionLoader;
@@ -242,7 +245,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
   regionCache.clear();
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
-  const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies', 'flagreveal', 'pin', 'higher'];
+  const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies', 'flagreveal', 'pin', 'higher', 'whoami'];
   zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'cinema', 'truefalse', 'calc', ...Object.keys(PACK_GAMES), ...NO_ZONE_GAMES] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();

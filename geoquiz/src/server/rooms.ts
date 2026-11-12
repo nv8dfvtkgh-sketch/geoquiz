@@ -5,7 +5,7 @@ import {
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
   type ServerMsg, type Settings, type Reward, type ChallengeEntry,
 } from '../shared/protocol';
-import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, ensureSounds, photosLoaded } from './photos';
@@ -128,6 +128,7 @@ const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 /** Tirage des questions selon les réglages. */
 export function drawQuestions(settings: Settings, rnd: () => number = Math.random): InternalQuestion[] {
   if (settings.category === 'daily') return dailyQuestions();
+  if (settings.category === 'survival') return survivalQuestions(rnd);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
   const pool = shuffle(cat.pool(zone, settings.difficulty, settings.count), rnd).slice(0, settings.count);
@@ -194,13 +195,17 @@ export class Room {
     this.autoTimer = setTimeout(() => { this.autoTimer = null; if (this.state === 'lobby') { if (this.players().length >= 2) this.start(); else { this.autoStartAt = Date.now() + 60_000; this.armAuto(); } } }, wait);
   }
 
+  /** Survie : chaque joueur a 3 vies (en solo, la partie s'arrête quand il n'en a plus). */
+  get survival() {
+    return this.settings.category === 'survival';
+  }
   /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
   get mode() {
     return this.kind === 'room' ? this.settings.mode ?? 'classic' : 'classic';
   }
   /** Joueurs encore en jeu (Battle Royale : non éliminés). */
   alive() {
-    return this.players().filter((p) => this.mode !== 'battle' || (p.lives ?? 0) > 0);
+    return this.players().filter((p) => (this.mode !== 'battle' && !this.survival) || (p.lives ?? 0) > 0);
   }
   teamScores(): TeamScore[] | undefined {
     if (this.mode !== 'teams' || this.state === 'lobby') return undefined;
@@ -471,7 +476,7 @@ export class Room {
     // Photos (monuments, stades) et sons : cherchés sur Wikimedia à la première partie.
     const media = CATEGORIES[this.settings.category]?.media;
     if (media && !photosLoaded(media)) {
-      const job = media === 'sounds' ? ensureSounds(extras.sounds) : ensurePhotos(extras[media], undefined, media);
+      const job = media === 'sounds' ? ensureSounds(extras.sounds) : ensurePhotos(extras[media] as { id: string; wiki: string }[], undefined, media);
       job.then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
       return;
     }
@@ -516,6 +521,8 @@ export class Room {
       shuffle(players, Math.random).forEach((p, i) => (p.team = i % n));
     }
     if (this.mode === 'battle') for (const p of players) p.lives = BATTLE_LIVES;
+    // Survie : 3 vies, la partie s'arrête à la troisième erreur.
+    if (this.survival && this.mode !== 'battle') for (const p of players) p.lives = BATTLE_LIVES;
     this.lastBattle = undefined;
     this.recap = [];
     this.rematchVotes.clear();
@@ -592,6 +599,7 @@ export class Room {
     this.timer = null;
     this.qIndex++;
     if (this.qIndex >= this.questions.length) return this.finish();
+    if (this.survival && this.players().every((p) => (p.lives ?? 1) <= 0)) return this.finish();
     const q = this.questions[this.qIndex];
     const now = Date.now();
     const timed = this.kind !== 'solo';
@@ -633,6 +641,7 @@ export class Room {
       params: { ...(q.extraParams ?? {}), ...(q.promptName ? { name: localize(q.promptName, lang) } : {}) },
       image: q.imageRef && !q.imageRef.startsWith('wiki:snd:') ? r.flagTokens[q.imageRef] : undefined,
       sound: q.imageRef?.startsWith('wiki:snd:') ? r.flagTokens[q.imageRef] : undefined,
+      clues: q.clues?.map((c) => localize(c, lang)),
       kit: q.kit,
       flag: q.flagIso ? r.flagTokens[q.flagIso] : undefined,
       map: q.map,
@@ -674,7 +683,7 @@ export class Room {
     let a = r.answers.get(m.id);
     if (!a) { a = { attempts: 0, done: false, correct: false, points: 0, timeMs: null, credit: 0 }; r.answers.set(m.id, a); }
     if (a.done) return;
-    if (this.mode === 'battle' && (m.lives ?? 0) <= 0) return; // éliminé : il regarde
+    if ((this.mode === 'battle' || this.survival) && (m.lives ?? 0) <= 0) return; // éliminé : il regarde
     a.attempts++;
     // « Où est-ce ? » : points selon la distance, même sans être « juste ».
     const g = r.q.grade ? r.q.grade(value) : { ok: r.q.check(value), credit: 1, km: undefined };
@@ -734,6 +743,7 @@ export class Room {
       const a: AnswerState = r.answers.get(p.id) ?? { attempts: 0, done: true, correct: false, points: 0, timeMs: null, credit: 0 };
       p.score = Math.max(0, p.score + a.points);
       if (a.correct) p.streak++; else p.streak = 0;
+      if (this.survival && this.mode !== 'battle' && !a.correct && (r.answers.has(p.id) || this.kind !== 'solo') && p.lives !== undefined && p.lives > 0) { p.lives--; if (!p.lives) p.outAt = this.qIndex + 1; }
       return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer, km: a.km };
     });
     this.recap.push({ q: r.q, results });
@@ -742,7 +752,8 @@ export class Room {
     if (this.mode === 'battle') battle = this.resolveDuels(results);
     this.lastBattle = battle;
     // Battle Royale : la partie s'arrête quand il ne reste qu'un joueur (ou plus aucun).
-    const last = this.qIndex >= this.questions.length - 1 || (this.mode === 'battle' && this.alive().length <= 1);
+    const last = this.qIndex >= this.questions.length - 1 || (this.mode === 'battle' && this.alive().length <= 1)
+      || (this.survival && this.players().every((p) => (p.lives ?? 1) <= 0));
     if (this.kind === 'solo') {
       const auto = this.settings.soloMode === 'timed';
       const ok = results[0]?.correct;
@@ -762,6 +773,7 @@ export class Room {
   advance() {
     if (this.timer) clearTimeout(this.timer);
     if (this.mode === 'battle' && this.alive().length <= 1 && this.players().length > 1) return this.finish();
+    if (this.survival && this.players().every((p) => (p.lives ?? 1) <= 0)) return this.finish();
     this.nextQuestion();
   }
 

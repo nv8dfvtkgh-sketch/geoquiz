@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -51,6 +51,12 @@ export const FAMILIES: Family[] = [
       { id: 'globle', icon: 'thermo', fresh: true, screen: 'globle' },
       { id: 'capword', icon: 'grid', fresh: true, screen: 'capword' },
       { id: 'compass', icon: 'compass', fresh: true, screen: 'compass' },
+      { id: 'nameall', icon: 'list', fresh: true, screen: 'nameall' },
+      { id: 'cards', icon: 'cards', fresh: true, screen: 'cards' },
+      { id: 'colorflag', icon: 'brush', fresh: true, screen: 'colorflag' },
+      { id: 'whereami', icon: 'camera', fresh: true },
+      { id: 'whoami', icon: 'question', fresh: true },
+      { id: 'survival', icon: 'heart', fresh: true },
     ],
   },
   {
@@ -122,6 +128,11 @@ export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
 export const ICONS = {
+  camera: <g {...P}><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></g>,
+  question: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.7" /><path d="M12 17h.01" strokeWidth="2.4" /></g>,
+  list: <g {...P}><path d="M9 6h11M9 12h11M9 18h11" /><path d="M4 6l1 1 2-2M4 12l1 1 2-2" /><path d="M4.5 18h1" strokeWidth="2.4" /></g>,
+  cards: <g {...P}><rect x="3" y="6" width="10" height="14" rx="2" transform="rotate(-8 8 13)" /><rect x="11" y="4" width="10" height="14" rx="2" transform="rotate(8 16 11)" /></g>,
+  brush: <g {...P}><path d="M14 4l6 6-8 8-3-3z" /><path d="M9 15c-3 0-5 2-5 5 3 0 5-2 5-5z" /></g>,
   thermo: <g {...P}><path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z" /><path d="M12 9v7" /><path d="M17 6h3M17 9h2" /></g>,
   grid: <g {...P}><rect x="3" y="4" width="5" height="5" rx="1" /><rect x="9.5" y="4" width="5" height="5" rx="1" /><rect x="16" y="4" width="5" height="5" rx="1" /><rect x="3" y="10.5" width="5" height="5" rx="1" /><rect x="9.5" y="10.5" width="5" height="5" rx="1" /><path d="M3 18.5h18" /></g>,
   compass: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></g>,

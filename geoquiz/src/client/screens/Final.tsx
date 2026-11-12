@@ -43,6 +43,7 @@ export function Final() {
     const wrong = f.recap.filter((r) => !r.results.find((x) => x.id === s.you)?.correct).length;
     const daily = room.settings.category === 'daily';
     const next = nextGame(room.settings.category);
+    if (room.settings.category === 'survival') return <SurvivalEnd correct={correct} total={total} fx={fx} />;
     return (
       <div className="final panel final-solo">
         {fx}
@@ -203,4 +204,32 @@ function useBest() {
     if (isNew) try { localStorage.setItem(key, JSON.stringify(cur)); } catch {}
     return { ...(isNew ? cur : prev!), isNew };
   }, [s.finished]);
+}
+
+/** Survie : nombre de bonnes réponses avant la 3e erreur, et record sur l'appareil. */
+function SurvivalEnd({ correct, total, fx }: { correct: number; total: number; fx: React.ReactNode }) {
+  const { t, send, leave, s } = useApp();
+  const [best] = useState(() => {
+    let b = 0;
+    try { b = Number(localStorage.getItem('gq.best.survival')) || 0; if (correct > b) localStorage.setItem('gq.best.survival', String(correct)); } catch { /* ignoré */ }
+    return b;
+  });
+  const isNew = correct > best && correct > 0;
+  return (
+    <div className="final panel final-solo">
+      {isNew && fx}
+      <div className="final-top">
+        <p className="survival-big" aria-hidden="true">{isNew ? '🏆' : '💔'}</p>
+        <h1>{t('survival.result', { n: correct })}</h1>
+        <p className="muted">{t('survival.asked', { n: total })}{s.reward ? ` · +${s.reward.xp} XP` : ''}</p>
+        <p className={isNew ? 'record stamp-new' : 'muted'}>{isNew ? t('final.newBest') : t('survival.best', { n: Math.max(best, correct) })}</p>
+      </div>
+      <div className="final-actions">
+        <button type="button" className="btn primary big" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>
+      </div>
+      <RewardCard />
+      <Recap />
+      <button type="button" className="text-btn final-home" onClick={leave}>{t('final.home')}</button>
+    </div>
+  );
 }

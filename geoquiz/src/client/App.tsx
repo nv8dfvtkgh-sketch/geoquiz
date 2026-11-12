@@ -20,6 +20,7 @@ import { ClassesScreen, ClassJoinScreen, TournamentScreen } from './screens/Scho
 import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
 import { SettingsButton } from './Settings';
 import { CapwordScreen, CompassScreen, GlobleScreen } from './screens/Puzzles';
+import { CardsScreen, ColorFlagScreen, NameAllScreen } from './screens/Solo';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -185,6 +186,9 @@ export function App() {
           {s.screen === 'globle' && <GlobleScreen />}
           {s.screen === 'capword' && <CapwordScreen />}
           {s.screen === 'compass' && <CompassScreen />}
+          {s.screen === 'nameall' && <NameAllScreen />}
+          {s.screen === 'cards' && <CardsScreen />}
+          {s.screen === 'colorflag' && <ColorFlagScreen />}
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}
       </div>

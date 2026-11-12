@@ -974,3 +974,39 @@ test('Tournoi du vendredi : heure de Casablanca, code de la semaine, lancement a
   assert.equal(room.state, 'question');
   room.destroy();
 });
+
+test('Qui suis-je : indices traduits, du plus dur au plus facile', () => {
+  const qs = drawQuestions(settings({ category: 'whoami', difficulty: 'easy', qtype: 'mcq', count: 4 }));
+  assert.ok(qs.length > 0);
+  for (const q of qs) {
+    assert.ok((q.clues?.length ?? 0) >= 3, 'au moins trois indices');
+    assert.ok(q.options!.some((o) => o.target === q.target));
+    for (const c of q.clues!) assert.ok(c.fr && c.ar && !c.fr.includes('{x}'));
+    // Aucun indice ne donne le nom du pays.
+    for (const c of q.clues!) assert.ok(!normalize(c.fr).includes(normalize(countries[q.target].names.fr)), c.fr);
+  }
+  const room = create('solo', settings({ category: 'whoami', difficulty: 'easy', qtype: 'mcq', count: 2 }));
+  const a = client();
+  onMessage(a.conn, room.code, { t: 'join', name: 'A', lang: 'es' });
+  const q = a.last('question')!.q;
+  assert.ok(q.clues && q.clues.length >= 3 && !q.clues[0].includes('{'));
+  room.destroy();
+});
+
+test('Survie : trois vies, la partie s\'arrête à la troisième erreur', () => {
+  const qs = drawQuestions(settings({ category: 'survival', zone: 'world', difficulty: 'easy', qtype: 'mcq' }));
+  assert.ok(qs.length >= 40, `${qs.length} questions`);
+  assert.ok(new Set(qs.map((q) => q.category)).size >= 3, 'jeux mélangés');
+  const room = create('solo', settings({ category: 'survival', zone: 'world', difficulty: 'easy', qtype: 'mcq' }));
+  const a = client();
+  onMessage(a.conn, room.code, { t: 'join', name: 'A', lang: 'fr' });
+  for (let i = 0; i < 3; i++) {
+    const q = a.last('question')!.q;
+    const wrong = room.round!.q.options!.find((o) => o.id !== room.round!.q.revealOption)!.id;
+    onMessage(a.conn, room.code, { t: 'answer', q: q.index, value: wrong });
+    onMessage(a.conn, room.code, { t: 'next' });
+  }
+  assert.equal(room.state, 'finished');
+  assert.equal(a.last('finished')!.solo!.total, 3);
+  room.destroy();
+});

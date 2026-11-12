@@ -156,6 +156,7 @@ export interface QuestionMsg {
   sign?: string; // panneau du code de la route à dessiner
   kit?: KitSpec; // maillot à dessiner
   sound?: string; // jeton d'un enregistrement (cris d'animaux)
+  clues?: string[]; // « Qui suis-je ? » : indices, du plus dur au plus facile
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono

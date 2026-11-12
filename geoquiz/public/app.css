@@ -1443,3 +1443,72 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .wd-keys button.g { background: #1F8A5B; color: #fff; }
 .wd-keys button.y { background: #D9A400; color: #fff; }
 .wd-keys button.x { background: #8E8E93; color: #fff; opacity: .7; }
+
+/* ---------------------------------------------------------------- tout nommer */
+.na-sets { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.na-set { display: grid; gap: 2px; justify-items: start; text-align: start; padding: 14px; border: 0; border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; cursor: pointer; }
+.na-set small { color: var(--ink-2); }
+.na-set .na-best { color: var(--ink); font-weight: 600; }
+.na-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.na-bar strong { font-size: 1.2rem; }
+.na-clock { font-size: 1.4rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.na-clock.low { color: var(--bad); }
+.na-progress { height: 8px; border-radius: 4px; background: var(--fill); overflow: hidden; }
+.na-progress span { display: block; height: 100%; background: var(--good); transition: width .3s; }
+.na-score { margin: 0; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.na-score b { font-size: 1.4rem; }
+.na-flash { color: var(--good); font-weight: 700; animation: wd-pop .3s; }
+.na-big { font-size: 2.6rem; line-height: 1; }
+.pz-land.na-off { fill: var(--land-off); }
+.pz-land.na-ok { fill: var(--good); }
+.pz-land.na-miss { fill: color-mix(in srgb, var(--bad) 55%, var(--land)); }
+.na-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 4px; }
+.na-list li { min-height: 30px; padding: 4px 8px; border-radius: 8px; background: var(--fill); font-size: .88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.na-list li.ok { background: color-mix(in srgb, var(--good) 22%, var(--card)); font-weight: 600; }
+.na-list li.miss { background: color-mix(in srgb, var(--bad) 14%, var(--card)); color: var(--bad); }
+
+/* ---------------------------------------------------------------- bataille de cartes */
+.tt-score { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-weight: 600; }
+.tt-score b { font-size: 1.3rem; }
+.tt-table { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tt-card { display: grid; gap: 6px; align-content: start; padding: 10px; border-radius: 18px; color: #fff; min-height: 300px; box-shadow: var(--shadow-up); }
+.tt-card.me { background: linear-gradient(160deg, #1E5AA8, #1F8A5B); }
+.tt-card.bot { background: linear-gradient(160deg, #E8590C, #B98B00); }
+.tt-card.back { display: grid; place-items: center; background: repeating-linear-gradient(45deg, #E8590C 0 14px, #D24F09 14px 28px); }
+.tt-back { font-size: 3rem; }
+.tt-top { display: grid; gap: 6px; justify-items: center; text-align: center; min-height: 72px; }
+.tt-top img { border-radius: 4px; box-shadow: 0 0 0 2px #ffffff80; object-fit: cover; }
+.tt-top strong { font-size: .98rem; line-height: 1.2; }
+.tt-stat { display: grid; gap: 1px; justify-items: start; text-align: start; padding: 7px 9px; border: 0; border-radius: 10px; background: #ffffff2b; color: #fff; font: inherit; font-size: .8rem; cursor: pointer; min-height: 48px; }
+.tt-stat b { font-size: .98rem; font-variant-numeric: tabular-nums; }
+.tt-stat:disabled { cursor: default; }
+.tt-stat:not(:disabled):hover { background: #ffffff45; }
+.tt-stat.on { background: #fff; color: #1D1D1F; }
+
+/* ---------------------------------------------------------------- colorie le drapeau */
+.cf-q { margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.cf-q span { color: var(--ink-2); font-weight: 600; }
+.cf-q strong { font-size: 1.4rem; }
+.cf-flag { width: 100%; max-width: 420px; justify-self: center; border-radius: 8px; box-shadow: 0 0 0 2px var(--ink), var(--shadow-up); background: #fff; overflow: hidden; }
+.cf-flag path { stroke: #1D1D1F; stroke-width: 1.5; cursor: pointer; transition: fill .15s; }
+.cf-flag path.blank { fill: #fff; stroke-dasharray: 6 5; }
+.cf-flag path.bad { stroke: var(--bad); stroke-width: 5; }
+.cf-palette { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.cf-palette button { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--card); box-shadow: 0 0 0 1px var(--border), var(--shadow); cursor: pointer; }
+.cf-palette button.on { box-shadow: 0 0 0 4px var(--accent); transform: scale(1.08); }
+.cf-real { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); font-weight: 600; }
+.cf-real img { border-radius: 4px; box-shadow: 0 0 0 1px var(--border); object-fit: cover; }
+
+/* ---------------------------------------------------------------- qui suis-je ? / survie / où suis-je ? */
+.clues { display: grid; gap: 6px; margin-top: 10px; }
+.clues ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.clues li { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 12px; background: var(--fill); color: var(--ink-2); font-size: .98rem; text-align: start; }
+.clues li b { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--ink-2); font-size: .8rem; }
+.clues li.on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); animation: clue-in .35s both; }
+.clues li.on b { background: var(--hl); color: #1D1D1F; }
+@keyframes clue-in { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { .clues li.on { animation: none; } }
+.clues .text-btn { justify-self: center; }
+.survival-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 14px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); font-weight: 600; }
+.survival-big { font-size: 3.4rem; margin: 0; line-height: 1; }
+.quiz-photo.with-map { max-height: 26vh; }

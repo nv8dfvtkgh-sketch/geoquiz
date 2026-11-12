@@ -1,0 +1,702 @@
+[
+ {
+  "id": "ls-halong",
+  "wiki": "Ha Long Bay",
+  "lat": 20.91,
+  "lon": 107.18,
+  "country": "VN",
+  "tier": 1,
+  "names": {
+   "fr": "Baie d'Along",
+   "en": "Ha Long Bay",
+   "es": "Bahía de Ha Long",
+   "ar": "خليج ها لونغ"
+  }
+ },
+ {
+  "id": "ls-geiranger",
+  "wiki": "Geirangerfjord",
+  "lat": 62.1,
+  "lon": 7.09,
+  "country": "NO",
+  "tier": 2,
+  "names": {
+   "fr": "Geirangerfjord",
+   "en": "Geirangerfjord",
+   "es": "Geirangerfjord",
+   "ar": "مضيق غيرانغر"
+  }
+ },
+ {
+  "id": "ls-uluru",
+  "wiki": "Uluru",
+  "lat": -25.34,
+  "lon": 131.04,
+  "country": "AU",
+  "tier": 1,
+  "names": {
+   "fr": "Uluru",
+   "en": "Uluru",
+   "es": "Uluru",
+   "ar": "أولورو"
+  }
+ },
+ {
+  "id": "ls-grandcanyon",
+  "wiki": "Grand Canyon",
+  "lat": 36.1,
+  "lon": -112.11,
+  "country": "US",
+  "tier": 1,
+  "names": {
+   "fr": "Grand Canyon",
+   "en": "Grand Canyon",
+   "es": "Gran Cañón",
+   "ar": "الأخدود العظيم"
+  }
+ },
+ {
+  "id": "ls-victoriafalls",
+  "wiki": "Victoria Falls",
+  "lat": -17.92,
+  "lon": 25.86,
+  "country": "ZM",
+  "tier": 1,
+  "names": {
+   "fr": "Chutes Victoria",
+   "en": "Victoria Falls",
+   "es": "Cataratas Victoria",
+   "ar": "شلالات فيكتوريا"
+  }
+ },
+ {
+  "id": "ls-iguazu",
+  "wiki": "Iguazu Falls",
+  "lat": -25.69,
+  "lon": -54.44,
+  "country": "AR",
+  "tier": 1,
+  "names": {
+   "fr": "Chutes d'Iguaçu",
+   "en": "Iguazu Falls",
+   "es": "Cataratas del Iguazú",
+   "ar": "شلالات إجوازو"
+  }
+ },
+ {
+  "id": "ls-banaue",
+  "wiki": "Banaue Rice Terraces",
+  "lat": 16.92,
+  "lon": 121.06,
+  "country": "PH",
+  "tier": 3,
+  "names": {
+   "fr": "Rizières en terrasses de Banaue",
+   "en": "Banaue Rice Terraces",
+   "es": "Terrazas de arroz de Banaue",
+   "ar": "مدرجات الأرز في باناوي"
+  }
+ },
+ {
+  "id": "ls-cappadocia",
+  "wiki": "Cappadocia",
+  "lat": 38.64,
+  "lon": 34.83,
+  "country": "TR",
+  "tier": 1,
+  "names": {
+   "fr": "Cappadoce",
+   "en": "Cappadocia",
+   "es": "Capadocia",
+   "ar": "كابادوكيا"
+  }
+ },
+ {
+  "id": "ls-uyuni",
+  "wiki": "Salar de Uyuni",
+  "lat": -20.13,
+  "lon": -67.49,
+  "country": "BO",
+  "tier": 2,
+  "names": {
+   "fr": "Salar d'Uyuni",
+   "en": "Salar de Uyuni",
+   "es": "Salar de Uyuni",
+   "ar": "سالار دي أويوني"
+  }
+ },
+ {
+  "id": "ls-fuji",
+  "wiki": "Mount Fuji",
+  "lat": 35.36,
+  "lon": 138.73,
+  "country": "JP",
+  "tier": 1,
+  "names": {
+   "fr": "Mont Fuji",
+   "en": "Mount Fuji",
+   "es": "Monte Fuji",
+   "ar": "جبل فوجي"
+  }
+ },
+ {
+  "id": "ls-matterhorn",
+  "wiki": "Matterhorn",
+  "lat": 45.98,
+  "lon": 7.66,
+  "country": "CH",
+  "tier": 1,
+  "names": {
+   "fr": "Cervin",
+   "en": "Matterhorn",
+   "es": "Cervino",
+   "ar": "جبل ماترهورن"
+  }
+ },
+ {
+  "id": "ls-tablemountain",
+  "wiki": "Table Mountain",
+  "lat": -33.96,
+  "lon": 18.4,
+  "country": "ZA",
+  "tier": 2,
+  "names": {
+   "fr": "Montagne de la Table",
+   "en": "Table Mountain",
+   "es": "Montaña de la Mesa",
+   "ar": "جبل الطاولة"
+  }
+ },
+ {
+  "id": "ls-kilimanjaro",
+  "wiki": "Mount Kilimanjaro",
+  "lat": -3.07,
+  "lon": 37.35,
+  "country": "TZ",
+  "tier": 1,
+  "names": {
+   "fr": "Kilimandjaro",
+   "en": "Mount Kilimanjaro",
+   "es": "Kilimanjaro",
+   "ar": "جبل كليمنجارو"
+  }
+ },
+ {
+  "id": "ls-ergchebbi",
+  "wiki": "Erg Chebbi",
+  "lat": 31.15,
+  "lon": -4.02,
+  "country": "MA",
+  "tier": 1,
+  "names": {
+   "fr": "Erg Chebbi (Merzouga)",
+   "en": "Erg Chebbi (Merzouga)",
+   "es": "Erg Chebbi (Merzouga)",
+   "ar": "عرق الشبي (مرزوكة)"
+  }
+ },
+ {
+  "id": "ls-chefchaouen",
+  "wiki": "Chefchaouen",
+  "lat": 35.17,
+  "lon": -5.27,
+  "country": "MA",
+  "tier": 1,
+  "names": {
+   "fr": "Chefchaouen",
+   "en": "Chefchaouen",
+   "es": "Chefchaouen",
+   "ar": "شفشاون"
+  }
+ },
+ {
+  "id": "ls-todgha",
+  "wiki": "Todgha Gorge",
+  "lat": 31.59,
+  "lon": -5.59,
+  "country": "MA",
+  "tier": 2,
+  "names": {
+   "fr": "Gorges du Todgha",
+   "en": "Todgha Gorge",
+   "es": "Gargantas del Todra",
+   "ar": "مضيق تودغى"
+  }
+ },
+ {
+  "id": "ls-ouzoud",
+  "wiki": "Ouzoud Falls",
+  "lat": 32.02,
+  "lon": -6.72,
+  "country": "MA",
+  "tier": 2,
+  "names": {
+   "fr": "Cascades d'Ouzoud",
+   "en": "Ouzoud Falls",
+   "es": "Cascadas de Ouzoud",
+   "ar": "شلالات أوزود"
+  }
+ },
+ {
+  "id": "ls-toubkal",
+  "wiki": "Toubkal",
+  "lat": 31.06,
+  "lon": -7.92,
+  "country": "MA",
+  "tier": 2,
+  "names": {
+   "fr": "Mont Toubkal",
+   "en": "Mount Toubkal",
+   "es": "Monte Toubkal",
+   "ar": "جبل توبقال"
+  }
+ },
+ {
+  "id": "ls-legzira",
+  "wiki": "Legzira",
+  "lat": 29.45,
+  "lon": -10.11,
+  "country": "MA",
+  "tier": 3,
+  "names": {
+   "fr": "Plage de Legzira",
+   "en": "Legzira beach",
+   "es": "Playa de Legzira",
+   "ar": "شاطئ لكزيرة"
+  }
+ },
+ {
+  "id": "ls-titicaca",
+  "wiki": "Lake Titicaca",
+  "lat": -15.9,
+  "lon": -69.33,
+  "country": "PE",
+  "tier": 2,
+  "names": {
+   "fr": "Lac Titicaca",
+   "en": "Lake Titicaca",
+   "es": "Lago Titicaca",
+   "ar": "بحيرة تيتيكاكا"
+  }
+ },
+ {
+  "id": "ls-torresdelpaine",
+  "wiki": "Torres del Paine National Park",
+  "lat": -51.0,
+  "lon": -73.0,
+  "country": "CL",
+  "tier": 3,
+  "names": {
+   "fr": "Torres del Paine",
+   "en": "Torres del Paine",
+   "es": "Torres del Paine",
+   "ar": "توريس ديل باين"
+  }
+ },
+ {
+  "id": "ls-peritomoreno",
+  "wiki": "Perito Moreno Glacier",
+  "lat": -50.5,
+  "lon": -73.05,
+  "country": "AR",
+  "tier": 2,
+  "names": {
+   "fr": "Glacier Perito Moreno",
+   "en": "Perito Moreno Glacier",
+   "es": "Glaciar Perito Moreno",
+   "ar": "نهر بيريتو مورينو الجليدي"
+  }
+ },
+ {
+  "id": "ls-monumentvalley",
+  "wiki": "Monument Valley",
+  "lat": 36.98,
+  "lon": -110.1,
+  "country": "US",
+  "tier": 2,
+  "names": {
+   "fr": "Monument Valley",
+   "en": "Monument Valley",
+   "es": "Monument Valley",
+   "ar": "وادي النصب"
+  }
+ },
+ {
+  "id": "ls-niagara",
+  "wiki": "Niagara Falls",
+  "lat": 43.08,
+  "lon": -79.07,
+  "country": "CA",
+  "tier": 1,
+  "names": {
+   "fr": "Chutes du Niagara",
+   "en": "Niagara Falls",
+   "es": "Cataratas del Niágara",
+   "ar": "شلالات نياجرا"
+  }
+ },
+ {
+  "id": "ls-moraine",
+  "wiki": "Moraine Lake",
+  "lat": 51.32,
+  "lon": -116.18,
+  "country": "CA",
+  "tier": 3,
+  "names": {
+   "fr": "Lac Moraine",
+   "en": "Moraine Lake",
+   "es": "Lago Moraine",
+   "ar": "بحيرة مورين"
+  }
+ },
+ {
+  "id": "ls-pamukkale",
+  "wiki": "Pamukkale",
+  "lat": 37.92,
+  "lon": 29.12,
+  "country": "TR",
+  "tier": 2,
+  "names": {
+   "fr": "Pamukkale",
+   "en": "Pamukkale",
+   "es": "Pamukkale",
+   "ar": "باموكالي"
+  }
+ },
+ {
+  "id": "ls-santorini",
+  "wiki": "Santorini",
+  "lat": 36.42,
+  "lon": 25.43,
+  "country": "GR",
+  "tier": 1,
+  "names": {
+   "fr": "Santorin",
+   "en": "Santorini",
+   "es": "Santorini",
+   "ar": "سانتوريني"
+  }
+ },
+ {
+  "id": "ls-plitvice",
+  "wiki": "Plitvice Lakes National Park",
+  "lat": 44.88,
+  "lon": 15.62,
+  "country": "HR",
+  "tier": 2,
+  "names": {
+   "fr": "Lacs de Plitvice",
+   "en": "Plitvice Lakes",
+   "es": "Lagos de Plitvice",
+   "ar": "بحيرات بليتفيتشه"
+  }
+ },
+ {
+  "id": "ls-moher",
+  "wiki": "Cliffs of Moher",
+  "lat": 52.97,
+  "lon": -9.43,
+  "country": "IE",
+  "tier": 2,
+  "names": {
+   "fr": "Falaises de Moher",
+   "en": "Cliffs of Moher",
+   "es": "Acantilados de Moher",
+   "ar": "منحدرات موهر"
+  }
+ },
+ {
+  "id": "ls-lofoten",
+  "wiki": "Lofoten",
+  "lat": 68.15,
+  "lon": 14.0,
+  "country": "NO",
+  "tier": 3,
+  "names": {
+   "fr": "Îles Lofoten",
+   "en": "Lofoten Islands",
+   "es": "Islas Lofoten",
+   "ar": "جزر لوفوتن"
+  }
+ },
+ {
+  "id": "ls-zhangjiajie",
+  "wiki": "Zhangjiajie National Forest Park",
+  "lat": 29.32,
+  "lon": 110.43,
+  "country": "CN",
+  "tier": 2,
+  "names": {
+   "fr": "Parc de Zhangjiajie",
+   "en": "Zhangjiajie Forest Park",
+   "es": "Parque de Zhangjiajie",
+   "ar": "غابة تشانغجياجيه"
+  }
+ },
+ {
+  "id": "ls-liriver",
+  "wiki": "Li River",
+  "lat": 25.0,
+  "lon": 110.5,
+  "country": "CN",
+  "tier": 3,
+  "names": {
+   "fr": "Rivière Li (Guilin)",
+   "en": "Li River (Guilin)",
+   "es": "Río Li (Guilin)",
+   "ar": "نهر لي (قويلين)"
+  }
+ },
+ {
+  "id": "ls-milford",
+  "wiki": "Milford Sound",
+  "lat": -44.64,
+  "lon": 167.9,
+  "country": "NZ",
+  "tier": 2,
+  "names": {
+   "fr": "Milford Sound",
+   "en": "Milford Sound",
+   "es": "Milford Sound",
+   "ar": "ميلفورد ساوند"
+  }
+ },
+ {
+  "id": "ls-borabora",
+  "wiki": "Bora Bora",
+  "lat": -16.5,
+  "lon": -151.74,
+  "country": "FR",
+  "tier": 2,
+  "names": {
+   "fr": "Bora-Bora",
+   "en": "Bora Bora",
+   "es": "Bora Bora",
+   "ar": "بورا بورا"
+  }
+ },
+ {
+  "id": "ls-sossusvlei",
+  "wiki": "Sossusvlei",
+  "lat": -24.73,
+  "lon": 15.29,
+  "country": "NA",
+  "tier": 2,
+  "names": {
+   "fr": "Sossusvlei",
+   "en": "Sossusvlei",
+   "es": "Sossusvlei",
+   "ar": "سوسوسفلي"
+  }
+ },
+ {
+  "id": "ls-everest",
+  "wiki": "Mount Everest",
+  "lat": 27.99,
+  "lon": 86.93,
+  "country": "NP",
+  "tier": 1,
+  "names": {
+   "fr": "Mont Everest",
+   "en": "Mount Everest",
+   "es": "Monte Everest",
+   "ar": "جبل إيفرست"
+  }
+ },
+ {
+  "id": "ls-wadirum",
+  "wiki": "Wadi Rum",
+  "lat": 29.58,
+  "lon": 35.42,
+  "country": "JO",
+  "tier": 2,
+  "names": {
+   "fr": "Wadi Rum",
+   "en": "Wadi Rum",
+   "es": "Wadi Rum",
+   "ar": "وادي رم"
+  }
+ },
+ {
+  "id": "ls-deadsea",
+  "wiki": "Dead Sea",
+  "lat": 31.5,
+  "lon": 35.5,
+  "country": "JO",
+  "tier": 1,
+  "names": {
+   "fr": "Mer Morte",
+   "en": "Dead Sea",
+   "es": "Mar Muerto",
+   "ar": "البحر الميت"
+  }
+ },
+ {
+  "id": "ls-socotra",
+  "wiki": "Socotra",
+  "lat": 12.5,
+  "lon": 53.9,
+  "country": "YE",
+  "tier": 3,
+  "names": {
+   "fr": "Socotra",
+   "en": "Socotra",
+   "es": "Socotra",
+   "ar": "سقطرى"
+  }
+ },
+ {
+  "id": "ls-baobabs",
+  "wiki": "Avenue of the Baobabs",
+  "lat": -20.25,
+  "lon": 44.42,
+  "country": "MG",
+  "tier": 2,
+  "names": {
+   "fr": "Allée des Baobabs",
+   "en": "Avenue of the Baobabs",
+   "es": "Avenida de los Baobabs",
+   "ar": "طريق أشجار الباوباب"
+  }
+ },
+ {
+  "id": "ls-chocolatehills",
+  "wiki": "Chocolate Hills",
+  "lat": 9.83,
+  "lon": 124.17,
+  "country": "PH",
+  "tier": 3,
+  "names": {
+   "fr": "Collines de Chocolat",
+   "en": "Chocolate Hills",
+   "es": "Colinas de Chocolate",
+   "ar": "تلال الشوكولاتة"
+  }
+ },
+ {
+  "id": "ls-bromo",
+  "wiki": "Mount Bromo",
+  "lat": -7.94,
+  "lon": 112.95,
+  "country": "ID",
+  "tier": 3,
+  "names": {
+   "fr": "Mont Bromo",
+   "en": "Mount Bromo",
+   "es": "Monte Bromo",
+   "ar": "جبل برومو"
+  }
+ },
+ {
+  "id": "ls-ngorongoro",
+  "wiki": "Ngorongoro Crater",
+  "lat": -3.2,
+  "lon": 35.5,
+  "country": "TZ",
+  "tier": 3,
+  "names": {
+   "fr": "Cratère du Ngorongoro",
+   "en": "Ngorongoro Crater",
+   "es": "Cráter del Ngorongoro",
+   "ar": "فوهة نغورونغورو"
+  }
+ },
+ {
+  "id": "ls-jokulsarlon",
+  "wiki": "Jökulsárlón",
+  "lat": 64.05,
+  "lon": -16.18,
+  "country": "IS",
+  "tier": 3,
+  "names": {
+   "fr": "Jökulsárlón",
+   "en": "Jökulsárlón",
+   "es": "Jökulsárlón",
+   "ar": "يوكولسارلون"
+  }
+ },
+ {
+  "id": "ls-dolomites",
+  "wiki": "Dolomites",
+  "lat": 46.41,
+  "lon": 11.84,
+  "country": "IT",
+  "tier": 2,
+  "names": {
+   "fr": "Dolomites",
+   "en": "Dolomites",
+   "es": "Dolomitas",
+   "ar": "جبال الدولوميت"
+  }
+ },
+ {
+  "id": "ls-bled",
+  "wiki": "Lake Bled",
+  "lat": 46.36,
+  "lon": 14.09,
+  "country": "SI",
+  "tier": 2,
+  "names": {
+   "fr": "Lac de Bled",
+   "en": "Lake Bled",
+   "es": "Lago Bled",
+   "ar": "بحيرة بليد"
+  }
+ },
+ {
+  "id": "ls-yosemite",
+  "wiki": "Yosemite Valley",
+  "lat": 37.74,
+  "lon": -119.57,
+  "country": "US",
+  "tier": 2,
+  "names": {
+   "fr": "Vallée de Yosemite",
+   "en": "Yosemite Valley",
+   "es": "Valle de Yosemite",
+   "ar": "وادي يوسميتي"
+  }
+ },
+ {
+  "id": "ls-okavango",
+  "wiki": "Okavango Delta",
+  "lat": -19.3,
+  "lon": 22.9,
+  "country": "BW",
+  "tier": 3,
+  "names": {
+   "fr": "Delta de l'Okavango",
+   "en": "Okavango Delta",
+   "es": "Delta del Okavango",
+   "ar": "دلتا أوكافانغو"
+  }
+ },
+ {
+  "id": "ls-amazonriver",
+  "wiki": "Amazon River",
+  "lat": -3.1,
+  "lon": -60.0,
+  "country": "BR",
+  "tier": 1,
+  "names": {
+   "fr": "Fleuve Amazone",
+   "en": "Amazon River",
+   "es": "Río Amazonas",
+   "ar": "نهر الأمازون"
+  }
+ },
+ {
+  "id": "ls-nile",
+  "wiki": "Aswan",
+  "lat": 24.09,
+  "lon": 32.9,
+  "country": "EG",
+  "tier": 2,
+  "names": {
+   "fr": "Le Nil à Assouan",
+   "en": "The Nile at Aswan",
+   "es": "El Nilo en Asuán",
+   "ar": "النيل في أسوان"
+  }
+ }
+]

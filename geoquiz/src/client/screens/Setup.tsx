@@ -18,7 +18,7 @@ export function Setup() {
   const [raw, setCfg] = useState<Settings>(() => (editing ? s.room!.settings : { ...settings, category: game }));
   // Défi du jour : questions imposées (10, même tirage pour tous).
   const review = game === 'review';
-  const fixed = game === 'daily' || review;
+  const fixed = game === 'daily' || review || game === 'survival';
   const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed]);
   const [hostPlays, setHostPlays] = useState(true);
   const set = (patch: Partial<Settings>) => setCfg(fix({ ...cfg, ...patch }, catalog?.zones ?? []));

@@ -8,7 +8,7 @@ import { RoadSign } from '../RoadSign';
 import { useApp } from '../state';
 
 /** Jeux qui ne s'impriment pas en quiz (carte cliquable, photo, son…) : même liste que le serveur. */
-const NOT_PRINTABLE = new Set(['custom', 'daily', 'pin', 'chain', 'countries', 'regions', 'sounds', 'monuments', 'stadiums', 'brands', 'review', 'league', 'passport', 'macities', 'tournament', 'classes']);
+const NOT_PRINTABLE = new Set(['custom', 'daily', 'pin', 'chain', 'countries', 'regions', 'sounds', 'monuments', 'stadiums', 'brands', 'review', 'league', 'passport', 'macities', 'tournament', 'classes', 'whereami', 'whoami', 'survival', 'globle', 'capword', 'compass', 'nameall', 'cards', 'colorflag']);
 export const printableGame = (id: string) => ['countries', 'regions', 'pin'].includes(id) || !NOT_PRINTABLE.has(id);
 
 type Kind = 'map' | 'flags' | 'quiz';

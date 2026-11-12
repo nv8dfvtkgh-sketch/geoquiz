@@ -6,7 +6,7 @@ import { activeEvent, countries, ensureRegion, extras, regionMap, world, worldBy
 import { drawQuestions } from './rooms';
 
 /** Jeux qu'on peut imprimer en quiz à cocher (pas de carte cliquable, de photo ni de son). */
-export const PRINT_EXCLUDED = new Set(['custom', 'daily', 'pin', 'chain', 'countries', 'regions', 'sounds', 'monuments', 'stadiums']);
+export const PRINT_EXCLUDED = new Set(['custom', 'daily', 'whereami', 'whoami', 'survival', 'pin', 'chain', 'countries', 'regions', 'sounds', 'monuments', 'stadiums']);
 
 export interface PrintReq { kind: 'map' | 'flags' | 'quiz'; zone?: string; category?: string; difficulty?: Difficulty; count?: number; lang?: Lang }
 

@@ -33,8 +33,37 @@ function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
       {q.flag && (q.category === 'flagreveal'
         ? <MysteryFlag q={q} open={open}><FlagImg token={q.flag} className="flag big" /></MysteryFlag>
         : <FlagImg token={q.flag} className="flag big" />)}
-      {q.image && <img className="quiz-photo" src={`/api/img/${q.image}`} alt="" draggable={false} />}
+      {q.image && <img className={`quiz-photo ${q.kind === 'pin' ? 'with-map' : ''}`} src={`/api/img/${q.image}`} alt="" draggable={false} />}
       {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}
+      {q.clues && <Clues q={q} open={open} />}
+    </div>
+  );
+}
+
+/** « Qui suis-je ? » : les indices arrivent un par un (plus on répond tôt, plus on marque). */
+function Clues({ q, open }: { q: QuestionMsg; open: boolean }) {
+  const { t, s } = useApp();
+  const clues = q.clues!;
+  const [n, setN] = useState(1);
+  useEffect(() => {
+    setN(1);
+    // Avec chrono : tous les indices sont donnés avant les trois quarts du temps ; sans chrono, un toutes les 4 s.
+    const step = q.timeLimit ? (q.timeLimit * 0.75) / Math.max(1, clues.length - 1) : 4000;
+    const start = s.qAt - (q.timeLimit && q.remaining !== null ? q.timeLimit - q.remaining : 0);
+    const id = setInterval(() => setN(Math.min(clues.length, 1 + Math.floor((performance.now() - start) / step))), 250);
+    return () => clearInterval(id);
+  }, [q.index]);
+  const shown = open ? clues.length : n;
+  return (
+    <div className="clues">
+      <ol>
+        {clues.map((c, i) => (
+          <li key={i} className={i < shown ? 'on' : ''} style={{ '--i': i } as React.CSSProperties} dir="auto">
+            <b>{i + 1}</b><span>{i < shown ? c : t('clue.hidden')}</span>
+          </li>
+        ))}
+      </ol>
+      {!open && shown < clues.length && <button type="button" className="text-btn" onClick={() => setN(shown + 1)}>💡 {t('clue.next')}</button>}
     </div>
   );
 }
@@ -175,6 +204,9 @@ function Progress({ q }: { q: QuestionMsg }) {
     streak++;
   }
   const many = q.total > 20;
+  if (s.room?.settings.category === 'survival') {
+    return <div className="qprogress"><div className="qprogress-top"><span className="qnum">{t('survival.q', { i: q.index + 1 })}</span>{streak >= 2 && <span className="streak" key={streak}>🔥 {streak}</span>}</div></div>;
+  }
   return (
     <div className="qprogress">
       <div className="qprogress-top">
@@ -255,7 +287,7 @@ function Status({ q }: { q: QuestionMsg }) {
           {fb.km !== undefined && <span className="km">{t('play.km', { n: fb.km.toLocaleString() })} · {t('play.points', { n: fb.points })}</span>}
           {!fb.correct && reveal && <span dir="auto">{t('play.answerWas', { label: reveal.label })}</span>}
           {fb.correct && q.kind === 'type' && reveal && <span dir="auto">{t('play.spelling', { label: reveal.label })}</span>}
-          {fb.correct && q.kind !== 'type' && ['monuments', 'truefalse', 'stadiums', 'higher', 'timeline', 'pin', 'chain', 'timezones'].includes(q.category) && reveal && <span dir="auto">{reveal.label}</span>}
+          {fb.correct && q.kind !== 'type' && ['monuments', 'truefalse', 'stadiums', 'higher', 'timeline', 'pin', 'chain', 'timezones', 'whereami'].includes(q.category) && reveal && <span dir="auto">{reveal.label}</span>}
           {reveal?.credit && <small className="credit" dir="auto">{t('play.photo', { credit: reveal.credit })}</small>}
         </div>
         {reveal?.flag && <FlagImg token={reveal.flag} className="flag small" />}
@@ -362,6 +394,14 @@ function ModeBar() {
     );
   }
   if (room.settings.mode === 'teams' && room.kind === 'room' && me.team !== undefined) return <TeamChip team={me.team} />;
+  if (room.settings.category === 'survival' && me.lives !== undefined) {
+    return (
+      <div className="survival-bar">
+        <Hearts lives={me.lives} />
+        <span>{me.out ? t('survival.out') : t('survival.streak', { n: room.qIndex })}</span>
+      </div>
+    );
+  }
   return null;
 }
 

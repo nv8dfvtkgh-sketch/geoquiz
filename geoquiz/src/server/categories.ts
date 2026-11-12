@@ -38,6 +38,7 @@ export interface InternalQuestion {
   kit?: KitSpec; // maillot dessiné
   point?: [number, number]; // « Où est-ce ? » : emplacement exact
   order?: string[]; // frise : ordre correct des options
+  clues?: Names[]; // « Qui suis-je ? » : indices dévoilés un à un, du plus dur au plus facile
   /** Vérifie une réponse : id d'entité (carte), id d'option (QCM) ou texte (saisie). */
   check(value: string): boolean;
   /** Réponse notée finement (« Où est-ce ? ») : part des points de 0 à 1 et distance. */
@@ -51,7 +52,7 @@ export interface Category extends CategoryInfo {
   pool(zone: ZoneCtx, difficulty: Difficulty, wanted: number): string[];
   make(target: string, kind: 'map' | 'mcq' | 'type', zone: ZoneCtx, rnd: () => number): InternalQuestion;
   /** Médias à charger avant la partie (photos, sons). */
-  media?: 'monuments' | 'stadiums' | 'sounds';
+  media?: 'monuments' | 'stadiums' | 'sounds' | 'landscapes';
 }
 
 // ------------------------------------------------------------------ outils
@@ -1221,9 +1222,133 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
   });
 }
 
+
+// ------------------------------------------------------------------ où suis-je ? (photo de paysage)
+/** Projection Natural Earth (degrés → coordonnées de la carte du monde). */
+export function fromLonLat(lonDeg: number, latDeg: number): [number, number] {
+  const l = (lonDeg * Math.PI) / 180, p = (latDeg * Math.PI) / 180;
+  if (!world.proj) return [Math.round(500 + lonDeg * 2.8), Math.round(306 - latDeg * 3.4)]; // carte de démo
+  const [x0, y1, scale] = world.proj;
+  const p2 = p * p, p4 = p2 * p2;
+  const x = l * (0.8707 - 0.131979 * p2 + p4 * (-0.013791 + p4 * (0.003971 * p2 - 0.001529 * p4)));
+  const y = p * (1.007226 + p2 * (0.015085 + p4 * (-0.044475 + 0.028874 * p2 - 0.005916 * p4)));
+  return [Math.round((x - x0) * scale * 10) / 10, Math.round((y1 - y) * scale * 10) / 10];
+}
+const whereamiCat: Category = {
+  id: 'whereami',
+  noZone: true,
+  media: 'landscapes',
+  qtypes: ['map'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.landscapes.filter((m) => photoFor(m.id)), d, n),
+  make(target, _kind, zone) {
+    const m = extras.landscapes.find((x) => x.id === target)!;
+    const photo = photoFor(target)!;
+    const k = fromLonLat(m.lon, m.lat);
+    // Tous les points à moins de 150 km, plus rien au-delà de 3 000 km.
+    const grade = (v: string) => {
+      const [x, y] = v.split(',').map(Number);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return { ok: false, credit: 0 };
+      const km = distanceKm([x, y], k);
+      const credit = km <= 150 ? 1 : Math.max(0, 1 - (km - 150) / 2850);
+      return { ok: credit >= 0.6, credit: Math.round(credit * 100) / 100, km: Math.round(km) };
+    };
+    const c = countries[m.country];
+    return {
+      category: 'whereami', kind: 'pin', target, promptKey: 'q.whereami', imageRef: `wiki:${target}`, credit: photo.credit,
+      answer: mapNames((l) => `${m.names[l]} — ${c.names[l]}`),
+      map: worldSpec(zone, 'shapes'), point: k, attempts: 1, check: (v) => grade(v).ok, grade,
+    };
+  },
+};
+
+// ------------------------------------------------------------------ qui suis-je ? (indices)
+const CONTINENT_NAMES: Record<string, Names> = {
+  africa: { fr: 'Afrique', en: 'Africa', es: 'África', ar: 'أفريقيا' },
+  europe: { fr: 'Europe', en: 'Europe', es: 'Europa', ar: 'أوروبا' },
+  asia: { fr: 'Asie', en: 'Asia', es: 'Asia', ar: 'آسيا' },
+  'north-america': { fr: 'Amérique du Nord', en: 'North America', es: 'América del Norte', ar: 'أمريكا الشمالية' },
+  'south-america': { fr: 'Amérique du Sud', en: 'South America', es: 'América del Sur', ar: 'أمريكا الجنوبية' },
+  oceania: { fr: 'Océanie', en: 'Oceania', es: 'Oceanía', ar: 'أوقيانوسيا' },
+};
+const CLUE: Record<string, Names> = {
+  pop: { fr: "J'ai environ {x} millions d'habitants.", en: 'I have about {x} million inhabitants.', es: 'Tengo unos {x} millones de habitantes.', ar: 'عدد سكاني حوالي {x} مليون نسمة.' },
+  popSmall: { fr: "J'ai moins d'un million d'habitants.", en: 'I have fewer than one million inhabitants.', es: 'Tengo menos de un millón de habitantes.', ar: 'عدد سكاني أقل من مليون نسمة.' },
+  currency: { fr: 'Ma monnaie : {x}.', en: 'My currency: {x}.', es: 'Mi moneda: {x}.', ar: 'عملتي: {x}.' },
+  nbCount: { fr: "J'ai {x} pays voisins.", en: 'I have {x} neighbouring countries.', es: 'Tengo {x} países vecinos.', ar: 'لدي {x} دول مجاورة.' },
+  island: { fr: "Je n'ai aucune frontière terrestre.", en: 'I have no land borders.', es: 'No tengo fronteras terrestres.', ar: 'ليست لدي حدود برية.' },
+  continent: { fr: 'Je suis en {x}.', en: 'I am in {x}.', es: 'Estoy en {x}.', ar: 'أقع في {x}.' },
+  neighbor: { fr: 'Un de mes voisins : {x}.', en: 'One of my neighbours: {x}.', es: 'Uno de mis vecinos: {x}.', ar: 'أحد جيراني: {x}.' },
+  capital: { fr: 'Ma capitale commence par « {x} ».', en: 'My capital starts with “{x}”.', es: 'Mi capital empieza por «{x}».', ar: 'تبدأ عاصمتي بحرف «{x}».' },
+};
+const clue = (k: string, x?: (l: Lang) => string): Names => mapNames((l) => CLUE[k][l].replace('{x}', x ? x(l) : ''));
+const whoamiCat: Category = {
+  id: 'whoami',
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world', 'continent'],
+  pool: (zone, d, n) => countryPool(zone, d, n, (id) => !!countries[id].pop && !!worldById[id]),
+  make(target, kind, zone, rnd) {
+    const c = countries[target];
+    const clues: Names[] = [];
+    const m = (c.pop ?? 0) / 1e6;
+    clues.push(m < 1 ? clue('popSmall') : clue('pop', (l) => (m < 10 ? Math.round(m * 10) / 10 : Math.round(m)).toLocaleString(l === 'ar' ? 'ar-MA' : l)));
+    // La monnaie trahit souvent le pays (« dirham marocain ») : seulement si son nom ne le contient pas.
+    const stem = (n: string) => normalize(n).slice(0, 4);
+    const cur = c.currency;
+    if (cur && LANG_KEYS.every((l) => !normalize(cur.names[l] ?? '').includes(stem(c.names[l] ?? '')))) clues.push(clue('currency', (l) => cur.names[l] ?? cur.code));
+    else clues.push(c.neighbors.length ? clue('nbCount', (l) => c.neighbors.length.toLocaleString(l === 'ar' ? 'ar-MA' : l)) : clue('island'));
+    if (CONTINENT_NAMES[c.continent]) clues.push(clue('continent', (l) => CONTINENT_NAMES[c.continent][l]));
+    const nb = c.neighbors.filter((id) => countries[id] && !countries[id].dependency);
+    if (nb.length) { const n = nb[Math.floor(rnd() * nb.length)]; clues.push(clue('neighbor', (l) => countries[n].names[l])); }
+    if (c.capital) clues.push(clue('capital', (l) => [...(c.capital!.names[l] ?? '')][0]?.toUpperCase() ?? ''));
+    const base = { category: 'whoami', target, promptKey: 'q.whoami', clues, answer: c.names, revealFlagIso: target, attempts: 1 };
+    if (kind === 'type') return { ...base, kind: 'type', check: typedCheck(allNames(c.names), countryNameSet) };
+    const { options, correct } = optionsFrom(target, countryDistractors(target, 3, rnd, (x) => !countries[x].dependency && (zone.countryIds ?? []).includes(x)), rnd, (id) => ({ label: countries[id].names, flagIso: undefined }));
+    return { ...base, kind: 'mcq', options, revealOption: correct, check: (v) => v === correct };
+  },
+};
+
+// ------------------------------------------------------------------ survie (3 vies)
+/** Questions de plus en plus dures, tous jeux de géographie mélangés (QCM). */
+export const SURVIVAL_GAMES = ['flags', 'capitals', 'countries', 'currencies', 'silhouettes', 'languages', 'whoami'];
+export function survivalQuestions(rnd: () => number = Math.random): InternalQuestion[] {
+  const zone = zones.get('world')!;
+  const out: InternalQuestion[] = [];
+  const steps: [Difficulty, number][] = [['easy', 10], ['medium', 20], ['hard', 40]];
+  const seen = new Set<string>();
+  for (const [d, n] of steps) {
+    for (let i = 0; i < n; i++) {
+      for (let tries = 0; tries < 6; tries++) {
+        const cat = CATEGORIES[SURVIVAL_GAMES[Math.floor(rnd() * SURVIVAL_GAMES.length)]];
+        if (!cat?.qtypes.includes('mcq')) continue;
+        const pool = cat.pool(zone, d, 30);
+        if (!pool.length) continue;
+        const t = pool[Math.floor(rnd() * pool.length)];
+        if (seen.has(`${cat.id}:${t}`)) continue;
+        seen.add(`${cat.id}:${t}`);
+        try {
+          const q = cat.make(t, 'mcq', zone, rnd);
+          if (q.map?.map === 'world') q.map = { ...q.map, active: q.map.active.filter((x) => x === t || !countries[x]?.dependency) };
+          out.push(q);
+        } catch { continue; }
+        break;
+      }
+    }
+  }
+  return out;
+}
+const survivalCat: Category = {
+  id: 'survival',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool: () => [],
+  make() { throw new Error('survie : voir survivalQuestions'); },
+};
+
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, whereamiCat, whoamiCat, survivalCat].map((c) => [c.id, c]),
 );
 
 /**
