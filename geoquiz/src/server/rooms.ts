@@ -176,6 +176,20 @@ export class Room {
   /** Révisions : jeton du compte, et questions chargées. */
   reviewToken?: string;
   reviewItems?: { c: string; t: string; z: string }[];
+  /** Devoir de classe joué (« CODE:id ») et tournoi du vendredi. */
+  assignment?: string;
+  tournament?: boolean;
+  /** Salle automatique (tournoi) : lancée toute seule à cette heure, sans hôte qui décide. */
+  autoStartAt?: number;
+  autoTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Programme le lancement automatique (à rappeler à chaque arrivée : les Workers peuvent s'endormir). */
+  armAuto() {
+    if (!this.autoStartAt || this.state !== 'lobby') return;
+    if (this.autoTimer) clearTimeout(this.autoTimer);
+    const wait = this.autoStartAt - Date.now();
+    if (wait <= 0) { if (this.players().length >= 2) this.start(); return; }
+    this.autoTimer = setTimeout(() => { this.autoTimer = null; if (this.state === 'lobby') { if (this.players().length >= 2) this.start(); else { this.autoStartAt = Date.now() + 60_000; this.armAuto(); } } }, wait);
+  }
 
   /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
   get mode() {
@@ -233,6 +247,7 @@ export class Room {
       const res = this.addMember(conn, msg.name, msg.lang, role);
       if (typeof res === 'string') return conn.send({ t: 'error', code: res });
       if (this.kind === 'solo' && this.state === 'lobby') this.start();
+      if (this.autoStartAt) this.armAuto();
       if (this.kind === 'duel' && this.players().length === 2 && this.state === 'lobby') {
         setTimeout(() => this.state === 'lobby' && this.players().length === 2 && this.start(), 1500);
       }
@@ -334,6 +349,7 @@ export class Room {
   }
 
   kick(by: string, playerId: string) {
+    if (this.autoStartAt) return;
     if (by !== this.hostId || playerId === this.hostId) return;
     const m = this.members.get(playerId);
     if (!m) return;
@@ -346,6 +362,7 @@ export class Room {
 
   destroy() {
     if (this.timer) clearTimeout(this.timer);
+    if (this.autoTimer) clearTimeout(this.autoTimer);
     for (const m of this.members.values()) if (m.conn) { m.conn.room = undefined; m.conn.memberId = undefined; }
     this.members.clear();
     this.onDestroy();
@@ -394,7 +411,8 @@ export class Room {
   handle(conn: Conn, msg: ClientMsg) {
     const m = conn.memberId ? this.members.get(conn.memberId) : undefined;
     if (!m) return;
-    const isHost = m.id === this.hostId;
+    // Tournoi : personne ne pilote la salle.
+    const isHost = m.id === this.hostId && !this.autoStartAt;
     switch (msg.t) {
       case 'settings':
         if (isHost && this.state === 'lobby') {
@@ -536,7 +554,7 @@ export class Room {
   }
 
   rematch(m: Member) {
-    if (this.state !== 'finished') return;
+    if (this.state !== 'finished' || this.autoStartAt) return;
     if (this.kind === 'duel') {
       this.rematchVotes.add(m.id);
       if (this.players().every((p) => this.rematchVotes.has(p.id)) && this.players().length === 2) this.start();
@@ -815,6 +833,7 @@ export class Room {
         teamWon: this.mode === 'teams' && p.team !== undefined && p.team === bestTeam,
         found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
         timeMs: res.reduce((t, x) => t + (x?.timeMs ?? (this.settings.timeLimit * 1000)), 0),
+        assignment: this.assignment, tournament: this.tournament,
         items: this.recap.map((x, i) => ({
           c: x.q.category, t: x.q.target, ok: !!res[i]?.correct,
           z: this.reviewItems?.[(x.q as any).reviewIndex ?? -1]?.z ?? (this.settings.category === 'daily' ? 'world' : this.settings.zone),

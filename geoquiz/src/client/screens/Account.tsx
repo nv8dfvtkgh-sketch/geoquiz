@@ -352,6 +352,7 @@ export function Profile() {
         <div><strong>{me.weekXp}</strong><span>{t('profile.week')}</span></div>
       </div>
       <button type="button" className="btn primary wide" onClick={() => go('leaderboard')}>{t('lb.title')}</button>
+      <button type="button" className="btn ghost wide" onClick={() => go('classes')}>🏫 {t('class.title')}</button>
 
       <h2>{t('profile.badges', { n: Object.keys(me.badges).length, total: BADGES.length })}</h2>
       <ul className="badges">

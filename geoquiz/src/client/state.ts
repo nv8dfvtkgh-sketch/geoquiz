@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament';
 
 export interface Feedback {
   q: number;
@@ -45,6 +45,8 @@ export interface State {
   challenge?: { code: string; results?: ChallengeEntry[]; by?: string };
   /** Défi ouvert par un lien /defi/CODE. */
   challengeCode?: string;
+  /** Classe ouverte par un lien /classe/CODE. */
+  classCode?: string;
   /** Retour de Google / Facebook pour un nouveau joueur : ticket d'inscription. */
   oauthTicket?: string;
 }

@@ -3,6 +3,7 @@ import { LIMITS } from '../../shared/protocol';
 import { FAMILIES, Icon, type GameDef } from '../games';
 import { joinGame } from '../net';
 import { FeedbackLink } from '../Feedback';
+import { HomeworkCard } from './School';
 import { useApp } from '../state';
 import { AccountForm, Stars } from './Account';
 import { starsOf } from '../account';
@@ -113,6 +114,7 @@ function Games() {
       {FAMILIES.map((f) => (
         <section key={f.id} className="family">
           <h2>{t(`family.${f.id}`)}</h2>
+          {f.id === 'today' && <HomeworkCard />}
           {f.id === 'geo' && (
             <button type="button" className="geo-feature" onClick={() => { if (!ready) return askName(); go('geo'); window.scrollTo(0, 0); }}>
               <span className="geo-feature-art" aria-hidden="true">🗺️</span>

@@ -190,7 +190,7 @@ export interface RecapItem {
 
 // Création d'une partie : POST /api/rooms (CreateRoomReq) → { code } ou { error }.
 // Ensuite, le navigateur ouvre le WebSocket /ws/<CODE> et envoie « join » (ou « resume »).
-export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string; reviewToken?: string }
+export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string }
 /** Défi entre amis : les mêmes questions, jouées chacun quand il veut. */
 export interface ChallengeEntry { name: string; correct: number; total: number; timeMs: number; at: number }
 export interface ChallengeView { code: string; settings: Settings; by: string; results: ChallengeEntry[] }
@@ -235,7 +235,7 @@ export type AgeGroup = 'u13' | '13-17' | '18+';
 export const AVATARS = ['🦁', '🐪', '🦊', '🐼', '🐨', '🦉', '🐢', '🐬', '🦜', '🐘', '🦒', '🐧', '🐙', '🦋', '🐝', '🦄', '🐸', '🐯', '🐻', '🐰', '🦓', '🦩', '🐳', '🦖'];
 export const BADGES = [
   'first', 'games10', 'games50', 'games200', 'perfect', 'hardHero', 'winner', 'duelWin', 'battleWin',
-  'explorer', 'collector', 'streak3', 'streak7', 'flags100', 'morocco', 'polyglot',
+  'explorer', 'collector', 'streak3', 'streak7', 'flags100', 'morocco', 'polyglot', 'tourney',
 ] as const;
 export const UNLOCK_AT = 60; // % de bonnes réponses pour débloquer la difficulté suivante
 export interface CatStats {

@@ -1177,3 +1177,35 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .league-list li.down { box-shadow: inset 4px 0 0 #E8590C; }
 .league-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .85rem; font-weight: 700; margin: 0; }
 .league-legend .up { color: var(--good); } .league-legend .down { color: #E8590C; }
+
+/* ------------------------------------------------------------------ classes et tournoi */
+.school { display: grid; gap: 14px; }
+.school h1 { margin: 0; }
+.school-card { display: grid; gap: 10px; padding: 16px; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); min-width: 0; }
+.school-card h2 { margin: 0; font-size: 1.15rem; }
+.school-card p { margin: 0; }
+.class-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.class-list button { width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; text-align: start; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--paper-2); color: var(--ink); font: inherit; cursor: pointer; }
+.class-list small { grid-column: 1 / -1; color: var(--ink-2); }
+.class-new { align-items: end; }
+.hw-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.hw-list li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--paper-2); border: 1px solid var(--border); }
+.hw-list li div { display: grid; gap: 2px; min-width: 0; }
+.hw-list li.done { opacity: .85; }
+.hw-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; align-items: end; }
+.class-code { text-align: center; justify-items: center; }
+.class-table th { vertical-align: top; }
+.class-table th .text-btn { padding: 0 4px; }
+.btn.danger { background: var(--bad); color: #fff; border-color: transparent; }
+.homework-card { display: flex; align-items: center; gap: 14px; width: 100%; margin: 0 0 12px; padding: 14px 18px; border: 0; border-radius: 18px; background: #1F8A5B; color: #fff; text-align: start; font: inherit; cursor: pointer; box-shadow: var(--shadow); }
+.homework-card > span:first-child { font-size: 1.8rem; }
+.homework-card > span:nth-child(2) { flex: 1; display: grid; }
+.homework-card small { opacity: .85; }
+.tournament { display: grid; gap: 12px; text-align: center; justify-items: center; }
+.tournament h1 { margin: 0; }
+.tn-theme { margin: 0; font: 700 1.2rem var(--font-display); }
+.countdown.big { display: flex; gap: 8px; }
+.countdown.big div { background: #0F1B2D; color: #fff; border-radius: 12px; padding: 10px 12px; min-width: 64px; display: grid; }
+.countdown.big b { font: 800 1.8rem var(--font-display); }
+.countdown.big small { color: #B9C6DA; font-size: .72rem; }
+.tn-rules { text-align: start; color: var(--ink-2); display: grid; gap: 4px; max-width: 46ch; margin: 6px 0 0; padding-inline-start: 1.2em; }

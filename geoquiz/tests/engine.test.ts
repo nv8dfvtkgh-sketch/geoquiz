@@ -916,3 +916,61 @@ test('Révisions et ligues', async () => {
   const down = (await svc.leagueView(tokOf(lastId)))!;
   assert.equal(down.div, 0, 'Bronze : pas de descente');
 });
+
+test('Espace classe : prof, élèves, devoirs, résultats', async () => {
+  const { AccountService, accountRoute } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  const svc = new AccountService(kv);
+  const call = async (method: string, path: string, token: string, body: unknown = {}) => accountRoute(svc, method, path, new URLSearchParams(), async () => body, token, null);
+  const prof = await svc.register({ pseudo: 'MmeAlami', password: 'motdepasse1', age: '18+', email: 'prof@ecole.ma' });
+  const kid = await svc.register({ pseudo: 'Adam', password: 'motdepasse1', age: 'u13' });
+  assert.equal((await call('POST', '/api/classes', kid.token, { name: 'CM2' }))!.json!['error' as never], 'class.adultsOnly');
+  const { code } = (await call('POST', '/api/classes', prof.token, { name: 'CM2 B', level: 'CE6' }))!.json as any;
+  assert.match(code, /^[A-Z0-9]{6}$/);
+  assert.equal(((await call('GET', `/api/class/${code}`, ''))!.json as any).teacher, 'MmeAlami');
+  await call('POST', '/api/classes/join', kid.token, { code });
+  const hw = (await call('POST', `/api/classes/${code}/assign`, prof.token, { settings: { category: 'regions', zone: 'r:MA:groups', difficulty: 'easy', count: 12 }, due: '2026-11-20' }))!.json as any;
+  assert.equal(hw.settings.count, 12);
+  const mine = (await call('GET', '/api/classes', kid.token))!.json as any;
+  assert.equal(mine.joined[0].assignments[0].mine, null);
+  // L'élève fait le devoir.
+  await svc.record(kid.token, { category: 'regions', difficulty: 'easy', kind: 'solo', mode: 'classic', zone: 'r:MA:groups', lang: 'fr', total: 12, correct: 10, accuracy: 83, rank: 1, players: 1, timeMs: 60000, assignment: `${code}:${hw.id}` });
+  await svc.record(kid.token, { category: 'regions', difficulty: 'easy', kind: 'solo', mode: 'classic', zone: 'r:MA:groups', lang: 'fr', total: 12, correct: 12, accuracy: 100, rank: 1, players: 1, timeMs: 50000, assignment: `${code}:${hw.id}` });
+  const detail = (await call('GET', `/api/classes/${code}`, prof.token))!.json as any;
+  const r = detail.results[hw.id][kid.me.id];
+  assert.deepEqual([r.correct, r.tries, r.best], [10, 2, 100], 'premier score gardé, meilleur à côté');
+  assert.equal((await call('GET', `/api/classes/${code}`, kid.token))!.status, 400, 'un élève ne voit pas le tableau du prof');
+  const csv = (await call('GET', `/api/classes/${code}.csv`, prof.token))!.text!;
+  assert.ok(csv.includes('Adam') && csv.includes('10/12'));
+});
+
+test('Tournoi du vendredi : heure de Casablanca, code de la semaine, lancement automatique', async () => {
+  const { nextTournament } = await import('../src/server/tournament');
+  const { tzOffset } = await import('../src/server/categories');
+  const thu = Date.UTC(2026, 10, 12, 12); // jeudi
+  const t = nextTournament(thu);
+  const off = tzOffset('Africa/Casablanca', new Date(t.startsAt));
+  const local = new Date(t.startsAt + off * 60000);
+  assert.deepEqual([local.getUTCDay(), local.getUTCHours(), local.getUTCMinutes()], [5, 20, 30]);
+  assert.equal(t.state, 'soon');
+  assert.equal(nextTournament(t.startsAt - 5 * 60000).state, 'open');
+  assert.equal(nextTournament(t.startsAt + 10 * 60000).code, t.code);
+  assert.notEqual(nextTournament(t.startsAt + 7 * 86400000).code, t.code);
+  // Salle automatique : personne ne peut la lancer, elle part toute seule.
+  const room = create('room', settings({ category: 'flags', zone: 'world', difficulty: 'easy', qtype: 'mcq', count: 3 }));
+  room.autoStartAt = Date.now() + 80;
+  const a = client(), b = client();
+  onMessage(a.conn, room.code, { t: 'join', name: 'A', lang: 'fr' });
+  onMessage(b.conn, room.code, { t: 'join', name: 'B', lang: 'fr' });
+  onMessage(a.conn, room.code, { t: 'start' });
+  assert.equal(room.state, 'lobby', 'le premier arrivé ne peut pas lancer');
+  await new Promise((r) => setTimeout(r, 150));
+  assert.equal(room.state, 'question');
+  room.destroy();
+});

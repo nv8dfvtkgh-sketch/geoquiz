@@ -8,6 +8,7 @@ import type { ClientMsg, ServerMsg } from '../shared/protocol';
 import { categoryInfos, poolCounts } from './categories';
 import { fetchPhoto } from './photos';
 import { countryList, flagPath, printSheet } from './print';
+import { nextTournament } from './tournament';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
@@ -84,6 +85,7 @@ async function createRoom(body: any): Promise<string | { error: string }> {
   const room = new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code));
   room.quizToken = quizToken;
   if (kind === 'solo' && typeof body.challenge === 'string' && /^[A-Z0-9]{6}$/.test(body.challenge)) room.challenge = body.challenge;
+  if (kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? ''))) room.assignment = body.assignment;
   if (settings.category === 'review') { if (kind !== 'solo') return { error: 'settings.invalid' }; room.reviewToken = String(body.reviewToken ?? '').slice(0, 64); }
   rooms.set(code, room);
   return code;
@@ -124,6 +126,16 @@ const server = http.createServer(async (req, res) => {
   try {
     if (p === '/healthz') return send(res, 200, JSON.stringify({ ok: true, rooms: rooms.size }));
     if (p === '/api/catalog') return send(res, 200, catalogJson, 'application/json', 'public, max-age=300');
+    if (p === '/api/tournament') {
+      const tn = nextTournament();
+      const open = tn.state === 'open' || tn.state === 'live';
+      if (open && !rooms.has(tn.code)) {
+        const room = new Room(tn.code, 'room', tn.settings, true, () => rooms.delete(tn.code));
+        room.autoStartAt = tn.startsAt; room.tournament = true;
+        rooms.set(tn.code, room);
+      }
+      return send(res, 200, JSON.stringify({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }));
+    }
     if (p === '/api/countries') return send(res, 200, JSON.stringify(countryList(url.searchParams.get('lang') ?? 'fr')), 'application/json', 'public, max-age=3600');
     if (p === '/api/print' && req.method === 'POST') {
       let body: any = null;
@@ -142,7 +154,7 @@ const server = http.createServer(async (req, res) => {
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
-    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p === '/api/league' || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) {
+    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p === '/api/league' || p.startsWith('/api/class') || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
       const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
       const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,

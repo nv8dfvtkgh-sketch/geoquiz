@@ -38,6 +38,10 @@ export interface GameResult {
   found?: string[];
   /** Temps total de réponse (départage du défi du jour). */
   timeMs?: number;
+  /** Devoir d'une classe : « CODE:id ». */
+  assignment?: string;
+  /** Tournoi du vendredi. */
+  tournament?: boolean;
   /** Chaque question (jeu, cible, zone, réussie ?) : alimente le mode révision. */
   items?: { c: string; t: string; z: string; ok: boolean }[];
 }
@@ -78,7 +82,22 @@ interface Account {
   rev?: Record<string, ReviewItem>;
   /** Ligue : division actuelle, groupe de la semaine, résultat de la semaine passée. */
   league?: { div: number; week?: string; group?: string; last?: { week: string; div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' } };
+  /** Classes : celles qu'il anime (prof), celles qu'il a rejointes (élève). */
+  teaching?: string[];
+  classes?: string[];
 }
+
+// ------------------------------------------------------------------ classes
+interface ClassAssignment { id: string; settings: Record<string, unknown>; due?: string; createdAt: number }
+interface ClassResult { correct: number; total: number; timeMs: number; at: number; tries: number; best: number }
+interface SchoolClass {
+  code: string; name: string; level: string; owner: string; ownerPseudo: string; createdAt: number;
+  students: Record<string, { pseudo: string; avatar: string; joinedAt: number }>;
+  assignments: ClassAssignment[];
+  results: Record<string, Record<string, ClassResult>>; // devoir → élève → résultat
+}
+const CLASS_LIMITS = { classes: 15, students: 60, assignments: 60 };
+const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 
 export class AccountError extends Error {}
 
@@ -539,6 +558,7 @@ export class AccountService {
     }
     if (r.lang && !a.langs.includes(r.lang)) a.langs = [...a.langs, r.lang].slice(0, 8);
     this.updateReview(a, r.items);
+    if (typeof r.assignment === 'string' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(r.assignment)) await this.recordAssignment(a, r.assignment, correct, total, Math.round(r.timeMs ?? 0));
     if (xp > 0) await this.addLeagueXp(a, xp);
     a.lastSeen = this.now();
 
@@ -562,6 +582,7 @@ export class AccountService {
     give('flags100', (a.cats.flags?.correct ?? 0) >= 100);
     give('morocco', r.category === 'regions' && r.zone.startsWith('r:MA:') && accuracy === 100 && total >= 5);
     give('polyglot', a.langs.length >= 3);
+    give('tourney', r.tournament === true && r.rank === 1 && r.players >= 3);
 
     await this.save(a);
     // Classement de la semaine.
@@ -620,6 +641,124 @@ export class AccountService {
       for (const k of Object.keys(s.days).sort().slice(0, -60)) delete s.days[k];
     }
     await this.kv.put('stats', s);
+  }
+
+  // ---------------------------------------------------------------- classes (espace prof)
+  private async cls(code: string) { return /^[A-Z0-9]{6}$/.test(code) ? (await this.kv.get<SchoolClass>(`cl:${code}`)) ?? null : null; }
+  private cleanText(v: unknown, n: number) { return String(v ?? '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, n); }
+  private assignmentSettings(s: any) {
+    const cat = this.cleanText(s?.category, 24);
+    if (!/^[a-z]+$/.test(cat) || ['custom', 'daily', 'review'].includes(cat)) throw new AccountError('class.badGame');
+    const zone = /^[a-zA-Z0-9:\-]{1,24}$/.test(String(s?.zone ?? '')) ? String(s.zone) : 'world';
+    const difficulty = ['easy', 'medium', 'hard'].includes(s?.difficulty) ? s.difficulty : 'easy';
+    const count = Math.min(30, Math.max(5, Math.round(Number(s?.count) || 10)));
+    return { category: cat, zone, difficulty, qtype: 'auto', count, timeLimit: 20, soloMode: 'training' };
+  }
+  async createClass(a: Account, b: any) {
+    if (a.age !== '18+') throw new AccountError('class.adultsOnly');
+    if ((a.teaching ?? []).length >= CLASS_LIMITS.classes) throw new AccountError('class.tooMany');
+    const name = this.cleanText(b?.name, 40);
+    if (name.length < 2) throw new AccountError('class.name');
+    let code = '';
+    do code = [...crypto.getRandomValues(new Uint8Array(6))].map((x) => CODE_CHARS[x % CODE_CHARS.length]).join('');
+    while (await this.kv.get(`cl:${code}`));
+    const c: SchoolClass = { code, name, level: this.cleanText(b?.level, 12), owner: a.id, ownerPseudo: a.pseudo, createdAt: this.now(), students: {}, assignments: [], results: {} };
+    await this.kv.put(`cl:${code}`, c);
+    a.teaching = [...(a.teaching ?? []), code];
+    await this.save(a);
+    return { code };
+  }
+  /** Vue d'ensemble : classes animées et classes rejointes (avec les devoirs et mes résultats). */
+  async myClasses(a: Account) {
+    const teaching = [];
+    for (const code of a.teaching ?? []) {
+      const c = await this.cls(code);
+      if (c) teaching.push({ code, name: c.name, level: c.level, students: Object.keys(c.students).length, assignments: c.assignments.length });
+    }
+    const joined = [];
+    for (const code of a.classes ?? []) {
+      const c = await this.cls(code);
+      if (!c || !c.students[a.id]) continue;
+      joined.push({
+        code, name: c.name, level: c.level, teacher: c.ownerPseudo,
+        assignments: c.assignments.map((x) => ({ id: x.id, settings: x.settings, due: x.due, mine: c.results[x.id]?.[a.id] ?? null })).reverse(),
+      });
+    }
+    return { teaching, joined, canTeach: a.age === '18+' };
+  }
+  async classDetail(a: Account, code: string) {
+    const c = await this.cls(code);
+    if (!c || c.owner !== a.id) throw new AccountError('class.notFound');
+    return c;
+  }
+  async classPublic(code: string) {
+    const c = await this.cls(code);
+    return c ? { code, name: c.name, level: c.level, teacher: c.ownerPseudo } : null;
+  }
+  async joinClass(a: Account, code: string) {
+    const c = await this.cls(code);
+    if (!c) throw new AccountError('class.notFound');
+    if (c.owner === a.id) throw new AccountError('class.own');
+    if (!c.students[a.id] && Object.keys(c.students).length >= CLASS_LIMITS.students) throw new AccountError('class.full');
+    c.students[a.id] = { pseudo: a.pseudo, avatar: a.avatar, joinedAt: c.students[a.id]?.joinedAt ?? this.now() };
+    await this.kv.put(`cl:${code}`, c);
+    if (!(a.classes ?? []).includes(code)) { a.classes = [...(a.classes ?? []), code].slice(-10); await this.save(a); }
+    return { code, name: c.name };
+  }
+  async leaveClass(a: Account, code: string) {
+    const c = await this.cls(code);
+    if (c) { delete c.students[a.id]; await this.kv.put(`cl:${code}`, c); }
+    a.classes = (a.classes ?? []).filter((x) => x !== code);
+    await this.save(a);
+  }
+  async removeStudent(a: Account, code: string, sid: string) {
+    const c = await this.classDetail(a, code);
+    delete c.students[sid];
+    await this.kv.put(`cl:${code}`, c);
+  }
+  async assign(a: Account, code: string, b: any) {
+    const c = await this.classDetail(a, code);
+    if (c.assignments.length >= CLASS_LIMITS.assignments) throw new AccountError('class.tooMany');
+    const due = /^\d{4}-\d{2}-\d{2}$/.test(String(b?.due ?? '')) ? String(b.due) : undefined;
+    const x: ClassAssignment = { id: randomHex(4), settings: this.assignmentSettings(b?.settings), due, createdAt: this.now() };
+    c.assignments.push(x);
+    await this.kv.put(`cl:${code}`, c);
+    return x;
+  }
+  async unassign(a: Account, code: string, id: string) {
+    const c = await this.classDetail(a, code);
+    c.assignments = c.assignments.filter((x) => x.id !== id);
+    delete c.results[id];
+    await this.kv.put(`cl:${code}`, c);
+  }
+  async deleteClass(a: Account, code: string) {
+    await this.classDetail(a, code);
+    await this.kv.delete(`cl:${code}`);
+    a.teaching = (a.teaching ?? []).filter((x) => x !== code);
+    await this.save(a);
+  }
+  async classCsv(a: Account, code: string) {
+    const c = await this.classDetail(a, code);
+    const cell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const head = ['eleve', ...c.assignments.map((x) => `${x.settings.category} (${x.createdAt ? new Date(x.createdAt).toISOString().slice(0, 10) : ''})`)];
+    const lines = Object.entries(c.students).map(([id, s]) => [s.pseudo, ...c.assignments.map((x) => {
+      const r = c.results[x.id]?.[id];
+      return r ? `${r.correct}/${r.total}` : '';
+    })].map(cell).join(','));
+    return '\ufeff' + [head.map(cell).join(','), ...lines].join('\r\n');
+  }
+  /** Fin d'une partie de devoir : premier score gardé, meilleur score à côté. */
+  private async recordAssignment(a: Account, ref: string, correct: number, total: number, timeMs: number) {
+    const [code, id] = ref.split(':');
+    const c = await this.cls(code ?? '');
+    if (!c || !c.students[a.id] || !c.assignments.some((x) => x.id === id)) return;
+    const cur = c.results[id]?.[a.id];
+    const pct = total ? Math.round((correct / total) * 100) : 0;
+    c.results[id] ??= {};
+    c.results[id][a.id] = cur
+      ? { ...cur, tries: cur.tries + 1, best: Math.max(cur.best, pct) }
+      : { correct, total, timeMs, at: this.now(), tries: 1, best: pct };
+    await this.kv.put(`cl:${code}`, c);
   }
 
   // ---------------------------------------------------------------- défis entre amis
@@ -775,6 +914,29 @@ export async function accountRoute(
       if (path === '/api/admin/feedback.csv' && method === 'GET') return { status: 200, text: await svc.adminFeedbackCsv(), type: 'text/csv; charset=utf-8' };
       const m = path.match(/^\/api\/admin\/feedback\/([0-9a-z]{6,20})$/);
       if (m && method === 'DELETE') { await svc.adminFeedbackDelete(m[1]); return { status: 200, json: {} }; }
+      return null;
+    }
+    const pub = path.match(/^\/api\/class\/([A-Z0-9]{6})$/);
+    if (pub && method === 'GET') {
+      const v = await svc.classPublic(pub[1]);
+      return v ? { status: 200, json: v } : { status: 404, json: { error: 'class.notFound' } };
+    }
+    if (path.startsWith('/api/classes')) {
+      const a = await svc.byToken(bearer);
+      if (!a) return { status: 401, json: { error: 'account.signedOut' } };
+      if (path === '/api/classes' && method === 'GET') return { status: 200, json: await svc.myClasses(a) };
+      if (path === '/api/classes' && method === 'POST') return { status: 200, json: await svc.createClass(a, await body()) };
+      if (path === '/api/classes/join' && method === 'POST') return { status: 200, json: await svc.joinClass(a, String((await body())?.code ?? '').toUpperCase()) };
+      const m = path.match(/^\/api\/classes\/([A-Z0-9]{6})(\.csv|\/leave|\/assign(?:\/([0-9a-f]{8}))?|\/students\/([0-9a-f]{16}))?$/);
+      if (!m) return null;
+      const [, code, sub, aid, sid] = m;
+      if (!sub && method === 'GET') return { status: 200, json: await svc.classDetail(a, code) };
+      if (!sub && method === 'DELETE') { await svc.deleteClass(a, code); return { status: 200, json: {} }; }
+      if (sub === '.csv') return { status: 200, text: await svc.classCsv(a, code), type: 'text/csv; charset=utf-8' };
+      if (sub === '/leave' && method === 'POST') { await svc.leaveClass(a, code); return { status: 200, json: {} }; }
+      if (sub === '/assign' && method === 'POST') return { status: 200, json: await svc.assign(a, code, await body()) };
+      if (aid && method === 'DELETE') { await svc.unassign(a, code, aid); return { status: 200, json: {} }; }
+      if (sid && method === 'DELETE') { await svc.removeStudent(a, code, sid); return { status: 200, json: {} }; }
       return null;
     }
     if (path === '/api/league' && method === 'GET') {
