@@ -133,12 +133,27 @@ function cleanName(name: any): string {
 const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 
 /** Tirage des questions selon les réglages. */
-export function drawQuestions(settings: Settings, rnd: () => number = Math.random): InternalQuestion[] {
+export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = []): InternalQuestion[] {
   if (settings.category === 'daily') return dailyQuestions();
   if (settings.category === 'survival') return survivalQuestions(rnd);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
-  const pool = shuffle(cat.pool(zone, settings.difficulty, settings.count), rnd).slice(0, settings.count);
+  const strict = cat.pool(zone, settings.difficulty, settings.count);
+  let pool = shuffle(strict, rnd);
+  if (avoid.length) {
+    // Anti-répétition : d'abord les questions jamais vues de ce niveau, puis celles du niveau
+    // au-dessus, et seulement ensuite les déjà vues (les plus anciennes en premier).
+    const seenAt = new Map(avoid.map((t, i) => [t, i]));
+    const next = settings.difficulty === 'easy' ? 'medium' : settings.difficulty === 'medium' ? 'hard' : null;
+    const inStrict = new Set(strict);
+    const wide = next ? shuffle(cat.pool(zone, next, settings.count).filter((t) => !inStrict.has(t)), rnd) : [];
+    const fresh = [...pool, ...wide].filter((t) => !seenAt.has(t));
+    const seen = [...pool, ...wide].filter((t) => seenAt.has(t)).sort((a, b) => seenAt.get(a)! - seenAt.get(b)!);
+    // Assez de questions neuves au bon niveau : on ne va pas chercher plus dur.
+    const freshStrict = pool.filter((t) => !seenAt.has(t));
+    pool = freshStrict.length >= settings.count ? freshStrict : [...fresh, ...seen];
+  }
+  pool = shuffle(pool.slice(0, settings.count), rnd);
   type Kind = 'map' | 'mcq' | 'type';
   // « Selon la difficulté » : facile = 4 choix, moyen = mélange, difficile = réponse à écrire.
   const auto: Record<string, Kind[]> = { easy: ['mcq'], medium: cat.qtypes, hard: ['type'] };
@@ -184,6 +199,8 @@ export class Room {
   retrying = false;
   /** Défi créé à partir de cette partie (solo), pour ne pas en créer deux. */
   madeChallenge?: string;
+  /** Questions déjà vues par le joueur dans ce jeu (anti-répétition), puis celles jouées ici. */
+  avoid: string[] = [];
   /** Révisions : jeton du compte, et questions chargées. */
   reviewToken?: string;
   reviewItems?: { c: string; t: string; z: string }[];
@@ -544,7 +561,9 @@ export class Room {
     this.questions = retry ? retry
       : this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
       : this.challengeItems ? this.challengeQuestions()
-      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings);
+      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid);
+    // Une revanche ne repose pas les mêmes questions.
+    if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-300);
     this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; p.shield = undefined; p.bet = undefined; }
@@ -908,7 +927,7 @@ export class Room {
   }
 
   finishedMsg(lang: Lang): ServerMsg {
-    const recap: RecapItem[] = this.recap.map((x, i) => ({ index: i, label: localize(x.q.answer, lang), results: x.results }));
+    const recap: RecapItem[] = this.recap.map((x, i) => ({ index: i, label: localize(x.q.answer, lang), results: x.results, target: x.q.target }));
     let solo;
     if (this.kind === 'solo') {
       const p = this.players()[0];

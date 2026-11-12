@@ -1094,3 +1094,21 @@ test('Album : ajout, fusion, cadeau de doublon, tenue d\'avatar débloquée', as
   const me = await svc.me((await svc.byToken(a.token))!);
   assert.deepEqual(me.look, { pin: 'star' });
 });
+
+test('Anti-répétition : pas de question déjà vue tant qu\'il en reste de nouvelles', () => {
+  const s = settings({ category: 'tennis', zone: 'world', difficulty: 'easy', qtype: 'mcq', count: 10 });
+  const all = new Set(CATEGORIES.tennis.pool(zones.get('world')!, 'hard', 99));
+  let seen: string[] = [];
+  const games = Math.floor(all.size / 10);
+  for (let g = 0; g < games; g++) {
+    const qs = drawQuestions(s, Math.random, seen);
+    assert.equal(qs.length, 10);
+    for (const q of qs) assert.ok(!seen.includes(q.target), `partie ${g + 1} : ${q.target} déjà vue`);
+    seen = [...seen, ...qs.map((q) => q.target)];
+  }
+  // Tout a été vu : on reprend par les plus anciennes.
+  const again = drawQuestions(s, Math.random, seen);
+  assert.equal(again.length, 10);
+  const oldest = new Set(seen.slice(0, 10 + (all.size % 10)));
+  assert.ok(again.every((q) => oldest.has(q.target) || !seen.includes(q.target)));
+});

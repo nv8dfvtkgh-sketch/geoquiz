@@ -194,12 +194,15 @@ export interface PlayerRound {
 export interface RecapItem {
   index: number;
   label: string;
+  target?: string; // identifiant de la question (pour ne pas la reposer trop vite)
   results: PlayerRound[];
 }
 
 // Création d'une partie : POST /api/rooms (CreateRoomReq) → { code } ou { error }.
 // Ensuite, le navigateur ouvre le WebSocket /ws/<CODE> et envoie « join » (ou « resume »).
-export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string }
+export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string;
+  /** Questions déjà vues dans ce jeu (de la plus ancienne à la plus récente) : on les évite. */
+  avoid?: string[] }
 /** Défi entre amis : les mêmes questions, jouées chacun quand il veut. */
 export interface ChallengeEntry { name: string; correct: number; total: number; timeMs: number; at: number }
 export interface ChallengeView { code: string; settings: Settings; by: string; results: ChallengeEntry[] }

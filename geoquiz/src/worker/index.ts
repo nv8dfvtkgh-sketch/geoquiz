@@ -105,7 +105,7 @@ async function createRoom(env: Env, body: any): Promise<string | { error: string
     const code = newCode();
     const res = await roomStub(env, code).fetch('https://room/init', {
       method: 'POST',
-      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined, reviewToken: settings.category === 'review' ? String(body.reviewToken ?? '').slice(0, 64) : undefined, assignment: kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? '')) ? body.assignment : undefined }),
+      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined, reviewToken: settings.category === 'review' ? String(body.reviewToken ?? '').slice(0, 64) : undefined, assignment: kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? '')) ? body.assignment : undefined, avoid: Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-300) : [] }),
     });
     if (res.ok) return code;
     if (res.status !== 409) return { error: 'server' }; // 409 : code déjà pris, on en tire un autre
@@ -252,7 +252,7 @@ export class RoomDO {
 
     if (url.pathname === '/init' && request.method === 'POST') {
       if (this.room) return new Response('exists', { status: 409 });
-      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string; autoStartAt?: number };
+      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string; autoStartAt?: number; avoid?: string[] };
       const settings = validSettings(b.settings);
       if (!settings) return new Response('invalid', { status: 400 });
       this.room = new Room(b.code, b.kind, settings, b.hostPlays, () => { this.room = null; });
@@ -260,6 +260,7 @@ export class RoomDO {
       this.room.challenge = b.challenge;
       this.room.reviewToken = b.reviewToken;
       this.room.assignment = b.assignment;
+      this.room.avoid = Array.isArray(b.avoid) ? b.avoid : [];
       if (b.autoStartAt) { this.room.autoStartAt = b.autoStartAt; this.room.tournament = true; this.room.armAuto(); }
       return new Response('ok');
     }

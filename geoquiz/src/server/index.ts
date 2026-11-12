@@ -84,6 +84,7 @@ async function createRoom(body: any): Promise<string | { error: string }> {
   const code = newCode((c) => rooms.has(c));
   const room = new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code));
   room.quizToken = quizToken;
+  room.avoid = Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-300) : [];
   if (kind === 'solo' && typeof body.challenge === 'string' && /^[A-Z0-9]{6}$/.test(body.challenge)) room.challenge = body.challenge;
   if (kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? ''))) room.assignment = body.assignment;
   if (settings.category === 'review') { if (kind !== 'solo') return { error: 'settings.invalid' }; room.reviewToken = String(body.reviewToken ?? '').slice(0, 64); }
@@ -152,7 +153,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (p === '/api/rooms' && req.method === 'POST') {
       let body: any = null;
-      try { body = JSON.parse(await readBody(req)); } catch {}
+      try { body = JSON.parse(await readBody(req, 32_000)); } catch {}
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }

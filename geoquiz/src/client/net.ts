@@ -24,6 +24,7 @@ export class Net {
   lang: Lang = 'fr';
   online = true;
   solo = false;
+  category = '';
 
   /** Ouvre la connexion vers une partie (ou la file de partie rapide). */
   open(target: string) {
@@ -57,7 +58,9 @@ export class Net {
     ws.onmessage = (e) => {
       let msg: ServerMsg;
       try { msg = JSON.parse(e.data); } catch { return; }
-      if (msg.t === 'joined') { saveSession({ code: msg.room.code, token: msg.token }); this.solo = msg.room.kind === 'solo'; }
+      if (msg.t === 'joined') { saveSession({ code: msg.room.code, token: msg.token }); this.solo = msg.room.kind === 'solo'; this.category = msg.room.settings.category; }
+      if (msg.t === 'room') this.category = msg.room.settings.category;
+      if (msg.t === 'finished') rememberSeen(this.category, msg.recap.map((x) => x.target ?? '').filter(Boolean));
       // Partie solo dont les images ou les sons n'ont pas pu être chargés : on la quitte (retour au réglage).
       if (msg.t === 'error' && msg.code === 'photos.unavailable' && this.solo) { saveSession(null); this.close(); }
       if (msg.t === 'kicked' || (msg.t === 'error' && (msg.code === 'room.expired' || msg.code === 'room.notFound'))) {
@@ -106,6 +109,8 @@ export async function createGame(req: CreateRoomReq, name: string, lang: Lang): 
   if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event'].includes(req.settings.category)) {
     try { localStorage.setItem('gq.last', JSON.stringify(req.settings)); } catch { /* stockage indisponible */ }
   }
+  // Anti-répétition : les questions déjà vues dans ce jeu sur cet appareil.
+  if (!req.challenge && !req.avoid) req = { ...req, avoid: seenIn(req.settings.category) };
   try {
     const r = await fetch('/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req) });
     const j = await r.json();
@@ -131,4 +136,16 @@ export async function joinGame(code: string, name: string, lang: Lang): Promise<
   net.open(code);
   net.send({ t: 'join', name, lang });
   return null;
+}
+
+/** Questions vues par jeu (les 300 dernières), pour ne pas les reposer trop vite. */
+const seenKey = (cat: string) => `gq.seen.${cat}`;
+export function seenIn(cat: string): string[] {
+  try { const v = JSON.parse(localStorage.getItem(seenKey(cat)) ?? '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
+}
+function rememberSeen(cat: string, targets: string[]) {
+  if (!cat || !targets.length || ['daily', 'review', 'custom', 'survival'].includes(cat)) return;
+  const set = new Set(targets);
+  const list = [...seenIn(cat).filter((t) => !set.has(t)), ...targets].slice(-300);
+  try { localStorage.setItem(seenKey(cat), JSON.stringify(list)); } catch { /* ignoré */ }
 }

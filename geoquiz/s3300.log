@@ -1,1 +1,7 @@
 • Quizellige prêt sur http://localhost:3300
+médias sounds Error: aucun son trouvé
+    at /home/claude/geoquiz/dist/server.js:348:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+médias sounds Error: aucun son trouvé
+    at /home/claude/geoquiz/dist/server.js:348:29
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
