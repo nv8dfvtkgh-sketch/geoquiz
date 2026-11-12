@@ -517,3 +517,75 @@ test('Fin de partie : les joueurs connectés reçoivent leur progression', async
   assert.equal(c.last('reward')!.reward.xp, 42);
   config.recordGame = prev;
 });
+
+test('Page Géographie : éléments trouvés retenus sans doublon, nombre à trouver par zone', async () => {
+  const { AccountService } = await import('../src/server/accounts');
+  const { poolCounts } = await import('../src/server/categories');
+  const store = new Map<string, unknown>();
+  const kv = { get: async (k: string) => structuredClone(store.get(k)) as any, put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); }, delete: async (k: string) => { store.delete(k); }, list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)) };
+  const svc = new AccountService(kv);
+  const { token } = await svc.register({ pseudo: 'Carto', password: 'secret1', age: '18+', email: 'c@x.ma' });
+  const base = { category: 'flags', difficulty: 'easy' as const, kind: 'solo' as const, mode: 'classic' as const, zone: 'world', lang: 'fr', players: 1, rank: 1, total: 5, correct: 2, accuracy: 40 };
+  await svc.record(token, { ...base, found: ['MA', 'FR'] });
+  await svc.record(token, { ...base, found: ['MA', 'ES'] });
+  const me = await svc.me((await svc.byToken(token))!);
+  assert.deepEqual(me.cats.flags.found!.sort(), ['ES', 'FR', 'MA']);
+  const pools = poolCounts();
+  assert.ok(pools.world.countries > 0 && pools.world.capitals <= pools.world.countries);
+  assert.ok(Object.keys(pools).some((z) => z.startsWith('c:')));
+});
+
+test('Connexion Google / Facebook : inscription, reconnexion, liaison par e-mail, 13 ans et plus', async () => {
+  const { AccountService, accountRoute } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = { get: async (k: string) => structuredClone(store.get(k)) as any, put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); }, delete: async (k: string) => { store.delete(k); }, list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)) };
+  const b64 = (o: unknown) => Buffer.from(JSON.stringify(o)).toString('base64url');
+  let gUser = { sub: 'g-123', email: 'Amine@Gmail.com', email_verified: true, name: 'Amine El Fassi', aud: 'gid' };
+  const fake = async (url: string) => {
+    if (url.startsWith('https://oauth2.googleapis.com/token')) return new Response(JSON.stringify({ id_token: `x.${b64(gUser)}.y` }));
+    if (url.includes('/oauth/access_token')) return new Response(JSON.stringify({ access_token: 'fbtok' }));
+    if (url.startsWith('https://graph.facebook.com/me')) return new Response(JSON.stringify({ id: 'fb-9', name: 'Sara', email: 'sara@x.ma' }));
+    return new Response('{}', { status: 404 });
+  };
+  const svc = new AccountService(kv, undefined, { google: { id: 'gid', secret: 's' }, facebook: { id: 'fid', secret: 's' } }, fake as any);
+  const O = 'https://quizellige.test';
+  const q = new URLSearchParams();
+  const start = (await accountRoute(svc, 'GET', '/api/auth/google/start', q, async () => ({}), '', null, O))!;
+  assert.equal(start.status, 302);
+  const state = new URL(start.location!).searchParams.get('state')!;
+  assert.ok(start.location!.includes('redirect_uri=https%3A%2F%2Fquizellige.test%2Fapi%2Fauth%2Fgoogle%2Fcallback'));
+  // État inconnu : refusé.
+  assert.ok((await svc.oauthCallback('google', new URLSearchParams({ code: 'c', state: 'f'.repeat(32) }), O)).includes('#autherr='));
+  const cb = await svc.oauthCallback('google', new URLSearchParams({ code: 'c', state }), O);
+  const ticket = cb.split('#oauth=')[1];
+  assert.ok(ticket, cb);
+  assert.deepEqual(await svc.oauthTicket(ticket), { provider: 'google', email: 'amine@gmail.com', name: 'Amine El Fassi' });
+  const err = async (f: () => Promise<unknown>) => { try { await f(); return ''; } catch (e) { return (e as Error).message; } };
+  assert.equal(await err(() => svc.oauthComplete({ ticket, pseudo: 'Amine', age: 'u13' })), 'account.ageMissing');
+  const done = await svc.oauthComplete({ ticket, pseudo: 'Amine', age: '18+', optin: true });
+  assert.equal(done.me.email, 'amine@gmail.com');
+  assert.equal(done.me.hasPassword, false);
+  assert.deepEqual(done.me.linked, ['google']);
+  assert.equal(await err(() => svc.oauthComplete({ ticket, pseudo: 'Amine2', age: '18+' })), 'account.ticketExpired');
+  // Reconnexion : directement connecté.
+  const s2 = new URL((await svc.oauthStart('google', O))).searchParams.get('state')!;
+  assert.ok((await svc.oauthCallback('google', new URLSearchParams({ code: 'c', state: s2 }), O)).includes('#auth='));
+  // Compte classique existant avec le même e-mail : Facebook s'y relie.
+  await svc.register({ pseudo: 'Sara', password: 'secret1', age: '13-17', email: 'sara@x.ma' });
+  const s3 = new URL((await svc.oauthStart('facebook', O))).searchParams.get('state')!;
+  const fb = await svc.oauthCallback('facebook', new URLSearchParams({ code: 'c', state: s3 }), O);
+  const tok = fb.split('#auth=')[1];
+  assert.ok(tok, fb);
+  const sara = await svc.me((await svc.byToken(tok))!);
+  assert.equal(sara.pseudo, 'Sara');
+  assert.deepEqual(sara.linked, ['facebook']);
+  // Un jeton Google destiné à une autre appli est refusé.
+  gUser = { ...gUser, sub: 'g-999', aud: 'autre' };
+  const s4 = new URL((await svc.oauthStart('google', O))).searchParams.get('state')!;
+  assert.ok((await svc.oauthCallback('google', new URLSearchParams({ code: 'c', state: s4 }), O)).includes('#autherr=account.providerFailed'));
+  // Suppression d'un compte sans mot de passe : il faut retaper son pseudo.
+  const amine = (await svc.byToken(done.token))!;
+  assert.equal(await err(() => svc.remove(amine, 'non')), 'account.wrong');
+  await svc.remove(amine, 'amine');
+  assert.equal(await kv.get('oauth:google:g-123'), undefined);
+});

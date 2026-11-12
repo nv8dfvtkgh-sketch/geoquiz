@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { WebSocketServer, WebSocket } from 'ws';
 import type { ClientMsg, ServerMsg } from '../shared/protocol';
-import { categoryInfos } from './categories';
+import { categoryInfos, poolCounts } from './categories';
 import { fetchPhoto } from './photos';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
@@ -34,7 +34,7 @@ initData(readJson(path.join(BUILD, 'world.json')), readJson(path.join(BUILD, 'co
   return fs.existsSync(f) ? readJson(f) : null;
 }, Object.fromEntries(EXTRA_FILES.map((k) => [k, fs.existsSync(path.join(BUILD, `${k}.json`)) ? readJson(path.join(BUILD, `${k}.json`)) : []])));
 config.maxPlayers = Number(process.env.MAX_PLAYERS ?? 50);
-const catalogJson = JSON.stringify(catalog(categoryInfos(), config.maxPlayers));
+const catalogJson = JSON.stringify(catalog(categoryInfos(), config.maxPlayers, poolCounts()));
 
 // ------------------------------------------------------------------ quiz créés (stockés en fichiers)
 const STORE = process.env.STORE_DIR ? path.resolve(process.env.STORE_DIR) : path.join(ROOT, 'data/store');
@@ -52,7 +52,11 @@ const fileKV: KV = {
 const quizzes = new QuizService(fileKV);
 config.loadQuiz = (id, token) => quizzes.playable(id, token);
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? '';
-const accounts = new AccountService(fileKV);
+const env = process.env;
+const accounts = new AccountService(fileKV, undefined, {
+  google: env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET ? { id: env.GOOGLE_CLIENT_ID, secret: env.GOOGLE_CLIENT_SECRET } : undefined,
+  facebook: env.FACEBOOK_APP_ID && env.FACEBOOK_APP_SECRET ? { id: env.FACEBOOK_APP_ID, secret: env.FACEBOOK_APP_SECRET } : undefined,
+});
 config.recordGame = (token, result) => accounts.record(token, result);
 
 // ------------------------------------------------------------------ salles
@@ -119,10 +123,12 @@ const server = http.createServer(async (req, res) => {
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
-    if (p.startsWith('/api/account') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) {
+    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
+      const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
       const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,
-        async () => JSON.parse(await readBody(req, 8192)), auth, ADMIN_PASSWORD ? safeEqual(auth, ADMIN_PASSWORD) : null);
+        async () => JSON.parse(await readBody(req, 8192)), auth, ADMIN_PASSWORD ? safeEqual(auth, ADMIN_PASSWORD) : null, origin);
+      if (r?.location) { res.writeHead(302, { Location: r.location, 'Cache-Control': 'no-store' }); return res.end(); }
       if (r) return send(res, r.status, r.text ?? JSON.stringify(r.json ?? {}), r.type ?? 'application/json');
       return send(res, 404, '{}');
     }

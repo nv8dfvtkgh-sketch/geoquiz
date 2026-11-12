@@ -212,12 +212,13 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
   ready = true;
 }
 
-export function catalog(categories: Catalog['categories'], maxPlayers: number): Catalog {
+export function catalog(categories: Catalog['categories'], maxPlayers: number, pools: Record<string, Record<string, number>> = {}): Catalog {
   return {
     zones: [...zones.values()].map((z) => ({
       ...z.info,
       view: z.view.map((n) => Math.round(n)) as [number, number, number, number],
       ids: z.info.kind === 'continent' || z.info.kind === 'subregion' ? z.countryIds : undefined,
+      pool: pools[z.info.id] ?? (z.info.kind === 'regions' ? { regions: z.info.count } : undefined),
     })),
     categories, maxPlayers,
   };

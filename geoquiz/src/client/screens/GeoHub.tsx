@@ -3,7 +3,7 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 import type { MapData, ZoneInfo } from '../../shared/protocol';
 import { loadMap } from '../MapView';
-import { useApp, type Look } from '../state';
+import { useApp } from '../state';
 
 export interface HubRegion { zone: string; games: string[] }
 export const HUB: HubRegion[] = [
@@ -88,30 +88,49 @@ export function GeoHubView({ progress, onPlay }: { progress: (game: string, zone
   );
 }
 
-/** Page d'aperçu (/apercu) : la carte des régions avec des pourcentages d'exemple, dans les deux styles. */
-export function HubPreview() {
-  const { t, look, setLook, go } = useApp();
-  const sample: Record<string, number> = {
-    'countries|world': 34, 'flags|world': 52, 'capitals|world': 12,
-    'countries|c:africa': 100, 'flags|c:africa': 86, 'capitals|c:africa': 61,
-    'countries|c:europe': 72, 'flags|c:europe': 95, 'capitals|c:europe': 40,
-    'countries|c:asia': 18, 'flags|c:asia': 0, 'capitals|c:asia': 5,
-    'countries|c:north-america': 55, 'flags|c:north-america': 30, 'capitals|c:north-america': 0,
-    'countries|c:south-america': 83, 'flags|c:south-america': 100, 'capitals|c:south-america': 47,
-    'countries|c:oceania': 0, 'flags|c:oceania': 0, 'capitals|c:oceania': 0,
-    'regions|r:MA:groups': 92,
+/** Pourcentage maîtrisé d'un jeu dans une zone, d'après les éléments déjà trouvés du joueur. */
+function useHubProgress() {
+  const { me, catalog } = useApp();
+  const [regionIds, setRegionIds] = useState<Set<string> | null>(null);
+  useEffect(() => { loadMap('region:MA:groups').then((d) => setRegionIds(new Set(d.features.map((f) => f.id)))).catch(() => {}); }, []);
+  return (game: string, zoneId: string): number | null => {
+    if (!me || !catalog) return null;
+    const z = catalog.zones.find((x) => x.id === zoneId);
+    const found = me.cats[game]?.found ?? [];
+    let n = 0;
+    let total = z?.pool?.[game] ?? z?.count ?? 0;
+    if (game === 'regions') {
+      n = regionIds ? found.filter((id) => regionIds.has(id)).length : 0;
+      total = z?.pool?.regions ?? z?.count ?? 0;
+    } else if (z?.kind === 'world') {
+      n = found.length;
+    } else {
+      const ids = new Set(z?.ids ?? []);
+      n = found.filter((id) => ids.has(id)).length;
+    }
+    return total ? Math.min(100, Math.floor((n * 100) / total)) : 0;
   };
+}
+
+/** Page « Géographie » : chaque ligne ouvre le jeu réglé sur la région et le mode choisis. */
+export function GeoScreen() {
+  const { t, me, go, settings, setSettings, openGame } = useApp();
+  const progress = useHubProgress();
   return (
     <div className="hub-page">
+      <button type="button" className="back-link" onClick={() => { history.replaceState(null, '', '/'); go('home'); }}>‹ {t('setup.backHome')}</button>
       <div className="hub-head">
         <h1>{t('hub.title')}</h1>
-        <p className="muted">{t('hub.previewNote')}</p>
-        <div className="seg">
-          {(['classic', 'kids'] as Look[]).map((l) => <button type="button" key={l} aria-pressed={(look ?? 'classic') === l} onClick={() => setLook(l)}>{t(`look.${l}`)}</button>)}
-        </div>
+        <p className="muted">{me ? t('hub.hint') : t('hub.guest')}</p>
+        {!me && <button type="button" className="btn primary" onClick={() => go('signin')}>{t('account.create')}</button>}
       </div>
-      <GeoHubView progress={(g, z) => sample[`${g}|${z}`] ?? 0} />
-      <div className="actions"><button type="button" className="btn ghost" onClick={() => { history.replaceState(null, '', '/'); go('home'); }}>{t('setup.backHome')}</button></div>
+      <GeoHubView
+        progress={progress}
+        onPlay={(game, zone, mode) => {
+          setSettings({ ...settings, zone, qtype: mode });
+          openGame(game);
+        }}
+      />
     </div>
   );
 }

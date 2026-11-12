@@ -11,19 +11,25 @@ import { Lobby, QuickWait } from './screens/Lobby';
 import { Game } from './screens/Game';
 import { Final } from './screens/Final';
 import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
-import { LeaderboardScreen, Profile, SignIn } from './screens/Account';
-import { HubPreview } from './screens/GeoHub';
+import { LeaderboardScreen, OAuthFinish, Profile, SignIn } from './screens/Account';
+import { GeoScreen } from './screens/GeoHub';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
 const adminPage = location.pathname.startsWith('/admin');
-const hubPreview = location.pathname.startsWith('/apercu');
+const hubPreview = /^\/(apercu|geographie)/.test(location.pathname);
+// Retour de Google / Facebook : #auth=<session>, #oauth=<ticket> ou #autherr=<code>.
+const authHash = new URLSearchParams(location.hash.slice(1));
+if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+if (authHash.get('auth')) saveAuth(authHash.get('auth'));
 
 export function App() {
   const [s, dispatch] = useReducer(reducer, undefined, () => {
     const st = initialState(joinMatch?.[1]?.toUpperCase());
     if (adminPage) return { ...st, screen: 'admin' as const };
-    if (hubPreview) return { ...st, screen: 'hubpreview' as const };
+    if (hubPreview) return { ...st, screen: 'geo' as const };
+    if (authHash.get('oauth')) return { ...st, screen: 'oauth' as const, oauthTicket: authHash.get('oauth')! };
+    if (authHash.get('autherr')) return { ...st, screen: 'signin' as const, error: authHash.get('autherr')! };
     if (quizMatch) return { ...st, screen: 'quizsheet' as const, quiz: { id: quizMatch[1].toUpperCase() } };
     return st;
   });
@@ -49,6 +55,8 @@ export function App() {
     });
   }, []);
   useEffect(() => { refreshMe(); }, [refreshMe]);
+  // Connecté par Google / Facebook sans avoir encore choisi de style : classique (13 ans et plus).
+  useEffect(() => { if (me && !look) { setLookState('classic'); try { localStorage.setItem('gq.look', 'classic'); } catch {} } }, [me, look]);
   useEffect(() => {
     document.documentElement.dataset.look = look ?? 'classic';
     if (look) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', look === 'kids' ? '#FFFFFF' : '#F5F5F7');
@@ -146,7 +154,8 @@ export function App() {
           {s.screen === 'profile' && <Profile />}
           {s.screen === 'leaderboard' && <LeaderboardScreen />}
           {s.screen === 'signin' && <SignIn />}
-          {s.screen === 'hubpreview' && <HubPreview />}
+          {s.screen === 'geo' && <GeoScreen />}
+          {s.screen === 'oauth' && <OAuthFinish />}
         </main>
       </div>
     </AppCtx.Provider>

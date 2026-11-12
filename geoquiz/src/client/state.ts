@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'hubpreview';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth';
 
 export interface Feedback {
   q: number;
@@ -40,6 +40,8 @@ export interface State {
   quiz?: { id: string; token?: string };
   /** Gains de la dernière partie (joueur connecté à son compte). */
   reward?: Reward;
+  /** Retour de Google / Facebook pour un nouveau joueur : ticket d'inscription. */
+  oauthTicket?: string;
 }
 
 export const initialState = (joinCode?: string): State => ({ screen: 'home', setupKind: 'game', game: 'countries', isHost: false, qAt: 0, joinCode });

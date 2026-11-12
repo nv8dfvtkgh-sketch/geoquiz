@@ -22,12 +22,15 @@ export interface GameResult {
   rank: number; // 1 = premier
   players: number;
   teamWon?: boolean;
+  /** Éléments trouvés pendant la partie (pays, régions…). */
+  found?: string[];
 }
 
 interface Account {
   id: string;
   pseudo: string;
-  pass: { salt: string; hash: string; iter: number };
+  pass?: { salt: string; hash: string; iter: number }; // absent : compte créé avec Google / Facebook
+  oauth?: Partial<Record<Provider, string>>; // identifiant chez le fournisseur
   age: AgeGroup;
   email?: string;
   country?: string;
@@ -47,6 +50,23 @@ interface Account {
 }
 
 export class AccountError extends Error {}
+
+// ------------------------------------------------------------------ connexion Google / Facebook
+export type Provider = 'google' | 'facebook';
+export interface OAuthConfig { google?: { id: string; secret: string }; facebook?: { id: string; secret: string } }
+type Fetcher = (url: string, init?: RequestInit) => Promise<Response>;
+interface OAuthProfile { sub: string; email?: string; verified: boolean; name?: string }
+
+function decodeJwtPayload(jwt: string): any {
+  const part = jwt.split('.')[1] ?? '';
+  const b = atob(part.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(part.length / 4) * 4, '='));
+  return JSON.parse(new TextDecoder().decode(Uint8Array.from(b, (c) => c.charCodeAt(0))));
+}
+/** Propose un pseudo valide à partir du nom donné par Google / Facebook. */
+function pseudoFrom(name = ''): string {
+  const clean = name.normalize('NFC').replace(/[^\p{L}\p{N}_\- ]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 20).trim();
+  return clean.length >= 3 ? clean : '';
+}
 
 // ------------------------------------------------------------------ niveaux et badges
 /** XP pour passer du niveau L au niveau L+1. */
@@ -105,9 +125,12 @@ const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,24}$/;
 
 // ------------------------------------------------------------------ service
 export class AccountService {
-  constructor(private kv: KV, private now = () => Date.now()) {}
+  constructor(private kv: KV, private now = () => Date.now(), private oauth: OAuthConfig = {}, private fetcher: Fetcher = (u, i) => fetch(u, i)) {}
 
   private async get(id: string) { return this.kv.get<Account>(`acct:${id}`); }
+  private async checkPass(a: Account, password: string) {
+    return !!a.pass && sameString(await hashPassword(password, a.pass.salt, a.pass.iter), a.pass.hash);
+  }
   private async save(a: Account) { await this.kv.put(`acct:${a.id}`, a); }
 
   private async session(a: Account) {
@@ -138,9 +161,14 @@ export class AccountService {
     if (await this.kv.get(`pseudo:${key}`)) throw new AccountError('account.pseudoTaken');
     if (age !== 'u13' && (await this.kv.get(`email:${email}`))) throw new AccountError('account.emailTaken');
     const salt = randomHex(16);
+    return this.create({ pseudo, pass: { salt, hash: await hashPassword(password, salt), iter: ITER }, age, email, body });
+  }
+
+  private async create({ pseudo, pass, age, email, body, oauth }: { pseudo: string; pass?: Account['pass']; age: AgeGroup; email: string; body: any; oauth?: Account['oauth'] }) {
+    const key = pseudoKey(pseudo);
     const t = this.now();
     const a: Account = {
-      id: randomHex(8), pseudo, pass: { salt, hash: await hashPassword(password, salt), iter: ITER }, age,
+      id: randomHex(8), pseudo, pass, oauth, age,
       email: age === 'u13' ? undefined : email,
       country: /^[A-Z]{2}$/.test(body?.country ?? '') ? body.country : undefined,
       avatar: AVATARS.includes(body?.avatar) ? body.avatar : AVATARS[0],
@@ -150,9 +178,115 @@ export class AccountService {
     };
     await this.kv.put(`pseudo:${key}`, a.id);
     if (a.email) await this.kv.put(`email:${a.email}`, a.id);
+    for (const [p, sub] of Object.entries(oauth ?? {})) await this.kv.put(`oauth:${p}:${sub}`, a.id);
     await this.save(a);
     await this.bump('users', 1);
     return { token: await this.session(a), me: await this.me(a) };
+  }
+
+  // ---------------------------------------------------------------- Google / Facebook
+  providers() { return { google: !!this.oauth.google, facebook: !!this.oauth.facebook }; }
+
+  async oauthStart(provider: Provider, origin: string) {
+    const cfg = this.oauth[provider];
+    if (!cfg) throw new AccountError('account.providerOff');
+    const state = randomHex(16);
+    await this.kv.put(`ostate:${state}`, { provider, exp: this.now() + 10 * 60000 });
+    const redirect = `${origin}/api/auth/${provider}/callback`;
+    if (provider === 'google') {
+      return 'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams({
+        client_id: cfg.id, redirect_uri: redirect, response_type: 'code', scope: 'openid email profile', state, prompt: 'select_account',
+      });
+    }
+    return 'https://www.facebook.com/v19.0/dialog/oauth?' + new URLSearchParams({
+      client_id: cfg.id, redirect_uri: redirect, response_type: 'code', scope: 'email,public_profile', state,
+    });
+  }
+
+  private async oauthProfile(provider: Provider, code: string, redirect: string): Promise<OAuthProfile> {
+    const cfg = this.oauth[provider]!;
+    if (provider === 'google') {
+      const r = await this.fetcher('https://oauth2.googleapis.com/token', {
+        method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ code, client_id: cfg.id, client_secret: cfg.secret, redirect_uri: redirect, grant_type: 'authorization_code' }).toString(),
+      });
+      const j: any = await r.json();
+      if (!r.ok || !j.id_token) throw new AccountError('account.providerFailed');
+      const p = decodeJwtPayload(j.id_token);
+      if (p.aud !== cfg.id || !p.sub) throw new AccountError('account.providerFailed');
+      return { sub: String(p.sub), email: p.email ? String(p.email).toLowerCase() : undefined, verified: p.email_verified === true || p.email_verified === 'true', name: p.name };
+    }
+    const tr = await this.fetcher('https://graph.facebook.com/v19.0/oauth/access_token?' + new URLSearchParams({ client_id: cfg.id, client_secret: cfg.secret, redirect_uri: redirect, code }));
+    const tj: any = await tr.json();
+    if (!tr.ok || !tj.access_token) throw new AccountError('account.providerFailed');
+    const mr = await this.fetcher('https://graph.facebook.com/me?' + new URLSearchParams({ fields: 'id,name,email', access_token: tj.access_token }));
+    const mj: any = await mr.json();
+    if (!mr.ok || !mj.id) throw new AccountError('account.providerFailed');
+    // Facebook ne renvoie que des adresses confirmées.
+    return { sub: String(mj.id), email: mj.email ? String(mj.email).toLowerCase() : undefined, verified: !!mj.email, name: mj.name };
+  }
+
+  /** Retour de Google / Facebook : renvoie l'adresse où rediriger le navigateur. */
+  async oauthCallback(provider: Provider, query: URLSearchParams, origin: string): Promise<string> {
+    const fail = (code: string) => `${origin}/#autherr=${code}`;
+    try {
+      const state = query.get('state') ?? '';
+      const st = /^[0-9a-f]{32}$/.test(state) ? await this.kv.get<{ provider: string; exp: number }>(`ostate:${state}`) : undefined;
+      if (st) await this.kv.delete(`ostate:${state}`);
+      if (!st || st.provider !== provider || st.exp < this.now()) return fail('account.providerFailed');
+      if (query.get('error') || !query.get('code')) return fail('account.providerCancelled');
+      const prof = await this.oauthProfile(provider, query.get('code')!, `${origin}/api/auth/${provider}/callback`);
+      // Compte déjà relié, ou même e-mail confirmé : on connecte (et on relie).
+      let id = await this.kv.get<string>(`oauth:${provider}:${prof.sub}`);
+      if (!id && prof.email && prof.verified) {
+        id = await this.kv.get<string>(`email:${prof.email}`);
+        const a = id ? await this.get(id) : undefined;
+        if (a && a.age !== 'u13') {
+          a.oauth = { ...a.oauth, [provider]: prof.sub };
+          await this.save(a);
+          await this.kv.put(`oauth:${provider}:${prof.sub}`, a.id);
+        } else id = undefined;
+      }
+      const a = id ? await this.get(id) : undefined;
+      if (a) {
+        a.lastSeen = this.now();
+        await this.save(a);
+        return `${origin}/#auth=${await this.session(a)}`;
+      }
+      // Nouveau joueur : il choisit encore son pseudo et sa tranche d'âge.
+      const ticket = randomHex(16);
+      await this.kv.put(`oticket:${ticket}`, { provider, sub: prof.sub, email: prof.verified ? prof.email : undefined, name: pseudoFrom(prof.name), exp: this.now() + 30 * 60000 });
+      return `${origin}/#oauth=${ticket}`;
+    } catch (e) {
+      if (e instanceof AccountError) return fail(e.message);
+      console.error('oauth', e);
+      return fail('account.providerFailed');
+    }
+  }
+
+  async oauthTicket(ticket: string) {
+    const t = /^[0-9a-f]{32}$/.test(ticket) ? await this.kv.get<{ provider: Provider; email?: string; name: string; exp: number }>(`oticket:${ticket}`) : undefined;
+    if (!t || t.exp < this.now()) throw new AccountError('account.ticketExpired');
+    return { provider: t.provider, email: t.email ?? '', name: t.name };
+  }
+
+  /** Fin d'inscription avec Google / Facebook (13 ans et plus seulement). */
+  async oauthComplete(body: any) {
+    const ticket = String(body?.ticket ?? '');
+    const t = /^[0-9a-f]{32}$/.test(ticket) ? await this.kv.get<{ provider: Provider; sub: string; email?: string; exp: number }>(`oticket:${ticket}`) : undefined;
+    if (!t || t.exp < this.now()) throw new AccountError('account.ticketExpired');
+    const pseudo = String(body?.pseudo ?? '').trim();
+    const p = pseudoProblem(pseudo);
+    if (p) throw new AccountError(p);
+    const age = body?.age as AgeGroup;
+    if (age !== '13-17' && age !== '18+') throw new AccountError('account.ageMissing');
+    const email = (t.email ?? String(body?.email ?? '').trim()).toLowerCase();
+    if (!EMAIL.test(email)) throw new AccountError('account.emailInvalid');
+    if (await this.kv.get(`pseudo:${pseudoKey(pseudo)}`)) throw new AccountError('account.pseudoTaken');
+    if (await this.kv.get(`email:${email}`)) throw new AccountError('account.emailTaken');
+    if (await this.kv.get(`oauth:${t.provider}:${t.sub}`)) throw new AccountError('account.pseudoTaken');
+    await this.kv.delete(`oticket:${ticket}`);
+    return this.create({ pseudo, age, email, body, oauth: { [t.provider]: t.sub } });
   }
 
   async login(body: any) {
@@ -164,7 +298,7 @@ export class AccountService {
     if (fail.until > this.now()) throw new AccountError('account.locked');
     const id = key && (await this.kv.get<string>(`pseudo:${key}`));
     const a = id ? await this.get(id) : undefined;
-    const ok = !!a && sameString(await hashPassword(password, a.pass.salt, a.pass.iter), a.pass.hash);
+    const ok = !!a && (await this.checkPass(a, password));
     if (!ok || !a) {
       fail.n++;
       if (fail.n >= 10) { fail.until = this.now() + 10 * 60000; fail.n = 0; }
@@ -186,6 +320,7 @@ export class AccountService {
       id: a.id, pseudo: a.pseudo, age: a.age, email: a.email, country: a.country, avatar: a.avatar, optin: a.optin, createdAt: a.createdAt,
       xp: a.xp, ...lv, title: titleOf(lv.level), games: a.games, correct: a.correct, answered: a.answered, wins: a.wins,
       cats: a.cats, badges: a.badges, days: { streak: a.days.streak, best: a.days.best }, weekXp: lb?.[a.id]?.xp ?? 0,
+      hasPassword: !!a.pass, linked: Object.keys(a.oauth ?? {}),
     };
   }
 
@@ -205,25 +340,27 @@ export class AccountService {
     }
     if (body?.newPassword !== undefined) {
       const np = String(body.newPassword);
-      if (!sameString(await hashPassword(String(body?.password ?? ''), a.pass.salt, a.pass.iter), a.pass.hash)) throw new AccountError('account.wrong');
+      // Compte Google / Facebook sans mot de passe : on peut en créer un sans l'ancien.
+      if (a.pass && !(await this.checkPass(a, String(body?.password ?? '')))) throw new AccountError('account.wrong');
       if (np.length < 6 || np.length > 100) throw new AccountError('account.passwordShort');
-      a.pass.salt = randomHex(16);
-      a.pass.hash = await hashPassword(np, a.pass.salt);
-      a.pass.iter = ITER;
+      const salt = randomHex(16);
+      a.pass = { salt, hash: await hashPassword(np, salt), iter: ITER };
     }
     await this.save(a);
     return this.me(a);
   }
 
-  /** Suppression définitive (droit à l'effacement) : il faut le mot de passe. */
+  /** Suppression définitive (droit à l'effacement) : il faut le mot de passe, ou le pseudo pour un compte Google / Facebook. */
   async remove(a: Account, password: string) {
-    if (!sameString(await hashPassword(password, a.pass.salt, a.pass.iter), a.pass.hash)) throw new AccountError('account.wrong');
+    const ok = a.pass ? await this.checkPass(a, password) : password.trim().toLowerCase() === a.pseudo.toLowerCase();
+    if (!ok) throw new AccountError('account.wrong');
     await this.purge(a);
   }
   private async purge(a: Account) {
     await this.kv.delete(`acct:${a.id}`);
     await this.kv.delete(`pseudo:${pseudoKey(a.pseudo)}`);
     if (a.email) await this.kv.delete(`email:${a.email}`);
+    for (const [p, sub] of Object.entries(a.oauth ?? {})) await this.kv.delete(`oauth:${p}:${sub}`);
     for (const k of await this.kv.list('sess:')) {
       const s = await this.kv.get<{ id: string }>(k);
       if (s?.id === a.id) await this.kv.delete(k);
@@ -262,6 +399,12 @@ export class AccountService {
     c.games++;
     c.correct += correct;
     c.answered += total;
+    // Page Géographie : on retient chaque élément trouvé au moins une fois.
+    if (Array.isArray(r.found) && r.found.length) {
+      const set = new Set(c.found ?? []);
+      for (const id of r.found.slice(0, 300)) if (typeof id === 'string' && id.length <= 24) set.add(id);
+      c.found = [...set].slice(0, 2000);
+    }
     // Meilleur score par difficulté : seulement sur des parties d'au moins 5 questions.
     let best: number | undefined;
     let unlocked: Reward['unlocked'];
@@ -367,9 +510,8 @@ export class AccountService {
     const a = await this.get(id);
     if (!a) throw new AccountError('account.notFound');
     const temp = randomHex(4);
-    a.pass.salt = randomHex(16);
-    a.pass.hash = await hashPassword(temp, a.pass.salt);
-    a.pass.iter = ITER;
+    const salt = randomHex(16);
+    a.pass = { salt, hash: await hashPassword(temp, salt), iter: ITER };
     await this.save(a);
     return { password: temp };
   }
@@ -380,13 +522,25 @@ export class AccountService {
 }
 
 // ------------------------------------------------------------------ routes HTTP (Node et Worker)
-export interface Routed { status: number; json?: unknown; text?: string; type?: string }
+export interface Routed { status: number; json?: unknown; text?: string; type?: string; location?: string }
 
 export async function accountRoute(
   svc: AccountService, method: string, path: string, query: URLSearchParams,
-  body: () => Promise<any>, bearer: string, adminOk: boolean | null,
+  body: () => Promise<any>, bearer: string, adminOk: boolean | null, origin = '',
 ): Promise<Routed | null> {
   try {
+    if (path === '/api/auth/providers' && method === 'GET') return { status: 200, json: svc.providers() };
+    const o = path.match(/^\/api\/auth\/(google|facebook)\/(start|callback)$/);
+    if (o && method === 'GET') {
+      const provider = o[1] as Provider;
+      if (o[2] === 'start') {
+        try { return { status: 302, location: await svc.oauthStart(provider, origin) }; }
+        catch (e) { if (e instanceof AccountError) return { status: 302, location: `${origin}/#autherr=${e.message}` }; throw e; }
+      }
+      return { status: 302, location: await svc.oauthCallback(provider, query, origin) };
+    }
+    if (path === '/api/account/oauth' && method === 'GET') return { status: 200, json: await svc.oauthTicket(query.get('ticket') ?? '') };
+    if (path === '/api/account/oauth' && method === 'POST') return { status: 200, json: await svc.oauthComplete(await body()) };
     if (path === '/api/account/register' && method === 'POST') return { status: 200, json: await svc.register(await body()) };
     if (path === '/api/account/login' && method === 'POST') return { status: 200, json: await svc.login(await body()) };
     if (path === '/api/leaderboard' && method === 'GET') {

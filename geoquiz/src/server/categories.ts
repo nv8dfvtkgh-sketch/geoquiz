@@ -635,6 +635,20 @@ export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
 );
 
+/**
+ * Nombre d'éléments à trouver pour « maîtriser » une zone, par jeu (page Géographie) :
+ * tous les pays de la zone qui ont un drapeau / une capitale, hors territoires dépendants.
+ */
+export function poolCounts(): Record<string, Record<string, number>> {
+  const out: Record<string, Record<string, number>> = {};
+  for (const [id, z] of zones) {
+    if (z.info.kind !== 'world' && z.info.kind !== 'continent') continue;
+    const ids = (z.countryIds ?? []).filter((c) => !countries[c].dependency);
+    out[id] = { countries: ids.length, flags: ids.filter(hasFlag).length, capitals: ids.filter(hasCapital).length };
+  }
+  return out;
+}
+
 export function categoryInfos(): CategoryInfo[] {
   return Object.values(CATEGORIES).map(({ id, qtypes, zoneKinds, noZone }) => ({ id, qtypes, zoneKinds, noZone }));
 }

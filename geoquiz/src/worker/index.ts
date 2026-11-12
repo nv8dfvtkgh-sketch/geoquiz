@@ -5,7 +5,7 @@
 //   - La partie rapide passe par un Durable Object unique (QuickDO) qui associe les joueurs.
 // Le moteur de jeu (src/server/rooms.ts, categories.ts, data.ts) est le même que la version Node.
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
-import { categoryInfos } from '../server/categories';
+import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
@@ -42,6 +42,10 @@ export interface Env {
   ACCOUNTS: DONamespace;
   MAX_PLAYERS?: string;
   ADMIN_PASSWORD?: string; // secret : Paramètres › Variables et secrets
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string; // secret
+  FACEBOOK_APP_ID?: string;
+  FACEBOOK_APP_SECRET?: string; // secret
 }
 
 /** Tous les quiz créés vivent dans un Durable Object unique (stockage SQLite). */
@@ -124,7 +128,7 @@ export default {
 
       if (p.startsWith('/api/')) {
         await ensureData(env);
-        if (p === '/api/catalog') return json(catalog(categoryInfos(), config.maxPlayers), 200, 'public, max-age=300');
+        if (p === '/api/catalog') return json(catalog(categoryInfos(), config.maxPlayers, poolCounts()), 200, 'public, max-age=300');
         if (p === '/api/rooms' && request.method === 'POST') {
           const text = await request.text();
           if (text.length > 4096) return json({ error: 'settings.invalid' }, 400);
@@ -135,7 +139,7 @@ export default {
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
         // Comptes joueurs, progression et classement : Durable Object des comptes.
-        if (p.startsWith('/api/account') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) return accountsStub(env).fetch(request);
+        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -327,7 +331,10 @@ export class AccountsDO {
       delete: async (k) => { await st.delete(k); },
       list: async (prefix) => [...(await st.list({ prefix })).keys()],
     };
-    this.svc = new AccountService(kv);
+    this.svc = new AccountService(kv, undefined, {
+      google: env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET ? { id: env.GOOGLE_CLIENT_ID, secret: env.GOOGLE_CLIENT_SECRET } : undefined,
+      facebook: env.FACEBOOK_APP_ID && env.FACEBOOK_APP_SECRET ? { id: env.FACEBOOK_APP_ID, secret: env.FACEBOOK_APP_SECRET } : undefined,
+    });
   }
 
   async fetch(request: Request): Promise<Response> {
@@ -343,8 +350,9 @@ export class AccountsDO {
       const text = await request.text();
       if (text.length > 8192) throw new SyntaxError('too large');
       return JSON.parse(text);
-    }, auth, pwd ? safeEqual(auth, pwd) : null);
+    }, auth, pwd ? safeEqual(auth, pwd) : null, url.origin);
     if (!r) return json({}, 404);
+    if (r.location) return new Response(null, { status: 302, headers: { Location: r.location, 'Cache-Control': 'no-store' } });
     if (r.text !== undefined) return new Response(r.text, { status: r.status, headers: { 'Content-Type': r.type ?? 'text/plain', 'Cache-Control': 'no-store' } });
     return json(r.json ?? {}, r.status);
   }

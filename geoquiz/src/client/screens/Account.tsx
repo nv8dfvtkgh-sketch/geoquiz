@@ -81,11 +81,28 @@ export function AccountForm({ pickStyle, onDone }: { pickStyle?: boolean; onDone
   };
 
   const tabs = (['signup', 'login'] as const);
+  const providers = useProviders();
   return (
     <form className="account-form" onSubmit={submit} noValidate>
       {mode !== 'guest' && (
         <div className="seg account-tabs">
           {tabs.map((m) => <button type="button" key={m} aria-pressed={mode === m} onClick={() => { setMode(m); setErr(''); }}>{t(`account.${m}`)}</button>)}
+        </div>
+      )}
+      {mode !== 'guest' && (providers.google || providers.facebook) && (
+        <div className="social">
+          {providers.google && (
+            <a className="social-btn google" href="/api/auth/google/start" onClick={() => { if (pickStyle && style) setLook(style); }}>
+              <GoogleG /> {t('account.withGoogle')}
+            </a>
+          )}
+          {providers.facebook && (
+            <a className="social-btn facebook" href="/api/auth/facebook/start" onClick={() => { if (pickStyle && style) setLook(style); }}>
+              <FacebookF /> {t('account.withFacebook')}
+            </a>
+          )}
+          <small className="muted center">{t('account.socialAge')}</small>
+          <div className="or"><span>{t('account.or')}</span></div>
         </div>
       )}
       <label className="field">
@@ -166,8 +183,110 @@ export function AccountForm({ pickStyle, onDone }: { pickStyle?: boolean; onDone
   );
 }
 
+// ------------------------------------------------------------------ Google / Facebook
+let providersCache: Promise<{ google: boolean; facebook: boolean }> | null = null;
+function useProviders() {
+  const [p, setP] = useState({ google: false, facebook: false });
+  useEffect(() => {
+    providersCache ??= api('/api/auth/providers').then((r) => (r.ok ? r.data : { google: false, facebook: false }));
+    providersCache.then(setP);
+  }, []);
+  return p;
+}
+/** Logos officiels des boutons de connexion (chartes Google et Facebook). */
+function GoogleG() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  );
+}
+function FacebookF() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z" />
+    </svg>
+  );
+}
+
+/** Fin d'inscription après Google / Facebook : pseudo et tranche d'âge (13 ans et plus). */
+export function OAuthFinish() {
+  const { t, s, look, setLook, signIn, go } = useApp();
+  const ticket = s.oauthTicket ?? '';
+  const [info, setInfo] = useState<{ provider: string; email: string; name: string } | null>(null);
+  const [pseudo, setPseudo] = useState('');
+  const [age, setAge] = useState<AgeGroup | ''>('');
+  const [email, setEmail] = useState('');
+  const [optin, setOptin] = useState(false);
+  const [country, setCountry] = useState('');
+  const [avatar, setAvatar] = useState(AVATARS[0]);
+  const [err, setErr] = useState('');
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    api(`/api/account/oauth?ticket=${encodeURIComponent(ticket)}`).then((r) => {
+      if (r.ok) { setInfo(r.data); setPseudo(r.data.name ?? ''); } else setErr(r.data?.error ?? 'account.ticketExpired');
+    });
+  }, [ticket]);
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErr('');
+    setBusy(true);
+    const r = await api('/api/account/oauth', { body: { ticket, pseudo: pseudo.trim(), age, email: info?.email ? undefined : email, optin, country, avatar } });
+    setBusy(false);
+    if (!r.ok) return setErr(r.data?.error ?? 'server');
+    signIn(r.data.token, r.data.me);
+    if (!look) setLook('classic');
+    go('home');
+  };
+  return (
+    <div className="welcome panel">
+      <div className="welcome-head">
+        <img className="welcome-logo" src="/logo.svg" width="72" height="72" alt="" />
+        <h1>{t('oauth.title')}</h1>
+        <p>{info ? t('oauth.hint', { provider: info.provider === 'google' ? 'Google' : 'Facebook' }) : ''}</p>
+      </div>
+      {!info ? (err ? <><p className="error">{t(`err.${err}`)}</p><button type="button" className="btn primary" onClick={() => go('signin')}>{t('account.signin')}</button></> : <div className="loading" />) : (
+        <form className="account-form" onSubmit={submit} noValidate>
+          <label className="field">
+            <span>{t('account.pseudo')}</span>
+            <input value={pseudo} maxLength={20} onChange={(e) => setPseudo(e.target.value)} autoComplete="nickname" />
+            <small className="muted">{t('account.pseudoHint')}</small>
+          </label>
+          <fieldset>
+            <legend>{t('account.age')}</legend>
+            <div className="seg">
+              {(['13-17', '18+'] as AgeGroup[]).map((a) => <button type="button" key={a} aria-pressed={age === a} onClick={() => setAge(a)}>{t(`account.age.${a}`)}</button>)}
+            </div>
+            <small className="muted">{t('oauth.kids')}</small>
+          </fieldset>
+          {info.email ? <p className="muted small">{t('oauth.email', { email: info.email })}</p> : (
+            <label className="field">
+              <span>{t('account.email')}</span>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+            </label>
+          )}
+          <label className="check">
+            <input type="checkbox" checked={optin} onChange={(e) => setOptin(e.target.checked)} />
+            <span>{t('account.optin')}</span>
+          </label>
+          <details className="more">
+            <summary>{t('account.optional')}</summary>
+            <label className="field"><span>{t('account.country')}</span><CountrySelect id="oa-country" value={country} onChange={setCountry} /></label>
+            <div className="field"><span>{t('account.avatar')}</span><AvatarPicker value={avatar} onChange={setAvatar} /></div>
+          </details>
+          {err && <p className="error" role="alert">{t(`err.${err}`)}</p>}
+          <button className="btn primary wide" disabled={busy}>{t('account.create')}</button>
+        </form>
+      )}
+    </div>
+  );
+}
+
 export function SignIn() {
-  const { t, go } = useApp();
+  const { t, go, s } = useApp();
   return (
     <div className="welcome panel">
       <button type="button" className="back-link" onClick={() => go('home')}>‹ {t('setup.backHome')}</button>
@@ -176,6 +295,7 @@ export function SignIn() {
         <h1>{t('account.title')}</h1>
         <p>{t('account.why')}</p>
       </div>
+      {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
       <AccountForm onDone={() => go('home')} />
     </div>
   );
@@ -291,7 +411,7 @@ function EditProfile({ me, auth, onDone }: { me: Me; auth: string; onDone: (m?: 
   const save = async () => {
     setErr('');
     const body: any = { avatar, country, ...(kid ? {} : { email, optin }) };
-    if (newPassword) Object.assign(body, { password, newPassword });
+    if (newPassword) Object.assign(body, me.hasPassword ? { password, newPassword } : { newPassword });
     const r = await api<Me>('/api/account', { method: 'PUT', body, token: auth });
     if (!r.ok) return setErr((r.data as any)?.error ?? 'server');
     onDone(r.data);
@@ -312,8 +432,8 @@ function EditProfile({ me, auth, onDone }: { me: Me; auth: string; onDone: (m?: 
         </>
       )}
       <details className="more">
-        <summary>{t('profile.changePassword')}</summary>
-        <label className="field"><span>{t('profile.currentPassword')}</span><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" /></label>
+        <summary>{me.hasPassword ? t('profile.changePassword') : t('profile.createPassword')}</summary>
+        {me.hasPassword && <label className="field"><span>{t('profile.currentPassword')}</span><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" /></label>}
         <label className="field"><span>{t('profile.newPassword')}</span><input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} autoComplete="new-password" /></label>
       </details>
       {err && <p className="error" role="alert">{t(`err.${err}`)}</p>}
@@ -324,7 +444,7 @@ function EditProfile({ me, auth, onDone }: { me: Me; auth: string; onDone: (m?: 
       <details className="more danger-zone" open={del} onToggle={(e) => setDel((e.target as HTMLDetailsElement).open)}>
         <summary>{t('profile.delete')}</summary>
         <p className="small">{t('profile.deleteNote')}</p>
-        <label className="field"><span>{t('profile.currentPassword')}</span><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" /></label>
+        <label className="field"><span>{me.hasPassword ? t('profile.currentPassword') : t('profile.typePseudo')}</span><input type={me.hasPassword ? 'password' : 'text'} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="off" /></label>
         <button type="button" className="btn danger-btn" disabled={!password} onClick={remove}>{t('profile.deleteConfirm')}</button>
       </details>
     </div>

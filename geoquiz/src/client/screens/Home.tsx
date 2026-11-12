@@ -111,6 +111,16 @@ function Games() {
       {FAMILIES.map((f) => (
         <section key={f.id} className="family">
           <h2>{t(`family.${f.id}`)}</h2>
+          {f.id === 'geo' && (
+            <button type="button" className="geo-feature" onClick={() => { if (!ready) return askName(); go('geo'); window.scrollTo(0, 0); }}>
+              <span className="geo-feature-art" aria-hidden="true">🗺️</span>
+              <span className="geo-feature-text">
+                <strong>{t('hub.title')}</strong>
+                <small>{t('hub.cta')}</small>
+              </span>
+              <span className="geo-feature-go" aria-hidden="true">›</span>
+            </button>
+          )}
           <div className="tiles">
             {f.games.map((g) => (
               <button

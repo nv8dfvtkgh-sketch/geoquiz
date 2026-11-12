@@ -693,6 +693,7 @@ export class Room {
         total, correct: res.filter((x) => x?.correct).length, accuracy: total ? (credit / total) * 100 : 0,
         rank: ranking.findIndex((x) => x.id === p.id) + 1, players: ranking.length,
         teamWon: this.mode === 'teams' && p.team !== undefined && p.team === bestTeam,
+        found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
       };
       config.recordGame(p.auth, result)
         .then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); })

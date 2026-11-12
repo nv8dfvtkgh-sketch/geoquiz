@@ -920,3 +920,24 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 [data-look='kids'] .hub-game { font-weight: 800; font-size: 1.08rem; }
 [data-look='kids'] .hub-pct { font-size: 1.1rem; color: var(--ink); }
 [data-look='kids'] .medal { width: 34px; height: 34px; }
+.geo-feature { display: flex; align-items: center; gap: 16px; width: 100%; margin: 0 0 14px; padding: 18px 20px; border: 0; border-radius: 22px; color: #FFFFFF; text-align: start; font: inherit; cursor: pointer; background: linear-gradient(120deg, #0071E3 0%, #0A84FF 45%, #34C759 120%); box-shadow: var(--shadow); transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s; }
+@media (hover: hover) { .geo-feature:hover { transform: translateY(-2px); box-shadow: var(--shadow-up); } }
+.geo-feature-art { font-size: 2.6rem; line-height: 1; flex: none; }
+.geo-feature-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.geo-feature-text strong { font-size: 1.2rem; letter-spacing: -.02em; }
+.geo-feature-text small { opacity: .9; font-size: .92rem; }
+.geo-feature-go { font-size: 2rem; line-height: 1; opacity: .8; }
+[dir='rtl'] .geo-feature-go { transform: scaleX(-1); }
+[data-look='kids'] .geo-feature { border-radius: 26px; background: linear-gradient(120deg, #7B3FF2, #1EA7FD); box-shadow: 0 6px 0 #5521C4; }
+[data-look='kids'] .geo-feature-text strong { font-size: 1.35rem; font-weight: 800; }
+.hub-page .back-link { align-self: flex-start; }
+.social { display: flex; flex-direction: column; gap: 10px; }
+.social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform .1s, filter .15s; }
+.social-btn:active { transform: scale(.98); }
+.social-btn.google { background: #FFFFFF; color: #1F1F1F; box-shadow: inset 0 0 0 1px #747775; }
+.social-btn.facebook { background: #1877F2; color: #FFFFFF; }
+@media (hover: hover) { .social-btn:hover { filter: brightness(.97); } }
+.or { display: flex; align-items: center; gap: 12px; color: var(--ink-2); font-size: .85rem; }
+.or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+[data-look='kids'] .social-btn { border-radius: 18px; min-height: 54px; font-weight: 700; box-shadow: 0 4px 0 #2B1B5A26; }
+[data-look='kids'] .social-btn.google { box-shadow: inset 0 0 0 2px #DADCE0, 0 4px 0 #2B1B5A1a; }

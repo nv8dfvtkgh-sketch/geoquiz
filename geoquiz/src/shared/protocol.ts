@@ -53,6 +53,8 @@ export interface ZoneInfo {
   view?: [number, number, number, number];
   /** Pays de la zone (continents et sous-régions). */
   ids?: string[];
+  /** Nombre d'éléments à trouver par jeu pour maîtriser la zone (page Géographie). */
+  pool?: Record<string, number>;
 }
 
 export interface CategoryInfo {
@@ -218,13 +220,19 @@ export const BADGES = [
   'explorer', 'collector', 'streak3', 'streak7', 'flags100', 'morocco', 'polyglot',
 ] as const;
 export const UNLOCK_AT = 60; // % de bonnes réponses pour débloquer la difficulté suivante
-export interface CatStats { games: number; correct: number; answered: number; best: Partial<Record<'easy' | 'medium' | 'hard', number>> }
+export interface CatStats {
+  games: number; correct: number; answered: number; best: Partial<Record<'easy' | 'medium' | 'hard', number>>;
+  /** Éléments déjà trouvés au moins une fois (pays, régions…) : progression de la page Géographie. */
+  found?: string[];
+}
 /** Ce que le joueur voit de son propre compte. */
 export interface Me {
   id: string; pseudo: string; age: AgeGroup; email?: string; country?: string; avatar: string; optin: boolean; createdAt: number;
   xp: number; level: number; levelXp: number; levelNeed: number; title: number;
   games: number; correct: number; answered: number; wins: number; cats: Record<string, CatStats>;
   badges: Record<string, number>; days: { streak: number; best: number }; weekXp: number;
+  /** false : compte Google / Facebook sans mot de passe. */
+  hasPassword: boolean; linked: string[];
 }
 /** Gains d'une partie, envoyés au joueur connecté à la fin. */
 export interface Reward {

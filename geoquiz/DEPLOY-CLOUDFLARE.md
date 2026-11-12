@@ -68,6 +68,10 @@ partage utilisent automatiquement l'adresse affichée dans le navigateur.
 - **Comptes joueurs** : stockés dans le Durable Object `AccountsDO` (créé automatiquement au déploiement,
   migration `v3`). Mots de passe hachés (PBKDF2), e-mails jamais demandés aux moins de 13 ans.
   Dans `/admin` → onglet **Joueurs** : statistiques, export CSV, mot de passe provisoire, suppression.
+- **Connexion Google / Facebook** (facultatif, 13 ans et plus) : variables `GOOGLE_CLIENT_ID`,
+  `GOOGLE_CLIENT_SECRET` (secret), `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET` (secret). Adresses de retour à
+  déclarer chez Google / Meta : `https://<votre-site>/api/auth/google/callback` et `/api/auth/facebook/callback`.
+  Sans ces variables, les boutons ne s'affichent pas.
 - **Journaux** : onglet **Observability** du Worker (activé dans `wrangler.jsonc`).
 
 ## Bon à savoir
