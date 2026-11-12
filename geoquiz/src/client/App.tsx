@@ -169,15 +169,7 @@ function TopBar() {
   );
 }
 
-/** Logo : étoile à huit branches de zellige (deux carrés croisés), en mosaïque de couleurs. */
+/** Logo : la lettre Q en pièces de zellige, étoile au centre (public/logo.svg). */
 export function Compass() {
-  return (
-    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" className="compass zellige">
-      <rect x="6" y="6" width="20" height="20" rx="2" fill="#0071E3" />
-      <rect x="6" y="6" width="20" height="20" rx="2" fill="#16A34A" transform="rotate(45 16 16)" />
-      <rect x="10.5" y="10.5" width="11" height="11" rx="1" fill="#FFC800" />
-      <rect x="10.5" y="10.5" width="11" height="11" rx="1" fill="#FF8A1F" transform="rotate(45 16 16)" />
-      <circle cx="16" cy="16" r="2.6" fill="#FFFFFF" />
-    </svg>
-  );
+  return <img src="/logo.svg" width="30" height="30" alt="" className="compass zellige" draggable={false} />;
 }

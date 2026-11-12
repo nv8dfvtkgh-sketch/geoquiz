@@ -18,7 +18,7 @@ function Welcome() {
   return (
     <form className="welcome" onSubmit={(e) => { e.preventDefault(); if (ready) setLook(pick!); }}>
       <div className="welcome-head">
-        <span className="welcome-globe" aria-hidden="true">🌍</span>
+        <img className="welcome-logo" src="/logo.svg" width="88" height="88" alt="" />
         <h1>{t('welcome.title')}</h1>
         <p>{t('welcome.hint')}</p>
       </div>

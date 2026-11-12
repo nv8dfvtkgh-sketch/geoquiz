@@ -763,3 +763,5 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 [data-look='kids'] .badge { font-weight: 700; }
 [data-look='kids'] .kids-toggle { background: #FFC800; color: var(--ink); box-shadow: 0 3px 0 #C79A00; font-weight: 700; }
 [data-look='kids'] .kids-toggle svg { color: #FF4D6D; }
+.compass.zellige { display: block; }
+.welcome-logo { display: block; margin: 0 auto 10px; width: 88px; height: 88px; }
