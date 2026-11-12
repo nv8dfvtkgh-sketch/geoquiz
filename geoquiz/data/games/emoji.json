@@ -437,7 +437,7 @@
  },
  {
   "id": "f-lionking",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🦁👑",
   "names": {
@@ -464,7 +464,7 @@
  },
  {
   "id": "f-nemo",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🔍🐠",
   "names": {
@@ -500,7 +500,7 @@
  },
  {
   "id": "f-frozen",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "❄️👸⛄",
   "names": {
@@ -515,7 +515,7 @@
  },
  {
   "id": "f-shrek",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "👹🐴👸",
   "names": {
@@ -542,7 +542,7 @@
  },
  {
   "id": "f-toystory",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🧸🤠🚀",
   "names": {
@@ -606,7 +606,7 @@
  },
  {
   "id": "f-mermaid",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🧜‍♀️🦀🐠",
   "names": {
@@ -618,7 +618,7 @@
  },
  {
   "id": "f-beauty",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🌹👸🐃",
   "names": {
@@ -630,7 +630,7 @@
  },
  {
   "id": "f-iceage",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🧊🦣🐿️",
   "names": {
@@ -642,7 +642,7 @@
  },
  {
   "id": "f-ratatouille",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐀👨‍🍳🇫🇷",
   "names": {
@@ -654,7 +654,7 @@
  },
  {
   "id": "f-kungfupanda",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐼🥋",
   "names": {
@@ -666,7 +666,7 @@
  },
  {
   "id": "f-aladdin",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🧞🪔🐒",
   "names": {
@@ -690,7 +690,7 @@
  },
  {
   "id": "f-up",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "🎈🏠👴",
   "names": {
@@ -714,7 +714,7 @@
  },
  {
   "id": "f-snowwhite",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "🍎👸⛏️",
   "names": {
@@ -753,7 +753,7 @@
  },
  {
   "id": "f-cinderella",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "👠🎃🕛",
   "names": {
@@ -765,7 +765,7 @@
  },
  {
   "id": "f-pinocchio",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "🤥🪵",
   "names": {
@@ -777,7 +777,7 @@
  },
  {
   "id": "f-cars",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "🏎️⚡🏁",
   "names": {
@@ -1339,7 +1339,7 @@
  },
  {
   "id": "f-junglebook",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐻🐍🐒👦",
   "names": {
@@ -1351,7 +1351,7 @@
  },
  {
   "id": "f-zootopia",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐰🦊🚓",
   "names": {
@@ -1368,7 +1368,7 @@
  },
  {
   "id": "f-moana",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🌊⛵🐔",
   "names": {
@@ -1384,7 +1384,7 @@
  },
  {
   "id": "f-coco",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "💀🎸🌼",
   "names": {
@@ -1396,7 +1396,7 @@
  },
  {
   "id": "f-incredibles",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🦸👨‍👩‍👧‍👦🔴",
   "names": {
@@ -1408,7 +1408,7 @@
  },
  {
   "id": "f-monsters",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "👹🚪👧",
   "names": {
@@ -1420,7 +1420,7 @@
  },
  {
   "id": "f-walle",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "🤖🌱🌍",
   "names": {
@@ -1432,7 +1432,7 @@
  },
  {
   "id": "f-tangled",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "👸💇‍♀️🏰",
   "names": {
@@ -1444,7 +1444,7 @@
  },
  {
   "id": "f-bambi",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🦌🐇🌲",
   "names": {
@@ -1456,7 +1456,7 @@
  },
  {
   "id": "f-dumbo",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐘👂🎪",
   "names": {
@@ -1468,7 +1468,7 @@
  },
  {
   "id": "f-dalmatians",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐶⚫⚪💯",
   "names": {
@@ -1480,7 +1480,7 @@
  },
  {
   "id": "f-mulan",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🗡️👩🐉",
   "names": {
@@ -1492,7 +1492,7 @@
  },
  {
   "id": "f-hercules",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "💪⚡🏛️",
   "names": {
@@ -1504,7 +1504,7 @@
  },
  {
   "id": "f-despicable",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🍌👓💛",
   "names": {
@@ -1516,7 +1516,7 @@
  },
  {
   "id": "f-madagascar",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🦁🦓🦒🐧",
   "names": {
@@ -1528,7 +1528,7 @@
  },
  {
   "id": "f-dragons",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐉👦🏝️",
   "names": {
@@ -1669,7 +1669,7 @@
  },
  {
   "id": "f-sleepingbeauty",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "👸😴🌹",
   "names": {
@@ -1681,7 +1681,7 @@
  },
  {
   "id": "f-peterpan",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🧚🏴‍☠️🐊",
   "names": {
@@ -1693,7 +1693,7 @@
  },
  {
   "id": "f-alice",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "👧🐇🎩⏰",
   "names": {
@@ -1705,7 +1705,7 @@
  },
  {
   "id": "f-smurfs",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🔵🍄🏘️",
   "names": {
@@ -1717,7 +1717,7 @@
  },
  {
   "id": "f-kirikou",
-  "theme": "film",
+  "theme": "cartoon",
   "tier": 3,
   "emoji": "👦🌍🧙‍♀️",
   "names": {
@@ -2020,7 +2020,7 @@
  },
  {
   "id": "s-simpsons",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🍩💛👨‍👩‍👧‍👦",
   "names": {
@@ -2036,7 +2036,7 @@
  },
  {
   "id": "s-spongebob",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🧽🍍🌊",
   "names": {
@@ -2051,7 +2051,7 @@
  },
  {
   "id": "s-pokemon",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "⚡🐭🔴⚪",
   "names": {
@@ -2150,7 +2150,7 @@
  },
  {
   "id": "s-dragonball",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐉🟠🥋",
   "names": {
@@ -2162,7 +2162,7 @@
  },
  {
   "id": "s-naruto",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🍥🦊🥷",
   "names": {
@@ -2174,7 +2174,7 @@
  },
  {
   "id": "s-onepiece",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🏴‍☠️👒🍖",
   "names": {
@@ -2297,7 +2297,7 @@
  },
  {
   "id": "s-tomjerry",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐱🐭🧀",
   "names": {
@@ -2312,7 +2312,7 @@
  },
  {
   "id": "s-scooby",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐶👻🚐",
   "names": {
@@ -2324,7 +2324,7 @@
  },
  {
   "id": "s-peppa",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐷☔👢",
   "names": {
@@ -2336,7 +2336,7 @@
  },
  {
   "id": "s-pawpatrol",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐶🚒🚓",
   "names": {
@@ -2352,7 +2352,7 @@
  },
  {
   "id": "s-miraculous",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 1,
   "emoji": "🐞🐱🗼",
   "names": {
@@ -2368,7 +2368,7 @@
  },
  {
   "id": "s-bluey",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🐶🔵🏡",
   "names": {
@@ -2380,7 +2380,7 @@
  },
  {
   "id": "s-grendizer",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🤖🛸⚔️",
   "names": {
@@ -2396,7 +2396,7 @@
  },
  {
   "id": "s-tsubasa",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "⚽👦⭐",
   "names": {
@@ -2413,7 +2413,7 @@
  },
  {
   "id": "s-heidi",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "👧🏔️🐐",
   "names": {
@@ -2425,7 +2425,7 @@
  },
  {
   "id": "s-conan",
-  "theme": "series",
+  "theme": "cartoon",
   "tier": 2,
   "emoji": "🕵️👓🎀",
   "names": {
@@ -2448,6 +2448,687 @@
    "en": "Bab Al-Hara",
    "es": "Bab Al-Hara",
    "ar": "باب الحارة"
+  }
+ },
+ {
+  "id": "a-flintstones",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🦴🏠🦕",
+  "names": {
+   "fr": "Les Pierrafeu",
+   "en": "The Flintstones",
+   "es": "Los Picapiedra",
+   "ar": "عائلة فلينتستون"
+  }
+ },
+ {
+  "id": "a-asterix",
+  "theme": "cartoon",
+  "tier": 1,
+  "emoji": "🛡️🐗🥘",
+  "names": {
+   "fr": "Astérix",
+   "en": "Asterix",
+   "es": "Astérix",
+   "ar": "أستريكس"
+  },
+  "alts": [
+   "Asterix et Obelix"
+  ]
+ },
+ {
+  "id": "a-tintin",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "👦🐶🚀",
+  "names": {
+   "fr": "Les Aventures de Tintin",
+   "en": "The Adventures of Tintin",
+   "es": "Las aventuras de Tintín",
+   "ar": "مغامرات تان تان"
+  },
+  "alts": [
+   "Tintin"
+  ]
+ },
+ {
+  "id": "a-winnie",
+  "theme": "cartoon",
+  "tier": 1,
+  "emoji": "🐻🍯🎈",
+  "names": {
+   "fr": "Winnie l'ourson",
+   "en": "Winnie the Pooh",
+   "es": "Winnie the Pooh",
+   "ar": "ويني الدبدوب"
+  },
+  "alts": [
+   "Winnie"
+  ]
+ },
+ {
+  "id": "a-turtles",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🐢🍕🥷",
+  "names": {
+   "fr": "Les Tortues Ninja",
+   "en": "Teenage Mutant Ninja Turtles",
+   "es": "Las Tortugas Ninja",
+   "ar": "سلاحف النينجا"
+  },
+  "alts": [
+   "Tortues Ninja",
+   "Ninja Turtles"
+  ]
+ },
+ {
+  "id": "a-totoro",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🌳🐾☂️",
+  "names": {
+   "fr": "Mon voisin Totoro",
+   "en": "My Neighbor Totoro",
+   "es": "Mi vecino Totoro",
+   "ar": "جاري توتورو"
+  },
+  "alts": [
+   "Totoro"
+  ]
+ },
+ {
+  "id": "a-chihiro",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "🛁🐉👧",
+  "names": {
+   "fr": "Le Voyage de Chihiro",
+   "en": "Spirited Away",
+   "es": "El viaje de Chihiro",
+   "ar": "المخطوفة"
+  },
+  "alts": [
+   "Chihiro"
+  ]
+ },
+ {
+  "id": "a-aristocats",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🐱🎹🗼",
+  "names": {
+   "fr": "Les Aristochats",
+   "en": "The Aristocats",
+   "es": "Los aristogatos",
+   "ar": "القطط الأرستقراطية"
+  }
+ },
+ {
+  "id": "a-ladytramp",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "🐶🍝❤️",
+  "names": {
+   "fr": "La Belle et le Clochard",
+   "en": "Lady and the Tramp",
+   "es": "La dama y el vagabundo",
+   "ar": "السيدة والصعلوك"
+  }
+ },
+ {
+  "id": "a-insideout",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "😀😢😡🧠",
+  "names": {
+   "fr": "Vice-versa",
+   "en": "Inside Out",
+   "es": "Del revés",
+   "ar": "قلبًا وقالبًا"
+  },
+  "alts": [
+   "Inside Out"
+  ]
+ },
+ {
+  "id": "a-encanto",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🦋🏠🕯️",
+  "names": {
+   "fr": "Encanto",
+   "en": "Encanto",
+   "es": "Encanto",
+   "ar": "إنكانتو"
+  }
+ },
+ {
+  "id": "a-luca",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "🐟👦🛵",
+  "names": {
+   "fr": "Luca",
+   "en": "Luca",
+   "es": "Luca",
+   "ar": "لوكا"
+  }
+ },
+ {
+  "id": "a-ralph",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "🎮🍬👊",
+  "names": {
+   "fr": "Les Mondes de Ralph",
+   "en": "Wreck-It Ralph",
+   "es": "¡Rompe Ralph!",
+   "ar": "رالف المدمّر"
+  },
+  "alts": [
+   "Ralph"
+  ]
+ },
+ {
+  "id": "a-trolls",
+  "theme": "cartoon",
+  "tier": 2,
+  "emoji": "🌈🎤💇",
+  "names": {
+   "fr": "Les Trolls",
+   "en": "Trolls",
+   "es": "Trolls",
+   "ar": "ترولز"
+  },
+  "alts": [
+   "Trolls"
+  ]
+ },
+ {
+  "id": "a-oggy",
+  "theme": "cartoon",
+  "tier": 1,
+  "emoji": "🐱🪳🪳",
+  "names": {
+   "fr": "Oggy et les Cafards",
+   "en": "Oggy and the Cockroaches",
+   "es": "Oggy y las cucarachas",
+   "ar": "أوغي والصراصير"
+  },
+  "alts": [
+   "Oggy"
+  ]
+ },
+ {
+  "id": "a-masha",
+  "theme": "cartoon",
+  "tier": 1,
+  "emoji": "👧🐻🍯",
+  "names": {
+   "fr": "Masha et Michka",
+   "en": "Masha and the Bear",
+   "es": "Masha y el Oso",
+   "ar": "ماشا والدب"
+  },
+  "alts": [
+   "Masha"
+  ]
+ },
+ {
+  "id": "a-calimero",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "🐣🥚😢",
+  "names": {
+   "fr": "Calimero",
+   "en": "Calimero",
+   "es": "Calimero",
+   "ar": "كاليميرو"
+  }
+ },
+ {
+  "id": "a-rugrats",
+  "theme": "cartoon",
+  "tier": 3,
+  "emoji": "👶🍼🦖",
+  "names": {
+   "fr": "Les Razmoket",
+   "en": "Rugrats",
+   "es": "Rugrats",
+   "ar": "رجرتس"
+  }
+ },
+ {
+  "id": "h-indiana",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🤠🐍💎",
+  "names": {
+   "fr": "Indiana Jones",
+   "en": "Indiana Jones",
+   "es": "Indiana Jones",
+   "ar": "إنديانا جونز"
+  },
+  "alts": [
+   "Indy"
+  ]
+ },
+ {
+  "id": "h-rocky",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🥊🥚🏃",
+  "names": {
+   "fr": "Rocky Balboa",
+   "en": "Rocky Balboa",
+   "es": "Rocky Balboa",
+   "ar": "روكي بالبوا"
+  },
+  "alts": [
+   "Rocky"
+  ]
+ },
+ {
+  "id": "h-terminator",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🤖🕶️🏍️",
+  "names": {
+   "fr": "Terminator",
+   "en": "The Terminator",
+   "es": "Terminator",
+   "ar": "تيرميناتور"
+  },
+  "alts": [
+   "Terminator"
+  ]
+ },
+ {
+  "id": "h-bond",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🍸🕶️0️⃣0️⃣7️⃣",
+  "names": {
+   "fr": "James Bond",
+   "en": "James Bond",
+   "es": "James Bond",
+   "ar": "جيمس بوند"
+  },
+  "alts": [
+   "007"
+  ]
+ },
+ {
+  "id": "h-zorro",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🗡️🎭🐎",
+  "names": {
+   "fr": "Zorro",
+   "en": "Zorro",
+   "es": "El Zorro",
+   "ar": "زورو"
+  },
+  "alts": [
+   "Zorro"
+  ]
+ },
+ {
+  "id": "h-dracula",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🧛🦇🏰",
+  "names": {
+   "fr": "Dracula",
+   "en": "Dracula",
+   "es": "Drácula",
+   "ar": "دراكولا"
+  }
+ },
+ {
+  "id": "h-frankenstein",
+  "theme": "character",
+  "tier": 3,
+  "emoji": "🧟⚡🔩",
+  "names": {
+   "fr": "Frankenstein",
+   "en": "Frankenstein",
+   "es": "Frankenstein",
+   "ar": "فرانكنشتاين"
+  }
+ },
+ {
+  "id": "h-superman",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🦸‍♂️🔴🔵🏙️",
+  "names": {
+   "fr": "Superman",
+   "en": "Superman",
+   "es": "Superman",
+   "ar": "سوبرمان"
+  }
+ },
+ {
+  "id": "h-wonderwoman",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "👸⚔️🛡️",
+  "names": {
+   "fr": "Wonder Woman",
+   "en": "Wonder Woman",
+   "es": "Wonder Woman",
+   "ar": "المرأة الخارقة"
+  }
+ },
+ {
+  "id": "h-hulk",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "💚💪😡",
+  "names": {
+   "fr": "Hulk",
+   "en": "the Hulk",
+   "es": "Hulk",
+   "ar": "هالك"
+  },
+  "alts": [
+   "Hulk"
+  ]
+ },
+ {
+  "id": "h-captainamerica",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🛡️⭐🦅",
+  "names": {
+   "fr": "Captain America",
+   "en": "Captain America",
+   "es": "Capitán América",
+   "ar": "كابتن أمريكا"
+  }
+ },
+ {
+  "id": "h-thor",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "⚡🔨⛈️",
+  "names": {
+   "fr": "Thor",
+   "en": "Thor",
+   "es": "Thor",
+   "ar": "ثور"
+  }
+ },
+ {
+  "id": "h-ironman",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🦾❤️💥",
+  "names": {
+   "fr": "Iron Man",
+   "en": "Iron Man",
+   "es": "Iron Man",
+   "ar": "الرجل الحديدي"
+  }
+ },
+ {
+  "id": "h-vader",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🖤😷⚔️",
+  "names": {
+   "fr": "Dark Vador",
+   "en": "Darth Vader",
+   "es": "Darth Vader",
+   "ar": "دارث فيدر"
+  },
+  "alts": [
+   "Darth Vader",
+   "Dark Vador"
+  ]
+ },
+ {
+  "id": "h-yoda",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "💚👂🧘",
+  "names": {
+   "fr": "Yoda",
+   "en": "Yoda",
+   "es": "Yoda",
+   "ar": "يودا"
+  }
+ },
+ {
+  "id": "h-sparrow",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🏴‍☠️🦜🍾",
+  "names": {
+   "fr": "Jack Sparrow",
+   "en": "Jack Sparrow",
+   "es": "Jack Sparrow",
+   "ar": "جاك سبارو"
+  }
+ },
+ {
+  "id": "h-gandalf",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🧙‍♂️🪄🐎",
+  "names": {
+   "fr": "Gandalf",
+   "en": "Gandalf",
+   "es": "Gandalf",
+   "ar": "غاندالف"
+  }
+ },
+ {
+  "id": "h-gollum",
+  "theme": "character",
+  "tier": 3,
+  "emoji": "💍🐟😈",
+  "names": {
+   "fr": "Gollum",
+   "en": "Gollum",
+   "es": "Gollum",
+   "ar": "غولوم"
+  }
+ },
+ {
+  "id": "h-mickey",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🐭🎩✨",
+  "names": {
+   "fr": "Mickey Mouse",
+   "en": "Mickey Mouse",
+   "es": "Mickey Mouse",
+   "ar": "ميكي ماوس"
+  },
+  "alts": [
+   "Mickey"
+  ]
+ },
+ {
+  "id": "h-mario",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🍄👨‍🔧🔴",
+  "names": {
+   "fr": "Mario",
+   "en": "Mario",
+   "es": "Mario",
+   "ar": "ماريو"
+  },
+  "alts": [
+   "Super Mario"
+  ]
+ },
+ {
+  "id": "h-pikachu",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "⚡🐭💛",
+  "names": {
+   "fr": "Pikachu",
+   "en": "Pikachu",
+   "es": "Pikachu",
+   "ar": "بيكاتشو"
+  }
+ },
+ {
+  "id": "h-sonic",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🦔💨💍",
+  "names": {
+   "fr": "Sonic",
+   "en": "Sonic",
+   "es": "Sonic",
+   "ar": "سونيك"
+  }
+ },
+ {
+  "id": "h-pacman",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🟡👻🍒",
+  "names": {
+   "fr": "Pac-Man",
+   "en": "Pac-Man",
+   "es": "Pac-Man",
+   "ar": "باك مان"
+  },
+  "alts": [
+   "Pacman"
+  ]
+ },
+ {
+  "id": "h-santa",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🎅🦌🎁",
+  "names": {
+   "fr": "le Père Noël",
+   "en": "Santa Claus",
+   "es": "Papá Noel",
+   "ar": "بابا نويل"
+  },
+  "alts": [
+   "Père Noël",
+   "Santa"
+  ]
+ },
+ {
+  "id": "h-tarzan",
+  "theme": "character",
+  "tier": 1,
+  "emoji": "🦍🌴🗣️",
+  "names": {
+   "fr": "Tarzan",
+   "en": "Tarzan",
+   "es": "Tarzán",
+   "ar": "طرزان"
+  }
+ },
+ {
+  "id": "h-popeye",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🥬💪⚓",
+  "names": {
+   "fr": "Popeye",
+   "en": "Popeye",
+   "es": "Popeye",
+   "ar": "باباي"
+  }
+ },
+ {
+  "id": "h-godzilla",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🦖🏙️🔥",
+  "names": {
+   "fr": "Godzilla",
+   "en": "Godzilla",
+   "es": "Godzilla",
+   "ar": "غودزيلا"
+  }
+ },
+ {
+  "id": "h-joker",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🃏😈💜",
+  "names": {
+   "fr": "le Joker",
+   "en": "the Joker",
+   "es": "el Joker",
+   "ar": "الجوكر"
+  },
+  "alts": [
+   "Joker"
+  ]
+ },
+ {
+  "id": "h-laracroft",
+  "theme": "character",
+  "tier": 3,
+  "emoji": "🏺🗿👩",
+  "names": {
+   "fr": "Lara Croft",
+   "en": "Lara Croft",
+   "es": "Lara Croft",
+   "ar": "لارا كروفت"
+  }
+ },
+ {
+  "id": "h-wolverine",
+  "theme": "character",
+  "tier": 3,
+  "emoji": "🐺🦾✂️",
+  "names": {
+   "fr": "Wolverine",
+   "en": "Wolverine",
+   "es": "Lobezno",
+   "ar": "وولفرين"
+  },
+  "alts": [
+   "Wolverine"
+  ]
+ },
+ {
+  "id": "h-juha",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "👴🫏😂",
+  "names": {
+   "fr": "Djeha (Joha)",
+   "en": "Juha",
+   "es": "Yuha",
+   "ar": "جحا"
+  },
+  "alts": [
+   "Goha",
+   "Djeha",
+   "Joha",
+   "Nasreddine"
+  ]
+ },
+ {
+  "id": "h-sherlockholmes",
+  "theme": "character",
+  "tier": 2,
+  "emoji": "🎩🔍🚬",
+  "names": {
+   "fr": "Sherlock Holmes",
+   "en": "Sherlock Holmes",
+   "es": "Sherlock Holmes",
+   "ar": "شيرلوك هولمز"
   }
  }
 ]

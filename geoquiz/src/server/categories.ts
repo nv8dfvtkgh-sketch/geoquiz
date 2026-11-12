@@ -557,7 +557,7 @@ const emojiCat: Category = {
       const { options, correct } = optionsFrom(target, near.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: emojiNames(byId[id]) }));
       return { ...base, kind, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
     }
-    emojiNameSets ??= Object.fromEntries(['country', 'city', 'film', 'tale', 'series'].map((t) => [t, nameSet(extras.emoji.filter((x) => x.theme === t).map(emojiNames))]));
+    emojiNameSets ??= Object.fromEntries(['country', 'city', 'film', 'tale', 'series', 'cartoon', 'character'].map((t) => [t, nameSet(extras.emoji.filter((x) => x.theme === t).map(emojiNames))]));
     const others = item.theme === 'country' ? countryNameSet : emojiNameSets[item.theme];
     return { ...base, kind, attempts: 1, check: typedCheck(allNames(names, item.alts), others) };
   },

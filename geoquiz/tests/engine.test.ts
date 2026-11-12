@@ -615,18 +615,24 @@ test('Cinéma (texte) : 4 types de questions, une bonne réponse, pas de co-vede
     }
   }
   assert.deepEqual([...seen].sort(), ['actor', 'character', 'director', 'year']);
-  const tales = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 200 })).filter((q) => q.target.startsWith('t-'));
+  const tales = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 400 })).filter((q) => q.target.startsWith('t-'));
   assert.ok(tales.length >= 10);
   const red = tales.find((q) => q.target === 't-redridinghood')!;
   assert.ok(red.check('le petit chaperon rouge') && red.check('Caperucita Roja') && !red.check('Les Trois Petits Cochons'));
 });
 
 test('Rébus : thème Séries TV, pièges du même thème, titres locaux acceptés', () => {
-  const all = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'mix', count: 250 }));
-  const series = all.filter((q) => q.target.startsWith('s-'));
-  assert.ok(series.length >= 30);
-  for (const q of series) if (q.kind === 'mcq') assert.ok(q.options!.every((o) => o.target.startsWith('s-')));
-  const typed = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 250 }));
+  const { extras } = require('../src/server/data');
+  const theme = (id: string) => extras.emoji.find((x: any) => x.id === id).theme;
+  const all = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 300 }));
+  for (const th of ['series', 'cartoon', 'character']) assert.ok(all.filter((q) => theme(q.target) === th).length >= 20, th);
+  for (const q of all) assert.ok(q.options!.every((o) => theme(o.target) === theme(q.target)), 'pièges du même thème');
+  const typed0 = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 300 }));
+  const bond = typed0.find((q) => q.target === 'h-bond')!;
+  assert.ok(bond.check('James Bond') && bond.check('007') && bond.check('جيمس بوند'));
+  const juha = typed0.find((q) => q.target === 'h-juha')!;
+  assert.ok(juha.check('جحا') && juha.check('Goha'));
+  const typed = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 300 }));
   const majid = typed.find((q) => q.target === 's-tsubasa')!;
   assert.ok(majid.check('Olive et Tom') && majid.check('Captain Majid') && majid.check('الكابتن ماجد') && !majid.check('Naruto'));
   const casa = typed.find((q) => q.target === 's-casapapel')!;
