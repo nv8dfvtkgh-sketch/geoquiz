@@ -1558,3 +1558,52 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .team-box { display: grid; gap: 4px; justify-items: start; text-align: start; padding: 12px; border-radius: 14px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; cursor: pointer; min-width: 0; }
 .team-box small { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 .team-box.on { border-color: var(--accent); }
+
+/* ---------------------------------------------------------------- album et avatar habillé */
+.av { position: relative; display: inline-grid; place-items: center; width: var(--s); height: var(--s); border-radius: 50%; box-shadow: 0 0 0 calc(var(--s) * .06) var(--ring); flex: none; line-height: 1; }
+.av.zellige { box-shadow: none; background: conic-gradient(#1E5AA8 0 25%, #1F8A5B 0 50%, #E0A800 0 75%, #E8590C 0); padding: calc(var(--s) * .06); }
+.av.zellige .av-face { background: var(--card); border-radius: 50%; width: 100%; height: 100%; display: grid; place-items: center; }
+.av-face { font-size: calc(var(--s) * .62); }
+.av-hat { position: absolute; top: calc(var(--s) * -.36); left: 50%; transform: translateX(-50%) rotate(-8deg); font-size: calc(var(--s) * .48); }
+.av-pin { position: absolute; right: calc(var(--s) * -.12); bottom: calc(var(--s) * -.08); font-size: calc(var(--s) * .34); }
+.settings-btn .av { pointer-events: none; }
+.lb-avatar .av, .league-list .av { margin-top: 6px; }
+.profile-avatar .av { margin-top: 14px; }
+.dress-btn { justify-self: start; }
+.dresser { display: grid; gap: 12px; }
+.dresser h2 { margin: 0; }
+.dresser-preview { display: grid; place-items: center; padding: 34px 0 12px; }
+.dresser-row h3 { margin: 0 0 6px; font-size: 1rem; }
+.dresser-items { display: flex; gap: 8px; flex-wrap: wrap; }
+.dresser-items button { display: grid; justify-items: center; gap: 2px; min-width: 56px; min-height: 56px; padding: 6px; border-radius: 14px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); font: inherit; font-size: 1.6rem; cursor: pointer; color: var(--ink); }
+.dresser-items button.on { border-color: var(--accent); }
+.dresser-items button.locked { opacity: .55; cursor: default; max-width: 120px; }
+.dresser-items button small { font-size: .62rem; line-height: 1.2; color: var(--ink-2); text-align: center; }
+.swatch { width: 28px; height: 28px; border-radius: 50%; display: block; }
+.swatch.zellige { background: conic-gradient(#1E5AA8 0 25%, #1F8A5B 0 50%, #E0A800 0 75%, #E8590C 0); }
+.album-page { display: grid; gap: 12px; }
+.album-page h1 { margin: 0; }
+.album-tabs button small { color: var(--ink-2); }
+.album-h { margin: 6px 0 0; }
+.album-done { color: var(--good); font-size: .9rem; }
+.album-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 12px; }
+.album-grid li { position: relative; display: grid; justify-items: center; gap: 4px; text-align: center; }
+.sticker { display: grid; place-items: center; width: 76px; height: 92px; border-radius: 12px; font-size: 2.6rem; background: var(--card); box-shadow: 0 0 0 3px #fff, 0 3px 10px #0002; transform: rotate(var(--rot, 0deg)); border: 0; }
+.album-grid li.empty .sticker { background: repeating-linear-gradient(45deg, var(--fill) 0 6px, color-mix(in srgb, var(--fill) 60%, var(--card)) 6px 12px); box-shadow: inset 0 0 0 2px var(--border); transform: none; font-size: 1rem; color: var(--ink-2); }
+.album-grid li.rare.have .sticker, .sticker.rare { background: linear-gradient(135deg, #FFF3C8, #FFD86B 60%, #FFF3C8); box-shadow: 0 0 0 3px #E0A800, 0 3px 12px #E0A80066; }
+.sticker-name { font-size: .78rem; font-weight: 600; line-height: 1.2; }
+.sticker-count { position: absolute; top: -6px; right: 4px; background: var(--accent); color: #fff; font-size: .72rem; font-weight: 800; padding: 1px 6px; border-radius: 999px; }
+.sticker.mini { width: 48px; height: 58px; font-size: 1.7rem; border-radius: 9px; position: relative; cursor: pointer; }
+.sticker.mini small { position: absolute; bottom: -6px; right: -6px; font-size: .65rem; background: var(--accent); color: #fff; border-radius: 999px; padding: 0 5px; }
+.album-trade { display: grid; gap: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.album-trade h2 { margin: 0; }
+.album-trade p { margin: 0; }
+.dup-row { display: flex; gap: 14px; flex-wrap: wrap; padding: 6px 2px; }
+.gift-code { display: grid; gap: 8px; justify-items: center; padding: 12px; border-radius: 14px; background: color-mix(in srgb, var(--good) 12%, var(--card)); text-align: center; }
+.sticker-toast { position: fixed; left: 50%; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 70; display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 14px; border-radius: 18px; background: var(--card); box-shadow: var(--shadow-up); width: min(92vw, 420px); animation: toast-in .5s cubic-bezier(.2, 1.4, .4, 1) both; }
+.sticker-toast .sticker.mini { animation: sticker-flip .7s .2s both; cursor: default; }
+.sticker-toast-text { display: grid; flex: 1; min-width: 0; }
+.sticker-toast-text small { color: var(--ink-2); }
+@keyframes toast-in { from { transform: translate(-50%, 40px); opacity: 0; } }
+@keyframes sticker-flip { from { transform: rotateY(180deg) scale(.6); } }
+@media (prefers-reduced-motion: reduce) { .sticker-toast, .sticker-toast .sticker.mini { animation: none; } }

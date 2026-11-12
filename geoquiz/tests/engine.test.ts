@@ -1060,3 +1060,37 @@ test('Équipes choisies dans la salle d\'attente, coffres, mise finale et réact
   assert.equal(cs[0].last('reveal')!.results.find((x) => x.id === r.players().find((p) => p.name === 'A')!.id)!.bet, -before.A);
   r.destroy();
 });
+
+test('Album : ajout, fusion, cadeau de doublon, tenue d\'avatar débloquée', async () => {
+  const { AccountService, accountRoute } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  const svc = new AccountService(kv);
+  const call = async (token: string, body: unknown) => accountRoute(svc, 'POST', '/api/album', new URLSearchParams(), async () => body, token, null);
+  const a = await svc.register({ pseudo: 'Nora', password: 'motdepasse1', age: 'u13' });
+  const b = await svc.register({ pseudo: 'Ilyas', password: 'motdepasse1', age: 'u13' });
+  assert.equal((await call(a.token, { op: 'add', id: 'panda' }))!.status, 200);
+  assert.equal((await call(a.token, { op: 'add', id: 'licorne' }))!.status, 400, 'autocollant inconnu');
+  const m = (await call(a.token, { op: 'merge', s: { panda: 2, lion: 1, faux: 9 } }))!.json as any;
+  assert.deepEqual(m.album, { panda: 2, lion: 1 });
+  assert.equal((await call(a.token, { op: 'gift', id: 'lion' }))!.status, 400, 'pas de doublon');
+  const g = (await call(a.token, { op: 'gift', id: 'panda' }))!.json as any;
+  assert.equal(g.album.panda, 1);
+  const c = (await call(b.token, { op: 'claim', code: g.code }))!.json as any;
+  assert.equal(c.id, 'panda');
+  assert.equal(c.album.panda, 1);
+  assert.equal((await call(b.token, { op: 'claim', code: g.code }))!.status, 400, 'code à usage unique');
+  // Invité : les cadeaux marchent aussi (l'album reste sur l'appareil).
+  const g2 = (await call('', { op: 'gift', id: 'lion' }))!.json as any;
+  assert.equal((await call('', { op: 'claim', code: g2.code }))!.json && ((await kv.get(`gift:${g2.code}`)) === undefined), true);
+  // Tenue : un objet verrouillé est refusé, un objet offert accepté.
+  const acct = (await svc.byToken(a.token))!;
+  await svc.update(acct, { look: { hat: 'crown', pin: 'star', frame: 'gold' } });
+  const me = await svc.me((await svc.byToken(a.token))!);
+  assert.deepEqual(me.look, { pin: 'star' });
+});

@@ -1,4 +1,5 @@
 // Panneau de réglages unique (bouton avatar en haut) : compte, langue, style, son, voix, avis.
+import { Avatar } from './screens/Collect';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { LANGS, LIMITS, type Lang } from '../shared/protocol';
@@ -22,7 +23,7 @@ export function SettingsButton() {
   return (
     <>
       <button type="button" className="settings-btn" aria-label={t('settings.open')} aria-expanded={open} onClick={() => setOpen(true)}>
-        {me ? <span aria-hidden="true">{me.avatar}</span> : (
+        {me ? <Avatar emoji={me.avatar} look={me.look} size={30} /> : (
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><g fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2" /><circle cx="10" cy="17" r="2" /></g></svg>
         )}
       </button>
@@ -49,7 +50,7 @@ function SettingsSheet({ onClose }: { onClose: () => void }) {
           <>
             {me ? (
               <button type="button" className="set-account" onClick={() => nav('profile')} disabled={inGame}>
-                <span className="set-avatar" aria-hidden="true">{me.avatar}</span>
+                <span className="set-avatar" aria-hidden="true"><Avatar emoji={me.avatar} look={me.look} size={40} /></span>
                 <span><strong dir="auto">{me.pseudo}</strong><small>{t('profile.level', { n: me.level })} · {t(`rank.${me.title}`)}</small></span>
                 {!inGame && <span className="set-go">{t('settings.myProfile')} ›</span>}
               </button>

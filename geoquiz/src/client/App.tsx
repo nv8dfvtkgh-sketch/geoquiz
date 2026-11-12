@@ -21,6 +21,8 @@ import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
 import { SettingsButton } from './Settings';
 import { CapwordScreen, CompassScreen, GlobleScreen } from './screens/Puzzles';
 import { CardsScreen, ColorFlagScreen, NameAllScreen } from './screens/Solo';
+import { AlbumScreen, StickerToast } from './screens/Collect';
+import { earnSticker, syncAlbum } from './album';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -66,7 +68,7 @@ export function App() {
     const tk = authRef.current;
     if (!tk) return;
     fetchMe(tk).then((r) => {
-      if (r.ok) setMe(r.data);
+      if (r.ok) { setMe(r.data); void syncAlbum(tk, r.data.album); }
       else if (r.status === 401) { saveAuth(null); setAuth(null); setMe(null); }
     });
   }, []);
@@ -113,6 +115,8 @@ export function App() {
       // Joueur connecté : la salle doit savoir à quel compte créditer la partie.
       if (msg.t === 'joined' && authRef.current) net.send({ t: 'auth', token: authRef.current });
       if (msg.t === 'reward') setTimeout(refreshMe, 0);
+      // Fin de partie : un autocollant pour l'album.
+      if (msg.t === 'finished') { const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; setTimeout(() => earnSticker(k), 1200); }
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.
       if (msg.t === 'matched') {
         net.open(msg.code);
@@ -122,10 +126,13 @@ export function App() {
       dispatch({ type: 'server', msg });
     });
     net.statusListeners.add(setOnline);
+    // Jeux joués dans le navigateur (énigmes, tout nommer…) : un autocollant aussi.
+    const onFinished = () => setTimeout(() => earnSticker(), 900);
+    window.addEventListener('gq:finished', onFinished);
     const session = savedSession();
     if (session) net.open(session.code);
     if (joinMatch || quizMatch) history.replaceState(null, '', '/');
-    return () => { off(); };
+    return () => { off(); window.removeEventListener('gq:finished', onFinished); };
   }, []);
 
   const send = useCallback((m: Parameters<typeof net.send>[0]) => net.send(m), []);
@@ -143,7 +150,7 @@ export function App() {
     setLook: (l: Look) => { setLookState(l); try { localStorage.setItem('gq.look', l); } catch {} },
     me, auth, refreshMe, setMe,
     signIn: (token: string, m: Me) => {
-      saveAuth(token); setAuth(token); setMe(m);
+      saveAuth(token); setAuth(token); setMe(m); void syncAlbum(token, m.album);
       setNameState(m.pseudo); try { localStorage.setItem('gq.name', m.pseudo); } catch {}
     },
     signOut: () => {
@@ -189,8 +196,10 @@ export function App() {
           {s.screen === 'nameall' && <NameAllScreen />}
           {s.screen === 'cards' && <CardsScreen />}
           {s.screen === 'colorflag' && <ColorFlagScreen />}
+          {s.screen === 'album' && <AlbumScreen />}
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}
+        <StickerToast />
       </div>
     </AppCtx.Provider>
   );

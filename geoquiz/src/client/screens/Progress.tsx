@@ -2,6 +2,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { api } from '../account';
 import { useApp } from '../state';
+import { Avatar } from './Collect';
+import type { Look } from '../../shared/stickers';
 
 const CONTINENTS = ['africa', 'europe', 'asia', 'north-america', 'south-america', 'oceania'];
 const INK = ['#1E5AA8', '#1F8A5B', '#E8590C', '#B98B00'];
@@ -64,7 +66,7 @@ export function PassportScreen() {
 const DIV_COLORS = ['#B26B3A', '#8E9AAF', '#E0A800', '#2B6CD4', '#5BC0EB'];
 
 interface LeagueView {
-  week: string; div: number; rows: { id: string; rank: number; xp: number; pseudo: string; avatar: string }[]; me: string; up: number; down: number; endsAt: number;
+  week: string; div: number; rows: { id: string; rank: number; xp: number; pseudo: string; avatar: string; look?: Look }[]; me: string; up: number; down: number; endsAt: number;
   last?: { div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' };
 }
 
@@ -107,7 +109,7 @@ export function LeagueScreen({ embedded = false }: { embedded?: boolean } = {}) 
             return (
               <li key={r.id} className={`${r.id === v.me ? 'me' : ''} ${zone}`}>
                 <span className="lb-rank">{r.rank}</span>
-                <span aria-hidden="true">{r.avatar}</span>
+                <Avatar emoji={r.avatar} look={r.look} size={28} />
                 <span className="lb-name" dir="auto">{r.pseudo}</span>
                 <span className="lb-xp">{r.xp} XP</span>
               </li>

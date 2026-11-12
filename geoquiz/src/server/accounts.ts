@@ -3,6 +3,7 @@
 // Node, Durable Object « AccountsDO » sur Cloudflare). Tout ce qui rapporte des points est
 // calculé ici, à partir des résultats que la salle envoie : le navigateur ne peut pas tricher.
 import type { KV } from './quizzes';
+import { isUnlocked, LOOK_BY_ID, STICKER_IDS, type Look } from '../shared/stickers';
 
 // ------------------------------------------------------------------ types
 import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type ChallengeEntry, type ChallengeView, type Me, type Reward, type Settings } from '../shared/protocol';
@@ -57,7 +58,7 @@ interface ReviewItem { c: string; t: string; z: string; step: number; due: numbe
 /** Ligues : divisions de la semaine, groupes de 20, 5 montent et 5 descendent. */
 export const LEAGUE_DIVS = ['bronze', 'silver', 'gold', 'sapphire', 'diamond'] as const;
 const LEAGUE_SIZE = 20, LEAGUE_MOVE = 5;
-interface LeagueGroup { members: Record<string, { xp: number; pseudo: string; avatar: string }> }
+interface LeagueGroup { members: Record<string, { xp: number; pseudo: string; avatar: string; look?: Look }> }
 
 interface Account {
   id: string;
@@ -87,6 +88,9 @@ interface Account {
   /** Classes : celles qu'il anime (prof), celles qu'il a rejointes (élève). */
   teaching?: string[];
   classes?: string[];
+  /** Album d'autocollants (id → nombre) et tenue de l'avatar. */
+  album?: Record<string, number>;
+  look?: Look;
 }
 
 // ------------------------------------------------------------------ classes
@@ -376,6 +380,7 @@ export class AccountService {
       hasPassword: !!a.pass, linked: Object.keys(a.oauth ?? {}),
       reviewDue: this.dueItems(a).length,
       league: { div: a.league?.div ?? 0, last: a.league?.last },
+      album: a.album ?? {}, look: a.look,
     };
   }
 
@@ -442,7 +447,7 @@ export class AccountService {
       a.league = { ...a.league, week, group: key };
     }
     const g = (await this.kv.get<LeagueGroup>(a.league.group!)) ?? { members: {} };
-    g.members[a.id] = { xp: (g.members[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar };
+    g.members[a.id] = { xp: (g.members[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar, look: a.look };
     await this.kv.put(a.league.group!, g);
   }
   async leagueView(token: string) {
@@ -460,6 +465,16 @@ export class AccountService {
 
   async update(a: Account, body: any) {
     if (body?.avatar !== undefined && AVATARS.includes(body.avatar)) a.avatar = body.avatar;
+    if (body?.look !== undefined && typeof body.look === 'object') {
+      // Tenue : seulement des objets débloqués, chacun à sa place.
+      const lv = levelOf(a.xp).level;
+      const look: Look = {};
+      for (const slot of ['hat', 'pin', 'frame'] as const) {
+        const it = LOOK_BY_ID[body.look?.[slot]];
+        if (it && it.slot === slot && isUnlocked(it.u, { level: lv, games: a.games, badges: a.badges, album: a.album })) look[slot] = it.id;
+      }
+      a.look = look;
+    }
     if (body?.country !== undefined) a.country = /^[A-Z]{2}$/.test(body.country ?? '') ? body.country : undefined;
     if (body?.optin !== undefined && a.age !== 'u13') a.optin = body.optin === true;
     if (body?.email !== undefined && a.age !== 'u13') {
@@ -590,8 +605,8 @@ export class AccountService {
     await this.save(a);
     // Classement de la semaine.
     const wk = `lb:${weekOf(this.now())}`;
-    const lb = (await this.kv.get<Record<string, { xp: number; pseudo: string; avatar: string; country?: string }>>(wk)) ?? {};
-    lb[a.id] = { xp: (lb[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar, country: a.country };
+    const lb = (await this.kv.get<Record<string, { xp: number; pseudo: string; avatar: string; country?: string; look?: Look }>>(wk)) ?? {};
+    lb[a.id] = { xp: (lb[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar, country: a.country, look: a.look };
     await this.kv.put(wk, lb);
     // Défi du jour : seule la première partie du jour compte au classement.
     if (r.category === 'daily' && r.kind === 'solo') {
@@ -806,6 +821,49 @@ export class AccountService {
 
   // ---------------------------------------------------------------- avis des joueurs
   /** Avis envoyé depuis le site (après quelques parties, ou par le lien « Donner mon avis »). */
+  // ---------------------------------------------------------------- album d'autocollants
+  /**
+   * Opérations sur l'album. Connecté : l'album du compte fait foi. Invité : l'album vit sur
+   * l'appareil, le serveur ne sert qu'aux échanges (codes de cadeau).
+   */
+  async album(a: Account | null, b: any): Promise<{ album?: Record<string, number>; code?: string; id?: string }> {
+    const op = String(b?.op ?? '');
+    const id = String(b?.id ?? '');
+    const save = async () => { if (a) await this.save(a); return a ? { album: a.album ?? {} } : {}; };
+    if (a) a.album ??= {};
+    if (op === 'get') return { album: a?.album ?? {} };
+    if (op === 'add') {
+      if (!a) throw new AccountError('account.signedOut');
+      if (!STICKER_IDS.has(id)) throw new AccountError('album.invalid');
+      a.album![id] = Math.min(99, (a.album![id] ?? 0) + 1);
+      return save();
+    }
+    if (op === 'merge') {
+      if (!a) throw new AccountError('account.signedOut');
+      for (const [k, n] of Object.entries(b?.s ?? {})) if (STICKER_IDS.has(k) && Number.isFinite(+(n as number))) a.album![k] = Math.min(99, Math.max(a.album![k] ?? 0, Math.round(+(n as number))));
+      return save();
+    }
+    if (op === 'gift') {
+      // Doublon offert : un code à donner à un ami (valable 14 jours, une seule fois).
+      if (!STICKER_IDS.has(id)) throw new AccountError('album.invalid');
+      if (a) { if ((a.album![id] ?? 0) < 2) throw new AccountError('album.noDuplicate'); a.album![id]--; }
+      let code: string;
+      do code = [...crypto.getRandomValues(new Uint8Array(6))].map((x) => CODE_CHARS[x % CODE_CHARS.length]).join('');
+      while (await this.kv.get(`gift:${code}`));
+      await this.kv.put(`gift:${code}`, { id, at: this.now() });
+      return { ...(await save()), code };
+    }
+    if (op === 'claim') {
+      const code = String(b?.code ?? '').toUpperCase();
+      const g = /^[A-Z0-9]{6}$/.test(code) ? await this.kv.get<{ id: string; at: number }>(`gift:${code}`) : undefined;
+      if (!g || this.now() - g.at > 14 * 864e5) throw new AccountError('album.giftNotFound');
+      await this.kv.delete(`gift:${code}`);
+      if (a) a.album![g.id] = Math.min(99, (a.album![g.id] ?? 0) + 1);
+      return { ...(await save()), id: g.id };
+    }
+    throw new AccountError('album.invalid');
+  }
+
   async feedback(b: any, token: string | null) {
     const rating = Math.round(Number(b?.rating));
     if (!(rating >= 1 && rating <= 5)) throw new AccountError('feedback.invalid');
@@ -947,6 +1005,7 @@ export async function accountRoute(
       return v ? { status: 200, json: v } : { status: 401, json: { error: 'account.signedOut' } };
     }
     if (path === '/api/daily' && method === 'GET') return { status: 200, json: await svc.daily(bearer || null) };
+    if (path === '/api/album' && method === 'POST') return { status: 200, json: await svc.album(bearer ? await svc.byToken(bearer) : null, await body()) };
     if (path.startsWith('/api/account')) {
       const a = await svc.byToken(bearer);
       if (!a) return { status: 401, json: { error: 'account.signedOut' } };

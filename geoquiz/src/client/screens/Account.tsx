@@ -1,5 +1,7 @@
 // Compte joueur : inscription / connexion, profil (niveau, badges, progression), classement,
 // et carte des gains en fin de partie.
+import { Avatar, AvatarDresser } from './Collect';
+import type { Look as Look2 } from '../../shared/stickers';
 import { useEffect, useMemo, useState } from 'react';
 import { useEvents } from '../events';
 import { AVATARS, BADGES, type AgeGroup, type Me, type Reward } from '../../shared/protocol';
@@ -332,6 +334,7 @@ export { Stars };
 export function Profile() {
   const { t, me, auth, go, signOut, setMe, lang, look, setLook } = useApp();
   const [edit, setEdit] = useState(false);
+  const [dress, setDress] = useState(false);
   const events = useEvents();
   if (!me) return <SignIn />;
   const evBadges = (events?.all ?? []).filter((e) => me.badges[`ev_${e.id}`]);
@@ -340,13 +343,15 @@ export function Profile() {
     <div className="profile panel">
       <button type="button" className="back-link" onClick={() => go('home')}>‹ {t('setup.backHome')}</button>
       <header className="profile-head">
-        <span className="profile-avatar" aria-hidden="true">{me.avatar}</span>
+        <span className="profile-avatar" aria-hidden="true"><Avatar emoji={me.avatar} look={me.look} size={64} /></span>
         <div>
           <h1 dir="auto">{me.pseudo}</h1>
           <p className="muted">{me.country ? `${flagOf(me.country)} ${countryName(me.country, lang)} · ` : ''}{t('profile.since', { date: new Date(me.createdAt).toLocaleDateString(lang) })}</p>
         </div>
       </header>
       <LevelBar level={me.level} levelXp={me.levelXp} levelNeed={me.levelNeed} title={me.title} />
+      <button type="button" className="btn ghost dress-btn" onClick={() => setDress(!dress)}>👕 {t('look.title')}</button>
+      {dress && <AvatarDresser />}
       <div className="profile-stats">
         <div><strong>{me.xp}</strong><span>{t('profile.xp')}</span></div>
         <div><strong>{me.games}</strong><span>{t('profile.games')}</span></div>
@@ -381,7 +386,7 @@ export function Profile() {
       <h2>{t('profile.progress')}</h2>
       <p className="muted small">{t('profile.progressHint')}</p>
       <ul className="progress-list">
-        {FAMILIES.flatMap((f) => f.games.filter((g) => !g.soon)).map((g) => {
+        {FAMILIES.flatMap((f) => f.games.filter((g) => !g.soon && !g.screen)).filter((g, i, all) => all.findIndex((x) => x.id === g.id) === i).map((g) => {
           const c = me.cats[g.id];
           return (
             <li key={g.id}>
@@ -466,7 +471,7 @@ function EditProfile({ me, auth, onDone }: { me: Me; auth: string; onDone: (m?: 
 }
 
 // ------------------------------------------------------------------ classement
-interface LbRow { id: string; rank: number; xp: number; pseudo: string; avatar: string; country?: string }
+interface LbRow { id: string; rank: number; xp: number; pseudo: string; avatar: string; country?: string; look?: Look2 }
 export function LeaderboardScreen({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, me, auth, go, lang } = useApp();
   const [onlyMine, setOnlyMine] = useState(false);
@@ -491,7 +496,7 @@ export function LeaderboardScreen({ embedded = false }: { embedded?: boolean } =
           {data.top.map((r) => (
             <li key={r.id} className={r.id === me?.id ? 'me' : ''}>
               <span className="lb-rank">{r.rank <= 3 ? ['🥇', '🥈', '🥉'][r.rank - 1] : r.rank}</span>
-              <span className="lb-avatar" aria-hidden="true">{r.avatar}</span>
+              <span className="lb-avatar" aria-hidden="true"><Avatar emoji={r.avatar} look={r.look} size={30} /></span>
               <span className="lb-name" dir="auto">{r.pseudo} {r.country ? <small>{flagOf(r.country)}</small> : null}</span>
               <strong>{r.xp} XP</strong>
             </li>

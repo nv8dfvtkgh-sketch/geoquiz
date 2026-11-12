@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -28,6 +28,7 @@ export const FAMILIES: Family[] = [
       { id: 'review', icon: 'refresh', fresh: true },
       { id: 'league', icon: 'trophy', fresh: true, screen: 'league' },
       { id: 'passport', icon: 'passport', fresh: true, screen: 'passport' },
+      { id: 'album', icon: 'sticker', fresh: true, screen: 'album' },
       { id: 'tournament', icon: 'stadium', fresh: true, screen: 'tournament' },
       { id: 'classes', icon: 'school', fresh: true, screen: 'classes' },
     ],
@@ -128,6 +129,7 @@ export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
 export const ICONS = {
+  sticker: <g {...P}><path d="M5 4h14v9l-6 7H5z" /><path d="M19 13h-6v7" /><path d="M9 9.5h.01M14 9.5h.01" strokeWidth="2.4" /></g>,
   camera: <g {...P}><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></g>,
   question: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.7" /><path d="M12 17h.01" strokeWidth="2.4" /></g>,
   list: <g {...P}><path d="M9 6h11M9 12h11M9 18h11" /><path d="M4 6l1 1 2-2M4 12l1 1 2-2" /><path d="M4.5 18h1" strokeWidth="2.4" /></g>,

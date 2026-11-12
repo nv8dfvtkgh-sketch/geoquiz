@@ -127,7 +127,11 @@ function usePuzzle(game: string, pool: GeoCountry[] | null) {
     if (!pool?.length) return null;
     return free ? pool[hash(free) % pool.length] : pickDaily(pool, game, day);
   }, [pool, free, game, day]);
-  const update = (s: PuzzleSave) => { setSave(s); if (!free) savePuzzle(game, day, s); };
+  const update = (s: PuzzleSave) => {
+    setSave(s);
+    if (!free) savePuzzle(game, day, s);
+    if (s.done && !save.done) window.dispatchEvent(new CustomEvent('gq:finished', { detail: { game, score: s.won ? 1 : 0 } }));
+  };
   const newFree = () => { setFree(`${game}:${Date.now()}`); setSave({ guesses: [], done: false, won: false }); window.scrollTo(0, 0); };
   const daily = () => { setFree(null); setSave(loadPuzzle(game, day)); };
   return { day, free: !!free, target, save, update, newFree, daily };

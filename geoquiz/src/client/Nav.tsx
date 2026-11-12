@@ -13,10 +13,10 @@ import { LeagueScreen } from './screens/Progress';
 import { starsOf } from './account';
 
 /** Écrans où la barre est visible (jamais pendant une partie). */
-export const NAV_SCREENS: Screen[] = ['home', 'today', 'rankings', 'profile', 'signin', 'leaderboard', 'league', 'passport', 'classes', 'tournament', 'geo', 'print', 'myquizzes', 'globle', 'capword', 'compass', 'nameall', 'cards', 'colorflag'];
+export const NAV_SCREENS: Screen[] = ['home', 'today', 'rankings', 'profile', 'signin', 'leaderboard', 'league', 'passport', 'classes', 'tournament', 'geo', 'print', 'myquizzes', 'globle', 'capword', 'compass', 'nameall', 'cards', 'colorflag', 'album'];
 const TAB_OF: Partial<Record<Screen, string>> = {
   home: 'home', geo: 'home', nameall: 'home', cards: 'home', colorflag: 'home', print: 'home', myquizzes: 'home',
-  today: 'today', globle: 'today', capword: 'today', compass: 'today', passport: 'today', league: 'today', classes: 'today', tournament: 'today',
+  today: 'today', album: 'today', globle: 'today', capword: 'today', compass: 'today', passport: 'today', league: 'today', classes: 'today', tournament: 'today',
   rankings: 'rankings', leaderboard: 'rankings', profile: 'profile', signin: 'profile',
 };
 

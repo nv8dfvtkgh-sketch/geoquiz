@@ -269,6 +269,9 @@ export interface Me {
   /** Questions à revoir aujourd'hui ; ligue de la semaine (division 0 = Bronze). */
   reviewDue?: number;
   league?: { div: number; last?: { week: string; div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' } };
+  /** Album d'autocollants (id → nombre) et tenue de l'avatar. */
+  album?: Record<string, number>;
+  look?: import('./stickers').Look;
 }
 /** Gains d'une partie, envoyés au joueur connecté à la fin. */
 export interface Reward {

@@ -163,7 +163,7 @@ export default {
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
         // Comptes joueurs, progression et classement : Durable Object des comptes.
-        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p === '/api/league' || p.startsWith('/api/class') || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
+        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p === '/api/league' || p === '/api/album' || p.startsWith('/api/class') || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
