@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings';
 
 export interface Feedback {
   q: number;
@@ -32,6 +32,8 @@ export interface State {
   question?: QuestionMsg;
   qAt: number;
   fb?: Feedback;
+  /** Réponses de la partie en cours (index → juste ?) : barre de progression et série. */
+  hist?: Record<number, boolean>;
   progress?: { answered: number; total: number };
   reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } };
   finished?: Extract<ServerMsg, { t: 'finished' }>;
@@ -96,6 +98,7 @@ function onServer(s: State, m: ServerMsg): State {
       const same = s.question?.index === m.q.index && s.room?.state !== 'lobby';
       return {
         ...s, question: m.q, qAt: performance.now(), screen: 'game', reward: m.q.index === 0 ? undefined : s.reward,
+        hist: m.q.index === 0 && !same ? {} : s.hist,
         fb: same ? s.fb : undefined, reveal: same ? s.reveal : undefined, progress: same ? s.progress : undefined,
       };
     }
@@ -104,13 +107,17 @@ function onServer(s: State, m: ServerMsg): State {
       const tried = [...(prev?.tried ?? []), m.value];
       return {
         ...s,
+        hist: m.done ? { ...(s.hist ?? {}), [m.q]: m.correct } : s.hist,
         fb: { q: m.q, tried, lastBad: m.correct ? undefined : m.value, attemptsLeft: m.attemptsLeft, done: m.done, correct: m.correct, points: m.points, value: m.value, reveal: m.reveal ?? prev?.reveal, km: m.km },
       };
     }
     case 'progress':
       return { ...s, progress: { answered: m.answered, total: m.total } };
-    case 'reveal':
-      return { ...s, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle } };
+    case 'reveal': {
+      const mine = m.results.find((r) => r.id === s.you);
+      const hist = mine ? { ...(s.hist ?? {}), [m.q]: mine.correct } : s.hist;
+      return { ...s, hist, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle } };
+    }
     case 'finished':
       return { ...s, finished: m, screen: 'final' };
     case 'reward':

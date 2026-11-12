@@ -17,6 +17,7 @@ import { PrintScreen } from './screens/Print';
 import { ChallengeScreen } from './Challenge';
 import { LeagueScreen, PassportScreen } from './screens/Progress';
 import { ClassesScreen, ClassJoinScreen, TournamentScreen } from './screens/School';
+import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -67,6 +68,8 @@ export function App() {
     });
   }, []);
   useEffect(() => { refreshMe(); }, [refreshMe]);
+  // Chaque nouvel écran s'ouvre en haut de page (pas au milieu de l'écran précédent).
+  useEffect(() => { if (s.screen !== 'game') window.scrollTo(0, 0); }, [s.screen]);
   // Connecté par Google / Facebook sans avoir encore choisi de style : classique (13 ans et plus).
   useEffect(() => { if (me && !look) { setLookState('classic'); try { localStorage.setItem('gq.look', 'classic'); } catch {} } }, [me, look]);
   useEffect(() => {
@@ -149,7 +152,7 @@ export function App() {
 
   return (
     <AppCtx.Provider value={ctx}>
-      <div className={`app screen-${s.screen}`}>
+      <div className={`app screen-${s.screen} ${NAV_SCREENS.includes(s.screen) && look ? 'has-nav' : ''}`}>
         <TopBar />
         {!online && <div className="banner" role="status">{t('net.reconnecting')}</div>}
         <main>
@@ -175,7 +178,10 @@ export function App() {
           {s.screen === 'classes' && <ClassesScreen />}
           {s.screen === 'classjoin' && <ClassJoinScreen />}
           {s.screen === 'tournament' && <TournamentScreen />}
+          {s.screen === 'today' && <TodayScreen />}
+          {s.screen === 'rankings' && <RankingsScreen />}
         </main>
+        {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}
       </div>
     </AppCtx.Provider>
   );

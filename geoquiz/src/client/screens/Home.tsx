@@ -6,6 +6,11 @@ import { FeedbackLink } from '../Feedback';
 import { HomeworkCard } from './School';
 import { useEvents } from '../events';
 
+import { useApp } from '../state';
+import { Stars } from './Account';
+import { starsOf } from '../account';
+
+
 /** Événement du moment (quiz spécial, badge à gagner). */
 function EventCard({ onOpen }: { onOpen: () => void }) {
   const { t, lang } = useApp();
@@ -20,27 +25,35 @@ function EventCard({ onOpen }: { onOpen: () => void }) {
     </button>
   );
 }
-import { useApp } from '../state';
-import { AccountForm, Stars } from './Account';
-import { starsOf } from '../account';
-
 export function Home() {
   const { look } = useApp();
   return look ? <Games /> : <Welcome />;
 }
 
-/** Premier passage : création du compte (ou connexion, ou invité) et choix du style. */
+/** Premier passage : on choisit son âge (pour le style) et on joue tout de suite ; le compte vient après. */
 function Welcome() {
-  const { t } = useApp();
+  const { t, setLook, go, name, setName } = useApp();
+  const pick = (age: 'u13' | '13-17' | '18+') => {
+    try { localStorage.setItem('gq.age', age); } catch { /* ignoré */ }
+    // Un pseudo d'invité pour jouer tout de suite (modifiable, et remplacé par le compte).
+    if (!name.trim()) setName(t('home.guestName', { n: 100 + Math.floor(Math.random() * 900) }));
+    setLook(age === 'u13' ? 'kids' : 'classic');
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="welcome">
       <div className="welcome-head">
         <img className="welcome-logo" src="/logo.svg" width="88" height="88" alt="" />
         <h1>{t('welcome.title')}</h1>
-        <p>{t('welcome.hint')}</p>
+        <p>{t('welcome.pitch')}</p>
       </div>
-      <AccountForm pickStyle />
-      <p className="muted small welcome-later">{t('welcome.later')}</p>
+      <h2 className="welcome-q">{t('welcome.age')}</h2>
+      <div className="age-picks">
+        <button type="button" onClick={() => pick('u13')}><span aria-hidden="true">🧒</span>{t('account.age.u13')}</button>
+        <button type="button" onClick={() => pick('13-17')}><span aria-hidden="true">🧑</span>{t('account.age.13-17')}</button>
+        <button type="button" onClick={() => pick('18+')}><span aria-hidden="true">🧑‍💼</span>{t('account.age.18+')}</button>
+      </div>
+      <p className="muted welcome-later">{t('welcome.already')} <button type="button" className="text-btn" onClick={() => { setLook('classic'); go('signin'); }}>{t('welcome.signin')}</button></p>
     </div>
   );
 }
@@ -127,11 +140,12 @@ function Games() {
       </form>
       {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
 
-      {FAMILIES.map((f) => (
+      <HomeworkCard />
+      <EventCard onOpen={() => { if (!ready) return askName(); openGame('event'); }} />
+
+      {FAMILIES.filter((f) => f.id !== 'today').map((f) => (
         <section key={f.id} className="family">
           <h2>{t(`family.${f.id}`)}</h2>
-          {f.id === 'today' && <HomeworkCard />}
-          {f.id === 'today' && <EventCard onOpen={() => { if (!ready) return askName(); openGame('event'); }} />}
           {f.id === 'geo' && (
             <button type="button" className="geo-feature" onClick={() => { if (!ready) return askName(); go('geo'); window.scrollTo(0, 0); }}>
               <span className="geo-feature-art" aria-hidden="true">🗺️</span>

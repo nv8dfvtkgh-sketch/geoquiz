@@ -178,29 +178,32 @@ export function Setup() {
           <button type="button" className="btn primary" onClick={save}>{t('setup.save')}</button>
         </div>
       ) : (
-        <div className="how">
-          {!(review && (!me || !me.reviewDue)) && <h2>{t('setup.howToPlay')}</h2>}
-          {review && (!me || !me.reviewDue) ? null : locked ? (
-            <button type="button" className="how-btn primary" disabled>
-              🔒 {t('setup.soloBtn')}<small>{t('lock.need', { diff: t(`diff.${locked}`) })}</small>
-            </button>
-          ) : (
-            <button type="button" className="how-btn primary" onClick={() => play('solo')}>
-              {t('setup.soloBtn')}<small>{cfg.soloMode === 'timed' ? t('solo.timed') : t('solo.training')}</small>
-            </button>
+        <>
+          <div className="how">
+            {locked && <p className="hint">{t('lock.hint')}</p>}
+            {!review && <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>}
+            {printableGame(cfg.category) && <button type="button" className="text-btn quick-link" onClick={() => { go('print'); window.scrollTo(0, 0); }}>🖨️ {t('print.fromGame')}</button>}
+          </div>
+          {!(review && (!me || !me.reviewDue)) && (
+            <div className="play-bar">
+              {locked ? (
+                <button type="button" className="how-btn primary" disabled>
+                  🔒 {t('setup.soloBtn')}<small>{t('lock.need', { diff: t(`diff.${locked}`) })}</small>
+                </button>
+              ) : (
+                <button type="button" className="how-btn primary" onClick={() => play('solo')}>
+                  {t('setup.soloBtn')}<small>{cfg.soloMode === 'timed' ? t('solo.timed') : t('solo.training')}</small>
+                </button>
+              )}
+              {!review && (
+                <div className="play-bar-row">
+                  <button type="button" className="how-btn" onClick={() => play('duel')}>⚔️ {t('setup.duelShort')}</button>
+                  <button type="button" className="how-btn" onClick={() => play('room')}>👥 {t('setup.roomShort')}</button>
+                </div>
+              )}
+            </div>
           )}
-          {locked && <p className="hint">{t('lock.hint')}</p>}
-          {!review && <>
-          <button type="button" className="how-btn" onClick={() => play('duel')}>
-            {t('setup.duelBtn')}<small>{t('setup.duelHint')}</small>
-          </button>
-          <button type="button" className="how-btn" onClick={() => play('room')}>
-            {t('setup.roomBtn')}<small>{t('setup.roomHint', { max: catalog.maxPlayers })}</small>
-          </button>
-          <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>
-          </>}
-          {printableGame(cfg.category) && <button type="button" className="text-btn quick-link" onClick={() => { go('print'); window.scrollTo(0, 0); }}>🖨️ {t('print.fromGame')}</button>}
-        </div>
+        </>
       )}
     </div>
   );

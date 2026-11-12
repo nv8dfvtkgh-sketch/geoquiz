@@ -7,10 +7,19 @@ import { RewardCard } from './Account';
 import { DailyBoard } from './Setup';
 import { countGame, FeedbackPrompt } from '../Feedback';
 import { Confetti } from '../Celebrate';
+import { FAMILIES } from '../games';
+
+/** Jeu suivant dans la même famille (le premier si on était au dernier). */
+function nextGame(cat: string): string | null {
+  const fam = FAMILIES.find((f) => f.games.some((g) => g.id === cat));
+  const list = fam?.games.filter((g) => !g.soon && !g.screen).map((g) => g.id) ?? [];
+  if (list.length < 2) return null;
+  return list[(list.indexOf(cat) + 1) % list.length];
+}
 import { ChallengeShare } from '../Challenge';
 
 export function Final() {
-  const { t, s, send, leave } = useApp();
+  const { t, s, send, leave, openGame } = useApp();
   const f = s.finished;
   const room = s.room;
   useEffect(() => { sfx.end(); }, []);
@@ -26,27 +35,40 @@ export function Final() {
   const fx = party && <Confetti size={party} />;
 
   if (kind === 'solo' && f.solo) {
+    const { correct, total, accuracy } = f.solo;
+    // Étoiles de la partie : 50 %, 80 %, 100 %.
+    const stars = accuracy >= 100 ? 3 : accuracy >= 80 ? 2 : accuracy >= 50 ? 1 : 0;
+    const nextAt = [0.5, 0.8, 1][stars];
+    const missing = nextAt ? Math.max(1, Math.ceil(nextAt * total - 1e-9) - correct) : 0;
+    const wrong = f.recap.filter((r) => !r.results.find((x) => x.id === s.you)?.correct).length;
+    const daily = room.settings.category === 'daily';
+    const next = nextGame(room.settings.category);
     return (
-      <div className="final panel">
+      <div className="final panel final-solo">
         {fx}
-        <h1 className={party === 'big' ? 'perfect' : ''}>{party === 'big' ? t('final.perfect') : t('final.title')}</h1>
-        <div className="solo-stats">
-          <div><span>{t('final.accuracy')}</span><strong>{f.solo.accuracy} %</strong><small>{t('final.correctCount', { c: f.solo.correct, n: f.solo.total })}</small></div>
-          <div><span>{t('final.time')}</span><strong>{formatTime(f.solo.timeMs)}</strong></div>
+        <div className="final-top">
+          <p className="final-stars" aria-label={t('final.starsLabel', { n: stars })}>
+            {[0, 1, 2].map((i) => <span key={i} className={i < stars ? 'on' : ''} style={{ '--i': i } as React.CSSProperties}>★</span>)}
+          </p>
+          <h1 className={party === 'big' ? 'perfect' : ''}>{party === 'big' ? t('final.perfect') : t('final.scoreOf', { c: correct, n: total })}</h1>
+          <p className="muted">{accuracy} % · {formatTime(f.solo.timeMs)}{s.reward ? ` · +${s.reward.xp} XP` : ''}</p>
+          {stars < 3 && total >= 3 && <p className="next-star">{t(missing > 1 ? 'final.nextStarMany' : 'final.nextStarOne', { n: missing })}</p>}
+          {room.settings.soloMode === 'timed' && best && (
+            <p className={best.isNew ? 'record stamp-new' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
+          )}
         </div>
-        {room.settings.soloMode === 'timed' && best && (
-          <p className={best.isNew ? 'record stamp-new' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
-        )}
-        {room.settings.category === 'daily' && <DailyShare />}
+        <div className="final-actions">
+          {!daily && <button type="button" className="btn primary big" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>}
+          {wrong > 0 && wrong < total && <button type="button" className="btn ghost" onClick={() => send({ t: 'retry' })}>{t('final.retryMistakes', { n: wrong })}</button>}
+          {next && <button type="button" className="btn ghost" onClick={() => { leave(); setTimeout(() => openGame(next), 60); }}>{t('final.nextGame', { game: t(`cat.${next}`) })}</button>}
+        </div>
+        {daily && <DailyShare />}
         <ChallengeShare />
         <RewardCard />
         <FeedbackPrompt game={room.settings.category} />
-        {room.settings.category === 'daily' && <DailyBoard refresh={1} />}
+        {daily && <DailyBoard refresh={1} />}
         <Recap />
-        <div className="actions">
-          <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
-          {room.settings.category !== 'daily' && <button type="button" className="btn primary" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>}
-        </div>
+        <button type="button" className="text-btn final-home" onClick={leave}>{t('final.home')}</button>
       </div>
     );
   }
@@ -142,7 +164,7 @@ function Recap() {
   const f = s.finished!;
   const players = s.room!.kind === 'duel' ? f.players : f.players.filter((p) => p.id === s.you);
   return (
-    <details className="recap" open={s.room!.kind !== 'room'}>
+    <details className="recap" open={s.room!.kind === 'duel'}>
       <summary>{t('final.recap')}</summary>
       <table>
         {players.length > 1 && (

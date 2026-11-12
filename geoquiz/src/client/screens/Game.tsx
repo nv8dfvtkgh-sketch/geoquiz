@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { QuestionMsg, Reveal } from '../../shared/protocol';
 import { MapView, type Mark } from '../MapView';
-import { sfx } from '../sound';
+import { isMuted, sfx } from '../sound';
 import { useApp } from '../state';
 import { RoadSign } from '../RoadSign';
 import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
-import { autoRead, canSpeak, setAutoRead, speak, stopSpeaking } from '../speech';
+import { autoRead, hasVoice, setAutoRead, speak, stopSpeaking } from '../speech';
 import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Game() {
@@ -48,12 +48,20 @@ function ReadAloud({ q, label }: { q: QuestionMsg; label: string }) {
     const opts = q.kind === 'mcq' || q.kind === 'order' ? (q.options ?? []).map((o) => o.label ?? '') : [];
     return [label, name, ...opts];
   };
-  useEffect(() => { if (auto) speak(parts(), lang); return () => stopSpeaking(); }, [q.index, auto]);
-  if (!canSpeak()) return null;
+  // Les voix de l'appareil arrivent parfois après l'affichage ; sans vraie voix pour la langue, pas de bouton.
+  const [ok, setOk] = useState(() => hasVoice(lang));
+  useEffect(() => {
+    const upd = () => setOk(hasVoice(lang));
+    upd();
+    window.speechSynthesis?.addEventListener?.('voiceschanged', upd);
+    return () => window.speechSynthesis?.removeEventListener?.('voiceschanged', upd);
+  }, [lang]);
+  useEffect(() => { if (auto && ok) speak(parts(), lang); return () => stopSpeaking(); }, [q.index, auto, ok]);
+  if (!ok) return null;
   return (
     <div className="read-aloud">
       <button type="button" className="speak-btn" aria-label={t('play.readAloud')} title={t('play.readAloud')} onClick={() => speak(parts(), lang)}>🔊</button>
-      <label className="speak-auto"><input type="checkbox" checked={auto} onChange={(e) => { setAuto(e.target.checked); setAutoRead(e.target.checked); }} /> {t('play.readAuto')}</label>
+      <label className="speak-auto"><input type="checkbox" checked={auto} onChange={(e) => { setAuto(e.target.checked); setAutoRead(e.target.checked); }} /> {t('play.readAutoShort')}</label>
     </div>
   );
 }
@@ -99,8 +107,12 @@ function Play({ q }: { q: QuestionMsg }) {
     if (k === lastSeen.current) return;
     lastSeen.current = k;
     fb.correct ? sfx.good() : sfx.bad();
+    // Petite vibration sur téléphone (sauf son coupé).
+    if (fb.done && !isMuted()) try { navigator.vibrate?.(fb.correct ? 30 : [60, 40, 60]); } catch { /* non pris en charge */ }
   }, [fb]);
 
+  // Entraînement solo : après la réponse, un toucher n'importe où passe à la suite.
+  const tapNext = solo && !!fb?.done && s.room!.settings.soloMode !== 'timed';
   const answer = (value: string) => {
     if (locked || fb?.tried.includes(value)) return;
     send({ t: 'answer', q: q.index, value });
@@ -117,9 +129,12 @@ function Play({ q }: { q: QuestionMsg }) {
   }, [fb, reveal]);
 
   return (
-    <div className={`play kind-${q.kind}`}>
+    <div
+      className={`play kind-${q.kind} ${tapNext ? 'tap-next' : ''}`}
+      onClick={(e) => { if (tapNext && !(e.target as Element).closest('button, a, input, select, textarea, .mapbox')) send({ t: 'next' }); }}
+    >
       <div className="hud">
-        <span className="qnum">{t('play.question', { i: q.index + 1, n: q.total })}</span>
+        <Progress q={q} />
         {!solo && me && <span className="myscore">{t('play.score', { n: me.score })}</span>}
         <Timer q={q} stopped={locked} />
       </div>
@@ -147,6 +162,30 @@ function Play({ q }: { q: QuestionMsg }) {
       {q.kind === 'type' && <TypeBox key={q.index} disabled={locked} onSubmit={answer} numeric={q.category === 'calc'} />}
 
       <Status q={q} />
+    </div>
+  );
+}
+
+/** Barre de progression en cases (vert = juste, rouge = faux) et série en cours. */
+function Progress({ q }: { q: QuestionMsg }) {
+  const { t, s } = useApp();
+  const hist = s.hist ?? {};
+  let streak = 0;
+  for (let i = q.index; i >= 0; i--) {
+    if (hist[i] === undefined) { if (i === q.index) continue; break; }
+    if (!hist[i]) break;
+    streak++;
+  }
+  const many = q.total > 20;
+  return (
+    <div className="qprogress">
+      <div className="qprogress-top">
+        <span className="qnum">{t('play.question', { i: q.index + 1, n: q.total })}</span>
+        {streak >= 2 && <span className="streak" key={streak}>🔥 {streak}</span>}
+      </div>
+      <div className={`qbar ${many ? 'thin' : ''}`} aria-hidden="true">
+        {Array.from({ length: q.total }, (_, i) => <i key={i} className={hist[i] === true ? 'g' : hist[i] === false ? 'r' : i === q.index ? 'c' : ''} />)}
+      </div>
     </div>
   );
 }

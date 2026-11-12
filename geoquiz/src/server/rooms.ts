@@ -171,6 +171,9 @@ export class Room {
   /** Défi joué : son code, et ses questions une fois chargées. */
   challenge?: string;
   challengeItems?: ChallengeData['items'];
+  /** « Revoir mes erreurs » : questions ratées rejouées (solo). */
+  retryQs?: InternalQuestion[];
+  retrying = false;
   /** Défi créé à partir de cette partie (solo), pour ne pas en créer deux. */
   madeChallenge?: string;
   /** Révisions : jeton du compte, et questions chargées. */
@@ -441,6 +444,12 @@ export class Room {
       case 'challenge':
         this.makeChallenge(m);
         break;
+      case 'retry':
+        if (this.kind === 'solo' && this.state === 'finished') {
+          const wrong = this.recap.filter((x) => !x.results[0]?.correct).map((x) => x.q);
+          if (wrong.length) { this.retryQs = wrong; this.start(); }
+        }
+        break;
       case 'auth':
         m.auth = typeof msg.token === 'string' ? msg.token.slice(0, 64) : undefined;
         break;
@@ -491,7 +500,11 @@ export class Room {
     const players = this.players();
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
-    this.questions = this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
+    const retry = this.retryQs;
+    this.retryQs = undefined;
+    this.retrying = !!retry;
+    this.questions = retry ? retry
+      : this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
       : this.challengeItems ? this.challengeQuestions()
       : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings);
     this.madeChallenge = undefined;
@@ -805,7 +818,7 @@ export class Room {
     this.broadcast((m) => this.finishedMsg(m.lang));
     this.recordAll();
     // Défi joué : on ajoute le résultat et on renvoie le classement du défi.
-    if (this.challenge && this.kind === 'solo') {
+    if (this.challenge && this.kind === 'solo' && !this.retrying) {
       const p = this.players()[0];
       if (p) {
         const res = this.recap.map((x) => x.results.find((r) => r.id === p.id));

@@ -1217,3 +1217,91 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .event-card small { opacity: .9; }
 
 .prompt[data-cat='tifinagh'] .prompt-emoji { font-size: clamp(4rem, 18vw, 6.5rem); line-height: 1.1; flex: 1 1 100%; text-align: center; font-family: 'Noto Sans Tifinagh', var(--font-ui); }
+
+/* ------------------------------------------------------------------ premier lancement : l'âge, puis on joue */
+.welcome-q { text-align: center; margin: 18px 0 10px; font-size: 1.2rem; }
+.age-picks { display: grid; gap: 10px; max-width: 420px; margin: 0 auto; }
+.age-picks button { display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 12px 18px; border: 0; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: 600 1.08rem var(--font-ui); text-align: start; cursor: pointer; transition: transform .12s; }
+.age-picks button span { font-size: 1.8rem; }
+.age-picks button:active { transform: scale(.98); }
+.welcome-later { text-align: center; margin-top: 16px; }
+
+/* ------------------------------------------------------------------ barre de navigation en bas */
+.bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); background: var(--glass); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--border); }
+.bottom-nav button { display: grid; justify-items: center; gap: 2px; min-height: 48px; padding: 4px 0; border: 0; background: none; color: var(--ink-2); font: 600 .7rem var(--font-ui); cursor: pointer; }
+.bottom-nav button.on { color: var(--accent); }
+.nav-ic { position: relative; display: grid; place-items: center; }
+.nav-badge { position: absolute; top: -4px; inset-inline-end: -10px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: #E8590C; color: #fff; font: 700 .65rem/18px var(--font-ui); font-style: normal; text-align: center; }
+.app.has-nav main { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+.app.has-nav .home-foot { margin-bottom: 8px; }
+@media (min-width: 900px) { .bottom-nav { left: 50%; right: auto; transform: translateX(-50%); width: min(520px, 100%); bottom: 14px; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow-up); padding-bottom: 6px; } }
+[data-look='kids'] .bottom-nav { background: #FFFFFFEE; }
+[data-look='kids'] .bottom-nav button { font-size: .74rem; font-weight: 800; color: #6B5E8C; }
+[data-look='kids'] .bottom-nav button.on { color: #7C3AED; }
+.rankings { display: grid; gap: 12px; }
+.rankings-title { margin: 8px 0 0; }
+.rankings-tabs { width: 100%; }
+.today .tiles { margin-top: 4px; }
+
+/* ------------------------------------------------------------------ fiche de jeu compacte */
+.setup .game-hero { height: 92px; margin-bottom: 12px; }
+.setup .game-hero > svg { width: 50px; height: 50px; }
+.setup { padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important; }
+.play-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; gap: 8px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--glass); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--border); }
+.play-bar > * { width: 100%; max-width: 640px; margin-inline: auto; }
+.play-bar .how-btn { min-height: 52px; }
+.play-bar-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.play-bar-row .how-btn { justify-content: center; font-size: .95rem; padding: 0 10px; min-height: 46px; }
+[data-look='kids'] .play-bar { background: #FFFFFFEE; }
+.how { margin-top: 4px; }
+
+/* ------------------------------------------------------------------ progression et série */
+.qprogress { flex: 1; display: grid; gap: 5px; min-width: 0; }
+.qprogress-top { display: flex; align-items: center; gap: 8px; }
+.streak { padding: 1px 9px; border-radius: 999px; background: #FFF1E6; color: #C2410C; font-weight: 800; font-size: .85rem; animation: pop .35s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes pop { from { transform: scale(.4); } }
+.qbar { display: flex; gap: 3px; }
+.qbar i { flex: 1; height: 6px; border-radius: 3px; background: var(--fill); transition: background .25s; }
+.qbar.thin { gap: 1px; } .qbar.thin i { height: 4px; border-radius: 2px; }
+.qbar i.g { background: #34C759; } .qbar i.r { background: #FF3B30; } .qbar i.c { background: var(--accent); }
+[data-look='kids'] .qbar i { height: 8px; border-radius: 4px; }
+[data-look='kids'] .qbar i.c { background: #7C3AED; }
+.tap-next { cursor: pointer; }
+
+/* ------------------------------------------------------------------ fin de partie solo */
+.final-top { display: grid; gap: 4px; justify-items: center; text-align: center; }
+.final-top h1 { margin: 0; font-size: clamp(2rem, 9vw, 2.8rem); }
+.final-top p { margin: 0; }
+.final-stars { display: flex; gap: 6px; font-size: 3rem; line-height: 1; }
+.final-stars span { color: var(--fill); text-shadow: 0 1px 0 #0001; }
+.final-stars span.on { color: #F5B700; animation: star-in .5s cubic-bezier(.2, 1.6, .4, 1) both; animation-delay: calc(var(--i) * 180ms + 150ms); }
+@keyframes star-in { from { transform: scale(0) rotate(-40deg); opacity: 0; } }
+.next-star { font-weight: 700; color: var(--ink); margin-top: 4px !important; }
+.final-actions { display: grid; gap: 8px; margin: 14px 0 6px; }
+.final-actions .btn { width: 100%; min-height: 48px; }
+.final-home { display: block; margin: 12px auto 0; }
+[data-look='kids'] .final-stars { font-size: 3.6rem; }
+[data-look='kids'] .final-stars span.on { color: #FFB020; text-shadow: 0 3px 0 #C77800; }
+
+/* ------------------------------------------------------------------ finitions */
+/* Cibles au doigt d'au moins 44 px. */
+.btn { min-height: 44px; }
+.seg button { min-height: 40px; }
+.text-btn { padding-block: 8px; }
+.opt { min-height: 60px; }
+/* Chargement : écran squelette au lieu d'un rond qui tourne seul. */
+.loading { width: min(560px, 100%); height: auto; margin: 24px auto; border: 0; border-radius: 0; animation: none; display: grid; gap: 12px; }
+.loading::before, .loading::after { content: ''; display: block; border-radius: 16px; background: linear-gradient(90deg, var(--fill) 25%, var(--card) 50%, var(--fill) 75%); background-size: 300% 100%; animation: shimmer 1.2s ease-in-out infinite; }
+.loading::before { height: 120px; }
+.loading::after { height: 220px; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+/* Transition douce d'une question à l'autre. */
+.play .prompt { animation: q-in .28s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes q-in { from { opacity: 0; transform: translateX(14px); } }
+[dir='rtl'] .play .prompt { animation-name: q-in-rtl; }
+@keyframes q-in-rtl { from { opacity: 0; transform: translateX(-14px); } }
+@media (prefers-reduced-motion: reduce) { .loading::before, .loading::after, .play .prompt { animation: none; } }
+
+/* Barre du haut sur téléphone : la langue reste lisible ; le compte passe dans l'onglet Profil. */
+.lang select { width: auto; min-width: 74px; }
+@media (max-width: 600px) { .app.has-nav .me-chip, .app.has-nav .signin-link { display: none; } }

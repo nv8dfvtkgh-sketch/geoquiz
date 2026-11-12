@@ -49,7 +49,8 @@ export function AccountForm({ pickStyle, onDone }: { pickStyle?: boolean; onDone
   const [mode, setMode] = useState<'signup' | 'login' | 'guest'>('signup');
   const [pseudo, setPseudo] = useState(name);
   const [password, setPassword] = useState('');
-  const [age, setAge] = useState<AgeGroup | ''>('');
+  // Âge déjà choisi au premier lancement.
+  const [age, setAge] = useState<AgeGroup | ''>(() => { try { return (localStorage.getItem('gq.age') as AgeGroup) || ''; } catch { return ''; } });
   const [email, setEmail] = useState('');
   const [optin, setOptin] = useState(false);
   const [country, setCountry] = useState('');
@@ -466,7 +467,7 @@ function EditProfile({ me, auth, onDone }: { me: Me; auth: string; onDone: (m?: 
 
 // ------------------------------------------------------------------ classement
 interface LbRow { id: string; rank: number; xp: number; pseudo: string; avatar: string; country?: string }
-export function LeaderboardScreen() {
+export function LeaderboardScreen({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, me, auth, go, lang } = useApp();
   const [onlyMine, setOnlyMine] = useState(false);
   const [data, setData] = useState<{ week: string; top: LbRow[]; me: LbRow | null } | null>(null);
@@ -476,8 +477,8 @@ export function LeaderboardScreen() {
   }, [onlyMine, auth, me?.country]);
   return (
     <div className="leaderboard-screen panel">
-      <button type="button" className="back-link" onClick={() => go(me ? 'profile' : 'home')}>‹ {me ? t('profile.title') : t('setup.backHome')}</button>
-      <h1>{t('lb.title')}</h1>
+      {!embedded && <button type="button" className="back-link" onClick={() => go(me ? 'profile' : 'home')}>‹ {me ? t('profile.title') : t('setup.backHome')}</button>}
+      {!embedded && <h1>{t('lb.title')}</h1>}
       <p className="muted">{t('lb.hint')}</p>
       {me?.country && (
         <div className="seg">

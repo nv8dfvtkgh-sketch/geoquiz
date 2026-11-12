@@ -203,6 +203,7 @@ export type ClientMsg =
   | { t: 'cancelQuick' }
   | { t: 'auth'; token: string }
   | { t: 'challenge' }
+  | { t: 'retry' }
   | { t: 'settings'; settings: Settings }
   | { t: 'start' }
   | { t: 'answer'; q: number; value: string }

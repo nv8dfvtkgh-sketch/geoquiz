@@ -68,14 +68,14 @@ interface LeagueView {
   last?: { div: number; rank: number; size: number; move: 'up' | 'down' | 'stay' };
 }
 
-export function LeagueScreen() {
+export function LeagueScreen({ embedded = false }: { embedded?: boolean } = {}) {
   const { t, me, auth, go } = useApp();
   const [v, setV] = useState<LeagueView | null>(null);
   const [now, setNow] = useState(Date.now());
   useEffect(() => { if (auth) api('/api/league', { token: auth }).then((r) => r.ok && setV(r.data)); }, [auth]);
   useEffect(() => { const id = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(id); }, []);
   if (!me) return (
-    <div className="league panel"><Back /><h1>{t('league.title')}</h1><p className="muted">{t('league.hint')}</p>
+    <div className="league panel">{!embedded && <Back />}<h1>{t('league.title')}</h1><p className="muted">{t('league.hint')}</p>
       <div className="review-box"><p>{t('league.signin')}</p><button type="button" className="btn primary" onClick={() => go('signin')}>{t('account.create')}</button></div></div>
   );
   if (!v) return <div className="loading" />;
@@ -84,7 +84,7 @@ export function LeagueScreen() {
   const n = v.rows.length;
   return (
     <div className="league panel">
-      <Back />
+      {!embedded && <Back />}
       <div className="league-head" style={{ '--div': DIV_COLORS[v.div] } as React.CSSProperties}>
         <span className="div-badge" aria-hidden="true">{['🥉', '🥈', '🥇', '💎', '👑'][v.div]}</span>
         <div>
