@@ -12,15 +12,18 @@ import { Game } from './screens/Game';
 import { Final } from './screens/Final';
 import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
 import { LeaderboardScreen, Profile, SignIn } from './screens/Account';
+import { HubPreview } from './screens/GeoHub';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
 const adminPage = location.pathname.startsWith('/admin');
+const hubPreview = location.pathname.startsWith('/apercu');
 
 export function App() {
   const [s, dispatch] = useReducer(reducer, undefined, () => {
     const st = initialState(joinMatch?.[1]?.toUpperCase());
     if (adminPage) return { ...st, screen: 'admin' as const };
+    if (hubPreview) return { ...st, screen: 'hubpreview' as const };
     if (quizMatch) return { ...st, screen: 'quizsheet' as const, quiz: { id: quizMatch[1].toUpperCase() } };
     return st;
   });
@@ -143,6 +146,7 @@ export function App() {
           {s.screen === 'profile' && <Profile />}
           {s.screen === 'leaderboard' && <LeaderboardScreen />}
           {s.screen === 'signin' && <SignIn />}
+          {s.screen === 'hubpreview' && <HubPreview />}
         </main>
       </div>
     </AppCtx.Provider>

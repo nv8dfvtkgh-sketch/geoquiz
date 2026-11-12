@@ -486,5 +486,15 @@
   "err.account.invalid": "Invalid data.",
   "err.account.notFound": "Account not found.",
   "err.account.styleMissing": "Choose your style.",
-  "err.net": "No connection. Try again."
+  "err.net": "No connection. Try again.",
+  "hub.title": "Geography: pick your map",
+  "hub.previewNote": "Preview: percentages are examples. Switch style to compare.",
+  "hub.mode": "Game mode",
+  "hub.pin": "Tap the map",
+  "hub.type": "Type",
+  "hub.morocco": "Morocco: regions",
+  "hub.medal.gold": "Gold medal",
+  "hub.medal.silver": "Silver medal",
+  "hub.medal.bronze": "Bronze medal",
+  "hub.medal.none": "No medal yet"
 }

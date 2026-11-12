@@ -486,5 +486,15 @@
   "err.account.invalid": "Datos no válidos.",
   "err.account.notFound": "Cuenta no encontrada.",
   "err.account.styleMissing": "Elige tu estilo.",
-  "err.net": "Sin conexión. Inténtalo de nuevo."
+  "err.net": "Sin conexión. Inténtalo de nuevo.",
+  "hub.title": "Geografía: elige tu mapa",
+  "hub.previewNote": "Vista previa: los porcentajes son ejemplos. Cambia de estilo para comparar.",
+  "hub.mode": "Modo de juego",
+  "hub.pin": "Tocar el mapa",
+  "hub.type": "Escribir",
+  "hub.morocco": "Marruecos: regiones",
+  "hub.medal.gold": "Medalla de oro",
+  "hub.medal.silver": "Medalla de plata",
+  "hub.medal.bronze": "Medalla de bronce",
+  "hub.medal.none": "Aún sin medalla"
 }

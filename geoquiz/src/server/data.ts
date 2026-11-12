@@ -213,5 +213,12 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
 }
 
 export function catalog(categories: Catalog['categories'], maxPlayers: number): Catalog {
-  return { zones: [...zones.values()].map((z) => z.info), categories, maxPlayers };
+  return {
+    zones: [...zones.values()].map((z) => ({
+      ...z.info,
+      view: z.view.map((n) => Math.round(n)) as [number, number, number, number],
+      ids: z.info.kind === 'continent' || z.info.kind === 'subregion' ? z.countryIds : undefined,
+    })),
+    categories, maxPlayers,
+  };
 }

@@ -49,6 +49,10 @@ export interface ZoneInfo {
   level?: 'groups' | 'subs';
   count: number;
   categories: CategoryId[];
+  /** Cadrage de la zone sur sa carte (aperçus). */
+  view?: [number, number, number, number];
+  /** Pays de la zone (continents et sous-régions). */
+  ids?: string[];
 }
 
 export interface CategoryInfo {

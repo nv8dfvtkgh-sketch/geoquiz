@@ -486,5 +486,15 @@
   "err.account.invalid": "Données invalides.",
   "err.account.notFound": "Compte introuvable.",
   "err.account.styleMissing": "Choisis ton style.",
-  "err.net": "Pas de connexion. Réessaie."
+  "err.net": "Pas de connexion. Réessaie.",
+  "hub.title": "Géographie : choisis ta carte",
+  "hub.previewNote": "Aperçu : les pourcentages sont des exemples. Change de style pour comparer.",
+  "hub.mode": "Mode de jeu",
+  "hub.pin": "Toucher la carte",
+  "hub.type": "Écrire",
+  "hub.morocco": "Maroc : les régions",
+  "hub.medal.gold": "Médaille d’or",
+  "hub.medal.silver": "Médaille d’argent",
+  "hub.medal.bronze": "Médaille de bronze",
+  "hub.medal.none": "Pas encore de médaille"
 }

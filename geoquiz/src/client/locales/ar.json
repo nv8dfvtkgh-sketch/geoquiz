@@ -486,5 +486,15 @@
   "err.account.invalid": "بيانات غير صالحة.",
   "err.account.notFound": "الحساب غير موجود.",
   "err.account.styleMissing": "اختر أسلوبك.",
-  "err.net": "لا يوجد اتصال. أعد المحاولة."
+  "err.net": "لا يوجد اتصال. أعد المحاولة.",
+  "hub.title": "الجغرافيا: اختر خريطتك",
+  "hub.previewNote": "معاينة: النسب أمثلة فقط. غيّر الأسلوب للمقارنة.",
+  "hub.mode": "طريقة اللعب",
+  "hub.pin": "المس الخريطة",
+  "hub.type": "اكتب",
+  "hub.morocco": "المغرب: الجهات",
+  "hub.medal.gold": "ميدالية ذهبية",
+  "hub.medal.silver": "ميدالية فضية",
+  "hub.medal.bronze": "ميدالية برونزية",
+  "hub.medal.none": "لا ميدالية بعد"
 }

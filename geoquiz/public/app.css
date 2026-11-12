@@ -871,3 +871,52 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .me-chip .me-level { white-space: nowrap; }
 .tile .stars { top: 14px; bottom: auto; }
 @media (max-width: 420px) { .lang select { max-width: 92px; } }
+
+/* ================================================================ carte des régions (aperçu) */
+.hub-page { width: 100%; max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; padding-bottom: 40px; }
+.hub-head { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.hub-head h1 { margin: 0; font-size: clamp(2rem, 6vw, 3rem); }
+.hub-head p { margin: 0; }
+.hub { display: flex; flex-direction: column; gap: 18px; }
+.hub-mode { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hub-mode > span { font-weight: 600; }
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 18px; }
+.hub-card { position: relative; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); min-height: 300px; }
+.hub-map { display: block; width: 100%; aspect-ratio: 3 / 2; background: var(--ocean); }
+.hub-map path { stroke: var(--paper-2); stroke-width: .5; vector-effect: non-scaling-stroke; stroke-linejoin: round; fill-rule: evenodd; }
+.hub-map path.in { fill: #34C759; }
+.hub-map path.out { fill: color-mix(in srgb, #34C759 30%, var(--ocean)); }
+.hub-card h3 { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); margin: 0; padding: 6px 14px; border-radius: 12px; background: #1D1D1F; color: #FFFFFF; font-size: 1.05rem; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; box-shadow: 0 4px 14px #00000033; }
+.hub-card ul { list-style: none; margin: -46px 0 0; padding: 0 12px 14px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+.hub-card li button { width: 100%; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 8px 6px 16px; border: 0; border-radius: 999px; background: var(--card); color: var(--ink); box-shadow: 0 1px 2px #0000000f, 0 6px 18px #00000017; font: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+@media (hover: hover) { .hub-card li button:hover { transform: translateY(-1px); box-shadow: 0 2px 4px #00000014, 0 10px 24px #0000001f; } }
+.hub-game { flex: 1; text-align: start; font-weight: 600; color: var(--accent); }
+.hub-pct { font-weight: 700; font-variant-numeric: tabular-nums; }
+.medal { width: 30px; height: 30px; flex: none; border-radius: 50%; position: relative; background: radial-gradient(circle at 35% 30%, #FFFFFF 0 12%, transparent 13%), var(--m, #E5E5EA); box-shadow: inset 0 -3px 0 #0000001f; }
+.medal::after { content: '★'; position: absolute; inset: 0; display: grid; place-items: center; font-size: .9rem; color: #FFFFFFE6; }
+.medal.none { --m: #E5E5EA; }
+.medal.none::after { color: #C7C7CC; }
+.medal.bronze { --m: linear-gradient(135deg, #E8A87C, #B5652E); }
+.medal.silver { --m: linear-gradient(135deg, #F2F2F7, #A1A1AA); }
+.medal.gold { --m: linear-gradient(135deg, #FFE066, #F5A300); }
+@media (prefers-color-scheme: dark) { :root:not([data-look='kids']) .medal.none { --m: #3A3A3C; } :root:not([data-look='kids']) .hub-card h3 { background: #F5F5F7; color: #1D1D1F; } }
+/* Maroc : couleurs du drapeau */
+.hz-r-MA-groups .hub-map path.in { fill: #C1272D; }
+/* style enfant */
+[data-look='kids'] .hub-card { border-radius: 28px; box-shadow: 0 6px 0 #2B1B5A1f; }
+[data-look='kids'] .hub-map { background: #8FD6FF; }
+[data-look='kids'] .hub-map path.in { fill: #FFC800; }
+[data-look='kids'] .hub-map path.out { fill: #FFF1B8; }
+[data-look='kids'] .hz-world .hub-map path.in { fill: #22C55E; }
+[data-look='kids'] .hz-c-africa .hub-map path.in { fill: #FF8A1F; }
+[data-look='kids'] .hz-c-europe .hub-map path.in { fill: #1EA7FD; }
+[data-look='kids'] .hz-c-asia .hub-map path.in { fill: #FF4D6D; }
+[data-look='kids'] .hz-c-north-america .hub-map path.in { fill: #A24BFF; }
+[data-look='kids'] .hz-c-south-america .hub-map path.in { fill: #22C55E; }
+[data-look='kids'] .hz-c-oceania .hub-map path.in { fill: #FFB800; }
+[data-look='kids'] .hz-r-MA-groups .hub-map path.in { fill: #FF4D6D; }
+[data-look='kids'] .hub-card h3 { background: var(--accent); font-size: 1.2rem; font-weight: 800; border-radius: 16px; box-shadow: 0 4px 0 var(--accent-dark); }
+[data-look='kids'] .hub-card li button { border-radius: 18px; box-shadow: 0 4px 0 #2B1B5A1f; font-weight: 700; min-height: 52px; }
+[data-look='kids'] .hub-game { font-weight: 800; font-size: 1.08rem; }
+[data-look='kids'] .hub-pct { font-size: 1.1rem; color: var(--ink); }
+[data-look='kids'] .medal { width: 34px; height: 34px; }
