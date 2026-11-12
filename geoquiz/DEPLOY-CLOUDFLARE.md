@@ -65,6 +65,9 @@ partage utilisent automatiquement l'adresse affichée dans le navigateur.
   (Worker `geoquiz` → **Paramètres** → **Variables et secrets** → **Ajouter** → type *Secret*).
   Sans ce secret, la page `/admin` reste fermée. Les quiz créés par les joueurs sont stockés
   dans le Durable Object `QuizDO` ; une photo est réduite à environ 120 Ko avant envoi.
+- **Comptes joueurs** : stockés dans le Durable Object `AccountsDO` (créé automatiquement au déploiement,
+  migration `v3`). Mots de passe hachés (PBKDF2), e-mails jamais demandés aux moins de 13 ans.
+  Dans `/admin` → onglet **Joueurs** : statistiques, export CSV, mot de passe provisoire, suppression.
 - **Journaux** : onglet **Observability** du Worker (activé dans `wrangler.jsonc`).
 
 ## Bon à savoir

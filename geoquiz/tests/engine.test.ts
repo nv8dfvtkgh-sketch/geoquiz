@@ -421,3 +421,99 @@ test('Rébus emojis et Monuments (photos Wikipédia simulées)', async () => {
     if (q.kind === 'type') assert.ok(q.check(countries[m.country].names.fr) && q.check(m.names.en));
   }
 });
+
+test('Comptes : inscription, connexion, progression, badges, classement, admin', async () => {
+  const { AccountService, accountRoute, levelOf } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  let now = Date.UTC(2026, 10, 12, 10);
+  const svc = new AccountService(kv, () => now);
+  const err = async (f: () => Promise<unknown>) => { try { await f(); return ''; } catch (e) { return (e as Error).message; } };
+
+  assert.equal(await err(() => svc.register({ pseudo: 'ab', password: 'secret1', age: '18+', email: 'a@b.co' })), 'account.pseudoFormat');
+  assert.equal(await err(() => svc.register({ pseudo: 'Gros Connard', password: 'secret1', age: '18+', email: 'a@b.co' })), 'account.pseudoRefused');
+  assert.equal(await err(() => svc.register({ pseudo: 'Yasmine', password: 'secret1', age: '18+' })), 'account.emailInvalid');
+  assert.equal(await err(() => svc.register({ pseudo: 'Yasmine', password: '123', age: '18+', email: 'y@x.ma' })), 'account.passwordShort');
+  const y = await svc.register({ pseudo: 'Yasmine', password: 'secret1', age: '18+', email: 'Y@X.ma', country: 'MA', avatar: '🐪', optin: true });
+  assert.equal(y.me.email, 'y@x.ma');
+  assert.equal(await err(() => svc.register({ pseudo: 'yasmine', password: 'secret1', age: '13-17', email: 'z@x.ma' })), 'account.pseudoTaken');
+  // Moins de 13 ans : pas d'e-mail gardé, pas d'accord nouveautés.
+  const kid = await svc.register({ pseudo: 'Petit Lion', password: 'lion12', age: 'u13', email: 'kid@x.ma', optin: true });
+  assert.equal(kid.me.email, undefined);
+  assert.equal(kid.me.optin, false);
+
+  assert.equal(await err(() => svc.login({ pseudo: 'Yasmine', password: 'mauvais' })), 'account.wrong');
+  const log = await svc.login({ pseudo: 'YASMINE', password: 'secret1' });
+  assert.ok((await svc.byToken(log.token))?.pseudo === 'Yasmine');
+
+  // Partie : XP, badges, meilleur score, déblocage.
+  const base = { category: 'flags', difficulty: 'easy' as const, kind: 'solo' as const, mode: 'classic' as const, zone: 'world', lang: 'fr', players: 1, rank: 1 };
+  const r1 = (await svc.record(log.token, { ...base, total: 10, correct: 10, accuracy: 100 }))!;
+  assert.equal(r1.xp, 10 * 10 + 10 + 25);
+  assert.deepEqual(r1.badges.sort(), ['first', 'perfect']);
+  assert.equal(r1.unlocked, 'medium');
+  assert.equal(r1.best, 100);
+  const r2 = (await svc.record(log.token, { ...base, kind: 'room', players: 4, total: 10, correct: 5, accuracy: 50, difficulty: 'medium' }))!;
+  assert.ok(r2.badges.includes('winner'));
+  assert.equal(r2.unlocked, undefined);
+  assert.equal(await svc.record('0'.repeat(48), { ...base, total: 10, correct: 10, accuracy: 100 }), null);
+  // Jours d'affilée.
+  now += 86400000; await svc.record(log.token, { ...base, total: 5, correct: 1, accuracy: 20 });
+  now += 86400000; const r3 = (await svc.record(log.token, { ...base, total: 5, correct: 1, accuracy: 20 }))!;
+  assert.ok(r3.badges.includes('streak3'));
+  const me = await svc.me((await svc.byToken(log.token))!);
+  assert.equal(me.games, 4);
+  assert.equal(me.cats.flags.best.easy, 100);
+  assert.equal(me.level, levelOf(me.xp).level);
+
+  const lb = await svc.leaderboard(log.token);
+  assert.equal(lb.top[0].pseudo, 'Yasmine');
+  assert.equal(lb.me?.rank, 1);
+
+  // Routes et admin.
+  const q = new URLSearchParams();
+  assert.equal((await accountRoute(svc, 'GET', '/api/account', q, async () => ({}), 'x', null))!.status, 401);
+  assert.equal((await accountRoute(svc, 'GET', '/api/admin/users', q, async () => ({}), 'x', false))!.status, 401);
+  const users = (await accountRoute(svc, 'GET', '/api/admin/users', q, async () => ({}), 'pw', true))!.json as any;
+  assert.equal(users.stats.users, 2);
+  assert.equal(users.stats.optin, 1);
+  const csv = (await accountRoute(svc, 'GET', '/api/admin/users.csv', q, async () => ({}), 'pw', true))!.text!;
+  assert.ok(csv.includes('"y@x.ma","oui"') && csv.includes('"Petit Lion",""'));
+  const reset = await svc.adminReset(kid.me.id);
+  assert.ok((await svc.login({ pseudo: 'Petit Lion', password: reset.password })).token);
+  // Suppression par le joueur.
+  const acct = (await svc.byToken(log.token))!;
+  assert.equal(await err(() => svc.remove(acct, 'non')), 'account.wrong');
+  await svc.remove((await svc.byToken(log.token))!, 'secret1');
+  assert.equal(await svc.byToken(log.token), null);
+  assert.ok(!(await kv.get('pseudo:yasmine')) && !(await kv.get('email:y@x.ma')));
+});
+
+test('Fin de partie : les joueurs connectés reçoivent leur progression', async () => {
+  const { config } = await import('../src/server/rooms');
+  const calls: any[] = [];
+  const prev = config.recordGame;
+  config.recordGame = async (token, result) => { calls.push({ token, result }); return { xp: 42, total: 42, level: 1, levelUp: false, levelXp: 42, levelNeed: 100, title: 0, badges: ['first'] }; };
+  const c = client();
+  const room = create('solo', settings({ category: 'flags', zone: 'world', count: 3, qtype: 'mcq' }));
+  onMessage(c.conn, room.code, { t: 'join', name: 'Fab', lang: 'fr' });
+  onMessage(c.conn, room.code, { t: 'auth', token: 'a'.repeat(48) });
+  for (let i = 0; i < 3; i++) {
+    const q = c.last('question')!.q;
+    assert.equal(q.index, i);
+    onMessage(c.conn, room.code, { t: 'answer', q: i, value: q.options![0].id });
+    onMessage(c.conn, room.code, { t: 'next' });
+  }
+  for (let i = 0; i < 20 && !c.last('reward'); i++) await new Promise((r) => setTimeout(r, 5));
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].token, 'a'.repeat(48));
+  assert.equal(calls[0].result.total, 3);
+  assert.equal(calls[0].result.category, 'flags');
+  assert.equal(c.last('reward')!.reward.xp, 42);
+  config.recordGame = prev;
+});

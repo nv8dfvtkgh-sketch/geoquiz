@@ -11,6 +11,7 @@ import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, wor
 import { QuickQueue } from '../server/quick';
 import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from '../server/quizzes';
+import { AccountService, accountRoute, type GameResult } from '../server/accounts';
 
 // Types minimaux de la plateforme (pour ne pas dépendre de @cloudflare/workers-types).
 interface Fetcher { fetch(input: Request | string, init?: RequestInit): Promise<Response> }
@@ -38,12 +39,14 @@ export interface Env {
   ROOMS: DONamespace;
   QUICK: DONamespace;
   QUIZZES: DONamespace;
+  ACCOUNTS: DONamespace;
   MAX_PLAYERS?: string;
   ADMIN_PASSWORD?: string; // secret : Paramètres › Variables et secrets
 }
 
 /** Tous les quiz créés vivent dans un Durable Object unique (stockage SQLite). */
 const quizStub = (env: Env) => env.QUIZZES.get(env.QUIZZES.idFromName('store'));
+const accountsStub = (env: Env) => env.ACCOUNTS.get(env.ACCOUNTS.idFromName('accounts'));
 const quizCall = async <T>(env: Env, op: string, body: unknown): Promise<T | null> => {
   const r = await quizStub(env).fetch(`https://quiz/internal/${op}`, { method: 'POST', body: JSON.stringify(body) });
   return r.ok ? ((await r.json()) as T) : null;
@@ -131,6 +134,8 @@ export default {
           return typeof code === 'string' ? json({ code }) : json(code, 400);
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
+        // Comptes joueurs, progression et classement : Durable Object des comptes.
+        if (p.startsWith('/api/account') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -192,6 +197,10 @@ export class RoomDO {
   async fetch(request: Request): Promise<Response> {
     await ensureData(this.env);
     config.loadQuiz = (id, token) => quizCall(this.env, 'content', { id, token });
+    config.recordGame = async (token, result) => {
+      const r = await accountsStub(this.env).fetch('https://accounts/internal/record', { method: 'POST', body: JSON.stringify({ token, result }) });
+      return r.ok ? r.json() : null;
+    };
     const url = new URL(request.url);
 
     if (request.headers.get('Upgrade') === 'websocket') {
@@ -301,6 +310,42 @@ export class QuizDO {
       const bin = Uint8Array.from(atob(r.image.b64), (c) => c.charCodeAt(0));
       return new Response(bin, { headers: { 'Content-Type': r.image.type, 'Cache-Control': 'private, max-age=3600' } });
     }
+    return json(r.json ?? {}, r.status);
+  }
+}
+
+// ------------------------------------------------------------------ comptes joueurs
+/** Tous les comptes, la progression et le classement vivent dans un Durable Object unique. */
+export class AccountsDO {
+  svc: AccountService;
+
+  constructor(private state: DOState, private env: Env) {
+    const st = state.storage;
+    const kv: KV = {
+      get: (k) => st.get(k),
+      put: (k, v) => st.put(k, v),
+      delete: async (k) => { await st.delete(k); },
+      list: async (prefix) => [...(await st.list({ prefix })).keys()],
+    };
+    this.svc = new AccountService(kv);
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
+    // Fin de partie : appel interne d'une salle (jamais exposé au public).
+    if (url.hostname === 'accounts' && url.pathname === '/internal/record') {
+      const b = (await request.json()) as { token: string; result: GameResult };
+      return json((await this.svc.record(b.token, b.result)) ?? null);
+    }
+    const pwd = this.env.ADMIN_PASSWORD ?? '';
+    const auth = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+    const r = await accountRoute(this.svc, request.method, url.pathname, url.searchParams, async () => {
+      const text = await request.text();
+      if (text.length > 8192) throw new SyntaxError('too large');
+      return JSON.parse(text);
+    }, auth, pwd ? safeEqual(auth, pwd) : null);
+    if (!r) return json({}, 404);
+    if (r.text !== undefined) return new Response(r.text, { status: r.status, headers: { 'Content-Type': r.type ?? 'text/plain', 'Cache-Control': 'no-store' } });
     return json(r.json ?? {}, r.status);
   }
 }

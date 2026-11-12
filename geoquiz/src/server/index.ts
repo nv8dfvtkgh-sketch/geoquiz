@@ -11,6 +11,7 @@ import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } fr
 import { QuickQueue } from './quick';
 import { config, newCode, Room, validSettings, type Conn } from './rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from './quizzes';
+import { AccountService, accountRoute } from './accounts';
 
 // ------------------------------------------------------------------ données
 function findRoot(dir: string): string {
@@ -51,6 +52,8 @@ const fileKV: KV = {
 const quizzes = new QuizService(fileKV);
 config.loadQuiz = (id, token) => quizzes.playable(id, token);
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? '';
+const accounts = new AccountService(fileKV);
+config.recordGame = (token, result) => accounts.record(token, result);
 
 // ------------------------------------------------------------------ salles
 const rooms = new Map<string, Room>();
@@ -115,6 +118,13 @@ const server = http.createServer(async (req, res) => {
       try { body = JSON.parse(await readBody(req)); } catch {}
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
+    }
+    if (p.startsWith('/api/account') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) {
+      const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
+      const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,
+        async () => JSON.parse(await readBody(req, 8192)), auth, ADMIN_PASSWORD ? safeEqual(auth, ADMIN_PASSWORD) : null);
+      if (r) return send(res, r.status, r.text ?? JSON.stringify(r.json ?? {}), r.type ?? 'application/json');
+      return send(res, 404, '{}');
     }
     if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');

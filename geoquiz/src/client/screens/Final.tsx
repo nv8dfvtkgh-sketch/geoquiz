@@ -3,6 +3,7 @@ import { formatTime } from '../i18n';
 import { sfx } from '../sound';
 import { useApp } from '../state';
 import { Leaderboard, TeamBars, TeamChip } from './common';
+import { RewardCard } from './Account';
 
 export function Final() {
   const { t, s, send, leave } = useApp();
@@ -24,6 +25,7 @@ export function Final() {
         {room.settings.soloMode === 'timed' && best && (
           <p className={best.isNew ? 'record' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
         )}
+        <RewardCard />
         <Recap />
         <div className="actions">
           <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
@@ -44,6 +46,7 @@ export function Final() {
         <h1 className={draw ? '' : iWin ? 'win' : 'lose'}>{draw ? t('final.draw') : iWin ? t('final.youWin') : t('final.youLose')}</h1>
         {!draw && <p className="muted" dir="auto">{t('final.win', { name: first.name })}</p>}
         <Leaderboard players={f.players} you={s.you} />
+        <RewardCard />
         <Recap />
         {asked && <p className="record">{t('final.rematchAsked')}</p>}
         <div className="actions">
@@ -79,6 +82,7 @@ export function Final() {
         ))}
       </div>
       <Leaderboard players={f.players} you={s.you} />
+      <RewardCard />
       <div className="actions">
         <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
         {s.isHost ? (

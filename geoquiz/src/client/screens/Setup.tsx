@@ -3,13 +3,14 @@ import { LIMITS, type Difficulty, type QType, type RoomKind, type Settings, type
 import { findGame, Icon } from '../games';
 import { createGame, net } from '../net';
 import { useApp } from '../state';
+import { lockedFor } from '../account';
 
 /**
  * Fiche d'un jeu : description, niveau, zone, options, puis « Comment jouer ? »
  * (seul, en duel, en salle). Sert aussi à modifier les réglages depuis la salle d'attente.
  */
 export function Setup() {
-  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail } = useApp();
+  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail, me } = useApp();
   const editing = s.setupKind === 'edit';
   const roomKind = editing ? s.room!.kind : null;
   const game = editing ? s.room!.settings.category : s.game;
@@ -19,6 +20,8 @@ export function Setup() {
   const set = (patch: Partial<Settings>) => setCfg(fix({ ...cfg, ...patch }, catalog?.zones ?? []));
 
   const cat = catalog?.categories.find((c) => c.id === cfg.category);
+  // Progression : en solo, une difficulté se débloque en réussissant la précédente (60 %).
+  const locked = cfg.category === 'custom' ? null : lockedFor(me, cfg.category, cfg.difficulty);
   const def = findGame(game);
   const zonesForCat = useMemo(() => (catalog?.zones ?? []).filter((z) => z.categories.includes(cfg.category)), [catalog, cfg.category]);
   const zoneName = (z: ZoneInfo) =>
@@ -102,7 +105,9 @@ export function Setup() {
         <legend>{t('setup.difficulty')}</legend>
         <div className="seg">
           {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
-            <button type="button" key={d} aria-pressed={cfg.difficulty === d} onClick={() => set({ difficulty: d })}>{t(`diff.${d}`)}</button>
+            <button type="button" key={d} aria-pressed={cfg.difficulty === d} onClick={() => set({ difficulty: d })}>
+              {lockedFor(me, cfg.category, d) && !editing ? <span aria-hidden="true">🔒 </span> : null}{t(`diff.${d}`)}
+            </button>
           ))}
         </div>
         {cfg.qtype === 'auto' && <p className="hint">{t('setup.autoHint')}</p>}
@@ -162,9 +167,16 @@ export function Setup() {
       ) : (
         <div className="how">
           <h2>{t('setup.howToPlay')}</h2>
-          <button type="button" className="how-btn primary" onClick={() => play('solo')}>
-            {t('setup.soloBtn')}<small>{cfg.soloMode === 'timed' ? t('solo.timed') : t('solo.training')}</small>
-          </button>
+          {locked ? (
+            <button type="button" className="how-btn primary" disabled>
+              🔒 {t('setup.soloBtn')}<small>{t('lock.need', { diff: t(`diff.${locked}`) })}</small>
+            </button>
+          ) : (
+            <button type="button" className="how-btn primary" onClick={() => play('solo')}>
+              {t('setup.soloBtn')}<small>{cfg.soloMode === 'timed' ? t('solo.timed') : t('solo.training')}</small>
+            </button>
+          )}
+          {locked && <p className="hint">{t('lock.hint')}</p>}
           <button type="button" className="how-btn" onClick={() => play('duel')}>
             {t('setup.duelBtn')}<small>{t('setup.duelHint')}</small>
           </button>

@@ -1,12 +1,12 @@
 // État de l'application côté navigateur, alimenté par les messages du serveur.
 import { createContext, useContext } from 'react';
 import type {
-  Catalog, ClientMsg, Lang, PublicPlayer, QuestionMsg, Reveal, RoomSnapshot, ServerMsg, Settings, TeamScore,
+  Catalog, ClientMsg, Lang, Me, PublicPlayer, QuestionMsg, Reveal, Reward, RoomSnapshot, ServerMsg, Settings, TeamScore,
 } from '../shared/protocol';
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin';
 
 export interface Feedback {
   q: number;
@@ -38,6 +38,8 @@ export interface State {
   joinCode?: string;
   /** Quiz créé ouvert (éditeur ou fiche) : code, et jeton si on en est le créateur. */
   quiz?: { id: string; token?: string };
+  /** Gains de la dernière partie (joueur connecté à son compte). */
+  reward?: Reward;
 }
 
 export const initialState = (joinCode?: string): State => ({ screen: 'home', setupKind: 'game', game: 'countries', isHost: false, qAt: 0, joinCode });
@@ -76,7 +78,7 @@ function screenFor(room: RoomSnapshot, cur: Screen): Screen {
 function onServer(s: State, m: ServerMsg): State {
   switch (m.t) {
     case 'joined':
-      return { ...s, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined };
+      return { ...s, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined };
     case 'room': {
       const screen = s.screen === 'home' || s.screen === 'quick' ? s.screen : screenFor(m.room, s.screen);
       return { ...s, room: m.room, isHost: m.room.hostId === s.you, screen: s.room ? screen : s.screen };
@@ -84,7 +86,7 @@ function onServer(s: State, m: ServerMsg): State {
     case 'question': {
       const same = s.question?.index === m.q.index && s.room?.state !== 'lobby';
       return {
-        ...s, question: m.q, qAt: performance.now(), screen: 'game',
+        ...s, question: m.q, qAt: performance.now(), screen: 'game', reward: m.q.index === 0 ? undefined : s.reward,
         fb: same ? s.fb : undefined, reveal: same ? s.reveal : undefined, progress: same ? s.progress : undefined,
       };
     }
@@ -102,6 +104,8 @@ function onServer(s: State, m: ServerMsg): State {
       return { ...s, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle } };
     case 'finished':
       return { ...s, finished: m, screen: 'final' };
+    case 'reward':
+      return { ...s, reward: m.reward };
     case 'quickWaiting':
       return { ...s, screen: 'quick' };
     case 'kicked':
@@ -135,6 +139,13 @@ export interface Ctx {
   fail: (code: string | null) => void;
   look: Look | null; // null : pas encore choisie (premier passage)
   setLook: (l: Look) => void;
+  /** Compte joueur (null : invité ou pas encore connecté). */
+  me: Me | null;
+  auth: string | null;
+  signIn: (token: string, me: Me) => void;
+  signOut: () => void;
+  refreshMe: () => void;
+  setMe: (me: Me) => void;
 }
 
 export const AppCtx = createContext<Ctx>(null as unknown as Ctx);

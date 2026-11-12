@@ -1,53 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { LIMITS } from '../../shared/protocol';
 import { FAMILIES, Icon, type GameDef } from '../games';
 import { joinGame } from '../net';
-import { useApp, type Look } from '../state';
+import { useApp } from '../state';
+import { AccountForm, Stars } from './Account';
+import { starsOf } from '../account';
 
 export function Home() {
   const { look } = useApp();
   return look ? <Games /> : <Welcome />;
 }
 
-/** Premier passage : pseudo et style du jeu (enfant ou classique), avec aperçu en direct. */
+/** Premier passage : création du compte (ou connexion, ou invité) et choix du style. */
 function Welcome() {
-  const { t, name, setName, setLook } = useApp();
-  const [pick, setPick] = useState<Look | null>(null);
-  useEffect(() => { document.documentElement.dataset.look = pick ?? 'classic'; }, [pick]);
-  const ready = name.trim().length > 0 && !!pick;
+  const { t } = useApp();
   return (
-    <form className="welcome" onSubmit={(e) => { e.preventDefault(); if (ready) setLook(pick!); }}>
+    <div className="welcome">
       <div className="welcome-head">
         <img className="welcome-logo" src="/logo.svg" width="88" height="88" alt="" />
         <h1>{t('welcome.title')}</h1>
         <p>{t('welcome.hint')}</p>
       </div>
-      <label className="field">
-        <span>{t('home.name')}</span>
-        <input value={name} maxLength={LIMITS.maxNameLength} placeholder={t('home.namePlaceholder')} onChange={(e) => setName(e.target.value)} autoComplete="nickname" />
-      </label>
-      <fieldset>
-        <legend>{t('welcome.style')}</legend>
-        <div className="look-cards">
-          {(['kids', 'classic'] as Look[]).map((l) => (
-            <button type="button" key={l} className={`look-card ${l}`} aria-pressed={pick === l} onClick={() => setPick(l)}>
-              <span className={`look-preview ${l}`} aria-hidden="true">
-                {l === 'kids' ? <><i>🦁</i><i>🍕</i><i>🚀</i></> : <><i /><i /><i /></>}
-              </span>
-              <strong>{t(`look.${l}`)}</strong>
-              <small>{t(`look.${l}Hint`)}</small>
-            </button>
-          ))}
-        </div>
-      </fieldset>
-      <button className="btn primary wide" disabled={!ready}>{t('welcome.go')}</button>
+      <AccountForm pickStyle />
       <p className="muted small welcome-later">{t('welcome.later')}</p>
-    </form>
+    </div>
   );
 }
 
 function Games() {
-  const { t, s, name, setName, lang, fail, openGame, openQuiz } = useApp();
+  const { t, s, name, setName, lang, fail, openGame, openQuiz, me, go } = useApp();
   const [code, setCode] = useState(s.joinCode ?? '');
   const [editingName, setEditingName] = useState(!name.trim());
   const [needName, setNeedName] = useState(false);
@@ -77,7 +58,17 @@ function Games() {
         <p className="muted">{t('home.chooseHint')}</p>
       </div>
 
-      {editingName ? (
+      {me ? (
+        <button type="button" className="me-card" onClick={() => go('profile')}>
+          <span className="me-avatar" aria-hidden="true">{me.avatar}</span>
+          <span className="me-text">
+            <strong dir="auto">{me.pseudo}</strong>
+            <small>{t('profile.level', { n: me.level })} · {t(`rank.${me.title}`)}</small>
+            <span className="level-bar"><span style={{ width: `${Math.round((me.levelXp / me.levelNeed) * 100)}%` }} /></span>
+          </span>
+          <span className="me-xp">{me.weekXp} XP<small>{t('profile.week')}</small></span>
+        </button>
+      ) : editingName ? (
         <label className="field name-field">
           <span>{t('home.name')}</span>
           <input
@@ -133,7 +124,8 @@ function Games() {
                 <Icon name={g.icon} />
                 <span className="tile-name">{t(`cat.${g.id}`)}</span>
                 {g.soon && <span className="tile-soon">{t('home.soon')}</span>}
-                {g.fresh && !g.soon && <span className="tile-dot" aria-label={t('home.new')} />}
+                {g.fresh && !g.soon && !starsOf(me, g.id)?.some(Boolean) && <span className="tile-dot" aria-label={t('home.new')} />}
+                {!g.soon && <Stars list={starsOf(me, g.id)} />}
               </button>
             ))}
           </div>

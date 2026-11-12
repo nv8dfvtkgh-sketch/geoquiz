@@ -313,6 +313,7 @@ export function Admin() {
   const [list, setList] = useState<any[] | null>(null);
   const [err, setErr] = useState('');
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected'>('pending');
+  const [tab, setTab] = useState<'quizzes' | 'players'>('quizzes');
   const [open, setOpen] = useState<any>(null);
   const [imgs, setImgs] = useState<Record<string, string>>({});
   const [reason, setReason] = useState('');
@@ -396,10 +397,27 @@ export function Admin() {
   }
 
   const shown = list.filter((q) => q.status === filter);
+  const tabs = (
+    <div className="seg admin-tabs">
+      <button type="button" aria-pressed={tab === 'quizzes'} onClick={() => setTab('quizzes')}>{t('admin.tabQuizzes')}</button>
+      <button type="button" aria-pressed={tab === 'players'} onClick={() => setTab('players')}>{t('admin.tabPlayers')}</button>
+    </div>
+  );
+  if (tab === 'players') {
+    return (
+      <div className="quizzes panel">
+        <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
+        <h1>{t('admin.title')}</h1>
+        {tabs}
+        <PlayersAdmin pwd={pwd} />
+      </div>
+    );
+  }
   return (
     <div className="quizzes panel">
       <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
       <h1>{t('admin.title')}</h1>
+      {tabs}
       <div className="seg">
         {(['pending', 'approved', 'rejected'] as const).map((f) => (
           <button type="button" key={f} aria-pressed={filter === f} onClick={() => setFilter(f)}>
@@ -418,6 +436,79 @@ export function Admin() {
           ))}
         </ul>
       )}
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------ admin : joueurs
+function PlayersAdmin({ pwd }: { pwd: string }) {
+  const { t, lang } = useApp();
+  const [data, setData] = useState<any>(null);
+  const [q, setQ] = useState('');
+  const [msg, setMsg] = useState('');
+  const auth = { Authorization: `Bearer ${pwd}` };
+  const load = () => api('/api/admin/users', { headers: auth }).then((r) => r.ok && setData(r.data));
+  useEffect(() => { load(); }, []);
+  const csv = async () => {
+    const r = await fetch('/api/admin/users.csv', { headers: auth });
+    if (!r.ok) return;
+    const url = URL.createObjectURL(await r.blob());
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `quizellige-joueurs-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const reset = async (u: any) => {
+    const r = await api(`/api/admin/users/${u.id}/reset`, { method: 'POST', headers: auth });
+    if (r.ok) setMsg(t('admin.resetDone', { pseudo: u.pseudo, password: r.data.password }));
+  };
+  const remove = async (u: any) => {
+    if (!confirm(t('admin.confirmDeleteUser', { pseudo: u.pseudo }))) return;
+    await api(`/api/admin/users/${u.id}`, { method: 'DELETE', headers: auth });
+    load();
+  };
+  if (!data) return <div className="loading" />;
+  const st = data.stats;
+  const users = (data.users as any[]).filter((u) => !q || u.pseudo.toLowerCase().includes(q.toLowerCase()) || u.email.includes(q.toLowerCase()));
+  const topCats = Object.entries(st.cats ?? {}).sort((a: any, b: any) => b[1] - a[1]).slice(0, 6) as [string, number][];
+  const date = (ms: number) => new Date(ms).toLocaleDateString(lang);
+  return (
+    <div className="players-admin">
+      <div className="profile-stats">
+        <div><strong>{st.users}</strong><span>{t('admin.statUsers')}</span></div>
+        <div><strong>{st.active7}</strong><span>{t('admin.statActive')}</span></div>
+        <div><strong>{st.games}</strong><span>{t('admin.statGames')}</span></div>
+        <div><strong>{st.optin}</strong><span>{t('admin.statOptin')}</span></div>
+      </div>
+      {topCats.length > 0 && <p className="muted small">{t('admin.topGames')} {topCats.map(([c, n]) => `${t(`cat.${c}`)} (${n})`).join(' · ')}</p>}
+      <div className="row-actions">
+        <button type="button" className="btn primary" onClick={csv}>{t('admin.exportCsv')}</button>
+        <input className="admin-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('admin.search')} aria-label={t('admin.search')} />
+      </div>
+      <p className="muted small">{t('admin.csvNote')}</p>
+      {msg && <p className="notice" role="status">{msg}</p>}
+      <div className="table-wrap">
+        <table className="admin-table">
+          <thead><tr><th>{t('account.pseudo')}</th><th>{t('account.email')}</th><th>{t('admin.colAge')}</th><th>{t('admin.colLevel')}</th><th>{t('admin.colGames')}</th><th>{t('admin.colSince')}</th><th /></tr></thead>
+          <tbody>
+            {users.map((u) => (
+              <tr key={u.id}>
+                <td dir="auto">{u.avatar} {u.pseudo} {u.country ? <small className="muted">{u.country}</small> : null}</td>
+                <td>{u.email || '—'}{u.optin ? ' ✉️' : ''}</td>
+                <td>{t(`account.age.${u.age}`)}</td>
+                <td>{u.level}</td>
+                <td>{u.games}</td>
+                <td>{date(u.createdAt)}</td>
+                <td className="nowrap">
+                  <button type="button" className="text-btn" onClick={() => reset(u)}>{t('admin.reset')}</button>
+                  <button type="button" className="text-btn danger" onClick={() => remove(u)}>{t('admin.delete')}</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

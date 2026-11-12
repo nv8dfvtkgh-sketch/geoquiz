@@ -179,6 +179,7 @@ export type ClientMsg =
   | { t: 'resume'; token: string; lang: Lang }
   | { t: 'quick'; settings: Settings }
   | { t: 'cancelQuick' }
+  | { t: 'auth'; token: string }
   | { t: 'settings'; settings: Settings }
   | { t: 'start' }
   | { t: 'answer'; q: number; value: string }
@@ -192,6 +193,7 @@ export type ClientMsg =
 // Messages serveur → navigateur
 export type ServerMsg =
   | { t: 'joined'; you: string; token: string; host: boolean; room: RoomSnapshot }
+  | { t: 'reward'; reward: Reward }
   | { t: 'room'; room: RoomSnapshot }
   | { t: 'question'; q: QuestionMsg }
   | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal }
@@ -203,3 +205,25 @@ export type ServerMsg =
   | { t: 'kicked' }
   | { t: 'error'; code: string }
   | { t: 'pong' };
+
+// ------------------------------------------------------------------ comptes et progression
+export type AgeGroup = 'u13' | '13-17' | '18+';
+export const AVATARS = ['🦁', '🐪', '🦊', '🐼', '🐨', '🦉', '🐢', '🐬', '🦜', '🐘', '🦒', '🐧', '🐙', '🦋', '🐝', '🦄', '🐸', '🐯', '🐻', '🐰', '🦓', '🦩', '🐳', '🦖'];
+export const BADGES = [
+  'first', 'games10', 'games50', 'games200', 'perfect', 'hardHero', 'winner', 'duelWin', 'battleWin',
+  'explorer', 'collector', 'streak3', 'streak7', 'flags100', 'morocco', 'polyglot',
+] as const;
+export const UNLOCK_AT = 60; // % de bonnes réponses pour débloquer la difficulté suivante
+export interface CatStats { games: number; correct: number; answered: number; best: Partial<Record<'easy' | 'medium' | 'hard', number>> }
+/** Ce que le joueur voit de son propre compte. */
+export interface Me {
+  id: string; pseudo: string; age: AgeGroup; email?: string; country?: string; avatar: string; optin: boolean; createdAt: number;
+  xp: number; level: number; levelXp: number; levelNeed: number; title: number;
+  games: number; correct: number; answered: number; wins: number; cats: Record<string, CatStats>;
+  badges: Record<string, number>; days: { streak: number; best: number }; weekXp: number;
+}
+/** Gains d'une partie, envoyés au joueur connecté à la fin. */
+export interface Reward {
+  xp: number; total: number; level: number; levelUp: boolean; levelXp: number; levelNeed: number; title: number;
+  badges: string[]; best?: number; unlocked?: 'medium' | 'hard';
+}

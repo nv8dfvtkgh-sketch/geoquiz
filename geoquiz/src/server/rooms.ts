@@ -3,12 +3,13 @@
 import {
   BATTLE_LIVES, DEFAULT_SETTINGS, LANGS, LIMITS, type TeamScore, type ClientMsg, type Lang, type PlayerRound, type PublicPlayer,
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
-  type ServerMsg, type Settings,
+  type ServerMsg, type Settings, type Reward,
 } from '../shared/protocol';
 import { CATEGORIES, customQuestions, localize, shuffle, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, photosLoaded } from './photos';
+import type { GameResult } from './accounts';
 
 export interface Conn {
   send(msg: ServerMsg): void;
@@ -21,7 +22,9 @@ export const config: {
   maxPlayers: number;
   /** Charge un quiz créé : version validée, ou brouillon si le jeton du créateur est fourni. */
   loadQuiz: (id: string, draftToken?: string) => Promise<QuizContent | null>;
-} = { maxPlayers: 50, loadQuiz: async () => null };
+  /** Enregistre la partie d'un joueur connecté à son compte ; renvoie ses gains. */
+  recordGame: (accountToken: string, result: GameResult) => Promise<Reward | null>;
+} = { maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null };
 export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // sans O/0, I/1/L
 const GRACE_MS = 600; // latence réseau tolérée après la fin du chrono
 const REVEAL_MS = { duel: 3500, room: 5000, solo: 0 };
@@ -39,6 +42,7 @@ interface Member {
   team?: number;
   lives?: number;
   outAt?: number; // Battle Royale : numéro de la question où le joueur a été éliminé
+  auth?: string; // jeton du compte joueur (progression)
 }
 
 interface AnswerState {
@@ -392,6 +396,9 @@ export class Room {
       case 'kick':
         this.kick(m.id, msg.playerId);
         break;
+      case 'auth':
+        m.auth = typeof msg.token === 'string' ? msg.token.slice(0, 64) : undefined;
+        break;
       case 'lang':
         m.lang = cleanLang(msg.lang);
         this.broadcastRoom();
@@ -668,5 +675,28 @@ export class Room {
     this.round = null;
     this.broadcastRoom();
     this.broadcast((m) => this.finishedMsg(m.lang));
+    this.recordAll();
+  }
+
+  /** Progression : chaque joueur connecté à un compte reçoit ses gains (XP, badges…). */
+  recordAll() {
+    const ranking = this.publicPlayers();
+    const teams = this.teamScores();
+    const bestTeam = teams?.length ? teams[0].id : undefined;
+    for (const p of this.players()) {
+      if (!p.auth) continue;
+      const res = this.recap.map((x) => x.results.find((r) => r.id === p.id));
+      const credit = res.reduce((s, x) => s + (x?.correct ? [1, 0.5, 0.25][(x.attempts || 1) - 1] ?? 0.25 : 0), 0);
+      const total = this.recap.length;
+      const result: GameResult = {
+        category: this.settings.category, difficulty: this.settings.difficulty, kind: this.kind, mode: this.mode, zone: this.settings.zone, lang: p.lang,
+        total, correct: res.filter((x) => x?.correct).length, accuracy: total ? (credit / total) * 100 : 0,
+        rank: ranking.findIndex((x) => x.id === p.id) + 1, players: ranking.length,
+        teamWon: this.mode === 'teams' && p.team !== undefined && p.team === bestTeam,
+      };
+      config.recordGame(p.auth, result)
+        .then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); })
+        .catch((e) => console.error('progression', e));
+    }
   }
 }

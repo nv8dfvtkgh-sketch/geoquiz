@@ -19,13 +19,15 @@
     "bindings": [
       { "name": "ROOMS", "class_name": "RoomDO" },
       { "name": "QUICK", "class_name": "QuickDO" },
-      { "name": "QUIZZES", "class_name": "QuizDO" }
+      { "name": "QUIZZES", "class_name": "QuizDO" },
+      { "name": "ACCOUNTS", "class_name": "AccountsDO" }
     ]
   },
   // Classes « SQLite » : disponibles sur le forfait gratuit.
   "migrations": [
     { "tag": "v1", "new_sqlite_classes": ["RoomDO", "QuickDO"] },
-    { "tag": "v2", "new_sqlite_classes": ["QuizDO"] }
+    { "tag": "v2", "new_sqlite_classes": ["QuizDO"] },
+    { "tag": "v3", "new_sqlite_classes": ["AccountsDO"] }
   ],
 
   "vars": { "MAX_PLAYERS": "50" },

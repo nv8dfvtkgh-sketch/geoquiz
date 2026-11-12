@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { LANGS, type Catalog, type Lang, type Settings } from '../shared/protocol';
+import { LANGS, type Catalog, type Lang, type Me, type Settings } from '../shared/protocol';
 import { applyLang, detectLang, LANG_LABELS, makeT } from './i18n';
 import { net, saveSession, savedSession } from './net';
+import { api, fetchMe, saveAuth, savedAuth } from './account';
 import { isMuted, setMuted, sfx } from './sound';
 import { AppCtx, initialState, loadSettings, reducer, useApp, type Look } from './state';
 import { Home } from './screens/Home';
@@ -10,6 +11,7 @@ import { Lobby, QuickWait } from './screens/Lobby';
 import { Game } from './screens/Game';
 import { Final } from './screens/Final';
 import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
+import { LeaderboardScreen, Profile, SignIn } from './screens/Account';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -30,6 +32,20 @@ export function App() {
   const [look, setLookState] = useState<Look | null>(() => {
     try { const v = localStorage.getItem('gq.look'); return v === 'kids' || v === 'classic' ? v : null; } catch { return null; }
   });
+  // Compte joueur : jeton gardé sur l'appareil, profil rechargé au démarrage.
+  const [auth, setAuth] = useState<string | null>(savedAuth);
+  const [me, setMe] = useState<Me | null>(null);
+  const authRef = useRef(auth);
+  authRef.current = auth;
+  const refreshMe = useCallback(() => {
+    const tk = authRef.current;
+    if (!tk) return;
+    fetchMe(tk).then((r) => {
+      if (r.ok) setMe(r.data);
+      else if (r.status === 401) { saveAuth(null); setAuth(null); setMe(null); }
+    });
+  }, []);
+  useEffect(() => { refreshMe(); }, [refreshMe]);
   useEffect(() => {
     document.documentElement.dataset.look = look ?? 'classic';
     if (look) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', look === 'kids' ? '#FFFFFF' : '#F5F5F7');
@@ -65,6 +81,9 @@ export function App() {
         }
       }
       if (ignoring) return;
+      // Joueur connecté : la salle doit savoir à quel compte créditer la partie.
+      if (msg.t === 'joined' && authRef.current) net.send({ t: 'auth', token: authRef.current });
+      if (msg.t === 'reward') setTimeout(refreshMe, 0);
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.
       if (msg.t === 'matched') {
         net.open(msg.code);
@@ -93,6 +112,16 @@ export function App() {
     fail: (code: string | null) => dispatch({ type: 'error', code: code ?? undefined }),
     look,
     setLook: (l: Look) => { setLookState(l); try { localStorage.setItem('gq.look', l); } catch {} },
+    me, auth, refreshMe, setMe,
+    signIn: (token: string, m: Me) => {
+      saveAuth(token); setAuth(token); setMe(m);
+      setNameState(m.pseudo); try { localStorage.setItem('gq.name', m.pseudo); } catch {}
+    },
+    signOut: () => {
+      if (auth) void api('/api/account/logout', { method: 'POST', body: {}, token: auth });
+      saveAuth(null); setAuth(null); setMe(null);
+      dispatch({ type: 'go', screen: 'home' });
+    },
   };
 
   return (
@@ -111,6 +140,9 @@ export function App() {
           {s.screen === 'editor' && <QuizEditor />}
           {s.screen === 'quizsheet' && <QuizSheet />}
           {s.screen === 'admin' && <Admin />}
+          {s.screen === 'profile' && <Profile />}
+          {s.screen === 'leaderboard' && <LeaderboardScreen />}
+          {s.screen === 'signin' && <SignIn />}
         </main>
       </div>
     </AppCtx.Provider>
@@ -118,7 +150,7 @@ export function App() {
 }
 
 function TopBar() {
-  const { t, lang, setLang, s, leave, look, setLook } = useApp();
+  const { t, lang, setLang, s, leave, look, setLook, me, go } = useApp();
   const [muted, setM] = useState(isMuted());
   const inGame = s.screen === 'game' || s.screen === 'lobby' || s.screen === 'final';
   return (
@@ -134,7 +166,15 @@ function TopBar() {
             {LANGS.map((l) => <option key={l} value={l}>{LANG_LABELS[l]}</option>)}
           </select>
         </label>
-        {look && !inGame && (
+        {look && !inGame && (me ? (
+          <button type="button" className="me-chip" onClick={() => go('profile')} title={t('profile.title')}>
+            <span className="me-avatar" aria-hidden="true">{me.avatar}</span>
+            <span className="me-level">{t('profile.levelShort', { n: me.level })}</span>
+          </button>
+        ) : (
+          <button type="button" className="text-btn signin-link" onClick={() => go('signin')}>{t('account.signin')}</button>
+        ))}
+        {look && !inGame && !me && (
           <button
             type="button"
             className="kids-toggle"
