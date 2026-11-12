@@ -64,6 +64,8 @@ export class Net {
         saveSession(null);
         this.close();
       }
+      // Réactions : affichées en surimpression, sans passer par l'état de l'appli.
+      if (msg.t === 'react') { window.dispatchEvent(new CustomEvent('gq:react', { detail: msg })); return; }
       for (const l of this.listeners) l(msg);
     };
     ws.onclose = () => {

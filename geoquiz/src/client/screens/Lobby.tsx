@@ -3,6 +3,7 @@ import type { RoomMode } from '../../shared/protocol';
 import { net } from '../net';
 import { useApp } from '../state';
 import { SettingsSummary } from './common';
+import { ReactionBar, ReactionLayer, TeamPicker } from '../Party';
 
 export function Lobby() {
   const { t, s, send, go } = useApp();
@@ -23,6 +24,7 @@ export function Lobby() {
 
   return (
     <div className={`lobby ${s.isHost && !room.hostPlays ? 'presenter' : ''}`}>
+      <ReactionLayer big={s.isHost && !room.hostPlays} />
       <section className="share panel">
         <p className="label">{t('lobby.code')}</p>
         <p className="code" aria-live="polite">{room.code.split('').map((c, i) => <span key={i}>{c}</span>)}</p>
@@ -54,7 +56,9 @@ export function Lobby() {
           </ul>
         )}
         {room.kind === 'room' && <ModePicker />}
+        {room.kind !== 'solo' && <PartyOptions />}
         <SettingsSummary settings={room.settings} />
+        {room.kind !== 'solo' && room.players.length > 1 && <ReactionBar />}
         {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
         <div className="actions">
           {duel ? (
@@ -104,6 +108,34 @@ function ModePicker() {
           ))}
         </div>
       )}
+      {mode === 'teams' && <TeamPicker />}
+    </div>
+  );
+}
+
+/** Options de fête : coffres surprises et mise finale (l'hôte choisit, les autres voient). */
+function PartyOptions() {
+  const { t, s, send } = useApp();
+  const room = s.room!;
+  const st = room.settings;
+  const toggle = (k: 'chests' | 'wager') => send({ t: 'settings', settings: { ...st, [k]: !st[k] } });
+  const chestsOk = st.mode !== 'battle';
+  if (!s.isHost) {
+    const on = [chestsOk && st.chests && `🎁 ${t('party.chests')}`, st.wager && `🎲 ${t('party.wager')}`].filter(Boolean);
+    return on.length ? <p className="mode-chosen">{on.join(' · ')}</p> : null;
+  }
+  return (
+    <div className="party-opts">
+      {chestsOk && (
+        <label className="toggle">
+          <input type="checkbox" checked={!!st.chests} onChange={() => toggle('chests')} />
+          <span><strong>🎁 {t('party.chests')}</strong><small>{t('party.chestsHint')}</small></span>
+        </label>
+      )}
+      <label className="toggle">
+        <input type="checkbox" checked={!!st.wager} onChange={() => toggle('wager')} />
+        <span><strong>🎲 {t('party.wager')}</strong><small>{t('party.wagerHint')}</small></span>
+      </label>
     </div>
   );
 }

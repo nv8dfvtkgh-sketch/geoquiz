@@ -7,6 +7,7 @@ import { RewardCard } from './Account';
 import { DailyBoard } from './Setup';
 import { countGame, FeedbackPrompt } from '../Feedback';
 import { Confetti } from '../Celebrate';
+import { ReactionBar, ReactionLayer } from '../Party';
 import { FAMILIES } from '../games';
 
 /** Jeu suivant dans la même famille (le premier si on était au dernier). */
@@ -86,6 +87,8 @@ export function Final() {
         <h1 className={draw ? '' : iWin ? 'win' : 'lose'}>{draw ? t('final.draw') : iWin ? t('final.youWin') : t('final.youLose')}</h1>
         {!draw && <p className="muted" dir="auto">{t('final.win', { name: first.name })}</p>}
         <Leaderboard players={f.players} you={s.you} />
+        <ReactionBar />
+        <ReactionLayer />
         <RewardCard />
         <FeedbackPrompt game={room.settings.category} />
         <Recap />
@@ -124,8 +127,10 @@ export function Final() {
         ))}
       </div>
       <Leaderboard players={f.players} you={s.you} />
+      <ReactionBar />
+      <ReactionLayer big={s.isHost && !room.hostPlays} />
       <RewardCard />
-        <FeedbackPrompt game={room.settings.category} />
+      <FeedbackPrompt game={room.settings.category} />
       <div className="actions">
         <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
         {s.isHost ? (

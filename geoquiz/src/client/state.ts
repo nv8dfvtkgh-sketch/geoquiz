@@ -1,7 +1,7 @@
 // État de l'application côté navigateur, alimenté par les messages du serveur.
 import { createContext, useContext } from 'react';
 import type {
-  Catalog, ChallengeEntry, ClientMsg, Lang, Me, PublicPlayer, QuestionMsg, Reveal, Reward, RoomSnapshot, ServerMsg, Settings, TeamScore,
+  Catalog, ChallengeEntry, ChestResult, ClientMsg, Lang, Me, PublicPlayer, QuestionMsg, Reveal, Reward, RoomSnapshot, ServerMsg, Settings, TeamScore,
 } from '../shared/protocol';
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
@@ -35,7 +35,9 @@ export interface State {
   /** Réponses de la partie en cours (index → juste ?) : barre de progression et série. */
   hist?: Record<number, boolean>;
   progress?: { answered: number; total: number };
-  reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } };
+  reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> };
+  /** Mise finale en cours : question visée, thème, fin du temps (horloge locale), mises reçues. */
+  wager?: { q: number; category: string; until: number; bets?: Record<string, number> };
   finished?: Extract<ServerMsg, { t: 'finished' }>;
   error?: string;
   joinCode?: string;
@@ -116,10 +118,12 @@ function onServer(s: State, m: ServerMsg): State {
     case 'reveal': {
       const mine = m.results.find((r) => r.id === s.you);
       const hist = mine ? { ...(s.hist ?? {}), [m.q]: mine.correct } : s.hist;
-      return { ...s, hist, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle } };
+      return { ...s, hist, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle, chests: m.chests } };
     }
+    case 'wager':
+      return { ...s, wager: { q: m.q, category: m.category, until: performance.now() + m.ms, bets: m.bets }, screen: 'game' };
     case 'finished':
-      return { ...s, finished: m, screen: 'final' };
+      return { ...s, finished: m, screen: 'final', wager: undefined };
     case 'reward':
       return { ...s, reward: m.reward };
     case 'challenge':

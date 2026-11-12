@@ -285,8 +285,10 @@ test('Équipes : répartition équilibrée et score par équipe', async () => {
   cs.forEach((c) => onMessage(c.conn, r.code, { t: 'answer', q: 0, value: correct }));
   await new Promise((res) => setTimeout(res, 450));
   const rv = cs[0].last('reveal')!;
-  const total = rv.players.reduce((s, p) => s + p.score, 0);
-  assert.equal(rv.teams!.reduce((s, t) => s + t.score, 0), total, 'le score des équipes = somme des joueurs');
+  for (const tm of rv.teams!) {
+    const mine = rv.players.filter((p) => p.team === tm.id);
+    assert.equal(tm.score, Math.round(mine.reduce((s, p) => s + p.score, 0) / mine.length), 'score d\'équipe = moyenne des joueurs');
+  }
   r.destroy();
 });
 
@@ -1009,4 +1011,52 @@ test('Survie : trois vies, la partie s\'arrête à la troisième erreur', () => 
   assert.equal(room.state, 'finished');
   assert.equal(a.last('finished')!.solo!.total, 3);
   room.destroy();
+});
+
+test('Équipes choisies dans la salle d\'attente, coffres, mise finale et réactions', async () => {
+  const r = create('room', settings({ count: 2, timeLimit: 5, qtype: 'mcq', mode: 'teams', teams: 2, chests: true, wager: true }), true);
+  const cs = ['A', 'B', 'C'].map((n) => { const c = client(); onMessage(c.conn, r.code, { t: 'join', name: n, lang: 'fr' }); return c; });
+  onMessage(cs[0].conn, r.code, { t: 'team', team: 1 });
+  onMessage(cs[1].conn, r.code, { t: 'team', team: 1 });
+  onMessage(cs[2].conn, r.code, { t: 'team', team: 7 });
+  assert.equal(cs[2].last('room')!.room.players.find((p) => p.name === 'A')!.team, 1);
+  onMessage(cs[0].conn, r.code, { t: 'start' });
+  const teams = Object.fromEntries(cs[0].last('room')!.room.players.map((p) => [p.name, p.team]));
+  assert.deepEqual([teams.A, teams.B, teams.C], [1, 1, 0], 'choix gardés, le dernier complète');
+  // Question 1 : A et B trouvent, coffres ouverts.
+  const ok = r.round!.q.revealOption!;
+  const bad = r.round!.q.options!.find((o) => o.id !== ok)!.id;
+  onMessage(cs[0].conn, r.code, { t: 'answer', q: 0, value: ok });
+  onMessage(cs[1].conn, r.code, { t: 'answer', q: 0, value: ok });
+  onMessage(cs[2].conn, r.code, { t: 'answer', q: 0, value: bad });
+  await new Promise((res) => setTimeout(res, 450));
+  const rv = cs[0].last('reveal')!;
+  assert.ok(rv.chests && Object.keys(rv.chests).length === 2 && !rv.chests[cs[2].last('joined')!.you]);
+  // Réactions : diffusées à tous, limitées.
+  onMessage(cs[2].conn, r.code, { t: 'react', e: 1 });
+  onMessage(cs[2].conn, r.code, { t: 'react', e: 2 });
+  assert.equal(cs[0].msgs.filter((m) => m.t === 'react').length, 1);
+  assert.equal(cs[0].last('react')!.name, 'C');
+  // Mise finale avant la dernière question.
+  onMessage(cs[0].conn, r.code, { t: 'next' });
+  const w = cs[1].last('wager')!;
+  assert.equal(w.q, 1);
+  const before = Object.fromEntries(r.players().map((p) => [p.name, p.score]));
+  onMessage(cs[0].conn, r.code, { t: 'bet', q: 1, pct: 100 });
+  onMessage(cs[1].conn, r.code, { t: 'bet', q: 1, pct: 0 });
+  onMessage(cs[2].conn, r.code, { t: 'bet', q: 1, pct: 33 });
+  assert.equal(r.state, 'reveal', 'mise invalide ignorée : on attend encore C');
+  onMessage(cs[2].conn, r.code, { t: 'bet', q: 1, pct: 50 });
+  assert.equal(r.state, 'question');
+  const ok2 = r.round!.q.revealOption!;
+  const bad2 = r.round!.q.options!.find((o) => o.id !== ok2)!.id;
+  onMessage(cs[0].conn, r.code, { t: 'answer', q: 1, value: bad2 });
+  onMessage(cs[1].conn, r.code, { t: 'answer', q: 1, value: bad2 });
+  onMessage(cs[2].conn, r.code, { t: 'answer', q: 1, value: bad2 });
+  await new Promise((res) => setTimeout(res, 450));
+  const after = Object.fromEntries(r.players().map((p) => [p.name, p.score]));
+  assert.equal(after.A, 0, 'A a tout misé et perdu');
+  assert.equal(after.B, before.B, 'B n\'a rien misé');
+  assert.equal(cs[0].last('reveal')!.results.find((x) => x.id === r.players().find((p) => p.name === 'A')!.id)!.bet, -before.A);
+  r.destroy();
 });

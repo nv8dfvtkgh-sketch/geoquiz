@@ -3,7 +3,7 @@
 import {
   BATTLE_LIVES, DEFAULT_SETTINGS, LANGS, LIMITS, type TeamScore, type ClientMsg, type Lang, type PlayerRound, type PublicPlayer,
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
-  type ServerMsg, type Settings, type Reward, type ChallengeEntry,
+  type ServerMsg, type Settings, type Reward, type ChallengeEntry, type ChestResult, REACTIONS,
 } from '../shared/protocol';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
@@ -41,6 +41,7 @@ export const challengeable = (cat: string) => cat !== 'daily' && cat !== 'custom
 export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // sans O/0, I/1/L
 const GRACE_MS = 600; // latence réseau tolérée après la fin du chrono
 const REVEAL_MS = { duel: 3500, room: 5000, solo: 0 };
+const WAGER_MS = 12_000;
 
 interface Member {
   id: string;
@@ -56,6 +57,10 @@ interface Member {
   lives?: number;
   outAt?: number; // Battle Royale : numéro de la question où le joueur a été éliminé
   auth?: string; // jeton du compte joueur (progression)
+  pickTeam?: number; // équipe choisie dans la salle d'attente
+  shield?: boolean; // coffre « bouclier » : protégé du prochain vol
+  bet?: number; // mise finale (en points)
+  reactAt?: number; // dernière réaction envoyée (anti-déluge)
 }
 
 interface AnswerState {
@@ -116,6 +121,8 @@ export function validSettings(s: any): Settings | null {
     mode: ['battle', 'teams', 'buzzer'].includes(s.mode) ? s.mode : 'classic',
     quiz: cat.id === 'custom' ? (typeof s.quiz === 'string' && /^[A-Z0-9]{6}$/.test(s.quiz) ? s.quiz : undefined) : undefined,
     teams: clamp(s.teams, 2, 4, 2),
+    chests: !!s.chests,
+    wager: !!s.wager,
   };
 }
 
@@ -186,6 +193,9 @@ export class Room {
   /** Salle automatique (tournoi) : lancée toute seule à cette heure, sans hôte qui décide. */
   autoStartAt?: number;
   autoTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Mise finale : question concernée, fin du temps pour miser, mises reçues (en %). */
+  betting?: { q: number; until: number; pct: Map<string, number>; done: boolean };
+  lastChests?: Record<string, ChestResult>;
   /** Programme le lancement automatique (à rappeler à chaque arrivée : les Workers peuvent s'endormir). */
   armAuto() {
     if (!this.autoStartAt || this.state !== 'lobby') return;
@@ -216,7 +226,8 @@ export class Room {
       t[p.team].score += Math.round(p.score);
       t[p.team].size++;
     }
-    return t.filter((x) => x.size > 0).sort((a, b) => b.score - a.score);
+    // Moyenne des joueurs : une grande équipe n'est pas avantagée.
+    return t.filter((x) => x.size > 0).map((x) => ({ ...x, score: Math.round(x.score / x.size) })).sort((a, b) => b.score - a.score);
   }
 
   constructor(
@@ -318,7 +329,8 @@ export class Room {
       this.sendProgress();
     } else if (this.state === 'reveal' && this.round && this.lastReveal) {
       conn.send({ t: 'question', q: this.questionFor(m.lang) });
-      conn.send({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results: this.lastReveal.results, players: this.publicPlayers(), next: null, teams: this.teamScores(), battle: this.lastBattle });
+      conn.send({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results: this.lastReveal.results, players: this.publicPlayers(), next: null, teams: this.teamScores(), battle: this.lastBattle, chests: this.lastChests });
+      if (this.betting && !this.betting.done) conn.send({ t: 'wager', q: this.betting.q, category: this.questions[this.betting.q].category, ms: Math.max(0, this.betting.until - Date.now()), bets: Object.fromEntries(this.betting.pct) });
     } else if (this.state === 'finished') {
       conn.send(this.finishedMsg(m.lang));
     }
@@ -458,6 +470,27 @@ export class Room {
       case 'auth':
         m.auth = typeof msg.token === 'string' ? msg.token.slice(0, 64) : undefined;
         break;
+      case 'team':
+        // Salle d'attente : chacun choisit son équipe (mode Équipes).
+        if (this.state === 'lobby' && this.mode === 'teams' && m.role === 'player' && Number.isInteger(msg.team) && msg.team >= 0 && msg.team < (this.settings.teams ?? 2)) {
+          m.pickTeam = msg.team; m.team = msg.team; this.broadcastRoom();
+        }
+        break;
+      case 'bet':
+        if (this.betting && !this.betting.done && msg.q === this.betting.q && m.role === 'player' && [0, 25, 50, 100].includes(msg.pct)) {
+          this.betting.pct.set(m.id, msg.pct);
+          m.conn?.send({ t: 'wager', q: this.betting.q, category: this.questions[this.betting.q].category, ms: Math.max(0, this.betting.until - Date.now()), bets: Object.fromEntries(this.betting.pct) });
+          if (this.alive().filter((p) => p.conn).every((p) => this.betting!.pct.has(p.id))) this.endWager();
+        }
+        break;
+      case 'react': {
+        // Réactions : emojis d'une liste fixe, pas plus d'une toutes les 0,7 s par joueur.
+        const now = Date.now();
+        if (this.kind === 'solo' || !Number.isInteger(msg.e) || msg.e < 0 || msg.e >= REACTIONS.length || now - (m.reactAt ?? 0) < 700) break;
+        m.reactAt = now;
+        this.broadcast(() => ({ t: 'react', e: msg.e, name: m.name }));
+        break;
+      }
       case 'lang':
         m.lang = cleanLang(msg.lang);
         this.broadcastRoom();
@@ -514,11 +547,18 @@ export class Room {
       : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings);
     this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
-    for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
+    for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; p.shield = undefined; p.bet = undefined; }
+    this.betting = undefined;
+    this.lastChests = undefined;
     if (this.mode === 'teams') {
-      // Équipes formées au hasard et équilibrées en nombre.
+      // Chacun garde l'équipe choisie ; les autres complètent les équipes les moins nombreuses.
       const n = Math.min(this.settings.teams ?? 2, players.length);
-      shuffle(players, Math.random).forEach((p, i) => (p.team = i % n));
+      const size = Array.from({ length: n }, () => 0);
+      for (const p of players) if (p.pickTeam !== undefined && p.pickTeam < n) { p.team = p.pickTeam; size[p.team]++; }
+      for (const p of shuffle(players.filter((x) => x.team === undefined), Math.random)) {
+        const tm = size.indexOf(Math.min(...size));
+        p.team = tm; size[tm]++;
+      }
     }
     if (this.mode === 'battle') for (const p of players) p.lives = BATTLE_LIVES;
     // Survie : 3 vies, la partie s'arrête à la troisième erreur.
@@ -595,11 +635,23 @@ export class Room {
   }
 
   nextQuestion() {
+    // Mise en cours : on attend les mises (ou la fin du temps), pas le bouton « suivant ».
+    if (this.betting && !this.betting.done && this.qIndex + 1 === this.betting.q) return;
     if (this.timer) clearTimeout(this.timer);
     this.timer = null;
     this.qIndex++;
     if (this.qIndex >= this.questions.length) return this.finish();
     if (this.survival && this.players().every((p) => (p.lives ?? 1) <= 0)) return this.finish();
+    // Mise finale : avant la dernière question, on montre le thème et chacun mise une part de ses points.
+    if (this.settings.wager && this.kind !== 'solo' && this.qIndex === this.questions.length - 1 && this.questions.length > 1 && !this.betting) {
+      this.betting = { q: this.qIndex, until: Date.now() + WAGER_MS, pct: new Map(), done: false };
+      this.qIndex--;
+      this.state = 'reveal';
+      const b = this.betting;
+      this.broadcast(() => ({ t: 'wager', q: b.q, category: this.questions[b.q].category, ms: WAGER_MS }));
+      this.timer = setTimeout(() => this.endWager(), WAGER_MS + GRACE_MS);
+      return;
+    }
     const q = this.questions[this.qIndex];
     const now = Date.now();
     const timed = this.kind !== 'solo';
@@ -623,6 +675,49 @@ export class Room {
     this.broadcast((m) => ({ t: 'question', q: this.questionFor(m.lang) }));
     this.sendProgress();
     if (timed) this.timer = setTimeout(() => this.endRound(), this.settings.timeLimit * 1000 + GRACE_MS);
+  }
+
+  endWager() {
+    const b = this.betting;
+    if (!b || b.done) return;
+    b.done = true;
+    for (const p of this.players()) p.bet = Math.round((p.score * (b.pct.get(p.id) ?? 0)) / 100);
+    this.nextQuestion();
+  }
+
+  /**
+   * Coffres surprises : chaque bonne réponse ouvre un coffre (points en plus, doublés, bouclier,
+   * vol de points au premier, échange de place avec le joueur juste devant).
+   */
+  openChests(results: PlayerRound[]): Record<string, ChestResult> {
+    const out: Record<string, ChestResult> = {};
+    const roll = (): ChestResult['kind'] => {
+      const r = Math.random() * 100;
+      return r < 28 ? 'plus' : r < 42 ? 'small' : r < 62 ? 'double' : r < 76 ? 'shield' : r < 92 ? 'steal' : 'swap';
+    };
+    for (const res of shuffle(results.filter((x) => x.correct), Math.random)) {
+      const me = this.members.get(res.id);
+      if (!me) continue;
+      let kind = roll();
+      const others = this.players().filter((p) => p.id !== me.id && p.score > me.score);
+      if ((kind === 'steal' || kind === 'swap') && !others.length) kind = 'plus';
+      if (kind === 'plus') { me.score += 300; out[me.id] = { kind, amount: 300 }; }
+      else if (kind === 'small') { me.score += 100; out[me.id] = { kind, amount: 100 }; }
+      else if (kind === 'double') { const n = Math.max(100, res.points); me.score += n; out[me.id] = { kind, amount: n }; }
+      else if (kind === 'shield') { me.shield = true; out[me.id] = { kind, amount: 0 }; }
+      else if (kind === 'steal') {
+        const v = others.sort((a, b) => b.score - a.score)[0];
+        if (v.shield) { v.shield = false; out[me.id] = { kind: 'blocked', amount: 0, from: v.name }; }
+        else { const n = Math.round(v.score * 0.1); v.score -= n; me.score += n; out[me.id] = { kind, amount: n, from: v.name }; }
+      } else {
+        // Échange avec le joueur juste devant.
+        const v = others.sort((a, b) => a.score - b.score)[0];
+        const gain = v.score - me.score;
+        [v.score, me.score] = [me.score, v.score];
+        out[me.id] = { kind: 'swap', amount: gain, from: v.name };
+      }
+    }
+    return out;
   }
 
   /** Question traduite, sans la réponse. */
@@ -739,13 +834,17 @@ export class Room {
     if (this.timer) clearTimeout(this.timer);
     this.timer = null;
     this.state = 'reveal';
+    const wagerQ = this.betting?.q === this.qIndex;
     const results: PlayerRound[] = this.players().map((p) => {
       const a: AnswerState = r.answers.get(p.id) ?? { attempts: 0, done: true, correct: false, points: 0, timeMs: null, credit: 0 };
-      p.score = Math.max(0, p.score + a.points);
+      const bet = wagerQ && p.bet ? (a.correct ? p.bet : -p.bet) : undefined;
+      p.score = Math.max(0, p.score + a.points + (bet ?? 0));
       if (a.correct) p.streak++; else p.streak = 0;
       if (this.survival && this.mode !== 'battle' && !a.correct && (r.answers.has(p.id) || this.kind !== 'solo') && p.lives !== undefined && p.lives > 0) { p.lives--; if (!p.lives) p.outAt = this.qIndex + 1; }
-      return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer, km: a.km };
+      return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer, km: a.km, bet };
     });
+    const chests = this.settings.chests && this.kind !== 'solo' && this.mode !== 'battle' ? this.openChests(results) : undefined;
+    this.lastChests = chests;
     this.recap.push({ q: r.q, results });
     this.lastReveal = { q: this.qIndex, results };
     let battle: { lost: string[]; out: string[] } | undefined;
@@ -765,8 +864,10 @@ export class Room {
     const players = this.publicPlayers();
     this.broadcastRoom();
     const teams = this.teamScores();
-    this.broadcast((m) => ({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results, players, next: last ? 1500 : wait, teams, battle }));
-    this.timer = setTimeout(() => this.advance(), last ? 1500 : wait);
+    // Un coffre ouvert laisse un peu plus de temps pour voir ce qu'il contient.
+    const pause = last ? 1500 : wait + (chests && Object.keys(chests).length ? 1500 : 0);
+    this.broadcast((m) => ({ t: 'reveal', q: this.qIndex, reveal: this.revealFor(m.lang), results, players, next: pause, teams, battle, chests }));
+    this.timer = setTimeout(() => this.advance(), pause);
   }
 
   /** Question suivante, ou fin de partie (dernière question, ou un seul survivant). */

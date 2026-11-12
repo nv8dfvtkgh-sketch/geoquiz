@@ -1,5 +1,6 @@
 import { BATTLE_LIVES, type PublicPlayer, type Settings, type TeamScore } from '../../shared/protocol';
 import { useApp } from '../state';
+import { TEAM_EMOJI } from '../Party';
 
 export function SettingsSummary({ settings }: { settings: Settings }) {
   const { t, catalog, lang } = useApp();
@@ -56,7 +57,7 @@ export function Hearts({ lives = 0 }: { lives?: number }) {
 
 export function TeamChip({ team }: { team: number }) {
   const { t } = useApp();
-  return <span className="team-chip"><i className={`t${team}`} aria-hidden="true" />{t(`team.${team}`)}</span>;
+  return <span className="team-chip"><i className={`t${team}`} aria-hidden="true" /><span aria-hidden="true">{TEAM_EMOJI[team]}</span> {t(`team.${team}`)}</span>;
 }
 
 /** Barres de score des équipes. */

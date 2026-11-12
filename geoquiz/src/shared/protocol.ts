@@ -25,6 +25,8 @@ export interface Settings {
   mode?: RoomMode; // salles seulement
   quiz?: string; // catégorie « custom » : code du quiz créé
   teams?: number; // nombre d'équipes (2 à 4)
+  chests?: boolean; // coffres surprises après une bonne réponse (duel, salle)
+  wager?: boolean; // mise avant la dernière question (duel, salle)
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -111,6 +113,11 @@ export interface PublicPlayer {
 }
 
 export interface TeamScore { id: number; score: number; size: number }
+/** Coffre surprise ouvert après une bonne réponse. */
+export type ChestKind = 'plus' | 'double' | 'steal' | 'shield' | 'swap' | 'small' | 'blocked';
+export interface ChestResult { kind: ChestKind; amount: number; from?: string }
+/** Réactions envoyées entre les questions (liste fixe : pas de texte libre). */
+export const REACTIONS = ['👏', '🔥', '😂', '😱', '🤯', '❤️'];
 
 export type RoomState = 'lobby' | 'question' | 'reveal' | 'finished';
 
@@ -181,6 +188,7 @@ export interface PlayerRound {
   attempts: number;
   answer?: string;
   km?: number; // « Où est-ce ? » : distance au bon endroit
+  bet?: number; // mise finale : points misés (gagnés ou perdus)
 }
 
 export interface RecapItem {
@@ -212,6 +220,9 @@ export type ClientMsg =
   | { t: 'rematch' }
   | { t: 'kick'; playerId: string }
   | { t: 'lang'; lang: Lang }
+  | { t: 'team'; team: number }
+  | { t: 'bet'; q: number; pct: number }
+  | { t: 'react'; e: number }
   | { t: 'leave' }
   | { t: 'ping' };
 
@@ -224,7 +235,9 @@ export type ServerMsg =
   | { t: 'question'; q: QuestionMsg }
   | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal; km?: number }
   | { t: 'progress'; answered: number; total: number }
-  | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } }
+  | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> }
+  | { t: 'wager'; q: number; category: string; ms: number; bets?: Record<string, number> }
+  | { t: 'react'; e: number; name: string }
   | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }
   | { t: 'quickWaiting' }
   | { t: 'matched'; code: string } // partie rapide : adversaire trouvé, rejoindre /ws/<code>

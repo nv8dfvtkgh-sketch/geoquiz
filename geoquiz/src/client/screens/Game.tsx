@@ -7,13 +7,17 @@ import { RoadSign } from '../RoadSign';
 import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
 import { autoRead, hasVoice, speak, stopSpeaking } from '../speech';
 import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
+import { ChestCard, ChestNews, ReactionBar, ReactionLayer, WagerPanel } from '../Party';
 
 export function Game() {
   const { s } = useApp();
   const q = s.question;
   if (!q || !s.room) return <div className="loading" />;
   const presenter = s.isHost && !s.room.hostPlays;
-  return presenter ? <Presenter q={q} /> : <Play q={q} />;
+  const multi = s.room.kind !== 'solo';
+  // Mise finale : avant la dernière question, chacun mise une part de ses points.
+  if (s.wager && s.wager.q > q.index) return <><WagerPanel />{multi && <ReactionLayer big={presenter} />}</>;
+  return <>{presenter ? <Presenter q={q} /> : <Play q={q} />}{multi && <ReactionLayer big={presenter} />}</>;
 }
 
 /** Question courte + nom du lieu en grand (évite les accords : « la Chine », « de la Chine »…). */
@@ -314,10 +318,14 @@ function Status({ q }: { q: QuestionMsg }) {
           {mine && mine.points > 0 && <span className="gain">{t('play.points', { n: mine.points })}</span>}
           {mine && mine.points < 0 && <span className="loss">{mine.points}</span>}
         </div>
+        {mine?.bet !== undefined && mine.bet !== 0 && <p className={`bet-line ${mine.bet > 0 ? 'up' : 'down'}`}>{t(mine.bet > 0 ? 'wager.won' : 'wager.lost', { n: Math.abs(mine.bet).toLocaleString() })}</p>}
+        {roundEnd.chests?.[s.you!] && <ChestCard chest={roundEnd.chests[s.you!]} q={q.index} />}
+        {roundEnd.chests && <ChestNews chests={roundEnd.chests} you={s.you} />}
         {roundEnd.battle && <p className="battle-line">{battleLine(t, roundEnd.battle, s.you!, room)}</p>}
         {roundEnd.teams ? <TeamBars teams={roundEnd.teams} myTeam={room.players.find((p) => p.id === s.you)?.team} />
           : <Leaderboard players={roundEnd.players} you={s.you} limit={room.kind === 'duel' ? 2 : 5} deltas={deltas} />}
         {roundEnd.next !== null && <Countdown from={roundEnd.next} at={roundEnd.at} />}
+        <ReactionBar />
       </div>
     );
   }
