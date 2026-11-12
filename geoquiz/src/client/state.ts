@@ -130,6 +130,7 @@ function onServer(s: State, m: ServerMsg): State {
       return { ...initialState(), error: 'kicked' };
     case 'error':
       if (m.code === 'room.expired') return { ...initialState(), error: s.room ? m.code : undefined };
+      if (m.code === 'photos.unavailable' && s.room?.kind === 'solo') return { ...s, room: undefined, question: undefined, screen: 'setup', setupKind: 'game', error: m.code };
       return { ...s, error: m.code };
     default:
       return s;

@@ -339,7 +339,7 @@
   "q.monuments.map": "Toca el país donde está este monumento:",
   "q.monuments.type": "¿En qué país está este monumento? (o su nombre)",
   "play.photo": "Foto: {credit}",
-  "err.photos.unavailable": "Las fotos de los monumentos no están disponibles ahora. Inténtalo de nuevo en un momento.",
+  "err.photos.unavailable": "Las imágenes o los sonidos de este juego no están disponibles ahora. Inténtalo de nuevo en un momento.",
   "welcome.title": "Bienvenido a Quizellige",
   "welcome.hint": "Crea tu cuenta en segundos para ganar puntos e insignias y subir en la clasificación.",
   "welcome.style": "Tu estilo",

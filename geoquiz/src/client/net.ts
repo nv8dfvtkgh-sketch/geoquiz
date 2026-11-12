@@ -23,6 +23,7 @@ export class Net {
   retry = 0;
   lang: Lang = 'fr';
   online = true;
+  solo = false;
 
   /** Ouvre la connexion vers une partie (ou la file de partie rapide). */
   open(target: string) {
@@ -56,7 +57,9 @@ export class Net {
     ws.onmessage = (e) => {
       let msg: ServerMsg;
       try { msg = JSON.parse(e.data); } catch { return; }
-      if (msg.t === 'joined') saveSession({ code: msg.room.code, token: msg.token });
+      if (msg.t === 'joined') { saveSession({ code: msg.room.code, token: msg.token }); this.solo = msg.room.kind === 'solo'; }
+      // Partie solo dont les images ou les sons n'ont pas pu être chargés : on la quitte (retour au réglage).
+      if (msg.t === 'error' && msg.code === 'photos.unavailable' && this.solo) { saveSession(null); this.close(); }
       if (msg.t === 'kicked' || (msg.t === 'error' && (msg.code === 'room.expired' || msg.code === 'room.notFound'))) {
         saveSession(null);
         this.close();

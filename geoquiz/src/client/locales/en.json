@@ -339,7 +339,7 @@
   "q.monuments.map": "Tap the country where this monument is:",
   "q.monuments.type": "Which country is this monument in? (or its name)",
   "play.photo": "Photo: {credit}",
-  "err.photos.unavailable": "Monument photos are unavailable right now. Try again in a moment.",
+  "err.photos.unavailable": "This game's pictures or sounds are unavailable right now. Try again in a moment.",
   "welcome.title": "Welcome to Quizellige",
   "welcome.hint": "Create your account in seconds to earn points and badges and climb the leaderboard.",
   "welcome.style": "Your style",
