@@ -339,5 +339,16 @@
   "q.monuments.map": "Touche le pays où se trouve ce monument :",
   "q.monuments.type": "Dans quel pays se trouve ce monument ? (ou son nom)",
   "play.photo": "Photo : {credit}",
-  "err.photos.unavailable": "Les photos des monuments ne sont pas disponibles pour le moment. Réessaie dans un instant."
+  "err.photos.unavailable": "Les photos des monuments ne sont pas disponibles pour le moment. Réessaie dans un instant.",
+  "welcome.title": "Bienvenue sur GéoQuiz",
+  "welcome.hint": "Crée ton profil en deux secondes : ton pseudo et ton style de jeu.",
+  "welcome.style": "Ton style",
+  "welcome.go": "C'est parti",
+  "welcome.later": "Tu pourras changer de style à tout moment avec le bouton en haut de l’écran.",
+  "look.kids": "Enfant",
+  "look.kidsHint": "Coloré, gros boutons, plein d’emojis",
+  "look.classic": "Classique",
+  "look.classicHint": "Épuré, pour les ados et les adultes",
+  "look.toKids": "Passer au style enfant",
+  "look.toClassic": "Passer au style classique"
 }

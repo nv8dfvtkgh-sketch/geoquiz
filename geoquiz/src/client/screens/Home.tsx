@@ -1,10 +1,52 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LIMITS } from '../../shared/protocol';
 import { FAMILIES, Icon, type GameDef } from '../games';
 import { joinGame } from '../net';
-import { useApp } from '../state';
+import { useApp, type Look } from '../state';
 
 export function Home() {
+  const { look } = useApp();
+  return look ? <Games /> : <Welcome />;
+}
+
+/** Premier passage : pseudo et style du jeu (enfant ou classique), avec aperçu en direct. */
+function Welcome() {
+  const { t, name, setName, setLook } = useApp();
+  const [pick, setPick] = useState<Look | null>(null);
+  useEffect(() => { document.documentElement.dataset.look = pick ?? 'classic'; }, [pick]);
+  const ready = name.trim().length > 0 && !!pick;
+  return (
+    <form className="welcome" onSubmit={(e) => { e.preventDefault(); if (ready) setLook(pick!); }}>
+      <div className="welcome-head">
+        <span className="welcome-globe" aria-hidden="true">🌍</span>
+        <h1>{t('welcome.title')}</h1>
+        <p>{t('welcome.hint')}</p>
+      </div>
+      <label className="field">
+        <span>{t('home.name')}</span>
+        <input value={name} maxLength={LIMITS.maxNameLength} placeholder={t('home.namePlaceholder')} onChange={(e) => setName(e.target.value)} autoComplete="nickname" />
+      </label>
+      <fieldset>
+        <legend>{t('welcome.style')}</legend>
+        <div className="look-cards">
+          {(['kids', 'classic'] as Look[]).map((l) => (
+            <button type="button" key={l} className={`look-card ${l}`} aria-pressed={pick === l} onClick={() => setPick(l)}>
+              <span className={`look-preview ${l}`} aria-hidden="true">
+                {l === 'kids' ? <><i>🦁</i><i>🍕</i><i>🚀</i></> : <><i /><i /><i /></>}
+              </span>
+              <strong>{t(`look.${l}`)}</strong>
+              <small>{t(`look.${l}Hint`)}</small>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      <button className="btn primary wide" disabled={!ready}>{t('welcome.go')}</button>
+      <p className="muted small welcome-later">{t('welcome.later')}</p>
+    </form>
+  );
+}
+
+function Games() {
   const { t, s, name, setName, lang, fail, openGame, openQuiz } = useApp();
   const [code, setCode] = useState(s.joinCode ?? '');
   const [editingName, setEditingName] = useState(!name.trim());

@@ -339,5 +339,16 @@
   "q.monuments.map": "Tap the country where this monument is:",
   "q.monuments.type": "Which country is this monument in? (or its name)",
   "play.photo": "Photo: {credit}",
-  "err.photos.unavailable": "Monument photos are unavailable right now. Try again in a moment."
+  "err.photos.unavailable": "Monument photos are unavailable right now. Try again in a moment.",
+  "welcome.title": "Welcome to GéoQuiz",
+  "welcome.hint": "Set up your profile in two seconds: your nickname and your game style.",
+  "welcome.style": "Your style",
+  "welcome.go": "Let's go",
+  "welcome.later": "You can switch style anytime with the button at the top of the screen.",
+  "look.kids": "Kids",
+  "look.kidsHint": "Colourful, big buttons, lots of emojis",
+  "look.classic": "Classic",
+  "look.classicHint": "Clean, for teens and adults",
+  "look.toKids": "Switch to kids style",
+  "look.toClassic": "Switch to classic style"
 }

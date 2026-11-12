@@ -3,7 +3,7 @@ import { LANGS, type Catalog, type Lang, type Settings } from '../shared/protoco
 import { applyLang, detectLang, LANG_LABELS, makeT } from './i18n';
 import { net, saveSession, savedSession } from './net';
 import { isMuted, setMuted, sfx } from './sound';
-import { AppCtx, initialState, loadSettings, reducer, useApp } from './state';
+import { AppCtx, initialState, loadSettings, reducer, useApp, type Look } from './state';
 import { Home } from './screens/Home';
 import { Setup } from './screens/Setup';
 import { Lobby, QuickWait } from './screens/Lobby';
@@ -27,6 +27,13 @@ export function App() {
   const [online, setOnline] = useState(true);
   const [name, setNameState] = useState(() => { try { return localStorage.getItem('gq.name') ?? ''; } catch { return ''; } });
   const [settings, setSettingsState] = useState<Settings>(loadSettings);
+  const [look, setLookState] = useState<Look | null>(() => {
+    try { const v = localStorage.getItem('gq.look'); return v === 'kids' || v === 'classic' ? v : null; } catch { return null; }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.look = look ?? 'classic';
+    if (look) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', look === 'kids' ? '#FFFFFF' : '#F5F5F7');
+  }, [look]);
   const t = useMemo(() => makeT(lang), [lang]);
 
   useEffect(() => {
@@ -84,6 +91,8 @@ export function App() {
     setSettings: (x: Settings) => { setSettingsState(x); try { localStorage.setItem('gq.settings', JSON.stringify(x)); } catch {} },
     leave: () => { net.send({ t: 'leave' }); setTimeout(() => net.close(), 50); saveSession(null); dispatch({ type: 'reset' }); },
     fail: (code: string | null) => dispatch({ type: 'error', code: code ?? undefined }),
+    look,
+    setLook: (l: Look) => { setLookState(l); try { localStorage.setItem('gq.look', l); } catch {} },
   };
 
   return (
@@ -109,7 +118,7 @@ export function App() {
 }
 
 function TopBar() {
-  const { t, lang, setLang, s, leave } = useApp();
+  const { t, lang, setLang, s, leave, look, setLook } = useApp();
   const [muted, setM] = useState(isMuted());
   const inGame = s.screen === 'game' || s.screen === 'lobby' || s.screen === 'final';
   return (
@@ -125,6 +134,20 @@ function TopBar() {
             {LANGS.map((l) => <option key={l} value={l}>{LANG_LABELS[l]}</option>)}
           </select>
         </label>
+        {look && !inGame && (
+          <button
+            type="button"
+            className="kids-toggle"
+            aria-pressed={look === 'kids'}
+            title={t(look === 'kids' ? 'look.toClassic' : 'look.toKids')}
+            onClick={() => setLook(look === 'kids' ? 'classic' : 'kids')}
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M12 2.8l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.1l6.1-.7z" fill="currentColor" />
+            </svg>
+            <span>{t(look === 'kids' ? 'look.classic' : 'look.kids')}</span>
+          </button>
+        )}
         <button
           type="button"
           className="icon-btn"

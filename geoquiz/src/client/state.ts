@@ -114,6 +114,9 @@ function onServer(s: State, m: ServerMsg): State {
   }
 }
 
+/** Apparence : « kids » ludique et colorée, « classic » épurée (ados et adultes). */
+export type Look = 'kids' | 'classic';
+
 export interface Ctx {
   s: State;
   t: T;
@@ -130,6 +133,8 @@ export interface Ctx {
   setSettings: (s: Settings) => void;
   leave: () => void;
   fail: (code: string | null) => void;
+  look: Look | null; // null : pas encore choisie (premier passage)
+  setLook: (l: Look) => void;
 }
 
 export const AppCtx = createContext<Ctx>(null as unknown as Ctx);
