@@ -202,8 +202,8 @@
   "game.animals": "Les animaux emblèmes des pays",
   "game.monuments": "Reconnais les merveilles en photo",
   "game.brands": "De quel pays vient la marque ?",
-  "game.cinema": "Films et acteurs",
-  "game.emoji": "Pays, villes et films en emojis",
+  "game.cinema": "Acteurs, réalisateurs, personnages",
+  "game.emoji": "Pays, villes, films et contes en emojis",
   "game.truefalse": "Vrai ou faux sur le monde",
   "game.create": "Tes questions, partagées par un code",
   "game.countries.long": "Situe les pays sur la carte, ou nomme le pays surligné. Du monde entier à une seule région du monde.",
@@ -512,5 +512,11 @@
   "err.account.providerOff": "Cette connexion n’est pas encore activée.",
   "err.account.providerFailed": "La connexion n’a pas abouti. Réessaie.",
   "err.account.providerCancelled": "Connexion annulée.",
-  "err.account.ticketExpired": "Le délai est dépassé. Recommence la connexion."
+  "err.account.ticketExpired": "Le délai est dépassé. Recommence la connexion.",
+  "game.cinema.long": "Qui joue dans Titanic ? Qui a réalisé Jurassic Park ? Dans quel film trouve-t-on Jack Sparrow ? Des questions sur les grands films, d’Hollywood au cinéma marocain.",
+  "q.cinema.actor": "Qui tient le rôle principal dans ce film ?",
+  "q.cinema.director": "Qui a réalisé ce film ?",
+  "q.cinema.year": "En quelle année est sorti ce film ?",
+  "q.cinema.character": "Dans quel film trouve-t-on ce personnage ?",
+  "q.emoji.tale": "Quel conte se cache derrière ces emojis ?"
 }

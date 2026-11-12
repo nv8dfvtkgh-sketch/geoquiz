@@ -786,5 +786,1153 @@
    "es": "Cars",
    "ar": "سيارات"
   }
+ },
+ {
+  "id": "p-kr",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🎤🥬🌶️",
+  "country": "KR"
+ },
+ {
+  "id": "p-se",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🫎❄️👑",
+  "country": "SE"
+ },
+ {
+  "id": "p-no",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🏔️🐟🌌",
+  "country": "NO"
+ },
+ {
+  "id": "p-dk",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🧱🧜‍♀️🚲",
+  "country": "DK"
+ },
+ {
+  "id": "p-pt",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🐓🥧🌊",
+  "country": "PT"
+ },
+ {
+  "id": "p-be",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🍟🍫🧇",
+  "country": "BE"
+ },
+ {
+  "id": "p-at",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🎻🏔️⛷️",
+  "country": "AT"
+ },
+ {
+  "id": "p-pl",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🥟🦬❄️",
+  "country": "PL"
+ },
+ {
+  "id": "p-ua",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🌻🌾💙💛",
+  "country": "UA"
+ },
+ {
+  "id": "p-ke",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🦁🏃☕",
+  "country": "KE"
+ },
+ {
+  "id": "p-tz",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🏔️🦒🏝️",
+  "country": "TZ"
+ },
+ {
+  "id": "p-mg",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🐒🌳🦎",
+  "country": "MG"
+ },
+ {
+  "id": "p-sn",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🥁🐟🦁",
+  "country": "SN"
+ },
+ {
+  "id": "p-dz",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🦊🏜️🌴",
+  "country": "DZ"
+ },
+ {
+  "id": "p-sa",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🕋🐪🛢️",
+  "country": "SA"
+ },
+ {
+  "id": "p-qa",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "⚽🏟️🐪",
+  "country": "QA"
+ },
+ {
+  "id": "p-ir",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🐈🧶🌹",
+  "country": "IR"
+ },
+ {
+  "id": "p-id",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🏝️🌋🦎",
+  "country": "ID"
+ },
+ {
+  "id": "p-ph",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🏝️🥭🎤",
+  "country": "PH"
+ },
+ {
+  "id": "p-vn",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🍜🛵🌾",
+  "country": "VN"
+ },
+ {
+  "id": "p-sg",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🦁🏙️🌳",
+  "country": "SG"
+ },
+ {
+  "id": "p-mn",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🐎⛺🦅",
+  "country": "MN"
+ },
+ {
+  "id": "p-np",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🏔️🧗🙏",
+  "country": "NP"
+ },
+ {
+  "id": "p-lk",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🍵🐘🏝️",
+  "country": "LK"
+ },
+ {
+  "id": "p-cu",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🚙🎺🌴",
+  "country": "CU"
+ },
+ {
+  "id": "p-jm",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "🏃🎶🌴",
+  "country": "JM"
+ },
+ {
+  "id": "p-co",
+  "theme": "country",
+  "tier": 2,
+  "emoji": "☕🦋🌺",
+  "country": "CO"
+ },
+ {
+  "id": "p-cl",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🌶️🗿🏔️",
+  "country": "CL"
+ },
+ {
+  "id": "p-cr",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🦥🌋🐸",
+  "country": "CR"
+ },
+ {
+  "id": "p-ec",
+  "theme": "country",
+  "tier": 3,
+  "emoji": "🐢🌋🌐",
+  "country": "EC"
+ },
+ {
+  "id": "c-barcelona",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "⚽🏛️🏖️",
+  "names": {
+   "fr": "Barcelone",
+   "en": "Barcelona",
+   "es": "Barcelona",
+   "ar": "برشلونة"
+  }
+ },
+ {
+  "id": "c-cairo",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🐪🔺🌆",
+  "names": {
+   "fr": "Le Caire",
+   "en": "Cairo",
+   "es": "El Cairo",
+   "ar": "القاهرة"
+  }
+ },
+ {
+  "id": "c-sydney",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🦘🎶🌉",
+  "names": {
+   "fr": "Sydney",
+   "en": "Sydney",
+   "es": "Sídney",
+   "ar": "سيدني"
+  }
+ },
+ {
+  "id": "c-casablanca",
+  "theme": "city",
+  "tier": 1,
+  "emoji": "🕌🌊🎬",
+  "names": {
+   "fr": "Casablanca",
+   "en": "Casablanca",
+   "es": "Casablanca",
+   "ar": "الدار البيضاء"
+  }
+ },
+ {
+  "id": "c-beijing",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏯🦆🧱",
+  "names": {
+   "fr": "Pékin",
+   "en": "Beijing",
+   "es": "Pekín",
+   "ar": "بكين"
+  }
+ },
+ {
+  "id": "c-moscow",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🪆🏰❄️",
+  "names": {
+   "fr": "Moscou",
+   "en": "Moscow",
+   "es": "Moscú",
+   "ar": "موسكو"
+  }
+ },
+ {
+  "id": "c-brussels",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🍟🧇👦⛲",
+  "names": {
+   "fr": "Bruxelles",
+   "en": "Brussels",
+   "es": "Bruselas",
+   "ar": "بروكسل"
+  }
+ },
+ {
+  "id": "c-geneva",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "⌚⛲🏔️",
+  "names": {
+   "fr": "Genève",
+   "en": "Geneva",
+   "es": "Ginebra",
+   "ar": "جنيف"
+  }
+ },
+ {
+  "id": "c-vienna",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🎻🎡☕",
+  "names": {
+   "fr": "Vienne",
+   "en": "Vienna",
+   "es": "Viena",
+   "ar": "فيينا"
+  }
+ },
+ {
+  "id": "c-prague",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🏰🌉🍺",
+  "names": {
+   "fr": "Prague",
+   "en": "Prague",
+   "es": "Praga",
+   "ar": "براغ"
+  }
+ },
+ {
+  "id": "c-edinburgh",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🏰🎶🐑",
+  "names": {
+   "fr": "Édimbourg",
+   "en": "Edinburgh",
+   "es": "Edimburgo",
+   "ar": "إدنبرة"
+  }
+ },
+ {
+  "id": "c-seattle",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "☕🌧️🗼",
+  "names": {
+   "fr": "Seattle",
+   "en": "Seattle",
+   "es": "Seattle",
+   "ar": "سياتل"
+  }
+ },
+ {
+  "id": "c-chicago",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🍕🌬️🏙️",
+  "names": {
+   "fr": "Chicago",
+   "en": "Chicago",
+   "es": "Chicago",
+   "ar": "شيكاغو"
+  }
+ },
+ {
+  "id": "c-toronto",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🍁🗼🏒",
+  "names": {
+   "fr": "Toronto",
+   "en": "Toronto",
+   "es": "Toronto",
+   "ar": "تورونتو"
+  }
+ },
+ {
+  "id": "c-buenosaires",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "💃🥩⚽",
+  "names": {
+   "fr": "Buenos Aires",
+   "en": "Buenos Aires",
+   "es": "Buenos Aires",
+   "ar": "بوينس آيرس"
+  }
+ },
+ {
+  "id": "c-capetown",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🏔️🐧🌊",
+  "names": {
+   "fr": "Le Cap",
+   "en": "Cape Town",
+   "es": "Ciudad del Cabo",
+   "ar": "كيب تاون"
+  }
+ },
+ {
+  "id": "c-fes",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🎨🧶🏺",
+  "names": {
+   "fr": "Fès",
+   "en": "Fez",
+   "es": "Fez",
+   "ar": "فاس"
+  }
+ },
+ {
+  "id": "c-essaouira",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🌊🐟💨",
+  "names": {
+   "fr": "Essaouira",
+   "en": "Essaouira",
+   "es": "Esauira",
+   "ar": "الصويرة"
+  }
+ },
+ {
+  "id": "c-tangier",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "⛴️🌊🏰",
+  "names": {
+   "fr": "Tanger",
+   "en": "Tangier",
+   "es": "Tánger",
+   "ar": "طنجة"
+  }
+ },
+ {
+  "id": "c-bangkok",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🛕🛺🍜",
+  "names": {
+   "fr": "Bangkok",
+   "en": "Bangkok",
+   "es": "Bangkok",
+   "ar": "بانكوك"
+  }
+ },
+ {
+  "id": "c-mumbai",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🎬🚂🌊",
+  "names": {
+   "fr": "Bombay",
+   "en": "Mumbai",
+   "es": "Bombay",
+   "ar": "مومباي"
+  },
+  "alts": [
+   "Mumbai",
+   "Bombay"
+  ]
+ },
+ {
+  "id": "c-kyoto",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "⛩️🍵🦌",
+  "names": {
+   "fr": "Kyoto",
+   "en": "Kyoto",
+   "es": "Kioto",
+   "ar": "كيوتو"
+  }
+ },
+ {
+  "id": "c-seoul",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🎤🏯🍜",
+  "names": {
+   "fr": "Séoul",
+   "en": "Seoul",
+   "es": "Seúl",
+   "ar": "سيول"
+  }
+ },
+ {
+  "id": "c-lisbon",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🚋🐟🥧",
+  "names": {
+   "fr": "Lisbonne",
+   "en": "Lisbon",
+   "es": "Lisboa",
+   "ar": "لشبونة"
+  }
+ },
+ {
+  "id": "c-naples",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🍕🌋⚽",
+  "names": {
+   "fr": "Naples",
+   "en": "Naples",
+   "es": "Nápoles",
+   "ar": "نابولي"
+  }
+ },
+ {
+  "id": "c-monaco",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏎️🎰⛵",
+  "names": {
+   "fr": "Monaco",
+   "en": "Monaco",
+   "es": "Mónaco",
+   "ar": "موناكو"
+  }
+ },
+ {
+  "id": "c-cannes",
+  "theme": "city",
+  "tier": 3,
+  "emoji": "🎬🌴⭐",
+  "names": {
+   "fr": "Cannes",
+   "en": "Cannes",
+   "es": "Cannes",
+   "ar": "كان"
+  }
+ },
+ {
+  "id": "c-rabat",
+  "theme": "city",
+  "tier": 2,
+  "emoji": "🏛️🌊👑",
+  "names": {
+   "fr": "Rabat",
+   "en": "Rabat",
+   "es": "Rabat",
+   "ar": "الرباط"
+  }
+ },
+ {
+  "id": "f-junglebook",
+  "theme": "film",
+  "tier": 1,
+  "emoji": "🐻🐍🐒👦",
+  "names": {
+   "fr": "Le Livre de la jungle",
+   "en": "The Jungle Book",
+   "es": "El libro de la selva",
+   "ar": "كتاب الأدغال"
+  }
+ },
+ {
+  "id": "f-zootopia",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐰🦊🚓",
+  "names": {
+   "fr": "Zootopie",
+   "en": "Zootopia",
+   "es": "Zootrópolis",
+   "ar": "زوتوبيا"
+  },
+  "alts": [
+   "Zootopie",
+   "Zootopia",
+   "Zootrópolis"
+  ]
+ },
+ {
+  "id": "f-moana",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🌊⛵🐔",
+  "names": {
+   "fr": "Vaiana",
+   "en": "Moana",
+   "es": "Vaiana",
+   "ar": "موانا"
+  },
+  "alts": [
+   "Moana",
+   "Vaiana"
+  ]
+ },
+ {
+  "id": "f-coco",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "💀🎸🌼",
+  "names": {
+   "fr": "Coco",
+   "en": "Coco",
+   "es": "Coco",
+   "ar": "كوكو"
+  }
+ },
+ {
+  "id": "f-incredibles",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦸👨‍👩‍👧‍👦🔴",
+  "names": {
+   "fr": "Les Indestructibles",
+   "en": "The Incredibles",
+   "es": "Los increíbles",
+   "ar": "الخارقون"
+  }
+ },
+ {
+  "id": "f-monsters",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "👹🚪👧",
+  "names": {
+   "fr": "Monstres et Cie",
+   "en": "Monsters, Inc.",
+   "es": "Monstruos, S.A.",
+   "ar": "شركة المرعبين المحدودة"
+  }
+ },
+ {
+  "id": "f-walle",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🤖🌱🌍",
+  "names": {
+   "fr": "WALL-E",
+   "en": "WALL-E",
+   "es": "WALL·E",
+   "ar": "وول-إي"
+  }
+ },
+ {
+  "id": "f-tangled",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "👸💇‍♀️🏰",
+  "names": {
+   "fr": "Raiponce",
+   "en": "Tangled",
+   "es": "Enredados",
+   "ar": "رابونزل"
+  }
+ },
+ {
+  "id": "f-bambi",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦌🐇🌲",
+  "names": {
+   "fr": "Bambi",
+   "en": "Bambi",
+   "es": "Bambi",
+   "ar": "بامبي"
+  }
+ },
+ {
+  "id": "f-dumbo",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐘👂🎪",
+  "names": {
+   "fr": "Dumbo",
+   "en": "Dumbo",
+   "es": "Dumbo",
+   "ar": "دامبو"
+  }
+ },
+ {
+  "id": "f-dalmatians",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐶⚫⚪💯",
+  "names": {
+   "fr": "Les 101 Dalmatiens",
+   "en": "101 Dalmatians",
+   "es": "101 dálmatas",
+   "ar": "101 كلب مرقش"
+  }
+ },
+ {
+  "id": "f-mulan",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🗡️👩🐉",
+  "names": {
+   "fr": "Mulan",
+   "en": "Mulan",
+   "es": "Mulán",
+   "ar": "مولان"
+  }
+ },
+ {
+  "id": "f-hercules",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "💪⚡🏛️",
+  "names": {
+   "fr": "Hercule",
+   "en": "Hercules",
+   "es": "Hércules",
+   "ar": "هرقل"
+  }
+ },
+ {
+  "id": "f-despicable",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🍌👓💛",
+  "names": {
+   "fr": "Moi, moche et méchant",
+   "en": "Despicable Me",
+   "es": "Gru, mi villano favorito",
+   "ar": "أنا الحقير"
+  }
+ },
+ {
+  "id": "f-madagascar",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦁🦓🦒🐧",
+  "names": {
+   "fr": "Madagascar",
+   "en": "Madagascar",
+   "es": "Madagascar",
+   "ar": "مدغشقر"
+  }
+ },
+ {
+  "id": "f-dragons",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🐉👦🏝️",
+  "names": {
+   "fr": "Dragons",
+   "en": "How to Train Your Dragon",
+   "es": "Cómo entrenar a tu dragón",
+   "ar": "كيف تروض تنينك"
+  },
+  "alts": [
+   "Dragons"
+  ]
+ },
+ {
+  "id": "f-et",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "👽🚲🌕",
+  "names": {
+   "fr": "E.T. l'extra-terrestre",
+   "en": "E.T. the Extra-Terrestrial",
+   "es": "E.T., el extraterrestre",
+   "ar": "إي.تي."
+  },
+  "alts": [
+   "E.T."
+  ]
+ },
+ {
+  "id": "f-lotr",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "💍🌋🧙",
+  "names": {
+   "fr": "Le Seigneur des anneaux",
+   "en": "The Lord of the Rings",
+   "es": "El Señor de los Anillos",
+   "ar": "سيد الخواتم"
+  }
+ },
+ {
+  "id": "f-forrest",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🏃🍫🪶",
+  "names": {
+   "fr": "Forrest Gump",
+   "en": "Forrest Gump",
+   "es": "Forrest Gump",
+   "ar": "فورست غامب"
+  }
+ },
+ {
+  "id": "f-matrix",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "💊🕶️💻",
+  "names": {
+   "fr": "Matrix",
+   "en": "The Matrix",
+   "es": "Matrix",
+   "ar": "ماتريكس"
+  }
+ },
+ {
+  "id": "f-marypoppins",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "☂️👩🎩",
+  "names": {
+   "fr": "Mary Poppins",
+   "en": "Mary Poppins",
+   "es": "Mary Poppins",
+   "ar": "ماري بوبينز"
+  }
+ },
+ {
+  "id": "f-chocolate",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🍫🏭🎫",
+  "names": {
+   "fr": "Charlie et la Chocolaterie",
+   "en": "Charlie and the Chocolate Factory",
+   "es": "Charlie y la fábrica de chocolate",
+   "ar": "تشارلي ومصنع الشوكولاتة"
+  }
+ },
+ {
+  "id": "f-ghostbusters",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "👻🚫📞",
+  "names": {
+   "fr": "SOS Fantômes",
+   "en": "Ghostbusters",
+   "es": "Los cazafantasmas",
+   "ar": "صائدو الأشباح"
+  }
+ },
+ {
+  "id": "f-avengers",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🦸🛡️🔨⚡",
+  "names": {
+   "fr": "Avengers",
+   "en": "The Avengers",
+   "es": "Los Vengadores",
+   "ar": "المنتقمون"
+  },
+  "alts": [
+   "Avengers"
+  ]
+ },
+ {
+  "id": "f-rocky",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🥊🏃🏆",
+  "names": {
+   "fr": "Rocky",
+   "en": "Rocky",
+   "es": "Rocky",
+   "ar": "روكي"
+  }
+ },
+ {
+  "id": "f-interstellar",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "🚀🌌⏳",
+  "names": {
+   "fr": "Interstellar",
+   "en": "Interstellar",
+   "es": "Interstellar",
+   "ar": "إنترستيلر"
+  }
+ },
+ {
+  "id": "f-sleepingbeauty",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "👸😴🌹",
+  "names": {
+   "fr": "La Belle au bois dormant",
+   "en": "Sleeping Beauty",
+   "es": "La bella durmiente",
+   "ar": "الجميلة النائمة"
+  }
+ },
+ {
+  "id": "f-peterpan",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🧚🏴‍☠️🐊",
+  "names": {
+   "fr": "Peter Pan",
+   "en": "Peter Pan",
+   "es": "Peter Pan",
+   "ar": "بيتر بان"
+  }
+ },
+ {
+  "id": "f-alice",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "👧🐇🎩⏰",
+  "names": {
+   "fr": "Alice au pays des merveilles",
+   "en": "Alice in Wonderland",
+   "es": "Alicia en el país de las maravillas",
+   "ar": "أليس في بلاد العجائب"
+  }
+ },
+ {
+  "id": "f-smurfs",
+  "theme": "film",
+  "tier": 2,
+  "emoji": "🔵🍄🏘️",
+  "names": {
+   "fr": "Les Schtroumpfs",
+   "en": "The Smurfs",
+   "es": "Los Pitufos",
+   "ar": "السنافر"
+  }
+ },
+ {
+  "id": "f-kirikou",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "👦🌍🧙‍♀️",
+  "names": {
+   "fr": "Kirikou et la Sorcière",
+   "en": "Kirikou and the Sorceress",
+   "es": "Kirikú y la bruja",
+   "ar": "كيريكو والساحرة"
+  }
+ },
+ {
+  "id": "f-homealone",
+  "theme": "film",
+  "tier": 3,
+  "emoji": "👦🏠🎄🚨",
+  "names": {
+   "fr": "Maman, j'ai raté l'avion !",
+   "en": "Home Alone",
+   "es": "Solo en casa",
+   "ar": "وحدي في المنزل"
+  }
+ },
+ {
+  "id": "t-redridinghood",
+  "theme": "tale",
+  "tier": 1,
+  "emoji": "👧🔴🐺🧺",
+  "names": {
+   "fr": "Le Petit Chaperon rouge",
+   "en": "Little Red Riding Hood",
+   "es": "Caperucita Roja",
+   "ar": "ليلى والذئب"
+  }
+ },
+ {
+  "id": "t-threepigs",
+  "theme": "tale",
+  "tier": 1,
+  "emoji": "🐷🐷🐷🐺🏠",
+  "names": {
+   "fr": "Les Trois Petits Cochons",
+   "en": "The Three Little Pigs",
+   "es": "Los tres cerditos",
+   "ar": "الخنازير الثلاثة الصغيرة"
+  }
+ },
+ {
+  "id": "t-goldilocks",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "👧🐻🐻🐻🥣",
+  "names": {
+   "fr": "Boucle d'or et les Trois Ours",
+   "en": "Goldilocks and the Three Bears",
+   "es": "Ricitos de Oro y los tres osos",
+   "ar": "ذات الشعر الذهبي والدببة الثلاثة"
+  }
+ },
+ {
+  "id": "t-beanstalk",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "👦🫘☁️👹",
+  "names": {
+   "fr": "Jack et le Haricot magique",
+   "en": "Jack and the Beanstalk",
+   "es": "Juan y las habichuelas mágicas",
+   "ar": "جاك وشجرة الفاصولياء"
+  }
+ },
+ {
+  "id": "t-thumb",
+  "theme": "tale",
+  "tier": 3,
+  "emoji": "👦🥖🐦🌲",
+  "names": {
+   "fr": "Le Petit Poucet",
+   "en": "Hop-o'-My-Thumb",
+   "es": "Pulgarcito",
+   "ar": "عقلة الإصبع"
+  },
+  "alts": [
+   "Little Thumb",
+   "Tom Thumb"
+  ]
+ },
+ {
+  "id": "t-hansel",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "👦👧🍬🏠🧙‍♀️",
+  "names": {
+   "fr": "Hansel et Gretel",
+   "en": "Hansel and Gretel",
+   "es": "Hansel y Gretel",
+   "ar": "هانسل وغريتل"
+  }
+ },
+ {
+  "id": "t-hare",
+  "theme": "tale",
+  "tier": 1,
+  "emoji": "🐇🐢🏁",
+  "names": {
+   "fr": "Le Lièvre et la Tortue",
+   "en": "The Tortoise and the Hare",
+   "es": "La liebre y la tortuga",
+   "ar": "الأرنب والسلحفاة"
+  }
+ },
+ {
+  "id": "t-cicada",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "🦗🐜🎻❄️",
+  "names": {
+   "fr": "La Cigale et la Fourmi",
+   "en": "The Ant and the Grasshopper",
+   "es": "La cigarra y la hormiga",
+   "ar": "الجندب والنملة"
+  }
+ },
+ {
+  "id": "t-crowfox",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "🐦‍⬛🧀🦊",
+  "names": {
+   "fr": "Le Corbeau et le Renard",
+   "en": "The Fox and the Crow",
+   "es": "El cuervo y el zorro",
+   "ar": "الغراب والثعلب"
+  }
+ },
+ {
+  "id": "t-alibaba",
+  "theme": "tale",
+  "tier": 1,
+  "emoji": "🧔💰🚪4️⃣0️⃣",
+  "names": {
+   "fr": "Ali Baba et les Quarante Voleurs",
+   "en": "Ali Baba and the Forty Thieves",
+   "es": "Alí Babá y los cuarenta ladrones",
+   "ar": "علي بابا والأربعون حرامي"
+  }
+ },
+ {
+  "id": "t-sinbad",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "🧔⛵🌊🦅",
+  "names": {
+   "fr": "Sindbad le marin",
+   "en": "Sinbad the Sailor",
+   "es": "Simbad el marino",
+   "ar": "السندباد البحري"
+  }
+ },
+ {
+  "id": "t-duckling",
+  "theme": "tale",
+  "tier": 1,
+  "emoji": "🦆😢🦢",
+  "names": {
+   "fr": "Le Vilain Petit Canard",
+   "en": "The Ugly Duckling",
+   "es": "El patito feo",
+   "ar": "البطة القبيحة"
+  }
+ },
+ {
+  "id": "t-puss",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "🐱👢👑",
+  "names": {
+   "fr": "Le Chat botté",
+   "en": "Puss in Boots",
+   "es": "El gato con botas",
+   "ar": "القط ذو الحذاء"
+  }
+ },
+ {
+  "id": "t-pea",
+  "theme": "tale",
+  "tier": 3,
+  "emoji": "👸🛏️🟢",
+  "names": {
+   "fr": "La Princesse au petit pois",
+   "en": "The Princess and the Pea",
+   "es": "La princesa y el guisante",
+   "ar": "الأميرة وحبة البازلاء"
+  }
+ },
+ {
+  "id": "t-robinhood",
+  "theme": "tale",
+  "tier": 2,
+  "emoji": "🏹🌳💰",
+  "names": {
+   "fr": "Robin des Bois",
+   "en": "Robin Hood",
+   "es": "Robin Hood",
+   "ar": "روبن هود"
+  }
+ },
+ {
+  "id": "t-piper",
+  "theme": "tale",
+  "tier": 3,
+  "emoji": "🎶🐀🐀🐀",
+  "names": {
+   "fr": "Le Joueur de flûte de Hamelin",
+   "en": "The Pied Piper of Hamelin",
+   "es": "El flautista de Hamelín",
+   "ar": "زمار هاملن"
+  }
  }
 ]

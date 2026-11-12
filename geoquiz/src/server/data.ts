@@ -52,7 +52,7 @@ export interface TrueFalse {
 /** Rébus en emojis : un pays (noms tirés des données) ou une ville / un film (noms fournis). */
 export interface EmojiItem {
   id: string;
-  theme: 'country' | 'city' | 'film';
+  theme: 'country' | 'city' | 'film' | 'tale';
   tier: number;
   emoji: string;
   country?: string;
@@ -67,6 +67,19 @@ export interface Monument {
   tier: number;
   names: Names;
 }
+/** Cinéma : films (titres traduits) et personnes (réalisateurs, acteurs). */
+export interface Film {
+  id: string;
+  tier: number;
+  year: number;
+  title: Names;
+  director: string;
+  actor?: string; // absent : film d'animation
+  character?: Names;
+  cast?: string[]; // autres acteurs du film, jamais proposés comme pièges
+  noYear?: boolean; // année de sortie discutée : pas de question sur l'année
+}
+export interface Cinema { films: Film[]; people: Record<string, Names> }
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
@@ -75,11 +88,12 @@ export interface Extras {
   truefalse: TrueFalse[];
   emoji: EmojiItem[];
   monuments: Monument[];
+  cinema: Cinema;
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments'] as const;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} } };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -163,6 +177,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     truefalse: extra.truefalse ?? [],
     emoji: (extra.emoji ?? []).filter((x) => x.theme !== 'country' || c[x.country!]),
     monuments: (extra.monuments ?? []).filter((x) => c[x.country]),
+    cinema: (extra.cinema as unknown as Cinema)?.films ? (extra.cinema as unknown as Cinema) : { films: [], people: {} },
   };
   countries = c;
   loader = regionLoader;
@@ -175,7 +190,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
 
   const all = Object.keys(countries).filter((id) => worldById[id]);
   const worldCats: CategoryId[] = ['countries', 'flags', 'capitals', 'silhouettes', 'currencies'];
-  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
+  zones.set('world', { info: { id: 'world', kind: 'world', count: all.length, categories: [...worldCats, 'languages', 'food', 'animals', 'monuments', 'emoji', 'cinema', 'truefalse', 'calc'] }, countryIds: all, view: [0, 0, world.w, world.h] });
   const conts = new Map<string, string[]>();
   const subs = new Map<string, { cont: string; ids: string[] }>();
   for (const id of all) {

@@ -1,0 +1,1541 @@
+{
+ "films": [
+  {
+   "id": "titanic",
+   "tier": 1,
+   "year": 1997,
+   "title": {
+    "fr": "Titanic",
+    "en": "Titanic",
+    "es": "Titanic",
+    "ar": "تايتانيك"
+   },
+   "director": "cameron",
+   "actor": "dicaprio",
+   "character": {
+    "fr": "Jack Dawson",
+    "en": "Jack Dawson",
+    "es": "Jack Dawson",
+    "ar": "جاك داوسون"
+   }
+  },
+  {
+   "id": "avatar",
+   "tier": 1,
+   "year": 2009,
+   "title": {
+    "fr": "Avatar",
+    "en": "Avatar",
+    "es": "Avatar",
+    "ar": "أفاتار"
+   },
+   "director": "cameron",
+   "actor": "worthington",
+   "character": {
+    "fr": "Jake Sully",
+    "en": "Jake Sully",
+    "es": "Jake Sully",
+    "ar": "جيك سولي"
+   }
+  },
+  {
+   "id": "jurassic",
+   "tier": 1,
+   "year": 1993,
+   "title": {
+    "fr": "Jurassic Park",
+    "en": "Jurassic Park",
+    "es": "Parque Jurásico",
+    "ar": "الحديقة الجوراسية"
+   },
+   "director": "spielberg",
+   "actor": "neill",
+   "character": {
+    "fr": "Alan Grant",
+    "en": "Alan Grant",
+    "es": "Alan Grant",
+    "ar": "آلان غرانت"
+   }
+  },
+  {
+   "id": "et",
+   "tier": 2,
+   "year": 1982,
+   "title": {
+    "fr": "E.T. l'extra-terrestre",
+    "en": "E.T. the Extra-Terrestrial",
+    "es": "E.T., el extraterrestre",
+    "ar": "إي.تي. الكائن الفضائي"
+   },
+   "director": "spielberg",
+   "actor": "hthomas",
+   "character": {
+    "fr": "Elliott",
+    "en": "Elliott",
+    "es": "Elliott",
+    "ar": "إليوت"
+   }
+  },
+  {
+   "id": "jaws",
+   "tier": 2,
+   "year": 1975,
+   "title": {
+    "fr": "Les Dents de la mer",
+    "en": "Jaws",
+    "es": "Tiburón",
+    "ar": "الفك المفترس"
+   },
+   "director": "spielberg",
+   "actor": "scheider"
+  },
+  {
+   "id": "forrest",
+   "tier": 1,
+   "year": 1994,
+   "title": {
+    "fr": "Forrest Gump",
+    "en": "Forrest Gump",
+    "es": "Forrest Gump",
+    "ar": "فورست غامب"
+   },
+   "director": "zemeckis",
+   "actor": "hanks"
+  },
+  {
+   "id": "bttf",
+   "tier": 2,
+   "year": 1985,
+   "title": {
+    "fr": "Retour vers le futur",
+    "en": "Back to the Future",
+    "es": "Regreso al futuro",
+    "ar": "العودة إلى المستقبل"
+   },
+   "director": "zemeckis",
+   "actor": "fox",
+   "character": {
+    "fr": "Marty McFly",
+    "en": "Marty McFly",
+    "es": "Marty McFly",
+    "ar": "مارتي مكفلاي"
+   }
+  },
+  {
+   "id": "godfather",
+   "tier": 2,
+   "year": 1972,
+   "title": {
+    "fr": "Le Parrain",
+    "en": "The Godfather",
+    "es": "El padrino",
+    "ar": "العراب"
+   },
+   "director": "coppola",
+   "actor": "brando",
+   "character": {
+    "fr": "Vito Corleone",
+    "en": "Vito Corleone",
+    "es": "Vito Corleone",
+    "ar": "فيتو كورليوني"
+   }
+  },
+  {
+   "id": "pirates",
+   "tier": 1,
+   "year": 2003,
+   "title": {
+    "fr": "Pirates des Caraïbes : La Malédiction du Black Pearl",
+    "en": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "es": "Piratas del Caribe: La maldición de la Perla Negra",
+    "ar": "قراصنة الكاريبي: لعنة اللؤلؤة السوداء"
+   },
+   "director": "verbinski",
+   "actor": "depp",
+   "character": {
+    "fr": "Jack Sparrow",
+    "en": "Jack Sparrow",
+    "es": "Jack Sparrow",
+    "ar": "جاك سبارو"
+   }
+  },
+  {
+   "id": "matrix",
+   "tier": 2,
+   "year": 1999,
+   "title": {
+    "fr": "Matrix",
+    "en": "The Matrix",
+    "es": "Matrix",
+    "ar": "ماتريكس"
+   },
+   "director": "wachowski",
+   "actor": "reeves",
+   "character": {
+    "fr": "Neo",
+    "en": "Neo",
+    "es": "Neo",
+    "ar": "نيو"
+   }
+  },
+  {
+   "id": "gladiator",
+   "tier": 2,
+   "year": 2000,
+   "title": {
+    "fr": "Gladiator",
+    "en": "Gladiator",
+    "es": "Gladiator",
+    "ar": "المصارع"
+   },
+   "director": "rscott",
+   "actor": "crowe",
+   "character": {
+    "fr": "Maximus",
+    "en": "Maximus",
+    "es": "Máximo",
+    "ar": "ماكسيموس"
+   }
+  },
+  {
+   "id": "hp1",
+   "tier": 1,
+   "year": 2001,
+   "title": {
+    "fr": "Harry Potter à l'école des sorciers",
+    "en": "Harry Potter and the Philosopher's Stone",
+    "es": "Harry Potter y la piedra filosofal",
+    "ar": "هاري بوتر وحجر الفيلسوف"
+   },
+   "director": "columbus",
+   "actor": "radcliffe",
+   "character": {
+    "fr": "Hermione Granger",
+    "en": "Hermione Granger",
+    "es": "Hermione Granger",
+    "ar": "هيرميون غرينجر"
+   }
+  },
+  {
+   "id": "lotr",
+   "tier": 2,
+   "year": 2001,
+   "title": {
+    "fr": "Le Seigneur des anneaux : La Communauté de l'anneau",
+    "en": "The Lord of the Rings: The Fellowship of the Ring",
+    "es": "El Señor de los Anillos: La Comunidad del Anillo",
+    "ar": "سيد الخواتم: رفقة الخاتم"
+   },
+   "director": "jackson",
+   "actor": "wood",
+   "character": {
+    "fr": "Gandalf",
+    "en": "Gandalf",
+    "es": "Gandalf",
+    "ar": "غاندالف"
+   }
+  },
+  {
+   "id": "starwars",
+   "tier": 1,
+   "year": 1977,
+   "title": {
+    "fr": "La Guerre des étoiles",
+    "en": "Star Wars",
+    "es": "La guerra de las galaxias",
+    "ar": "حرب النجوم"
+   },
+   "director": "lucas",
+   "actor": "hamill",
+   "character": {
+    "fr": "Dark Vador",
+    "en": "Darth Vader",
+    "es": "Darth Vader",
+    "ar": "دارث فيدر"
+   },
+   "cast": [
+    "ford"
+   ]
+  },
+  {
+   "id": "rocky",
+   "tier": 2,
+   "year": 1976,
+   "title": {
+    "fr": "Rocky",
+    "en": "Rocky",
+    "es": "Rocky",
+    "ar": "روكي"
+   },
+   "director": "avildsen",
+   "actor": "stallone"
+  },
+  {
+   "id": "inception",
+   "tier": 2,
+   "year": 2010,
+   "title": {
+    "fr": "Inception",
+    "en": "Inception",
+    "es": "Origen",
+    "ar": "استهلال"
+   },
+   "director": "nolan",
+   "actor": "dicaprio",
+   "character": {
+    "fr": "Dom Cobb",
+    "en": "Dom Cobb",
+    "es": "Dom Cobb",
+    "ar": "دوم كوب"
+   },
+   "cast": [
+    "murphy"
+   ]
+  },
+  {
+   "id": "interstellar",
+   "tier": 2,
+   "year": 2014,
+   "title": {
+    "fr": "Interstellar",
+    "en": "Interstellar",
+    "es": "Interstellar",
+    "ar": "إنترستيلر"
+   },
+   "director": "nolan",
+   "actor": "mcconaughey",
+   "character": {
+    "fr": "Cooper",
+    "en": "Cooper",
+    "es": "Cooper",
+    "ar": "كوبر"
+   }
+  },
+  {
+   "id": "darkknight",
+   "tier": 2,
+   "year": 2008,
+   "title": {
+    "fr": "The Dark Knight : Le Chevalier noir",
+    "en": "The Dark Knight",
+    "es": "El caballero oscuro",
+    "ar": "فارس الظلام"
+   },
+   "director": "nolan",
+   "actor": "bale",
+   "character": {
+    "fr": "le Joker",
+    "en": "the Joker",
+    "es": "el Joker",
+    "ar": "الجوكر"
+   },
+   "cast": [
+    "murphy"
+   ]
+  },
+  {
+   "id": "schindler",
+   "tier": 3,
+   "year": 1993,
+   "title": {
+    "fr": "La Liste de Schindler",
+    "en": "Schindler's List",
+    "es": "La lista de Schindler",
+    "ar": "قائمة شندلر"
+   },
+   "director": "spielberg",
+   "actor": "neeson"
+  },
+  {
+   "id": "mission",
+   "tier": 2,
+   "year": 1996,
+   "title": {
+    "fr": "Mission impossible",
+    "en": "Mission: Impossible",
+    "es": "Misión: Imposible",
+    "ar": "المهمة المستحيلة"
+   },
+   "director": "depalma",
+   "actor": "cruise",
+   "character": {
+    "fr": "Ethan Hunt",
+    "en": "Ethan Hunt",
+    "es": "Ethan Hunt",
+    "ar": "إيثان هانت"
+   }
+  },
+  {
+   "id": "topgun",
+   "tier": 2,
+   "year": 1986,
+   "title": {
+    "fr": "Top Gun",
+    "en": "Top Gun",
+    "es": "Top Gun",
+    "ar": "توب غن"
+   },
+   "director": "tscott",
+   "actor": "cruise",
+   "character": {
+    "fr": "Maverick",
+    "en": "Maverick",
+    "es": "Maverick",
+    "ar": "مافريك"
+   }
+  },
+  {
+   "id": "raiders",
+   "tier": 2,
+   "year": 1981,
+   "title": {
+    "fr": "Les Aventuriers de l'arche perdue",
+    "en": "Raiders of the Lost Ark",
+    "es": "En busca del arca perdida",
+    "ar": "غزاة التابوت الضائع"
+   },
+   "director": "spielberg",
+   "actor": "ford",
+   "character": {
+    "fr": "Indiana Jones",
+    "en": "Indiana Jones",
+    "es": "Indiana Jones",
+    "ar": "إنديانا جونز"
+   }
+  },
+  {
+   "id": "homealone",
+   "tier": 1,
+   "year": 1990,
+   "title": {
+    "fr": "Maman, j'ai raté l'avion !",
+    "en": "Home Alone",
+    "es": "Solo en casa",
+    "ar": "وحدي في المنزل"
+   },
+   "director": "columbus",
+   "actor": "culkin",
+   "character": {
+    "fr": "Kevin McCallister",
+    "en": "Kevin McCallister",
+    "es": "Kevin McCallister",
+    "ar": "كيفن مكاليستر"
+   }
+  },
+  {
+   "id": "amelie",
+   "tier": 3,
+   "year": 2001,
+   "title": {
+    "fr": "Le Fabuleux Destin d'Amélie Poulain",
+    "en": "Amélie",
+    "es": "Amélie",
+    "ar": "أميلي"
+   },
+   "director": "jeunet",
+   "actor": "tautou"
+  },
+  {
+   "id": "intouchables",
+   "tier": 2,
+   "year": 2011,
+   "title": {
+    "fr": "Intouchables",
+    "en": "The Intouchables",
+    "es": "Intocable",
+    "ar": "المنبوذون"
+   },
+   "director": "nakache",
+   "actor": "sy",
+   "character": {
+    "fr": "Driss",
+    "en": "Driss",
+    "es": "Driss",
+    "ar": "دريس"
+   }
+  },
+  {
+   "id": "visiteurs",
+   "tier": 3,
+   "year": 1993,
+   "title": {
+    "fr": "Les Visiteurs",
+    "en": "The Visitors",
+    "es": "Los visitantes",
+    "ar": "الزوار"
+   },
+   "director": "poire",
+   "actor": "clavier",
+   "character": {
+    "fr": "Jacquouille la Fripouille",
+    "en": "Jacquouille la Fripouille",
+    "es": "Jacquouille la Fripouille",
+    "ar": "جاكويل"
+   },
+   "cast": [
+    "reno"
+   ]
+  },
+  {
+   "id": "chtis",
+   "tier": 3,
+   "year": 2008,
+   "title": {
+    "fr": "Bienvenue chez les Ch’tis",
+    "en": "Welcome to the Sticks",
+    "es": "Bienvenidos al norte",
+    "ar": "مرحبًا بكم عند الشتي"
+   },
+   "director": "boon",
+   "actor": "merad"
+  },
+  {
+   "id": "leon",
+   "tier": 3,
+   "year": 1994,
+   "title": {
+    "fr": "Léon",
+    "en": "Léon: The Professional",
+    "es": "León: el profesional",
+    "ar": "ليون: المحترف"
+   },
+   "director": "besson",
+   "actor": "reno",
+   "character": {
+    "fr": "Mathilda",
+    "en": "Mathilda",
+    "es": "Mathilda",
+    "ar": "ماتيلدا"
+   }
+  },
+  {
+   "id": "message",
+   "tier": 3,
+   "year": 1976,
+   "title": {
+    "fr": "Le Message",
+    "en": "The Message",
+    "es": "El mensaje",
+    "ar": "الرسالة"
+   },
+   "director": "akkad",
+   "actor": "quinn",
+   "noYear": true
+  },
+  {
+   "id": "lawrence",
+   "tier": 3,
+   "year": 1962,
+   "title": {
+    "fr": "Lawrence d'Arabie",
+    "en": "Lawrence of Arabia",
+    "es": "Lawrence de Arabia",
+    "ar": "لورنس العرب"
+   },
+   "director": "lean",
+   "actor": "otoole",
+   "cast": [
+    "quinn"
+   ]
+  },
+  {
+   "id": "liondesert",
+   "tier": 3,
+   "year": 1981,
+   "title": {
+    "fr": "Le Lion du désert",
+    "en": "Lion of the Desert",
+    "es": "El león del desierto",
+    "ar": "عمر المختار"
+   },
+   "director": "akkad",
+   "actor": "quinn",
+   "noYear": true
+  },
+  {
+   "id": "alizaoua",
+   "tier": 3,
+   "year": 2000,
+   "title": {
+    "fr": "Ali Zaoua, prince de la rue",
+    "en": "Ali Zaoua: Prince of the Streets",
+    "es": "Ali Zaoua, príncipe de la calle",
+    "ar": "علي زاوا"
+   },
+   "director": "ayouch",
+   "actor": null
+  },
+  {
+   "id": "casablanca",
+   "tier": 2,
+   "year": 1942,
+   "title": {
+    "fr": "Casablanca",
+    "en": "Casablanca",
+    "es": "Casablanca",
+    "ar": "كازابلانكا"
+   },
+   "director": "curtiz",
+   "actor": "bogart",
+   "character": {
+    "fr": "Rick Blaine",
+    "en": "Rick Blaine",
+    "es": "Rick Blaine",
+    "ar": "ريك بلين"
+   }
+  },
+  {
+   "id": "oz",
+   "tier": 2,
+   "year": 1939,
+   "title": {
+    "fr": "Le Magicien d'Oz",
+    "en": "The Wizard of Oz",
+    "es": "El mago de Oz",
+    "ar": "ساحر أوز"
+   },
+   "director": "fleming",
+   "actor": "garland",
+   "character": {
+    "fr": "Dorothy",
+    "en": "Dorothy",
+    "es": "Dorothy",
+    "ar": "دوروثي"
+   }
+  },
+  {
+   "id": "marypoppins",
+   "tier": 2,
+   "year": 1964,
+   "title": {
+    "fr": "Mary Poppins",
+    "en": "Mary Poppins",
+    "es": "Mary Poppins",
+    "ar": "ماري بوبينز"
+   },
+   "director": "stevenson",
+   "actor": "andrews"
+  },
+  {
+   "id": "chocolate",
+   "tier": 1,
+   "year": 2005,
+   "title": {
+    "fr": "Charlie et la Chocolaterie",
+    "en": "Charlie and the Chocolate Factory",
+    "es": "Charlie y la fábrica de chocolate",
+    "ar": "تشارلي ومصنع الشوكولاتة"
+   },
+   "director": "burton",
+   "actor": "depp",
+   "character": {
+    "fr": "Willy Wonka",
+    "en": "Willy Wonka",
+    "es": "Willy Wonka",
+    "ar": "ويلي وونكا"
+   }
+  },
+  {
+   "id": "scissorhands",
+   "tier": 3,
+   "year": 1990,
+   "title": {
+    "fr": "Edward aux mains d'argent",
+    "en": "Edward Scissorhands",
+    "es": "Eduardo Manostijeras",
+    "ar": "إدوارد ذو الأيدي المقصية"
+   },
+   "director": "burton",
+   "actor": "depp"
+  },
+  {
+   "id": "lionking",
+   "tier": 1,
+   "year": 1994,
+   "title": {
+    "fr": "Le Roi lion",
+    "en": "The Lion King",
+    "es": "El rey león",
+    "ar": "الأسد الملك"
+   },
+   "director": "allers",
+   "actor": null,
+   "character": {
+    "fr": "Simba",
+    "en": "Simba",
+    "es": "Simba",
+    "ar": "سيمبا"
+   }
+  },
+  {
+   "id": "toystory",
+   "tier": 1,
+   "year": 1995,
+   "title": {
+    "fr": "Toy Story",
+    "en": "Toy Story",
+    "es": "Toy Story",
+    "ar": "حكاية لعبة"
+   },
+   "director": "lasseter",
+   "actor": null,
+   "character": {
+    "fr": "Woody",
+    "en": "Woody",
+    "es": "Woody",
+    "ar": "وودي"
+   }
+  },
+  {
+   "id": "nemo",
+   "tier": 1,
+   "year": 2003,
+   "title": {
+    "fr": "Le Monde de Nemo",
+    "en": "Finding Nemo",
+    "es": "Buscando a Nemo",
+    "ar": "البحث عن نيمو"
+   },
+   "director": "stanton",
+   "actor": null,
+   "character": {
+    "fr": "Dory",
+    "en": "Dory",
+    "es": "Dory",
+    "ar": "دوري"
+   }
+  },
+  {
+   "id": "frozen",
+   "tier": 1,
+   "year": 2013,
+   "title": {
+    "fr": "La Reine des neiges",
+    "en": "Frozen",
+    "es": "Frozen",
+    "ar": "ملكة الثلج"
+   },
+   "director": "buck",
+   "actor": null,
+   "character": {
+    "fr": "Olaf",
+    "en": "Olaf",
+    "es": "Olaf",
+    "ar": "أولاف"
+   }
+  },
+  {
+   "id": "shrek",
+   "tier": 1,
+   "year": 2001,
+   "title": {
+    "fr": "Shrek",
+    "en": "Shrek",
+    "es": "Shrek",
+    "ar": "شريك"
+   },
+   "director": "adamson",
+   "actor": null,
+   "character": {
+    "fr": "la princesse Fiona",
+    "en": "Princess Fiona",
+    "es": "la princesa Fiona",
+    "ar": "الأميرة فيونا"
+   }
+  },
+  {
+   "id": "chihiro",
+   "tier": 2,
+   "year": 2001,
+   "title": {
+    "fr": "Le Voyage de Chihiro",
+    "en": "Spirited Away",
+    "es": "El viaje de Chihiro",
+    "ar": "المخطوفة"
+   },
+   "director": "miyazaki",
+   "actor": null,
+   "character": {
+    "fr": "Sans-Visage",
+    "en": "No-Face",
+    "es": "Sin Cara",
+    "ar": "بلا وجه"
+   }
+  },
+  {
+   "id": "up",
+   "tier": 2,
+   "year": 2009,
+   "title": {
+    "fr": "Là-haut",
+    "en": "Up",
+    "es": "Up",
+    "ar": "فوق"
+   },
+   "director": "docter",
+   "actor": null,
+   "character": {
+    "fr": "Carl Fredricksen",
+    "en": "Carl Fredricksen",
+    "es": "Carl Fredricksen",
+    "ar": "كارل فريدريكسن"
+   }
+  },
+  {
+   "id": "coco",
+   "tier": 2,
+   "year": 2017,
+   "title": {
+    "fr": "Coco",
+    "en": "Coco",
+    "es": "Coco",
+    "ar": "كوكو"
+   },
+   "director": "unkrich",
+   "actor": null,
+   "character": {
+    "fr": "Miguel",
+    "en": "Miguel",
+    "es": "Miguel",
+    "ar": "ميغيل"
+   }
+  },
+  {
+   "id": "blackpanther",
+   "tier": 2,
+   "year": 2018,
+   "title": {
+    "fr": "Black Panther",
+    "en": "Black Panther",
+    "es": "Black Panther",
+    "ar": "النمر الأسود"
+   },
+   "director": "coogler",
+   "actor": "boseman",
+   "character": {
+    "fr": "T'Challa",
+    "en": "T'Challa",
+    "es": "T'Challa",
+    "ar": "تي تشالا"
+   }
+  },
+  {
+   "id": "endgame",
+   "tier": 2,
+   "year": 2019,
+   "title": {
+    "fr": "Avengers: Endgame",
+    "en": "Avengers: Endgame",
+    "es": "Vengadores: Endgame",
+    "ar": "المنتقمون: نهاية اللعبة"
+   },
+   "director": "russo",
+   "actor": "downey",
+   "character": {
+    "fr": "Thanos",
+    "en": "Thanos",
+    "es": "Thanos",
+    "ar": "ثانوس"
+   }
+  },
+  {
+   "id": "ironman",
+   "tier": 2,
+   "year": 2008,
+   "title": {
+    "fr": "Iron Man",
+    "en": "Iron Man",
+    "es": "Iron Man",
+    "ar": "الرجل الحديدي"
+   },
+   "director": "favreau",
+   "actor": "downey",
+   "character": {
+    "fr": "Tony Stark",
+    "en": "Tony Stark",
+    "es": "Tony Stark",
+    "ar": "توني ستارك"
+   }
+  },
+  {
+   "id": "spiderman",
+   "tier": 1,
+   "year": 2002,
+   "title": {
+    "fr": "Spider-Man",
+    "en": "Spider-Man",
+    "es": "Spider-Man",
+    "ar": "الرجل العنكبوت"
+   },
+   "director": "raimi",
+   "actor": "maguire",
+   "character": {
+    "fr": "Mary Jane",
+    "en": "Mary Jane",
+    "es": "Mary Jane",
+    "ar": "ماري جين"
+   }
+  },
+  {
+   "id": "barbie",
+   "tier": 1,
+   "year": 2023,
+   "title": {
+    "fr": "Barbie",
+    "en": "Barbie",
+    "es": "Barbie",
+    "ar": "باربي"
+   },
+   "director": "gerwig",
+   "actor": "robbie",
+   "character": {
+    "fr": "Ken",
+    "en": "Ken",
+    "es": "Ken",
+    "ar": "كين"
+   }
+  },
+  {
+   "id": "oppenheimer",
+   "tier": 2,
+   "year": 2023,
+   "title": {
+    "fr": "Oppenheimer",
+    "en": "Oppenheimer",
+    "es": "Oppenheimer",
+    "ar": "أوبنهايمر"
+   },
+   "director": "nolan",
+   "actor": "murphy",
+   "cast": [
+    "downey"
+   ]
+  },
+  {
+   "id": "dune",
+   "tier": 2,
+   "year": 2021,
+   "title": {
+    "fr": "Dune",
+    "en": "Dune",
+    "es": "Dune",
+    "ar": "كثيب"
+   },
+   "director": "villeneuve",
+   "actor": "chalamet",
+   "character": {
+    "fr": "Paul Atréides",
+    "en": "Paul Atreides",
+    "es": "Paul Atreides",
+    "ar": "بول أتريديس"
+   }
+  },
+  {
+   "id": "slumdog",
+   "tier": 3,
+   "year": 2008,
+   "title": {
+    "fr": "Slumdog Millionaire",
+    "en": "Slumdog Millionaire",
+    "es": "Slumdog Millionaire",
+    "ar": "المليونير المتشرد"
+   },
+   "director": "boyle",
+   "actor": "patel",
+   "character": {
+    "fr": "Jamal Malik",
+    "en": "Jamal Malik",
+    "es": "Jamal Malik",
+    "ar": "جمال مالك"
+   }
+  },
+  {
+   "id": "pi",
+   "tier": 3,
+   "year": 2012,
+   "title": {
+    "fr": "L'Odyssée de Pi",
+    "en": "Life of Pi",
+    "es": "La vida de Pi",
+    "ar": "حياة باي"
+   },
+   "director": "anglee",
+   "actor": "sharma",
+   "character": {
+    "fr": "le tigre Richard Parker",
+    "en": "Richard Parker the tiger",
+    "es": "el tigre Richard Parker",
+    "ar": "النمر ريتشارد باركر"
+   }
+  },
+  {
+   "id": "soundofmusic",
+   "tier": 3,
+   "year": 1965,
+   "title": {
+    "fr": "La Mélodie du bonheur",
+    "en": "The Sound of Music",
+    "es": "Sonrisas y lágrimas",
+    "ar": "صوت الموسيقى"
+   },
+   "director": "wise",
+   "actor": "andrews",
+   "character": {
+    "fr": "Maria",
+    "en": "Maria",
+    "es": "María",
+    "ar": "ماريا"
+   }
+  },
+  {
+   "id": "choristes",
+   "tier": 3,
+   "year": 2004,
+   "title": {
+    "fr": "Les Choristes",
+    "en": "The Chorus",
+    "es": "Los chicos del coro",
+    "ar": "فتيان الجوقة"
+   },
+   "director": "barratier",
+   "actor": "jugnot"
+  },
+  {
+   "id": "taxi",
+   "tier": 3,
+   "year": 1998,
+   "title": {
+    "fr": "Taxi",
+    "en": "Taxi",
+    "es": "Taxi",
+    "ar": "تاكسي"
+   },
+   "director": "pires",
+   "actor": "naceri"
+  }
+ ],
+ "people": {
+  "dicaprio": {
+   "fr": "Leonardo DiCaprio",
+   "en": "Leonardo DiCaprio",
+   "es": "Leonardo DiCaprio",
+   "ar": "ليوناردو دي كابريو"
+  },
+  "winslet": {
+   "fr": "Kate Winslet",
+   "en": "Kate Winslet",
+   "es": "Kate Winslet",
+   "ar": "كيت وينسلت"
+  },
+  "worthington": {
+   "fr": "Sam Worthington",
+   "en": "Sam Worthington",
+   "es": "Sam Worthington",
+   "ar": "سام ورثينغتون"
+  },
+  "neill": {
+   "fr": "Sam Neill",
+   "en": "Sam Neill",
+   "es": "Sam Neill",
+   "ar": "سام نيل"
+  },
+  "hthomas": {
+   "fr": "Henry Thomas",
+   "en": "Henry Thomas",
+   "es": "Henry Thomas",
+   "ar": "هنري توماس"
+  },
+  "scheider": {
+   "fr": "Roy Scheider",
+   "en": "Roy Scheider",
+   "es": "Roy Scheider",
+   "ar": "روي شايدر"
+  },
+  "hanks": {
+   "fr": "Tom Hanks",
+   "en": "Tom Hanks",
+   "es": "Tom Hanks",
+   "ar": "توم هانكس"
+  },
+  "fox": {
+   "fr": "Michael J. Fox",
+   "en": "Michael J. Fox",
+   "es": "Michael J. Fox",
+   "ar": "مايكل جي. فوكس"
+  },
+  "brando": {
+   "fr": "Marlon Brando",
+   "en": "Marlon Brando",
+   "es": "Marlon Brando",
+   "ar": "مارلون براندو"
+  },
+  "depp": {
+   "fr": "Johnny Depp",
+   "en": "Johnny Depp",
+   "es": "Johnny Depp",
+   "ar": "جوني ديب"
+  },
+  "reeves": {
+   "fr": "Keanu Reeves",
+   "en": "Keanu Reeves",
+   "es": "Keanu Reeves",
+   "ar": "كيانو ريفز"
+  },
+  "crowe": {
+   "fr": "Russell Crowe",
+   "en": "Russell Crowe",
+   "es": "Russell Crowe",
+   "ar": "راسل كرو"
+  },
+  "radcliffe": {
+   "fr": "Daniel Radcliffe",
+   "en": "Daniel Radcliffe",
+   "es": "Daniel Radcliffe",
+   "ar": "دانيال رادكليف"
+  },
+  "wood": {
+   "fr": "Elijah Wood",
+   "en": "Elijah Wood",
+   "es": "Elijah Wood",
+   "ar": "إيلايجا وود"
+  },
+  "hamill": {
+   "fr": "Mark Hamill",
+   "en": "Mark Hamill",
+   "es": "Mark Hamill",
+   "ar": "مارك هاميل"
+  },
+  "stallone": {
+   "fr": "Sylvester Stallone",
+   "en": "Sylvester Stallone",
+   "es": "Sylvester Stallone",
+   "ar": "سيلفستر ستالون"
+  },
+  "mcconaughey": {
+   "fr": "Matthew McConaughey",
+   "en": "Matthew McConaughey",
+   "es": "Matthew McConaughey",
+   "ar": "ماثيو ماكونهي"
+  },
+  "bale": {
+   "fr": "Christian Bale",
+   "en": "Christian Bale",
+   "es": "Christian Bale",
+   "ar": "كريستيان بيل"
+  },
+  "neeson": {
+   "fr": "Liam Neeson",
+   "en": "Liam Neeson",
+   "es": "Liam Neeson",
+   "ar": "ليام نيسون"
+  },
+  "cruise": {
+   "fr": "Tom Cruise",
+   "en": "Tom Cruise",
+   "es": "Tom Cruise",
+   "ar": "توم كروز"
+  },
+  "ford": {
+   "fr": "Harrison Ford",
+   "en": "Harrison Ford",
+   "es": "Harrison Ford",
+   "ar": "هاريسون فورد"
+  },
+  "culkin": {
+   "fr": "Macaulay Culkin",
+   "en": "Macaulay Culkin",
+   "es": "Macaulay Culkin",
+   "ar": "ماكولي كالكن"
+  },
+  "tautou": {
+   "fr": "Audrey Tautou",
+   "en": "Audrey Tautou",
+   "es": "Audrey Tautou",
+   "ar": "أودري توتو"
+  },
+  "sy": {
+   "fr": "Omar Sy",
+   "en": "Omar Sy",
+   "es": "Omar Sy",
+   "ar": "عمر سي"
+  },
+  "clavier": {
+   "fr": "Christian Clavier",
+   "en": "Christian Clavier",
+   "es": "Christian Clavier",
+   "ar": "كريستيان كلافييه"
+  },
+  "merad": {
+   "fr": "Kad Merad",
+   "en": "Kad Merad",
+   "es": "Kad Merad",
+   "ar": "قاد مراد"
+  },
+  "reno": {
+   "fr": "Jean Reno",
+   "en": "Jean Reno",
+   "es": "Jean Reno",
+   "ar": "جان رينو"
+  },
+  "quinn": {
+   "fr": "Anthony Quinn",
+   "en": "Anthony Quinn",
+   "es": "Anthony Quinn",
+   "ar": "أنتوني كوين"
+  },
+  "otoole": {
+   "fr": "Peter O'Toole",
+   "en": "Peter O'Toole",
+   "es": "Peter O'Toole",
+   "ar": "بيتر أوتول"
+  },
+  "bogart": {
+   "fr": "Humphrey Bogart",
+   "en": "Humphrey Bogart",
+   "es": "Humphrey Bogart",
+   "ar": "همفري بوغارت"
+  },
+  "garland": {
+   "fr": "Judy Garland",
+   "en": "Judy Garland",
+   "es": "Judy Garland",
+   "ar": "جودي غارلاند"
+  },
+  "andrews": {
+   "fr": "Julie Andrews",
+   "en": "Julie Andrews",
+   "es": "Julie Andrews",
+   "ar": "جولي أندروز"
+  },
+  "boseman": {
+   "fr": "Chadwick Boseman",
+   "en": "Chadwick Boseman",
+   "es": "Chadwick Boseman",
+   "ar": "تشادويك بوسمان"
+  },
+  "downey": {
+   "fr": "Robert Downey Jr.",
+   "en": "Robert Downey Jr.",
+   "es": "Robert Downey Jr.",
+   "ar": "روبرت داوني جونيور"
+  },
+  "maguire": {
+   "fr": "Tobey Maguire",
+   "en": "Tobey Maguire",
+   "es": "Tobey Maguire",
+   "ar": "توبي ماغواير"
+  },
+  "robbie": {
+   "fr": "Margot Robbie",
+   "en": "Margot Robbie",
+   "es": "Margot Robbie",
+   "ar": "مارغو روبي"
+  },
+  "murphy": {
+   "fr": "Cillian Murphy",
+   "en": "Cillian Murphy",
+   "es": "Cillian Murphy",
+   "ar": "كيليان مورفي"
+  },
+  "chalamet": {
+   "fr": "Timothée Chalamet",
+   "en": "Timothée Chalamet",
+   "es": "Timothée Chalamet",
+   "ar": "تيموثي شالاميه"
+  },
+  "patel": {
+   "fr": "Dev Patel",
+   "en": "Dev Patel",
+   "es": "Dev Patel",
+   "ar": "ديف باتيل"
+  },
+  "sharma": {
+   "fr": "Suraj Sharma",
+   "en": "Suraj Sharma",
+   "es": "Suraj Sharma",
+   "ar": "سوراج شارما"
+  },
+  "jugnot": {
+   "fr": "Gérard Jugnot",
+   "en": "Gérard Jugnot",
+   "es": "Gérard Jugnot",
+   "ar": "جيرار جونيو"
+  },
+  "naceri": {
+   "fr": "Samy Naceri",
+   "en": "Samy Naceri",
+   "es": "Samy Naceri",
+   "ar": "سامي ناصري"
+  },
+  "cameron": {
+   "fr": "James Cameron",
+   "en": "James Cameron",
+   "es": "James Cameron",
+   "ar": "جيمس كاميرون"
+  },
+  "spielberg": {
+   "fr": "Steven Spielberg",
+   "en": "Steven Spielberg",
+   "es": "Steven Spielberg",
+   "ar": "ستيفن سبيلبرغ"
+  },
+  "zemeckis": {
+   "fr": "Robert Zemeckis",
+   "en": "Robert Zemeckis",
+   "es": "Robert Zemeckis",
+   "ar": "روبرت زيميكيس"
+  },
+  "coppola": {
+   "fr": "Francis Ford Coppola",
+   "en": "Francis Ford Coppola",
+   "es": "Francis Ford Coppola",
+   "ar": "فرانسيس فورد كوبولا"
+  },
+  "verbinski": {
+   "fr": "Gore Verbinski",
+   "en": "Gore Verbinski",
+   "es": "Gore Verbinski",
+   "ar": "غور فيربينسكي"
+  },
+  "wachowski": {
+   "fr": "Lana & Lilly Wachowski",
+   "en": "Lana & Lilly Wachowski",
+   "es": "Lana & Lilly Wachowski",
+   "ar": "لانا وليلي واتشوسكي"
+  },
+  "rscott": {
+   "fr": "Ridley Scott",
+   "en": "Ridley Scott",
+   "es": "Ridley Scott",
+   "ar": "ريدلي سكوت"
+  },
+  "columbus": {
+   "fr": "Chris Columbus",
+   "en": "Chris Columbus",
+   "es": "Chris Columbus",
+   "ar": "كريس كولومبوس"
+  },
+  "jackson": {
+   "fr": "Peter Jackson",
+   "en": "Peter Jackson",
+   "es": "Peter Jackson",
+   "ar": "بيتر جاكسون"
+  },
+  "lucas": {
+   "fr": "George Lucas",
+   "en": "George Lucas",
+   "es": "George Lucas",
+   "ar": "جورج لوكاس"
+  },
+  "avildsen": {
+   "fr": "John G. Avildsen",
+   "en": "John G. Avildsen",
+   "es": "John G. Avildsen",
+   "ar": "جون جي. أفيلدسن"
+  },
+  "nolan": {
+   "fr": "Christopher Nolan",
+   "en": "Christopher Nolan",
+   "es": "Christopher Nolan",
+   "ar": "كريستوفر نولان"
+  },
+  "depalma": {
+   "fr": "Brian De Palma",
+   "en": "Brian De Palma",
+   "es": "Brian De Palma",
+   "ar": "بريان دي بالما"
+  },
+  "tscott": {
+   "fr": "Tony Scott",
+   "en": "Tony Scott",
+   "es": "Tony Scott",
+   "ar": "توني سكوت"
+  },
+  "jeunet": {
+   "fr": "Jean-Pierre Jeunet",
+   "en": "Jean-Pierre Jeunet",
+   "es": "Jean-Pierre Jeunet",
+   "ar": "جان بيير جونيه"
+  },
+  "nakache": {
+   "fr": "Olivier Nakache & Éric Toledano",
+   "en": "Olivier Nakache & Éric Toledano",
+   "es": "Olivier Nakache & Éric Toledano",
+   "ar": "أوليفييه نقاش وإريك توليدانو"
+  },
+  "poire": {
+   "fr": "Jean-Marie Poiré",
+   "en": "Jean-Marie Poiré",
+   "es": "Jean-Marie Poiré",
+   "ar": "جان ماري بواريه"
+  },
+  "boon": {
+   "fr": "Dany Boon",
+   "en": "Dany Boon",
+   "es": "Dany Boon",
+   "ar": "داني بون"
+  },
+  "besson": {
+   "fr": "Luc Besson",
+   "en": "Luc Besson",
+   "es": "Luc Besson",
+   "ar": "لوك بيسون"
+  },
+  "akkad": {
+   "fr": "Moustapha Akkad",
+   "en": "Moustapha Akkad",
+   "es": "Moustapha Akkad",
+   "ar": "مصطفى العقاد"
+  },
+  "lean": {
+   "fr": "David Lean",
+   "en": "David Lean",
+   "es": "David Lean",
+   "ar": "ديفيد لين"
+  },
+  "ayouch": {
+   "fr": "Nabil Ayouch",
+   "en": "Nabil Ayouch",
+   "es": "Nabil Ayouch",
+   "ar": "نبيل عيوش"
+  },
+  "curtiz": {
+   "fr": "Michael Curtiz",
+   "en": "Michael Curtiz",
+   "es": "Michael Curtiz",
+   "ar": "مايكل كورتيز"
+  },
+  "fleming": {
+   "fr": "Victor Fleming",
+   "en": "Victor Fleming",
+   "es": "Victor Fleming",
+   "ar": "فيكتور فليمينغ"
+  },
+  "stevenson": {
+   "fr": "Robert Stevenson",
+   "en": "Robert Stevenson",
+   "es": "Robert Stevenson",
+   "ar": "روبرت ستيفنسون"
+  },
+  "burton": {
+   "fr": "Tim Burton",
+   "en": "Tim Burton",
+   "es": "Tim Burton",
+   "ar": "تيم بيرتون"
+  },
+  "allers": {
+   "fr": "Roger Allers & Rob Minkoff",
+   "en": "Roger Allers & Rob Minkoff",
+   "es": "Roger Allers & Rob Minkoff",
+   "ar": "روجر ألرز وروب مينكوف"
+  },
+  "lasseter": {
+   "fr": "John Lasseter",
+   "en": "John Lasseter",
+   "es": "John Lasseter",
+   "ar": "جون لاسيتر"
+  },
+  "stanton": {
+   "fr": "Andrew Stanton",
+   "en": "Andrew Stanton",
+   "es": "Andrew Stanton",
+   "ar": "أندرو ستانتون"
+  },
+  "buck": {
+   "fr": "Chris Buck & Jennifer Lee",
+   "en": "Chris Buck & Jennifer Lee",
+   "es": "Chris Buck & Jennifer Lee",
+   "ar": "كريس باك وجنيفر لي"
+  },
+  "adamson": {
+   "fr": "Andrew Adamson & Vicky Jenson",
+   "en": "Andrew Adamson & Vicky Jenson",
+   "es": "Andrew Adamson & Vicky Jenson",
+   "ar": "أندرو آدامسون وفيكي جنسن"
+  },
+  "miyazaki": {
+   "fr": "Hayao Miyazaki",
+   "en": "Hayao Miyazaki",
+   "es": "Hayao Miyazaki",
+   "ar": "هاياو ميازاكي"
+  },
+  "docter": {
+   "fr": "Pete Docter",
+   "en": "Pete Docter",
+   "es": "Pete Docter",
+   "ar": "بيت دوكتر"
+  },
+  "unkrich": {
+   "fr": "Lee Unkrich",
+   "en": "Lee Unkrich",
+   "es": "Lee Unkrich",
+   "ar": "لي أنكريتش"
+  },
+  "coogler": {
+   "fr": "Ryan Coogler",
+   "en": "Ryan Coogler",
+   "es": "Ryan Coogler",
+   "ar": "رايان كوغلر"
+  },
+  "russo": {
+   "fr": "Anthony & Joe Russo",
+   "en": "Anthony & Joe Russo",
+   "es": "Anthony & Joe Russo",
+   "ar": "الأخوان أنتوني وجو روسو"
+  },
+  "favreau": {
+   "fr": "Jon Favreau",
+   "en": "Jon Favreau",
+   "es": "Jon Favreau",
+   "ar": "جون فافرو"
+  },
+  "raimi": {
+   "fr": "Sam Raimi",
+   "en": "Sam Raimi",
+   "es": "Sam Raimi",
+   "ar": "سام ريمي"
+  },
+  "gerwig": {
+   "fr": "Greta Gerwig",
+   "en": "Greta Gerwig",
+   "es": "Greta Gerwig",
+   "ar": "غريتا غيرويغ"
+  },
+  "villeneuve": {
+   "fr": "Denis Villeneuve",
+   "en": "Denis Villeneuve",
+   "es": "Denis Villeneuve",
+   "ar": "دوني فيلنوف"
+  },
+  "boyle": {
+   "fr": "Danny Boyle",
+   "en": "Danny Boyle",
+   "es": "Danny Boyle",
+   "ar": "داني بويل"
+  },
+  "anglee": {
+   "fr": "Ang Lee",
+   "en": "Ang Lee",
+   "es": "Ang Lee",
+   "ar": "آنغ لي"
+  },
+  "wise": {
+   "fr": "Robert Wise",
+   "en": "Robert Wise",
+   "es": "Robert Wise",
+   "ar": "روبرت وايز"
+  },
+  "barratier": {
+   "fr": "Christophe Barratier",
+   "en": "Christophe Barratier",
+   "es": "Christophe Barratier",
+   "ar": "كريستوف باراتييه"
+  },
+  "pires": {
+   "fr": "Gérard Pirès",
+   "en": "Gérard Pirès",
+   "es": "Gérard Pirès",
+   "ar": "جيرار بيريس"
+  }
+ }
+}

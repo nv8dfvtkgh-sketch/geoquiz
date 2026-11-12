@@ -110,7 +110,7 @@ export function Setup() {
             </button>
           ))}
         </div>
-        {cfg.qtype === 'auto' && <p className="hint">{t('setup.autoHint')}</p>}
+        {cfg.qtype === 'auto' && (cat?.qtypes.length ?? 0) > 1 && <p className="hint">{t('setup.autoHint')}</p>}
       </fieldset>
 
       <details className="more" open={editing}>

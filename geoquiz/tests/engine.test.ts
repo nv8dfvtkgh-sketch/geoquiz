@@ -589,3 +589,34 @@ test('Connexion Google / Facebook : inscription, reconnexion, liaison par e-mail
   await svc.remove(amine, 'amine');
   assert.equal(await kv.get('oauth:google:g-123'), undefined);
 });
+
+test('Cinéma (texte) : 4 types de questions, une bonne réponse, pas de co-vedette en piège', async () => {
+  const { extras } = await import('../src/server/data');
+  const seen = new Set<string>();
+  for (let k = 0; k < 15; k++) {
+    for (const d of ['easy', 'medium', 'hard'] as const) {
+      const qs = drawQuestions(settings({ category: 'cinema', zone: 'world', difficulty: d, qtype: 'auto', count: 20 }));
+      assert.ok(qs.length >= 10);
+      assert.equal(new Set(qs.map((q) => q.target.split('|')[0])).size, qs.length, 'un film une seule fois');
+      for (const q of qs) {
+        const [id, kind] = q.target.split('|');
+        seen.add(kind);
+        const f = extras.cinema.films.find((x) => x.id === id)!;
+        assert.equal(q.kind, 'mcq');
+        assert.equal(q.options!.length, 4);
+        assert.equal(new Set(q.options!.map((o) => o.label.fr)).size, 4, 'choix distincts');
+        assert.ok(q.check(q.revealOption!));
+        const good = q.options!.find((o) => o.id === q.revealOption)!;
+        if (kind === 'actor') { assert.equal(good.target, f.actor); assert.ok(!q.options!.some((o) => f.cast?.includes(o.target))); }
+        if (kind === 'director') assert.equal(good.target, f.director);
+        if (kind === 'year') assert.equal(good.target, String(f.year));
+        if (kind === 'character') assert.equal(good.target, f.id);
+      }
+    }
+  }
+  assert.deepEqual([...seen].sort(), ['actor', 'character', 'director', 'year']);
+  const tales = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'type', count: 200 })).filter((q) => q.target.startsWith('t-'));
+  assert.ok(tales.length >= 10);
+  const red = tales.find((q) => q.target === 't-redridinghood')!;
+  assert.ok(red.check('le petit chaperon rouge') && red.check('Caperucita Roja') && !red.check('Les Trois Petits Cochons'));
+});

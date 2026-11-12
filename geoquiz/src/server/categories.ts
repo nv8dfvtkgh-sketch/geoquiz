@@ -557,7 +557,7 @@ const emojiCat: Category = {
       const { options, correct } = optionsFrom(target, near.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: emojiNames(byId[id]) }));
       return { ...base, kind, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
     }
-    emojiNameSets ??= Object.fromEntries(['country', 'city', 'film'].map((t) => [t, nameSet(extras.emoji.filter((x) => x.theme === t).map(emojiNames))]));
+    emojiNameSets ??= Object.fromEntries(['country', 'city', 'film', 'tale'].map((t) => [t, nameSet(extras.emoji.filter((x) => x.theme === t).map(emojiNames))]));
     const others = item.theme === 'country' ? countryNameSet : emojiNameSets[item.theme];
     return { ...base, kind, attempts: 1, check: typedCheck(allNames(names, item.alts), others) };
   },
@@ -604,6 +604,63 @@ const monumentsCat: Category = {
   },
 };
 
+// ------------------------------------------------------------------ cinéma (version texte)
+// Pas d'affiches ni de photos : des questions sur les films eux-mêmes (acteur principal,
+// réalisateur, année de sortie, personnage). Une seule question par film dans une partie.
+type CineKind = 'actor' | 'director' | 'year' | 'character';
+const cinemaCat: Category = {
+  id: 'cinema',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const ids = tierPool(extras.cinema.films, d, n);
+    return ids.map((id) => {
+      const f = extras.cinema.films.find((x) => x.id === id)!;
+      const kinds: CineKind[] = ['director'];
+      if (f.actor) kinds.push('actor', 'actor');
+      if (f.character) kinds.push('character', 'character');
+      if (!f.noYear) kinds.push('year');
+      return `${id}|${kinds[Math.floor(Math.random() * kinds.length)]}`;
+    });
+  },
+  make(target, _kind, _zone, rnd) {
+    const [id, kind] = target.split('|') as [string, CineKind];
+    const { films, people } = extras.cinema;
+    const f = films.find((x) => x.id === id)!;
+    const titled = mapNames((l) => `${f.title[l]} (${f.year})`);
+    const base = { category: 'cinema', kind: 'mcq' as const, target, attempts: 1 };
+    const pick = <T,>(pool: T[], k: number) => shuffle(pool, rnd).slice(0, k);
+    if (kind === 'actor' || kind === 'director') {
+      const right = kind === 'actor' ? f.actor! : f.director;
+      const exclude = new Set([right, ...(f.cast ?? [])]);
+      const pool = [...new Set(films.map((x) => (kind === 'actor' ? x.actor : x.director)).filter((p): p is string => !!p && !exclude.has(p)))];
+      // Pièges de la même époque d'abord.
+      const near = pool.sort((a, b) => {
+        const ya = films.find((x) => (kind === 'actor' ? x.actor : x.director) === a)!.year;
+        const yb = films.find((x) => (kind === 'actor' ? x.actor : x.director) === b)!.year;
+        return Math.abs(ya - f.year) - Math.abs(yb - f.year) + (rnd() - 0.5) * 30;
+      });
+      const { options, correct } = optionsFrom(right, near.slice(0, 3), rnd, (p) => ({ label: people[p] }));
+      return { ...base, promptKey: `q.cinema.${kind}`, promptName: titled, answer: people[right], options, revealOption: correct, check: (v) => v === correct };
+    }
+    if (kind === 'year') {
+      const offsets = pick([-9, -6, -4, -3, -2, 2, 3, 4, 6, 9], 3);
+      const years = offsets.map((o) => f.year + o).filter((y) => y <= 2026);
+      while (years.length < 3) years.push(f.year - 10 - years.length);
+      const label = (y: number) => mapNames(() => String(y));
+      const { options, correct } = optionsFrom(String(f.year), years.map(String), rnd, (y) => ({ label: label(Number(y)) }));
+      // Les années se lisent mieux dans l'ordre.
+      options.sort((a, b) => Number(a.target) - Number(b.target));
+      return { ...base, promptKey: 'q.cinema.year', promptName: f.title, answer: label(f.year), options, revealOption: correct, check: (v) => v === correct };
+    }
+    const others = pick(films.filter((x) => x.id !== f.id), 3).map((x) => x.id);
+    const byId = Object.fromEntries(films.map((x) => [x.id, x]));
+    const { options, correct } = optionsFrom(f.id, others, rnd, (x) => ({ label: byId[x].title }));
+    return { ...base, promptKey: 'q.cinema.character', promptName: f.character!, answer: titled, options, revealOption: correct, check: (v) => v === correct };
+  },
+};
+
 // ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
 // Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
 // cette entrée sert au catalogue et à la validation des réglages.
@@ -632,7 +689,7 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 }
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat].map((c) => [c.id, c]),
 );
 
 /**

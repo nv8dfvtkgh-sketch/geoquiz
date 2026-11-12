@@ -202,8 +202,8 @@
   "game.animals": "Los animales emblema de los países",
   "game.monuments": "Reconoce las maravillas en fotos",
   "game.brands": "¿De qué país es la marca?",
-  "game.cinema": "Películas y actores",
-  "game.emoji": "Países, ciudades y películas en emojis",
+  "game.cinema": "Actores, directores, personajes",
+  "game.emoji": "Países, ciudades, películas y cuentos en emojis",
   "game.truefalse": "Verdadero o falso sobre el mundo",
   "game.create": "Tus preguntas, compartidas con un código",
   "game.countries.long": "Sitúa los países en el mapa o nombra el país resaltado. Del mundo entero a una sola región.",
@@ -512,5 +512,11 @@
   "err.account.providerOff": "Este acceso aún no está activado.",
   "err.account.providerFailed": "No se pudo iniciar sesión. Inténtalo de nuevo.",
   "err.account.providerCancelled": "Inicio de sesión cancelado.",
-  "err.account.ticketExpired": "Se acabó el tiempo. Vuelve a iniciar sesión."
+  "err.account.ticketExpired": "Se acabó el tiempo. Vuelve a iniciar sesión.",
+  "game.cinema.long": "¿Quién actúa en Titanic? ¿Quién dirigió Parque Jurásico? ¿En qué película aparece Jack Sparrow? Preguntas sobre grandes películas, de Hollywood al cine marroquí.",
+  "q.cinema.actor": "¿Quién protagoniza esta película?",
+  "q.cinema.director": "¿Quién dirigió esta película?",
+  "q.cinema.year": "¿En qué año se estrenó esta película?",
+  "q.cinema.character": "¿En qué película aparece este personaje?",
+  "q.emoji.tale": "¿Qué cuento se esconde tras estos emojis?"
 }

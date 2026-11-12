@@ -202,8 +202,8 @@
   "game.animals": "Countries' emblem animals",
   "game.monuments": "Recognise world wonders in photos",
   "game.brands": "Which country is the brand from?",
-  "game.cinema": "Films and actors",
-  "game.emoji": "Countries, cities and films in emojis",
+  "game.cinema": "Actors, directors, characters",
+  "game.emoji": "Countries, cities, films and tales in emojis",
   "game.truefalse": "True or false about the world",
   "game.create": "Your questions, shared with a code",
   "game.countries.long": "Find countries on the map, or name the highlighted one. From the whole world down to a single region.",
@@ -512,5 +512,11 @@
   "err.account.providerOff": "This sign-in isn’t enabled yet.",
   "err.account.providerFailed": "Sign-in didn’t go through. Try again.",
   "err.account.providerCancelled": "Sign-in cancelled.",
-  "err.account.ticketExpired": "Time ran out. Start signing in again."
+  "err.account.ticketExpired": "Time ran out. Start signing in again.",
+  "game.cinema.long": "Who stars in Titanic? Who directed Jurassic Park? Which film features Jack Sparrow? Questions about great films, from Hollywood to Moroccan cinema.",
+  "q.cinema.actor": "Who plays the lead role in this film?",
+  "q.cinema.director": "Who directed this film?",
+  "q.cinema.year": "What year did this film come out?",
+  "q.cinema.character": "Which film features this character?",
+  "q.emoji.tale": "Which tale is hiding behind these emojis?"
 }

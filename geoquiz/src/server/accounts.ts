@@ -80,7 +80,7 @@ export function levelOf(xp: number) {
 /** Titre affiché selon le niveau (clé rank.N côté client). */
 export const titleOf = (level: number) => [1, 5, 10, 15, 20, 30, 40, 50].filter((x) => level >= x).length - 1;
 
-const ALL_GAMES = ['countries', 'flags', 'capitals', 'regions', 'silhouettes', 'currencies', 'languages', 'food', 'animals', 'monuments', 'emoji', 'truefalse', 'calc'];
+const ALL_GAMES = ['countries', 'flags', 'capitals', 'regions', 'silhouettes', 'currencies', 'languages', 'food', 'animals', 'monuments', 'emoji', 'cinema', 'truefalse', 'calc'];
 
 // ------------------------------------------------------------------ outils
 const enc = new TextEncoder();

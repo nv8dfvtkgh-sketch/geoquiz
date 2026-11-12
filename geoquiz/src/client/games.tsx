@@ -42,7 +42,7 @@ export const FAMILIES: Family[] = [
     id: 'screens',
     tint: 'tint-violet',
     games: [
-      { id: 'cinema', icon: 'clap', soon: true },
+      { id: 'cinema', icon: 'clap', fresh: true },
       { id: 'emoji', icon: 'smile', fresh: true },
     ],
   },
