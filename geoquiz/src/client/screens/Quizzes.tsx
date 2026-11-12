@@ -313,7 +313,7 @@ export function Admin() {
   const [list, setList] = useState<any[] | null>(null);
   const [err, setErr] = useState('');
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected'>('pending');
-  const [tab, setTab] = useState<'quizzes' | 'players'>('quizzes');
+  const [tab, setTab] = useState<'quizzes' | 'players' | 'feedback'>('quizzes');
   const [open, setOpen] = useState<any>(null);
   const [imgs, setImgs] = useState<Record<string, string>>({});
   const [reason, setReason] = useState('');
@@ -401,15 +401,16 @@ export function Admin() {
     <div className="seg admin-tabs">
       <button type="button" aria-pressed={tab === 'quizzes'} onClick={() => setTab('quizzes')}>{t('admin.tabQuizzes')}</button>
       <button type="button" aria-pressed={tab === 'players'} onClick={() => setTab('players')}>{t('admin.tabPlayers')}</button>
+      <button type="button" aria-pressed={tab === 'feedback'} onClick={() => setTab('feedback')}>{t('admin.tabFeedback')}</button>
     </div>
   );
-  if (tab === 'players') {
+  if (tab === 'players' || tab === 'feedback') {
     return (
       <div className="quizzes panel">
         <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
         <h1>{t('admin.title')}</h1>
         {tabs}
-        <PlayersAdmin pwd={pwd} />
+        {tab === 'players' ? <PlayersAdmin pwd={pwd} /> : <FeedbackAdmin pwd={pwd} />}
       </div>
     );
   }
@@ -509,6 +510,70 @@ function PlayersAdmin({ pwd }: { pwd: string }) {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------ admin : avis des joueurs
+function FeedbackAdmin({ pwd }: { pwd: string }) {
+  const { t, lang } = useApp();
+  const [data, setData] = useState<any>(null);
+  const [only, setOnly] = useState(0);
+  const auth = { Authorization: `Bearer ${pwd}` };
+  const load = () => api('/api/admin/feedback', { headers: auth }).then((r) => r.ok && setData(r.data));
+  useEffect(() => { load(); }, []);
+  const csv = async () => {
+    const r = await fetch('/api/admin/feedback.csv', { headers: auth });
+    if (!r.ok) return;
+    const url = URL.createObjectURL(await r.blob());
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `quizellige-avis-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const remove = async (id: string) => {
+    if (!confirm(t('admin.confirmDeleteFb'))) return;
+    await api(`/api/admin/feedback/${id}`, { method: 'DELETE', headers: auth });
+    load();
+  };
+  if (!data) return <div className="loading" />;
+  const faces = ['😞', '😕', '😐', '🙂', '🤩'];
+  const items = (data.items as any[]).filter((f) => !only || f.rating === only);
+  const tags = Object.entries(data.tags as Record<string, number>).sort((a, b) => b[1] - a[1]);
+  return (
+    <div className="players-admin">
+      <div className="profile-stats">
+        <div><strong>{data.count}</strong><span>{t('admin.fbCount')}</span></div>
+        <div><strong>{data.avg || '–'}</strong><span>{t('admin.fbAvg')}</span></div>
+      </div>
+      {tags.length > 0 && <p className="muted small">{tags.map(([k, n]) => `${t(`fb.tag.${k}`)} (${n})`).join(' · ')}</p>}
+      <div className="row-actions">
+        <button type="button" className="btn primary" onClick={csv}>{t('admin.exportCsv')}</button>
+        <div className="seg">
+          <button type="button" aria-pressed={!only} onClick={() => setOnly(0)}>{t('admin.fbAll')}</button>
+          {faces.map((f, i) => <button type="button" key={i} aria-pressed={only === i + 1} onClick={() => setOnly(i + 1)}>{f}</button>)}
+        </div>
+      </div>
+      {items.length === 0 ? <p className="muted">{t('admin.fbEmpty')}</p> : (
+        <ul className="fb-list">
+          {items.map((f) => (
+            <li key={f.id}>
+              <div className="fb-row">
+                <span className="fb-face" aria-label={`${f.rating}/5`}>{faces[f.rating - 1]}</span>
+                <span className="muted small">
+                  {new Date(f.at).toLocaleString(lang)} · {f.pseudo ? `${f.pseudo} (${t(`account.age.${f.age}`)})` : t('admin.fbGuest')}
+                  {f.game ? ` · ${t(`cat.${f.game}`)}` : ''} · {t('admin.fbGames', { n: f.games })} · {f.lang} · {f.look} · {f.screen}
+                </span>
+                <button type="button" className="text-btn danger" onClick={() => remove(f.id)}>{t('admin.delete')}</button>
+              </div>
+              {f.tags.length > 0 && <p className="fb-chips">{f.tags.map((x: string) => <span key={x}>{t(`fb.tag.${x}`)}</span>)}</p>}
+              {f.comment && <p className="fb-comment" dir="auto">{f.comment}</p>}
+              <p className="muted tiny">{f.device}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

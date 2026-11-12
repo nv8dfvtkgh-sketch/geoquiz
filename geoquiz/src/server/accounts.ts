@@ -9,6 +9,11 @@ import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type Me, type
 export { AVATARS, BADGES, UNLOCK_AT };
 export type { AgeGroup, CatStats, Me, Reward };
 
+export const FEEDBACK_TAGS = ['fun', 'learn', 'design', 'multi', 'kids', 'bug', 'hard', 'easy', 'unclear', 'slow', 'more'];
+interface FeedbackItem {
+  id: string; at: number; rating: number; tags: string[]; comment: string; game: string; games: number;
+  lang: string; look: string; device: string; screen: string; pseudo?: string; age?: string;
+}
 interface DailyRow { correct: number; total: number; timeMs: number; pseudo: string; avatar: string; country?: string }
 
 export interface GameResult {
@@ -511,6 +516,44 @@ export class AccountService {
     await this.kv.put('stats', s);
   }
 
+  // ---------------------------------------------------------------- avis des joueurs
+  /** Avis envoyé depuis le site (après quelques parties, ou par le lien « Donner mon avis »). */
+  async feedback(b: any, token: string | null) {
+    const rating = Math.round(Number(b?.rating));
+    if (!(rating >= 1 && rating <= 5)) throw new AccountError('feedback.invalid');
+    const tags = Array.isArray(b?.tags) ? b.tags.filter((x: unknown) => typeof x === 'string' && FEEDBACK_TAGS.includes(x)).slice(0, 12) : [];
+    const clean = (v: unknown, n: number) => String(v ?? '').replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim().slice(0, n);
+    const a = token ? await this.byToken(token) : null;
+    const item: FeedbackItem = {
+      id: `${this.now().toString(36)}${randomHex(3)}`, at: this.now(), rating, tags,
+      comment: clean(b?.comment, 1000), game: clean(b?.game, 24), games: Math.min(9999, Math.max(0, Math.round(Number(b?.games) || 0))),
+      lang: clean(b?.lang, 4), look: clean(b?.look, 8), device: clean(b?.device, 160), screen: clean(b?.screen, 16),
+      pseudo: a?.pseudo, age: a?.age,
+    };
+    await this.kv.put(`fb:${item.id}`, item);
+    // On garde les 3 000 derniers avis.
+    const keys = (await this.kv.list('fb:')).sort();
+    for (const k of keys.slice(0, -3000)) await this.kv.delete(k);
+  }
+  async adminFeedback() {
+    const keys = await this.kv.list('fb:');
+    const items: FeedbackItem[] = [];
+    for (const k of keys) { const f = await this.kv.get<FeedbackItem>(k); if (f) items.push(f); }
+    items.sort((x, y) => y.at - x.at);
+    const tags: Record<string, number> = {};
+    for (const f of items) for (const t of f.tags) tags[t] = (tags[t] ?? 0) + 1;
+    const avg = items.length ? Math.round((items.reduce((s, f) => s + f.rating, 0) / items.length) * 10) / 10 : 0;
+    return { count: items.length, avg, tags, items };
+  }
+  async adminFeedbackCsv() {
+    const { items } = await this.adminFeedback();
+    const cell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const head = ['date', 'note', 'tags', 'commentaire', 'jeu', 'parties', 'pseudo', 'tranche_age', 'langue', 'style', 'appareil', 'ecran'];
+    const lines = items.map((f) => [new Date(f.at).toISOString().slice(0, 16).replace('T', ' '), f.rating, f.tags.join(' '), f.comment, f.game, f.games, f.pseudo ?? '', f.age ?? '', f.lang, f.look, f.device, f.screen].map(cell).join(','));
+    return '\ufeff' + [head.join(','), ...lines].join('\r\n');
+  }
+  async adminFeedbackDelete(id: string) { await this.kv.delete(`fb:${id}`); }
+
   async adminUsers() {
     const keys = await this.kv.list('acct:');
     const users: Account[] = [];
@@ -572,6 +615,16 @@ export async function accountRoute(
     if (path === '/api/leaderboard' && method === 'GET') {
       const c = query.get('country') ?? '';
       return { status: 200, json: await svc.leaderboard(bearer || null, /^[A-Z]{2}$/.test(c) ? c : undefined) };
+    }
+    if (path === '/api/feedback' && method === 'POST') { await svc.feedback(await body(), bearer || null); return { status: 200, json: {} }; }
+    if (path.startsWith('/api/admin/feedback')) {
+      if (adminOk === null) return { status: 503, json: { error: 'admin.notConfigured' } };
+      if (!adminOk) return { status: 401, json: { error: 'admin.denied' } };
+      if (path === '/api/admin/feedback' && method === 'GET') return { status: 200, json: await svc.adminFeedback() };
+      if (path === '/api/admin/feedback.csv' && method === 'GET') return { status: 200, text: await svc.adminFeedbackCsv(), type: 'text/csv; charset=utf-8' };
+      const m = path.match(/^\/api\/admin\/feedback\/([0-9a-z]{6,20})$/);
+      if (m && method === 'DELETE') { await svc.adminFeedbackDelete(m[1]); return { status: 200, json: {} }; }
+      return null;
     }
     if (path === '/api/daily' && method === 'GET') return { status: 200, json: await svc.daily(bearer || null) };
     if (path.startsWith('/api/account')) {

@@ -135,7 +135,7 @@ const server = http.createServer(async (req, res) => {
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
-    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p.startsWith('/api/admin/users')) {
+    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
       const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
       const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,

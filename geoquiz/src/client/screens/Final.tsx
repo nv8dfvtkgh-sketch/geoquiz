@@ -5,6 +5,7 @@ import { useApp } from '../state';
 import { Leaderboard, TeamBars, TeamChip } from './common';
 import { RewardCard } from './Account';
 import { DailyBoard } from './Setup';
+import { countGame, FeedbackPrompt } from '../Feedback';
 
 export function Final() {
   const { t, s, send, leave } = useApp();
@@ -12,6 +13,7 @@ export function Final() {
   const room = s.room;
   useEffect(() => { sfx.end(); }, []);
   const best = useBest();
+  useState(() => countGame()); // une fois par fin de partie, avant la carte d'avis
   if (!f || !room) return <div className="loading" />;
   const kind = room.kind;
 
@@ -28,6 +30,7 @@ export function Final() {
         )}
         {room.settings.category === 'daily' && <DailyShare />}
         <RewardCard />
+        <FeedbackPrompt game={room.settings.category} />
         {room.settings.category === 'daily' && <DailyBoard refresh={1} />}
         <Recap />
         <div className="actions">
@@ -50,6 +53,7 @@ export function Final() {
         {!draw && <p className="muted" dir="auto">{t('final.win', { name: first.name })}</p>}
         <Leaderboard players={f.players} you={s.you} />
         <RewardCard />
+        <FeedbackPrompt game={room.settings.category} />
         <Recap />
         {asked && <p className="record">{t('final.rematchAsked')}</p>}
         <div className="actions">
@@ -86,6 +90,7 @@ export function Final() {
       </div>
       <Leaderboard players={f.players} you={s.you} />
       <RewardCard />
+        <FeedbackPrompt game={room.settings.category} />
       <div className="actions">
         <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
         {s.isHost ? (

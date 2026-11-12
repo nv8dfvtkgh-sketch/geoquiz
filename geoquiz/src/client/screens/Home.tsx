@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { LIMITS } from '../../shared/protocol';
 import { FAMILIES, Icon, type GameDef } from '../games';
 import { joinGame } from '../net';
+import { FeedbackLink } from '../Feedback';
 import { useApp } from '../state';
 import { AccountForm, Stars } from './Account';
 import { starsOf } from '../account';
@@ -159,6 +160,7 @@ function Games() {
           </span>
         </button>
       </section>
+      <p className="home-foot"><FeedbackLink /></p>
     </div>
   );
 }
