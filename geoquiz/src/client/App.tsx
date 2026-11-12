@@ -18,6 +18,7 @@ import { ChallengeScreen } from './Challenge';
 import { LeagueScreen, PassportScreen } from './screens/Progress';
 import { ClassesScreen, ClassJoinScreen, TournamentScreen } from './screens/School';
 import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
+import { SettingsButton } from './Settings';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -198,47 +199,7 @@ function TopBar() {
         <span>{t('app.title')}</span>
       </button>
       <div className="topbar-tools">
-        <label className="lang">
-          <span className="sr">{t('lang.label')}</span>
-          <select value={lang} onChange={(e) => setLang(e.target.value as Lang)}>
-            {LANGS.map((l) => <option key={l} value={l}>{LANG_LABELS[l]}</option>)}
-          </select>
-        </label>
-        {look && !inGame && (me ? (
-          <button type="button" className="me-chip" onClick={() => go('profile')} title={t('profile.title')}>
-            <span className="me-avatar" aria-hidden="true">{me.avatar}</span>
-            <span className="me-level">{t('profile.levelShort', { n: me.level })}</span>
-          </button>
-        ) : (
-          <button type="button" className="text-btn signin-link" onClick={() => go('signin')}>{t('account.signin')}</button>
-        ))}
-        {look && !inGame && !me && (
-          <button
-            type="button"
-            className="kids-toggle"
-            aria-pressed={look === 'kids'}
-            title={t(look === 'kids' ? 'look.toClassic' : 'look.toKids')}
-            onClick={() => setLook(look === 'kids' ? 'classic' : 'kids')}
-          >
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path d="M12 2.8l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.1l6.1-.7z" fill="currentColor" />
-            </svg>
-            <span>{t(look === 'kids' ? 'look.classic' : 'look.kids')}</span>
-          </button>
-        )}
-        <button
-          type="button"
-          className="icon-btn"
-          aria-pressed={!muted}
-          title={muted ? t('sound.off') : t('sound.on')}
-          aria-label={muted ? t('sound.off') : t('sound.on')}
-          onClick={() => { setMuted(!muted); setM(!muted); if (muted) sfx.good(); }}
-        >
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" />
-            {muted ? <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" strokeWidth="2" /> : <path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" stroke="currentColor" strokeWidth="2" fill="none" />}
-          </svg>
-        </button>
+        {look && <SettingsButton />}
         {inGame && (
           <button type="button" className="text-btn" onClick={leave}>{t('play.quit')}</button>
         )}

@@ -93,7 +93,14 @@ export const net = new Net();
 setInterval(() => net.ws?.readyState === WebSocket.OPEN && net.send({ t: 'ping' }), 20_000);
 
 /** Crée une partie sur le serveur puis la rejoint. */
+/** Dernier jeu lancé (bouton « Continuer » de l'accueil). */
+export function lastGame(): CreateRoomReq['settings'] | null {
+  try { return JSON.parse(localStorage.getItem('gq.last') ?? 'null'); } catch { return null; }
+}
 export async function createGame(req: CreateRoomReq, name: string, lang: Lang): Promise<string | null> {
+  if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event'].includes(req.settings.category)) {
+    try { localStorage.setItem('gq.last', JSON.stringify(req.settings)); } catch { /* stockage indisponible */ }
+  }
   try {
     const r = await fetch('/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req) });
     const j = await r.json();

@@ -5,7 +5,7 @@ import { isMuted, sfx } from '../sound';
 import { useApp } from '../state';
 import { RoadSign } from '../RoadSign';
 import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
-import { autoRead, hasVoice, setAutoRead, speak, stopSpeaking } from '../speech';
+import { autoRead, hasVoice, speak, stopSpeaking } from '../speech';
 import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Game() {
@@ -42,7 +42,6 @@ function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
 /** Lecture à voix haute de la question et des choix (voix de l'appareil). */
 function ReadAloud({ q, label }: { q: QuestionMsg; label: string }) {
   const { t, lang } = useApp();
-  const [auto, setAuto] = useState(autoRead);
   const parts = () => {
     const name = q.params.name && !/^[\p{Extended_Pictographic}\s\u200d\ufe0f]+$/u.test(q.params.name) ? q.params.name : '';
     const opts = q.kind === 'mcq' || q.kind === 'order' ? (q.options ?? []).map((o) => o.label ?? '') : [];
@@ -56,12 +55,11 @@ function ReadAloud({ q, label }: { q: QuestionMsg; label: string }) {
     window.speechSynthesis?.addEventListener?.('voiceschanged', upd);
     return () => window.speechSynthesis?.removeEventListener?.('voiceschanged', upd);
   }, [lang]);
-  useEffect(() => { if (auto && ok) speak(parts(), lang); return () => stopSpeaking(); }, [q.index, auto, ok]);
+  useEffect(() => { if (autoRead() && ok) speak(parts(), lang); return () => stopSpeaking(); }, [q.index, ok]);
   if (!ok) return null;
   return (
     <div className="read-aloud">
       <button type="button" className="speak-btn" aria-label={t('play.readAloud')} title={t('play.readAloud')} onClick={() => speak(parts(), lang)}>🔊</button>
-      <label className="speak-auto"><input type="checkbox" checked={auto} onChange={(e) => { setAuto(e.target.checked); setAutoRead(e.target.checked); }} /> {t('play.readAutoShort')}</label>
     </div>
   );
 }
