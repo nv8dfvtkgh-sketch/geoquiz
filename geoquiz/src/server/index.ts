@@ -7,7 +7,7 @@ import { WebSocketServer, WebSocket } from 'ws';
 import type { ClientMsg, ServerMsg } from '../shared/protocol';
 import { categoryInfos, poolCounts } from './categories';
 import { fetchPhoto } from './photos';
-import { countryList, eventList, flagPath, printSheet } from './print';
+import { countryList, eventList, flagPath, geoJson, printSheet } from './print';
 import { nextTournament } from './tournament';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
@@ -137,6 +137,7 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, JSON.stringify({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }));
     }
     if (p === '/api/events') return send(res, 200, JSON.stringify(eventList()), 'application/json', 'public, max-age=600');
+    if (p === '/api/geo') return send(res, 200, geoJson(), 'application/json', 'public, max-age=3600');
     if (p === '/api/countries') return send(res, 200, JSON.stringify(countryList(url.searchParams.get('lang') ?? 'fr')), 'application/json', 'public, max-age=3600');
     if (p === '/api/print' && req.method === 'POST') {
       let body: any = null;

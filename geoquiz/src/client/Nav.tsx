@@ -1,4 +1,5 @@
 // Barre de navigation en bas (comme une appli) : Jouer, Aujourd'hui, Classements, Profil.
+import { cameFrom } from './screens/Puzzles';
 import { useEffect, useState } from 'react';
 import { api } from './account';
 import { FAMILIES, Icon, type GameDef } from './games';
@@ -12,10 +13,10 @@ import { LeagueScreen } from './screens/Progress';
 import { starsOf } from './account';
 
 /** Écrans où la barre est visible (jamais pendant une partie). */
-export const NAV_SCREENS: Screen[] = ['home', 'today', 'rankings', 'profile', 'signin', 'leaderboard', 'league', 'passport', 'classes', 'tournament', 'geo', 'print', 'myquizzes'];
+export const NAV_SCREENS: Screen[] = ['home', 'today', 'rankings', 'profile', 'signin', 'leaderboard', 'league', 'passport', 'classes', 'tournament', 'geo', 'print', 'myquizzes', 'globle', 'capword', 'compass'];
 const TAB_OF: Partial<Record<Screen, string>> = {
   home: 'home', geo: 'home', print: 'home', myquizzes: 'home',
-  today: 'today', passport: 'today', league: 'today', classes: 'today', tournament: 'today',
+  today: 'today', globle: 'today', capword: 'today', compass: 'today', passport: 'today', league: 'today', classes: 'today', tournament: 'today',
   rankings: 'rankings', leaderboard: 'rankings', profile: 'profile', signin: 'profile',
 };
 
@@ -72,7 +73,7 @@ export function TodayScreen() {
   const fam = FAMILIES.find((f) => f.id === 'today')!;
   const pick = (g: GameDef) => {
     if (!name.trim()) setName(t('home.guestName', { n: 100 + Math.floor(Math.random() * 900) }));
-    if (g.screen) { go(g.screen); window.scrollTo(0, 0); return; }
+    if (g.screen) { cameFrom('today'); go(g.screen); window.scrollTo(0, 0); return; }
     openGame(g.id);
   };
   const end = ev ? new Date(ev.end).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) : '';

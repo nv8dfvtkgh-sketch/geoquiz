@@ -2,11 +2,12 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
   soon?: boolean; // affiché « Bientôt », pas encore jouable
-  screen?: 'passport' | 'league' | 'tournament' | 'classes'; // ouvre une page plutôt qu'une partie
+  screen?: PageScreen; // ouvre une page plutôt qu'une partie
   fresh?: boolean; // pastille « Nouveau »
 }
 export interface Family {
@@ -21,6 +22,9 @@ export const FAMILIES: Family[] = [
     tint: 'tint-gold',
     games: [
       { id: 'daily', icon: 'calendar', fresh: true },
+      { id: 'globle', icon: 'thermo', fresh: true, screen: 'globle' },
+      { id: 'capword', icon: 'grid', fresh: true, screen: 'capword' },
+      { id: 'compass', icon: 'compass', fresh: true, screen: 'compass' },
       { id: 'review', icon: 'refresh', fresh: true },
       { id: 'league', icon: 'trophy', fresh: true, screen: 'league' },
       { id: 'passport', icon: 'passport', fresh: true, screen: 'passport' },
@@ -44,6 +48,9 @@ export const FAMILIES: Family[] = [
       { id: 'higher', icon: 'scale', fresh: true },
       { id: 'chain', icon: 'chain', fresh: true },
       { id: 'timezones', icon: 'clock', fresh: true },
+      { id: 'globle', icon: 'thermo', fresh: true, screen: 'globle' },
+      { id: 'capword', icon: 'grid', fresh: true, screen: 'capword' },
+      { id: 'compass', icon: 'compass', fresh: true, screen: 'compass' },
     ],
   },
   {
@@ -115,6 +122,9 @@ export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
 export const ICONS = {
+  thermo: <g {...P}><path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z" /><path d="M12 9v7" /><path d="M17 6h3M17 9h2" /></g>,
+  grid: <g {...P}><rect x="3" y="4" width="5" height="5" rx="1" /><rect x="9.5" y="4" width="5" height="5" rx="1" /><rect x="16" y="4" width="5" height="5" rx="1" /><rect x="3" y="10.5" width="5" height="5" rx="1" /><rect x="9.5" y="10.5" width="5" height="5" rx="1" /><path d="M3 18.5h18" /></g>,
+  compass: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5z" /></g>,
   globe: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></g>,
   regions: <g {...P}><path d="M4 5l6-2 4 3 6-1v14l-6 2-4-3-6 1z" /><path d="M10 3v15M14 6v15" /></g>,
   flag: <g {...P}><path d="M5 21V4h11l-1.5 4H19v8h-8l1.5-4H5" /></g>,

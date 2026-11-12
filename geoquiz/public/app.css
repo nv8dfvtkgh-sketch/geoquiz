@@ -1375,3 +1375,71 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 @media (min-width: 700px) { .tiles-row { grid-auto-columns: 150px; } }
 .set-account.guest > span:nth-child(2) { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .set-account.guest input { min-height: 42px; }
+
+/* ---------------------------------------------------------------- énigmes du jour */
+.pz { display: grid; gap: 14px; padding-bottom: 24px; }
+.pz-head { display: grid; gap: 8px; }
+.pz-head h1 { margin: 4px 0 0; }
+.pz-head p { margin: 0; }
+.pz-modes { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.pz-modes .seg { flex: 0 1 auto; }
+.pz-streak { font-weight: 700; color: var(--hl); }
+.pz-input { display: grid; gap: 6px; position: relative; }
+.pz-field { display: flex; gap: 8px; }
+.pz-field input { flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--paper-2); color: var(--ink); font: inherit; font-size: 1.05rem; }
+.pz-sugg { display: grid; gap: 2px; background: var(--card); border-radius: 12px; box-shadow: var(--shadow-up); padding: 4px; }
+.pz-sugg button { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border: 0; border-radius: 9px; background: transparent; color: var(--ink); font: inherit; text-align: start; cursor: pointer; }
+.pz-sugg button:hover, .pz-sugg button:focus-visible { background: var(--fill); }
+.pz-sugg button.used { opacity: .5; }
+.pz-sugg img { border-radius: 3px; box-shadow: 0 0 0 1px var(--border); object-fit: cover; }
+.pz-msg { margin: 0; color: var(--bad); font-weight: 600; }
+.pz-hint { margin: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: color-mix(in srgb, var(--hl) 18%, var(--card)); font-weight: 600; }
+.pz-hint img { border-radius: 3px; }
+.pz-map { border-radius: var(--radius-l); overflow: hidden; background: var(--ocean); box-shadow: var(--shadow); }
+.pz-map svg { display: block; width: 100%; height: auto; }
+.pz-land { fill: var(--land); stroke: var(--line); stroke-width: .4; vector-effect: non-scaling-stroke; stroke-linejoin: round; fill-rule: evenodd; transition: fill .4s; }
+.pz-dot { stroke: var(--ink); stroke-width: .6; vector-effect: non-scaling-stroke; }
+.pz-list, .pz-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.pz-list li { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+.pz-list li i { width: 16px; height: 16px; border-radius: 5px; flex: none; box-shadow: 0 0 0 1px var(--border); }
+.pz-list li span { flex: 1; min-width: 0; }
+.pz-list li b { font-variant-numeric: tabular-nums; }
+.pz-list li.win { outline: 2px solid var(--good); }
+.pz-tag { font-size: .75rem; font-weight: 700; color: var(--bad); }
+.pz-shape { display: grid; place-items: center; height: min(42vh, 260px); border-radius: var(--radius-l); background: var(--card); box-shadow: var(--shadow); padding: 16px; }
+.pz-shape svg { width: 100%; height: 100%; }
+.pz-shape path { fill: var(--ink); fill-rule: evenodd; transition: fill .5s; }
+.pz-shape path.shown { fill: var(--good); }
+.pz-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto 2em 3.4em; gap: 8px; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); font-variant-numeric: tabular-nums; }
+.pz-rows li.empty { background: var(--fill); box-shadow: none; }
+.pz-rows li.win { background: color-mix(in srgb, var(--good) 20%, var(--card)); }
+.pz-rows li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pz-rows li b:last-child { text-align: end; }
+.pz-arrow { font-size: 1.2rem; text-align: center; }
+.pz-end { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 14px; align-items: center; padding: 16px; border-radius: var(--radius-l); background: var(--card); box-shadow: var(--shadow-up); }
+.pz-end.won { background: color-mix(in srgb, var(--good) 14%, var(--card)); }
+.pz-end img { border-radius: 6px; box-shadow: 0 0 0 1px var(--border); object-fit: cover; }
+.pz-end div:not(.pz-end-actions) { display: grid; gap: 2px; }
+.pz-end strong { font-size: 1.15rem; }
+.pz-end small { color: var(--ink-2); }
+.pz-end-actions { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.pz-end-actions .btn { flex: 1 1 160px; }
+.pz-len { margin: 0; text-align: center; color: var(--ink-2); font-weight: 600; }
+.wd-grid { display: grid; gap: 6px; justify-content: center; }
+.wd-row { display: grid; grid-template-columns: repeat(var(--n), min(12vw, 52px)); gap: 6px; }
+.wd-row b { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; border: 2px solid var(--border); font-size: clamp(1.1rem, 5vw, 1.6rem); font-weight: 800; text-transform: uppercase; background: var(--card); }
+.wd-row b.typed { border-color: var(--ink-2); animation: wd-pop .12s; }
+.wd-row b.g, .wd-row b.y, .wd-row b.x { border-color: transparent; color: #fff; animation: wd-flip .45s both; animation-delay: calc(var(--j) * 90ms); }
+.wd-row b.g { background: #1F8A5B; }
+.wd-row b.y { background: #D9A400; }
+.wd-row b.x { background: #8E8E93; }
+@keyframes wd-pop { 50% { transform: scale(1.08); } }
+@keyframes wd-flip { 0% { transform: rotateX(90deg); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .wd-row b { animation: none !important; } }
+.wd-keys { display: grid; gap: 6px; user-select: none; }
+.wd-keys div { display: flex; gap: 4px; justify-content: center; }
+.wd-keys button { flex: 1 1 0; max-width: 44px; min-width: 0; height: 50px; border: 0; border-radius: 8px; background: var(--fill); color: var(--ink); font: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; padding: 0; }
+.wd-keys button.wide { flex: 1.6 1 0; max-width: 72px; font-size: .78rem; }
+.wd-keys button.g { background: #1F8A5B; color: #fff; }
+.wd-keys button.y { background: #D9A400; color: #fff; }
+.wd-keys button.x { background: #8E8E93; color: #fff; opacity: .7; }

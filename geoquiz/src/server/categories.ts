@@ -868,7 +868,7 @@ const timezonesCat: Category = {
 
 // ------------------------------------------------------------------ où est-ce sur la carte ?
 // On pose une épingle ; les points dépendent de la distance (en km) à la capitale.
-function toLonLat(x: number, y: number): [number, number] {
+export function toLonLat(x: number, y: number): [number, number] {
   const [x0, y1, scale] = world.proj ?? [0, 0, 0];
   const px = x / scale + x0, py = y1 - y / scale;
   // Projection Natural Earth inversée (Newton sur la latitude).

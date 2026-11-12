@@ -7,7 +7,7 @@
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
-import { countryList, eventList, flagPath, printSheet } from '../server/print';
+import { countryList, eventList, flagPath, geoJson, printSheet } from '../server/print';
 import { nextTournament } from '../server/tournament';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
@@ -139,6 +139,7 @@ export default {
           return json({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }, 200, 'no-store');
         }
         if (p === '/api/events') return json(eventList(), 200, 'public, max-age=600');
+        if (p === '/api/geo') return new Response(geoJson(), { headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=3600' } });
         if (p === '/api/countries') return json(countryList(url.searchParams.get('lang') ?? 'fr'), 200, 'public, max-age=3600');
         if (p === '/api/print' && request.method === 'POST') {
           const text = await request.text();

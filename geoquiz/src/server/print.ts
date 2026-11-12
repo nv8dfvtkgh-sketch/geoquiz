@@ -1,8 +1,8 @@
 // Fiches à imprimer : carte muette numérotée, drapeaux à nommer, quiz à cocher.
 // Le serveur tire le contenu (comme une partie) et renvoie aussi le corrigé.
 import { LANGS, type Difficulty, type Lang, type Names } from '../shared/protocol';
-import { CATEGORIES, countryPool, localize } from './categories';
-import { activeEvent, countries, ensureRegion, extras, regionMap, worldById, zones } from './data';
+import { CATEGORIES, countryPool, localize, toLonLat } from './categories';
+import { activeEvent, countries, ensureRegion, extras, regionMap, world, worldById, zones } from './data';
 import { drawQuestions } from './rooms';
 
 /** Jeux qu'on peut imprimer en quiz à cocher (pas de carte cliquable, de photo ni de son). */
@@ -81,3 +81,20 @@ export function countryList(lang: string) {
 
 /** Drapeau public pour les fiches (sur la fiche, le nom n'est pas un secret). */
 export const flagPath = (p: string) => p.match(/^\/api\/flag\/([A-Z]{2})\.svg$/)?.[1] ?? null;
+
+/** Données des énigmes et jeux joués dans le navigateur (pays caché, capitale du jour, tout nommer…). */
+let geoCache = '';
+export function geoJson(): string {
+  if (geoCache) return geoCache;
+  const deg = (r: number) => Math.round((r * 1800) / Math.PI) / 10;
+  const list = Object.entries(countries)
+    .filter(([id, c]) => !c.dependency && worldById[id])
+    .map(([id, c]) => {
+      const f = worldById[id];
+      // Carte sans projection (démo) : position approximative.
+      const ll = world.proj ? (([lon, lat]) => [deg(lat), deg(lon)])(toLonLat(f.c[0], f.c[1])) : [Math.round((306 - f.c[1]) / 3.4), Math.round((f.c[0] - 500) / 2.8)];
+      return { id, n: c.names, cap: c.capital?.names ?? null, ca: c.capital?.alts ?? [], co: c.continent, pop: c.pop ?? 0, area: c.area ?? 0, nb: c.neighbors, fame: Math.round((c.fame ?? 20 - c.rank) * 10) / 10, ll };
+    });
+  geoCache = JSON.stringify(list);
+  return geoCache;
+}
