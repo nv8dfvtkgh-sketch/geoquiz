@@ -689,5 +689,22 @@
   "admin.fbGuest": "invitado",
   "admin.fbGames": "{n} partidas",
   "admin.confirmDeleteFb": "¿Borrar esta opinión?",
-  "feedback.invalid": "Elige una nota."
+  "feedback.invalid": "Elige una nota.",
+  "ch.challengeFriend": "Retar a un amigo",
+  "ch.sendLink": "Envía este enlace: tu amigo jugará las mismas preguntas.",
+  "ch.otherApp": "Otra app",
+  "ch.shareText": "🏆 He sacado {score} en {game} en Quizellige. ¿Me superas?",
+  "ch.boardTitle": "El reto de {name}",
+  "ch.score": "{c}/{n}",
+  "ch.invite": "¡{name} te reta!",
+  "ch.toBeat": "Resultado a superar: {c}/{n} en {time}",
+  "ch.accept": "Aceptar el reto",
+  "ch.already": "Ya han jugado",
+  "ch.discover": "Descubrir todos los juegos",
+  "ch.missing": "Este reto ya no existe (los retos duran 30 días).",
+  "err.challenge.notFound": "Este reto ya no existe.",
+  "err.challenge.failed": "No se pudo crear el reto. Inténtalo de nuevo.",
+  "play.readAloud": "Leer la pregunta en voz alta",
+  "play.readAuto": "Leer automáticamente",
+  "final.perfect": "¡Sin fallos!"
 }

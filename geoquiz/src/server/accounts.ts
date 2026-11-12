@@ -5,10 +5,15 @@
 import type { KV } from './quizzes';
 
 // ------------------------------------------------------------------ types
-import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type Me, type Reward } from '../shared/protocol';
+import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type ChallengeEntry, type ChallengeView, type Me, type Reward, type Settings } from '../shared/protocol';
 export { AVATARS, BADGES, UNLOCK_AT };
 export type { AgeGroup, CatStats, Me, Reward };
 
+interface ChallengeRecord {
+  data: { settings: Settings; items: { target: string; kind: string }[]; by: string; first: ChallengeEntry };
+  results: ChallengeEntry[];
+  createdAt: number;
+}
 export const FEEDBACK_TAGS = ['fun', 'learn', 'design', 'multi', 'kids', 'bug', 'hard', 'easy', 'unclear', 'slow', 'more'];
 interface FeedbackItem {
   id: string; at: number; rating: number; tags: string[]; comment: string; game: string; games: number;
@@ -516,6 +521,46 @@ export class AccountService {
     await this.kv.put('stats', s);
   }
 
+  // ---------------------------------------------------------------- défis entre amis
+  /** Nouveau défi : les questions (cibles) restent côté serveur ; gardé 30 jours. */
+  async createChallenge(c: ChallengeRecord['data']): Promise<string> {
+    const A = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+      code = [...crypto.getRandomValues(new Uint8Array(6))].map((b) => A[b % A.length]).join('');
+      if (!(await this.kv.get(`ch:${code}`))) break;
+    }
+    const clean = (s: string) => String(s ?? '').replace(/[\u0000-\u001f<>]/g, '').slice(0, 20) || '?';
+    const rec: ChallengeRecord = { data: { ...c, by: clean(c.by), first: { ...c.first, name: clean(c.first.name) }, items: c.items.slice(0, 50) }, results: [{ ...c.first, name: clean(c.first.name) }], createdAt: this.now() };
+    await this.kv.put(`ch:${code}`, rec);
+    // Ménage occasionnel des défis de plus de 30 jours.
+    if (Math.random() < 0.05) {
+      for (const k of await this.kv.list('ch:')) {
+        const r = await this.kv.get<ChallengeRecord>(k);
+        if (r && this.now() - r.createdAt > 30 * 86400000) await this.kv.delete(k);
+      }
+    }
+    return code;
+  }
+  async challengeData(code: string) {
+    return (await this.kv.get<ChallengeRecord>(`ch:${code}`))?.data ?? null;
+  }
+  private sortResults(list: ChallengeEntry[]) {
+    return list.slice().sort((a, b) => b.correct / b.total - a.correct / a.total || a.timeMs - b.timeMs);
+  }
+  async challengeView(code: string): Promise<ChallengeView | null> {
+    const r = await this.kv.get<ChallengeRecord>(`ch:${code}`);
+    return r ? { code, settings: r.data.settings, by: r.data.by, results: this.sortResults(r.results).slice(0, 30) } : null;
+  }
+  async addChallengeResult(code: string, e: ChallengeEntry) {
+    const r = await this.kv.get<ChallengeRecord>(`ch:${code}`);
+    if (!r) return null;
+    const name = String(e.name ?? '').replace(/[\u0000-\u001f<>]/g, '').slice(0, 20) || '?';
+    r.results = [...r.results, { ...e, name }].slice(-100);
+    await this.kv.put(`ch:${code}`, r);
+    return { by: r.data.by, results: this.sortResults(r.results).slice(0, 30) };
+  }
+
   // ---------------------------------------------------------------- avis des joueurs
   /** Avis envoyé depuis le site (après quelques parties, ou par le lien « Donner mon avis »). */
   async feedback(b: any, token: string | null) {
@@ -615,6 +660,11 @@ export async function accountRoute(
     if (path === '/api/leaderboard' && method === 'GET') {
       const c = query.get('country') ?? '';
       return { status: 200, json: await svc.leaderboard(bearer || null, /^[A-Z]{2}$/.test(c) ? c : undefined) };
+    }
+    const ch = path.match(/^\/api\/challenge\/([A-Z0-9]{6})$/);
+    if (ch && method === 'GET') {
+      const v = await svc.challengeView(ch[1]);
+      return v ? { status: 200, json: v } : { status: 404, json: { error: 'challenge.notFound' } };
     }
     if (path === '/api/feedback' && method === 'POST') { await svc.feedback(await body(), bearer || null); return { status: 200, json: {} }; }
     if (path.startsWith('/api/admin/feedback')) {

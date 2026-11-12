@@ -689,5 +689,22 @@
   "admin.fbGuest": "guest",
   "admin.fbGames": "{n} games",
   "admin.confirmDeleteFb": "Delete this feedback?",
-  "feedback.invalid": "Pick a rating."
+  "feedback.invalid": "Pick a rating.",
+  "ch.challengeFriend": "Challenge a friend",
+  "ch.sendLink": "Send this link: your friend will play the same questions.",
+  "ch.otherApp": "Other app",
+  "ch.shareText": "🏆 I scored {score} in {game} on Quizellige. Can you beat me?",
+  "ch.boardTitle": "{name}’s challenge",
+  "ch.score": "{c}/{n}",
+  "ch.invite": "{name} challenges you!",
+  "ch.toBeat": "Score to beat: {c}/{n} in {time}",
+  "ch.accept": "Accept the challenge",
+  "ch.already": "Already played",
+  "ch.discover": "Discover all the games",
+  "ch.missing": "This challenge no longer exists (challenges last 30 days).",
+  "err.challenge.notFound": "This challenge no longer exists.",
+  "err.challenge.failed": "The challenge could not be created. Try again.",
+  "play.readAloud": "Read the question aloud",
+  "play.readAuto": "Read automatically",
+  "final.perfect": "Perfect score!"
 }

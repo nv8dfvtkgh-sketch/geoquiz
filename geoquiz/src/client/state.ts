@@ -1,12 +1,12 @@
 // État de l'application côté navigateur, alimenté par les messages du serveur.
 import { createContext, useContext } from 'react';
 import type {
-  Catalog, ClientMsg, Lang, Me, PublicPlayer, QuestionMsg, Reveal, Reward, RoomSnapshot, ServerMsg, Settings, TeamScore,
+  Catalog, ChallengeEntry, ClientMsg, Lang, Me, PublicPlayer, QuestionMsg, Reveal, Reward, RoomSnapshot, ServerMsg, Settings, TeamScore,
 } from '../shared/protocol';
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge';
 
 export interface Feedback {
   q: number;
@@ -41,6 +41,10 @@ export interface State {
   quiz?: { id: string; token?: string };
   /** Gains de la dernière partie (joueur connecté à son compte). */
   reward?: Reward;
+  /** Défi entre amis : code créé ou joué, et son classement à la fin. */
+  challenge?: { code: string; results?: ChallengeEntry[]; by?: string };
+  /** Défi ouvert par un lien /defi/CODE. */
+  challengeCode?: string;
   /** Retour de Google / Facebook pour un nouveau joueur : ticket d'inscription. */
   oauthTicket?: string;
 }
@@ -81,7 +85,7 @@ function screenFor(room: RoomSnapshot, cur: Screen): Screen {
 function onServer(s: State, m: ServerMsg): State {
   switch (m.t) {
     case 'joined':
-      return { ...s, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined };
+      return { ...s, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined, challenge: undefined };
     case 'room': {
       const screen = s.screen === 'home' || s.screen === 'quick' ? s.screen : screenFor(m.room, s.screen);
       return { ...s, room: m.room, isHost: m.room.hostId === s.you, screen: s.room ? screen : s.screen };
@@ -109,6 +113,8 @@ function onServer(s: State, m: ServerMsg): State {
       return { ...s, finished: m, screen: 'final' };
     case 'reward':
       return { ...s, reward: m.reward };
+    case 'challenge':
+      return { ...s, challenge: { code: m.code, results: m.results ?? s.challenge?.results, by: m.by ?? s.challenge?.by } };
     case 'quickWaiting':
       return { ...s, screen: 'quick' };
     case 'kicked':

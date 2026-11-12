@@ -3,7 +3,7 @@
 import {
   BATTLE_LIVES, DEFAULT_SETTINGS, LANGS, LIMITS, type TeamScore, type ClientMsg, type Lang, type PlayerRound, type PublicPlayer,
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
-  type ServerMsg, type Settings, type Reward,
+  type ServerMsg, type Settings, type Reward, type ChallengeEntry,
 } from '../shared/protocol';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
@@ -24,7 +24,17 @@ export const config: {
   loadQuiz: (id: string, draftToken?: string) => Promise<QuizContent | null>;
   /** Enregistre la partie d'un joueur connecté à son compte ; renvoie ses gains. */
   recordGame: (accountToken: string, result: GameResult) => Promise<Reward | null>;
-} = { maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null };
+  /** Défis entre amis : création, questions (cibles), ajout d'un résultat. */
+  createChallenge: (c: ChallengeData) => Promise<string | null>;
+  loadChallenge: (code: string) => Promise<ChallengeData | null>;
+  addChallengeResult: (code: string, e: ChallengeEntry) => Promise<{ by: string; results: ChallengeEntry[] } | null>;
+} = {
+  maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null,
+  createChallenge: async () => null, loadChallenge: async () => null, addChallengeResult: async () => null,
+};
+export interface ChallengeData { settings: Settings; items: { target: string; kind: string }[]; by: string; first: ChallengeEntry }
+/** Jeux qu'on peut lancer en défi (pas le défi du jour, déjà commun, ni les quiz créés). */
+export const challengeable = (cat: string) => cat !== 'daily' && cat !== 'custom';
 export const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // sans O/0, I/1/L
 const GRACE_MS = 600; // latence réseau tolérée après la fin du chrono
 const REVEAL_MS = { duel: 3500, room: 5000, solo: 0 };
@@ -155,6 +165,11 @@ export class Room {
   /** Quiz créé : jeton du créateur quand il teste son brouillon (solo), contenu chargé. */
   quizToken?: string;
   quizContent?: QuizContent;
+  /** Défi joué : son code, et ses questions une fois chargées. */
+  challenge?: string;
+  challengeItems?: ChallengeData['items'];
+  /** Défi créé à partir de cette partie (solo), pour ne pas en créer deux. */
+  madeChallenge?: string;
 
   /** Mode réellement appliqué (seules les salles ont Battle Royale et Équipes). */
   get mode() {
@@ -399,6 +414,9 @@ export class Room {
       case 'kick':
         this.kick(m.id, msg.playerId);
         break;
+      case 'challenge':
+        this.makeChallenge(m);
+        break;
       case 'auth':
         m.auth = typeof msg.token === 'string' ? msg.token.slice(0, 64) : undefined;
         break;
@@ -424,6 +442,13 @@ export class Room {
       job.then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
       return;
     }
+    if (this.challenge && !this.challengeItems) {
+      config.loadChallenge(this.challenge).then((c) => {
+        if (c) { this.challengeItems = c.items; this.settings = { ...this.settings, ...c.settings, soloMode: this.settings.soloMode }; this.start(); }
+        else this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'challenge.notFound' });
+      });
+      return;
+    }
     if (this.settings.category === 'custom' && !this.quizContent) {
       config.loadQuiz(this.settings.quiz!, this.quizToken).then((c) => {
         if (c) { this.quizContent = c; this.start(); }
@@ -434,7 +459,9 @@ export class Room {
     const players = this.players();
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
-    this.questions = this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random) : drawQuestions(this.settings);
+    this.questions = this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
+      : this.challengeItems ? this.challengeQuestions() : drawQuestions(this.settings);
+    this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
     if (this.mode === 'teams') {
@@ -448,6 +475,35 @@ export class Room {
     this.rematchVotes.clear();
     this.qIndex = -1;
     this.nextQuestion();
+  }
+
+  /** Questions d'un défi : mêmes cibles et même type, choix remélangés. */
+  challengeQuestions(): InternalQuestion[] {
+    const cat = CATEGORIES[this.settings.category];
+    const zone = zones.get(this.settings.zone) ?? zones.get('world')!;
+    const out: InternalQuestion[] = [];
+    for (const it of this.challengeItems ?? []) {
+      try { out.push(cat.make(it.target, it.kind as 'map' | 'mcq' | 'type', zone, Math.random)); } catch { /* élément disparu des données */ }
+    }
+    return out;
+  }
+
+  /** Solo terminé : crée un défi à partager (ou renvoie celui déjà créé / joué). */
+  async makeChallenge(m: Member) {
+    if (this.kind !== 'solo' || this.state !== 'finished' || !challengeable(this.settings.category)) return;
+    if (this.challenge) return m.conn?.send({ t: 'challenge', code: this.challenge });
+    if (this.madeChallenge) return m.conn?.send({ t: 'challenge', code: this.madeChallenge });
+    const res = this.recap.map((x) => x.results.find((r) => r.id === m.id));
+    const first: ChallengeEntry = {
+      name: m.name, correct: res.filter((r) => r?.correct).length, total: this.recap.length,
+      timeMs: res.reduce((t, r) => t + (r?.timeMs ?? 0), 0), at: Date.now(),
+    };
+    const code = await config.createChallenge({
+      settings: this.settings, by: m.name, first,
+      items: this.questions.map((q) => ({ target: q.target, kind: q.kind })),
+    }).catch(() => null);
+    if (code) { this.madeChallenge = code; m.conn?.send({ t: 'challenge', code }); }
+    else m.conn?.send({ t: 'error', code: 'challenge.failed' });
   }
 
   rematch(m: Member) {
@@ -701,6 +757,16 @@ export class Room {
     this.broadcastRoom();
     this.broadcast((m) => this.finishedMsg(m.lang));
     this.recordAll();
+    // Défi joué : on ajoute le résultat et on renvoie le classement du défi.
+    if (this.challenge && this.kind === 'solo') {
+      const p = this.players()[0];
+      if (p) {
+        const res = this.recap.map((x) => x.results.find((r) => r.id === p.id));
+        const e: ChallengeEntry = { name: p.name, correct: res.filter((r) => r?.correct).length, total: this.recap.length, timeMs: res.reduce((t, r) => t + (r?.timeMs ?? 0), 0), at: Date.now() };
+        const code = this.challenge;
+        config.addChallengeResult(code, e).then((r) => { if (r) p.conn?.send({ t: 'challenge', code, results: r.results, by: r.by }); }).catch(() => {});
+      }
+    }
   }
 
   /** Progression : chaque joueur connecté à un compte reçoit ses gains (XP, badges…). */

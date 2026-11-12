@@ -689,5 +689,22 @@
   "admin.fbGuest": "invité",
   "admin.fbGames": "{n} parties",
   "admin.confirmDeleteFb": "Supprimer cet avis ?",
-  "feedback.invalid": "Choisis une note."
+  "feedback.invalid": "Choisis une note.",
+  "ch.challengeFriend": "Défier un ami",
+  "ch.sendLink": "Envoie ce lien : ton ami jouera les mêmes questions.",
+  "ch.otherApp": "Autre appli",
+  "ch.shareText": "🏆 J’ai fait {score} en {game} sur Quizellige. Tu fais mieux ?",
+  "ch.boardTitle": "Le défi de {name}",
+  "ch.score": "{c}/{n}",
+  "ch.invite": "{name} te lance un défi !",
+  "ch.toBeat": "Score à battre : {c}/{n} en {time}",
+  "ch.accept": "Relever le défi",
+  "ch.already": "Ils ont déjà joué",
+  "ch.discover": "Découvrir tous les jeux",
+  "ch.missing": "Ce défi n’existe plus (les défis durent 30 jours).",
+  "err.challenge.notFound": "Ce défi n’existe plus.",
+  "err.challenge.failed": "Le défi n’a pas pu être créé. Réessaie.",
+  "play.readAloud": "Lire la question à voix haute",
+  "play.readAuto": "Lire automatiquement",
+  "final.perfect": "Sans faute !"
 }

@@ -689,5 +689,22 @@
   "admin.fbGuest": "زائر",
   "admin.fbGames": "{n} مباريات",
   "admin.confirmDeleteFb": "حذف هذا الرأي؟",
-  "feedback.invalid": "اختر تقييماً."
+  "feedback.invalid": "اختر تقييماً.",
+  "ch.challengeFriend": "تحدَّ صديقاً",
+  "ch.sendLink": "أرسل هذا الرابط: سيلعب صديقك الأسئلة نفسها.",
+  "ch.otherApp": "تطبيق آخر",
+  "ch.shareText": "🏆 حصلت على {score} في {game} على Quizellige. هل تتفوق علي؟",
+  "ch.boardTitle": "تحدي {name}",
+  "ch.score": "{c}/{n}",
+  "ch.invite": "{name} يتحداك!",
+  "ch.toBeat": "النتيجة المطلوب تجاوزها: {c}/{n} في {time}",
+  "ch.accept": "قبول التحدي",
+  "ch.already": "لعبوا من قبل",
+  "ch.discover": "اكتشف كل الألعاب",
+  "ch.missing": "هذا التحدي لم يعد موجوداً (تدوم التحديات 30 يوماً).",
+  "err.challenge.notFound": "هذا التحدي لم يعد موجوداً.",
+  "err.challenge.failed": "تعذّر إنشاء التحدي. حاول مجدداً.",
+  "play.readAloud": "قراءة السؤال بصوت عالٍ",
+  "play.readAuto": "قراءة تلقائية",
+  "final.perfect": "بدون أخطاء!"
 }

@@ -5,6 +5,7 @@ import { sfx } from '../sound';
 import { useApp } from '../state';
 import { RoadSign } from '../RoadSign';
 import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
+import { autoRead, canSpeak, setAutoRead, speak, stopSpeaking } from '../speech';
 import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Game() {
@@ -21,6 +22,7 @@ function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
   const label = t(q.promptKey, q.params);
   return (
     <div className="prompt" key={q.index}>
+      <ReadAloud q={q} label={label} />
       <div className="prompt-text">
         {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto" className={q.category === 'emoji' ? 'rebus' : q.category === 'truefalse' || q.params.name.length > 40 ? 'long' : ''}>{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}
       </div>
@@ -33,6 +35,25 @@ function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
         : <FlagImg token={q.flag} className="flag big" />)}
       {q.image && <img className="quiz-photo" src={`/api/img/${q.image}`} alt="" draggable={false} />}
       {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}
+    </div>
+  );
+}
+
+/** Lecture à voix haute de la question et des choix (voix de l'appareil). */
+function ReadAloud({ q, label }: { q: QuestionMsg; label: string }) {
+  const { t, lang } = useApp();
+  const [auto, setAuto] = useState(autoRead);
+  const parts = () => {
+    const name = q.params.name && !/^[\p{Extended_Pictographic}\s\u200d\ufe0f]+$/u.test(q.params.name) ? q.params.name : '';
+    const opts = q.kind === 'mcq' || q.kind === 'order' ? (q.options ?? []).map((o) => o.label ?? '') : [];
+    return [label, name, ...opts];
+  };
+  useEffect(() => { if (auto) speak(parts(), lang); return () => stopSpeaking(); }, [q.index, auto]);
+  if (!canSpeak()) return null;
+  return (
+    <div className="read-aloud">
+      <button type="button" className="speak-btn" aria-label={t('play.readAloud')} title={t('play.readAloud')} onClick={() => speak(parts(), lang)}>🔊</button>
+      <label className="speak-auto"><input type="checkbox" checked={auto} onChange={(e) => { setAuto(e.target.checked); setAutoRead(e.target.checked); }} /> {t('play.readAuto')}</label>
     </div>
   );
 }

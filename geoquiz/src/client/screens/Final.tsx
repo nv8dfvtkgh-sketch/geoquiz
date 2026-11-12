@@ -6,6 +6,8 @@ import { Leaderboard, TeamBars, TeamChip } from './common';
 import { RewardCard } from './Account';
 import { DailyBoard } from './Setup';
 import { countGame, FeedbackPrompt } from '../Feedback';
+import { Confetti } from '../Celebrate';
+import { ChallengeShare } from '../Challenge';
 
 export function Final() {
   const { t, s, send, leave } = useApp();
@@ -16,19 +18,27 @@ export function Final() {
   useState(() => countGame()); // une fois par fin de partie, avant la carte d'avis
   if (!f || !room) return <div className="loading" />;
   const kind = room.kind;
+  // Fête : 100 % (ou victoire) = grands confettis ; 80 % ou podium = petite pluie.
+  const myRank = f.players.findIndex((p) => p.id === s.you) + 1;
+  const party: 'big' | 'small' | null = kind === 'solo' && f.solo
+    ? (f.solo.total >= 5 && f.solo.accuracy === 100 ? 'big' : f.solo.accuracy >= 80 ? 'small' : null)
+    : f.players.length >= 2 && myRank === 1 ? 'big' : kind === 'room' && myRank > 0 && myRank <= 3 ? 'small' : null;
+  const fx = party && <Confetti size={party} />;
 
   if (kind === 'solo' && f.solo) {
     return (
       <div className="final panel">
-        <h1>{t('final.title')}</h1>
+        {fx}
+        <h1 className={party === 'big' ? 'perfect' : ''}>{party === 'big' ? t('final.perfect') : t('final.title')}</h1>
         <div className="solo-stats">
           <div><span>{t('final.accuracy')}</span><strong>{f.solo.accuracy} %</strong><small>{t('final.correctCount', { c: f.solo.correct, n: f.solo.total })}</small></div>
           <div><span>{t('final.time')}</span><strong>{formatTime(f.solo.timeMs)}</strong></div>
         </div>
         {room.settings.soloMode === 'timed' && best && (
-          <p className={best.isNew ? 'record' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
+          <p className={best.isNew ? 'record stamp-new' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
         )}
         {room.settings.category === 'daily' && <DailyShare />}
+        <ChallengeShare />
         <RewardCard />
         <FeedbackPrompt game={room.settings.category} />
         {room.settings.category === 'daily' && <DailyBoard refresh={1} />}
@@ -49,6 +59,7 @@ export function Final() {
     const asked = (room.rematchVotes?.length ?? 0) > 0 && !voted;
     return (
       <div className="final panel">
+        {fx}
         <h1 className={draw ? '' : iWin ? 'win' : 'lose'}>{draw ? t('final.draw') : iWin ? t('final.youWin') : t('final.youLose')}</h1>
         {!draw && <p className="muted" dir="auto">{t('final.win', { name: first.name })}</p>}
         <Leaderboard players={f.players} you={s.you} />
@@ -69,6 +80,7 @@ export function Final() {
   const podium = f.players.slice(0, 3);
   return (
     <div className="final panel">
+      {fx}
       <h1>{t('final.title')}</h1>
       {f.teams && f.teams.length > 0 && (
         <>

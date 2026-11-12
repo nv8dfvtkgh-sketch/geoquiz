@@ -810,3 +810,56 @@ test('Cris d\'animaux et stades (Wikimedia simulé)', async () => {
     else assert.ok(s.check(extras.stadiums.find((x) => x.id === s.target)!.names.fr));
   }
 });
+
+test('Défi entre amis : mêmes questions, classement du défi', async () => {
+  const { AccountService, accountRoute } = await import('../src/server/accounts');
+  const { config } = await import('../src/server/rooms');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  const svc = new AccountService(kv);
+  config.createChallenge = (c) => svc.createChallenge(c);
+  config.loadChallenge = (code) => svc.challengeData(code);
+  config.addChallengeResult = (code, e) => svc.addChallengeResult(code, e);
+  const tick = () => new Promise((r) => setTimeout(r, 20));
+  const playAll = (room: Room, c: ReturnType<typeof client>, good: boolean) => {
+    while (room.state !== 'finished') {
+      const q = room.round!.q;
+      const v = good ? q.revealOption! : q.options!.find((o) => o.id !== q.revealOption)!.id;
+      onMessage(c.conn, room.code, { t: 'answer', q: room.qIndex, value: v });
+      if (room.state === 'reveal') onMessage(c.conn, room.code, { t: 'next' });
+    }
+  };
+  // Yasmine joue, puis crée le défi.
+  const a = create('solo', settings({ category: 'flags', zone: 'world', difficulty: 'easy', qtype: 'mcq', count: 5 }));
+  const ya = client();
+  onMessage(ya.conn, a.code, { t: 'join', name: 'Yasmine', lang: 'fr' });
+  playAll(a, ya, true);
+  onMessage(ya.conn, a.code, { t: 'challenge' });
+  await tick();
+  const code = ya.last('challenge')!.code;
+  assert.match(code, /^[A-Z0-9]{6}$/);
+  const targets = a.questions.map((q) => q.target);
+  // Page publique du défi : pas les réponses.
+  const view = await accountRoute(svc, 'GET', `/api/challenge/${code}`, new URLSearchParams(), async () => ({}), '', null);
+  assert.equal((view!.json as any).by, 'Yasmine');
+  assert.ok(!JSON.stringify(view!.json).includes(targets[0]) || targets[0].length < 3);
+  // Karim joue le défi : mêmes pays, dans le même ordre.
+  const b = create('solo', settings({ category: 'countries', zone: 'world', difficulty: 'hard', qtype: 'type', count: 10 }));
+  b.challenge = code;
+  const ka = client();
+  onMessage(ka.conn, b.code, { t: 'join', name: 'Karim', lang: 'fr' });
+  await tick();
+  assert.equal(b.settings.category, 'flags');
+  assert.deepEqual(b.questions.map((q) => q.target), targets);
+  playAll(b, ka, false);
+  await tick();
+  const res = ka.last('challenge')!;
+  assert.equal(res.code, code);
+  assert.deepEqual(res.results!.map((r) => r.name), ['Yasmine', 'Karim']);
+  a.destroy(); b.destroy();
+});

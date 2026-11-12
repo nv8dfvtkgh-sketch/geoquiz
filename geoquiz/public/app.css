@@ -1123,3 +1123,27 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .tiny { font-size: .72rem; margin: 0; word-break: break-all; }
 [data-look='kids'] .feedback { border-radius: 22px; box-shadow: 0 5px 0 #2B1B5A14; }
 [data-look='kids'] .fb-faces button.on { border-color: #7C3AED; }
+
+/* ------------------------------------------------------------------ fête, voix, défis */
+.confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 60; }
+.final h1.perfect { animation: perfect-pop .7s cubic-bezier(.2, 1.6, .4, 1) both; }
+@keyframes perfect-pop { from { transform: scale(.4); opacity: 0; } }
+.stamp-new { display: inline-block; justify-self: center; padding: 4px 14px; border: 3px solid #E8590C; border-radius: 10px; color: #E8590C !important; font-weight: 800; transform: rotate(-4deg); animation: stamp .45s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes stamp { from { transform: rotate(-4deg) scale(2.2); opacity: 0; } }
+.prompt > .prompt-text { order: -2; }
+.read-aloud { order: -1; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 86px; text-align: center; }
+.speak-btn { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--fill); font-size: 1.1rem; cursor: pointer; }
+.speak-auto { font-size: .68rem; line-height: 1.15; color: var(--ink-2); display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
+[data-look='kids'] .speak-btn { background: #7C3AED; color: #fff; width: 48px; height: 48px; font-size: 1.3rem; box-shadow: 0 4px 0 #5B21B6; }
+.challenge-share { display: grid; gap: 10px; margin: 8px 0 14px; justify-items: center; text-align: center; }
+.challenge-share h2 { margin: 0; font-size: 1.15rem; }
+.ch-board { width: 100%; }
+.ch-btn { font-size: 1.05rem; }
+.ch-links { display: grid; gap: 8px; justify-items: center; }
+.btn.wa { background: #25D366; color: #fff; border-color: transparent; text-decoration: none; display: inline-flex; align-items: center; }
+.challenge-page { display: grid; gap: 14px; max-width: 520px; margin-inline: auto; text-align: center; justify-items: center; }
+.challenge-page .field { width: 100%; text-align: start; }
+.ch-swords { font-size: 3rem; margin: 0; }
+.ch-game { margin: 0; font-weight: 700; color: var(--ink-2); }
+.ch-target { margin: 0; font: 700 1.2rem var(--font-display); }
+.btn.big { padding: 14px 28px; font-size: 1.1rem; }

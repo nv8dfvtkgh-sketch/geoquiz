@@ -103,7 +103,7 @@ async function createRoom(env: Env, body: any): Promise<string | { error: string
     const code = newCode();
     const res = await roomStub(env, code).fetch('https://room/init', {
       method: 'POST',
-      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken }),
+      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined }),
     });
     if (res.ok) return code;
     if (res.status !== 409) return { error: 'server' }; // 409 : code déjà pris, on en tire un autre
@@ -152,7 +152,7 @@ export default {
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
         // Comptes joueurs, progression et classement : Durable Object des comptes.
-        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
+        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -214,6 +214,13 @@ export class RoomDO {
   async fetch(request: Request): Promise<Response> {
     await ensureData(this.env);
     config.loadQuiz = (id, token) => quizCall(this.env, 'content', { id, token });
+    const acct = async <T,>(path: string, body: unknown): Promise<T | null> => {
+      const r = await accountsStub(this.env).fetch(`https://accounts/internal/${path}`, { method: 'POST', body: JSON.stringify(body) });
+      return r.ok ? ((await r.json()) as T) : null;
+    };
+    config.createChallenge = (c) => acct<string>('challenge/create', c);
+    config.loadChallenge = (code) => acct('challenge/load', { code });
+    config.addChallengeResult = (code, e) => acct('challenge/result', { code, e });
     config.recordGame = async (token, result) => {
       const r = await accountsStub(this.env).fetch('https://accounts/internal/record', { method: 'POST', body: JSON.stringify({ token, result }) });
       return r.ok ? r.json() : null;
@@ -233,11 +240,12 @@ export class RoomDO {
 
     if (url.pathname === '/init' && request.method === 'POST') {
       if (this.room) return new Response('exists', { status: 409 });
-      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string };
+      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string };
       const settings = validSettings(b.settings);
       if (!settings) return new Response('invalid', { status: 400 });
       this.room = new Room(b.code, b.kind, settings, b.hostPlays, () => { this.room = null; });
       this.room.quizToken = b.quizToken;
+      this.room.challenge = b.challenge;
       return new Response('ok');
     }
 
@@ -353,6 +361,14 @@ export class AccountsDO {
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
     // Fin de partie : appel interne d'une salle (jamais exposé au public).
+    if (url.hostname === 'accounts' && url.pathname.startsWith('/internal/challenge/')) {
+      const b = (await request.json()) as any;
+      const what = url.pathname.slice('/internal/challenge/'.length);
+      if (what === 'create') return json(await this.svc.createChallenge(b));
+      if (what === 'load') return json(await this.svc.challengeData(String(b.code)));
+      if (what === 'result') return json(await this.svc.addChallengeResult(String(b.code), b.e));
+      return json(null, 404);
+    }
     if (url.hostname === 'accounts' && url.pathname === '/internal/record') {
       const b = (await request.json()) as { token: string; result: GameResult };
       return json((await this.svc.record(b.token, b.result)) ?? null);

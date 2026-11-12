@@ -59,6 +59,9 @@ const accounts = new AccountService(fileKV, undefined, {
   facebook: env.FACEBOOK_APP_ID && env.FACEBOOK_APP_SECRET ? { id: env.FACEBOOK_APP_ID, secret: env.FACEBOOK_APP_SECRET } : undefined,
 });
 config.recordGame = (token, result) => accounts.record(token, result);
+config.createChallenge = (c) => accounts.createChallenge(c);
+config.loadChallenge = (code) => accounts.challengeData(code);
+config.addChallengeResult = (code, e) => accounts.addChallengeResult(code, e);
 
 // ------------------------------------------------------------------ salles
 const rooms = new Map<string, Room>();
@@ -79,6 +82,7 @@ async function createRoom(body: any): Promise<string | { error: string }> {
   const code = newCode((c) => rooms.has(c));
   const room = new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code));
   room.quizToken = quizToken;
+  if (kind === 'solo' && typeof body.challenge === 'string' && /^[A-Z0-9]{6}$/.test(body.challenge)) room.challenge = body.challenge;
   rooms.set(code, room);
   return code;
 }
@@ -135,7 +139,7 @@ const server = http.createServer(async (req, res) => {
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
-    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) {
+    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p === '/api/feedback' || p.startsWith('/api/challenge/') || p.startsWith('/api/admin/users') || p.startsWith('/api/admin/feedback')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
       const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
       const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,

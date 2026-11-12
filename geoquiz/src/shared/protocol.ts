@@ -190,7 +190,10 @@ export interface RecapItem {
 
 // Création d'une partie : POST /api/rooms (CreateRoomReq) → { code } ou { error }.
 // Ensuite, le navigateur ouvre le WebSocket /ws/<CODE> et envoie « join » (ou « resume »).
-export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string }
+export interface CreateRoomReq { kind: RoomKind; settings: Settings; hostPlays?: boolean; quizToken?: string; challenge?: string }
+/** Défi entre amis : les mêmes questions, jouées chacun quand il veut. */
+export interface ChallengeEntry { name: string; correct: number; total: number; timeMs: number; at: number }
+export interface ChallengeView { code: string; settings: Settings; by: string; results: ChallengeEntry[] }
 
 // Messages navigateur → serveur
 export type ClientMsg =
@@ -199,6 +202,7 @@ export type ClientMsg =
   | { t: 'quick'; settings: Settings }
   | { t: 'cancelQuick' }
   | { t: 'auth'; token: string }
+  | { t: 'challenge' }
   | { t: 'settings'; settings: Settings }
   | { t: 'start' }
   | { t: 'answer'; q: number; value: string }
@@ -213,6 +217,7 @@ export type ClientMsg =
 export type ServerMsg =
   | { t: 'joined'; you: string; token: string; host: boolean; room: RoomSnapshot }
   | { t: 'reward'; reward: Reward }
+  | { t: 'challenge'; code: string; results?: ChallengeEntry[]; by?: string }
   | { t: 'room'; room: RoomSnapshot }
   | { t: 'question'; q: QuestionMsg }
   | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal; km?: number }
