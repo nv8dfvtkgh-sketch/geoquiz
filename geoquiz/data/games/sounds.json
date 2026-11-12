@@ -1,0 +1,335 @@
+[
+ {
+  "id": "lion",
+  "tier": 1,
+  "emoji": "🦁",
+  "q": "lion roar",
+  "names": {
+   "fr": "lion",
+   "en": "lion",
+   "es": "león",
+   "ar": "أسد"
+  }
+ },
+ {
+  "id": "cow",
+  "tier": 1,
+  "emoji": "🐄",
+  "q": "cow moo",
+  "names": {
+   "fr": "vache",
+   "en": "cow",
+   "es": "vaca",
+   "ar": "بقرة"
+  }
+ },
+ {
+  "id": "dog",
+  "tier": 1,
+  "emoji": "🐕",
+  "q": "dog barking",
+  "names": {
+   "fr": "chien",
+   "en": "dog",
+   "es": "perro",
+   "ar": "كلب"
+  }
+ },
+ {
+  "id": "cat",
+  "tier": 1,
+  "emoji": "🐈",
+  "q": "cat meow",
+  "names": {
+   "fr": "chat",
+   "en": "cat",
+   "es": "gato",
+   "ar": "قطة"
+  }
+ },
+ {
+  "id": "rooster",
+  "tier": 1,
+  "emoji": "🐓",
+  "q": "rooster crowing",
+  "names": {
+   "fr": "coq",
+   "en": "rooster",
+   "es": "gallo",
+   "ar": "ديك"
+  }
+ },
+ {
+  "id": "horse",
+  "tier": 1,
+  "emoji": "🐎",
+  "q": "horse neigh",
+  "names": {
+   "fr": "cheval",
+   "en": "horse",
+   "es": "caballo",
+   "ar": "حصان"
+  }
+ },
+ {
+  "id": "sheep",
+  "tier": 1,
+  "emoji": "🐑",
+  "q": "sheep bleat",
+  "names": {
+   "fr": "mouton",
+   "en": "sheep",
+   "es": "oveja",
+   "ar": "خروف"
+  }
+ },
+ {
+  "id": "pig",
+  "tier": 1,
+  "emoji": "🐖",
+  "q": "pig grunt",
+  "names": {
+   "fr": "cochon",
+   "en": "pig",
+   "es": "cerdo",
+   "ar": "خنزير"
+  }
+ },
+ {
+  "id": "duck",
+  "tier": 1,
+  "emoji": "🦆",
+  "q": "duck quack",
+  "names": {
+   "fr": "canard",
+   "en": "duck",
+   "es": "pato",
+   "ar": "بطة"
+  }
+ },
+ {
+  "id": "donkey",
+  "tier": 1,
+  "emoji": "🫏",
+  "q": "donkey braying",
+  "names": {
+   "fr": "âne",
+   "en": "donkey",
+   "es": "burro",
+   "ar": "حمار"
+  }
+ },
+ {
+  "id": "elephant",
+  "tier": 1,
+  "emoji": "🐘",
+  "q": "elephant trumpet",
+  "names": {
+   "fr": "éléphant",
+   "en": "elephant",
+   "es": "elefante",
+   "ar": "فيل"
+  }
+ },
+ {
+  "id": "frog",
+  "tier": 1,
+  "emoji": "🐸",
+  "q": "frog croak",
+  "names": {
+   "fr": "grenouille",
+   "en": "frog",
+   "es": "rana",
+   "ar": "ضفدع"
+  }
+ },
+ {
+  "id": "wolf",
+  "tier": 2,
+  "emoji": "🐺",
+  "q": "wolf howl",
+  "names": {
+   "fr": "loup",
+   "en": "wolf",
+   "es": "lobo",
+   "ar": "ذئب"
+  }
+ },
+ {
+  "id": "owl",
+  "tier": 2,
+  "emoji": "🦉",
+  "q": "owl hoot",
+  "names": {
+   "fr": "hibou",
+   "en": "owl",
+   "es": "búho",
+   "ar": "بومة"
+  }
+ },
+ {
+  "id": "goat",
+  "tier": 2,
+  "emoji": "🐐",
+  "q": "goat bleat",
+  "names": {
+   "fr": "chèvre",
+   "en": "goat",
+   "es": "cabra",
+   "ar": "ماعز"
+  }
+ },
+ {
+  "id": "crow",
+  "tier": 2,
+  "q": "crow caw",
+  "names": {
+   "fr": "corbeau",
+   "en": "crow",
+   "es": "cuervo",
+   "ar": "غراب"
+  }
+ },
+ {
+  "id": "cuckoo",
+  "tier": 2,
+  "emoji": "🐦",
+  "q": "common cuckoo call",
+  "names": {
+   "fr": "coucou",
+   "en": "cuckoo",
+   "es": "cuco",
+   "ar": "وقواق"
+  }
+ },
+ {
+  "id": "turkey",
+  "tier": 2,
+  "emoji": "🦃",
+  "q": "turkey gobble",
+  "names": {
+   "fr": "dindon",
+   "en": "turkey",
+   "es": "pavo",
+   "ar": "ديك رومي"
+  }
+ },
+ {
+  "id": "camel",
+  "tier": 2,
+  "emoji": "🐪",
+  "q": "camel grunt",
+  "names": {
+   "fr": "chameau",
+   "en": "camel",
+   "es": "camello",
+   "ar": "جمل"
+  }
+ },
+ {
+  "id": "dolphin",
+  "tier": 2,
+  "emoji": "🐬",
+  "q": "dolphin clicks whistles",
+  "names": {
+   "fr": "dauphin",
+   "en": "dolphin",
+   "es": "delfín",
+   "ar": "دلفين"
+  }
+ },
+ {
+  "id": "bee",
+  "tier": 2,
+  "emoji": "🐝",
+  "q": "bees buzzing",
+  "names": {
+   "fr": "abeille",
+   "en": "bee",
+   "es": "abeja",
+   "ar": "نحلة"
+  }
+ },
+ {
+  "id": "cricket",
+  "tier": 3,
+  "emoji": "🦗",
+  "q": "cricket chirping",
+  "names": {
+   "fr": "grillon",
+   "en": "cricket",
+   "es": "grillo",
+   "ar": "صرصار الليل"
+  }
+ },
+ {
+  "id": "seagull",
+  "tier": 3,
+  "q": "herring gull call",
+  "names": {
+   "fr": "mouette",
+   "en": "seagull",
+   "es": "gaviota",
+   "ar": "نورس"
+  }
+ },
+ {
+  "id": "monkey",
+  "tier": 3,
+  "emoji": "🐒",
+  "q": "howler monkey",
+  "names": {
+   "fr": "singe hurleur",
+   "en": "howler monkey",
+   "es": "mono aullador",
+   "ar": "قرد العواء"
+  }
+ },
+ {
+  "id": "whale",
+  "tier": 3,
+  "emoji": "🐋",
+  "q": "humpback whale song",
+  "names": {
+   "fr": "baleine",
+   "en": "whale",
+   "es": "ballena",
+   "ar": "حوت"
+  }
+ },
+ {
+  "id": "hyena",
+  "tier": 3,
+  "q": "spotted hyena",
+  "names": {
+   "fr": "hyène",
+   "en": "hyena",
+   "es": "hiena",
+   "ar": "ضبع"
+  }
+ },
+ {
+  "id": "peacock",
+  "tier": 3,
+  "emoji": "🦚",
+  "q": "peafowl call",
+  "names": {
+   "fr": "paon",
+   "en": "peacock",
+   "es": "pavo real",
+   "ar": "طاووس"
+  }
+ },
+ {
+  "id": "goose",
+  "tier": 3,
+  "emoji": "🪿",
+  "q": "goose honking",
+  "names": {
+   "fr": "oie",
+   "en": "goose",
+   "es": "ganso",
+   "ar": "إوزة"
+  }
+ }
+]

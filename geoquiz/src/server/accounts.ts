@@ -9,11 +9,13 @@ import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type Me, type
 export { AVATARS, BADGES, UNLOCK_AT };
 export type { AgeGroup, CatStats, Me, Reward };
 
+interface DailyRow { correct: number; total: number; timeMs: number; pseudo: string; avatar: string; country?: string }
+
 export interface GameResult {
   category: string;
   difficulty: 'easy' | 'medium' | 'hard';
   kind: 'solo' | 'duel' | 'room';
-  mode: 'classic' | 'battle' | 'teams';
+  mode: 'classic' | 'battle' | 'teams' | 'buzzer';
   zone: string;
   lang: string;
   total: number;
@@ -24,6 +26,8 @@ export interface GameResult {
   teamWon?: boolean;
   /** Éléments trouvés pendant la partie (pays, régions…). */
   found?: string[];
+  /** Temps total de réponse (départage du défi du jour). */
+  timeMs?: number;
 }
 
 interface Account {
@@ -454,10 +458,32 @@ export class AccountService {
     const lb = (await this.kv.get<Record<string, { xp: number; pseudo: string; avatar: string; country?: string }>>(wk)) ?? {};
     lb[a.id] = { xp: (lb[a.id]?.xp ?? 0) + xp, pseudo: a.pseudo, avatar: a.avatar, country: a.country };
     await this.kv.put(wk, lb);
+    // Défi du jour : seule la première partie du jour compte au classement.
+    if (r.category === 'daily' && r.kind === 'solo') {
+      const dk = `daily:${today}`;
+      const board = (await this.kv.get<Record<string, DailyRow>>(dk)) ?? {};
+      if (!board[a.id]) {
+        board[a.id] = { correct, total, timeMs: Math.max(0, Math.round(r.timeMs ?? 0)), pseudo: a.pseudo, avatar: a.avatar, country: a.country };
+        await this.kv.put(dk, board);
+        // On ne garde que les 8 derniers jours.
+        for (const k of (await this.kv.list('daily:')).sort().slice(0, -8)) await this.kv.delete(k);
+      }
+    }
     await this.bump('games', 1, r.category);
 
     const lv = levelOf(a.xp);
     return { xp, total: a.xp, ...lv, levelUp: lv.level > before, title: titleOf(lv.level), badges: got, best, unlocked };
+  }
+
+  /** Classement du défi du jour : bonnes réponses, puis le plus rapide. */
+  async daily(token: string | null) {
+    const day = dayOf(this.now());
+    const board = (await this.kv.get<Record<string, DailyRow>>(`daily:${day}`)) ?? {};
+    const rows = Object.entries(board)
+      .sort((x, y) => y[1].correct - x[1].correct || x[1].timeMs - y[1].timeMs)
+      .map(([id, v], i) => ({ id, rank: i + 1, ...v }));
+    const me = token ? await this.byToken(token) : null;
+    return { day, players: rows.length, top: rows.slice(0, 30), me: me ? rows.find((r) => r.id === me.id) ?? null : null };
   }
 
   async leaderboard(token: string | null, country?: string) {
@@ -547,6 +573,7 @@ export async function accountRoute(
       const c = query.get('country') ?? '';
       return { status: 200, json: await svc.leaderboard(bearer || null, /^[A-Z]{2}$/.test(c) ? c : undefined) };
     }
+    if (path === '/api/daily' && method === 'GET') return { status: 200, json: await svc.daily(bearer || null) };
     if (path.startsWith('/api/account')) {
       const a = await svc.byToken(bearer);
       if (!a) return { status: 401, json: { error: 'account.signedOut' } };

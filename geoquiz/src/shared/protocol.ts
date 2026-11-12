@@ -11,7 +11,7 @@ export type Difficulty = 'easy' | 'medium' | 'hard';
 export type RoomKind = 'solo' | 'duel' | 'room';
 export type SoloMode = 'training' | 'timed';
 /** Mode d'une salle : classique, Battle Royale (duels par paires, 3 cœurs) ou équipes. */
-export type RoomMode = 'classic' | 'battle' | 'teams';
+export type RoomMode = 'classic' | 'battle' | 'teams' | 'buzzer';
 export const BATTLE_LIVES = 3;
 
 export interface Settings {
@@ -84,6 +84,8 @@ export interface MapFeature {
 export interface MapData {
   w: number;
   h: number;
+  /** carte du monde : [x0, y1, échelle] de la projection Natural Earth (mesure des distances) */
+  proj?: [number, number, number];
   features: MapFeature[];
 }
 
@@ -127,6 +129,10 @@ export interface RoomSnapshot {
   pairs?: [string, string | null][]; // Battle Royale : duels de la question en cours
 }
 
+export type QKind = 'map' | 'mcq' | 'type' | 'pin' | 'order';
+/** Maillot dessiné (jeu « Couleurs des équipes »). */
+export interface KitSpec { p: string; c: string[]; sh: string }
+
 export interface QOption {
   id: string; // opaque (o0…o3)
   label?: string;
@@ -137,7 +143,8 @@ export interface QuestionMsg {
   index: number;
   total: number;
   category: CategoryId;
-  kind: 'map' | 'mcq' | 'type';
+  /** pin : placer un point sur la carte ; order : remettre les réponses dans l'ordre */
+  kind: QKind;
   promptKey: string; // clé i18n
   params: Record<string, string>;
   flag?: string; // jeton d'image de drapeau à afficher
@@ -147,6 +154,8 @@ export interface QuestionMsg {
   image?: string; // jeton d'une photo de quiz créé
   emoji?: string; // grand pictogramme (plats, animaux)
   sign?: string; // panneau du code de la route à dessiner
+  kit?: KitSpec; // maillot à dessiner
+  sound?: string; // jeton d'un enregistrement (cris d'animaux)
   options?: QOption[];
   attempts: number;
   timeLimit: number | null; // ms, null = sans chrono
@@ -159,6 +168,8 @@ export interface Reveal {
   label: string;
   flag?: string;
   credit?: string; // crédit de la photo (Monuments)
+  point?: [number, number]; // « Où est-ce ? » : emplacement exact sur la carte
+  order?: string[]; // frise : ordre correct des options
 }
 
 export interface PlayerRound {
@@ -168,6 +179,7 @@ export interface PlayerRound {
   timeMs: number | null;
   attempts: number;
   answer?: string;
+  km?: number; // « Où est-ce ? » : distance au bon endroit
 }
 
 export interface RecapItem {
@@ -203,7 +215,7 @@ export type ServerMsg =
   | { t: 'reward'; reward: Reward }
   | { t: 'room'; room: RoomSnapshot }
   | { t: 'question'; q: QuestionMsg }
-  | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal }
+  | { t: 'feedback'; q: number; correct: boolean; attemptsLeft: number; done: boolean; points: number; value: string; reveal?: Reveal; km?: number }
   | { t: 'progress'; answered: number; total: number }
   | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] } }
   | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }

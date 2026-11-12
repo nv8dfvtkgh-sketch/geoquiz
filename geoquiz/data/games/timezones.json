@@ -1,0 +1,442 @@
+[
+ {
+  "id": "casablanca",
+  "tz": "Africa/Casablanca",
+  "tier": 1,
+  "names": {
+   "fr": "Casablanca",
+   "en": "Casablanca",
+   "es": "Casablanca",
+   "ar": "الدار البيضاء"
+  }
+ },
+ {
+  "id": "paris",
+  "tz": "Europe/Paris",
+  "tier": 1,
+  "names": {
+   "fr": "Paris",
+   "en": "Paris",
+   "es": "París",
+   "ar": "باريس"
+  }
+ },
+ {
+  "id": "london",
+  "tz": "Europe/London",
+  "tier": 1,
+  "names": {
+   "fr": "Londres",
+   "en": "London",
+   "es": "Londres",
+   "ar": "لندن"
+  }
+ },
+ {
+  "id": "newyork",
+  "tz": "America/New_York",
+  "tier": 1,
+  "names": {
+   "fr": "New York",
+   "en": "New York",
+   "es": "Nueva York",
+   "ar": "نيويورك"
+  }
+ },
+ {
+  "id": "losangeles",
+  "tz": "America/Los_Angeles",
+  "tier": 1,
+  "names": {
+   "fr": "Los Angeles",
+   "en": "Los Angeles",
+   "es": "Los Ángeles",
+   "ar": "لوس أنجلوس"
+  }
+ },
+ {
+  "id": "tokyo",
+  "tz": "Asia/Tokyo",
+  "tier": 1,
+  "names": {
+   "fr": "Tokyo",
+   "en": "Tokyo",
+   "es": "Tokio",
+   "ar": "طوكيو"
+  }
+ },
+ {
+  "id": "dubai",
+  "tz": "Asia/Dubai",
+  "tier": 1,
+  "names": {
+   "fr": "Dubaï",
+   "en": "Dubai",
+   "es": "Dubái",
+   "ar": "دبي"
+  }
+ },
+ {
+  "id": "sydney",
+  "tz": "Australia/Sydney",
+  "tier": 1,
+  "names": {
+   "fr": "Sydney",
+   "en": "Sydney",
+   "es": "Sídney",
+   "ar": "سيدني"
+  }
+ },
+ {
+  "id": "beijing",
+  "tz": "Asia/Shanghai",
+  "tier": 1,
+  "names": {
+   "fr": "Pékin",
+   "en": "Beijing",
+   "es": "Pekín",
+   "ar": "بكين"
+  }
+ },
+ {
+  "id": "moscow",
+  "tz": "Europe/Moscow",
+  "tier": 1,
+  "names": {
+   "fr": "Moscou",
+   "en": "Moscow",
+   "es": "Moscú",
+   "ar": "موسكو"
+  }
+ },
+ {
+  "id": "rio",
+  "tz": "America/Sao_Paulo",
+  "tier": 1,
+  "names": {
+   "fr": "Rio de Janeiro",
+   "en": "Rio de Janeiro",
+   "es": "Río de Janeiro",
+   "ar": "ريو دي جانيرو"
+  }
+ },
+ {
+  "id": "cairo",
+  "tz": "Africa/Cairo",
+  "tier": 1,
+  "names": {
+   "fr": "Le Caire",
+   "en": "Cairo",
+   "es": "El Cairo",
+   "ar": "القاهرة"
+  }
+ },
+ {
+  "id": "madrid",
+  "tz": "Europe/Madrid",
+  "tier": 1,
+  "names": {
+   "fr": "Madrid",
+   "en": "Madrid",
+   "es": "Madrid",
+   "ar": "مدريد"
+  }
+ },
+ {
+  "id": "mexico",
+  "tz": "America/Mexico_City",
+  "tier": 2,
+  "names": {
+   "fr": "Mexico",
+   "en": "Mexico City",
+   "es": "Ciudad de México",
+   "ar": "مكسيكو"
+  }
+ },
+ {
+  "id": "istanbul",
+  "tz": "Europe/Istanbul",
+  "tier": 2,
+  "names": {
+   "fr": "Istanbul",
+   "en": "Istanbul",
+   "es": "Estambul",
+   "ar": "إسطنبول"
+  }
+ },
+ {
+  "id": "bangkok",
+  "tz": "Asia/Bangkok",
+  "tier": 2,
+  "names": {
+   "fr": "Bangkok",
+   "en": "Bangkok",
+   "es": "Bangkok",
+   "ar": "بانكوك"
+  }
+ },
+ {
+  "id": "singapore",
+  "tz": "Asia/Singapore",
+  "tier": 2,
+  "names": {
+   "fr": "Singapour",
+   "en": "Singapore",
+   "es": "Singapur",
+   "ar": "سنغافورة"
+  }
+ },
+ {
+  "id": "montreal",
+  "tz": "America/Toronto",
+  "tier": 2,
+  "names": {
+   "fr": "Montréal",
+   "en": "Montreal",
+   "es": "Montreal",
+   "ar": "مونتريال"
+  }
+ },
+ {
+  "id": "buenosaires",
+  "tz": "America/Argentina/Buenos_Aires",
+  "tier": 2,
+  "names": {
+   "fr": "Buenos Aires",
+   "en": "Buenos Aires",
+   "es": "Buenos Aires",
+   "ar": "بوينس آيرس"
+  }
+ },
+ {
+  "id": "dakar",
+  "tz": "Africa/Dakar",
+  "tier": 2,
+  "names": {
+   "fr": "Dakar",
+   "en": "Dakar",
+   "es": "Dakar",
+   "ar": "داكار"
+  }
+ },
+ {
+  "id": "riyadh",
+  "tz": "Asia/Riyadh",
+  "tier": 2,
+  "names": {
+   "fr": "Riyad",
+   "en": "Riyadh",
+   "es": "Riad",
+   "ar": "الرياض"
+  }
+ },
+ {
+  "id": "nairobi",
+  "tz": "Africa/Nairobi",
+  "tier": 2,
+  "names": {
+   "fr": "Nairobi",
+   "en": "Nairobi",
+   "es": "Nairobi",
+   "ar": "نيروبي"
+  }
+ },
+ {
+  "id": "johannesburg",
+  "tz": "Africa/Johannesburg",
+  "tier": 2,
+  "names": {
+   "fr": "Johannesburg",
+   "en": "Johannesburg",
+   "es": "Johannesburgo",
+   "ar": "جوهانسبرغ"
+  }
+ },
+ {
+  "id": "seoul",
+  "tz": "Asia/Seoul",
+  "tier": 2,
+  "names": {
+   "fr": "Séoul",
+   "en": "Seoul",
+   "es": "Seúl",
+   "ar": "سيول"
+  }
+ },
+ {
+  "id": "chicago",
+  "tz": "America/Chicago",
+  "tier": 2,
+  "names": {
+   "fr": "Chicago",
+   "en": "Chicago",
+   "es": "Chicago",
+   "ar": "شيكاغو"
+  }
+ },
+ {
+  "id": "algiers",
+  "tz": "Africa/Algiers",
+  "tier": 2,
+  "names": {
+   "fr": "Alger",
+   "en": "Algiers",
+   "es": "Argel",
+   "ar": "الجزائر العاصمة"
+  }
+ },
+ {
+  "id": "tunis",
+  "tz": "Africa/Tunis",
+  "tier": 2,
+  "names": {
+   "fr": "Tunis",
+   "en": "Tunis",
+   "es": "Túnez",
+   "ar": "تونس العاصمة"
+  }
+ },
+ {
+  "id": "mumbai",
+  "tz": "Asia/Kolkata",
+  "tier": 3,
+  "names": {
+   "fr": "Bombay",
+   "en": "Mumbai",
+   "es": "Bombay",
+   "ar": "مومباي"
+  }
+ },
+ {
+  "id": "tehran",
+  "tz": "Asia/Tehran",
+  "tier": 3,
+  "names": {
+   "fr": "Téhéran",
+   "en": "Tehran",
+   "es": "Teherán",
+   "ar": "طهران"
+  }
+ },
+ {
+  "id": "kathmandu",
+  "tz": "Asia/Kathmandu",
+  "tier": 3,
+  "names": {
+   "fr": "Katmandou",
+   "en": "Kathmandu",
+   "es": "Katmandú",
+   "ar": "كاتماندو"
+  }
+ },
+ {
+  "id": "auckland",
+  "tz": "Pacific/Auckland",
+  "tier": 3,
+  "names": {
+   "fr": "Auckland",
+   "en": "Auckland",
+   "es": "Auckland",
+   "ar": "أوكلاند"
+  }
+ },
+ {
+  "id": "honolulu",
+  "tz": "Pacific/Honolulu",
+  "tier": 3,
+  "names": {
+   "fr": "Honolulu",
+   "en": "Honolulu",
+   "es": "Honolulu",
+   "ar": "هونولولو"
+  }
+ },
+ {
+  "id": "jakarta",
+  "tz": "Asia/Jakarta",
+  "tier": 3,
+  "names": {
+   "fr": "Jakarta",
+   "en": "Jakarta",
+   "es": "Yakarta",
+   "ar": "جاكرتا"
+  }
+ },
+ {
+  "id": "lima",
+  "tz": "America/Lima",
+  "tier": 3,
+  "names": {
+   "fr": "Lima",
+   "en": "Lima",
+   "es": "Lima",
+   "ar": "ليما"
+  }
+ },
+ {
+  "id": "bogota",
+  "tz": "America/Bogota",
+  "tier": 3,
+  "names": {
+   "fr": "Bogota",
+   "en": "Bogotá",
+   "es": "Bogotá",
+   "ar": "بوغوتا"
+  }
+ },
+ {
+  "id": "karachi",
+  "tz": "Asia/Karachi",
+  "tier": 3,
+  "names": {
+   "fr": "Karachi",
+   "en": "Karachi",
+   "es": "Karachi",
+   "ar": "كراتشي"
+  }
+ },
+ {
+  "id": "reykjavik",
+  "tz": "Atlantic/Reykjavik",
+  "tier": 3,
+  "names": {
+   "fr": "Reykjavik",
+   "en": "Reykjavik",
+   "es": "Reikiavik",
+   "ar": "ريكيافيك"
+  }
+ },
+ {
+  "id": "vancouver",
+  "tz": "America/Vancouver",
+  "tier": 3,
+  "names": {
+   "fr": "Vancouver",
+   "en": "Vancouver",
+   "es": "Vancouver",
+   "ar": "فانكوفر"
+  }
+ },
+ {
+  "id": "santiago",
+  "tz": "America/Santiago",
+  "tier": 3,
+  "names": {
+   "fr": "Santiago du Chili",
+   "en": "Santiago (Chile)",
+   "es": "Santiago de Chile",
+   "ar": "سانتياغو"
+  }
+ },
+ {
+  "id": "lagos",
+  "tz": "Africa/Lagos",
+  "tier": 3,
+  "names": {
+   "fr": "Lagos",
+   "en": "Lagos",
+   "es": "Lagos",
+   "ar": "لاغوس"
+  }
+ }
+]

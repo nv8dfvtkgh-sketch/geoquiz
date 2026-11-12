@@ -89,6 +89,8 @@ for (const [a3, iso, cont, sub, rank, c, r, cap] of C) {
     properties: {
       ADM0_A3: a3, ISO_A2: a3 === 'FRA' ? '-99' : iso, ISO_A2_EH: iso, NAME: cap[1], TYPE: 'Sovereign country',
       CONTINENT: cont, SUBREGION: sub, LABELRANK: rank,
+      POP_EST: Math.round(1e5 * (12 - rank) ** 3 * (1 + (a3.charCodeAt(0) + a3.charCodeAt(2)) % 7)),
+      GDP_MD: Math.round(2e3 * (12 - rank) ** 4),
     },
     geometry: { type: 'Polygon', coordinates: coords },
   });
@@ -101,11 +103,11 @@ for (const [a3, iso, cont, sub, rank, c, r, cap] of C) {
 // Lesotho dans le trou de l'Afrique du Sud, Monaco minuscule et isolé.
 {
   const [x, y] = center(2, 4);
-  feats.push({ type: 'Feature', properties: { ADM0_A3: 'LSO', ISO_A2_EH: 'LS', NAME: 'Lesotho', CONTINENT: 'Africa', SUBREGION: 'Southern Africa', LABELRANK: 5 },
+  feats.push({ type: 'Feature', properties: { ADM0_A3: 'LSO', ISO_A2_EH: 'LS', NAME: 'Lesotho', CONTINENT: 'Africa', SUBREGION: 'Southern Africa', LABELRANK: 5, POP_EST: 2100000, GDP_MD: 2400 },
     geometry: { type: 'Polygon', coordinates: [cell(x - 2, y + 2, x + 2, y - 2)] } });
   places.push({ type: 'Feature', properties: { FEATURECLA: 'Admin-0 capital', ADM0_A3: 'LSO', NAME: 'Maseru', NAME_FR: 'Maseru', NAME_AR: 'ماسيرو', NAME_ES: 'Maseru' }, geometry: { type: 'Point', coordinates: [x, y] } });
   places.push({ type: 'Feature', properties: { FEATURECLA: 'Admin-0 capital alt', ADM0_A3: 'ZAF', NAME: 'Cape Town', NAME_FR: 'Le Cap', NAME_AR: 'كيب تاون', NAME_ES: 'Ciudad del Cabo' }, geometry: { type: 'Point', coordinates: [x - 4, y - 3] } });
-  feats.push({ type: 'Feature', properties: { ADM0_A3: 'MCO', ISO_A2_EH: 'MC', NAME: 'Monaco', CONTINENT: 'Europe', SUBREGION: 'Western Europe', LABELRANK: 8 },
+  feats.push({ type: 'Feature', properties: { ADM0_A3: 'MCO', ISO_A2_EH: 'MC', NAME: 'Monaco', CONTINENT: 'Europe', SUBREGION: 'Western Europe', LABELRANK: 8, POP_EST: 38000, GDP_MD: 7000 },
     geometry: { type: 'Polygon', coordinates: [[[35, 46], [35.3, 46], [35.3, 45.7], [35, 45.7], [35, 46]]] } });
   places.push({ type: 'Feature', properties: { FEATURECLA: 'Admin-0 capital', ADM0_A3: 'MCO', NAME: 'Monaco', NAME_FR: 'Monaco', NAME_AR: 'موناكو', NAME_ES: 'Mónaco' }, geometry: { type: 'Point', coordinates: [35.15, 45.85] } });
 }

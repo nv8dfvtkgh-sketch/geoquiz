@@ -87,7 +87,7 @@ function ModePicker() {
       <h3>{t('mode.title')}</h3>
       {s.isHost ? (
         <div className="mode-list" role="radiogroup" aria-label={t('mode.title')}>
-          {(['classic', 'battle', 'teams'] as RoomMode[]).map((m) => (
+          {(['classic', 'battle', 'teams', 'buzzer'] as RoomMode[]).map((m) => (
             <button type="button" key={m} role="radio" aria-checked={mode === m} className={`mode-card ${mode === m ? 'on' : ''}`} onClick={() => set({ mode: m })}>
               <strong>{t(`mode.${m}`)}</strong>
               <span>{t(`mode.${m}.hint`)}</span>

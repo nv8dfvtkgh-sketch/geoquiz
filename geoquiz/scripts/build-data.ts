@@ -117,7 +117,25 @@ function buildFeatures(
       a: round(area, 0),
     };
   });
-  return { w: width, h: height, features, tx: (lon: number, lat: number) => tx(project(lon, lat)) };
+  // Passage inverse (carte → projection) : sert à mesurer les distances en km (« Où est-ce ? »).
+  return { w: width, h: height, features, proj: [round(b[0], 5), round(b[3], 5), round(scale, 5)] as [number, number, number], tx: (lon: number, lat: number) => tx(project(lon, lat)) };
+}
+
+/** Surface en km² d'un ensemble d'anneaux lon/lat (les trous, orientés à l'inverse, se retranchent). */
+function sphereArea(rings: Ring[]): number {
+  const R = 6371;
+  const rad = Math.PI / 180;
+  let total = 0;
+  for (const r of rings) {
+    let s = 0;
+    for (let i = 0; i < r.length; i++) {
+      const [l1, p1] = r[i];
+      const [l2, p2] = r[(i + 1) % r.length];
+      s += (l2 - l1) * rad * (2 + Math.sin(p1 * rad) + Math.sin(p2 * rad));
+    }
+    total += (s * R * R) / 2;
+  }
+  return Math.abs(total);
 }
 
 /**
@@ -180,6 +198,8 @@ async function main() {
       subregion: slug(String(prop(primary, 'SUBREGION') ?? 'other')),
       rank: Number(prop(primary, 'LABELRANK') ?? 5),
       fame: fameOf(feats),
+      pop: Math.round(feats.reduce((t, f) => t + Math.max(0, Number(prop(f, 'POP_EST')) || 0), 0)) || undefined,
+      area: Math.round(sphereArea(rings)) || undefined,
       dependency: /dependency|lease/i.test(type),
       names: Object.fromEntries(LANGS.map((l) => [l, cldr[iso]?.[l] || namesFrom(primary, prop(primary, 'NAME'))[l]])),
       neighbors: [] as string[],
@@ -221,7 +241,7 @@ async function main() {
   }
   log(`Capitales : ${capFeatures.size}`);
 
-  fs.writeFileSync(path.join(OUT, 'world.json'), JSON.stringify({ w: world.w, h: world.h, features: world.features }));
+  fs.writeFileSync(path.join(OUT, 'world.json'), JSON.stringify({ w: world.w, h: world.h, proj: world.proj, features: world.features }));
 
   // ---------------------------------------------------------------- régions
   const admin1 = readJson(path.join(RAW, FILES.admin1)).features as any[];

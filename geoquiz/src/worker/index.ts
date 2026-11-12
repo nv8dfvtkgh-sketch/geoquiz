@@ -139,7 +139,7 @@ export default {
         }
         // Quiz créés et espace d'administration : traités par le Durable Object des quiz.
         // Comptes joueurs, progression et classement : Durable Object des comptes.
-        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) return accountsStub(env).fetch(request);
+        if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p.startsWith('/api/admin/users')) return accountsStub(env).fetch(request);
         if (p.startsWith('/api/quizzes') || p.startsWith('/api/admin/')) return quizStub(env).fetch(request);
         if (p === '/api/map/world') return json(worldJson, 200, 'public, max-age=86400');
         m = p.match(/^\/api\/map\/region\/([A-Z]{2})\/(groups|subs)$/);
@@ -151,7 +151,7 @@ export default {
         m = p.match(/^\/api\/room\/([A-Z0-9]{6})$/);
         if (m) return roomStub(env, m[1]).fetch('https://room/exists');
         m = p.match(/^\/api\/img\/([A-Z0-9]{6})\.([\w-]{6,20})$/);
-        if (m) return roomStub(env, m[1]).fetch(`https://room/img/${m[1]}.${m[2]}`);
+        if (m) return roomStub(env, m[1]).fetch(`https://room/img/${m[1]}.${m[2]}${url.searchParams.get('f') === 'mp3' ? '?f=mp3' : ''}`);
         return json({}, 404);
       }
       return env.ASSETS.fetch(request);
@@ -235,7 +235,7 @@ export class RoomDO {
       const iso = this.room?.resolveImage(img[1]);
       if (!iso) return new Response('', { status: 404 });
       if (iso.startsWith('wiki:')) {
-        const r = await fetchPhoto(iso.slice(5)).catch(() => null);
+        const r = await fetchPhoto(iso.slice(5), undefined, url.searchParams.get('f') ?? '').catch(() => null);
         return r ? new Response(r.body, { headers: { 'Content-Type': r.headers.get('content-type') ?? 'image/jpeg', 'Cache-Control': 'private, max-age=3600' } }) : new Response('', { status: 404 });
       }
       if (iso.startsWith('quiz:')) {

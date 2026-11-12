@@ -1,9 +1,10 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatTime } from '../i18n';
 import { sfx } from '../sound';
 import { useApp } from '../state';
 import { Leaderboard, TeamBars, TeamChip } from './common';
 import { RewardCard } from './Account';
+import { DailyBoard } from './Setup';
 
 export function Final() {
   const { t, s, send, leave } = useApp();
@@ -25,11 +26,13 @@ export function Final() {
         {room.settings.soloMode === 'timed' && best && (
           <p className={best.isNew ? 'record' : 'muted'}>{best.isNew ? t('final.newBest') : t('final.best', { acc: best.acc, time: formatTime(best.time) })}</p>
         )}
+        {room.settings.category === 'daily' && <DailyShare />}
         <RewardCard />
+        {room.settings.category === 'daily' && <DailyBoard refresh={1} />}
         <Recap />
         <div className="actions">
           <button type="button" className="btn ghost" onClick={leave}>{t('final.home')}</button>
-          <button type="button" className="btn primary" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>
+          {room.settings.category !== 'daily' && <button type="button" className="btn primary" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>}
         </div>
       </div>
     );
@@ -89,6 +92,30 @@ export function Final() {
           <button type="button" className="btn primary" onClick={() => send({ t: 'rematch' })}>{t('final.backLobby')}</button>
         ) : <p className="waiting">{t('final.waitHost')}</p>}
       </div>
+    </div>
+  );
+}
+
+/** Défi du jour : résultat en carrés de couleur, à partager sans dévoiler les réponses. */
+function DailyShare() {
+  const { t, s, lang } = useApp();
+  const [done, setDone] = useState(false);
+  const f = s.finished!;
+  const mine = f.recap.map((x) => x.results.find((r) => r.id === s.you));
+  const grid = mine.map((r) => (r?.correct ? '🟩' : '🟥')).join('');
+  const ok = mine.filter((r) => r?.correct).length;
+  const day = new Date().toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'short' });
+  const text = `${t('daily.shareTitle', { day })}\n${grid} ${ok}/${mine.length}\n${location.origin}`;
+  const share = async () => {
+    try {
+      if (navigator.share) await navigator.share({ text });
+      else { await navigator.clipboard.writeText(text); setDone(true); }
+    } catch { /* partage annulé */ }
+  };
+  return (
+    <div className="daily-share">
+      <p className="daily-grid" aria-label={`${ok}/${mine.length}`}>{grid}</p>
+      <button type="button" className="btn primary" onClick={share}>{done ? t('daily.copied') : t('daily.share')}</button>
     </div>
   );
 }

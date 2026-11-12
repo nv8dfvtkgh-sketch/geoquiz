@@ -123,7 +123,7 @@ const server = http.createServer(async (req, res) => {
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
-    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p.startsWith('/api/admin/users')) {
+    if (p.startsWith('/api/account') || p.startsWith('/api/auth/') || p === '/api/leaderboard' || p === '/api/daily' || p.startsWith('/api/admin/users')) {
       const auth = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
       const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
       const r = await accountRoute(accounts, req.method ?? 'GET', p, url.searchParams,
@@ -152,7 +152,7 @@ const server = http.createServer(async (req, res) => {
     if (m) {
       const iso = rooms.get(m[1])?.resolveImage(`${m[1]}.${m[2]}`);
       if (iso?.startsWith('wiki:')) {
-        const r = await fetchPhoto(iso.slice(5)).catch(() => null);
+        const r = await fetchPhoto(iso.slice(5), undefined, url.searchParams.get('f') ?? '').catch(() => null);
         return r ? send(res, 200, Buffer.from(await r.arrayBuffer()), r.headers.get('content-type') ?? 'image/jpeg', 'private, max-age=3600') : send(res, 404, '');
       }
       if (iso?.startsWith('quiz:')) {

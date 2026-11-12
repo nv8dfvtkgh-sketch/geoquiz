@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LIMITS, type Difficulty, type QType, type RoomKind, type Settings, type ZoneInfo } from '../../shared/protocol';
 import { findGame, Icon } from '../games';
 import { createGame, net } from '../net';
 import { useApp } from '../state';
-import { lockedFor } from '../account';
+import { api, lockedFor } from '../account';
 
 /**
  * Fiche d'un jeu : description, niveau, zone, options, puis « Comment jouer ? »
@@ -15,7 +15,9 @@ export function Setup() {
   const roomKind = editing ? s.room!.kind : null;
   const game = editing ? s.room!.settings.category : s.game;
   const [raw, setCfg] = useState<Settings>(() => (editing ? s.room!.settings : { ...settings, category: game }));
-  const cfg = useMemo(() => fix({ ...raw, category: game }, catalog?.zones ?? []), [raw, catalog, game]);
+  // Défi du jour : questions imposées (10, même tirage pour tous).
+  const fixed = game === 'daily';
+  const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed]);
   const [hostPlays, setHostPlays] = useState(true);
   const set = (patch: Partial<Settings>) => setCfg(fix({ ...cfg, ...patch }, catalog?.zones ?? []));
 
@@ -101,7 +103,9 @@ export function Setup() {
         </label>
       )}
 
-      <fieldset className="seg-field">
+      {fixed && <DailyBoard />}
+
+      {!fixed && <fieldset className="seg-field">
         <legend>{t('setup.difficulty')}</legend>
         <div className="seg">
           {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
@@ -111,9 +115,9 @@ export function Setup() {
           ))}
         </div>
         {cfg.qtype === 'auto' && (cat?.qtypes.length ?? 0) > 1 && <p className="hint">{t('setup.autoHint')}</p>}
-      </fieldset>
+      </fieldset>}
 
-      <details className="more" open={editing}>
+      {!fixed && <details className="more" open={editing}>
         <summary>{t('setup.more')}</summary>
         {(cat?.qtypes.length ?? 0) > 1 && <fieldset className="seg-field">
           <legend>{t('setup.qtype')}</legend>
@@ -156,7 +160,7 @@ export function Setup() {
             </label>
           </>
         )}
-      </details>
+      </details>}
 
       {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
 
@@ -187,6 +191,39 @@ export function Setup() {
         </div>
       )}
     </div>
+  );
+}
+
+/** Classement du défi du jour (comptes connectés). */
+export function DailyBoard({ refresh = 0 }: { refresh?: number }) {
+  const { t, me, auth } = useApp();
+  const [data, setData] = useState<{ day: string; players: number; top: { id: string; rank: number; pseudo: string; avatar: string; correct: number; total: number; timeMs: number }[]; me: { rank: number; correct: number; total: number } | null } | null>(null);
+  useEffect(() => {
+    let alive = true;
+    const load = () => api('/api/daily', { token: auth }).then((r) => { if (alive && r.ok) setData(r.data); });
+    load();
+    // Le score de la partie qui vient de finir arrive un peu après la fin.
+    const id = refresh ? setTimeout(load, 1500) : undefined;
+    return () => { alive = false; if (id) clearTimeout(id); };
+  }, [auth, refresh]);
+  if (!data) return null;
+  return (
+    <section className="daily-board">
+      <h2>{t('daily.board')}</h2>
+      {data.me ? <p className="record">{t('daily.yourRank', { r: data.me.rank, n: data.players, c: data.me.correct, t: data.me.total })}</p>
+        : <p className="muted">{me ? t('daily.notYet') : t('daily.signin')}</p>}
+      {data.top.length > 0 ? (
+        <ol className="lb">
+          {data.top.slice(0, 10).map((r) => (
+            <li key={r.id} className={me?.id === r.id ? 'me' : ''}>
+              <span className="lb-rank">{r.rank}</span><span aria-hidden="true">{r.avatar}</span>
+              <span className="lb-name" dir="auto">{r.pseudo}</span>
+              <span className="lb-xp">{r.correct}/{r.total} · {Math.round(r.timeMs / 1000)} s</span>
+            </li>
+          ))}
+        </ol>
+      ) : <p className="muted">{t('daily.empty')}</p>}
+    </section>
   );
 }
 

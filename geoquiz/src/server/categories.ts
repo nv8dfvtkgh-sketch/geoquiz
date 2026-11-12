@@ -1,12 +1,12 @@
 // Catégories de quiz. Chaque catégorie déclare ses types de questions, les zones où elle
 // s'applique, comment choisir les cibles et comment fabriquer une question.
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
-import type { CategoryInfo, Difficulty, Lang, MapSpec, Names } from '../shared/protocol';
+import type { CategoryInfo, Difficulty, KitSpec, Lang, MapSpec, Names, QKind } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
+  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
 } from './data';
-import { photoFor } from './photos';
-import { matches } from './text';
+import { photoFor, soundFor } from './photos';
+import { matches, normalize } from './text';
 
 export interface QOptionInternal {
   id: string;
@@ -18,7 +18,7 @@ export interface QOptionInternal {
 /** Question telle que le serveur la connaît (avec la réponse). Jamais envoyée telle quelle. */
 export interface InternalQuestion {
   category: string;
-  kind: 'map' | 'mcq' | 'type';
+  kind: QKind;
   promptKey: string;
   promptName?: Names; // paramètre {name} traduit
   flagIso?: string;
@@ -35,8 +35,13 @@ export interface InternalQuestion {
   target: string;
   answer: Names; // libellé de la bonne réponse
   revealFlagIso?: string;
+  kit?: KitSpec; // maillot dessiné
+  point?: [number, number]; // « Où est-ce ? » : emplacement exact
+  order?: string[]; // frise : ordre correct des options
   /** Vérifie une réponse : id d'entité (carte), id d'option (QCM) ou texte (saisie). */
   check(value: string): boolean;
+  /** Réponse notée finement (« Où est-ce ? ») : part des points de 0 à 1 et distance. */
+  grade?(value: string): { ok: boolean; credit: number; km?: number };
   /** Pour la carte : entité à faire clignoter ; pour le QCM : option correcte. */
   revealId?: string;
   revealOption?: string;
@@ -45,6 +50,8 @@ export interface InternalQuestion {
 export interface Category extends CategoryInfo {
   pool(zone: ZoneCtx, difficulty: Difficulty, wanted: number): string[];
   make(target: string, kind: 'map' | 'mcq' | 'type', zone: ZoneCtx, rnd: () => number): InternalQuestion;
+  /** Médias à charger avant la partie (photos, sons). */
+  media?: 'monuments' | 'stadiums' | 'sounds';
 }
 
 // ------------------------------------------------------------------ outils
@@ -571,6 +578,7 @@ let monumentNames: Set<string> | null = null;
 const monumentsCat: Category = {
   id: 'monuments',
   noZone: true,
+  media: 'monuments',
   qtypes: ['mcq', 'map', 'type'],
   zoneKinds: ['world'],
   pool: (_zone, d, n) => tierPool(extras.monuments.filter((m) => photoFor(m.id)), d, n),
@@ -686,6 +694,449 @@ function packCat(id: string, packs: string[]): Category {
 }
 const packCats = Object.entries(PACK_GAMES).map(([id, packs]) => packCat(id, packs));
 
+// ------------------------------------------------------------------ plus ou moins
+// Deux pays : lequel a le plus d'habitants / la plus grande surface ? Écart d'au moins 30 %.
+const hasStats = (id: string) => !!countries[id]?.pop && !!countries[id]?.area && !countries[id].dependency && !!worldById[id];
+const UNIT: Record<'pop' | 'area', Names> = {
+  pop: { fr: 'hab.', en: 'people', es: 'hab.', ar: 'نسمة' },
+  area: { fr: 'km²', en: 'km²', es: 'km²', ar: 'كم²' },
+};
+const LOCALE: Record<Lang, string> = { fr: 'fr-FR', en: 'en-GB', es: 'es-ES', ar: 'ar' };
+export function compact(v: number, l: Lang): string {
+  try { return new Intl.NumberFormat(LOCALE[l], { notation: 'compact', maximumFractionDigits: 1 }).format(v); }
+  catch { return String(Math.round(v)); }
+}
+const higherCat: Category = {
+  id: 'higher',
+  qtypes: ['mcq'],
+  zoneKinds: ['world', 'continent', 'subregion'],
+  pool: (zone, d, n) => countryPool(zone, d, n, hasStats),
+  make(target, _kind, zone, rnd) {
+    const metric: 'pop' | 'area' = rnd() < 0.55 ? 'pop' : 'area';
+    const val = (id: string) => countries[id][metric]!;
+    const v = val(target);
+    const all = (zone.countryIds ?? []).filter((id) => id !== target && hasStats(id));
+    const ok = all.filter((id) => { const r = Math.max(v, val(id)) / Math.min(v, val(id)); return r >= 1.3; });
+    // Les duels serrés (moins de 3 fois plus) d'abord : plus intéressants.
+    const close = ok.filter((id) => Math.max(v, val(id)) / Math.min(v, val(id)) < 3);
+    const other = (close.length ? shuffle(close, rnd) : shuffle(ok.length ? ok : all, rnd))[0];
+    const win = val(other) > v ? other : target;
+    const lose = win === target ? other : target;
+    const opts = shuffle([target, other], rnd).map((id, i) => ({ id: `o${i}`, target: id, flagIso: id, label: countries[id].names }));
+    const correct = opts.find((o) => o.target === win)!.id;
+    const fmt = (id: string, l: Lang) => `${countries[id].names[l]} : ${compact(val(id), l)} ${UNIT[metric][l]}`;
+    return {
+      category: 'higher', kind: 'mcq', target, promptKey: `q.higher.${metric}`, options: opts, revealOption: correct,
+      answer: mapNames((l) => `${fmt(win, l)} · ${fmt(lose, l)}`), attempts: 1, check: (x) => x === correct,
+    };
+  },
+};
+
+// ------------------------------------------------------------------ drapeau mystère
+// Le drapeau se dévoile petit à petit dans le navigateur : plus on répond tôt, plus on gagne.
+const flagrevealCat: Category = {
+  id: 'flagreveal',
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world', 'continent', 'subregion'],
+  pool: (zone, d, n) => countryPool(zone, d, n, hasFlag),
+  make(target, kind, _zone, rnd) {
+    const c = countries[target];
+    const base = { category: 'flagreveal', target, answer: c.names, flagIso: target, revealFlagIso: target, promptKey: 'q.flagreveal' };
+    if (kind !== 'type') {
+      const { options, correct } = optionsFrom(target, countryDistractors(target, 3, rnd, hasFlag, lookalikesOf(target)), rnd, (id) => ({ label: countries[id].names }));
+      return { ...base, kind: 'mcq', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    return { ...base, kind: 'type', attempts: 1, check: typedCheck(allNames(c.names), countryNameSet) };
+  },
+};
+
+// ------------------------------------------------------------------ course aux tables
+// Tables de multiplication ; en difficile, aussi le facteur manquant (« 7 × ? = 56 »).
+const TABLES: Record<Difficulty, number[]> = { easy: [2, 3, 4, 5, 10], medium: [2, 3, 4, 5, 6, 7, 8, 9, 10], hard: [3, 4, 6, 7, 8, 9, 11, 12] };
+const tablesCat: Category = {
+  id: 'tables',
+  noZone: true,
+  qtypes: ['type', 'mcq'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const set = new Set<string>();
+    const tabs = TABLES[d];
+    const hi = d === 'hard' ? 12 : 10;
+    for (let i = 0; set.size < n && i < n * 30; i++) {
+      const a = tabs[Math.floor(Math.random() * tabs.length)];
+      const b = 1 + Math.floor(Math.random() * hi);
+      const [x, y] = Math.random() < 0.5 ? [a, b] : [b, a];
+      set.add(d === 'hard' && Math.random() < 0.35 ? `f:${x}:${y}` : `m:${x}:${y}`);
+    }
+    return [...set];
+  },
+  make(target, kind, zone, rnd) {
+    if (!target.startsWith('f:')) return { ...calcCat.make(target, kind, zone, rnd), category: 'tables' };
+    // Facteur manquant : la réponse est y.
+    const [, x, y] = target.split(':');
+    const prod = Number(x) * Number(y);
+    const expr = `${x} × ? = ${prod}`;
+    const same = (v: string) => mapNames(() => v);
+    const base = { category: 'tables', target, answer: same(y), promptName: same(expr), promptKey: 'q.tables.missing' };
+    if (kind === 'mcq') {
+      const others = shuffle([...new Set([+y + 1, +y - 1, +y + 2, +y - 2, +x])].filter((v) => v > 0 && v !== +y), rnd).slice(0, 3);
+      const opts = shuffle([+y, ...others], rnd).map((v, i) => ({ id: `o${i}`, target: String(v), label: same(String(v)) }));
+      const correct = opts.find((o) => o.target === y)!.id;
+      return { ...base, kind: 'mcq', options: opts, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    return {
+      ...base, kind: 'type', attempts: 1,
+      check: (v) => Number(v.replace(/[٠-٩]/g, (c) => String(ARABIC_DIGITS.indexOf(c))).replace(/\s/g, '')) === Number(y),
+    };
+  },
+};
+
+// ------------------------------------------------------------------ fuseaux horaires
+// Le décalage est calculé le jour de la partie (heure d'été comprise) avec Intl.
+export function tzOffset(tz: string, at = new Date()): number {
+  const part = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' }).formatToParts(at).find((p) => p.type === 'timeZoneName')?.value ?? 'GMT';
+  const m = part.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+  return m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3] ?? 0)) : 0;
+}
+const NEXT_DAY: Names = { fr: 'le lendemain', en: 'next day', es: 'día siguiente', ar: 'اليوم التالي' };
+const PREV_DAY: Names = { fr: 'la veille', en: 'previous day', es: 'día anterior', ar: 'اليوم السابق' };
+const hhmm = (min: number) => `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`;
+function clockLabel(totalMin: number): Names {
+  const day = Math.floor(totalMin / 1440);
+  const t = hhmm(((totalMin % 1440) + 1440) % 1440);
+  return mapNames((l) => (day > 0 ? `${t} (${NEXT_DAY[l]})` : day < 0 ? `${t} (${PREV_DAY[l]})` : t));
+}
+const TZ_Q: Record<Lang, (base: string, time: string, city: string) => string> = {
+  fr: (b, t, c) => `Il est ${t} à ${b}. Quelle heure est-il à ${c} ?`,
+  en: (b, t, c) => `It is ${t} in ${b}. What time is it in ${c}?`,
+  es: (b, t, c) => `Son las ${t} en ${b}. ¿Qué hora es en ${c}?`,
+  ar: (b, t, c) => `الساعة ${t} في ${b}. كم الساعة في ${c}؟`,
+};
+/** Heure tapée : « 21 », « 21h », « 21:30 », « 9h30 », « 9 pm ». */
+export function parseClock(v: string): number | null {
+  const t = v.replace(/[٠-٩]/g, (c) => String(ARABIC_DIGITS.indexOf(c))).toLowerCase();
+  const m = t.match(/(\d{1,2})\s*(?:[:h.]\s*(\d{2}))?\s*(am|pm)?/);
+  if (!m) return null;
+  let h = Number(m[1]);
+  const mm = Number(m[2] ?? 0);
+  if (m[3] === 'pm' && h < 12) h += 12;
+  if (m[3] === 'am' && h === 12) h = 0;
+  return h > 24 || mm > 59 ? null : (h % 24) * 60 + mm;
+}
+const timezonesCat: Category = {
+  id: 'timezones',
+  noZone: true,
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.timezones, d, n),
+  make(target, kind, _zone, rnd) {
+    const city = extras.timezones.find((x) => x.id === target)!;
+    const now = new Date();
+    const off = tzOffset(city.tz, now);
+    // Ville de départ : une grande ville d'un autre fuseau.
+    const bases = extras.timezones.filter((x) => x.tier === 1 && x.id !== target && tzOffset(x.tz, now) !== off);
+    const base = bases.length ? bases[Math.floor(rnd() * bases.length)] : extras.timezones[0];
+    const start = (6 + Math.floor(rnd() * 16)) * 60; // entre 6:00 et 21:00
+    const diff = off - tzOffset(base.tz, now);
+    const right = start + diff;
+    const prompt = mapNames((l) => TZ_Q[l](base.names[l], hhmm(start), city.names[l]));
+    const qbase = { category: 'timezones', target, promptKey: 'cat.timezones', promptName: prompt, answer: clockLabel(right) };
+    if (kind === 'mcq') {
+      const cands = [right + 60, right - 60, right + 120, right - 120, start - diff, right + 180, right - 180].filter((v) => v !== right);
+      const others = shuffle([...new Set(cands)], rnd).slice(0, 3);
+      const opts = [right, ...others].sort((a, b) => a - b).map((v, i) => ({ id: `o${i}`, target: String(v), label: clockLabel(v) }));
+      const correct = opts.find((o) => o.target === String(right))!.id;
+      return { ...qbase, kind: 'mcq', options: opts, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    const want = ((right % 1440) + 1440) % 1440;
+    return { ...qbase, kind: 'type', attempts: 1, check: (v) => parseClock(v) === want };
+  },
+};
+
+// ------------------------------------------------------------------ où est-ce sur la carte ?
+// On pose une épingle ; les points dépendent de la distance (en km) à la capitale.
+function toLonLat(x: number, y: number): [number, number] {
+  const [x0, y1, scale] = world.proj ?? [0, 0, 0];
+  const px = x / scale + x0, py = y1 - y / scale;
+  // Projection Natural Earth inversée (Newton sur la latitude).
+  let p = py;
+  for (let i = 0; i < 12; i++) {
+    const p2 = p * p, p4 = p2 * p2;
+    const f = p * (1.007226 + p2 * (0.015085 + p4 * (-0.044475 + 0.028874 * p2 - 0.005916 * p4))) - py;
+    const df = 1.007226 + p2 * (3 * 0.015085 + p4 * (7 * -0.044475 + 9 * 0.028874 * p2 - 11 * 0.005916 * p4));
+    p -= f / df;
+  }
+  const p2 = p * p, p4 = p2 * p2;
+  const l = px / (0.8707 - 0.131979 * p2 + p4 * (-0.013791 + p4 * (0.003971 * p2 - 0.001529 * p4)));
+  return [l, p];
+}
+export function distanceKm(a: [number, number], b: [number, number]): number {
+  if (!world.proj) return Math.hypot(a[0] - b[0], a[1] - b[1]) * 40; // carte sans projection (démo)
+  const [l1, p1] = toLonLat(a[0], a[1]);
+  const [l2, p2] = toLonLat(b[0], b[1]);
+  const h = Math.sin((p2 - p1) / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin((l2 - l1) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+const hasPoint = (id: string) => hasCapital(id) && !!worldById[id]?.k;
+const pinCat: Category = {
+  id: 'pin',
+  qtypes: ['map'],
+  zoneKinds: ['world', 'continent', 'subregion'],
+  // En facile, le pays est donné avec la ville.
+  pool: (zone, d, n) => countryPool(zone, d, n, hasPoint).map((id) => `${id}|${d === 'easy' ? 1 : 0}`),
+  make(target, _kind, zone) {
+    const [id, hint] = target.split('|');
+    const c = countries[id];
+    const cap = c.capital!;
+    const k = worldById[id].k!;
+    // Barème selon la taille de la zone : tous les points tout près, plus rien très loin.
+    const span = distanceKm([zone.view[0], zone.view[1] + zone.view[3] / 2], [zone.view[0] + zone.view[2], zone.view[1] + zone.view[3] / 2]) || 20000;
+    const full = Math.max(80, span * 0.012), zero = Math.max(700, span * 0.12);
+    const grade = (v: string) => {
+      const [x, y] = v.split(',').map(Number);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return { ok: false, credit: 0 };
+      const km = distanceKm([x, y], k);
+      const credit = km <= full ? 1 : Math.max(0, 1 - (km - full) / (zero - full));
+      return { ok: credit >= 0.6, credit: Math.round(credit * 100) / 100, km: Math.round(km) };
+    };
+    return {
+      category: 'pin', kind: 'pin', target, promptKey: 'q.pin',
+      promptName: hint === '1' ? mapNames((l) => `${cap.names[l]} (${c.names[l]})`) : cap.names,
+      answer: mapNames((l) => `${cap.names[l]} — ${c.names[l]}`),
+      map: worldSpec(zone, 'shapes'), point: k, revealId: id, attempts: 1,
+      check: (v) => grade(v).ok, grade,
+    };
+  },
+};
+
+// ------------------------------------------------------------------ frise chronologique
+const YEAR_BC: Record<Lang, (y: number) => string> = { fr: (y) => `${y} av. J.-C.`, en: (y) => `${y} BC`, es: (y) => `${y} a. C.`, ar: (y) => `${y} ق.م` };
+const yearOf = (y: number, l: Lang) => (y < 0 ? YEAR_BC[l](-y) : String(y));
+const timelineCat: Category = {
+  id: 'timeline',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool(_zone, d, n) {
+    const maxTier = d === 'easy' ? 1 : d === 'medium' ? 2 : 3;
+    const gap = d === 'easy' ? 40 : d === 'medium' ? 15 : 4;
+    let list = extras.timeline.filter((e) => e.tier <= maxTier);
+    if (list.length < 8) list = extras.timeline;
+    const out = new Set<string>();
+    for (let i = 0; out.size < n && i < n * 40; i++) {
+      const pick: typeof list = [];
+      for (const e of shuffle(list, Math.random)) {
+        if (pick.every((p) => Math.abs(p.year - e.year) >= gap)) pick.push(e);
+        if (pick.length === 4) break;
+      }
+      if (pick.length === 4) out.add(pick.map((e) => e.id).sort().join(','));
+    }
+    return [...out];
+  },
+  make(target, _kind, _zone, rnd) {
+    const evs = target.split(',').map((id) => extras.timeline.find((e) => e.id === id)!);
+    const opts = shuffle(evs, rnd).map((e, i) => ({ id: `o${i}`, target: e.id, label: e.names }));
+    const order = evs.slice().sort((a, b) => a.year - b.year).map((e) => opts.find((o) => o.target === e.id)!.id);
+    const byOpt = Object.fromEntries(opts.map((o) => [o.id, evs.find((e) => e.id === o.target)!]));
+    return {
+      category: 'timeline', kind: 'order', target, promptKey: 'q.timeline', options: opts, order, attempts: 1,
+      answer: mapNames((l) => order.map((o) => `${yearOf(byOpt[o].year, l)} : ${byOpt[o].names[l]}`).join(' → ')),
+      check: (v) => v === order.join(','),
+    };
+  },
+};
+
+// ------------------------------------------------------------------ chaîne de pays
+// Un pays est donné : il faut en citer un autre qui commence par sa dernière lettre
+// (dans la langue du joueur : « Maroc » → C, « Morocco » → O, « المغرب » → ب).
+const letters = (s: string) => normalize(s).replace(/[^\p{L}]/gu, '');
+const lastLetter = (s: string) => letters(s).slice(-1);
+const firstLetter = (s: string) => letters(s).slice(0, 1);
+const chainable = (id: string) => !!worldById[id] && !countries[id].dependency;
+function chainAnswers(target: string): Record<Lang, string[]> {
+  const t = countries[target];
+  const all = Object.keys(countries).filter((id) => id !== target && chainable(id));
+  return Object.fromEntries(LANG_KEYS.map((l) => {
+    const want = lastLetter(t.names[l]);
+    const ok = all.filter((id) => firstLetter(countries[id].names[l]) === want);
+    // Les plus connus d'abord (exemples de réponse).
+    ok.sort((a, b) => (countries[b].fame ?? 0) - (countries[a].fame ?? 0));
+    return [l, ok];
+  })) as Record<Lang, string[]>;
+}
+const chainCat: Category = {
+  id: 'chain',
+  noZone: true,
+  qtypes: ['type'],
+  zoneKinds: ['world'],
+  pool(zone, d, n) {
+    // Seulement les pays qui laissent au moins 2 réponses possibles dans chaque langue.
+    return countryPool(zones.get('world')!, d, n, (id) => chainable(id) && Object.values(chainAnswers(id)).every((a) => a.length >= 2));
+  },
+  make(target) {
+    const t = countries[target];
+    const ok = chainAnswers(target);
+    const accepted = LANG_KEYS.flatMap((l) => ok[l].map((id) => countries[id].names[l]));
+    return {
+      category: 'chain', kind: 'type', target, promptKey: 'q.chain',
+      promptName: mapNames((l) => `${t.names[l]} → ${lastLetter(t.names[l]).toUpperCase()}…`),
+      answer: mapNames((l) => ok[l].slice(0, 3).map((id) => countries[id].names[l]).join(', ')),
+      attempts: 1, check: typedCheck(accepted, countryNameSet),
+    };
+  },
+};
+
+// ------------------------------------------------------------------ cris d'animaux
+const soundById = () => Object.fromEntries(extras.sounds.map((x) => [x.id, x]));
+let soundNames: Set<string> | null = null;
+const soundsCat: Category = {
+  id: 'sounds',
+  noZone: true,
+  media: 'sounds',
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.sounds.filter((s) => soundFor(s.id)), d, n),
+  make(target, kind, _zone, rnd) {
+    const a = soundById()[target];
+    const label = (x: { emoji?: string; names: Names }) => (x.emoji ? mapNames((l) => `${x.emoji} ${x.names[l]}`) : x.names);
+    const base = { category: 'sounds', target, answer: label(a), promptKey: 'q.sounds', imageRef: `wiki:snd:${target}`, credit: soundFor(target)?.credit };
+    if (kind === 'mcq') {
+      const others = shuffle(extras.sounds.filter((x) => x.id !== target && soundFor(x.id)), rnd).slice(0, 3).map((x) => x.id);
+      const byId = soundById();
+      const { options, correct } = optionsFrom(target, others, rnd, (id) => ({ label: label(byId[id]) }));
+      return { ...base, kind: 'mcq', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    soundNames ??= nameSet(extras.sounds.map((x) => x.names));
+    return { ...base, kind: 'type', attempts: 1, check: typedCheck(allNames(a.names), soundNames) };
+  },
+};
+
+// ------------------------------------------------------------------ stades et lieux mythiques (photos libres)
+const stadiumById = () => Object.fromEntries(extras.stadiums.map((m) => [m.id, m]));
+let stadiumNames: Set<string> | null = null;
+const stadiumsCat: Category = {
+  id: 'stadiums',
+  noZone: true,
+  media: 'stadiums',
+  qtypes: ['mcq', 'type'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.stadiums.filter((m) => photoFor(m.id)), d, n),
+  make(target, kind, _zone, rnd) {
+    const m = stadiumById()[target];
+    const photo = photoFor(target)!;
+    const c = countries[m.country];
+    const base = { category: 'stadiums', target, imageRef: `wiki:${target}`, credit: photo.credit };
+    const full = mapNames((l) => `${m.names[l]} — ${m.home ? m.home[l] : c.names[l]}`);
+    const all = extras.stadiums.filter((x) => x.id !== target && photoFor(x.id));
+    const near = [...shuffle(all.filter((x) => x.sport === m.sport), rnd), ...shuffle(all.filter((x) => x.sport !== m.sport), rnd)];
+    if (kind === 'type') {
+      stadiumNames ??= nameSet(extras.stadiums.flatMap((x) => (x.home ? [x.names, x.home] : [x.names])));
+      const accepted = [...allNames(m.names), ...(m.home ? allNames(m.home) : [])];
+      return { ...base, kind: 'type', answer: full, promptKey: 'q.stadiums.type', attempts: 1, check: typedCheck(accepted, stadiumNames) };
+    }
+    const roll = rnd();
+    if (m.home && roll < 0.4) {
+      // « Qui joue ici ? » : pièges parmi les clubs et événements des autres lieux.
+      const homes = near.filter((x) => x.home);
+      const { options, correct } = optionsFrom(target, homes.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: stadiumById()[id].home! }));
+      return { ...base, kind: 'mcq', answer: full, promptKey: 'q.stadiums.home', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    if (roll < 0.8) {
+      const { options, correct } = optionsFrom(target, near.slice(0, 3).map((x) => x.id), rnd, (id) => ({ label: stadiumById()[id].names }));
+      return { ...base, kind: 'mcq', answer: full, promptKey: 'q.stadiums.name', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    const { options, correct } = optionsFrom(m.country, countryDistractors(m.country, 3, rnd, (x) => !countries[x].dependency), rnd, (id) => ({ label: countries[id].names }));
+    return { ...base, kind: 'mcq', answer: full, promptKey: 'q.stadiums.country', options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+  },
+};
+
+// ------------------------------------------------------------------ couleurs des équipes (maillots dessinés)
+// Deux maillots « qui se ressemblent » (même motif, mêmes teintes) ne sont jamais proposés ensemble.
+function hueName(hex: string): string {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) / 255, g = ((n >> 8) & 255) / 255, b = (n & 255) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2, d = max - min;
+  if (l > 0.85) return 'white';
+  if (l < 0.15) return 'black';
+  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+  if (s < 0.2) return 'grey';
+  let h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  h = (h * 60 + 360) % 360;
+  if (h < 18 || h >= 330) return 'red';
+  if (h < 45) return 'orange';
+  if (h < 70) return 'yellow';
+  if (h < 170) return 'green';
+  if (h < 250) return l > 0.5 ? 'sky' : 'blue';
+  return 'red';
+}
+export const kitLook = (k: KitSpec) => (k.p === 'plain' ? `plain:${hueName(k.c[0])}` : `${k.p}:${k.c.slice(0, 2).map(hueName).sort().join('+')}`);
+const NATIONS = new Set(['bra', 'arg', 'ned', 'cro', 'fra', 'ita', 'ger', 'mar', 'mex', 'esp', 'por', 'cmr', 'jpn']);
+const kitsCat: Category = {
+  id: 'kits',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool: (_zone, d, n) => tierPool(extras.kits, d, n),
+  make(target, _kind, _zone, rnd) {
+    const k = extras.kits.find((x) => x.id === target)!;
+    const look = kitLook(k.kit);
+    const others = extras.kits.filter((x) => x.id !== target && kitLook(x.kit) !== look);
+    // Pièges : d'abord le même genre (club ou sélection), sans doublons de look.
+    const same = (x: { id: string }) => NATIONS.has(x.id) === NATIONS.has(target);
+    const picked: typeof others = [];
+    for (const x of [...shuffle(others.filter(same), rnd), ...shuffle(others.filter((y) => !same(y)), rnd)]) {
+      if (picked.length === 3) break;
+      if (!picked.some((p) => kitLook(p.kit) === kitLook(x.kit))) picked.push(x);
+    }
+    const byId = Object.fromEntries(extras.kits.map((x) => [x.id, x]));
+    const { options, correct } = optionsFrom(target, picked.map((x) => x.id), rnd, (id) => ({ label: byId[id].names }));
+    return {
+      category: 'kits', kind: 'mcq', target, promptKey: NATIONS.has(target) ? 'q.kits.nation' : 'q.kits.club', kit: k.kit,
+      answer: k.names, options, revealOption: correct, attempts: 1, check: (v) => v === correct,
+    };
+  },
+};
+
+// ------------------------------------------------------------------ défi du jour
+// Dix questions, une par jeu, identiques pour tout le monde le même jour (tirage à graine).
+export const DAILY_GAMES = ['flags', 'capitals', 'countries', 'emoji', 'food', 'sport', 'space', 'animals', 'maroc', 'silhouettes'];
+export const dayKey = (t = Date.now()) => new Date(t).toISOString().slice(0, 10);
+export function seeded(seed: string): () => number {
+  let h = 1779033703 ^ seed.length;
+  for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  let a = h >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+export function dailyQuestions(day = dayKey()): InternalQuestion[] {
+  const rnd = seeded(`quizellige:${day}`);
+  const world = zones.get('world')!;
+  const out: InternalQuestion[] = [];
+  for (const id of DAILY_GAMES) {
+    const cat = CATEGORIES[id];
+    if (!cat) continue;
+    const pool = cat.pool(world, 'medium', 30).slice().sort();
+    if (!pool.length) continue;
+    const t = pool[Math.floor(rnd() * pool.length)];
+    const q = cat.make(t, 'mcq', world, rnd);
+    if (q.map?.map === 'world') q.map = { ...q.map, active: q.map.active.filter((x) => x === t || !countries[x]?.dependency) };
+    out.push(q);
+  }
+  return out;
+}
+const dailyCat: Category = {
+  id: 'daily',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool: () => [],
+  make() { throw new Error('défi du jour : voir dailyQuestions'); },
+};
+
 // ------------------------------------------------------------------ quiz créés (« Crée ton quiz »)
 // Les questions viennent du quiz chargé par la salle (voir rooms.ts, customQuestions) ;
 // cette entrée sert au catalogue et à la validation des réglages.
@@ -714,7 +1165,8 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 }
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
-  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats].map((c) => [c.id, c]),
+  [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat].map((c) => [c.id, c]),
 );
 
 /**

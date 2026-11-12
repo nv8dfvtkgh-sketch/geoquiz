@@ -32,6 +32,9 @@ interface Props {
   highlight?: string;
   marks?: Record<string, Mark>;
   onPick?: (id: string) => void;
+  /** « Où est-ce ? » : un toucher n'importe où pose l'épingle. */
+  onPin?: (p: [number, number]) => void;
+  pins?: { mine?: [number, number]; target?: [number, number] };
   t: T;
 }
 
@@ -40,7 +43,7 @@ const DOT_PX = 5; // rond discret à l'écran
 const DOT_FOCUS_PX = 9; // rond mis en avant (réponse, erreur, pays surligné)
 const HIT_PX = 14; // zone tactile invisible, plus large que le rond
 
-export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
+export function MapView({ spec, highlight, marks = {}, onPick, onPin, pins, t }: Props) {
   const data = useMap(spec.map);
   const svgRef = useRef<SVGSVGElement>(null);
   const [size, setSize] = useState({ w: 1, h: 1 });
@@ -126,12 +129,30 @@ export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
   const onUp = (e: React.PointerEvent) => {
     ptrs.current.delete(e.pointerId);
     const g = gesture.current;
+    if (ptrs.current.size === 0 && !g.multi && g.moved <= 6 && onPin) {
+      const svg = svgRef.current!;
+      const m = svg.getScreenCTM();
+      if (m) {
+        const pt = svg.createSVGPoint();
+        pt.x = e.clientX; pt.y = e.clientY;
+        const p = pt.matrixTransform(m.inverse());
+        onPin([Math.round(p.x * 10) / 10, Math.round(p.y * 10) / 10]);
+      }
+      return;
+    }
     if (ptrs.current.size === 0 && !g.multi && g.moved <= 6 && g.target && onPick) onPick(g.target);
   };
 
   const active = useMemo(() => new Set(spec.active), [spec.active]);
   const capitals = spec.layer === 'capitals';
   const interactive = !!onPick;
+  const pinLayer = pins && (
+    <g className="pins">
+      {pins.mine && pins.target && <line className="pin-line" x1={pins.mine[0]} y1={pins.mine[1]} x2={pins.target[0]} y2={pins.target[1]} strokeWidth={upp * 2} strokeDasharray={`${upp * 6} ${upp * 4}`} />}
+      {pins.target && <circle className="pin-target" cx={pins.target[0]} cy={pins.target[1]} r={upp * 8} strokeWidth={upp * 3} />}
+      {pins.mine && <circle className="pin-mine" cx={pins.mine[0]} cy={pins.mine[1]} r={upp * 7} strokeWidth={upp * 2.5} />}
+    </g>
+  );
 
   const land = useMemo(() => {
     if (!data) return null;
@@ -175,7 +196,7 @@ export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
   }, [data, active, capitals, marks, upp, interactive, highlight]);
 
   return (
-    <div className={`mapbox ${interactive ? 'interactive' : ''}`} dir="ltr">
+    <div className={`mapbox ${interactive || onPin ? 'interactive' : ''}`} dir="ltr">
       <svg
         ref={svgRef}
         className="map"
@@ -190,6 +211,7 @@ export function MapView({ spec, highlight, marks = {}, onPick, t }: Props) {
         <rect className="ocean" x={-5000} y={-5000} width={12000} height={12000} />
         <g className={capitals ? 'land muted' : 'land'}>{land}</g>
         <g>{dots}</g>
+        {pinLayer}
       </svg>
       {!data && <div className="map-loading" />}
       <div className="zoom">

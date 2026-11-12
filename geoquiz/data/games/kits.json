@@ -1,0 +1,752 @@
+[
+ {
+  "id": "barca",
+  "tier": 1,
+  "names": {
+   "fr": "FC Barcelone",
+   "en": "FC Barcelona",
+   "es": "FC Barcelona",
+   "ar": "برشلونة"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#a50044",
+    "#004d98"
+   ],
+   "sh": "#004d98"
+  }
+ },
+ {
+  "id": "real",
+  "tier": 1,
+  "names": {
+   "fr": "Real Madrid",
+   "en": "Real Madrid",
+   "es": "Real Madrid",
+   "ar": "ريال مدريد"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "atletico",
+  "tier": 2,
+  "names": {
+   "fr": "Atlético de Madrid",
+   "en": "Atlético Madrid",
+   "es": "Atlético de Madrid",
+   "ar": "أتلتيكو مدريد"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#cb3524",
+    "#ffffff"
+   ],
+   "sh": "#1c2c5b"
+  }
+ },
+ {
+  "id": "juve",
+  "tier": 1,
+  "names": {
+   "fr": "Juventus",
+   "en": "Juventus",
+   "es": "Juventus",
+   "ar": "يوفنتوس"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#000000",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "milan",
+  "tier": 1,
+  "names": {
+   "fr": "AC Milan",
+   "en": "AC Milan",
+   "es": "AC Milan",
+   "ar": "ميلان"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#d4001f",
+    "#111111"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "inter",
+  "tier": 2,
+  "names": {
+   "fr": "Inter Milan",
+   "en": "Inter Milan",
+   "es": "Inter de Milán",
+   "ar": "إنتر ميلان"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#0068a8",
+    "#111111"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "psg",
+  "tier": 1,
+  "names": {
+   "fr": "Paris Saint-Germain",
+   "en": "Paris Saint-Germain",
+   "es": "París Saint-Germain",
+   "ar": "باريس سان جيرمان"
+  },
+  "kit": {
+   "p": "band",
+   "c": [
+    "#004170",
+    "#da291c",
+    "#ffffff"
+   ],
+   "sh": "#004170"
+  }
+ },
+ {
+  "id": "om",
+  "tier": 1,
+  "names": {
+   "fr": "Olympique de Marseille",
+   "en": "Olympique de Marseille",
+   "es": "Olympique de Marsella",
+   "ar": "أولمبيك مارسيليا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#ffffff",
+    "#2faee0"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "ajax",
+  "tier": 2,
+  "names": {
+   "fr": "Ajax Amsterdam",
+   "en": "Ajax",
+   "es": "Ajax de Ámsterdam",
+   "ar": "أياكس أمستردام"
+  },
+  "kit": {
+   "p": "band",
+   "c": [
+    "#ffffff",
+    "#d2122e"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "boca",
+  "tier": 1,
+  "names": {
+   "fr": "Boca Juniors",
+   "en": "Boca Juniors",
+   "es": "Boca Juniors",
+   "ar": "بوكا جونيورز"
+  },
+  "kit": {
+   "p": "hband",
+   "c": [
+    "#103f79",
+    "#f3b229"
+   ],
+   "sh": "#103f79"
+  }
+ },
+ {
+  "id": "river",
+  "tier": 2,
+  "names": {
+   "fr": "River Plate",
+   "en": "River Plate",
+   "es": "River Plate",
+   "ar": "ريفر بليت"
+  },
+  "kit": {
+   "p": "sash",
+   "c": [
+    "#ffffff",
+    "#e30613"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "celtic",
+  "tier": 2,
+  "names": {
+   "fr": "Celtic Glasgow",
+   "en": "Celtic",
+   "es": "Celtic de Glasgow",
+   "ar": "سلتيك"
+  },
+  "kit": {
+   "p": "hoops",
+   "c": [
+    "#018749",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "porto",
+  "tier": 2,
+  "names": {
+   "fr": "FC Porto",
+   "en": "FC Porto",
+   "es": "FC Oporto",
+   "ar": "بورتو"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#0047ab",
+    "#ffffff"
+   ],
+   "sh": "#0047ab"
+  }
+ },
+ {
+  "id": "benfica",
+  "tier": 3,
+  "names": {
+   "fr": "Benfica",
+   "en": "Benfica",
+   "es": "Benfica",
+   "ar": "بنفيكا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#e00000"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "liverpool",
+  "tier": 1,
+  "names": {
+   "fr": "Liverpool",
+   "en": "Liverpool",
+   "es": "Liverpool",
+   "ar": "ليفربول"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#c8102e"
+   ],
+   "sh": "#c8102e"
+  }
+ },
+ {
+  "id": "manutd",
+  "tier": 1,
+  "names": {
+   "fr": "Manchester United",
+   "en": "Manchester United",
+   "es": "Manchester United",
+   "ar": "مانشستر يونايتد"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#da291c",
+    "#111111"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "arsenal",
+  "tier": 2,
+  "names": {
+   "fr": "Arsenal",
+   "en": "Arsenal",
+   "es": "Arsenal",
+   "ar": "آرسنال"
+  },
+  "kit": {
+   "p": "sleeves",
+   "c": [
+    "#ef0107",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "chelsea",
+  "tier": 2,
+  "names": {
+   "fr": "Chelsea",
+   "en": "Chelsea",
+   "es": "Chelsea",
+   "ar": "تشيلسي"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#034694"
+   ],
+   "sh": "#034694"
+  }
+ },
+ {
+  "id": "city",
+  "tier": 2,
+  "names": {
+   "fr": "Manchester City",
+   "en": "Manchester City",
+   "es": "Manchester City",
+   "ar": "مانشستر سيتي"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#6cabdd"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "dortmund",
+  "tier": 2,
+  "names": {
+   "fr": "Borussia Dortmund",
+   "en": "Borussia Dortmund",
+   "es": "Borussia Dortmund",
+   "ar": "بوروسيا دورتموند"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#fde100",
+    "#111111"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "newcastle",
+  "tier": 3,
+  "names": {
+   "fr": "Newcastle United",
+   "en": "Newcastle United",
+   "es": "Newcastle United",
+   "ar": "نيوكاسل يونايتد"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#111111",
+    "#ffffff"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "galatasaray",
+  "tier": 2,
+  "names": {
+   "fr": "Galatasaray",
+   "en": "Galatasaray",
+   "es": "Galatasaray",
+   "ar": "غلطة سراي"
+  },
+  "kit": {
+   "p": "halves",
+   "c": [
+    "#a90432",
+    "#fdb912"
+   ],
+   "sh": "#a90432"
+  }
+ },
+ {
+  "id": "fener",
+  "tier": 3,
+  "names": {
+   "fr": "Fenerbahçe",
+   "en": "Fenerbahçe",
+   "es": "Fenerbahçe",
+   "ar": "فنربخشة"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#ffed00",
+    "#00205b"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "raja",
+  "tier": 1,
+  "names": {
+   "fr": "Raja Casablanca",
+   "en": "Raja Casablanca",
+   "es": "Raja Casablanca",
+   "ar": "الرجاء الرياضي"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#00843d",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "wydad",
+  "tier": 1,
+  "names": {
+   "fr": "Wydad Casablanca",
+   "en": "Wydad Casablanca",
+   "es": "Wydad Casablanca",
+   "ar": "الوداد الرياضي"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#d71920",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "zamalek",
+  "tier": 2,
+  "names": {
+   "fr": "Zamalek",
+   "en": "Zamalek",
+   "es": "Zamalek",
+   "ar": "الزمالك"
+  },
+  "kit": {
+   "p": "hbands",
+   "c": [
+    "#ffffff",
+    "#d50000"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "esperance",
+  "tier": 3,
+  "names": {
+   "fr": "Espérance de Tunis",
+   "en": "Espérance de Tunis",
+   "es": "Esperance de Túnez",
+   "ar": "الترجي الرياضي"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#d50000",
+    "#ffd200"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "flamengo",
+  "tier": 2,
+  "names": {
+   "fr": "Flamengo",
+   "en": "Flamengo",
+   "es": "Flamengo",
+   "ar": "فلامنغو"
+  },
+  "kit": {
+   "p": "hoops",
+   "c": [
+    "#c4161c",
+    "#111111"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "feyenoord",
+  "tier": 3,
+  "names": {
+   "fr": "Feyenoord",
+   "en": "Feyenoord",
+   "es": "Feyenoord",
+   "ar": "فينورد"
+  },
+  "kit": {
+   "p": "halves",
+   "c": [
+    "#ffffff",
+    "#e2001a"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "bra",
+  "tier": 1,
+  "names": {
+   "fr": "Brésil",
+   "en": "Brazil",
+   "es": "Brasil",
+   "ar": "البرازيل"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#ffdc02",
+    "#009c3b"
+   ],
+   "sh": "#002776"
+  }
+ },
+ {
+  "id": "arg",
+  "tier": 1,
+  "names": {
+   "fr": "Argentine",
+   "en": "Argentina",
+   "es": "Argentina",
+   "ar": "الأرجنتين"
+  },
+  "kit": {
+   "p": "stripes",
+   "c": [
+    "#75aadb",
+    "#ffffff"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "ned",
+  "tier": 1,
+  "names": {
+   "fr": "Pays-Bas",
+   "en": "Netherlands",
+   "es": "Países Bajos",
+   "ar": "هولندا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#f36c21"
+   ],
+   "sh": "#f36c21"
+  }
+ },
+ {
+  "id": "cro",
+  "tier": 1,
+  "names": {
+   "fr": "Croatie",
+   "en": "Croatia",
+   "es": "Croacia",
+   "ar": "كرواتيا"
+  },
+  "kit": {
+   "p": "checks",
+   "c": [
+    "#ff0000",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "fra",
+  "tier": 1,
+  "names": {
+   "fr": "France",
+   "en": "France",
+   "es": "Francia",
+   "ar": "فرنسا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#002395",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "ita",
+  "tier": 1,
+  "names": {
+   "fr": "Italie",
+   "en": "Italy",
+   "es": "Italia",
+   "ar": "إيطاليا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#0066b3"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "ger",
+  "tier": 2,
+  "names": {
+   "fr": "Allemagne",
+   "en": "Germany",
+   "es": "Alemania",
+   "ar": "ألمانيا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#ffffff",
+    "#111111"
+   ],
+   "sh": "#111111"
+  }
+ },
+ {
+  "id": "mar",
+  "tier": 1,
+  "names": {
+   "fr": "Maroc",
+   "en": "Morocco",
+   "es": "Marruecos",
+   "ar": "المغرب"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#c1272d",
+    "#006233"
+   ],
+   "sh": "#006233"
+  }
+ },
+ {
+  "id": "mex",
+  "tier": 2,
+  "names": {
+   "fr": "Mexique",
+   "en": "Mexico",
+   "es": "México",
+   "ar": "المكسيك"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#006847",
+    "#ffffff"
+   ],
+   "sh": "#ffffff"
+  }
+ },
+ {
+  "id": "esp",
+  "tier": 2,
+  "names": {
+   "fr": "Espagne",
+   "en": "Spain",
+   "es": "España",
+   "ar": "إسبانيا"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#c60b1e",
+    "#ffc400"
+   ],
+   "sh": "#1c2c5b"
+  }
+ },
+ {
+  "id": "por",
+  "tier": 2,
+  "names": {
+   "fr": "Portugal",
+   "en": "Portugal",
+   "es": "Portugal",
+   "ar": "البرتغال"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#a6192e",
+    "#046a38"
+   ],
+   "sh": "#046a38"
+  }
+ },
+ {
+  "id": "cmr",
+  "tier": 3,
+  "names": {
+   "fr": "Cameroun",
+   "en": "Cameroon",
+   "es": "Camerún",
+   "ar": "الكاميرون"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#007a5e",
+    "#fcd116"
+   ],
+   "sh": "#ce1126"
+  }
+ },
+ {
+  "id": "jpn",
+  "tier": 3,
+  "names": {
+   "fr": "Japon",
+   "en": "Japan",
+   "es": "Japón",
+   "ar": "اليابان"
+  },
+  "kit": {
+   "p": "plain",
+   "c": [
+    "#00205b",
+    "#ffffff"
+   ],
+   "sh": "#00205b"
+  }
+ }
+]

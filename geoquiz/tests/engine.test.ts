@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (cat === 'custom' || cat === 'monuments') continue; // quiz créés, monuments (photos) : tests dédiés plus bas
+    if (cat === 'custom' || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -384,7 +384,7 @@ test('Rébus emojis et Monuments (photos Wikipédia simulées)', async () => {
       assert.ok(q.check(q.revealOption!));
     } else assert.ok(q.check(q.answer.fr) && q.check(q.answer.en), q.answer.fr);
   }
-  const lion = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'easy', qtype: 'type', count: 50 })).find((q) => q.target === 'f-lionking')!;
+  const lion = drawQuestions(settings({ category: 'emoji', zone: 'world', difficulty: 'easy', qtype: 'type', count: 400 })).find((q) => q.target === 'f-lionking')!;
   assert.ok(lion.check('le roi lion') && lion.check('The Lion King') && lion.check('الأسد الملك') && !lion.check('Titanic'));
 
   // Monuments : Wikipédia simulé (un monument sans photo libre).
@@ -660,4 +660,153 @@ test('Packs : sciences, sport par discipline, Maroc, code de la route, vocabulai
   assert.ok(new Set(sport.map((q) => q.target.split('-')[0])).size >= 4, 'le mélange sport couvre plusieurs disciplines');
   const signs = drawQuestions(settings({ category: 'roadsigns', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 30 })).filter((q) => q.sign);
   assert.ok(signs.length >= 15);
+});
+
+test('Lot 2-3 : plus ou moins, drapeau mystère, tables, fuseaux, frise, chaîne, maillots', async () => {
+  const { extras } = await import('../src/server/data');
+  const { tzOffset, parseClock, kitLook } = await import('../src/server/categories');
+  for (const d of ['easy', 'medium', 'hard'] as const) {
+    for (const cat of ['higher', 'flagreveal', 'tables', 'timezones', 'timeline', 'chain', 'kits']) {
+      const qs = drawQuestions(settings({ category: cat, zone: 'world', difficulty: d, qtype: 'auto', count: 8 }));
+      assert.ok(qs.length >= 5, `${cat}/${d} : ${qs.length}`);
+      for (const q of qs) {
+        if (q.kind === 'mcq') {
+          assert.ok(q.options!.length >= 2 && q.check(q.revealOption!), `${cat} : bonne réponse`);
+          assert.equal(q.options!.filter((o) => q.check(o.id)).length, 1, `${cat} : une seule bonne réponse`);
+        }
+        for (const l of ['fr', 'en', 'es', 'ar'] as const) assert.ok(q.answer[l], `${cat} ${l} réponse`);
+      }
+    }
+  }
+  // Plus ou moins : la bonne option est bien la plus grande.
+  for (const q of drawQuestions(settings({ category: 'higher', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 20 }))) {
+    const m = q.promptKey.endsWith('pop') ? 'pop' : 'area';
+    const good = q.options!.find((o) => o.id === q.revealOption)!.target;
+    const bad = q.options!.find((o) => o.id !== q.revealOption)!.target;
+    assert.ok(countries[good][m]! > countries[bad][m]!);
+  }
+  // Tables : réponse tapée.
+  const t = drawQuestions(settings({ category: 'tables', zone: 'world', difficulty: 'hard', qtype: 'type', count: 30 }));
+  for (const q of t) assert.ok(q.check(q.answer.fr) && !q.check('99999'));
+  // Fuseaux : décalages réels, heure tapée.
+  assert.equal(tzOffset('Asia/Kolkata'), 330);
+  assert.equal(tzOffset('Asia/Tokyo'), 540);
+  assert.equal(parseClock('21h30'), 21 * 60 + 30);
+  assert.equal(parseClock('9 pm'), 21 * 60);
+  assert.equal(parseClock('٠٧:٠٥'), 7 * 60 + 5);
+  const tz = drawQuestions(settings({ category: 'timezones', zone: 'world', difficulty: 'hard', qtype: 'type', count: 10 }));
+  for (const q of tz) assert.ok(q.check(q.answer.fr.slice(0, 5)), q.answer.fr);
+  // Frise : l'ordre chronologique est accepté, pas un autre.
+  const tl = drawQuestions(settings({ category: 'timeline', zone: 'world', difficulty: 'easy', qtype: 'auto', count: 6 }));
+  for (const q of tl) {
+    assert.equal(q.kind, 'order');
+    assert.ok(q.check(q.order!.join(',')) && !q.check(q.order!.slice().reverse().join(',')));
+    const years = q.order!.map((o) => extras.timeline.find((e) => e.id === q.options!.find((x) => x.id === o)!.target)!.year);
+    assert.deepEqual(years, years.slice().sort((a, b) => a - b));
+  }
+  // Chaîne : « Maroc » → un pays en C (fr), en O (en).
+  const chain = CATEGORIES.chain.make('MA', 'type', zones.get('world')!, Math.random);
+  assert.equal(chain.promptName!.fr, 'Maroc → C…');
+  const okFr = Object.values(countries).find((c) => /^c/i.test(c.names.fr) && c.names.fr !== 'Maroc');
+  if (okFr) assert.ok(chain.check(okFr.names.fr), okFr.names.fr);
+  assert.ok(!chain.check('Maroc'));
+  // Maillots : jamais deux looks identiques dans les choix.
+  for (const q of drawQuestions(settings({ category: 'kits', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 40 }))) {
+    const looks = q.options!.map((o) => kitLook(extras.kits.find((k) => k.id === o.target)!.kit));
+    assert.equal(new Set(looks).size, looks.length, looks.join(' '));
+  }
+});
+
+test('Où est-ce sur la carte : points selon la distance', () => {
+  const qs = drawQuestions(settings({ category: 'pin', zone: 'world', difficulty: 'easy', qtype: 'auto', count: 5 }));
+  assert.ok(qs.length >= 3);
+  for (const q of qs) {
+    assert.equal(q.kind, 'pin');
+    const [x, y] = q.point!;
+    const exact = q.grade!(`${x},${y}`);
+    assert.ok(exact.ok && exact.credit === 1 && exact.km === 0);
+    const far = q.grade!(`${x + 400},${y}`);
+    assert.ok(!far.ok && far.credit === 0);
+    assert.ok(!q.grade!('nimporte').ok);
+  }
+  // Partie solo : les points tombent même sans être « juste ».
+  const room = create('solo', settings({ category: 'pin', zone: 'world', difficulty: 'easy', qtype: 'auto', count: 3 }));
+  const c = client();
+  onMessage(c.conn, room.code, { t: 'join', name: 'A', lang: 'fr' });
+  const q = room.round!.q;
+  onMessage(c.conn, room.code, { t: 'answer', q: 0, value: `${q.point![0] + 3},${q.point![1]}` });
+  const fb = c.last('feedback')!;
+  assert.ok(fb.km! > 0 && fb.points > 0 && fb.reveal?.point);
+});
+
+test('Défi du jour : mêmes questions pour tous le même jour', async () => {
+  const { dailyQuestions } = await import('../src/server/categories');
+  const a = dailyQuestions('2026-11-12').map((q) => `${q.category}:${q.target}:${q.revealOption}`);
+  const b = dailyQuestions('2026-11-12').map((q) => `${q.category}:${q.target}:${q.revealOption}`);
+  const c = dailyQuestions('2026-11-13').map((q) => `${q.category}:${q.target}`);
+  assert.deepEqual(a, b);
+  assert.notDeepEqual(a.map((x) => x.split(':').slice(0, 2).join(':')), c);
+  assert.ok(a.length >= 8);
+});
+
+test('Buzzer : seul le premier qui trouve marque, une erreur coûte des points', () => {
+  const room = create('room', settings({ category: 'flags', zone: 'world', difficulty: 'easy', qtype: 'mcq', count: 3, mode: 'buzzer' }), false);
+  const host = client(), a = client(), b = client(), c = client();
+  onMessage(host.conn, room.code, { t: 'join', name: 'Hôte', lang: 'fr' });
+  for (const [x, n] of [[a, 'A'], [b, 'B'], [c, 'C']] as const) onMessage(x.conn, room.code, { t: 'join', name: n, lang: 'fr' });
+  onMessage(host.conn, room.code, { t: 'start' });
+  const q = room.round!.q;
+  const wrong = q.options!.find((o) => o.id !== q.revealOption)!.id;
+  onMessage(c.conn, room.code, { t: 'answer', q: 0, value: wrong });
+  onMessage(a.conn, room.code, { t: 'answer', q: 0, value: q.revealOption! });
+  onMessage(b.conn, room.code, { t: 'answer', q: 0, value: q.revealOption! });
+  assert.equal(a.last('feedback')!.points, 1000);
+  assert.equal(b.last('feedback')!.points, 0);
+  assert.equal(c.last('feedback')!.points, -250);
+  room.endRound();
+  const score = Object.fromEntries(room.players().map((p) => [p.name, p.score]));
+  assert.deepEqual(score, { A: 1000, B: 0, C: 0 });
+  room.destroy();
+});
+
+test('Cris d\'animaux et stades (Wikimedia simulé)', async () => {
+  const { extras } = await import('../src/server/data');
+  const { ensureSounds, ensurePhotos, soundFor, mp3Of, resetPhotos } = await import('../src/server/photos');
+  resetPhotos();
+  const fake = async (url: string) => {
+    const u = new URL(url);
+    const q = u.searchParams.get('gsrsearch') ?? '';
+    if (q.startsWith('lion')) return new Response(JSON.stringify({ query: { pages: [
+      { index: 1, title: 'File:Lion documentary.ogg', imageinfo: [{ url: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Doc.ogg', mediatype: 'AUDIO', duration: 600, extmetadata: { LicenseShortName: { value: 'CC BY 4.0' } } }] },
+      { index: 2, title: 'File:Lion roar.ogg', imageinfo: [{ url: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Lion_roar.ogg', mediatype: 'AUDIO', duration: 6, extmetadata: { Artist: { value: 'Ana' }, LicenseShortName: { value: 'CC BY-SA 3.0' } } }] },
+    ] } }));
+    if (q.startsWith('cow') || q.startsWith('dog') || q.startsWith('cat ')) return new Response(JSON.stringify({ query: { pages: [
+      { index: 1, title: 'File:x.wav', imageinfo: [{ url: `https://upload.wikimedia.org/wikipedia/commons/1/12/${q.split(' ')[0]}.wav`, mediatype: 'AUDIO', duration: 3, extmetadata: { LicenseShortName: { value: 'Public domain' } } }] },
+    ] } }));
+    if (u.searchParams.get('titles')) {
+      const titles = u.searchParams.get('titles')!.split('|');
+      return new Response(JSON.stringify({ query: { pages: titles.map((t) => ({ title: t, pageimage: 'P.jpg', thumbnail: { source: 'https://upload.example/p.jpg' }, imageinfo: [{ extmetadata: { LicenseShortName: { value: 'CC BY 2.0' } } }] })) } }));
+    }
+    return new Response(JSON.stringify({ query: {} }));
+  };
+  assert.ok(await ensureSounds(extras.sounds, fake as any));
+  assert.equal(soundFor('lion')?.url, 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Lion_roar.ogg', 'le documentaire de 10 minutes est écarté');
+  assert.equal(soundFor('lion')?.mp3, 'https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cd/Lion_roar.ogg/Lion_roar.ogg.mp3');
+  assert.equal(mp3Of('https://upload.wikimedia.org/wikipedia/commons/a/ab/x.mp3'), 'https://upload.wikimedia.org/wikipedia/commons/a/ab/x.mp3');
+  assert.equal(soundFor('horse'), undefined);
+  const room = create('solo', settings({ category: 'sounds', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 4 }));
+  const c = client();
+  onMessage(c.conn, room.code, { t: 'join', name: 'A', lang: 'fr' });
+  const q = c.last('question')!.q;
+  assert.ok(q.sound && !q.image && q.options!.length === 4);
+  assert.ok(room.resolveImage(q.sound!)!.startsWith('wiki:snd:'));
+  room.destroy();
+  // Stades : photos, et « qui joue ici ? ».
+  assert.ok(await ensurePhotos(extras.stadiums, fake as any, 'stadiums'));
+  const st = drawQuestions(settings({ category: 'stadiums', zone: 'world', difficulty: 'hard', qtype: 'mix', count: 30 }));
+  assert.ok(st.length >= 20);
+  for (const s of st) {
+    if (s.kind === 'mcq') assert.ok(s.check(s.revealOption!) && s.options!.length === 4);
+    else assert.ok(s.check(extras.stadiums.find((x) => x.id === s.target)!.names.fr));
+  }
 });

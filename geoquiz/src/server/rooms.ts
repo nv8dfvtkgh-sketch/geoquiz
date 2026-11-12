@@ -5,10 +5,10 @@ import {
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
   type ServerMsg, type Settings, type Reward,
 } from '../shared/protocol';
-import { CATEGORIES, customQuestions, localize, shuffle, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { countries, ensureRegion, extras, regionLoaded, zones } from './data';
-import { ensurePhotos, photosLoaded } from './photos';
+import { ensurePhotos, ensureSounds, photosLoaded } from './photos';
 import type { GameResult } from './accounts';
 
 export interface Conn {
@@ -53,6 +53,7 @@ interface AnswerState {
   timeMs: number | null;
   credit: number;
   answer?: string;
+  km?: number;
 }
 
 interface Round {
@@ -63,6 +64,7 @@ interface Round {
   msgByLang: Partial<Record<Lang, QuestionMsg>>;
   revealByLang: Partial<Record<Lang, Reveal>>;
   flagTokens: Record<string, string>;
+  buzzed?: string; // mode Buzzer : premier joueur à avoir trouvé
 }
 
 // Aléatoire cryptographique standard (disponible dans Node 20+ et dans Cloudflare Workers).
@@ -98,7 +100,7 @@ export function validSettings(s: any): Settings | null {
     count: clamp(s.count, LIMITS.minCount, LIMITS.maxCount, DEFAULT_SETTINGS.count),
     timeLimit: clamp(s.timeLimit, LIMITS.minTime, LIMITS.maxTime, DEFAULT_SETTINGS.timeLimit),
     soloMode: s.soloMode === 'timed' ? 'timed' : 'training',
-    mode: ['battle', 'teams'].includes(s.mode) ? s.mode : 'classic',
+    mode: ['battle', 'teams', 'buzzer'].includes(s.mode) ? s.mode : 'classic',
     quiz: cat.id === 'custom' ? (typeof s.quiz === 'string' && /^[A-Z0-9]{6}$/.test(s.quiz) ? s.quiz : undefined) : undefined,
     teams: clamp(s.teams, 2, 4, 2),
   };
@@ -112,6 +114,7 @@ const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 
 /** Tirage des questions selon les réglages. */
 export function drawQuestions(settings: Settings, rnd: () => number = Math.random): InternalQuestion[] {
+  if (settings.category === 'daily') return dailyQuestions();
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
   const pool = shuffle(cat.pool(zone, settings.difficulty, settings.count), rnd).slice(0, settings.count);
@@ -414,9 +417,11 @@ export class Room {
       ensureRegion(region.iso).then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' })));
       return;
     }
-    // Monuments : les photos libres sont cherchées sur Wikipédia à la première partie.
-    if (this.settings.category === 'monuments' && !photosLoaded()) {
-      ensurePhotos(extras.monuments).then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
+    // Photos (monuments, stades) et sons : cherchés sur Wikimedia à la première partie.
+    const media = CATEGORIES[this.settings.category]?.media;
+    if (media && !photosLoaded(media)) {
+      const job = media === 'sounds' ? ensureSounds(extras.sounds) : ensurePhotos(extras[media], undefined, media);
+      job.then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
       return;
     }
     if (this.settings.category === 'custom' && !this.quizContent) {
@@ -510,7 +515,9 @@ export class Room {
       kind: q.kind,
       promptKey: q.promptKey,
       params: { ...(q.extraParams ?? {}), ...(q.promptName ? { name: localize(q.promptName, lang) } : {}) },
-      image: q.imageRef ? r.flagTokens[q.imageRef] : undefined,
+      image: q.imageRef && !q.imageRef.startsWith('wiki:snd:') ? r.flagTokens[q.imageRef] : undefined,
+      sound: q.imageRef?.startsWith('wiki:snd:') ? r.flagTokens[q.imageRef] : undefined,
+      kit: q.kit,
       flag: q.flagIso ? r.flagTokens[q.flagIso] : undefined,
       map: q.map,
       highlight: q.highlight,
@@ -536,6 +543,8 @@ export class Room {
       label: localize(q.answer, lang),
       flag: q.revealFlagIso ? (r.flagTokens[q.revealFlagIso] ??= this.flagToken(q.revealFlagIso)) : undefined,
       credit: q.credit,
+      point: q.point,
+      order: q.order,
     };
     r.revealByLang[lang] = rv;
     return rv;
@@ -551,27 +560,41 @@ export class Room {
     if (a.done) return;
     if (this.mode === 'battle' && (m.lives ?? 0) <= 0) return; // éliminé : il regarde
     a.attempts++;
-    const ok = r.q.check(value);
+    // « Où est-ce ? » : points selon la distance, même sans être « juste ».
+    const g = r.q.grade ? r.q.grade(value) : { ok: r.q.check(value), credit: 1, km: undefined };
+    const ok = g.ok;
     a.answer = r.q.kind === 'type' ? value : undefined;
+    if (g.km !== undefined) a.km = g.km;
     if (ok || a.attempts >= r.q.attempts) {
       a.done = true;
       a.correct = ok;
       a.timeMs = now - r.sentAt;
-      a.credit = ok ? [1, 0.5, 0.25][a.attempts - 1] ?? 0.25 : 0;
-      if (ok) {
+      a.credit = r.q.grade ? g.credit : ok ? [1, 0.5, 0.25][a.attempts - 1] ?? 0.25 : 0;
+      if (a.credit > 0) {
         const limit = this.settings.timeLimit * 1000;
         const speed = r.deadline ? Math.max(0, 1 - Math.min(a.timeMs, limit) / limit) : 1;
         a.points = Math.round((500 + 500 * speed) * a.credit);
+      }
+      if (this.mode === 'buzzer') {
+        // Buzzer : seul le premier à trouver marque ; une erreur coûte des points.
+        if (ok && !r.buzzed) { r.buzzed = m.id; a.points = 1000; }
+        else if (ok) a.points = 0;
+        else a.points = -250;
       }
     }
     const solo = this.kind === 'solo';
     m.conn?.send({
       t: 'feedback', q: qi, correct: ok, attemptsLeft: r.q.attempts - a.attempts, done: a.done, points: a.points, value,
-      reveal: a.done && solo ? this.revealFor(m.lang) : undefined,
+      reveal: a.done && solo ? this.revealFor(m.lang) : undefined, km: a.km,
     });
     if (a.done) {
       if (solo) this.endRound();
-      else { this.sendProgress(); this.maybeEndRound(); }
+      else if (this.mode === 'buzzer' && r.buzzed === m.id) {
+        // Quelqu'un a trouvé : la manche se termine presque aussitôt.
+        this.sendProgress();
+        if (this.timer) clearTimeout(this.timer);
+        this.timer = setTimeout(() => this.endRound(), 700);
+      } else { this.sendProgress(); this.maybeEndRound(); }
     }
   }
 
@@ -592,9 +615,10 @@ export class Room {
     this.timer = null;
     this.state = 'reveal';
     const results: PlayerRound[] = this.players().map((p) => {
-      const a = r.answers.get(p.id) ?? { attempts: 0, done: true, correct: false, points: 0, timeMs: null, credit: 0 };
-      if (a.correct) { p.score += a.points; p.streak++; } else p.streak = 0;
-      return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer };
+      const a: AnswerState = r.answers.get(p.id) ?? { attempts: 0, done: true, correct: false, points: 0, timeMs: null, credit: 0 };
+      p.score = Math.max(0, p.score + a.points);
+      if (a.correct) p.streak++; else p.streak = 0;
+      return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer, km: a.km };
     });
     this.recap.push({ q: r.q, results });
     this.lastReveal = { q: this.qIndex, results };
@@ -695,6 +719,7 @@ export class Room {
         rank: ranking.findIndex((x) => x.id === p.id) + 1, players: ranking.length,
         teamWon: this.mode === 'teams' && p.team !== undefined && p.team === bestTeam,
         found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
+        timeMs: res.reduce((t, x) => t + (x?.timeMs ?? (this.settings.timeLimit * 1000)), 0),
       };
       config.recordGame(p.auth, result)
         .then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); })

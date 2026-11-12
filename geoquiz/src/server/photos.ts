@@ -11,13 +11,14 @@ const THUMB = 960; // largeur standard des vignettes Wikimedia
 
 type Fetcher = (url: string, init?: RequestInit) => Promise<Response>;
 const photos = new Map<string, Photo>();
-let loaded = false;
-let loading: Promise<boolean> | null = null;
+const loaded = new Set<string>();
+const loading = new Map<string, Promise<boolean>>();
 
-export const photosLoaded = () => loaded;
+/** Jeux d'images : « monuments », « stadiums »… (chargés séparément, une fois chacun). */
+export const photosLoaded = (group = 'monuments') => loaded.has(group);
 export const photoFor = (id: string) => photos.get(id);
 /** Pour les tests. */
-export function resetPhotos() { photos.clear(); loaded = false; loading = null; }
+export function resetPhotos() { photos.clear(); sounds.clear(); loaded.clear(); loading.clear(); }
 
 const stripHtml = (s: string) => s.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/\s+/g, ' ').trim();
 
@@ -30,13 +31,21 @@ async function api(fetcher: Fetcher, params: Record<string, string>) {
 }
 
 /** Charge les photos (une seule fois par instance). Renvoie faux si Wikipédia ne répond pas. */
-export function ensurePhotos(items: { id: string; wiki: string }[], fetcher: Fetcher = (u, i) => fetch(u, i)): Promise<boolean> {
-  if (loaded) return Promise.resolve(true);
-  loading ??= load(items, fetcher).then(
-    () => { loaded = true; return true; },
-    (e) => { console.error('photos', e); loading = null; return false; },
-  );
-  return loading;
+export function ensurePhotos(items: { id: string; wiki: string }[], fetcher: Fetcher = (u, i) => fetch(u, i), group = 'monuments'): Promise<boolean> {
+  return once(group, () => load(items, fetcher));
+}
+
+function once(group: string, job: () => Promise<void>): Promise<boolean> {
+  if (loaded.has(group)) return Promise.resolve(true);
+  let p = loading.get(group);
+  if (!p) {
+    p = job().then(
+      () => { loaded.add(group); return true; },
+      (e) => { console.error('médias', group, e); loading.delete(group); return false; },
+    );
+    loading.set(group, p);
+  }
+  return p;
 }
 
 async function load(items: { id: string; wiki: string }[], fetcher: Fetcher) {
@@ -87,10 +96,62 @@ async function load(items: { id: string; wiki: string }[], fetcher: Fetcher) {
   for (const [id, f] of fileOf) photos.set(id, { url: f.thumb, credit: credit.get(f.file) ?? 'Wikimedia Commons' });
 }
 
-/** Télécharge la photo pour la renvoyer au navigateur (sans révéler son nom). */
-export async function fetchPhoto(id: string, fetcher: Fetcher = (u, i) => fetch(u, i)): Promise<Response | null> {
-  const p = photos.get(id);
-  if (!p) return null;
-  const r = await fetcher(p.url, { headers: { 'User-Agent': USER_AGENT }, cf: { cacheTtl: 604800, cacheEverything: true } } as RequestInit);
+// ------------------------------------------------------------------ cris d'animaux
+// Pour chaque animal, une recherche dans les fichiers audio de Wikimedia Commons ; on garde
+// le premier enregistrement court sous licence libre. Les navigateurs qui ne lisent pas l'Ogg
+// (Safari) reçoivent la version MP3 que Commons fabrique pour chaque fichier audio.
+export interface Sound { url: string; mp3: string; credit: string }
+const sounds = new Map<string, Sound>();
+const COMMONS = 'https://commons.wikimedia.org/w/api.php';
+export const soundFor = (id: string) => sounds.get(id);
+export const soundsLoaded = () => loaded.has('sounds');
+
+export function ensureSounds(items: { id: string; q: string }[], fetcher: Fetcher = (u, i) => fetch(u, i)): Promise<boolean> {
+  return once('sounds', async () => {
+    const found = await Promise.all(items.map((it) => findSound(it.q, fetcher).catch(() => null)));
+    items.forEach((it, i) => { if (found[i]) sounds.set(it.id, found[i]!); });
+    if (!sounds.size) throw new Error('aucun son trouvé');
+  });
+}
+
+/** Adresse de la version MP3 d'un fichier audio de Commons. */
+export function mp3Of(url: string): string {
+  if (/\.mp3$/i.test(url)) return url;
+  const m = url.match(/^(https:\/\/upload\.wikimedia\.org\/wikipedia\/commons)\/(\w\/\w\w)\/([^/]+)$/);
+  return m ? `${m[1]}/transcoded/${m[2]}/${m[3]}/${m[3]}.mp3` : url;
+}
+
+async function findSound(q: string, fetcher: Fetcher): Promise<Sound | null> {
+  const params = new URLSearchParams({
+    format: 'json', formatversion: '2', origin: '*', action: 'query', generator: 'search',
+    gsrsearch: `${q} filetype:audio`, gsrnamespace: '6', gsrlimit: '8',
+    prop: 'imageinfo', iiprop: 'url|size|mediatype|extmetadata', iiextmetadatafilter: 'Artist|LicenseShortName',
+  });
+  const init = { headers: { 'User-Agent': USER_AGENT, 'Api-User-Agent': USER_AGENT }, cf: { cacheTtl: 86400, cacheEverything: true } } as RequestInit;
+  const r = await fetcher(`${COMMONS}?${params}`, init);
+  if (!r.ok) throw new Error(`Commons : ${r.status}`);
+  const j = (await r.json()) as any;
+  const pages = ((j.query?.pages ?? []) as any[]).sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+  for (const p of pages) {
+    const ii = p.imageinfo?.[0];
+    if (!ii?.url || (ii.mediatype && ii.mediatype !== 'AUDIO')) continue;
+    if (!/\.(ogg|oga|opus|mp3|wav|flac)$/i.test(ii.url)) continue;
+    // Un cri, pas un documentaire : entre 1 et 40 secondes.
+    if (ii.duration !== undefined && (ii.duration < 1 || ii.duration > 40)) continue;
+    const meta = ii.extmetadata ?? {};
+    const lic = stripHtml(meta.LicenseShortName?.value ?? '');
+    if (!lic || /fair use|non-free/i.test(lic)) continue;
+    const artist = stripHtml(meta.Artist?.value ?? '') || '?';
+    return { url: ii.url, mp3: mp3Of(ii.url), credit: `${artist.slice(0, 80)} · ${lic} · Wikimedia Commons` };
+  }
+  return null;
+}
+
+/** Télécharge la photo (ou le son) pour la renvoyer au navigateur, sans révéler son nom. */
+export async function fetchPhoto(id: string, fetcher: Fetcher = (u, i) => fetch(u, i), variant = ''): Promise<Response | null> {
+  const s = sounds.get(id.replace(/^snd:/, ''));
+  const url = id.startsWith('snd:') ? (s ? (variant === 'mp3' ? s.mp3 : s.url) : null) : photos.get(id)?.url;
+  if (!url) return null;
+  const r = await fetcher(url, { headers: { 'User-Agent': USER_AGENT }, cf: { cacheTtl: 604800, cacheEverything: true } } as RequestInit);
   return r.ok ? r : null;
 }

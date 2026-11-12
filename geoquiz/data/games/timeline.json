@@ -1,0 +1,673 @@
+[
+ {
+  "id": "giza",
+  "year": -2560,
+  "tier": 2,
+  "names": {
+   "fr": "Construction de la grande pyramide de Gizeh",
+   "en": "The Great Pyramid of Giza is built",
+   "es": "Se construye la Gran Pirámide de Guiza",
+   "ar": "بناء الهرم الأكبر في الجيزة"
+  }
+ },
+ {
+  "id": "hammurabi",
+  "year": -1754,
+  "tier": 3,
+  "names": {
+   "fr": "Le code de Hammurabi est gravé",
+   "en": "The Code of Hammurabi is carved",
+   "es": "Se graba el Código de Hammurabi",
+   "ar": "نقش شريعة حمورابي"
+  }
+ },
+ {
+  "id": "olympia",
+  "year": -776,
+  "tier": 2,
+  "names": {
+   "fr": "Premiers Jeux olympiques antiques à Olympie",
+   "en": "First ancient Olympic Games at Olympia",
+   "es": "Primeros Juegos Olímpicos antiguos en Olimpia",
+   "ar": "أول ألعاب أولمبية قديمة في أولمبيا"
+  }
+ },
+ {
+  "id": "rome",
+  "year": -753,
+  "tier": 2,
+  "names": {
+   "fr": "Fondation de Rome (selon la légende)",
+   "en": "Founding of Rome (according to legend)",
+   "es": "Fundación de Roma (según la leyenda)",
+   "ar": "تأسيس روما (حسب الأسطورة)"
+  }
+ },
+ {
+  "id": "alexander",
+  "year": -323,
+  "tier": 3,
+  "names": {
+   "fr": "Mort d'Alexandre le Grand",
+   "en": "Death of Alexander the Great",
+   "es": "Muerte de Alejandro Magno",
+   "ar": "وفاة الإسكندر الأكبر"
+  }
+ },
+ {
+  "id": "caesar",
+  "year": -44,
+  "tier": 2,
+  "names": {
+   "fr": "Assassinat de Jules César",
+   "en": "Assassination of Julius Caesar",
+   "es": "Asesinato de Julio César",
+   "ar": "اغتيال يوليوس قيصر"
+  }
+ },
+ {
+  "id": "cleopatra",
+  "year": -30,
+  "tier": 3,
+  "names": {
+   "fr": "Mort de Cléopâtre, dernière reine d’Égypte",
+   "en": "Death of Cleopatra, last queen of Egypt",
+   "es": "Muerte de Cleopatra, última reina de Egipto",
+   "ar": "وفاة كليوباترا آخر ملكات مصر"
+  }
+ },
+ {
+  "id": "pompeii",
+  "year": 79,
+  "tier": 2,
+  "names": {
+   "fr": "Le Vésuve ensevelit Pompéi",
+   "en": "Vesuvius buries Pompeii",
+   "es": "El Vesubio sepulta Pompeya",
+   "ar": "بركان فيزوف يدفن مدينة بومبي"
+  }
+ },
+ {
+  "id": "paper",
+  "year": 105,
+  "tier": 3,
+  "names": {
+   "fr": "Le papier est mis au point en Chine (Cai Lun)",
+   "en": "Paper is perfected in China (Cai Lun)",
+   "es": "Se perfecciona el papel en China (Cai Lun)",
+   "ar": "تطوير صناعة الورق في الصين (تساي لون)"
+  }
+ },
+ {
+  "id": "rome_falls",
+  "year": 476,
+  "tier": 2,
+  "names": {
+   "fr": "Chute de l'Empire romain d'Occident",
+   "en": "Fall of the Western Roman Empire",
+   "es": "Caída del Imperio romano de Occidente",
+   "ar": "سقوط الإمبراطورية الرومانية الغربية"
+  }
+ },
+ {
+  "id": "sophia",
+  "year": 537,
+  "tier": 3,
+  "names": {
+   "fr": "Achèvement de Sainte-Sophie à Constantinople",
+   "en": "Hagia Sophia is completed in Constantinople",
+   "es": "Se termina Santa Sofía en Constantinopla",
+   "ar": "اكتمال بناء آيا صوفيا في القسطنطينية"
+  }
+ },
+ {
+  "id": "hijra",
+  "year": 622,
+  "tier": 2,
+  "names": {
+   "fr": "L'Hégire, début du calendrier musulman",
+   "en": "The Hijra, start of the Islamic calendar",
+   "es": "La Hégira, inicio del calendario islámico",
+   "ar": "الهجرة النبوية وبداية التقويم الهجري"
+  }
+ },
+ {
+  "id": "fes",
+  "year": 789,
+  "tier": 2,
+  "names": {
+   "fr": "Fondation de Fès par Idriss Ier",
+   "en": "Founding of Fez by Idris I",
+   "es": "Fundación de Fez por Idris I",
+   "ar": "تأسيس فاس على يد إدريس الأول"
+  }
+ },
+ {
+  "id": "charlemagne",
+  "year": 800,
+  "tier": 2,
+  "names": {
+   "fr": "Charlemagne est couronné empereur",
+   "en": "Charlemagne is crowned emperor",
+   "es": "Carlomagno es coronado emperador",
+   "ar": "تتويج شارلمان إمبراطوراً"
+  }
+ },
+ {
+  "id": "qarawiyyin",
+  "year": 859,
+  "tier": 3,
+  "names": {
+   "fr": "Fondation de l'université Al Quaraouiyine à Fès",
+   "en": "Founding of the University of al-Qarawiyyin in Fez",
+   "es": "Fundación de la Universidad de al-Qarawiyyin en Fez",
+   "ar": "تأسيس جامعة القرويين بفاس"
+  }
+ },
+ {
+  "id": "marrakech",
+  "year": 1070,
+  "tier": 3,
+  "names": {
+   "fr": "Fondation de Marrakech par les Almoravides",
+   "en": "Founding of Marrakesh by the Almoravids",
+   "es": "Fundación de Marrakech por los almorávides",
+   "ar": "تأسيس مراكش على يد المرابطين"
+  }
+ },
+ {
+  "id": "hastings",
+  "year": 1066,
+  "tier": 3,
+  "names": {
+   "fr": "Bataille de Hastings",
+   "en": "Battle of Hastings",
+   "es": "Batalla de Hastings",
+   "ar": "معركة هاستينغز"
+  }
+ },
+ {
+  "id": "magna",
+  "year": 1215,
+  "tier": 3,
+  "names": {
+   "fr": "Signature de la Magna Carta en Angleterre",
+   "en": "The Magna Carta is sealed in England",
+   "es": "Se sella la Carta Magna en Inglaterra",
+   "ar": "توقيع الماغنا كارتا في إنجلترا"
+  }
+ },
+ {
+  "id": "battuta",
+  "year": 1325,
+  "tier": 3,
+  "names": {
+   "fr": "Ibn Battuta part de Tanger pour son grand voyage",
+   "en": "Ibn Battuta leaves Tangier on his great journey",
+   "es": "Ibn Battuta parte de Tánger en su gran viaje",
+   "ar": "ابن بطوطة ينطلق من طنجة في رحلته الكبرى"
+  }
+ },
+ {
+  "id": "plague",
+  "year": 1347,
+  "tier": 2,
+  "names": {
+   "fr": "La peste noire arrive en Europe",
+   "en": "The Black Death reaches Europe",
+   "es": "La peste negra llega a Europa",
+   "ar": "وصول الطاعون الأسود إلى أوروبا"
+  }
+ },
+ {
+  "id": "constantinople",
+  "year": 1453,
+  "tier": 2,
+  "names": {
+   "fr": "Prise de Constantinople par les Ottomans",
+   "en": "The Ottomans take Constantinople",
+   "es": "Los otomanos toman Constantinopla",
+   "ar": "فتح العثمانيين للقسطنطينية"
+  }
+ },
+ {
+  "id": "gutenberg",
+  "year": 1455,
+  "tier": 2,
+  "names": {
+   "fr": "Gutenberg imprime sa Bible",
+   "en": "Gutenberg prints his Bible",
+   "es": "Gutenberg imprime su Biblia",
+   "ar": "غوتنبرغ يطبع إنجيله"
+  }
+ },
+ {
+  "id": "columbus",
+  "year": 1492,
+  "tier": 1,
+  "names": {
+   "fr": "Christophe Colomb atteint l'Amérique",
+   "en": "Christopher Columbus reaches the Americas",
+   "es": "Cristóbal Colón llega a América",
+   "ar": "كريستوف كولومبوس يصل إلى أمريكا"
+  }
+ },
+ {
+  "id": "magellan",
+  "year": 1522,
+  "tier": 2,
+  "names": {
+   "fr": "Fin du premier tour du monde (expédition Magellan)",
+   "en": "First voyage around the world completed (Magellan expedition)",
+   "es": "Termina la primera vuelta al mundo (expedición de Magallanes)",
+   "ar": "اكتمال أول رحلة حول العالم (بعثة ماجلان)"
+  }
+ },
+ {
+  "id": "copernicus",
+  "year": 1543,
+  "tier": 3,
+  "names": {
+   "fr": "Copernicus : la Terre tourne autour du Soleil",
+   "en": "Copernicus: the Earth orbits the Sun",
+   "es": "Copérnico: la Tierra gira alrededor del Sol",
+   "ar": "كوبرنيكوس: الأرض تدور حول الشمس"
+  }
+ },
+ {
+  "id": "threekings",
+  "year": 1578,
+  "tier": 3,
+  "names": {
+   "fr": "Bataille des Trois Rois (Oued al-Makhazin)",
+   "en": "Battle of the Three Kings (Wadi al-Makhazin)",
+   "es": "Batalla de los Tres Reyes (Alcazarquivir)",
+   "ar": "معركة وادي المخازن"
+  }
+ },
+ {
+  "id": "newton",
+  "year": 1687,
+  "tier": 3,
+  "names": {
+   "fr": "Newton publie sa loi de la gravitation",
+   "en": "Newton publishes his law of gravitation",
+   "es": "Newton publica su ley de la gravitación",
+   "ar": "نيوتن ينشر قانون الجاذبية"
+  }
+ },
+ {
+  "id": "usa",
+  "year": 1776,
+  "tier": 1,
+  "names": {
+   "fr": "Déclaration d'indépendance des États-Unis",
+   "en": "United States Declaration of Independence",
+   "es": "Declaración de independencia de Estados Unidos",
+   "ar": "إعلان استقلال الولايات المتحدة"
+  }
+ },
+ {
+  "id": "bastille",
+  "year": 1789,
+  "tier": 1,
+  "names": {
+   "fr": "Prise de la Bastille, Révolution française",
+   "en": "Storming of the Bastille, French Revolution",
+   "es": "Toma de la Bastilla, Revolución francesa",
+   "ar": "اقتحام الباستيل والثورة الفرنسية"
+  }
+ },
+ {
+  "id": "napoleon",
+  "year": 1804,
+  "tier": 2,
+  "names": {
+   "fr": "Napoléon est sacré empereur",
+   "en": "Napoleon is crowned emperor",
+   "es": "Napoleón es coronado emperador",
+   "ar": "تتويج نابليون إمبراطوراً"
+  }
+ },
+ {
+  "id": "waterloo",
+  "year": 1815,
+  "tier": 2,
+  "names": {
+   "fr": "Bataille de Waterloo",
+   "en": "Battle of Waterloo",
+   "es": "Batalla de Waterloo",
+   "ar": "معركة واترلو"
+  }
+ },
+ {
+  "id": "darwin",
+  "year": 1859,
+  "tier": 2,
+  "names": {
+   "fr": "Darwin publie « L'Origine des espèces »",
+   "en": "Darwin publishes \"On the Origin of Species\"",
+   "es": "Darwin publica «El origen de las especies»",
+   "ar": "داروين ينشر «أصل الأنواع»"
+  }
+ },
+ {
+  "id": "suez",
+  "year": 1869,
+  "tier": 2,
+  "names": {
+   "fr": "Ouverture du canal de Suez",
+   "en": "The Suez Canal opens",
+   "es": "Se inaugura el canal de Suez",
+   "ar": "افتتاح قناة السويس"
+  }
+ },
+ {
+  "id": "telephone",
+  "year": 1876,
+  "tier": 2,
+  "names": {
+   "fr": "Graham Bell dépose le brevet du téléphone",
+   "en": "Graham Bell patents the telephone",
+   "es": "Graham Bell patenta el teléfono",
+   "ar": "غراهام بيل يسجل براءة اختراع الهاتف"
+  }
+ },
+ {
+  "id": "bulb",
+  "year": 1879,
+  "tier": 2,
+  "names": {
+   "fr": "Edison présente son ampoule électrique",
+   "en": "Edison presents his light bulb",
+   "es": "Edison presenta su bombilla",
+   "ar": "إديسون يقدّم مصباحه الكهربائي"
+  }
+ },
+ {
+  "id": "liberty",
+  "year": 1886,
+  "tier": 2,
+  "names": {
+   "fr": "Inauguration de la statue de la Liberté",
+   "en": "The Statue of Liberty is unveiled",
+   "es": "Se inaugura la Estatua de la Libertad",
+   "ar": "تدشين تمثال الحرية"
+  }
+ },
+ {
+  "id": "eiffel",
+  "year": 1889,
+  "tier": 1,
+  "names": {
+   "fr": "Inauguration de la tour Eiffel",
+   "en": "The Eiffel Tower is inaugurated",
+   "es": "Se inaugura la Torre Eiffel",
+   "ar": "تدشين برج إيفل"
+  }
+ },
+ {
+  "id": "athens",
+  "year": 1896,
+  "tier": 1,
+  "names": {
+   "fr": "Premiers Jeux olympiques modernes à Athènes",
+   "en": "First modern Olympic Games in Athens",
+   "es": "Primeros Juegos Olímpicos modernos en Atenas",
+   "ar": "أول ألعاب أولمبية حديثة في أثينا"
+  }
+ },
+ {
+  "id": "wright",
+  "year": 1903,
+  "tier": 1,
+  "names": {
+   "fr": "Premier vol en avion des frères Wright",
+   "en": "The Wright brothers' first airplane flight",
+   "es": "Primer vuelo en avión de los hermanos Wright",
+   "ar": "أول طيران بالطائرة للأخوين رايت"
+  }
+ },
+ {
+  "id": "titanic",
+  "year": 1912,
+  "tier": 1,
+  "names": {
+   "fr": "Naufrage du Titanic",
+   "en": "The Titanic sinks",
+   "es": "Se hunde el Titanic",
+   "ar": "غرق سفينة تايتانيك"
+  }
+ },
+ {
+  "id": "ww1",
+  "year": 1914,
+  "tier": 1,
+  "names": {
+   "fr": "Début de la Première Guerre mondiale",
+   "en": "World War I begins",
+   "es": "Comienza la Primera Guerra Mundial",
+   "ar": "بداية الحرب العالمية الأولى"
+  }
+ },
+ {
+  "id": "tut",
+  "year": 1922,
+  "tier": 2,
+  "names": {
+   "fr": "Découverte du tombeau de Toutânkhamon",
+   "en": "Tutankhamun's tomb is discovered",
+   "es": "Se descubre la tumba de Tutankamón",
+   "ar": "اكتشاف مقبرة توت عنخ آمون"
+  }
+ },
+ {
+  "id": "penicillin",
+  "year": 1928,
+  "tier": 2,
+  "names": {
+   "fr": "Fleming découvre la pénicilline",
+   "en": "Fleming discovers penicillin",
+   "es": "Fleming descubre la penicilina",
+   "ar": "فليمنغ يكتشف البنسلين"
+  }
+ },
+ {
+  "id": "worldcup",
+  "year": 1930,
+  "tier": 1,
+  "names": {
+   "fr": "Première Coupe du monde de football (Uruguay)",
+   "en": "First FIFA World Cup (Uruguay)",
+   "es": "Primer Mundial de fútbol (Uruguay)",
+   "ar": "أول كأس عالم لكرة القدم (الأوروغواي)"
+  }
+ },
+ {
+  "id": "ww2",
+  "year": 1939,
+  "tier": 1,
+  "names": {
+   "fr": "Début de la Seconde Guerre mondiale",
+   "en": "World War II begins",
+   "es": "Comienza la Segunda Guerra Mundial",
+   "ar": "بداية الحرب العالمية الثانية"
+  }
+ },
+ {
+  "id": "un",
+  "year": 1945,
+  "tier": 1,
+  "names": {
+   "fr": "Création de l'Organisation des Nations unies",
+   "en": "The United Nations is founded",
+   "es": "Se funda la Organización de las Naciones Unidas",
+   "ar": "تأسيس منظمة الأمم المتحدة"
+  }
+ },
+ {
+  "id": "morocco",
+  "year": 1956,
+  "tier": 1,
+  "names": {
+   "fr": "Indépendance du Maroc",
+   "en": "Morocco's independence",
+   "es": "Independencia de Marruecos",
+   "ar": "استقلال المغرب"
+  }
+ },
+ {
+  "id": "sputnik",
+  "year": 1957,
+  "tier": 2,
+  "names": {
+   "fr": "Lancement de Spoutnik, premier satellite",
+   "en": "Sputnik, the first satellite, is launched",
+   "es": "Se lanza el Sputnik, primer satélite",
+   "ar": "إطلاق سبوتنيك أول قمر صناعي"
+  }
+ },
+ {
+  "id": "gagarin",
+  "year": 1961,
+  "tier": 1,
+  "names": {
+   "fr": "Youri Gagarine, premier humain dans l’espace",
+   "en": "Yuri Gagarin, first human in space",
+   "es": "Yuri Gagarin, primer ser humano en el espacio",
+   "ar": "يوري غاغارين أول إنسان في الفضاء"
+  }
+ },
+ {
+  "id": "heart",
+  "year": 1967,
+  "tier": 3,
+  "names": {
+   "fr": "Première greffe du cœur",
+   "en": "First heart transplant",
+   "es": "Primer trasplante de corazón",
+   "ar": "أول عملية زرع قلب"
+  }
+ },
+ {
+  "id": "moon",
+  "year": 1969,
+  "tier": 1,
+  "names": {
+   "fr": "Premiers pas sur la Lune",
+   "en": "First steps on the Moon",
+   "es": "Primeros pasos en la Luna",
+   "ar": "أول خطوات على سطح القمر"
+  }
+ },
+ {
+  "id": "greenmarch",
+  "year": 1975,
+  "tier": 2,
+  "names": {
+   "fr": "La Marche verte",
+   "en": "The Green March",
+   "es": "La Marcha Verde",
+   "ar": "المسيرة الخضراء"
+  }
+ },
+ {
+  "id": "chernobyl",
+  "year": 1986,
+  "tier": 2,
+  "names": {
+   "fr": "Catastrophe nucléaire de Tchernobyl",
+   "en": "Chernobyl nuclear disaster",
+   "es": "Desastre nuclear de Chernóbil",
+   "ar": "كارثة تشيرنوبيل النووية"
+  }
+ },
+ {
+  "id": "berlin",
+  "year": 1989,
+  "tier": 1,
+  "names": {
+   "fr": "Chute du mur de Berlin",
+   "en": "Fall of the Berlin Wall",
+   "es": "Caída del Muro de Berlín",
+   "ar": "سقوط جدار برلين"
+  }
+ },
+ {
+  "id": "mandela",
+  "year": 1990,
+  "tier": 2,
+  "names": {
+   "fr": "Nelson Mandela est libéré",
+   "en": "Nelson Mandela is released",
+   "es": "Nelson Mandela es liberado",
+   "ar": "إطلاق سراح نيلسون مانديلا"
+  }
+ },
+ {
+  "id": "web",
+  "year": 1991,
+  "tier": 2,
+  "names": {
+   "fr": "Mise en ligne du premier site web",
+   "en": "The first website goes online",
+   "es": "Se publica el primer sitio web",
+   "ar": "إطلاق أول موقع على الإنترنت"
+  }
+ },
+ {
+  "id": "dolly",
+  "year": 1996,
+  "tier": 3,
+  "names": {
+   "fr": "Naissance de Dolly, la brebis clonée",
+   "en": "Birth of Dolly the cloned sheep",
+   "es": "Nace la oveja clonada Dolly",
+   "ar": "ولادة النعجة المستنسخة دوللي"
+  }
+ },
+ {
+  "id": "euro",
+  "year": 2002,
+  "tier": 2,
+  "names": {
+   "fr": "Les pièces et billets en euros entrent en circulation",
+   "en": "Euro coins and notes enter circulation",
+   "es": "Entran en circulación las monedas y billetes de euro",
+   "ar": "دخول عملة اليورو الورقية والمعدنية حيز التداول"
+  }
+ },
+ {
+  "id": "iphone",
+  "year": 2007,
+  "tier": 1,
+  "names": {
+   "fr": "Sortie du premier iPhone",
+   "en": "The first iPhone is released",
+   "es": "Sale el primer iPhone",
+   "ar": "إطلاق أول هاتف آيفون"
+  }
+ },
+ {
+  "id": "covid",
+  "year": 2020,
+  "tier": 1,
+  "names": {
+   "fr": "Pandémie de Covid-19",
+   "en": "Covid-19 pandemic",
+   "es": "Pandemia de covid-19",
+   "ar": "جائحة كوفيد-19"
+  }
+ },
+ {
+  "id": "atlas",
+  "year": 2022,
+  "tier": 1,
+  "names": {
+   "fr": "Le Maroc en demi-finale de la Coupe du monde",
+   "en": "Morocco reaches the World Cup semi-finals",
+   "es": "Marruecos llega a semifinales del Mundial",
+   "ar": "المغرب يبلغ نصف نهائي كأس العالم"
+  }
+ }
+]

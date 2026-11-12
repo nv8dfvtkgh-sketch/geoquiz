@@ -4,6 +4,7 @@ import { MapView, type Mark } from '../MapView';
 import { sfx } from '../sound';
 import { useApp } from '../state';
 import { RoadSign } from '../RoadSign';
+import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
 import { FlagImg, Hearts, Leaderboard, TeamBars, TeamChip } from './common';
 
 export function Game() {
@@ -15,7 +16,7 @@ export function Game() {
 }
 
 /** Question courte + nom du lieu en grand (évite les accords : « la Chine », « de la Chine »…). */
-function Prompt({ q }: { q: QuestionMsg }) {
+function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
   const { t } = useApp();
   const label = t(q.promptKey, q.params);
   return (
@@ -25,7 +26,11 @@ function Prompt({ q }: { q: QuestionMsg }) {
       </div>
       {q.emoji && <span className="prompt-emoji" aria-hidden="true">{q.emoji}</span>}
       {q.sign && <RoadSign id={q.sign} />}
-      {q.flag && <FlagImg token={q.flag} className="flag big" />}
+      {q.kit && <Jersey kit={q.kit} />}
+      {q.sound && <SoundClip key={q.index} token={q.sound} />}
+      {q.flag && (q.category === 'flagreveal'
+        ? <MysteryFlag q={q} open={open}><FlagImg token={q.flag} className="flag big" /></MysteryFlag>
+        : <FlagImg token={q.flag} className="flag big" />)}
       {q.image && <img className="quiz-photo" src={`/api/img/${q.image}`} alt="" draggable={false} />}
       {q.shape && <Shape shape={q.shape} small={q.kind === 'map'} />}
     </div>
@@ -100,7 +105,13 @@ function Play({ q }: { q: QuestionMsg }) {
 
       <ModeBar />
 
-      <Prompt q={q} />
+      {q.category === 'tables' && <RaceTrack players={s.room!.players} you={s.you} total={q.total} />}
+
+      <Prompt q={q} open={locked} />
+
+      {q.kind === 'pin' && q.map && <PinPlay q={q} locked={locked} reveal={reveal} mine={fb?.value} onSubmit={answer} />}
+
+      {q.kind === 'order' && <OrderBoard q={q} locked={locked} reveal={reveal} onSubmit={answer} />}
 
       {q.kind === 'map' && q.map && (
         <MapView spec={q.map} marks={marks} onPick={locked ? undefined : answer} t={t} />
@@ -127,11 +138,31 @@ function Options({ q, chosen, correctId, wrongId, onPick }: { q: QuestionMsg; ch
         const cls = o.id === correctId ? 'good' : o.id === wrongId ? 'bad' : o.id === chosen ? 'chosen' : '';
         return (
           <button type="button" key={o.id} className={`opt ${cls}`} disabled={!onPick && !cls} onClick={() => onPick?.(o.id)} style={{ '--i': i } as React.CSSProperties}>
-            {o.flag ? <FlagImg token={o.flag} /> : <span dir="auto">{o.label}</span>}
+            {o.flag && <FlagImg token={o.flag} />}
+            {o.label && (!o.flag || q.category === 'higher') && <span dir="auto" className={o.flag ? 'opt-sub' : ''}>{o.label}</span>}
           </button>
         );
       })}
     </div>
+  );
+}
+
+/** « Où est-ce ? » : toucher la carte pose l'épingle, puis on valide. */
+function PinPlay({ q, locked, reveal, mine, onSubmit }: { q: QuestionMsg; locked: boolean; reveal?: Reveal; mine?: string; onSubmit: (v: string) => void }) {
+  const { t } = useApp();
+  const [pin, setPin] = useState<[number, number] | null>(null);
+  useEffect(() => setPin(null), [q.index]);
+  const sent = mine ? (mine.split(',').map(Number) as [number, number]) : undefined;
+  return (
+    <>
+      <MapView spec={q.map!} onPin={locked ? undefined : setPin} pins={{ mine: sent ?? pin ?? undefined, target: reveal?.point }} t={t} />
+      {!locked && (
+        <div className="pin-actions">
+          <span className="muted">{pin ? t('play.pinMove') : t('play.pinHint')}</span>
+          <button type="button" className="btn primary" disabled={!pin} onClick={() => pin && onSubmit(`${pin[0]},${pin[1]}`)}>{t('play.validate')}</button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -163,9 +194,10 @@ function Status({ q }: { q: QuestionMsg }) {
       <div className={`result-bar ${fb.correct ? 'ok' : 'ko'}`} role="status">
         <div>
           <strong>{fb.correct ? t('play.correct') : t('play.wrong')}</strong>
+          {fb.km !== undefined && <span className="km">{t('play.km', { n: fb.km.toLocaleString() })} · {t('play.points', { n: fb.points })}</span>}
           {!fb.correct && reveal && <span dir="auto">{t('play.answerWas', { label: reveal.label })}</span>}
           {fb.correct && q.kind === 'type' && reveal && <span dir="auto">{t('play.spelling', { label: reveal.label })}</span>}
-          {fb.correct && q.kind !== 'type' && (q.category === 'monuments' || q.category === 'truefalse') && reveal && <span dir="auto">{reveal.label}</span>}
+          {fb.correct && q.kind !== 'type' && ['monuments', 'truefalse', 'stadiums', 'higher', 'timeline', 'pin', 'chain', 'timezones'].includes(q.category) && reveal && <span dir="auto">{reveal.label}</span>}
           {reveal?.credit && <small className="credit" dir="auto">{t('play.photo', { credit: reveal.credit })}</small>}
         </div>
         {reveal?.flag && <FlagImg token={reveal.flag} className="flag small" />}
@@ -184,11 +216,13 @@ function Status({ q }: { q: QuestionMsg }) {
         <div className="sheet-head">
           <div>
             <strong>{mine?.correct ? t('play.correct') : fb ? t('play.wrong') : t('play.timeUp')}</strong>
+            {mine?.km !== undefined && <span className="km">{t('play.km', { n: mine.km.toLocaleString() })}</span>}
             <span dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</span>
             {roundEnd.reveal.credit && <small className="credit" dir="auto">{t('play.photo', { credit: roundEnd.reveal.credit })}</small>}
           </div>
           {roundEnd.reveal.flag && <FlagImg token={roundEnd.reveal.flag} className="flag small" />}
-          {mine?.correct && <span className="gain">{t('play.points', { n: mine.points })}</span>}
+          {mine && mine.points > 0 && <span className="gain">{t('play.points', { n: mine.points })}</span>}
+          {mine && mine.points < 0 && <span className="loss">{mine.points}</span>}
         </div>
         {roundEnd.battle && <p className="battle-line">{battleLine(t, roundEnd.battle, s.you!, room)}</p>}
         {roundEnd.teams ? <TeamBars teams={roundEnd.teams} myTeam={room.players.find((p) => p.id === s.you)?.team} />
@@ -299,10 +333,11 @@ function Presenter({ q }: { q: QuestionMsg }) {
         <span className="answered">{s.progress ? t('play.answered', { a: s.progress.answered, n: s.progress.total }) : ''}</span>
         <Timer q={q} stopped={!!roundEnd} />
       </div>
-      <Prompt q={q} />
+      <Prompt q={q} open={!!roundEnd} />
       <div className="presenter-body">
-        {q.map && <MapView spec={q.map} highlight={q.highlight} marks={marks} t={t} />}
+        {q.map && <MapView spec={q.map} highlight={q.highlight} marks={marks} pins={q.kind === 'pin' ? { target: reveal?.point } : undefined} t={t} />}
         {q.kind === 'mcq' && <Options q={q} correctId={reveal?.optionId} />}
+        {q.kind === 'order' && <OrderBoard q={q} locked reveal={reveal} />}
         {roundEnd && (
           <aside className="presenter-board">
             <p className="answer" dir="auto">{t('play.answerWas', { label: roundEnd.reveal.label })}</p>

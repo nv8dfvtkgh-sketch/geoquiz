@@ -1,0 +1,706 @@
+[
+ {
+  "id": "st-campnou",
+  "wiki": "Camp Nou",
+  "country": "ES",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Camp Nou",
+   "en": "Camp Nou",
+   "es": "Camp Nou",
+   "ar": "كامب نو"
+  },
+  "home": {
+   "fr": "FC Barcelone",
+   "en": "FC Barcelona",
+   "es": "FC Barcelona",
+   "ar": "برشلونة"
+  }
+ },
+ {
+  "id": "st-bernabeu",
+  "wiki": "Santiago Bernabéu Stadium",
+  "country": "ES",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Santiago-Bernabéu",
+   "en": "Santiago Bernabéu Stadium",
+   "es": "Estadio Santiago Bernabéu",
+   "ar": "ملعب سانتياغو برنابيو"
+  },
+  "home": {
+   "fr": "Real Madrid",
+   "en": "Real Madrid",
+   "es": "Real Madrid",
+   "ar": "ريال مدريد"
+  }
+ },
+ {
+  "id": "st-wembley",
+  "wiki": "Wembley Stadium",
+  "country": "GB",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade de Wembley",
+   "en": "Wembley Stadium",
+   "es": "Estadio de Wembley",
+   "ar": "ملعب ويمبلي"
+  },
+  "home": {
+   "fr": "Équipe d'Angleterre",
+   "en": "England national team",
+   "es": "Selección de Inglaterra",
+   "ar": "منتخب إنجلترا"
+  }
+ },
+ {
+  "id": "st-stadefrance",
+  "wiki": "Stade de France",
+  "country": "FR",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade de France",
+   "en": "Stade de France",
+   "es": "Stade de France",
+   "ar": "ستاد دو فرانس"
+  },
+  "home": {
+   "fr": "Équipe de France",
+   "en": "France national team",
+   "es": "Selección de Francia",
+   "ar": "منتخب فرنسا"
+  }
+ },
+ {
+  "id": "st-parcdesprinces",
+  "wiki": "Parc des Princes",
+  "country": "FR",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Parc des Princes",
+   "en": "Parc des Princes",
+   "es": "Parque de los Príncipes",
+   "ar": "حديقة الأمراء"
+  },
+  "home": {
+   "fr": "Paris Saint-Germain",
+   "en": "Paris Saint-Germain",
+   "es": "París Saint-Germain",
+   "ar": "باريس سان جيرمان"
+  }
+ },
+ {
+  "id": "st-velodrome",
+  "wiki": "Stade Vélodrome",
+  "country": "FR",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Vélodrome",
+   "en": "Stade Vélodrome",
+   "es": "Estadio Velódromo",
+   "ar": "ملعب فيلودروم"
+  },
+  "home": {
+   "fr": "Olympique de Marseille",
+   "en": "Olympique de Marseille",
+   "es": "Olympique de Marsella",
+   "ar": "أولمبيك مارسيليا"
+  }
+ },
+ {
+  "id": "st-oldtrafford",
+  "wiki": "Old Trafford",
+  "country": "GB",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Old Trafford",
+   "en": "Old Trafford",
+   "es": "Old Trafford",
+   "ar": "أولد ترافورد"
+  },
+  "home": {
+   "fr": "Manchester United",
+   "en": "Manchester United",
+   "es": "Manchester United",
+   "ar": "مانشستر يونايتد"
+  }
+ },
+ {
+  "id": "st-anfield",
+  "wiki": "Anfield",
+  "country": "GB",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Anfield",
+   "en": "Anfield",
+   "es": "Anfield",
+   "ar": "أنفيلد"
+  },
+  "home": {
+   "fr": "Liverpool FC",
+   "en": "Liverpool FC",
+   "es": "Liverpool FC",
+   "ar": "ليفربول"
+  }
+ },
+ {
+  "id": "st-emirates",
+  "wiki": "Emirates Stadium",
+  "country": "GB",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Emirates Stadium",
+   "en": "Emirates Stadium",
+   "es": "Emirates Stadium",
+   "ar": "ملعب الإمارات"
+  },
+  "home": {
+   "fr": "Arsenal",
+   "en": "Arsenal",
+   "es": "Arsenal",
+   "ar": "آرسنال"
+  }
+ },
+ {
+  "id": "st-stamford",
+  "wiki": "Stamford Bridge",
+  "country": "GB",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stamford Bridge",
+   "en": "Stamford Bridge",
+   "es": "Stamford Bridge",
+   "ar": "ستامفورد بريدج"
+  },
+  "home": {
+   "fr": "Chelsea",
+   "en": "Chelsea",
+   "es": "Chelsea",
+   "ar": "تشيلسي"
+  }
+ },
+ {
+  "id": "st-allianz",
+  "wiki": "Allianz Arena",
+  "country": "DE",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Allianz Arena",
+   "en": "Allianz Arena",
+   "es": "Allianz Arena",
+   "ar": "أليانز أرينا"
+  },
+  "home": {
+   "fr": "Bayern Munich",
+   "en": "Bayern Munich",
+   "es": "Bayern de Múnich",
+   "ar": "بايرن ميونخ"
+  }
+ },
+ {
+  "id": "st-westfalen",
+  "wiki": "Westfalenstadion",
+  "country": "DE",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Signal Iduna Park",
+   "en": "Signal Iduna Park",
+   "es": "Signal Iduna Park",
+   "ar": "سيغنال إيدونا بارك"
+  },
+  "home": {
+   "fr": "Borussia Dortmund",
+   "en": "Borussia Dortmund",
+   "es": "Borussia Dortmund",
+   "ar": "بوروسيا دورتموند"
+  }
+ },
+ {
+  "id": "st-sansiro",
+  "wiki": "San Siro",
+  "country": "IT",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "San Siro",
+   "en": "San Siro",
+   "es": "San Siro",
+   "ar": "سان سيرو"
+  },
+  "home": {
+   "fr": "AC Milan et Inter",
+   "en": "AC Milan and Inter",
+   "es": "AC Milan e Inter",
+   "ar": "ميلان وإنتر"
+  }
+ },
+ {
+  "id": "st-juventus",
+  "wiki": "Juventus Stadium",
+  "country": "IT",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Allianz Stadium (Turin)",
+   "en": "Allianz Stadium (Turin)",
+   "es": "Allianz Stadium (Turín)",
+   "ar": "ملعب أليانز (تورينو)"
+  },
+  "home": {
+   "fr": "Juventus",
+   "en": "Juventus",
+   "es": "Juventus",
+   "ar": "يوفنتوس"
+  }
+ },
+ {
+  "id": "st-olimpico",
+  "wiki": "Stadio Olimpico",
+  "country": "IT",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade olympique de Rome",
+   "en": "Stadio Olimpico",
+   "es": "Estadio Olímpico de Roma",
+   "ar": "الملعب الأولمبي في روما"
+  },
+  "home": {
+   "fr": "AS Roma et Lazio",
+   "en": "AS Roma and Lazio",
+   "es": "AS Roma y Lazio",
+   "ar": "روما ولاتسيو"
+  }
+ },
+ {
+  "id": "st-metropolitano",
+  "wiki": "Metropolitano Stadium",
+  "country": "ES",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Metropolitano",
+   "en": "Metropolitano Stadium",
+   "es": "Estadio Metropolitano",
+   "ar": "ملعب ميتروبوليتانو"
+  },
+  "home": {
+   "fr": "Atlético de Madrid",
+   "en": "Atlético Madrid",
+   "es": "Atlético de Madrid",
+   "ar": "أتلتيكو مدريد"
+  }
+ },
+ {
+  "id": "st-celticpark",
+  "wiki": "Celtic Park",
+  "country": "GB",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Celtic Park",
+   "en": "Celtic Park",
+   "es": "Celtic Park",
+   "ar": "سلتيك بارك"
+  },
+  "home": {
+   "fr": "Celtic Glasgow",
+   "en": "Celtic",
+   "es": "Celtic de Glasgow",
+   "ar": "سلتيك"
+  }
+ },
+ {
+  "id": "st-luz",
+  "wiki": "Estádio da Luz",
+  "country": "PT",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade de la Luz",
+   "en": "Estádio da Luz",
+   "es": "Estadio da Luz",
+   "ar": "ملعب النور"
+  },
+  "home": {
+   "fr": "Benfica",
+   "en": "Benfica",
+   "es": "Benfica",
+   "ar": "بنفيكا"
+  }
+ },
+ {
+  "id": "st-maracana",
+  "wiki": "Maracanã Stadium",
+  "country": "BR",
+  "tier": 1,
+  "sport": "foot",
+  "names": {
+   "fr": "Maracanã",
+   "en": "Maracanã",
+   "es": "Maracaná",
+   "ar": "ماراكانا"
+  }
+ },
+ {
+  "id": "st-azteca",
+  "wiki": "Estadio Azteca",
+  "country": "MX",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Aztèque",
+   "en": "Estadio Azteca",
+   "es": "Estadio Azteca",
+   "ar": "ملعب أزتيكا"
+  }
+ },
+ {
+  "id": "st-bombonera",
+  "wiki": "La Bombonera",
+  "country": "AR",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "La Bombonera",
+   "en": "La Bombonera",
+   "es": "La Bombonera",
+   "ar": "لا بومبونيرا"
+  },
+  "home": {
+   "fr": "Boca Juniors",
+   "en": "Boca Juniors",
+   "es": "Boca Juniors",
+   "ar": "بوكا جونيورز"
+  }
+ },
+ {
+  "id": "st-mohammedv",
+  "wiki": "Stade Mohammed V",
+  "country": "MA",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Complexe Mohammed V",
+   "en": "Stade Mohammed V",
+   "es": "Estadio Mohammed V",
+   "ar": "مركب محمد الخامس"
+  },
+  "home": {
+   "fr": "Raja et Wydad de Casablanca",
+   "en": "Raja and Wydad Casablanca",
+   "es": "Raja y Wydad de Casablanca",
+   "ar": "الرجاء والوداد"
+  }
+ },
+ {
+  "id": "st-moulayabdellah",
+  "wiki": "Prince Moulay Abdellah Stadium",
+  "country": "MA",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Prince-Moulay-Abdellah",
+   "en": "Prince Moulay Abdellah Stadium",
+   "es": "Estadio Príncipe Moulay Abdellah",
+   "ar": "ملعب الأمير مولاي عبد الله"
+  },
+  "home": {
+   "fr": "AS FAR et équipe du Maroc",
+   "en": "AS FAR and Morocco national team",
+   "es": "AS FAR y selección de Marruecos",
+   "ar": "الجيش الملكي والمنتخب المغربي"
+  }
+ },
+ {
+  "id": "st-ibnbatouta",
+  "wiki": "Ibn Batouta Stadium",
+  "country": "MA",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade Ibn-Batouta",
+   "en": "Ibn Batouta Stadium",
+   "es": "Estadio Ibn Batouta",
+   "ar": "ملعب ابن بطوطة"
+  },
+  "home": {
+   "fr": "Ittihad de Tanger",
+   "en": "Ittihad Tanger",
+   "es": "Ittihad de Tánger",
+   "ar": "اتحاد طنجة"
+  }
+ },
+ {
+  "id": "st-lusail",
+  "wiki": "Lusail Stadium",
+  "country": "QA",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "Stade de Lusail",
+   "en": "Lusail Stadium",
+   "es": "Estadio de Lusail",
+   "ar": "استاد لوسيل"
+  },
+  "home": {
+   "fr": "Finale de la Coupe du monde 2022",
+   "en": "2022 World Cup final",
+   "es": "Final del Mundial 2022",
+   "ar": "نهائي كأس العالم 2022"
+  }
+ },
+ {
+  "id": "st-rolandgarros",
+  "wiki": "Stade Roland Garros",
+  "country": "FR",
+  "tier": 1,
+  "sport": "tennis",
+  "names": {
+   "fr": "Stade Roland-Garros",
+   "en": "Stade Roland Garros",
+   "es": "Estadio Roland Garros",
+   "ar": "ملعب رولان غاروس"
+  },
+  "home": {
+   "fr": "Tournoi de Roland-Garros",
+   "en": "French Open",
+   "es": "Torneo de Roland Garros",
+   "ar": "بطولة رولان غاروس"
+  }
+ },
+ {
+  "id": "st-centrecourt",
+  "wiki": "Centre Court",
+  "country": "GB",
+  "tier": 1,
+  "sport": "tennis",
+  "names": {
+   "fr": "Court central de Wimbledon",
+   "en": "Wimbledon Centre Court",
+   "es": "Pista central de Wimbledon",
+   "ar": "الملعب الرئيسي في ويمبلدون"
+  },
+  "home": {
+   "fr": "Tournoi de Wimbledon",
+   "en": "Wimbledon",
+   "es": "Torneo de Wimbledon",
+   "ar": "بطولة ويمبلدون"
+  }
+ },
+ {
+  "id": "st-ashe",
+  "wiki": "Arthur Ashe Stadium",
+  "country": "US",
+  "tier": 2,
+  "sport": "tennis",
+  "names": {
+   "fr": "Stade Arthur-Ashe",
+   "en": "Arthur Ashe Stadium",
+   "es": "Estadio Arthur Ashe",
+   "ar": "ملعب آرثر آش"
+  },
+  "home": {
+   "fr": "US Open",
+   "en": "US Open",
+   "es": "Abierto de Estados Unidos",
+   "ar": "بطولة أمريكا المفتوحة"
+  }
+ },
+ {
+  "id": "st-laver",
+  "wiki": "Rod Laver Arena",
+  "country": "AU",
+  "tier": 2,
+  "sport": "tennis",
+  "names": {
+   "fr": "Rod Laver Arena",
+   "en": "Rod Laver Arena",
+   "es": "Rod Laver Arena",
+   "ar": "رود لافر أرينا"
+  },
+  "home": {
+   "fr": "Open d'Australie",
+   "en": "Australian Open",
+   "es": "Abierto de Australia",
+   "ar": "بطولة أستراليا المفتوحة"
+  }
+ },
+ {
+  "id": "st-twickenham",
+  "wiki": "Twickenham Stadium",
+  "country": "GB",
+  "tier": 2,
+  "sport": "rugby",
+  "names": {
+   "fr": "Stade de Twickenham",
+   "en": "Twickenham Stadium",
+   "es": "Estadio de Twickenham",
+   "ar": "ملعب تويكنهام"
+  },
+  "home": {
+   "fr": "XV d'Angleterre (rugby)",
+   "en": "England rugby team",
+   "es": "Selección inglesa de rugby",
+   "ar": "منتخب إنجلترا للرغبي"
+  }
+ },
+ {
+  "id": "st-edenpark",
+  "wiki": "Eden Park",
+  "country": "NZ",
+  "tier": 2,
+  "sport": "rugby",
+  "names": {
+   "fr": "Eden Park",
+   "en": "Eden Park",
+   "es": "Eden Park",
+   "ar": "إيدن بارك"
+  },
+  "home": {
+   "fr": "All Blacks (rugby)",
+   "en": "All Blacks (rugby)",
+   "es": "All Blacks (rugby)",
+   "ar": "أول بلاكس (رغبي)"
+  }
+ },
+ {
+  "id": "st-msg",
+  "wiki": "Madison Square Garden",
+  "country": "US",
+  "tier": 2,
+  "sport": "basket",
+  "names": {
+   "fr": "Madison Square Garden",
+   "en": "Madison Square Garden",
+   "es": "Madison Square Garden",
+   "ar": "ماديسون سكوير غاردن"
+  },
+  "home": {
+   "fr": "New York Knicks (basket)",
+   "en": "New York Knicks",
+   "es": "New York Knicks (baloncesto)",
+   "ar": "نيويورك نيكس (كرة السلة)"
+  }
+ },
+ {
+  "id": "st-mcg",
+  "wiki": "Melbourne Cricket Ground",
+  "country": "AU",
+  "tier": 3,
+  "sport": "other",
+  "names": {
+   "fr": "Melbourne Cricket Ground",
+   "en": "Melbourne Cricket Ground",
+   "es": "Melbourne Cricket Ground",
+   "ar": "ملعب ملبورن للكريكيت"
+  }
+ },
+ {
+  "id": "st-birdsnest",
+  "wiki": "Beijing National Stadium",
+  "country": "CN",
+  "tier": 2,
+  "sport": "other",
+  "names": {
+   "fr": "Stade national de Pékin (« Nid d'oiseau »)",
+   "en": "Beijing National Stadium (Bird's Nest)",
+   "es": "Estadio Nacional de Pekín («Nido de pájaro»)",
+   "ar": "استاد بكين الوطني («عش الطائر»)"
+  },
+  "home": {
+   "fr": "Jeux olympiques de 2008",
+   "en": "2008 Olympic Games",
+   "es": "Juegos Olímpicos de 2008",
+   "ar": "الألعاب الأولمبية 2008"
+  }
+ },
+ {
+  "id": "st-berlin",
+  "wiki": "Olympiastadion (Berlin)",
+  "country": "DE",
+  "tier": 3,
+  "sport": "other",
+  "names": {
+   "fr": "Stade olympique de Berlin",
+   "en": "Olympiastadion Berlin",
+   "es": "Estadio Olímpico de Berlín",
+   "ar": "الملعب الأولمبي في برلين"
+  },
+  "home": {
+   "fr": "Hertha Berlin",
+   "en": "Hertha BSC",
+   "es": "Hertha Berlín",
+   "ar": "هيرتا برلين"
+  }
+ },
+ {
+  "id": "st-monaco",
+  "wiki": "Circuit de Monaco",
+  "country": "MC",
+  "tier": 2,
+  "sport": "motor",
+  "names": {
+   "fr": "Circuit de Monaco",
+   "en": "Circuit de Monaco",
+   "es": "Circuito de Mónaco",
+   "ar": "حلبة موناكو"
+  },
+  "home": {
+   "fr": "Grand Prix de Monaco (F1)",
+   "en": "Monaco Grand Prix (F1)",
+   "es": "Gran Premio de Mónaco (F1)",
+   "ar": "جائزة موناكو الكبرى (فورمولا 1)"
+  }
+ },
+ {
+  "id": "st-silverstone",
+  "wiki": "Silverstone Circuit",
+  "country": "GB",
+  "tier": 3,
+  "sport": "motor",
+  "names": {
+   "fr": "Circuit de Silverstone",
+   "en": "Silverstone Circuit",
+   "es": "Circuito de Silverstone",
+   "ar": "حلبة سيلفرستون"
+  },
+  "home": {
+   "fr": "Grand Prix de Grande-Bretagne (F1)",
+   "en": "British Grand Prix (F1)",
+   "es": "Gran Premio de Gran Bretaña (F1)",
+   "ar": "جائزة بريطانيا الكبرى (فورمولا 1)"
+  }
+ },
+ {
+  "id": "st-yankee",
+  "wiki": "Yankee Stadium",
+  "country": "US",
+  "tier": 3,
+  "sport": "other",
+  "names": {
+   "fr": "Yankee Stadium",
+   "en": "Yankee Stadium",
+   "es": "Yankee Stadium",
+   "ar": "ملعب يانكي"
+  },
+  "home": {
+   "fr": "New York Yankees (baseball)",
+   "en": "New York Yankees",
+   "es": "New York Yankees (béisbol)",
+   "ar": "نيويورك يانكيز (البيسبول)"
+  }
+ }
+]

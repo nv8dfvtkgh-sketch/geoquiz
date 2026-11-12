@@ -18,6 +18,7 @@ export interface Feedback {
   points: number;
   value?: string;
   reveal?: Reveal;
+  km?: number;
 }
 
 export interface State {
@@ -97,7 +98,7 @@ function onServer(s: State, m: ServerMsg): State {
       const tried = [...(prev?.tried ?? []), m.value];
       return {
         ...s,
-        fb: { q: m.q, tried, lastBad: m.correct ? undefined : m.value, attemptsLeft: m.attemptsLeft, done: m.done, correct: m.correct, points: m.points, value: m.value, reveal: m.reveal ?? prev?.reveal },
+        fb: { q: m.q, tried, lastBad: m.correct ? undefined : m.value, attemptsLeft: m.attemptsLeft, done: m.done, correct: m.correct, points: m.points, value: m.value, reveal: m.reveal ?? prev?.reveal, km: m.km },
       };
     }
     case 'progress':
