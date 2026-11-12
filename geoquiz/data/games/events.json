@@ -1,0 +1,41 @@
+[
+ {
+  "id": "independance2026",
+  "pack": "ev_independance",
+  "emoji": "🇲🇦",
+  "start": "2026-11-10",
+  "end": "2026-11-25",
+  "names": {
+   "fr": "Spécial fête de l'Indépendance",
+   "en": "Independence Day special",
+   "es": "Especial fiesta de la Independencia",
+   "ar": "خاص بعيد الاستقلال"
+  }
+ },
+ {
+  "id": "cdm2030",
+  "pack": "ev_cdm2030",
+  "emoji": "🏆",
+  "start": "2026-11-26",
+  "end": "2027-01-31",
+  "names": {
+   "fr": "Spécial Coupe du monde 2030",
+   "en": "2030 World Cup special",
+   "es": "Especial Mundial 2030",
+   "ar": "خاص بكأس العالم 2030"
+  }
+ },
+ {
+  "id": "ramadan2027",
+  "pack": "ev_ramadan",
+  "emoji": "🌙",
+  "start": "2027-02-05",
+  "end": "2027-03-12",
+  "names": {
+   "fr": "Quiz du Ramadan",
+   "en": "Ramadan quiz",
+   "es": "Quiz de Ramadán",
+   "ar": "مسابقة رمضان"
+  }
+ }
+]

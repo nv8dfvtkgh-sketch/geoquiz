@@ -25,6 +25,9 @@ export interface CountryMeta {
 
 export interface RegionLevel extends MapData {
   names: Record<string, Names>;
+  /** Maroc : villes à placer [x, y, région] et échelle de la carte. */
+  points?: Record<string, [number, number, string]>;
+  kmPerUnit?: number;
 }
 
 export type RegionLoader = (iso: string) => Promise<{ levels: Record<string, RegionLevel> } | null> | { levels: Record<string, RegionLevel> } | null;
@@ -94,6 +97,8 @@ export interface Stadium { id: string; wiki: string; country: string; tier: numb
 /** Maillot dessiné : motif, couleurs et short (aucun logo). */
 export interface Kit { p: string; c: string[]; sh: string }
 export interface KitTeam { id: string; tier: number; names: Names; kit: Kit }
+/** Ville du Maroc à placer sur la carte des régions. */
+export interface MaCity { id: string; lat: number; lon: number; tier: number; names: Names }
 /** Cri d'animal : enregistrement libre cherché sur Wikimedia Commons. */
 export interface AnimalSound { id: string; tier: number; emoji?: string; q: string; names: Names }
 /** Jeux construits sur les packs ; « sport » mélange toutes les disciplines. */
@@ -102,9 +107,16 @@ export const PACK_GAMES: Record<string, string[]> = {
   sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport'],
   football: ['football'], tennis: ['tennis'], rugby: ['rugby'], basketball: ['basketball'], olympics: ['olympics'], motorsport: ['motorsport'],
   maroc: ['maroc'], roadsigns: ['roadsigns'], vocab: ['vocab'], hello: ['hello'],
+  prog_geo: ['prog_geo'], prog_hist: ['prog_hist'], prog_sci: ['prog_sci'], tifinagh: ['tifinagh'],
 };
+/** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
+export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names }
+export function activeEvent(now = Date.now()): GameEvent | undefined {
+  const day = new Date(now).toISOString().slice(0, 10);
+  return extras.events.find((e) => e.start <= day && day <= e.end);
+}
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review'];
+export const NO_ZONE_GAMES = ['tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];
@@ -120,11 +132,13 @@ export interface Extras {
   stadiums: Stadium[];
   kits: KitTeam[];
   sounds: AnimalSound[];
+  macities: MaCity[];
+  events: GameEvent[];
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds'] as const;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds', 'macities', 'events'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [], macities: [], events: [] };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -215,6 +229,8 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     stadiums: (extra.stadiums ?? []).filter((x) => c[x.country]),
     kits: extra.kits ?? [],
     sounds: extra.sounds ?? [],
+    macities: extra.macities ?? [],
+    events: extra.events ?? [],
   };
   countries = c;
   loader = regionLoader;
@@ -255,7 +271,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
       if (count < 2) continue;
       const z = `r:${iso}:${level}`;
       zones.set(z, {
-        info: { id: z, kind: 'regions', parent: `c:${m.continent}`, names: m.names, level: level as 'groups' | 'subs', count, categories: ['regions'] },
+        info: { id: z, kind: 'regions', parent: `c:${m.continent}`, names: m.names, level: level as 'groups' | 'subs', count, categories: iso === 'MA' && level === 'groups' ? ['regions', 'macities'] : ['regions'] },
         region: { iso, level },
         view: [0, 0, w2, h2],
       });

@@ -23,8 +23,8 @@
   --glass: #F5F5F7B8;
   --radius: 14px;
   --radius-l: 22px;
-  --font-ui: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Tifinagh', sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Tifinagh', sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -52,7 +52,7 @@
     color-scheme: dark;
   }
 }
-[dir='rtl'] { --font-ui: 'Noto Sans Arabic', -apple-system, 'Inter', system-ui, sans-serif; --font-display: 'Noto Sans Arabic', -apple-system, 'Inter', system-ui, sans-serif; }
+[dir='rtl'] { --font-ui: 'Noto Sans Arabic', -apple-system, 'Inter', system-ui, 'Noto Sans Tifinagh', sans-serif; --font-display: 'Noto Sans Arabic', -apple-system, 'Inter', system-ui, 'Noto Sans Tifinagh', sans-serif; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
@@ -655,11 +655,11 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
   --glass: #FFFFFFCC;
   --radius: 18px;
   --radius-l: 28px;
-  --font-ui: 'Baloo 2', 'Baloo Bhaijaan 2', ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif;
-  --font-display: 'Baloo 2', 'Baloo Bhaijaan 2', ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif;
+  --font-ui: 'Baloo 2', 'Baloo Bhaijaan 2', ui-rounded, 'Arial Rounded MT Bold', system-ui, 'Noto Sans Tifinagh', sans-serif;
+  --font-display: 'Baloo 2', 'Baloo Bhaijaan 2', ui-rounded, 'Arial Rounded MT Bold', system-ui, 'Noto Sans Tifinagh', sans-serif;
   color-scheme: light;
 }
-:root[data-look='kids'][dir='rtl'] { --font-ui: 'Baloo Bhaijaan 2', 'Baloo 2', system-ui, sans-serif; --font-display: 'Baloo Bhaijaan 2', 'Baloo 2', system-ui, sans-serif; }
+:root[data-look='kids'][dir='rtl'] { --font-ui: 'Baloo Bhaijaan 2', 'Baloo 2', system-ui, 'Noto Sans Tifinagh', sans-serif; --font-display: 'Baloo Bhaijaan 2', 'Baloo 2', system-ui, 'Noto Sans Tifinagh', sans-serif; }
 [data-look='kids'] body {
   font-size: 18px; letter-spacing: 0;
   background: radial-gradient(#FFFFFF8C 2px, transparent 2.5px) 0 0 / 26px 26px, linear-gradient(180deg, #BFE6FF 0, #DFF3FF 320px, #FFF3D1 100%) fixed;
@@ -1209,3 +1209,11 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .countdown.big b { font: 800 1.8rem var(--font-display); }
 .countdown.big small { color: #B9C6DA; font-size: .72rem; }
 .tn-rules { text-align: start; color: var(--ink-2); display: grid; gap: 4px; max-width: 46ch; margin: 6px 0 0; padding-inline-start: 1.2em; }
+
+/* Événement du moment */
+.event-card { display: flex; align-items: center; gap: 14px; width: 100%; margin: 0 0 12px; padding: 14px 18px; border: 0; border-radius: 18px; background: linear-gradient(120deg, #C1272D, #006233); color: #fff; text-align: start; font: inherit; cursor: pointer; box-shadow: var(--shadow); }
+.event-emoji { font-size: 2rem; line-height: 1; }
+.event-card > span:nth-child(2) { flex: 1; display: grid; }
+.event-card small { opacity: .9; }
+
+.prompt[data-cat='tifinagh'] .prompt-emoji { font-size: clamp(4rem, 18vw, 6.5rem); line-height: 1.1; flex: 1 1 100%; text-align: center; font-family: 'Noto Sans Tifinagh', var(--font-ui); }

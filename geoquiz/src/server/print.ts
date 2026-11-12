@@ -2,7 +2,7 @@
 // Le serveur tire le contenu (comme une partie) et renvoie aussi le corrigé.
 import { LANGS, type Difficulty, type Lang, type Names } from '../shared/protocol';
 import { CATEGORIES, countryPool, localize } from './categories';
-import { countries, ensureRegion, regionMap, worldById, zones } from './data';
+import { activeEvent, countries, ensureRegion, extras, regionMap, worldById, zones } from './data';
 import { drawQuestions } from './rooms';
 
 /** Jeux qu'on peut imprimer en quiz à cocher (pas de carte cliquable, de photo ni de son). */
@@ -62,6 +62,12 @@ export async function printSheet(req: PrintReq): Promise<{ status: number; json:
     answerLabel: loc(q.answer),
   }));
   return { status: 200, json: { kind: 'quiz', category: cat.id, questions } };
+}
+
+/** Événements : celui en cours, et tous (noms des badges). */
+export function eventList() {
+  const cur = activeEvent();
+  return { active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end } : null, all: extras.events.map(({ id, emoji, names }) => ({ id, emoji, names })) };
 }
 
 /** Liste des pays (passeport) : nom dans la langue, continent. */

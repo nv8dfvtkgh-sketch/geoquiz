@@ -1,6 +1,7 @@
 // Compte joueur : inscription / connexion, profil (niveau, badges, progression), classement,
 // et carte des gains en fin de partie.
 import { useEffect, useMemo, useState } from 'react';
+import { useEvents } from '../events';
 import { AVATARS, BADGES, type AgeGroup, type Me, type Reward } from '../../shared/protocol';
 import { api, starsOf } from '../account';
 import { FAMILIES, Icon } from '../games';
@@ -304,7 +305,7 @@ export function SignIn() {
 // ------------------------------------------------------------------ niveau et badges
 const BADGE_ICON: Record<string, string> = {
   first: '🎯', games10: '🔟', games50: '🏅', games200: '🏆', perfect: '💯', hardHero: '🧗', winner: '👑', duelWin: '⚔️',
-  battleWin: '🛡️', explorer: '🧭', collector: '🗂️', streak3: '🔥', streak7: '🌟', flags100: '🚩', morocco: '🇲🇦', polyglot: '🗣️',
+  battleWin: '🛡️', explorer: '🧭', collector: '🗂️', streak3: '🔥', streak7: '🌟', flags100: '🚩', morocco: '🇲🇦', polyglot: '🗣️', tourney: '🏟️',
 };
 export const badgeIcon = (id: string) => BADGE_ICON[id] ?? '🏅';
 
@@ -330,7 +331,9 @@ export { Stars };
 export function Profile() {
   const { t, me, auth, go, signOut, setMe, lang, look, setLook } = useApp();
   const [edit, setEdit] = useState(false);
+  const events = useEvents();
   if (!me) return <SignIn />;
+  const evBadges = (events?.all ?? []).filter((e) => me.badges[`ev_${e.id}`]);
   const acc = me.answered ? Math.round((me.correct / me.answered) * 100) : 0;
   return (
     <div className="profile panel">
@@ -354,7 +357,7 @@ export function Profile() {
       <button type="button" className="btn primary wide" onClick={() => go('leaderboard')}>{t('lb.title')}</button>
       <button type="button" className="btn ghost wide" onClick={() => go('classes')}>🏫 {t('class.title')}</button>
 
-      <h2>{t('profile.badges', { n: Object.keys(me.badges).length, total: BADGES.length })}</h2>
+      <h2>{t('profile.badges', { n: BADGES.filter((b) => me.badges[b]).length, total: BADGES.length })}</h2>
       <ul className="badges">
         {BADGES.map((b) => (
           <li key={b} className={me.badges[b] ? 'on' : ''}>
@@ -364,6 +367,15 @@ export function Profile() {
           </li>
         ))}
       </ul>
+
+      {evBadges.length > 0 && (
+        <>
+          <h2>{t('profile.eventBadges')}</h2>
+          <ul className="badges">
+            {evBadges.map((e) => <li key={e.id} className="on"><span className="badge-icon" aria-hidden="true">{e.emoji}</span><strong>{e.names[lang]}</strong></li>)}
+          </ul>
+        </>
+      )}
 
       <h2>{t('profile.progress')}</h2>
       <p className="muted small">{t('profile.progressHint')}</p>
@@ -493,7 +505,8 @@ export function LeaderboardScreen() {
 
 // ------------------------------------------------------------------ fin de partie
 export function RewardCard() {
-  const { t, s, me, go } = useApp();
+  const { t, s, me, go, lang } = useApp();
+  const events = useEvents();
   const r: Reward | undefined = s.reward;
   if (!s.finished?.players.some((p) => p.id === s.you)) return null; // animateur qui ne joue pas
   if (!me) {
@@ -513,7 +526,10 @@ export function RewardCard() {
       {r.best !== undefined && !r.unlocked && <p className="muted small">{t('reward.best', { acc: r.best })}</p>}
       {r.badges.length > 0 && (
         <ul className="reward-badges">
-          {r.badges.map((b) => <li key={b}><span aria-hidden="true">{badgeIcon(b)}</span><strong>{t(`badge.${b}`)}</strong></li>)}
+          {r.badges.map((b) => {
+            const ev = b.startsWith('ev_') ? events?.all.find((e) => `ev_${e.id}` === b) : undefined;
+            return <li key={b}><span aria-hidden="true">{ev ? ev.emoji : badgeIcon(b)}</span><strong>{ev ? ev.names[lang] : t(`badge.${b}`)}</strong></li>;
+          })}
         </ul>
       )}
     </div>

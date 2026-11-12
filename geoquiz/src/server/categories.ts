@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, KitSpec, Lang, MapSpec, Names, QKind } from '../shared/protocol';
 import {
-  capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
+  activeEvent, capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
 } from './data';
 import { photoFor, soundFor } from './photos';
 import { matches, normalize } from './text';
@@ -693,6 +693,19 @@ function packCat(id: string, packs: string[]): Category {
   };
 }
 const packCats = Object.entries(PACK_GAMES).map(([id, packs]) => packCat(id, packs));
+/** Événement du moment : le pack de l'événement en cours (vide hors période). */
+const eventCat: Category = {
+  id: 'event',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool(zone, d, n) { const ev = activeEvent(); return ev ? packCat('event', [ev.pack]).pool(zone, d, n) : []; },
+  make(target, kind, zone, rnd) {
+    const ev = activeEvent();
+    const pack = ev?.pack ?? extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? '';
+    return packCat('event', [pack]).make(target, kind, zone, rnd);
+  },
+};
 
 // ------------------------------------------------------------------ plus ou moins
 // Deux pays : lequel a le plus d'habitants / la plus grande surface ? Écart d'au moins 30 %.
@@ -905,6 +918,50 @@ const pinCat: Category = {
       answer: mapNames((l) => `${cap.names[l]} — ${c.names[l]}`),
       map: worldSpec(zone, 'shapes'), point: k, revealId: id, attempts: 1,
       check: (v) => grade(v).ok, grade,
+    };
+  },
+};
+
+// ------------------------------------------------------------------ villes du Maroc
+// Placer une ville sur la carte des 12 régions (points selon la distance), ou trouver sa région.
+const macitiesCat: Category = {
+  id: 'macities',
+  noZone: true,
+  qtypes: ['map', 'mcq'],
+  zoneKinds: ['regions'],
+  pool(zone, d, n) {
+    const rm = zone.region && regionMap(zone.region.iso, zone.region.level);
+    if (!rm?.data.points) return [];
+    return tierPool(extras.macities.filter((c) => rm.data.points![c.id]), d, n);
+  },
+  make(target, kind, zone, rnd) {
+    const { iso, level } = zone.region!;
+    const rm = regionMap(iso, level)!.data;
+    const city = extras.macities.find((c) => c.id === target)!;
+    const [px, py, region] = rm.points![target];
+    const spec: MapSpec = { map: `region:${iso}:${level}`, view: zone.view, active: rm.features.map((f) => f.id), layer: 'shapes' };
+    const regionName = rm.names[region];
+    const answer = regionName ? mapNames((l) => `${city.names[l]} — ${regionName[l]}`) : city.names;
+    if (kind === 'mcq' && regionName) {
+      // « Dans quelle région se trouve… ? » : pièges parmi les régions voisines.
+      const me = rm.features.find((f) => f.id === region)!;
+      const near = rm.features.filter((f) => f.id !== region)
+        .sort((a, b) => Math.hypot(a.c[0] - me.c[0], a.c[1] - me.c[1]) - Math.hypot(b.c[0] - me.c[0], b.c[1] - me.c[1]))
+        .slice(0, 5).map((f) => f.id);
+      const { options, correct } = optionsFrom(region, shuffle(near, rnd).slice(0, 3), rnd, (id) => ({ label: rm.names[id] }));
+      return { category: 'macities', kind: 'mcq', target, promptKey: 'q.macities.region', promptName: city.names, answer, map: spec, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
+    const k = rm.kmPerUnit ?? 1;
+    const grade = (v: string) => {
+      const [x, y] = v.split(',').map(Number);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return { ok: false, credit: 0 };
+      const km = Math.hypot(x - px, y - py) * k;
+      const credit = km <= 15 ? 1 : Math.max(0, 1 - (km - 15) / 235);
+      return { ok: credit >= 0.6, credit: Math.round(credit * 100) / 100, km: Math.round(km) };
+    };
+    return {
+      category: 'macities', kind: 'pin', target, promptKey: 'q.pin', promptName: city.names, answer, map: spec,
+      point: [px, py], attempts: 1, check: (v) => grade(v).ok, grade,
     };
   },
 };
@@ -1166,7 +1223,7 @@ export function customQuestions(id: string, quiz: { title: string; questions: { 
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat].map((c) => [c.id, c]),
 );
 
 /**

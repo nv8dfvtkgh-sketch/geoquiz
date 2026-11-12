@@ -55,8 +55,19 @@ export const FAMILIES: Family[] = [
       { id: 'animals', icon: 'paw', fresh: true },
       { id: 'monuments', icon: 'columns', fresh: true },
       { id: 'hello', icon: 'wave', fresh: true },
+      { id: 'macities', icon: 'pin', fresh: true },
+      { id: 'tifinagh', icon: 'yaz', fresh: true },
       { id: 'sounds', icon: 'ear', fresh: true },
       { id: 'brands', icon: 'tag', soon: true },
+    ],
+  },
+  {
+    id: 'programme',
+    tint: 'tint-sage',
+    games: [
+      { id: 'prog_geo', icon: 'regions', fresh: true },
+      { id: 'prog_hist', icon: 'columns', fresh: true },
+      { id: 'prog_sci', icon: 'flask', fresh: true },
     ],
   },
   {
@@ -133,6 +144,8 @@ export const ICONS = {
   rugby: <g {...P}><ellipse cx="12" cy="12" rx="10" ry="5.5" transform="rotate(-35 12 12)" /><path d="M9 15l6-6M10.5 10.5l1.5 1.5M12 9l1.5 1.5M9 12l1.5 1.5" /></g>,
   basket: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3v18M5.6 5.6c2.5 2.5 2.5 10.3 0 12.8M18.4 5.6c-2.5 2.5-2.5 10.3 0 12.8" /></g>,
   rings: <g {...P}><circle cx="6" cy="10" r="3.3" /><circle cx="12" cy="10" r="3.3" /><circle cx="18" cy="10" r="3.3" /><circle cx="9" cy="14" r="3.3" /><circle cx="15" cy="14" r="3.3" /></g>,
+  yaz: <g {...P}><path d="M6 4l6 4 6-4M6 20l6-4 6 4M12 8v8" /></g>,
+  flask: <g {...P}><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3" /><path d="M7.5 14h9" /></g>,
   school: <g {...P}><path d="M3 9l9-5 9 5-9 5z" /><path d="M7 11.2V16c1.5 1.5 3 2 5 2s3.5-.5 5-2v-4.8M21 9v6" /></g>,
   refresh: <g {...P}><path d="M20 11a8 8 0 0 0-14.6-4.5M4 13a8 8 0 0 0 14.6 4.5" /><path d="M5 3v4h4M19 21v-4h-4" /></g>,
   trophy: <g {...P}><path d="M7 4h10v5a5 5 0 0 1-10 0z" /><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8M9.5 18h5" /></g>,

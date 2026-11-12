@@ -7,7 +7,7 @@ import { formatTime } from '../i18n';
 import { createGame, joinGame } from '../net';
 import { useApp } from '../state';
 
-const NOT_ASSIGNABLE = new Set(['daily', 'review', 'custom', 'brands']);
+const NOT_ASSIGNABLE = new Set(['daily', 'review', 'custom', 'brands', 'event']);
 const JOIN_KEY = 'gq.joinClass';
 const later = (code: string | null) => { try { if (code) localStorage.setItem(JOIN_KEY, code); else localStorage.removeItem(JOIN_KEY); } catch { /* ignoré */ } };
 const pending = () => { try { return localStorage.getItem(JOIN_KEY); } catch { return null; } };

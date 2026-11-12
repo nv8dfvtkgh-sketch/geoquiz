@@ -7,7 +7,7 @@ import {
 } from '../shared/protocol';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
-import { countries, ensureRegion, extras, regionLoaded, zones } from './data';
+import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, ensureSounds, photosLoaded } from './photos';
 import type { GameResult } from './accounts';
 
@@ -834,6 +834,7 @@ export class Room {
         found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
         timeMs: res.reduce((t, x) => t + (x?.timeMs ?? (this.settings.timeLimit * 1000)), 0),
         assignment: this.assignment, tournament: this.tournament,
+        event: this.settings.category === 'event' ? activeEvent()?.id : undefined,
         items: this.recap.map((x, i) => ({
           c: x.q.category, t: x.q.target, ok: !!res[i]?.correct,
           z: this.reviewItems?.[(x.q as any).reviewIndex ?? -1]?.z ?? (this.settings.category === 'daily' ? 'world' : this.settings.zone),

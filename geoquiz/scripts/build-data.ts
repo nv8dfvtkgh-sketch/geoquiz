@@ -121,6 +121,16 @@ function buildFeatures(
   return { w: width, h: height, features, proj: [round(b[0], 5), round(b[3], 5), round(scale, 5)] as [number, number, number], tx: (lon: number, lat: number) => tx(project(lon, lat)) };
 }
 
+/** Point dans un anneau (lon, lat) : règle pair-impair. */
+function inRing([x, y]: Pt, r: Ring): boolean {
+  let inside = false;
+  for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+    const [xi, yi] = r[i], [xj, yj] = r[j];
+    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
 /** Surface en km² d'un ensemble d'anneaux lon/lat (les trous, orientés à l'inverse, se retranchent). */
 function sphereArea(rings: Ring[]): number {
   const R = 6371;
@@ -319,7 +329,19 @@ async function main() {
 
     const buildLevel = (its: { id: string; rings: Ring[] }[], names: Record<string, Names>) => {
       const m = buildFeatures(its, proj, 1000, 0.45, 0.6);
-      return { w: m.w, h: m.h, features: m.features, names };
+      const level: any = { w: m.w, h: m.h, features: m.features, names };
+      // Villes à placer (Maroc) : position sur la carte, région, et échelle en km.
+      if (iso === 'MA' && fs.existsSync(path.join(ROOT, 'data/games/macities.json'))) {
+        const cities = readJson(path.join(ROOT, 'data/games/macities.json')) as { id: string; lat: number; lon: number }[];
+        level.points = {};
+        for (const c of cities) {
+          const region = its.find((it) => it.rings.some((r) => inRing([c.lon, c.lat], r)))?.id;
+          const [x, y] = m.tx(c.lon, c.lat);
+          level.points[c.id] = [round(x), round(y), region ?? ''];
+        }
+        level.kmPerUnit = round(111.32 / m.proj[2], 4);
+      }
+      return level;
     };
 
     if (hasGroups || allSubsAreGroups) {

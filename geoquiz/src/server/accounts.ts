@@ -42,6 +42,8 @@ export interface GameResult {
   assignment?: string;
   /** Tournoi du vendredi. */
   tournament?: boolean;
+  /** Événement du moment joué (badge si au moins 50 %). */
+  event?: string;
   /** Chaque question (jeu, cible, zone, réussie ?) : alimente le mode révision. */
   items?: { c: string; t: string; z: string; ok: boolean }[];
 }
@@ -583,6 +585,7 @@ export class AccountService {
     give('morocco', r.category === 'regions' && r.zone.startsWith('r:MA:') && accuracy === 100 && total >= 5);
     give('polyglot', a.langs.length >= 3);
     give('tourney', r.tournament === true && r.rank === 1 && r.players >= 3);
+    if (typeof r.event === 'string' && /^[a-z0-9]{3,24}$/.test(r.event)) give(`ev_${r.event}`, accuracy >= 50 && total >= 5);
 
     await this.save(a);
     // Classement de la semaine.

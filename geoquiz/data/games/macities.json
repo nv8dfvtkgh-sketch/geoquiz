@@ -1,0 +1,482 @@
+[
+ {
+  "id": "casablanca",
+  "lat": 33.573,
+  "lon": -7.589,
+  "tier": 1,
+  "names": {
+   "fr": "Casablanca",
+   "en": "Casablanca",
+   "es": "Casablanca",
+   "ar": "الدار البيضاء"
+  }
+ },
+ {
+  "id": "rabat",
+  "lat": 34.02,
+  "lon": -6.841,
+  "tier": 1,
+  "names": {
+   "fr": "Rabat",
+   "en": "Rabat",
+   "es": "Rabat",
+   "ar": "الرباط"
+  }
+ },
+ {
+  "id": "marrakech",
+  "lat": 31.629,
+  "lon": -7.981,
+  "tier": 1,
+  "names": {
+   "fr": "Marrakech",
+   "en": "Marrakesh",
+   "es": "Marrakech",
+   "ar": "مراكش"
+  }
+ },
+ {
+  "id": "fes",
+  "lat": 34.033,
+  "lon": -5.0,
+  "tier": 1,
+  "names": {
+   "fr": "Fès",
+   "en": "Fez",
+   "es": "Fez",
+   "ar": "فاس"
+  }
+ },
+ {
+  "id": "tanger",
+  "lat": 35.767,
+  "lon": -5.8,
+  "tier": 1,
+  "names": {
+   "fr": "Tanger",
+   "en": "Tangier",
+   "es": "Tánger",
+   "ar": "طنجة"
+  }
+ },
+ {
+  "id": "agadir",
+  "lat": 30.428,
+  "lon": -9.598,
+  "tier": 1,
+  "names": {
+   "fr": "Agadir",
+   "en": "Agadir",
+   "es": "Agadir",
+   "ar": "أكادير"
+  }
+ },
+ {
+  "id": "meknes",
+  "lat": 33.895,
+  "lon": -5.555,
+  "tier": 1,
+  "names": {
+   "fr": "Meknès",
+   "en": "Meknes",
+   "es": "Mequinez",
+   "ar": "مكناس"
+  }
+ },
+ {
+  "id": "oujda",
+  "lat": 34.681,
+  "lon": -1.908,
+  "tier": 1,
+  "names": {
+   "fr": "Oujda",
+   "en": "Oujda",
+   "es": "Uchda",
+   "ar": "وجدة"
+  }
+ },
+ {
+  "id": "laayoune",
+  "lat": 27.153,
+  "lon": -13.203,
+  "tier": 1,
+  "names": {
+   "fr": "Laâyoune",
+   "en": "Laayoune",
+   "es": "El Aaiún",
+   "ar": "العيون"
+  }
+ },
+ {
+  "id": "dakhla",
+  "lat": 23.684,
+  "lon": -15.958,
+  "tier": 1,
+  "names": {
+   "fr": "Dakhla",
+   "en": "Dakhla",
+   "es": "Dajla",
+   "ar": "الداخلة"
+  }
+ },
+ {
+  "id": "essaouira",
+  "lat": 31.513,
+  "lon": -9.77,
+  "tier": 1,
+  "names": {
+   "fr": "Essaouira",
+   "en": "Essaouira",
+   "es": "Esauira",
+   "ar": "الصويرة"
+  }
+ },
+ {
+  "id": "ouarzazate",
+  "lat": 30.92,
+  "lon": -6.894,
+  "tier": 1,
+  "names": {
+   "fr": "Ouarzazate",
+   "en": "Ouarzazate",
+   "es": "Uarzazat",
+   "ar": "ورزازات"
+  }
+ },
+ {
+  "id": "tetouan",
+  "lat": 35.572,
+  "lon": -5.369,
+  "tier": 2,
+  "names": {
+   "fr": "Tétouan",
+   "en": "Tetouan",
+   "es": "Tetuán",
+   "ar": "تطوان"
+  }
+ },
+ {
+  "id": "kenitra",
+  "lat": 34.261,
+  "lon": -6.58,
+  "tier": 2,
+  "names": {
+   "fr": "Kénitra",
+   "en": "Kenitra",
+   "es": "Kenitra",
+   "ar": "القنيطرة"
+  }
+ },
+ {
+  "id": "chefchaouen",
+  "lat": 35.171,
+  "lon": -5.27,
+  "tier": 2,
+  "names": {
+   "fr": "Chefchaouen",
+   "en": "Chefchaouen",
+   "es": "Chauen",
+   "ar": "شفشاون"
+  }
+ },
+ {
+  "id": "eljadida",
+  "lat": 33.234,
+  "lon": -8.5,
+  "tier": 2,
+  "names": {
+   "fr": "El Jadida",
+   "en": "El Jadida",
+   "es": "El Yadida",
+   "ar": "الجديدة"
+  }
+ },
+ {
+  "id": "safi",
+  "lat": 32.3,
+  "lon": -9.237,
+  "tier": 2,
+  "names": {
+   "fr": "Safi",
+   "en": "Safi",
+   "es": "Safí",
+   "ar": "آسفي"
+  }
+ },
+ {
+  "id": "nador",
+  "lat": 35.168,
+  "lon": -2.933,
+  "tier": 2,
+  "names": {
+   "fr": "Nador",
+   "en": "Nador",
+   "es": "Nador",
+   "ar": "الناظور"
+  }
+ },
+ {
+  "id": "alhoceima",
+  "lat": 35.247,
+  "lon": -3.932,
+  "tier": 2,
+  "names": {
+   "fr": "Al Hoceïma",
+   "en": "Al Hoceima",
+   "es": "Alhucemas",
+   "ar": "الحسيمة"
+  }
+ },
+ {
+  "id": "benimellal",
+  "lat": 32.337,
+  "lon": -6.349,
+  "tier": 2,
+  "names": {
+   "fr": "Béni Mellal",
+   "en": "Beni Mellal",
+   "es": "Beni Mellal",
+   "ar": "بني ملال"
+  }
+ },
+ {
+  "id": "errachidia",
+  "lat": 31.931,
+  "lon": -4.425,
+  "tier": 2,
+  "names": {
+   "fr": "Errachidia",
+   "en": "Errachidia",
+   "es": "Errachidia",
+   "ar": "الرشيدية"
+  }
+ },
+ {
+  "id": "guelmim",
+  "lat": 28.987,
+  "lon": -10.057,
+  "tier": 2,
+  "names": {
+   "fr": "Guelmim",
+   "en": "Guelmim",
+   "es": "Guelmim",
+   "ar": "كلميم"
+  }
+ },
+ {
+  "id": "ifrane",
+  "lat": 33.527,
+  "lon": -5.107,
+  "tier": 2,
+  "names": {
+   "fr": "Ifrane",
+   "en": "Ifrane",
+   "es": "Ifrán",
+   "ar": "إفران"
+  }
+ },
+ {
+  "id": "merzouga",
+  "lat": 31.099,
+  "lon": -4.012,
+  "tier": 2,
+  "names": {
+   "fr": "Merzouga",
+   "en": "Merzouga",
+   "es": "Merzouga",
+   "ar": "مرزوكة"
+  }
+ },
+ {
+  "id": "mohammedia",
+  "lat": 33.687,
+  "lon": -7.383,
+  "tier": 2,
+  "names": {
+   "fr": "Mohammédia",
+   "en": "Mohammedia",
+   "es": "Mohammedia",
+   "ar": "المحمدية"
+  }
+ },
+ {
+  "id": "taza",
+  "lat": 34.21,
+  "lon": -4.01,
+  "tier": 3,
+  "names": {
+   "fr": "Taza",
+   "en": "Taza",
+   "es": "Taza",
+   "ar": "تازة"
+  }
+ },
+ {
+  "id": "tiznit",
+  "lat": 29.698,
+  "lon": -9.731,
+  "tier": 3,
+  "names": {
+   "fr": "Tiznit",
+   "en": "Tiznit",
+   "es": "Tiznit",
+   "ar": "تيزنيت"
+  }
+ },
+ {
+  "id": "settat",
+  "lat": 33.001,
+  "lon": -7.616,
+  "tier": 3,
+  "names": {
+   "fr": "Settat",
+   "en": "Settat",
+   "es": "Settat",
+   "ar": "سطات"
+  }
+ },
+ {
+  "id": "khouribga",
+  "lat": 32.886,
+  "lon": -6.906,
+  "tier": 3,
+  "names": {
+   "fr": "Khouribga",
+   "en": "Khouribga",
+   "es": "Juribga",
+   "ar": "خريبكة"
+  }
+ },
+ {
+  "id": "larache",
+  "lat": 35.193,
+  "lon": -6.156,
+  "tier": 3,
+  "names": {
+   "fr": "Larache",
+   "en": "Larache",
+   "es": "Larache",
+   "ar": "العرائش"
+  }
+ },
+ {
+  "id": "taroudant",
+  "lat": 30.47,
+  "lon": -8.877,
+  "tier": 3,
+  "names": {
+   "fr": "Taroudant",
+   "en": "Taroudant",
+   "es": "Tarudant",
+   "ar": "تارودانت"
+  }
+ },
+ {
+  "id": "zagora",
+  "lat": 30.332,
+  "lon": -5.838,
+  "tier": 3,
+  "names": {
+   "fr": "Zagora",
+   "en": "Zagora",
+   "es": "Zagora",
+   "ar": "زاكورة"
+  }
+ },
+ {
+  "id": "midelt",
+  "lat": 32.68,
+  "lon": -4.735,
+  "tier": 3,
+  "names": {
+   "fr": "Midelt",
+   "en": "Midelt",
+   "es": "Midelt",
+   "ar": "ميدلت"
+  }
+ },
+ {
+  "id": "azrou",
+  "lat": 33.434,
+  "lon": -5.221,
+  "tier": 3,
+  "names": {
+   "fr": "Azrou",
+   "en": "Azrou",
+   "es": "Azrú",
+   "ar": "أزرو"
+  }
+ },
+ {
+  "id": "asilah",
+  "lat": 35.465,
+  "lon": -6.035,
+  "tier": 3,
+  "names": {
+   "fr": "Asilah",
+   "en": "Asilah",
+   "es": "Arcila",
+   "ar": "أصيلة"
+  }
+ },
+ {
+  "id": "tantan",
+  "lat": 28.438,
+  "lon": -11.103,
+  "tier": 3,
+  "names": {
+   "fr": "Tan-Tan",
+   "en": "Tan-Tan",
+   "es": "Tan-Tan",
+   "ar": "طانطان"
+  }
+ },
+ {
+  "id": "smara",
+  "lat": 26.739,
+  "lon": -11.672,
+  "tier": 3,
+  "names": {
+   "fr": "Smara",
+   "en": "Smara",
+   "es": "Smara",
+   "ar": "السمارة"
+  }
+ },
+ {
+  "id": "figuig",
+  "lat": 32.109,
+  "lon": -1.229,
+  "tier": 3,
+  "names": {
+   "fr": "Figuig",
+   "en": "Figuig",
+   "es": "Figuig",
+   "ar": "فجيج"
+  }
+ },
+ {
+  "id": "sidiifni",
+  "lat": 29.38,
+  "lon": -10.173,
+  "tier": 3,
+  "names": {
+   "fr": "Sidi Ifni",
+   "en": "Sidi Ifni",
+   "es": "Sidi Ifni",
+   "ar": "سيدي إفني"
+  }
+ },
+ {
+  "id": "khenifra",
+  "lat": 32.935,
+  "lon": -5.669,
+  "tier": 3,
+  "names": {
+   "fr": "Khénifra",
+   "en": "Khenifra",
+   "es": "Jenifra",
+   "ar": "خنيفرة"
+  }
+ }
+]

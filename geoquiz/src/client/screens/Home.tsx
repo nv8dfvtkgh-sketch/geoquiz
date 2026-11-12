@@ -4,6 +4,22 @@ import { FAMILIES, Icon, type GameDef } from '../games';
 import { joinGame } from '../net';
 import { FeedbackLink } from '../Feedback';
 import { HomeworkCard } from './School';
+import { useEvents } from '../events';
+
+/** Événement du moment (quiz spécial, badge à gagner). */
+function EventCard({ onOpen }: { onOpen: () => void }) {
+  const { t, lang } = useApp();
+  const ev = useEvents()?.active;
+  if (!ev) return null;
+  const end = new Date(ev.end).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' });
+  return (
+    <button type="button" className="event-card" onClick={onOpen}>
+      <span className="event-emoji" aria-hidden="true">{ev.emoji}</span>
+      <span><strong>{ev.names[lang]}</strong><small>{t('event.until', { date: end })}</small></span>
+      <span aria-hidden="true">›</span>
+    </button>
+  );
+}
 import { useApp } from '../state';
 import { AccountForm, Stars } from './Account';
 import { starsOf } from '../account';
@@ -115,6 +131,7 @@ function Games() {
         <section key={f.id} className="family">
           <h2>{t(`family.${f.id}`)}</h2>
           {f.id === 'today' && <HomeworkCard />}
+          {f.id === 'today' && <EventCard onOpen={() => { if (!ready) return askName(); openGame('event'); }} />}
           {f.id === 'geo' && (
             <button type="button" className="geo-feature" onClick={() => { if (!ready) return askName(); go('geo'); window.scrollTo(0, 0); }}>
               <span className="geo-feature-art" aria-hidden="true">🗺️</span>

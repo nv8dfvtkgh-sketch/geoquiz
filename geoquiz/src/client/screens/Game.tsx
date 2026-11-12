@@ -21,7 +21,7 @@ function Prompt({ q, open = false }: { q: QuestionMsg; open?: boolean }) {
   const { t } = useApp();
   const label = t(q.promptKey, q.params);
   return (
-    <div className="prompt" key={q.index}>
+    <div className="prompt" key={q.index} data-cat={q.category}>
       <ReadAloud q={q} label={label} />
       <div className="prompt-text">
         {q.params.name ? (<><p className="ask">{label}</p><h1 dir="auto" className={q.category === 'emoji' ? 'rebus' : q.category === 'truefalse' || q.params.name.length > 40 ? 'long' : ''}>{q.params.name}</h1></>) : <h1 dir="auto">{label}</h1>}

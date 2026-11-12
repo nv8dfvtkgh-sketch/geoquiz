@@ -119,7 +119,7 @@ export function Setup() {
         <div className="seg">
           {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
             <button type="button" key={d} aria-pressed={cfg.difficulty === d} onClick={() => set({ difficulty: d })}>
-              {lockedFor(me, cfg.category, d) && !editing ? <span aria-hidden="true">🔒 </span> : null}{t(`diff.${d}`)}
+              {lockedFor(me, cfg.category, d) && !editing ? <span aria-hidden="true">🔒 </span> : null}{cfg.category.startsWith('prog_') ? t(`diff.prog.${d}`) : t(`diff.${d}`)}
             </button>
           ))}
         </div>
@@ -243,6 +243,7 @@ export function DailyBoard({ refresh = 0 }: { refresh?: number }) {
 function fix(c: Settings, zones: ZoneInfo[]): Settings {
   const ok = zones.find((z) => z.id === c.zone && z.categories.includes(c.category));
   if (ok) return c;
+  if (c.category === 'macities') return { ...c, zone: 'r:MA:groups' };
   const pref = c.category === 'regions' ? zones.find((z) => z.id === 'r:MA:groups') ?? zones.find((z) => z.categories.includes('regions')) : zones.find((z) => z.id === 'world');
   return { ...c, zone: pref?.id ?? 'world' };
 }
