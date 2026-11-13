@@ -702,5 +702,62 @@
    "es": "New York Yankees (béisbol)",
    "ar": "نيويورك يانكيز (البيسبول)"
   }
+ },
+ {
+  "id": "st-fnb",
+  "wiki": "FNB Stadium",
+  "country": "ZA",
+  "tier": 2,
+  "sport": "foot",
+  "names": {
+   "fr": "FNB Stadium (Soccer City)",
+   "en": "FNB Stadium (Soccer City)",
+   "es": "FNB Stadium (Soccer City)",
+   "ar": "ملعب إف إن بي (سوكر سيتي)"
+  },
+  "home": {
+   "fr": "Kaizer Chiefs",
+   "en": "Kaizer Chiefs",
+   "es": "Kaizer Chiefs",
+   "ar": "كايزر تشيفز"
+  }
+ },
+ {
+  "id": "st-centenario",
+  "wiki": "Estadio Centenario",
+  "country": "UY",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Estadio Centenario",
+   "en": "Estadio Centenario",
+   "es": "Estadio Centenario",
+   "ar": "ملعب سينتيناريو"
+  },
+  "home": {
+   "fr": "l'Uruguay (finale du Mondial 1930)",
+   "en": "Uruguay (1930 World Cup final)",
+   "es": "Uruguay (final del Mundial 1930)",
+   "ar": "الأوروغواي (نهائي كأس العالم 1930)"
+  }
+ },
+ {
+  "id": "st-monumental",
+  "wiki": "Estadio Monumental Antonio Vespucio Liberti",
+  "country": "AR",
+  "tier": 3,
+  "sport": "foot",
+  "names": {
+   "fr": "Estadio Monumental",
+   "en": "Estadio Monumental",
+   "es": "Estadio Monumental",
+   "ar": "ملعب مونومنتال"
+  },
+  "home": {
+   "fr": "River Plate",
+   "en": "River Plate",
+   "es": "River Plate",
+   "ar": "ريفر بليت"
+  }
  }
 ]

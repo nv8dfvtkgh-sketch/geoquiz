@@ -331,5 +331,149 @@
    "es": "ganso",
    "ar": "إوزة"
   }
+ },
+ {
+  "id": "tiger",
+  "tier": 2,
+  "emoji": "🐯",
+  "q": "tiger roar",
+  "names": {
+   "fr": "tigre",
+   "en": "tiger",
+   "es": "tigre",
+   "ar": "نمر"
+  }
+ },
+ {
+  "id": "bear",
+  "tier": 2,
+  "emoji": "🐻",
+  "q": "bear growl",
+  "names": {
+   "fr": "ours",
+   "en": "bear",
+   "es": "oso",
+   "ar": "دب"
+  }
+ },
+ {
+  "id": "rattlesnake",
+  "tier": 3,
+  "emoji": "🐍",
+  "q": "rattlesnake rattle",
+  "names": {
+   "fr": "serpent à sonnette",
+   "en": "rattlesnake",
+   "es": "serpiente de cascabel",
+   "ar": "الأفعى المجلجلة"
+  }
+ },
+ {
+  "id": "hen",
+  "tier": 1,
+  "emoji": "🐔",
+  "q": "hen clucking",
+  "names": {
+   "fr": "poule",
+   "en": "hen",
+   "es": "gallina",
+   "ar": "دجاجة"
+  }
+ },
+ {
+  "id": "pigeon",
+  "tier": 2,
+  "emoji": "🕊️",
+  "q": "pigeon cooing",
+  "names": {
+   "fr": "pigeon",
+   "en": "pigeon",
+   "es": "paloma",
+   "ar": "حمامة"
+  }
+ },
+ {
+  "id": "mosquito",
+  "tier": 2,
+  "emoji": "🦟",
+  "q": "mosquito buzzing",
+  "names": {
+   "fr": "moustique",
+   "en": "mosquito",
+   "es": "mosquito",
+   "ar": "بعوضة"
+  }
+ },
+ {
+  "id": "sealion",
+  "tier": 3,
+  "emoji": "🦭",
+  "q": "sea lion",
+  "names": {
+   "fr": "otarie",
+   "en": "sea lion",
+   "es": "león marino",
+   "ar": "أسد البحر"
+  }
+ },
+ {
+  "id": "nightingale",
+  "tier": 3,
+  "emoji": "🐦",
+  "q": "nightingale song",
+  "names": {
+   "fr": "rossignol",
+   "en": "nightingale",
+   "es": "ruiseñor",
+   "ar": "العندليب"
+  }
+ },
+ {
+  "id": "woodpecker",
+  "tier": 3,
+  "emoji": "🌳",
+  "q": "woodpecker drumming",
+  "names": {
+   "fr": "pic (oiseau)",
+   "en": "woodpecker",
+   "es": "pájaro carpintero",
+   "ar": "نقار الخشب"
+  }
+ },
+ {
+  "id": "parrot",
+  "tier": 2,
+  "emoji": "🦜",
+  "q": "parrot",
+  "names": {
+   "fr": "perroquet",
+   "en": "parrot",
+   "es": "loro",
+   "ar": "ببغاء"
+  }
+ },
+ {
+  "id": "kookaburra",
+  "tier": 3,
+  "emoji": "🐦",
+  "q": "kookaburra",
+  "names": {
+   "fr": "martin-chasseur (kookaburra)",
+   "en": "kookaburra",
+   "es": "cucaburra",
+   "ar": "الكوكابورا"
+  }
+ },
+ {
+  "id": "gorilla",
+  "tier": 3,
+  "emoji": "🦍",
+  "q": "gorilla",
+  "names": {
+   "fr": "gorille",
+   "en": "gorilla",
+   "es": "gorila",
+   "ar": "غوريلا"
+  }
  }
 ]

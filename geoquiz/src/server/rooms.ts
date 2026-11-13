@@ -141,12 +141,13 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   const strict = cat.pool(zone, settings.difficulty, settings.count);
   let pool = shuffle(strict, rnd);
   if (avoid.length) {
-    // Anti-répétition : d'abord les questions jamais vues de ce niveau, puis celles du niveau
-    // au-dessus, et seulement ensuite les déjà vues (les plus anciennes en premier).
+    // Anti-répétition : d'abord les questions jamais vues de ce niveau, puis celles des niveaux
+    // au-dessus (le plus proche d'abord), et seulement ensuite les déjà vues (les plus anciennes en premier).
     const seenAt = new Map(avoid.map((t, i) => [t, i]));
-    const next = settings.difficulty === 'easy' ? 'medium' : settings.difficulty === 'medium' ? 'hard' : null;
+    const harder = (settings.difficulty === 'easy' ? ['medium', 'hard'] : settings.difficulty === 'medium' ? ['hard'] : []) as Settings['difficulty'][];
     const inStrict = new Set(strict);
-    const wide = next ? shuffle(cat.pool(zone, next, settings.count).filter((t) => !inStrict.has(t)), rnd) : [];
+    const wide: string[] = [];
+    for (const d of harder) for (const t of shuffle(cat.pool(zone, d, settings.count), rnd)) if (!inStrict.has(t) && !wide.includes(t)) wide.push(t);
     const fresh = [...pool, ...wide].filter((t) => !seenAt.has(t));
     const seen = [...pool, ...wide].filter((t) => seenAt.has(t)).sort((a, b) => seenAt.get(a)! - seenAt.get(b)!);
     // Assez de questions neuves au bon niveau : on ne va pas chercher plus dur.
@@ -563,7 +564,7 @@ export class Room {
       : this.challengeItems ? this.challengeQuestions()
       : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid);
     // Une revanche ne repose pas les mêmes questions.
-    if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-300);
+    if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-400);
     this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; p.shield = undefined; p.bet = undefined; }

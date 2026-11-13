@@ -8,3 +8,5 @@ public/data/
 .wrangler/
 data/store/
 cf.log
+*.log
+/*.png

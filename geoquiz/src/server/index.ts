@@ -84,7 +84,7 @@ async function createRoom(body: any): Promise<string | { error: string }> {
   const code = newCode((c) => rooms.has(c));
   const room = new Room(code, kind, settings, kind !== 'room' || body.hostPlays !== false, () => rooms.delete(code));
   room.quizToken = quizToken;
-  room.avoid = Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-300) : [];
+  room.avoid = Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-400) : [];
   if (kind === 'solo' && typeof body.challenge === 'string' && /^[A-Z0-9]{6}$/.test(body.challenge)) room.challenge = body.challenge;
   if (kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? ''))) room.assignment = body.assignment;
   if (settings.category === 'review') { if (kind !== 'solo') return { error: 'settings.invalid' }; room.reviewToken = String(body.reviewToken ?? '').slice(0, 64); }

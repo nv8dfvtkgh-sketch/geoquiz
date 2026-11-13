@@ -446,5 +446,119 @@
    "es": "markhor",
    "ar": "الماعز البري (مارخور)"
   }
+ },
+ {
+  "id": "asianelephant",
+  "countries": [
+   "TH"
+  ],
+  "tier": 2,
+  "emoji": "🐘",
+  "names": {
+   "fr": "éléphant d'Asie",
+   "en": "Asian elephant",
+   "es": "elefante asiático",
+   "ar": "الفيل الآسيوي"
+  }
+ },
+ {
+  "id": "tiger-kr",
+  "countries": [
+   "KR"
+  ],
+  "tier": 2,
+  "emoji": "🐅",
+  "names": {
+   "fr": "tigre de l'Amour (tigre de Corée)",
+   "en": "Amur tiger (Korean tiger)",
+   "es": "tigre de Amur (tigre coreano)",
+   "ar": "نمر آمور (النمر الكوري)"
+  }
+ },
+ {
+  "id": "flamingo",
+  "countries": [
+   "BS"
+  ],
+  "tier": 3,
+  "emoji": "🦩",
+  "names": {
+   "fr": "flamant rose",
+   "en": "flamingo",
+   "es": "flamenco",
+   "ar": "النحام الوردي"
+  }
+ },
+ {
+  "id": "scarletibis",
+  "countries": [
+   "TT"
+  ],
+  "tier": 3,
+  "emoji": "🐦",
+  "names": {
+   "fr": "ibis rouge",
+   "en": "scarlet ibis",
+   "es": "corocoro rojo",
+   "ar": "أبو منجل القرمزي"
+  }
+ },
+ {
+  "id": "goldeneagle",
+  "countries": [
+   "MX"
+  ],
+  "tier": 2,
+  "emoji": "🦅",
+  "names": {
+   "fr": "aigle royal",
+   "en": "golden eagle",
+   "es": "águila real",
+   "ar": "العقاب الذهبي"
+  }
+ },
+ {
+  "id": "macaw",
+  "countries": [
+   "HN"
+  ],
+  "tier": 3,
+  "emoji": "🦜",
+  "names": {
+   "fr": "ara rouge",
+   "en": "scarlet macaw",
+   "es": "guacamaya roja",
+   "ar": "الببغاء القرمزي"
+  }
+ },
+ {
+  "id": "falcon",
+  "countries": [
+   "AE",
+   "QA",
+   "SA"
+  ],
+  "tier": 2,
+  "emoji": "🦅",
+  "names": {
+   "fr": "faucon",
+   "en": "falcon",
+   "es": "halcón",
+   "ar": "الصقر"
+  }
+ },
+ {
+  "id": "jaguar",
+  "countries": [
+   "GY"
+  ],
+  "tier": 3,
+  "emoji": "🐆",
+  "names": {
+   "fr": "jaguar",
+   "en": "jaguar",
+   "es": "jaguar",
+   "ar": "اليغور"
+  }
  }
 ]

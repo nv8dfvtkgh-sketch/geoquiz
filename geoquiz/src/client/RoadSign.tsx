@@ -31,6 +31,14 @@ const SIGNS: Record<string, React.ReactNode> = {
   levelcrossing: <Triangle><path d="M24 60 H76 M24 72 H76 M30 54 V78 M50 54 V78 M70 54 V78" stroke={INK} strokeWidth="5" /></Triangle>,
   nouturn: <Round><path d="M58 76 V46 Q58 32 45 32 Q34 32 34 46 V60" fill="none" stroke={INK} strokeWidth="7" strokeLinecap="round" /><path d="M26 56 L34 70 L42 56 Z" fill={INK} /><path d="M22 22 L78 78" stroke={RED} strokeWidth="8" /></Round>,
   pedestrians: <><rect x="10" y="10" width="80" height="80" rx="8" fill={BLUE} /><path d="M50 18 L84 80 L16 80 Z" fill={W} /><path d="M28 74 H72" stroke={INK} strokeWidth="4" strokeDasharray="6 4" /><circle cx="52" cy="38" r="5" fill={INK} /><path d="M51 44 L47 58 L40 70 M47 58 L56 68 M49 49 L58 55 M49 49 L42 54" stroke={INK} strokeWidth="4.5" strokeLinecap="round" fill="none" /></>,
+  danger: <Triangle><rect x="45" y="36" width="10" height="28" rx="3" fill={INK} /><circle cx="50" cy="74" r="5.5" fill={INK} /></Triangle>,
+  bendleft: <g transform="translate(100 0) scale(-1 1)"><Triangle><path d="M40 78 V62 Q40 50 52 46 L60 43" fill="none" stroke={INK} strokeWidth="7" strokeLinecap="round" /><path d="M56 34 L70 42 L58 52 Z" fill={INK} /></Triangle></g>,
+  straight: <Round fill={BLUE} ring="none">{arrow('M50 78 V40')}<path d="M34 44 L50 24 L66 44 Z" fill={W} /></Round>,
+  turnleft: <g transform="translate(100 0) scale(-1 1)"><Round fill={BLUE} ring="none">{arrow('M38 74 V50 Q38 40 48 40 H64')}<path d="M60 28 L76 40 L60 52 Z" fill={W} /></Round></g>,
+  keepright: <Round fill={BLUE} ring="none">{arrow('M32 32 L60 60')}<path d="M72 48 L72 72 L48 72 Z" fill={W} /></Round>,
+  speed100: <Round><text x="50" y="60" textAnchor="middle" fontSize="28" fontWeight="800" fill={INK} fontFamily="Arial, sans-serif">100</text></Round>,
+  speed120: <Round><text x="50" y="60" textAnchor="middle" fontSize="28" fontWeight="800" fill={INK} fontFamily="Arial, sans-serif">120</text></Round>,
+  noentryall: <Round />,
 };
 
 export function RoadSign({ id }: { id: string }) {

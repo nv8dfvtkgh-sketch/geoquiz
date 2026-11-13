@@ -139,13 +139,15 @@ export async function joinGame(code: string, name: string, lang: Lang): Promise<
 }
 
 /** Questions vues par jeu (les 300 dernières), pour ne pas les reposer trop vite. */
-const seenKey = (cat: string) => `gq.seen.${cat}`;
+// Culture sport mélange les questions des six sports : une question vue dans l'un ne revient pas dans l'autre.
+const SPORT = new Set(['sport', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport']);
+const seenKey = (cat: string) => `gq.seen.${SPORT.has(cat) ? 'sport' : cat}`;
 export function seenIn(cat: string): string[] {
   try { const v = JSON.parse(localStorage.getItem(seenKey(cat)) ?? '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
 }
 function rememberSeen(cat: string, targets: string[]) {
   if (!cat || !targets.length || ['daily', 'review', 'custom', 'survival'].includes(cat)) return;
   const set = new Set(targets);
-  const list = [...seenIn(cat).filter((t) => !set.has(t)), ...targets].slice(-300);
+  const list = [...seenIn(cat).filter((t) => !set.has(t)), ...targets].slice(-400);
   try { localStorage.setItem(seenKey(cat), JSON.stringify(list)); } catch { /* ignoré */ }
 }

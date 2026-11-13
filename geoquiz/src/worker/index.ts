@@ -105,7 +105,7 @@ async function createRoom(env: Env, body: any): Promise<string | { error: string
     const code = newCode();
     const res = await roomStub(env, code).fetch('https://room/init', {
       method: 'POST',
-      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined, reviewToken: settings.category === 'review' ? String(body.reviewToken ?? '').slice(0, 64) : undefined, assignment: kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? '')) ? body.assignment : undefined, avoid: Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-300) : [] }),
+      body: JSON.stringify({ code, kind, settings, hostPlays: kind !== 'room' || body.hostPlays !== false, quizToken, challenge: kind === 'solo' && /^[A-Z0-9]{6}$/.test(String(body.challenge ?? '')) ? body.challenge : undefined, reviewToken: settings.category === 'review' ? String(body.reviewToken ?? '').slice(0, 64) : undefined, assignment: kind === 'solo' && /^[A-Z0-9]{6}:[0-9a-f]{8}$/.test(String(body.assignment ?? '')) ? body.assignment : undefined, avoid: Array.isArray(body.avoid) ? body.avoid.filter((x: unknown) => typeof x === 'string' && x.length <= 60).slice(-400) : [] }),
     });
     if (res.ok) return code;
     if (res.status !== 409) return { error: 'server' }; // 409 : code déjà pris, on en tire un autre
