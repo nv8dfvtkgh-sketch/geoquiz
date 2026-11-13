@@ -22,6 +22,7 @@ import { SettingsButton } from './Settings';
 import { CapwordScreen, CompassScreen, GlobleScreen } from './screens/Puzzles';
 import { CardsScreen, ColorFlagScreen, NameAllScreen } from './screens/Solo';
 import { AlbumScreen, StickerToast } from './screens/Collect';
+import { BoardOnline, DuelScreen } from './screens/Duels';
 import { earnSticker, syncAlbum } from './album';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
@@ -170,7 +171,8 @@ export function App() {
           {s.screen === 'setup' && <Setup />}
           {s.screen === 'lobby' && <Lobby />}
           {s.screen === 'quick' && <QuickWait />}
-          {s.screen === 'game' && <Game />}
+          {s.screen === 'game' && (s.room?.settings.category === 'board' ? <BoardOnline /> : <Game />)}
+          {s.screen === 'duel' && <DuelScreen />}
           {s.screen === 'final' && <Final />}
           {s.screen === 'myquizzes' && <MyQuizzes />}
           {s.screen === 'editor' && <QuizEditor />}

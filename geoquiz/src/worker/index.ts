@@ -4,6 +4,7 @@
 //     partie en mémoire et gère les WebSockets de tous ses joueurs.
 //   - La partie rapide passe par un Durable Object unique (QuickDO) qui associe les joueurs.
 // Le moteur de jeu (src/server/rooms.ts, categories.ts, data.ts) est le même que la version Node.
+import { boardQuestionsJson } from '../server/boardplay';
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
@@ -11,7 +12,7 @@ import { countryList, eventList, flagPath, geoJson, printSheet } from '../server
 import { nextTournament } from '../server/tournament';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
-import { config, newCode, Room, validSettings, type Conn } from '../server/rooms';
+import { cleanLang, config, newCode, Room, validSettings, type Conn } from '../server/rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from '../server/quizzes';
 import { AccountService, accountRoute, type GameResult } from '../server/accounts';
 
@@ -139,6 +140,7 @@ export default {
           return json({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }, 200, 'no-store');
         }
         if (p === '/api/events') return json(eventList(), 200, 'public, max-age=600');
+        if (p === '/api/boardq') return new Response(boardQuestionsJson(url.searchParams.get('theme') ?? 'geo', url.searchParams.get('d') ?? 'easy', cleanLang(url.searchParams.get('lang')), Number(url.searchParams.get('n')) || 30), { headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
         if (p === '/api/geo') return new Response(geoJson(), { headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=3600' } });
         if (p === '/api/countries') return json(countryList(url.searchParams.get('lang') ?? 'fr'), 200, 'public, max-age=3600');
         if (p === '/api/print' && request.method === 'POST') {

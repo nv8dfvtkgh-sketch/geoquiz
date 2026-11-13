@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (['custom', 'daily', 'review'].includes(cat) || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
+    if (['custom', 'daily', 'review', 'board'].includes(cat) || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -1111,4 +1111,29 @@ test('Anti-répétition : pas de question déjà vue tant qu\'il en reste de nou
   assert.equal(again.length, 10);
   const oldest = new Set(seen.slice(0, 10 + (all.size % 10)));
   assert.ok(again.every((q) => oldest.has(q.target) || !seen.includes(q.target)));
+});
+
+test('Jeux de plateau à distance : morpion quiz en duel, question au seul joueur dont c\'est le tour', async () => {
+  const r = create('duel', settings({ category: 'board', zone: 'world', board: 'ttt', theme: 'geo', difficulty: 'easy' } as any));
+  const a = client(), b = client();
+  onMessage(a.conn, r.code, { t: 'join', name: 'A', lang: 'fr' });
+  onMessage(b.conn, r.code, { t: 'join', name: 'B', lang: 'ar' });
+  await new Promise((res) => setTimeout(res, 1700));
+  const va = a.last('board')!, vb = b.last('board')!;
+  assert.ok(va && vb, 'chacun reçoit le plateau');
+  const cur = va.view.turn === va.you ? a : b;
+  const other = cur === a ? b : a;
+  const free = (cur.last('board')!.view as any).cells.indexOf(null);
+  onMessage(other.conn, r.code, { t: 'bmove', move: free });
+  assert.equal((cur.last('board')!.view as any).ask, undefined, 'pas son tour : ignoré');
+  onMessage(cur.conn, r.code, { t: 'bmove', move: free });
+  const mine = cur.last('board')!;
+  assert.ok(mine.q && mine.q.options.length >= 2, 'question envoyée au joueur');
+  assert.equal(other.last('board')!.q, undefined, 'pas à l\'autre');
+  const ok = r.board!.q!.revealOption!;
+  onMessage(cur.conn, r.code, { t: 'banswer', value: ok });
+  const after = cur.last('board')!;
+  assert.equal((after.view as any).cells[free], after.you, 'bonne réponse : case prise');
+  assert.equal(after.res?.ok, true);
+  r.destroy();
 });

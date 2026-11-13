@@ -9,6 +9,15 @@ export function SettingsSummary({ settings }: { settings: Settings }) {
     : z.kind === 'world' ? t('zone.world')
       : z.kind === 'regions' ? `${z.names?.[lang]} (${t(`level.${z.level}`)})`
         : t(`zone.${z.id.replace(':', '.')}`);
+  if (settings.category === 'board') {
+    return (
+      <dl className="summary">
+        <div><dt>{t('setup.category')}</dt><dd>{t(`cat.${settings.board}`)}</dd></div>
+        <div><dt>{t('duel.theme')}</dt><dd>{t(`duel.theme.${settings.theme ?? 'geo'}`)}</dd></div>
+        <div><dt>{t('setup.difficulty')}</dt><dd>{t(`diff.${settings.difficulty}`)}</dd></div>
+      </dl>
+    );
+  }
   return (
     <dl className="summary">
       <div><dt>{t('setup.category')}</dt><dd>{t(`cat.${settings.category}`)}</dd></div>

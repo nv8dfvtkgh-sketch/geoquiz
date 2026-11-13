@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -58,6 +58,21 @@ export const FAMILIES: Family[] = [
       { id: 'whereami', icon: 'camera', fresh: true },
       { id: 'whoami', icon: 'question', fresh: true },
       { id: 'survival', icon: 'heart', fresh: true },
+    ],
+  },
+  {
+    id: 'duels',
+    tint: 'tint-rose',
+    games: [
+      { id: 'ttt', icon: 'ttt', fresh: true, screen: 'duel' },
+      { id: 'c4q', icon: 'c4', fresh: true, screen: 'duel' },
+      { id: 'ships', icon: 'ship', fresh: true, screen: 'duel' },
+      { id: 'hangman', icon: 'hang', fresh: true, screen: 'duel' },
+      { id: 'dots', icon: 'dots', fresh: true, screen: 'duel' },
+      { id: 'memory', icon: 'cards', fresh: true, screen: 'duel' },
+      { id: 'caravan', icon: 'dice', fresh: true, screen: 'duel' },
+      { id: 'awale', icon: 'awale', fresh: true, screen: 'duel' },
+      { id: 'c4', icon: 'c4', fresh: true, screen: 'duel' },
     ],
   },
   {
@@ -133,6 +148,13 @@ export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
 export const ICONS = {
+  ttt: <g {...P}><path d="M9 3v18M15 3v18M3 9h18M3 15h18" /><path d="M4.5 4.5l3 3M7.5 4.5l-3 3" /><circle cx="18" cy="18" r="1.8" /></g>,
+  c4: <g {...P}><rect x="3" y="4" width="18" height="15" rx="2" /><circle cx="8" cy="9" r="1.6" /><circle cx="12" cy="14" r="1.6" /><circle cx="16" cy="9" r="1.6" /><path d="M6 19v2M18 19v2" /></g>,
+  ship: <g {...P}><path d="M3 15h18l-2.5 4.5h-13z" /><path d="M6 15V9h8l3 6" /><path d="M10 9V5" /></g>,
+  hang: <g {...P}><path d="M4 21h9M7 21V3h8v3" /><circle cx="15" cy="8.5" r="2.5" /><path d="M15 11v5M12.5 13h5" /></g>,
+  dots: <g {...P}><path d="M5 5h7v7H5z" /><circle cx="19" cy="5" r=".8" /><circle cx="5" cy="19" r=".8" /><circle cx="12" cy="19" r=".8" /><circle cx="19" cy="12" r=".8" /><circle cx="19" cy="19" r=".8" /></g>,
+  dice: <g {...P}><rect x="4" y="4" width="16" height="16" rx="3" /><circle cx="9" cy="9" r=".9" /><circle cx="15" cy="15" r=".9" /><circle cx="15" cy="9" r=".9" /><circle cx="9" cy="15" r=".9" /></g>,
+  awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
   bulb: <g {...P}><path d="M9 17h6M10 20h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></g>,
   sticker: <g {...P}><path d="M5 4h14v9l-6 7H5z" /><path d="M19 13h-6v7" /><path d="M9 9.5h.01M14 9.5h.01" strokeWidth="2.4" /></g>,

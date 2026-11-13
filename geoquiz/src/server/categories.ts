@@ -1337,6 +1337,7 @@ export function survivalQuestions(rnd: () => number = Math.random): InternalQues
   }
   return out;
 }
+const boardCat: Category = { id: 'board', noZone: true, qtypes: ['mcq'], zoneKinds: ['world'], pool: () => [], make() { throw new Error('plateau'); } };
 const survivalCat: Category = {
   id: 'survival',
   noZone: true,
@@ -1348,7 +1349,7 @@ const survivalCat: Category = {
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, whereamiCat, whoamiCat, survivalCat].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, whereamiCat, whoamiCat, survivalCat, boardCat].map((c) => [c.id, c]),
 );
 
 /**

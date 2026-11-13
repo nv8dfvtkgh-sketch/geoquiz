@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel';
 
 export interface Feedback {
   q: number;
@@ -38,6 +38,8 @@ export interface State {
   reveal?: { reveal: Reveal; results: Extract<ServerMsg, { t: 'reveal' }>['results']; players: PublicPlayer[]; next: number | null; at: number; q: number; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> };
   /** Mise finale en cours : question visée, thème, fin du temps (horloge locale), mises reçues. */
   wager?: { q: number; category: string; until: number; bets?: Record<string, number> };
+  /** Jeu de plateau à distance : dernière vue reçue du serveur. */
+  board?: Extract<ServerMsg, { t: 'board' }>;
   finished?: Extract<ServerMsg, { t: 'finished' }>;
   error?: string;
   joinCode?: string;
@@ -84,14 +86,14 @@ export function reducer(s: State, a: Action): State {
 
 function screenFor(room: RoomSnapshot, cur: Screen): Screen {
   if (room.state === 'lobby') return cur === 'setup' ? 'setup' : 'lobby';
-  if (room.state === 'finished') return 'final';
+  if (room.state === 'finished') return room.settings.category === 'board' ? 'game' : 'final';
   return 'game';
 }
 
 function onServer(s: State, m: ServerMsg): State {
   switch (m.t) {
     case 'joined':
-      return { ...s, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined, challenge: undefined };
+      return { ...s, board: undefined, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined, challenge: undefined };
     case 'room': {
       const screen = s.screen === 'home' || s.screen === 'quick' ? s.screen : screenFor(m.room, s.screen);
       return { ...s, room: m.room, isHost: m.room.hostId === s.you, screen: s.room ? screen : s.screen };
@@ -120,6 +122,8 @@ function onServer(s: State, m: ServerMsg): State {
       const hist = mine ? { ...(s.hist ?? {}), [m.q]: mine.correct } : s.hist;
       return { ...s, hist, reveal: { reveal: m.reveal, results: m.results, players: m.players, next: m.next, at: performance.now(), q: m.q, teams: m.teams, battle: m.battle, chests: m.chests } };
     }
+    case 'board':
+      return { ...s, board: m, screen: 'game' };
     case 'wager':
       return { ...s, wager: { q: m.q, category: m.category, until: performance.now() + m.ms, bets: m.bets }, screen: 'game' };
     case 'finished':

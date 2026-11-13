@@ -5,6 +5,8 @@ import {
   type QuestionMsg, type RecapItem, type Reveal, type RoomKind, type RoomSnapshot, type RoomState,
   type ServerMsg, type Settings, type Reward, type ChallengeEntry, type ChestResult, REACTIONS,
 } from '../shared/protocol';
+import { answer as boardAnswer, BOARD_GAMES, BOARD_MAX, BOARD_THEMES, botMove, hangNext, initBoard, legal as boardLegal, play as boardPlay, viewFor, type BoardGame, type BoardState } from '../shared/boards';
+import { boardCtx, boardQ, boardQuestion } from './boardplay';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
@@ -123,6 +125,7 @@ export function validSettings(s: any): Settings | null {
     teams: clamp(s.teams, 2, 4, 2),
     chests: !!s.chests,
     wager: !!s.wager,
+    ...(cat.id === 'board' ? { board: BOARD_GAMES.includes(s.board) ? s.board : 'ttt', theme: BOARD_THEMES[s.theme] ? s.theme : 'geo' } : {}),
   };
 }
 
@@ -130,7 +133,7 @@ function cleanName(name: any): string {
   const n = String(name ?? '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, LIMITS.maxNameLength);
   return n || 'Joueur';
 }
-const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
+export const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 
 /** Tirage des questions selon les réglages. */
 export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = []): InternalQuestion[] {
@@ -257,6 +260,7 @@ export class Room {
   ) {}
 
   get maxPlayers() {
+    if (this.settings.category === 'board') return this.kind === 'duel' ? 2 : BOARD_MAX[this.settings.board as BoardGame] ?? 2;
     return this.kind === 'solo' ? 1 : this.kind === 'duel' ? 2 : config.maxPlayers;
   }
   get empty() {
@@ -338,6 +342,7 @@ export class Room {
   resync(m: Member) {
     const conn = m.conn;
     if (!conn) return;
+    if (this.board) return this.sendBoard(m);
     if (this.state === 'question' && this.round) {
       conn.send({ t: 'question', q: this.questionFor(m.lang) });
       const a = this.round.answers.get(m.id);
@@ -399,6 +404,7 @@ export class Room {
   }
 
   destroy() {
+    if (this.board?.timer) clearTimeout(this.board.timer);
     if (this.timer) clearTimeout(this.timer);
     if (this.autoTimer) clearTimeout(this.autoTimer);
     for (const m of this.members.values()) if (m.conn) { m.conn.room = undefined; m.conn.memberId = undefined; }
@@ -501,6 +507,12 @@ export class Room {
           if (this.alive().filter((p) => p.conn).every((p) => this.betting!.pct.has(p.id))) this.endWager();
         }
         break;
+      case 'bmove':
+        this.boardMove(m, msg.move);
+        break;
+      case 'banswer':
+        this.boardAnswer(m, msg.value);
+        break;
       case 'react': {
         // Réactions : emojis d'une liste fixe, pas plus d'une toutes les 0,7 s par joueur.
         const now = Date.now();
@@ -556,6 +568,7 @@ export class Room {
     const players = this.players();
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
+    if (this.settings.category === 'board') return this.startBoard();
     const retry = this.retryQs;
     this.retryQs = undefined;
     this.retrying = !!retry;
@@ -646,6 +659,8 @@ export class Room {
       this.state = 'lobby';
       this.qIndex = -1;
       this.round = null;
+      if (this.board?.timer) clearTimeout(this.board.timer);
+      this.board = undefined;
       for (const p of this.players()) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
       this.pairs = [];
       // On retire les joueurs partis pendant la partie.
@@ -695,6 +710,96 @@ export class Room {
     this.broadcast((m) => ({ t: 'question', q: this.questionFor(m.lang) }));
     this.sendProgress();
     if (timed) this.timer = setTimeout(() => this.endRound(), this.settings.timeLimit * 1000 + GRACE_MS);
+  }
+
+  // ---------------------------------------------------------------- jeux de duel sur plateau
+  board?: { s: BoardState; order: string[]; q?: InternalQuestion; deadline?: number; asked: Map<string, { n: number; ok: number }>; avoid: Set<string>; timer?: ReturnType<typeof setTimeout> };
+
+  startBoard() {
+    const players = shuffle(this.players(), Math.random).slice(0, this.maxPlayers);
+    const game = (this.settings.board ?? 'ttt') as BoardGame;
+    const host = this.members.get(this.hostId) ?? players[0];
+    const ctx = boardCtx(game, host.lang, this.settings.difficulty, Math.random);
+    if (this.board?.timer) clearTimeout(this.board.timer);
+    this.board = { s: initBoard(game, players.length, this.settings.theme ?? 'geo', Math.random, ctx), order: players.map((p) => p.id), asked: new Map(), avoid: this.board?.avoid ?? new Set() };
+    for (const p of this.players()) { p.score = 0; p.streak = 0; }
+    this.rematchVotes.clear();
+    this.state = 'question';
+    this.broadcastRoom();
+    this.boardTick();
+  }
+  sendBoard(m: Member, res?: { ok: boolean; correct?: string }) {
+    const b = this.board;
+    if (!b || !m.conn) return;
+    const you = b.order.indexOf(m.id);
+    const mine = you >= 0 && you === b.s.turn && b.s.ask && b.q;
+    m.conn.send({ t: 'board', view: viewFor(b.s, you >= 0 ? you : null), order: b.order, you, q: mine ? boardQ(b.q!, m.lang) : undefined, deadline: b.deadline ? b.deadline - Date.now() : undefined, res });
+  }
+  /** Après chaque coup : question à poser, manche suivante du pendu, fin de partie, chrono du tour. */
+  boardTick(res?: { id: string; ok: boolean; correct?: string }): void {
+    const b = this.board!;
+    if (b.timer) clearTimeout(b.timer);
+    b.deadline = undefined;
+    if (b.s.winner !== null) return this.endBoard(res);
+    if (b.s.ask && !b.q) {
+      b.q = boardQuestion(b.s.ask, this.settings.difficulty, Math.random, b.avoid) ?? undefined;
+      if (!b.q) { b.s = boardAnswer(b.s, true); return this.boardTick(res); } // plus de question : le coup passe
+    }
+    if (b.s.game === 'hangman' && b.s.done) {
+      b.timer = setTimeout(() => { b.s = hangNext(b.s as any); this.boardTick(); }, 2600);
+    } else {
+      // Question : 25 s pour répondre. Coup : 60 s, sinon il est joué à la place du joueur.
+      const ms = b.s.ask ? 25_000 : 60_000;
+      b.deadline = Date.now() + ms;
+      b.timer = setTimeout(() => {
+        const id = b.order[b.s.turn];
+        const m = this.members.get(id);
+        if (!m) return;
+        if (b.s.ask) this.boardAnswer(m, '');
+        else this.boardMove(m, botMove(viewFor(b.s, b.s.turn), b.s.turn, 'easy', Math.random));
+      }, ms + GRACE_MS);
+    }
+    for (const m of this.members.values()) this.sendBoard(m, res && res.id === m.id ? res : res ? { ok: res.ok } : undefined);
+  }
+  boardMove(m: Member, move: any) {
+    const b = this.board;
+    if (!b || this.state !== 'question') return;
+    const p = b.order.indexOf(m.id);
+    if (p < 0 || !boardLegal(b.s, p, move)) return;
+    b.s = boardPlay(b.s, p, move, Math.random);
+    this.boardTick();
+  }
+  boardAnswer(m: Member, value: string) {
+    const b = this.board;
+    if (!b || !b.s.ask || !b.q || b.order[b.s.turn] !== m.id) return;
+    const ok = typeof value === 'string' && !!value && b.q.check(value);
+    const st = b.asked.get(m.id) ?? { n: 0, ok: 0 };
+    st.n++; if (ok) st.ok++;
+    b.asked.set(m.id, st);
+    const correct = b.q.revealOption;
+    b.q = undefined;
+    b.s = boardAnswer(b.s, ok);
+    this.boardTick({ id: m.id, ok, correct });
+  }
+  endBoard(res?: { id: string; ok: boolean; correct?: string }) {
+    const b = this.board!;
+    this.state = 'finished';
+    b.order.forEach((id, i) => { const m = this.members.get(id); if (m) m.score = b.s.scores[i] + (b.s.winner === i ? 1000 : 0); });
+    this.broadcastRoom();
+    for (const m of this.members.values()) this.sendBoard(m, res && res.id === m.id ? res : undefined);
+    // Progression : une partie gagnée compte comme une première place.
+    for (const id of b.order) {
+      const p = this.members.get(id);
+      if (!p?.auth) continue;
+      const st = b.asked.get(id) ?? { n: 0, ok: 0 };
+      const i = b.order.indexOf(id);
+      const rank = b.s.winner === i ? 1 : b.s.winner === -1 ? 1 : 2;
+      const result: GameResult = {
+        category: `board:${this.settings.board}`, difficulty: this.settings.difficulty, kind: this.kind, mode: 'classic', zone: 'world', lang: p.lang,
+        total: st.n, correct: st.ok, accuracy: st.n ? (st.ok / st.n) * 100 : b.s.winner === i ? 100 : 50, rank, players: b.order.length,
+      };
+      config.recordGame(p.auth, result).then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); }).catch(() => {});
+    }
   }
 
   endWager() {

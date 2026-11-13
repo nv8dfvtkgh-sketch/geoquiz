@@ -118,7 +118,7 @@ export function activeEvent(now = Date.now()): GameEvent | undefined {
   return extras.events.find((e) => e.start <= day && day <= e.end);
 }
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
+export const NO_ZONE_GAMES = ['board', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];

@@ -55,8 +55,8 @@ export function Lobby() {
             ))}
           </ul>
         )}
-        {room.kind === 'room' && <ModePicker />}
-        {room.kind !== 'solo' && <PartyOptions />}
+        {room.kind === 'room' && room.settings.category !== 'board' && <ModePicker />}
+        {room.kind !== 'solo' && room.settings.category !== 'board' && <PartyOptions />}
         <SettingsSummary settings={room.settings} />
         {room.kind !== 'solo' && room.players.length > 1 && <ReactionBar />}
         {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}

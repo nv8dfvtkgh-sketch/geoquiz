@@ -27,6 +27,8 @@ export interface Settings {
   teams?: number; // nombre d'équipes (2 à 4)
   chests?: boolean; // coffres surprises après une bonne réponse (duel, salle)
   wager?: boolean; // mise avant la dernière question (duel, salle)
+  board?: string; // jeu de duel sur plateau (catégorie « board »)
+  theme?: string; // thème des questions du plateau
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -140,6 +142,16 @@ export type QKind = 'map' | 'mcq' | 'type' | 'pin' | 'order';
 /** Maillot dessiné (jeu « Couleurs des équipes »). */
 export interface KitSpec { p: string; c: string[]; sh: string }
 
+/** Question d'un jeu de plateau (QCM). Drapeaux par code pays. */
+export interface BoardQ {
+  category: string;
+  promptKey: string;
+  params: Record<string, string>;
+  flag?: string;
+  emoji?: string;
+  sign?: string;
+  options: { id: string; label?: string; flag?: string }[];
+}
 export interface QOption {
   id: string; // opaque (o0…o3)
   label?: string;
@@ -226,6 +238,8 @@ export type ClientMsg =
   | { t: 'team'; team: number }
   | { t: 'bet'; q: number; pct: number }
   | { t: 'react'; e: number }
+  | { t: 'bmove'; move: import('./boards').Move }
+  | { t: 'banswer'; value: string }
   | { t: 'leave' }
   | { t: 'ping' };
 
@@ -241,6 +255,7 @@ export type ServerMsg =
   | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> }
   | { t: 'wager'; q: number; category: string; ms: number; bets?: Record<string, number> }
   | { t: 'react'; e: number; name: string }
+  | { t: 'board'; view: import('./boards').BoardState; order: string[]; you: number; q?: BoardQ; deadline?: number; res?: { ok: boolean; correct?: string } }
   | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }
   | { t: 'quickWaiting' }
   | { t: 'matched'; code: string } // partie rapide : adversaire trouvé, rejoindre /ws/<code>

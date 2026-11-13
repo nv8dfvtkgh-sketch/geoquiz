@@ -1,5 +1,6 @@
 // Version Node.js : un seul processus (fichiers statiques + API + WebSocket), parties en mémoire.
 // Pour Cloudflare Workers, voir src/worker/index.ts.
+import { boardQuestionsJson } from './boardplay';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,7 +12,7 @@ import { countryList, eventList, flagPath, geoJson, printSheet } from './print';
 import { nextTournament } from './tournament';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
-import { config, newCode, Room, validSettings, type Conn } from './rooms';
+import { cleanLang, config, newCode, Room, validSettings, type Conn } from './rooms';
 import { QuizService, quizRoute, safeEqual, type KV } from './quizzes';
 import { AccountService, accountRoute } from './accounts';
 
@@ -138,6 +139,7 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, JSON.stringify({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }));
     }
     if (p === '/api/events') return send(res, 200, JSON.stringify(eventList()), 'application/json', 'public, max-age=600');
+    if (p === '/api/boardq') return send(res, 200, boardQuestionsJson(url.searchParams.get('theme') ?? 'geo', url.searchParams.get('d') ?? 'easy', cleanLang(url.searchParams.get('lang')), Number(url.searchParams.get('n')) || 30), 'application/json', 'no-store');
     if (p === '/api/geo') return send(res, 200, geoJson(), 'application/json', 'public, max-age=3600');
     if (p === '/api/countries') return send(res, 200, JSON.stringify(countryList(url.searchParams.get('lang') ?? 'fr')), 'application/json', 'public, max-age=3600');
     if (p === '/api/print' && req.method === 'POST') {
