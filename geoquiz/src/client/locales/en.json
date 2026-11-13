@@ -1033,5 +1033,17 @@
   "look.badge": "Badge “{name}”",
   "look.stickers": "{n} stickers",
   "look.page": "A complete album page",
-  "look.saved": "Outfit saved!"
+  "look.saved": "Outfit saved!",
+  "cat.peaks": "Peaks and rivers",
+  "game.peaks": "Each country's highest peak, each capital's river",
+  "game.peaks.long": "What is Peru's highest peak? Which river does Baghdad stand on? 95 questions drawn from Wikidata, Wikipedia's big free database.",
+  "cat.records": "World records",
+  "game.records": "The longest, the highest, the biggest…",
+  "game.records.long": "Longest river, biggest lake, highest peak: guess the record, or pick the winner among four. Lengths, areas and heights from Wikidata.",
+  "cat.inventions": "Inventors and discoveries",
+  "game.inventions": "Who invented what? Who discovered what?",
+  "game.inventions.long": "From the printing press to the QR code, from penicillin to Jupiter's moons: 50 inventions and discoveries, plus the founder of the world's oldest university, in Fez. Inventors checked in Wikidata.",
+  "cat.afrisport": "African champions",
+  "game.afrisport": "Famous Moroccan and African athletes",
+  "game.afrisport.long": "Hakimi, El Guerrouj, Salah, Kipchoge, Ons Jabeur… Which country are they from? In which sport did they shine? 81 questions drawn from Wikidata."
 }

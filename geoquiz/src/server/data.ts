@@ -105,10 +105,11 @@ export interface AnimalSound { id: string; tier: number; emoji?: string; q: stri
 /** Jeux construits sur les packs ; « sport » mélange toutes les disciplines. */
 export const PACK_GAMES: Record<string, string[]> = {
   space: ['space'], body: ['body'], dinos: ['dinos'],
-  sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport'],
+  sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport', 'afrisport'],
   football: ['football'], tennis: ['tennis'], rugby: ['rugby'], basketball: ['basketball'], olympics: ['olympics'], motorsport: ['motorsport'],
   maroc: ['maroc'], roadsigns: ['roadsigns'], vocab: ['vocab'], hello: ['hello'],
   prog_geo: ['prog_geo'], prog_hist: ['prog_hist'], prog_sci: ['prog_sci'], tifinagh: ['tifinagh'],
+  peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names }

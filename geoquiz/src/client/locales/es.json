@@ -1033,5 +1033,17 @@
   "look.badge": "Insignia «{name}»",
   "look.stickers": "{n} pegatinas",
   "look.page": "Una página del álbum completa",
-  "look.saved": "¡Atuendo guardado!"
+  "look.saved": "¡Atuendo guardado!",
+  "cat.peaks": "Cumbres y ríos",
+  "game.peaks": "La cumbre más alta de cada país, el río de cada capital",
+  "game.peaks.long": "¿Cuál es la cumbre más alta de Perú? ¿A orillas de qué río está Bagdad? 95 preguntas sacadas de Wikidata, la gran base de datos libre de Wikipedia.",
+  "cat.records": "Récords del mundo",
+  "game.records": "El más largo, el más alto, el más grande…",
+  "game.records.long": "Río más largo, lago más grande, cumbre más alta: adivina el récord o elige al ganador entre cuatro. Longitudes, superficies y alturas de Wikidata.",
+  "cat.inventions": "Inventores y descubrimientos",
+  "game.inventions": "¿Quién inventó qué? ¿Quién descubrió qué?",
+  "game.inventions.long": "De la imprenta al código QR, de la penicilina a las lunas de Júpiter: 50 inventos y descubrimientos, y la fundadora de la universidad más antigua del mundo, en Fez. Inventores comprobados en Wikidata.",
+  "cat.afrisport": "Campeones de África",
+  "game.afrisport": "Deportistas marroquíes y africanos famosos",
+  "game.afrisport.long": "Hakimi, El Guerrouj, Salah, Kipchoge, Ons Jabeur… ¿De qué país son? ¿En qué deporte brillaron? 81 preguntas sacadas de Wikidata."
 }

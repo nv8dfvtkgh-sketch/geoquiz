@@ -140,7 +140,7 @@ export async function joinGame(code: string, name: string, lang: Lang): Promise<
 
 /** Questions vues par jeu (les 300 dernières), pour ne pas les reposer trop vite. */
 // Culture sport mélange les questions des six sports : une question vue dans l'un ne revient pas dans l'autre.
-const SPORT = new Set(['sport', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport']);
+const SPORT = new Set(['sport', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport', 'afrisport']);
 const seenKey = (cat: string) => `gq.seen.${SPORT.has(cat) ? 'sport' : cat}`;
 export function seenIn(cat: string): string[] {
   try { const v = JSON.parse(localStorage.getItem(seenKey(cat)) ?? '[]'); return Array.isArray(v) ? v : []; } catch { return []; }

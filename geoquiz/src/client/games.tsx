@@ -70,6 +70,8 @@ export const FAMILIES: Family[] = [
       { id: 'monuments', icon: 'columns', fresh: true },
       { id: 'hello', icon: 'wave', fresh: true },
       { id: 'macities', icon: 'pin', fresh: true },
+      { id: 'peaks', icon: 'mountain', fresh: true },
+      { id: 'records', icon: 'trophy', fresh: true },
       { id: 'tifinagh', icon: 'yaz', fresh: true },
       { id: 'sounds', icon: 'ear', fresh: true },
       { id: 'brands', icon: 'tag', soon: true },
@@ -105,6 +107,7 @@ export const FAMILIES: Family[] = [
       { id: 'dinos', icon: 'dino', fresh: true },
       { id: 'vocab', icon: 'book', fresh: true },
       { id: 'roadsigns', icon: 'sign', fresh: true },
+      { id: 'inventions', icon: 'bulb', fresh: true },
     ],
   },
   {
@@ -116,6 +119,7 @@ export const FAMILIES: Family[] = [
       { id: 'tennis', icon: 'tennis', fresh: true },
       { id: 'rugby', icon: 'rugby', fresh: true },
       { id: 'basketball', icon: 'basket', fresh: true },
+      { id: 'afrisport', icon: 'medal', fresh: true },
       { id: 'olympics', icon: 'rings', fresh: true },
       { id: 'motorsport', icon: 'wheel', fresh: true },
       { id: 'stadiums', icon: 'stadium', fresh: true },
@@ -129,6 +133,8 @@ export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
 export const ICONS = {
+  mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
+  bulb: <g {...P}><path d="M9 17h6M10 20h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></g>,
   sticker: <g {...P}><path d="M5 4h14v9l-6 7H5z" /><path d="M19 13h-6v7" /><path d="M9 9.5h.01M14 9.5h.01" strokeWidth="2.4" /></g>,
   camera: <g {...P}><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></g>,
   question: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.7" /><path d="M12 17h.01" strokeWidth="2.4" /></g>,

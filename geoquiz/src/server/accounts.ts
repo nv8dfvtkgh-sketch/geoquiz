@@ -53,7 +53,7 @@ export interface GameResult {
 export const REVIEW_STEPS = [1, 3, 7, 14, 30];
 /** Jeux dont les questions peuvent revenir en révision (pas de photo, de son ni de carte de région). */
 export const REVIEWABLE = new Set(['flags', 'capitals', 'countries', 'silhouettes', 'currencies', 'languages', 'food', 'animals', 'emoji', 'cinema', 'truefalse',
-  'space', 'body', 'dinos', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport', 'maroc', 'roadsigns', 'vocab', 'hello', 'kits', 'flagreveal', 'higher', 'timeline']);
+  'space', 'body', 'dinos', 'football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport', 'maroc', 'roadsigns', 'vocab', 'hello', 'kits', 'flagreveal', 'higher', 'timeline', 'peaks', 'records', 'inventions', 'afrisport']);
 interface ReviewItem { c: string; t: string; z: string; step: number; due: number }
 /** Ligues : divisions de la semaine, groupes de 20, 5 montent et 5 descendent. */
 export const LEAGUE_DIVS = ['bronze', 'silver', 'gold', 'sapphire', 'diamond'] as const;

@@ -1033,5 +1033,17 @@
   "look.badge": "Badge « {name} »",
   "look.stickers": "{n} autocollants",
   "look.page": "Une page d'album complète",
-  "look.saved": "Tenue enregistrée !"
+  "look.saved": "Tenue enregistrée !",
+  "cat.peaks": "Sommets et fleuves",
+  "game.peaks": "Le plus haut sommet de chaque pays, le fleuve de chaque capitale",
+  "game.peaks.long": "Quel est le plus haut sommet du Pérou ? Au bord de quel fleuve se trouve Bagdad ? 95 questions tirées de Wikidata, la grande base de données libre de Wikipédia.",
+  "cat.records": "Records du monde",
+  "game.records": "Le plus long, le plus haut, le plus grand…",
+  "game.records.long": "Plus long fleuve, plus grand lac, plus haut sommet : devine le record, ou trouve le gagnant parmi quatre. Longueurs, superficies et altitudes tirées de Wikidata.",
+  "cat.inventions": "Inventeurs et découvertes",
+  "game.inventions": "Qui a inventé quoi ? Qui a découvert quoi ?",
+  "game.inventions.long": "De l'imprimerie au code QR, de la pénicilline aux lunes de Jupiter : 50 inventions et découvertes, et la fondatrice de la plus ancienne université du monde, à Fès. Inventeurs vérifiés dans Wikidata.",
+  "cat.afrisport": "Champions d'Afrique",
+  "game.afrisport": "Sportifs marocains et africains célèbres",
+  "game.afrisport.long": "Hakimi, El Guerrouj, Salah, Kipchoge, Ons Jabeur… De quel pays sont-ils ? Dans quel sport ont-ils brillé ? 81 questions tirées de Wikidata."
 }
