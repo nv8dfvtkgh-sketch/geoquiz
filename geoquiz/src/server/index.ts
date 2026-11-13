@@ -1,5 +1,6 @@
 // Version Node.js : un seul processus (fichiers statiques + API + WebSocket), parties en mémoire.
 // Pour Cloudflare Workers, voir src/worker/index.ts.
+import { challengeMeta, withMeta } from './sharemeta';
 import { boardQuestionsJson } from './boardplay';
 import http from 'node:http';
 import fs from 'node:fs';
@@ -110,7 +111,7 @@ setInterval(() => {
 // ------------------------------------------------------------------ HTTP
 const TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
-  '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.ico': 'image/x-icon', '.json': 'application/json',
+  '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json', '.jpg': 'image/jpeg', '.ico': 'image/x-icon', '.json': 'application/json',
 };
 function send(res: http.ServerResponse, status: number, body: string | Buffer, type = 'application/json', cache = 'no-store') {
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': cache, 'X-Content-Type-Options': 'nosniff' });
@@ -215,7 +216,14 @@ const server = http.createServer(async (req, res) => {
       const long = /\.(js|css)$/.test(file) && url.searchParams.has('v');
       return send(res, 200, fs.readFileSync(file), TYPES[path.extname(file)] ?? 'application/octet-stream', long ? 'public, max-age=31536000, immutable' : 'no-cache');
     }
-    return send(res, 200, fs.readFileSync(path.join(PUBLIC, 'index.html')), TYPES['.html'], 'no-cache');
+    let html = fs.readFileSync(path.join(PUBLIC, 'index.html'), 'utf8');
+    const dm = p.match(/^\/defi\/([A-Z0-9]{4,12})$/);
+    if (dm) {
+      const d = await accounts.challengeData(dm[1]).catch(() => null);
+      const origin = env.PUBLIC_URL ?? `${req.headers['x-forwarded-proto'] ?? 'http'}://${req.headers.host}`;
+      if (d?.settings) html = withMeta(html, challengeMeta(d as any, dm[1], origin));
+    }
+    return send(res, 200, html, TYPES['.html'], 'no-cache');
   } catch (e) {
     console.error(e);
     send(res, 500, '{}');

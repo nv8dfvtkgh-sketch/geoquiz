@@ -6,7 +6,8 @@ import { useEvents } from '../events';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
 import { chooseSystem } from './Revision';
-import { dailyDoneHere } from '../dailyLock';
+import { dailyDoneHere, dailyStreak } from '../dailyLock';
+import { hideInstall, installNow, installOffer } from '../install';
 import type { BoardGame } from '../../shared/boards';
 
 import { useApp } from '../state';
@@ -102,9 +103,21 @@ function Games() {
     </button>
   );
 
+  // Série de défis du jour joués d'affilée (sur cet appareil).
+  const streak = dailyStreak();
+  const [install, setInstall] = useState(installOffer);
+  useEffect(() => { const on = () => setInstall(installOffer()); window.addEventListener('gq:install', on); return () => window.removeEventListener('gq:install', on); }, []);
+  const doneToday = dailyDoneHere();
   return (
     <div className="home home2">
       {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
+      {streak > 0 && (
+        <button type="button" className={`streak-pill ${doneToday ? 'ok' : 'risk'}`} onClick={() => openGame('daily')}>
+          <span aria-hidden="true">🔥</span>
+          <strong>{t(streak > 1 ? 'streak.days' : 'streak.day', { n: streak })}</strong>
+          <small>{doneToday ? t('streak.safe') : t('streak.keep')}</small>
+        </button>
+      )}
 
       {last && lastDef ? (
         <button type="button" className="continue-card" onClick={() => createGame({ kind: 'solo', settings: last }, name, lang).then(fail)}>
@@ -175,6 +188,17 @@ function Games() {
             </div>
           </section>
         </>
+      )}
+      {install && (
+        <div className="install-card">
+          <img src="/icon-192.png" alt="" width="44" height="44" />
+          <div>
+            <strong>{t('install.title')}</strong>
+            <small>{install === 'ios' ? t('install.ios') : t('install.hint')}</small>
+          </div>
+          {install === 'prompt' && <button type="button" className="btn primary" onClick={() => void installNow()}>{t('install.btn')}</button>}
+          <button type="button" className="install-x" aria-label={t('install.hide')} onClick={hideInstall}>×</button>
+        </div>
       )}
     </div>
   );

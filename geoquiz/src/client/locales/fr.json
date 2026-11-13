@@ -1155,5 +1155,14 @@
   "daily.doneTitle": "Défi du jour terminé",
   "daily.doneHint": "Un nouveau défi arrive demain, à {time}. Reviens tenter ta chance !",
   "q.place.country": "Dans quel pays se trouve ce lieu ?",
-  "err.daily.done": "Tu as déjà fait le défi du jour avec ce compte. Reviens demain !"
+  "err.daily.done": "Tu as déjà fait le défi du jour avec ce compte. Reviens demain !",
+  "streak.day": "1 jour de suite",
+  "streak.days": "{n} jours de suite",
+  "streak.keep": "Fais le défi du jour pour garder ta série",
+  "streak.safe": "Série gardée aujourd'hui. Reviens demain !",
+  "install.title": "Installer Quizellige",
+  "install.hint": "Sur ton écran d'accueil, comme une application.",
+  "install.ios": "Sur iPhone : touche Partager, puis « Sur l'écran d'accueil ».",
+  "install.btn": "Installer",
+  "install.hide": "Masquer"
 }

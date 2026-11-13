@@ -1425,9 +1425,9 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .pz-end-actions { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
 .pz-end-actions .btn { flex: 1 1 160px; }
 .pz-len { margin: 0; text-align: center; color: var(--ink-2); font-weight: 600; }
-.wd-grid { display: grid; gap: 6px; justify-content: center; }
-.wd-row { display: grid; grid-template-columns: repeat(var(--n), min(12vw, 52px)); gap: 6px; }
-.wd-row b { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; border: 2px solid var(--border); font-size: clamp(1.1rem, 5vw, 1.6rem); font-weight: 800; text-transform: uppercase; background: var(--card); }
+.wd-grid { display: grid; gap: 6px; min-width: 0; }
+.wd-row { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 52px)); gap: clamp(3px, 1.2vw, 6px); justify-content: center; min-width: 0; }
+.wd-row b { aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; border: 2px solid var(--border); font-size: clamp(.85rem, 5vw, 1.6rem); font-weight: 800; text-transform: uppercase; background: var(--card); min-width: 0; }
 .wd-row b.typed { border-color: var(--ink-2); animation: wd-pop .12s; }
 .wd-row b.g, .wd-row b.y, .wd-row b.x { border-color: transparent; color: #fff; animation: wd-flip .45s both; animation-delay: calc(var(--j) * 90ms); }
 .wd-row b.g { background: #1F8A5B; }
@@ -1756,3 +1756,18 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .daily-done > span { font-size: 1.6rem; }
 .daily-done div { display: grid; gap: 2px; min-width: 0; }
 .daily-done small { color: var(--ink-2); }
+
+/* Série de jours sur l'accueil */
+.streak-pill { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 14px; border: 0; border-radius: 16px; font: inherit; text-align: start; cursor: pointer; color: var(--ink); background: color-mix(in srgb, #FF8A1F 14%, var(--card)); box-shadow: var(--shadow); min-width: 0; }
+.streak-pill > span { font-size: 1.5rem; line-height: 1; }
+.streak-pill strong { white-space: nowrap; }
+.streak-pill small { color: var(--ink-2); min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.streak-pill.risk { background: color-mix(in srgb, #FF3B30 12%, var(--card)); }
+
+/* Installer l'application */
+.install-card { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); margin-top: 8px; }
+.install-card img { border-radius: 12px; }
+.install-card div { display: grid; gap: 2px; min-width: 0; }
+.install-card small { color: var(--ink-2); }
+.install-x { border: 0; background: none; font-size: 1.4rem; color: var(--ink-2); cursor: pointer; padding: 4px 8px; }
+@media (max-width: 380px) { .install-card { grid-template-columns: auto 1fr auto; } .install-card .btn { grid-column: 1 / -1; } }

@@ -1210,3 +1210,14 @@ test('Maths des révisions : chaque réponse recalculée indépendamment', async
   }
   assert.ok(checked > 3000, `${checked} calculs vérifiés`);
 });
+
+test('Aperçu d\'un lien de défi : qui défie, le score et le jeu', async () => {
+  const { challengeMeta, withMeta } = await import('../src/server/sharemeta');
+  const html = '<title>Quizellige</title><meta name="description" content="x" /><meta property="og:title" content="a" /><meta property="og:description" content="b" /><meta property="og:url" content="c" />';
+  const m = challengeMeta({ settings: settings({ category: 'flags' }), by: 'Fab <b>', first: { name: 'Fab', correct: 8, total: 10, timeMs: 1, at: 1 } }, 'ABC123', 'https://q.example');
+  assert.match(m.title, /Fab <b> te défie : 8\/10 · Drapeaux/);
+  const out = withMeta(html, m);
+  assert.ok(out.includes('og:title" content="Fab &lt;b&gt; te défie : 8/10 · Drapeaux'));
+  assert.ok(out.includes('og:url" content="https://q.example/defi/ABC123'));
+  assert.ok(!out.includes('<b>'));
+});

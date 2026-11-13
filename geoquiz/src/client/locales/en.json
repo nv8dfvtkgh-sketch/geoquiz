@@ -1155,5 +1155,14 @@
   "daily.doneTitle": "Daily challenge done",
   "daily.doneHint": "A new challenge arrives tomorrow at {time}. Come back and try again!",
   "q.place.country": "Which country is this place in?",
-  "err.daily.done": "You have already played today's challenge with this account. Come back tomorrow!"
+  "err.daily.done": "You have already played today's challenge with this account. Come back tomorrow!",
+  "streak.day": "1-day streak",
+  "streak.days": "{n}-day streak",
+  "streak.keep": "Play today's challenge to keep your streak",
+  "streak.safe": "Streak saved for today. Come back tomorrow!",
+  "install.title": "Install Quizellige",
+  "install.hint": "On your home screen, like an app.",
+  "install.ios": "On iPhone: tap Share, then “Add to Home Screen”.",
+  "install.btn": "Install",
+  "install.hide": "Hide"
 }

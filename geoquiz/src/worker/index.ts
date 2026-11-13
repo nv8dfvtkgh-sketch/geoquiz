@@ -8,6 +8,7 @@ import { boardQuestionsJson } from '../server/boardplay';
 import type { ClientMsg, ServerMsg, Settings } from '../shared/protocol';
 import { categoryInfos, poolCounts } from '../server/categories';
 import { fetchPhoto } from '../server/photos';
+import { challengeMeta, withMeta } from '../server/sharemeta';
 import { countryList, eventList, flagPath, geoJson, printSheet } from '../server/print';
 import { nextTournament } from '../server/tournament';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
@@ -123,6 +124,16 @@ export default {
       // Les fichiers de données ne sont lisibles que par le Worker (noms des lieux = réponses).
       if (p.startsWith('/data/')) return new Response('Not found', { status: 404 });
 
+      // Lien de défi : la page de l'application, avec un aperçu « Fab te défie : 8/10 · Drapeaux ».
+      const dm = p.match(/^\/defi\/([A-Z0-9]{4,12})$/);
+      if (dm) {
+        const page = await env.ASSETS.fetch(new Request(`${url.origin}/`));
+        let html = await page.text();
+        const r = await accountsStub(env).fetch('https://accounts/internal/challenge/load', { method: 'POST', body: JSON.stringify({ code: dm[1] }) }).catch(() => null);
+        const d = r?.ok ? ((await r.json()) as any) : null;
+        if (d?.settings) html = withMeta(html, challengeMeta(d, dm[1], url.origin));
+        return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' } });
+      }
       let m = p.match(/^\/ws\/(quick|[A-Z0-9]{6})$/);
       if (m) {
         if (request.headers.get('Upgrade') !== 'websocket') return new Response('WebSocket attendu', { status: 426 });

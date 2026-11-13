@@ -6,12 +6,13 @@
   "compatibility_date": "2025-09-01",
 
   // Pages, scripts, styles et données du jeu. Le Worker passe en premier pour l'API,
-  // les WebSockets et /data/* (bloqué au public : les noms des lieux sont les réponses).
+  // les WebSockets, /data/* (bloqué au public : les noms des lieux sont les réponses)
+  // et /defi/* (aperçu personnalisé du lien partagé).
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*", "/ws/*", "/data/*"]
+    "run_worker_first": ["/api/*", "/ws/*", "/data/*", "/defi/*"]
   },
 
   // Une partie = un Durable Object ; la partie rapide = un Durable Object unique.
