@@ -5,6 +5,7 @@ import { createGame, net } from '../net';
 import { useApp } from '../state';
 import { api, lockedFor } from '../account';
 import { printableGame } from './Print';
+import { dailyDoneHere, nextDailyTime } from '../dailyLock';
 
 /**
  * Fiche d'un jeu : description, niveau, zone, options, puis « Comment jouer ? »
@@ -21,6 +22,14 @@ export function Setup() {
   const fixed = game === 'daily' || review || game === 'survival';
   const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed]);
   const [hostPlays, setHostPlays] = useState(true);
+  // Défi du jour déjà joué (sur cet appareil, ou sur le compte depuis un autre appareil) : rien avant demain.
+  const [dailyDone, setDailyDone] = useState(() => game === 'daily' && dailyDoneHere());
+  useEffect(() => {
+    if (game !== 'daily' || editing || !auth) return;
+    let alive = true;
+    api('/api/daily', { token: auth }).then((r) => { if (alive && r.ok && r.data.me) setDailyDone(true); });
+    return () => { alive = false; };
+  }, [game, editing, auth]);
   const set = (patch: Partial<Settings>) => setCfg(fix({ ...cfg, ...patch }, catalog?.zones ?? []));
 
   const cat = catalog?.categories.find((c) => c.id === cfg.category);
@@ -181,10 +190,16 @@ export function Setup() {
         <>
           <div className="how">
             {locked && <p className="hint">{t('lock.hint')}</p>}
-            {!review && <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>}
+            {!review && !dailyDone && <button type="button" className="text-btn quick-link" onClick={quick}>{t('setup.quickLink')}</button>}
             {printableGame(cfg.category) && <button type="button" className="text-btn quick-link" onClick={() => { go('print'); window.scrollTo(0, 0); }}>🖨️ {t('print.fromGame')}</button>}
           </div>
-          {!(review && (!me || !me.reviewDue)) && (
+          {dailyDone && (
+            <div className="daily-done" role="status">
+              <span aria-hidden="true">✅</span>
+              <div><strong>{t('daily.doneTitle')}</strong><small>{t('daily.doneHint', { time: nextDailyTime(lang) })}</small></div>
+            </div>
+          )}
+          {!dailyDone && !(review && (!me || !me.reviewDue)) && (
             <div className="play-bar">
               {locked ? (
                 <button type="button" className="how-btn primary" disabled>

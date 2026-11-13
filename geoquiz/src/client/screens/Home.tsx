@@ -6,6 +6,7 @@ import { useEvents } from '../events';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
 import { chooseSystem } from './Revision';
+import { dailyDoneHere } from '../dailyLock';
 import type { BoardGame } from '../../shared/boards';
 
 import { useApp } from '../state';
@@ -114,8 +115,8 @@ function Games() {
       ) : (
         <button type="button" className="continue-card daily" onClick={() => openGame('daily')}>
           <span className="continue-ic"><Icon name="calendar" size={26} /></span>
-          <span className="continue-text"><strong>{t('cat.daily')}</strong><small>{t('game.daily')}</small></span>
-          <span className="continue-go">{t('home.play')}</span>
+          <span className="continue-text"><strong>{t('cat.daily')}</strong><small>{dailyDoneHere() ? t('daily.doneTitle') : t('game.daily')}</small></span>
+          <span className="continue-go">{dailyDoneHere() ? '✅' : t('home.play')}</span>
         </button>
       )}
 

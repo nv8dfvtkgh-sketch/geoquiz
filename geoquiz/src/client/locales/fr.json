@@ -568,7 +568,7 @@
   "family.today": "Aujourd'hui",
   "cat.daily": "Défi du jour",
   "game.daily": "10 questions, les mêmes pour tous",
-  "game.daily.long": "Chaque jour, 10 questions de jeux différents, identiques pour tout le monde. Une seule partie compte au classement du jour : partage ton score en carrés de couleur, sans dévoiler les réponses.",
+  "game.daily.long": "Chaque jour, 10 questions de jeux différents, identiques pour tout le monde. Une seule partie par jour : partage ton score en carrés de couleur, sans dévoiler les réponses.",
   "cat.pin": "Où est-ce ?",
   "game.pin": "Plante ton épingle sur la carte",
   "game.pin.long": "Une capitale est donnée : pose ton épingle là où tu penses qu'elle se trouve. Plus tu es près, plus tu gagnes de points ; la distance s'affiche en kilomètres.",
@@ -1151,5 +1151,7 @@
   "rev.back": "Révisions",
   "rev.long": "Questions de révision écrites d’après le programme officiel en vigueur.",
   "rev.src.fr": "Questions originales alignées sur les programmes officiels de l’Éducation nationale (Éduscol, Bulletin officiel, programmes 2025-2026).",
-  "rev.src.us": "Questions originales alignées sur les standards américains : Common Core (maths, anglais), NGSS (sciences), cadre C3 (sciences sociales)."
+  "rev.src.us": "Questions originales alignées sur les standards américains : Common Core (maths, anglais), NGSS (sciences), cadre C3 (sciences sociales).",
+  "daily.doneTitle": "Défi du jour terminé",
+  "daily.doneHint": "Un nouveau défi arrive demain, à {time}. Reviens tenter ta chance !"
 }

@@ -3,6 +3,7 @@ import type { QuestionMsg, Reveal } from '../../shared/protocol';
 import { MapView, type Mark } from '../MapView';
 import { isMuted, sfx } from '../sound';
 import { useApp } from '../state';
+import { markDailyDone } from '../dailyLock';
 import { RoadSign } from '../RoadSign';
 import { Jersey, MysteryFlag, OrderBoard, RaceTrack, SoundClip } from '../GameExtras';
 import { autoRead, hasVoice, speak, stopSpeaking } from '../speech';
@@ -12,6 +13,9 @@ import { ChestCard, ChestNews, ReactionBar, ReactionLayer, WagerPanel } from '..
 export function Game() {
   const { s } = useApp();
   const q = s.question;
+  // Défi du jour commencé : il ne pourra être rejoué que demain.
+  const isDaily = s.room?.settings.category === 'daily' && !(s.isHost && !s.room.hostPlays);
+  useEffect(() => { if (isDaily) markDailyDone(); }, [isDaily]);
   if (!q || !s.room) return <div className="loading" />;
   const presenter = s.isHost && !s.room.hostPlays;
   const multi = s.room.kind !== 'solo';

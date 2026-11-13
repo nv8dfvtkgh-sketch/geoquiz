@@ -1750,3 +1750,9 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .rev-sub.all span { grid-row: span 2; }
 .rev-sub:hover, .rev-levels button:hover, .rev-cycles button:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
 .rev-src { margin-top: 8px; }
+
+/* Défi du jour déjà joué */
+.daily-done { display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 16px; background: color-mix(in srgb, var(--good) 12%, var(--card)); box-shadow: var(--shadow); }
+.daily-done > span { font-size: 1.6rem; }
+.daily-done div { display: grid; gap: 2px; min-width: 0; }
+.daily-done small { color: var(--ink-2); }

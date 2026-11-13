@@ -568,7 +568,7 @@
   "family.today": "Hoy",
   "cat.daily": "Reto del día",
   "game.daily": "10 preguntas, las mismas para todos",
-  "game.daily.long": "Cada día, 10 preguntas de juegos distintos, iguales para todos. Solo tu primera partida cuenta en la clasificación del día: comparte tu resultado en cuadrados de colores sin desvelar las respuestas.",
+  "game.daily.long": "Cada día, 10 preguntas de juegos distintos, iguales para todos. Una sola partida al día: comparte tu resultado en cuadrados de colores sin desvelar las respuestas.",
   "cat.pin": "¿Dónde está?",
   "game.pin": "Clava tu chincheta en el mapa",
   "game.pin.long": "Se nombra una capital: clava tu chincheta donde creas que está. Cuanto más cerca, más puntos; la distancia aparece en kilómetros.",
@@ -1151,5 +1151,7 @@
   "rev.back": "Repaso",
   "rev.long": "Preguntas de repaso escritas según el programa oficial vigente.",
   "rev.src.fr": "Preguntas originales alineadas con los programas oficiales franceses (Éduscol, Bulletin officiel, 2025-2026).",
-  "rev.src.us": "Preguntas originales alineadas con los estándares de EE. UU.: Common Core, NGSS y marco C3."
+  "rev.src.us": "Preguntas originales alineadas con los estándares de EE. UU.: Common Core, NGSS y marco C3.",
+  "daily.doneTitle": "Reto del día completado",
+  "daily.doneHint": "Mañana a las {time} llega un nuevo reto. ¡Vuelve a intentarlo!"
 }
