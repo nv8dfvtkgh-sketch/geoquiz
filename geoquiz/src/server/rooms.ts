@@ -157,7 +157,6 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
     const freshStrict = pool.filter((t) => !seenAt.has(t));
     pool = freshStrict.length >= settings.count ? freshStrict : [...fresh, ...seen];
   }
-  pool = shuffle(pool.slice(0, settings.count), rnd);
   type Kind = 'map' | 'mcq' | 'type';
   // « Selon la difficulté » : facile = 4 choix, moyen = mélange, difficile = réponse à écrire.
   const auto: Record<string, Kind[]> = { easy: ['mcq'], medium: cat.qtypes, hard: ['type'] };
@@ -166,7 +165,7 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   // Une catégorie sans saisie (Vrai ou faux) reste en QCM même en difficile.
   const supported = wanted.filter((k) => cat.qtypes.includes(k));
   const kinds: Kind[] = supported.length ? supported : (cat.qtypes as Kind[]);
-  return pool.map((t, i) => {
+  const build = (t: string, i: number) => {
     const q = cat.make(t, kinds[(i + Math.floor(rnd() * kinds.length)) % kinds.length], zone, rnd);
     // Hors du niveau difficile, les territoires (Féroé, Jersey, Groenland…) sont grisés sur la
     // carte : ils ne sont jamais demandés et allègent la carte des petites cibles.
@@ -174,7 +173,32 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
       q.map = { ...q.map, active: q.map.active.filter((id) => id === t || !countries[id]?.dependency) };
     }
     return q;
-  });
+  };
+  // Variété : un même énoncé (« Lequel de ces fleuves est le plus long ? ») revient au plus
+  // deux fois par partie quand il y a d'autres questions, et jamais deux fois de suite.
+  // Deux questions sont « les mêmes » si elles ont le même énoncé et montrent la même chose
+  // (même pictogramme, panneau, drapeau…) ; une carte, une silhouette ou une photo les distinguent.
+  const visual = (q: InternalQuestion) => !!(q.shape || q.credit || q.imageRef || q.highlight || q.kit || q.map);
+  const key = (q: InternalQuestion) => (visual(q) ? `v${Math.random()}` : [q.promptKey, q.promptName ? JSON.stringify(q.promptName) : '', q.emoji, q.sign, q.flagIso, q.extraParams ? JSON.stringify(q.extraParams) : ''].join('|'));
+  const picked: { q: InternalQuestion; k: string }[] = [];
+  const spare: { q: InternalQuestion; k: string }[] = [];
+  const count = new Map<string, number>();
+  const candidates = pool.slice(0, Math.min(pool.length, settings.count * 3));
+  for (let i = 0; i < candidates.length && picked.length < settings.count; i++) {
+    const q = build(candidates[i], picked.length);
+    const k = key(q);
+    if ((count.get(k) ?? 0) >= 2) { spare.push({ q, k }); continue; }
+    count.set(k, (count.get(k) ?? 0) + 1);
+    picked.push({ q, k });
+  }
+  while (picked.length < settings.count && spare.length) picked.push(spare.shift()!);
+  const out = shuffle(picked, rnd);
+  for (let i = 1; i < out.length; i++) {
+    if (out[i].k !== out[i - 1].k) continue;
+    const j = out.findIndex((x, n) => n > i && x.k !== out[i - 1].k && (i + 1 >= out.length || n === i + 1 || x.k !== out[i + 1].k));
+    if (j > 0) [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out.map((x) => x.q);
 }
 
 export class Room {
