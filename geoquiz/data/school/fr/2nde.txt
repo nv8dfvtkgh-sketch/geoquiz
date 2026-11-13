@@ -41,7 +41,7 @@ En Python, quelle instruction crée une boucle bornée ? | for | if | def | prin
 Quelle est l'unité structurale du vivant ? | la cellule | l'atome | la molécule d'eau | l'organe
 Quelle molécule universelle porte l'information génétique ? | l'ADN | l'ATP | le glucose | la chlorophylle
 Quelles bases composent l'ADN ? | A, T, C, G | A, U, C, G | A, B, C, D | X, Y, Z, W
-Que fabrique un organe à partir de l'information génétique ? | des protéines | des minéraux | de l'ADN neuf seulement | de l'eau
+Que fabrique une cellule à partir de l'information génétique ? | des protéines | des minéraux | de l'ADN neuf seulement | de l'eau
 Qu'est-ce que le métabolisme ? | l'ensemble des réactions chimiques d'un organisme | un organe | un régime alimentaire | une maladie
 Dans quel organite se fait la photosynthèse ? | le chloroplaste | la mitochondrie | le noyau | la vacuole
 Dans quel organite se fait la respiration cellulaire ? | la mitochondrie | le chloroplaste | le ribosome | la paroi
@@ -99,7 +99,7 @@ Qu'est-ce que l'opinion publique ? | l'ensemble des opinions partagées dans une
 Qu'est-ce qu'un sondage ? | une enquête auprès d'un échantillon représentatif | un vote officiel | un recensement complet | un débat télévisé
 Qu'est-ce que la monnaie ? | un instrument d'échange, de mesure et de réserve de valeur | uniquement des pièces | un bien de consommation | un impôt
 Qui émet l'euro ? | la Banque centrale européenne (et les banques centrales nationales) | l'État français seul | la Commission européenne | les banques commerciales seulement
-Qu'est-ce qu'un diplôme pour l'insertion professionnelle ? | une protection relative contre le chômage | une garantie absolue d'emploi | un obstacle | sans effet
+Quel effet a un diplôme sur l'insertion professionnelle ? | une protection relative contre le chômage | une garantie absolue d'emploi | un obstacle | sans effet
 Qu'est-ce que l'INSEE ? | l'Institut national de la statistique et des études économiques | un ministère de l'éducation | une banque | un syndicat
 ## anglais
 Quelle phrase utilise correctement le present perfect ? | I have just finished. | I have finish yesterday. | I just finished since now. | I have finishing.

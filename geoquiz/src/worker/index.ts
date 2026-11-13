@@ -160,6 +160,12 @@ export default {
           if (text.length > 4096) return json({ error: 'settings.invalid' }, 400);
           let body: unknown = null;
           try { body = JSON.parse(text); } catch {}
+          // Défi du jour : un compte qui l'a déjà joué aujourd'hui attend demain.
+          const tok = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+          if (tok && (body as any)?.settings?.category === 'daily') {
+            const d = await accountsStub(env).fetch('https://x/api/daily', { headers: { Authorization: `Bearer ${tok}` } }).then((r) => r.json() as any).catch(() => null);
+            if (d?.me) return json({ error: 'daily.done' }, 409);
+          }
           const code = await createRoom(env, body);
           return typeof code === 'string' ? json({ code }) : json(code, 400);
         }
@@ -235,6 +241,8 @@ export class RoomDO {
     config.loadChallenge = (code) => acct('challenge/load', { code });
     config.addChallengeResult = (code, e) => acct('challenge/result', { code, e });
     config.loadReview = async (token) => (await acct<{ c: string; t: string; z: string }[]>('review', { token })) ?? [];
+    config.loadMedia = (group) => acct('media/get', { group });
+    config.saveMedia = async (group, snap) => { await acct('media/put', { group, snap }); };
     config.recordGame = async (token, result) => {
       const r = await accountsStub(this.env).fetch('https://accounts/internal/record', { method: 'POST', body: JSON.stringify({ token, result }) });
       return r.ok ? r.json() : null;
@@ -386,6 +394,24 @@ export class AccountsDO {
       if (what === 'load') return json(await this.svc.challengeData(String(b.code)));
       if (what === 'result') return json(await this.svc.addChallengeResult(String(b.code), b.e));
       return json(null, 404);
+    }
+    // Copie durable des médias Wikimedia (par morceaux : une valeur de stockage est limitée à 128 Kio).
+    if (url.hostname === 'accounts' && url.pathname.startsWith('/internal/media/')) {
+      const b = (await request.json()) as { group: string; snap?: { at: number; photos?: unknown[]; sounds?: unknown[] } };
+      const g = String(b.group ?? '').replace(/\W/g, '').slice(0, 20);
+      const st = this.state.storage;
+      if (url.pathname.endsWith('/put') && b.snap) {
+        const list = (b.snap.photos ?? b.snap.sounds ?? []).slice(0, 500);
+        const parts = Math.ceil(list.length / 60);
+        for (let i = 0; i < parts; i++) await st.put(`media:${g}:${i}`, list.slice(i * 60, i * 60 + 60));
+        await st.put(`media:${g}`, { at: Number(b.snap.at) || Date.now(), parts, kind: b.snap.sounds ? 'sounds' : 'photos' });
+        return json(true);
+      }
+      const head = await st.get<{ at: number; parts: number; kind: 'sounds' | 'photos' }>(`media:${g}`);
+      if (!head) return json(null);
+      const list: unknown[] = [];
+      for (let i = 0; i < head.parts; i++) list.push(...((await st.get<unknown[]>(`media:${g}:${i}`)) ?? []));
+      return json({ at: head.at, [head.kind]: list });
     }
     if (url.hostname === 'accounts' && url.pathname === '/internal/review') {
       const b = (await request.json()) as { token: string };

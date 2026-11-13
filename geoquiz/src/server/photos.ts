@@ -12,13 +12,37 @@ const THUMB = 960; // largeur standard des vignettes Wikimedia
 type Fetcher = (url: string, init?: RequestInit) => Promise<Response>;
 const photos = new Map<string, Photo>();
 const loaded = new Set<string>();
+/** Jeux dont les médias sont introuvables : ils se jouent sans photo (questions écrites). */
+const off = new Map<string, number>(); // jeu → moment où les médias ont manqué (on réessaie après 10 min)
 const loading = new Map<string, Promise<boolean>>();
 
 /** Jeux d'images : « monuments », « stadiums »… (chargés séparément, une fois chacun). */
 export const photosLoaded = (group = 'monuments') => loaded.has(group);
 export const photoFor = (id: string) => photos.get(id);
+/** Médias indisponibles pour ce jeu : version sans photo. */
+export const mediaOff = (group: string) => Date.now() - (off.get(group) ?? -Infinity) < 600_000;
+export function setMediaOff(group: string, v: boolean) { if (v) off.set(group, Date.now()); else off.delete(group); }
+
+/** Copie des médias trouvés, gardée par la plateforme : la partie démarre même si Wikipédia ne répond plus. */
+export interface MediaSnapshot { at: number; photos?: [string, Photo][]; sounds?: [string, Sound][] }
+export function mediaSnapshot(group: string, ids: string[]): MediaSnapshot {
+  if (group === 'sounds') return { at: Date.now(), sounds: ids.filter((id) => sounds.has(id)).map((id) => [id, sounds.get(id)!]) };
+  return { at: Date.now(), photos: ids.filter((id) => photos.has(id)).map((id) => [id, photos.get(id)!]) };
+}
+/** Recharge une copie ; faux si elle est vide. */
+export function restoreMedia(group: string, snap: MediaSnapshot | null | undefined): boolean {
+  const list = group === 'sounds' ? snap?.sounds : snap?.photos;
+  if (!list?.length) return false;
+  for (const [id, v] of list) {
+    if (!v || typeof (v as Photo).url !== 'string' || !/^https:\/\/upload\.wikimedia\.org\//.test((v as Photo).url)) continue;
+    if (group === 'sounds') sounds.set(id, v as Sound); else photos.set(id, v as Photo);
+  }
+  loaded.add(group);
+  off.delete(group);
+  return true;
+}
 /** Pour les tests. */
-export function resetPhotos() { photos.clear(); sounds.clear(); loaded.clear(); loading.clear(); }
+export function resetPhotos() { photos.clear(); sounds.clear(); loaded.clear(); loading.clear(); off.clear(); }
 
 const stripHtml = (s: string) => s.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/\s+/g, ' ').trim();
 
@@ -152,6 +176,6 @@ export async function fetchPhoto(id: string, fetcher: Fetcher = (u, i) => fetch(
   const s = sounds.get(id.replace(/^snd:/, ''));
   const url = id.startsWith('snd:') ? (s ? (variant === 'mp3' ? s.mp3 : s.url) : null) : photos.get(id)?.url;
   if (!url) return null;
-  const r = await fetcher(url, { headers: { 'User-Agent': USER_AGENT }, cf: { cacheTtl: 604800, cacheEverything: true } } as RequestInit);
+  const r = await fetcher(url, { headers: { 'User-Agent': USER_AGENT }, cf: { cacheTtl: 2592000, cacheEverything: true } } as RequestInit);
   return r.ok ? r : null;
 }

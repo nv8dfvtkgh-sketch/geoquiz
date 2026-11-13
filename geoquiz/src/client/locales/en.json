@@ -1153,5 +1153,7 @@
   "rev.src.fr": "Original questions aligned with the French national curriculum (Éduscol, Bulletin officiel, 2025-2026 programmes).",
   "rev.src.us": "Original questions aligned with US standards: Common Core (math, ELA), NGSS (science), C3 Framework (social studies).",
   "daily.doneTitle": "Daily challenge done",
-  "daily.doneHint": "A new challenge arrives tomorrow at {time}. Come back and try again!"
+  "daily.doneHint": "A new challenge arrives tomorrow at {time}. Come back and try again!",
+  "q.place.country": "Which country is this place in?",
+  "err.daily.done": "You have already played today's challenge with this account. Come back tomorrow!"
 }

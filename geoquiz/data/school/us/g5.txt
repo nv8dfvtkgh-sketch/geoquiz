@@ -26,10 +26,10 @@ Evaluate 2 × (3 + 4). | 14 | 10 | 24 | 9
 On a coordinate plane, what is the first number in (3, 5)? | the x-coordinate | the y-coordinate | the origin | the slope
 Where is the origin on a coordinate plane? | (0, 0) | (1, 1) | (0, 1) | (10, 10)
 How many milliliters in a liter? | 1,000 | 100 | 10 | 10,000
-Which shape has exactly one pair of parallel sides (US definition)? | trapezoid | rectangle | rhombus | square
+Which of these shapes can have only one pair of parallel sides? | trapezoid | rectangle | rhombus | square
 ## science
 What is matter made of? | particles too small to see | air only | light | energy only
-When sugar dissolves in water, what happens to its weight? | it stays the same (mass is conserved) | it disappears | it doubles | it becomes zero
+When sugar dissolves in water, what happens to the total weight? | it stays the same (mass is conserved) | it disappears | it doubles | it becomes zero
 Which is a mixture? | trail mix | pure water | gold | oxygen gas
 What new substance forms when baking soda and vinegar react? | a gas (carbon dioxide) | gold | ice | sand
 Which way does gravity pull objects near Earth? | down, toward Earth's center | up | sideways | in circles

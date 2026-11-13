@@ -1153,5 +1153,7 @@
   "rev.src.fr": "Preguntas originales alineadas con los programas oficiales franceses (Éduscol, Bulletin officiel, 2025-2026).",
   "rev.src.us": "Preguntas originales alineadas con los estándares de EE. UU.: Common Core, NGSS y marco C3.",
   "daily.doneTitle": "Reto del día completado",
-  "daily.doneHint": "Mañana a las {time} llega un nuevo reto. ¡Vuelve a intentarlo!"
+  "daily.doneHint": "Mañana a las {time} llega un nuevo reto. ¡Vuelve a intentarlo!",
+  "q.place.country": "¿En qué país está este lugar?",
+  "err.daily.done": "Ya hiciste el reto de hoy con esta cuenta. ¡Vuelve mañana!"
 }

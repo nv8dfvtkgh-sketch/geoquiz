@@ -16993,10 +16993,10 @@
    "id": "roadsigns-26",
    "tier": 2,
    "q": {
-    "fr": "À un carrefour à sens giratoire, qui a en principe la priorité ?",
-    "en": "At a roundabout, who normally has priority?",
-    "es": "En una rotonda, ¿quién tiene normalmente prioridad?",
-    "ar": "في الملتقى الدائري، لمن الأولوية عادة؟"
+    "fr": "À un carrefour à sens giratoire annoncé par un panneau « Cédez le passage », qui a la priorité ?",
+    "en": "At a roundabout marked with a “Give way” sign, who has priority?",
+    "es": "En una rotonda señalizada con «Ceda el paso», ¿quién tiene prioridad?",
+    "ar": "في مدار طرقي مُعلَّم بعلامة «أفسح الطريق»، لمن الأولوية؟"
    },
    "a": [
     {
@@ -29227,7 +29227,7 @@
    },
    "a": [
     {
-     "fr": "Madagascar",
+     "fr": "à Madagascar",
      "en": "Madagascar",
      "es": "Madagascar",
      "ar": "مدغشقر"
@@ -31701,9 +31701,9 @@
    "id": "ec-31",
    "tier": 2,
    "q": {
-    "fr": "Le Maroc est-il qualifié pour la Coupe du monde 2026 ?",
-    "en": "Has Morocco qualified for the 2026 World Cup?",
-    "es": "¿Está Marruecos clasificado para el Mundial 2026?",
+    "fr": "Le Maroc s'est-il qualifié pour la Coupe du monde 2026 ?",
+    "en": "Did Morocco qualify for the 2026 World Cup?",
+    "es": "¿Se clasificó Marruecos para el Mundial 2026?",
     "ar": "هل تأهل المغرب إلى كأس العالم 2026؟"
    },
    "a": [
@@ -33790,10 +33790,10 @@
      "ar": "كانغشينجونغا"
     },
     {
-     "fr": "K2",
-     "en": "K2",
-     "es": "K2",
-     "ar": "جبل كي 2"
+     "fr": "Elbrouz",
+     "en": "Mount Elbrus",
+     "es": "Elbrus",
+     "ar": "جبل إلبروس"
     },
     {
      "fr": "Puncak Jaya",

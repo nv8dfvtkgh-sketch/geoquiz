@@ -25,6 +25,11 @@ export function Setup() {
   // Défi du jour déjà joué (sur cet appareil, ou sur le compte depuis un autre appareil) : rien avant demain.
   const [dailyDone, setDailyDone] = useState(() => game === 'daily' && dailyDoneHere());
   useEffect(() => {
+    const on = () => { if (game === 'daily') setDailyDone(true); };
+    window.addEventListener('gq:daily', on);
+    return () => window.removeEventListener('gq:daily', on);
+  }, [game]);
+  useEffect(() => {
     if (game !== 'daily' || editing || !auth) return;
     let alive = true;
     api('/api/daily', { token: auth }).then((r) => { if (alive && r.ok && r.data.me) setDailyDone(true); });

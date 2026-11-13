@@ -5,7 +5,7 @@ Qu'est-ce qu'une didascalie ? | une indication de mise en scène | une réplique
 Comment s'appelle un long discours d'un personnage seul en scène ? | un monologue | un aparté | une tirade à deux | un dialogue
 Qu'est-ce qu'un aparté ? | une réplique que le public entend mais pas les autres personnages | une scène muette | la fin de la pièce | un changement de décor
 Quel est le registre d'une farce ? | comique | tragique | épique | lyrique
-Quel chevalier de la Table ronde part en quête du Graal chez Chrétien de Troyes ? | Perceval | Lancelot du Lac seul | Roland | Ulysse
+Quel chevalier de la Table ronde part en quête du Graal chez Chrétien de Troyes ? | Perceval | Lancelot | Roland | Ulysse
 Qui est le roi de la Table ronde ? | Arthur | Charlemagne | Louis IX | Richard Cœur de Lion
 Quelle chanson de geste raconte la mort d'un neveu de Charlemagne à Roncevaux ? | La Chanson de Roland | Tristan et Iseut | Le Roman de Renart | Yvain
 Qu'est-ce qu'un récit de voyage ? | le récit d'un voyageur qui raconte ses découvertes | une carte routière | un poème d'amour | une fable animale
@@ -69,7 +69,7 @@ Quelle est la vitesse de la lumière dans le vide (environ) ? | 300 000 km/s | 3
 Une source primaire de lumière, c'est… | un objet qui produit sa propre lumière | un objet éclairé | un miroir | la Lune
 La Lune est une source de lumière… | secondaire (elle est éclairée) | primaire | artificielle | électrique
 ## histgeo
-Qui est le fondateur de l'islam au VIIe siècle ? | le prophète Mahomet | Charlemagne | Saint Paul | Constantin
+Qui est le fondateur de l'islam au VIIe siècle ? | le prophète Mohammed (Mahomet) | Charlemagne | Saint Paul | Constantin
 Quelle ville est le premier lieu saint de l'islam ? | La Mecque | Jérusalem | Bagdad | Cordoue
 Quel empire chrétien a Constantinople pour capitale ? | l'Empire byzantin | l'Empire carolingien | l'Empire ottoman | l'Empire romain d'Occident
 En quelle année débute l'hégire ? | 622 | 800 | 1095 | 476
@@ -80,7 +80,7 @@ Quand a lieu la première croisade ? | 1096-1099 | 1492 | 1789 | 800
 Qui découvre l'Amérique pour l'Europe en 1492 ? | Christophe Colomb | Vasco de Gama | Magellan | Marco Polo
 Quelle expédition réalise le premier tour du monde (1519-1522) ? | celle de Magellan | celle de Colomb | celle de Cartier | celle de Cook
 Qui a inventé l'imprimerie à caractères mobiles en Europe vers 1450 ? | Gutenberg | Léonard de Vinci | Luther | Galilée
-Qui lance la Réforme protestante en 1517 ? | Martin Luther | Calvin seul | Érasme | Henri VIII
+Qui lance la Réforme protestante en 1517 ? | Martin Luther | Jean Calvin | Érasme | Henri VIII
 Quel artiste a peint « La Joconde » ? | Léonard de Vinci | Michel-Ange | Raphaël | Botticelli
 Quel est le principe de la monarchie absolue de Louis XIV ? | le roi détient tous les pouvoirs | le peuple vote les lois | le Parlement gouverne | le pape choisit le roi
 Qu'est-ce que le développement durable ? | répondre aux besoins présents sans compromettre ceux des générations futures | produire toujours plus | ne plus rien consommer | développer les villes seulement

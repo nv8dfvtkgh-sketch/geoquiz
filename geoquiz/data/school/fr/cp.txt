@@ -63,7 +63,7 @@ Que faut-il faire avant de traverser la rue ? | regarder à gauche et à droite 
 À quoi sert une brosse à dents ? | se laver les dents | se coiffer | écrire | dessiner
 Quel aliment est un fruit ? | la pomme | la carotte | le pain | le fromage
 Que mange-t-on pour avoir des os solides (calcium) ? | des produits laitiers | des bonbons | des chips | du soda
-Quand fait-il nuit ? | quand le Soleil est caché | à midi | le matin à l'école | en été seulement
+Quand fait-il nuit ? | quand le Soleil est couché | à midi | le matin à l'école | en été seulement
 Où vit le poisson ? | dans l'eau | dans un arbre | sous la terre | dans le désert
 Combien de pattes a une araignée ? | 8 | 6 | 4 | 10
 Combien de pattes a un insecte ? | 6 | 8 | 4 | 2

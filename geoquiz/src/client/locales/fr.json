@@ -1153,5 +1153,7 @@
   "rev.src.fr": "Questions originales alignées sur les programmes officiels de l’Éducation nationale (Éduscol, Bulletin officiel, programmes 2025-2026).",
   "rev.src.us": "Questions originales alignées sur les standards américains : Common Core (maths, anglais), NGSS (sciences), cadre C3 (sciences sociales).",
   "daily.doneTitle": "Défi du jour terminé",
-  "daily.doneHint": "Un nouveau défi arrive demain, à {time}. Reviens tenter ta chance !"
+  "daily.doneHint": "Un nouveau défi arrive demain, à {time}. Reviens tenter ta chance !",
+  "q.place.country": "Dans quel pays se trouve ce lieu ?",
+  "err.daily.done": "Tu as déjà fait le défi du jour avec ce compte. Reviens demain !"
 }

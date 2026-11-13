@@ -29,7 +29,7 @@ Quelle est la morale d'une fable ? | la leçon à retenir | le titre | le premie
 Quel est le périmètre d'un carré de 5 cm de côté ? | 20 cm | 25 cm | 10 cm | 15 cm
 Quelle est l'aire d'un carré de 5 cm de côté ? | 25 cm² | 20 cm² | 10 cm² | 50 cm²
 Combien de centimètres carrés dans 1 m² ? | 10 000 | 100 | 1 000 | 1 000 000
-Comment s'appelle le segment qui passe par le centre d'un cercle et le coupe en deux points ? | le diamètre | le rayon | la corde quelconque | l'arc
+Comment s'appelle un segment qui relie deux points d'un cercle en passant par son centre ? | le diamètre | le rayon | la corde quelconque | l'arc
 Le diamètre d'un cercle vaut… | deux fois le rayon | le rayon | la moitié du rayon | trois fois le rayon
 Combien mesure un angle droit ? | 90° | 180° | 45° | 360°
 Combien mesure un angle plat ? | 180° | 90° | 360° | 100°
@@ -75,7 +75,7 @@ Comment appelle-t-on l'extermination des Juifs par les nazis ? | la Shoah | la R
 Le 8 mai commémore… | la victoire de 1945 | l'armistice de 1918 | la fête nationale | la Révolution
 Quelle monnaie est utilisée en France depuis 2002 ? | l'euro | le franc | la livre | le dollar
 Combien de pays dans l'Union européenne (depuis 2020) ? | 27 | 28 | 12 | 50
-Quelle est la capitale de l'Union européenne où siège la Commission ? | Bruxelles | Paris | Berlin | Strasbourg
+Dans quelle ville siège la Commission européenne ? | Bruxelles | Paris | Berlin | Strasbourg
 Quel moyen de transport relie Paris à Londres sous la Manche ? | le tunnel sous la Manche (Eurostar) | un pont | un téléphérique | un bac à vapeur
 Qu'est-ce qu'un câble sous-marin ? | un câble au fond de la mer qui transporte Internet | un sous-marin | une ligne de pêche | un pipeline de pétrole
 Quel est l'aéroport le plus fréquenté de France ? | Paris-Charles-de-Gaulle | Lyon | Nice | Marseille

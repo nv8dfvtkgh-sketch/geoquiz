@@ -10,7 +10,7 @@ import { boardCtx, boardQ, boardQuestion } from './boardplay';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
-import { ensurePhotos, ensureSounds, photosLoaded } from './photos';
+import { ensurePhotos, ensureSounds, mediaOff, mediaSnapshot, photosLoaded, restoreMedia, setMediaOff, type MediaSnapshot } from './photos';
 import type { GameResult } from './accounts';
 
 export interface Conn {
@@ -32,11 +32,33 @@ export const config: {
   addChallengeResult: (code: string, e: ChallengeEntry) => Promise<{ by: string; results: ChallengeEntry[] } | null>;
   /** Révisions : questions à revoir aujourd'hui pour ce compte. */
   loadReview: (accountToken: string) => Promise<{ c: string; t: string; z: string }[]>;
+  /** Copie durable des médias trouvés sur Wikimedia (photos, sons), par jeu. */
+  loadMedia: (group: string) => Promise<MediaSnapshot | null>;
+  saveMedia: (group: string, snap: MediaSnapshot) => Promise<void>;
 } = {
-  loadReview: async () => [],
+  loadReview: async () => [], loadMedia: async () => null, saveMedia: async () => {},
   maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null,
   createChallenge: async () => null, loadChallenge: async () => null, addChallengeResult: async () => null,
 };
+/** Médias d'un jeu : d'abord la copie gardée (moins d'un mois), sinon Wikimedia (et on garde une copie),
+ *  et en dernier recours une copie plus ancienne. */
+const MEDIA_FRESH = 30 * 86400_000;
+const mediaJobs = new Map<string, Promise<boolean>>();
+function loadMedia(media: 'monuments' | 'stadiums' | 'sounds' | 'landscapes'): Promise<boolean> {
+  let job = mediaJobs.get(media);
+  if (job) return job;
+  job = (async () => {
+    const snap = await config.loadMedia(media).catch(() => null);
+    if (snap && Date.now() - snap.at < MEDIA_FRESH && restoreMedia(media, snap)) return true;
+    const items = (media === 'sounds' ? extras.sounds : extras[media]) as { id: string }[];
+    const ok = media === 'sounds' ? await ensureSounds(extras.sounds) : await ensurePhotos(extras[media] as { id: string; wiki: string }[], undefined, media);
+    if (ok) { await config.saveMedia(media, mediaSnapshot(media, items.map((x) => x.id))).catch(() => {}); return true; }
+    return restoreMedia(media, snap);
+  })().finally(() => mediaJobs.delete(media));
+  mediaJobs.set(media, job);
+  return job;
+}
+
 export interface ChallengeData { settings: Settings; items: { target: string; kind: string }[]; by: string; first: ChallengeEntry }
 /** Jeux qu'on peut lancer en défi (pas le défi du jour, déjà commun, ni les quiz créés). */
 export const challengeable = (cat: string) => cat !== 'daily' && cat !== 'custom';
@@ -562,9 +584,13 @@ export class Room {
     }
     // Photos (monuments, stades) et sons : cherchés sur Wikimedia à la première partie.
     const media = CATEGORIES[this.settings.category]?.media;
-    if (media && !photosLoaded(media)) {
-      const job = media === 'sounds' ? ensureSounds(extras.sounds) : ensurePhotos(extras[media] as { id: string; wiki: string }[], undefined, media);
-      job.then((ok) => (ok ? this.start() : this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' })));
+    if (media && !photosLoaded(media) && !mediaOff(media)) {
+      loadMedia(media).then((ok) => {
+        if (ok) return this.start();
+        // Monuments et stades se jouent aussi sans photo (« Dans quel pays se trouve… ? »).
+        if (media === 'monuments' || media === 'stadiums') { setMediaOff(media, true); return this.start(); }
+        this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'photos.unavailable' });
+      });
       return;
     }
     if (this.settings.category === 'review' && !this.reviewItems) {

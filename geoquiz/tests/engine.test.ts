@@ -1167,3 +1167,46 @@ test('Révisions scolaires : chaque classe, chaque cycle et chaque matière donn
   const qs = drawQuestions(settings({ category: 'rev_fr_cm1_all', zone: 'world', difficulty: 'easy' } as any), () => 0.42);
   assert.ok(qs.length >= 5);
 });
+
+test('Médias : copie gardée, et monuments sans photo quand Wikimedia ne répond pas', async () => {
+  const { resetPhotos, mediaSnapshot, restoreMedia, photoFor, setMediaOff } = await import('../src/server/photos');
+  const { extras } = await import('../src/server/data');
+  resetPhotos();
+  // Copie gardée : rechargée sans appeler Wikimedia.
+  const id = extras.monuments[0].id;
+  assert.ok(restoreMedia('monuments', { at: Date.now(), photos: [[id, { url: 'https://upload.wikimedia.org/x.jpg', credit: 'A · CC BY · Wikimedia Commons' }]] }));
+  assert.equal(photoFor(id)?.credit, 'A · CC BY · Wikimedia Commons');
+  assert.equal(mediaSnapshot('monuments', [id]).photos?.length, 1);
+  // Une adresse hors de Wikimedia est refusée.
+  resetPhotos();
+  restoreMedia('monuments', { at: Date.now(), photos: [[id, { url: 'https://evil.example/x.jpg', credit: '' }]] });
+  assert.equal(photoFor(id), undefined);
+  // Sans photo : « Dans quel pays se trouve ce lieu ? »
+  resetPhotos();
+  setMediaOff('monuments', true);
+  const qs = drawQuestions({ category: 'monuments', zone: 'world', difficulty: 'hard', count: 8, qtype: 'auto', time: 20 } as any, () => 0.3);
+  assert.equal(qs.length, 8);
+  for (const q of qs) { assert.equal(q.promptKey, 'q.place.country'); assert.equal(q.imageRef, undefined); assert.ok(q.check(q.revealOption!)); }
+  setMediaOff('monuments', false);
+  resetPhotos();
+});
+
+test('Maths des révisions : chaque réponse recalculée indépendamment', async () => {
+  const { mathQuestion, GRADE } = await import('../src/server/schoolmath');
+  const val = (s: string) => Number(s.replace(/−/g, '-').replace(/\s/g, '').replace(',', '.'));
+  let checked = 0;
+  for (const lv of Object.keys(GRADE)) for (let s = 1; s < 600; s++) for (const lang of ['fr', 'en'] as const) {
+    const q = mathQuestion(lv, s * 7919, lang)!;
+    const prompt = q[0].replace(/−/g, '-').replace(/,(\d)/g, '.$1');
+    // Calculs écrits « a op b = ? » (avec parenthèses et nombres négatifs) : on les refait.
+    const m = /^\(?(-?[\d.]+)\)? ([+\-×÷]) \(?(-?[\d.]+)\)?(?: ([+×]) (-?[\d.]+))? = \?$/.exec(prompt);
+    if (!m) continue;
+    const a = Number(m[1]), b = Number(m[3]), c = m[5] !== undefined ? Number(m[5]) : undefined;
+    const op = (x: number, o: string, y: number) => (o === '+' ? x + y : o === '-' ? x - y : o === '×' ? x * y : x / y);
+    const expected = c === undefined ? op(a, m[2], b) : m[4] === '×' ? op(a, m[2], b * c) : op(op(a, m[2], b), '+', c);
+    assert.ok(Math.abs(val(q[1]) - expected) < 1e-6, `${lv} : ${q[0]} → ${q[1]} (attendu ${expected})`);
+    for (const bad of q.slice(2)) assert.notEqual(val(bad), expected, `${lv} : piège juste dans ${q[0]}`);
+    checked++;
+  }
+  assert.ok(checked > 3000, `${checked} calculs vérifiés`);
+});

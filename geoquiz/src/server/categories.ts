@@ -7,7 +7,7 @@ import {
 } from './data';
 import { MATH_SUBJECT, revGames, revId, SCHOOL } from '../shared/school';
 import { mathQuestion } from './schoolmath';
-import { photoFor, soundFor } from './photos';
+import { mediaOff, photoFor, soundFor } from './photos';
 import { matches, normalize } from './text';
 
 export interface QOptionInternal {
@@ -584,11 +584,16 @@ const monumentsCat: Category = {
   media: 'monuments',
   qtypes: ['mcq', 'map', 'type'],
   zoneKinds: ['world'],
-  pool: (_zone, d, n) => tierPool(extras.monuments.filter((m) => photoFor(m.id)), d, n),
+  pool: (_zone, d, n) => tierPool(extras.monuments.filter((m) => photoFor(m.id) || mediaOff('monuments')), d, n),
   make(target, kind, _zone, rnd) {
     const m = monumentById()[target];
-    const photo = photoFor(target)!;
+    const photo = photoFor(target);
     const c = countries[m.country];
+    if (!photo) {
+      // Photos indisponibles : « Dans quel pays se trouve la tour Eiffel ? »
+      const { options, correct } = optionsFrom(m.country, countryDistractors(m.country, 3, rnd, (x) => !countries[x].dependency), rnd, (id) => ({ label: countries[id].names }));
+      return { category: 'monuments', target, kind: 'mcq', answer: mapNames((l) => `${m.names[l]} — ${c.names[l]}`), promptKey: 'q.place.country', promptName: m.names, options, revealOption: correct, revealId: m.country, attempts: 1, check: (v) => v === correct };
+    }
     const base = { category: 'monuments', target, imageRef: `wiki:${target}`, credit: photo.credit, revealId: m.country };
     if (kind === 'map' && (worldById[m.country]?.a ?? 0) < 12) kind = 'mcq';
     if (kind === 'map') {
@@ -1121,11 +1126,16 @@ const stadiumsCat: Category = {
   media: 'stadiums',
   qtypes: ['mcq', 'type'],
   zoneKinds: ['world'],
-  pool: (_zone, d, n) => tierPool(extras.stadiums.filter((m) => photoFor(m.id)), d, n),
+  pool: (_zone, d, n) => tierPool(extras.stadiums.filter((m) => photoFor(m.id) || mediaOff('stadiums')), d, n),
   make(target, kind, _zone, rnd) {
     const m = stadiumById()[target];
-    const photo = photoFor(target)!;
+    const photo = photoFor(target);
     const c = countries[m.country];
+    if (!photo) {
+      // Photos indisponibles : « Dans quel pays se trouve le Maracanã ? »
+      const { options, correct } = optionsFrom(m.country, countryDistractors(m.country, 3, rnd, (x) => !countries[x].dependency), rnd, (id) => ({ label: countries[id].names }));
+      return { category: 'stadiums', target, kind: 'mcq', answer: mapNames((l) => `${m.names[l]} — ${m.home ? m.home[l] : c.names[l]}`), promptKey: 'q.place.country', promptName: m.names, options, revealOption: correct, attempts: 1, check: (v) => v === correct };
+    }
     const base = { category: 'stadiums', target, imageRef: `wiki:${target}`, credit: photo.credit };
     const full = mapNames((l) => `${m.names[l]} — ${m.home ? m.home[l] : c.names[l]}`);
     const all = extras.stadiums.filter((x) => x.id !== target && photoFor(x.id));

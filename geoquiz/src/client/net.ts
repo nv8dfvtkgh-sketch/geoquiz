@@ -1,5 +1,7 @@
 // Connexion temps réel : un WebSocket par partie (/ws/<CODE>), ou /ws/quick pour le jumelage.
 // Reconnexion automatique et reprise de sa place grâce au jeton reçu à l'entrée dans la partie.
+import { savedAuth } from './account';
+import { markDailyDone } from './dailyLock';
 import type { ClientMsg, CreateRoomReq, Lang, ServerMsg } from '../shared/protocol';
 
 type Listener = (msg: ServerMsg) => void;
@@ -112,8 +114,10 @@ export async function createGame(req: CreateRoomReq, name: string, lang: Lang): 
   // Anti-répétition : les questions déjà vues dans ce jeu sur cet appareil.
   if (!req.challenge && !req.avoid) req = { ...req, avoid: seenIn(req.settings.category) };
   try {
-    const r = await fetch('/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(req) });
+    const tk = req.settings.category === 'daily' ? savedAuth() : null;
+    const r = await fetch('/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(tk ? { Authorization: `Bearer ${tk}` } : {}) }, body: JSON.stringify(req) });
     const j = await r.json();
+    if (j.error === 'daily.done') markDailyDone();
     if (!r.ok || !j.code) return j.error ?? 'server';
     net.open(j.code);
     net.send({ t: 'join', name, lang });

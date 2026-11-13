@@ -65,6 +65,9 @@ config.createChallenge = (c) => accounts.createChallenge(c);
 config.loadChallenge = (code) => accounts.challengeData(code);
 config.addChallengeResult = (code, e) => accounts.addChallengeResult(code, e);
 config.loadReview = (token) => accounts.reviewDue(token);
+// Copie des médias Wikimedia trouvés (photos, sons) : la partie démarre même si Wikimedia ne répond plus.
+config.loadMedia = async (group) => { try { return JSON.parse(fs.readFileSync(path.join(STORE, `media-${group.replace(/\W/g, '')}.json`), 'utf8')); } catch { return null; } };
+config.saveMedia = async (group, snap) => { try { fs.mkdirSync(STORE, { recursive: true }); fs.writeFileSync(path.join(STORE, `media-${group.replace(/\W/g, '')}.json`), JSON.stringify(snap)); } catch { /* ignoré */ } };
 
 // ------------------------------------------------------------------ salles
 const rooms = new Map<string, Room>();
@@ -156,6 +159,9 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/rooms' && req.method === 'POST') {
       let body: any = null;
       try { body = JSON.parse(await readBody(req, 32_000)); } catch {}
+      // Défi du jour : un compte qui l'a déjà joué aujourd'hui attend demain.
+      const tok = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
+      if (tok && body?.settings?.category === 'daily' && (await accounts.daily(tok).catch(() => null))?.me) return send(res, 409, JSON.stringify({ error: 'daily.done' }));
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }
