@@ -1729,3 +1729,24 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .b-awale .pit, .b-awale .row > * { min-width: 0; width: 100%; }
 .b-awale .row { min-width: 0; }
 .b-memory > * { min-width: 0; overflow: hidden; }
+
+/* Révisions scolaires : programme → classe ou cycle → matière */
+.rev { display: grid; gap: 12px; }
+.rev h1 { margin: 0; }
+.rev-sys { justify-self: start; }
+.rev-h { font-size: 1rem; margin: 8px 0 0; color: var(--ink-2); }
+.rev-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(82px, 1fr)); gap: 8px; }
+.rev-cycles { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.rev-levels button, .rev-cycles button, .rev-sub { display: grid; gap: 2px; justify-items: center; text-align: center; padding: 12px 8px; border-radius: 14px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; cursor: pointer; min-width: 0; }
+.rev-cycles button { justify-items: start; text-align: start; padding: 12px 14px; }
+.rev-levels strong { font-size: 1.15rem; }
+.rev-levels small, .rev-cycles small, .rev-sub small { color: var(--ink-2); font-size: .78rem; }
+.rev-levels button.on, .rev-cycles button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
+.rev-subjects { display: grid; gap: 8px; scroll-margin-top: 70px; }
+.rev-subs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.rev-sub { justify-items: start; text-align: start; padding: 14px; }
+.rev-sub span { font-size: 1.6rem; line-height: 1; }
+.rev-sub.all { grid-column: 1 / -1; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; background: color-mix(in srgb, #1E7F3A 12%, var(--card)); }
+.rev-sub.all span { grid-row: span 2; }
+.rev-sub:hover, .rev-levels button:hover, .rev-cycles button:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.rev-src { margin-top: 8px; }

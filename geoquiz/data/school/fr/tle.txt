@@ -1,0 +1,109 @@
+# Terminale (philosophie, spécialités, histoire-géographie, langues)
+## philo
+Quelle phrase célèbre est de Descartes ? | « Je pense, donc je suis » | « Connais-toi toi-même » | « L'enfer, c'est les autres » | « Dieu est mort »
+Qui a dit « Je sais que je ne sais rien » (d'après Platon) ? | Socrate | Aristote | Épicure | Kant
+Quel philosophe a écrit « La République » et l'allégorie de la caverne ? | Platon | Aristote | Descartes | Rousseau
+Que représente l'allégorie de la caverne ? | le passage de l'ignorance à la connaissance | une fable sur les animaux | un mythe sur la création du monde | un traité de géologie
+Qui a écrit « Du contrat social » ? | Rousseau | Hobbes | Locke | Montesquieu
+Pour Hobbes, l'état de nature est… | une guerre de tous contre tous | un paradis paisible | une société parfaite | une démocratie
+Qui a dit « L'homme est un animal politique » ? | Aristote | Platon | Sartre | Nietzsche
+Selon Kant, qu'est-ce que l'impératif catégorique ? | un commandement moral inconditionnel | un conseil de prudence | une loi de la nature | un ordre politique
+Quel philosophe a écrit « L'existence précède l'essence » ? | Jean-Paul Sartre | Albert Camus | Simone de Beauvoir | Heidegger
+Qui a écrit « On ne naît pas femme : on le devient » ? | Simone de Beauvoir | Hannah Arendt | Simone Weil | Olympe de Gouges
+Quel philosophe a écrit « Le Mythe de Sisyphe » ? | Albert Camus | Sartre | Pascal | Spinoza
+Qu'est-ce que l'inconscient selon Freud ? | une part du psychisme qui échappe à la conscience | la perte de connaissance | le sommeil | la mémoire volontaire
+Qu'est-ce que l'épicurisme recherche ? | l'ataraxie, l'absence de trouble | le plaisir sans limite | la richesse | la gloire
+Que prône le stoïcisme ? | distinguer ce qui dépend de nous et ce qui n'en dépend pas | rechercher tous les plaisirs | fuir la société | douter de tout sans fin
+Qui a écrit « Les Pensées » et le « pari » ? | Pascal | Descartes | Montaigne | Voltaire
+Qu'est-ce qu'une démonstration ? | un raisonnement qui établit une vérité à partir de prémisses | une opinion | une expérience seule | un sondage
+Qu'est-ce que la doxa ? | l'opinion commune | la science | la vérité absolue | la religion
+Qu'est-ce que le relativisme ? | l'idée que la vérité ou les valeurs dépendent du point de vue | l'idée d'une vérité unique | une théorie physique | une méthode de calcul
+Quel philosophe distingue la « liberté des Anciens » et celle des « Modernes » ? | Benjamin Constant | Tocqueville | Montesquieu | Marx
+Qui a écrit « La Banalité du mal » à propos du procès Eichmann ? | Hannah Arendt | Simone Weil | Primo Levi | Raymond Aron
+Quelle est la durée de l'épreuve écrite de philosophie au bac ? | 4 heures | 2 heures | 3 heures | 6 heures
+Quels exercices sont proposés à l'écrit de philosophie ? | dissertation ou explication de texte | QCM | commentaire de document historique | résumé
+Selon Spinoza, la liberté consiste à… | comprendre la nécessité qui nous détermine | faire tout ce qu'on veut | obéir aux lois seulement | ne rien choisir
+Qu'est-ce que le cogito ? | la certitude de l'existence du sujet pensant | une loi morale | une preuve de Dieu par la nature | un paradoxe
+## maths
+Que vaut la limite de eˣ quand x → +∞ ? | +∞ | 0 | 1 | e
+Que vaut la limite de eˣ quand x → −∞ ? | 0 | −∞ | 1 | −1
+Quelle est la dérivée de ln(x) ? | 1/x | ln(x)/x | x | eˣ
+Que vaut ln(1) ? | 0 | 1 | e | non défini
+Que vaut ln(e) ? | 1 | 0 | e | 10
+Que vaut ln(a × b) ? | ln a + ln b | ln a × ln b | ln(a + b) | ln a − ln b
+Une primitive de 1/x sur ]0 ; +∞[ ? | ln(x) | −1/x² | x | eˣ
+Une primitive de eˣ ? | eˣ | x·eˣ | eˣ⁺¹/(x+1) | ln x
+Une primitive de cos(x) ? | sin(x) | −sin(x) | cos(x) | −cos(x)
+Combien de façons de ranger 4 objets distincts ? | 24 | 16 | 4 | 12
+Que vaut le coefficient binomial (5 parmi 2) ? | 10 | 20 | 25 | 7
+Espérance d'une loi binomiale B(n ; p) ? | n × p | n + p | p / n | n × p × (1 − p)
+Variance d'une loi binomiale B(n ; p) ? | n × p × (1 − p) | n × p | √(np) | p²
+Que dit le théorème des valeurs intermédiaires ? | une fonction continue prend toutes les valeurs entre f(a) et f(b) | toute fonction est dérivable | une suite croissante converge toujours | f(a) = f(b)
+Une suite croissante et majorée est… | convergente | divergente vers +∞ | constante | négative
+Que vaut la dérivée de cos(x) ? | −sin(x) | sin(x) | cos(x) | −cos(x)
+Une fonction est convexe si sa dérivée seconde est… | positive | négative | nulle | constante
+Qu'est-ce qu'une équation différentielle y' = ay ? | ses solutions sont y = C·eᵃˣ | ses solutions sont des droites | elle n'a pas de solution | y = ax
+## svt
+Qu'est-ce que la sélection naturelle favorise ? | les allèles qui augmentent la survie et la reproduction | les mutations nuisibles | l'extinction de toutes les espèces | rien
+Qu'est-ce que la spéciation ? | l'apparition d'une nouvelle espèce | la disparition d'une espèce | la mutation d'un gène | la classification
+Quelle méthode date les roches anciennes ? | la radiochronologie | la stratigraphie seule | le carbone 14 pour des milliards d'années | la couleur des roches
+Quel principe dit qu'une couche sédimentaire est plus récente que celle qu'elle recouvre ? | le principe de superposition | le principe de continuité | le principe d'inclusion | le principe d'actualisme
+Quel gaz à effet de serre est principalement issu des énergies fossiles ? | le CO₂ | le dioxygène | l'argon | l'azote
+Qu'est-ce que le GIEC ? | le groupe d'experts intergouvernemental sur l'évolution du climat | une ONG écologiste | un parti politique | une entreprise pétrolière
+Qu'est-ce qu'un réflexe myotatique ? | la contraction d'un muscle en réponse à son propre étirement | un mouvement volontaire | un battement cardiaque | une réaction allergique
+Quel neurotransmetteur agit à la jonction neuromusculaire ? | l'acétylcholine | l'insuline | l'adrénaline seule | le glucagon
+Quelle hormone fait baisser la glycémie ? | l'insuline | le glucagon | l'adrénaline | le cortisol
+Quel organe sécrète l'insuline ? | le pancréas | le foie | les reins | la thyroïde
+Qu'est-ce que le diabète de type 1 ? | une absence de production d'insuline (maladie auto-immune) | une résistance à l'insuline liée au mode de vie | une maladie du foie | une carence en sucre
+Qu'est-ce que le stress aigu déclenche ? | la libération d'adrénaline et de cortisol | l'arrêt du cœur | la digestion | le sommeil
+Qu'est-ce que la photosynthèse produit ? | du glucose et du dioxygène | du CO₂ et de l'eau | de l'ATP sans lumière | de la cellulose seulement
+Quel phénomène crée des montagnes par collision continentale ? | l'orogenèse | la subduction océanique seule | l'expansion | l'érosion
+Qu'est-ce que la domestication ? | la sélection d'espèces sauvages par l'humain | l'évolution naturelle | une maladie | la reproduction sans humain
+## physique
+Que dit la loi de décroissance radioactive ? | N(t) = N₀ × e^(−λt) | N(t) = N₀ + λt | N(t) = λt | N(t) = N₀ / t
+Qu'est-ce que la demi-vie ? | la durée pour que la moitié des noyaux se désintègrent | la moitié de la vie d'un atome | la durée de vie maximale | le temps de fission
+Un acide selon Brønsted est… | une espèce capable de céder un proton H⁺ | une espèce qui capte un proton | un sel | une base forte
+Que vaut pH + pOH dans l'eau à 25 °C ? | 14 | 7 | 0 | 1
+Que dit la troisième loi de Kepler ? | T²/a³ est constant pour les planètes d'un même astre | les orbites sont circulaires | la vitesse est constante | T = a
+Dans un champ de pesanteur uniforme, la trajectoire d'un projectile est… | une parabole | une droite | un cercle | une spirale
+Qu'est-ce que l'effet Doppler ? | un changement de fréquence perçue dû au mouvement de la source | un écho | une réfraction | une interférence
+Qu'est-ce que la diffraction ? | l'étalement d'une onde après une petite ouverture | une réflexion | une absorption | une émission
+Qu'est-ce que l'effet photoélectrique ? | l'émission d'électrons par un métal éclairé | la production de lumière par la chaleur | une réaction nucléaire | une diffusion du son
+Quel est le premier principe de la thermodynamique ? | la conservation de l'énergie | l'entropie augmente | la température absolue est nulle | F = ma
+Quelle est la constante de temps d'un circuit RC ? | τ = R × C | τ = R / C | τ = C / R | τ = R + C
+Quelle est l'unité de la capacité d'un condensateur ? | le farad | le henry | l'ohm | le coulomb
+Qu'est-ce que la poussée d'Archimède ? | une force verticale vers le haut égale au poids du fluide déplacé | le poids de l'objet | une force de frottement | une force magnétique
+Qu'est-ce qu'un catalyseur ? | une espèce qui accélère une réaction sans être consommée | un réactif limitant | un produit | un solvant
+Qu'est-ce qu'un ester ? | un composé organique au groupe –COO– | un alcool | un acide fort | un métal
+## histgeo
+Quand a lieu le krach de Wall Street ? | 1929 | 1919 | 1939 | 1945
+Qui lance le New Deal aux États-Unis ? | Franklin D. Roosevelt | Herbert Hoover | Harry Truman | Woodrow Wilson
+Qu'est-ce que le Front populaire (1936) ? | une coalition de gauche menée par Léon Blum | un parti fasciste | un mouvement résistant | une alliance militaire
+Quel tribunal juge les dirigeants nazis en 1945-1946 ? | le tribunal de Nuremberg | la Cour de La Haye | le tribunal de Tokyo | le tribunal de Paris
+Quand est créée l'ONU ? | 1945 | 1919 | 1957 | 1989
+Qu'est-ce que le plan Marshall ? | une aide américaine à la reconstruction de l'Europe | un plan de bataille | un traité soviétique | une monnaie européenne
+Quelle crise de 1962 oppose les États-Unis et l'URSS ? | la crise des missiles de Cuba | le blocus de Berlin | la guerre de Corée | la crise de Suez
+Quand l'URSS disparaît-elle ? | 1991 | 1989 | 1985 | 1999
+Quel traité crée l'Union européenne en 1992 ? | le traité de Maastricht | le traité de Rome | le traité de Lisbonne | l'Acte unique
+Qui est élu président de la République en 1981 ? | François Mitterrand | Valéry Giscard d'Estaing | Jacques Chirac | Georges Pompidou
+Qu'est-ce que la mer territoriale ? | une bande de 12 milles marins sous souveraineté de l'État | la haute mer | une zone de 200 milles | un lac
+Qu'est-ce qu'une ZEE ? | une zone économique exclusive jusqu'à 200 milles marins | une zone d'exclusion militaire | une zone franche | un parc marin
+Quel pays a la deuxième plus grande ZEE du monde ? | la France | les États-Unis | la Russie | le Brésil
+Qu'est-ce que le soft power ? | la capacité d'influence par la culture et l'attractivité | la puissance militaire | la puissance économique seule | la diplomatie secrète
+Qu'est-ce qu'un acteur transnational ? | un acteur qui agit à travers les frontières (firme, ONG) | un État seul | une commune | un parti local
+## anglais
+Que veut dire « to hold someone accountable » ? | tenir quelqu'un responsable | compter quelqu'un | emprisonner quelqu'un | payer quelqu'un
+Complète : « I'd rather you … that. » | didn't do | don't do | not do | won't do
+Complète : « Not only … he late, he was also rude. » | was | is | did | has
+Que veut dire « a whistleblower » ? | un lanceur d'alerte | un arbitre | un siffleur de rue | un musicien
+Que veut dire « to cast a vote » ? | voter | jeter un sort | distribuer les rôles | annuler un vote
+Que veut dire « a landslide victory » ? | une victoire écrasante | une victoire après un glissement de terrain | une défaite | une égalité
+Quel événement de 1776 fonde les États-Unis ? | la Déclaration d'indépendance | la Constitution | la guerre de Sécession | l'achat de la Louisiane
+Combien d'États composent les États-Unis ? | 50 | 52 | 48 | 51
+Quelle institution britannique a deux chambres : Commons et Lords ? | le Parlement | la Cour suprême | la monarchie | le cabinet
+Que veut dire « Brexit » ? | la sortie du Royaume-Uni de l'Union européenne | une élection écossaise | une monnaie | une loi sur l'immigration seule
+Que veut dire « to thrive » ? | prospérer | voler | lancer | souffrir
+Que veut dire « a loophole » ? | une faille (juridique) | un trou de serrure | une boucle | une échelle
+Que veut dire « regardless of » ? | indépendamment de | en regardant | à cause de | grâce à
+Que veut dire « to undermine » ? | saper, affaiblir | souligner | creuser une mine | sous-estimer
+Que veut dire « an outcome » ? | un résultat | une sortie de secours | un revenu | une dépense

@@ -1,0 +1,105 @@
+# Première (tronc commun et spécialités)
+## francais
+Quelles sont les deux épreuves anticipées de français du bac ? | un écrit et un oral | deux oraux | deux écrits | un QCM et un oral
+Quels sont les sujets possibles à l'écrit du bac de français (voie générale) ? | commentaire ou dissertation | résumé ou synthèse | QCM | traduction
+Qui a écrit « Cahier de Douai » (poèmes de 1870) ? | Arthur Rimbaud | Paul Verlaine | Victor Hugo | Charles Baudelaire
+Qui a écrit « Manon Lescaut » ? | l'abbé Prévost | Marivaux | Diderot | Rousseau
+Qui a écrit « La Peau de chagrin » ? | Honoré de Balzac | Émile Zola | Gustave Flaubert | Stendhal
+Qui a écrit « On ne badine pas avec l'amour » ? | Alfred de Musset | Victor Hugo | Marivaux | Edmond Rostand
+Qui a écrit la « Déclaration des droits de la femme et de la citoyenne » (1791) ? | Olympe de Gouges | Madame de Staël | George Sand | Madame Roland
+Qui a écrit « Les Caractères » (1688) ? | La Bruyère | La Rochefoucauld | La Fontaine | Pascal
+Qui a écrit « Le Parti pris des choses » ? | Francis Ponge | Paul Valéry | Saint-John Perse | René Char
+Qui a écrit « Pour un oui ou pour un non » ? | Nathalie Sarraute | Marguerite Duras | Samuel Beckett | Eugène Ionesco
+Qu'est-ce que le théâtre de l'absurde ? | un théâtre qui montre l'absurdité de la condition humaine | une comédie de mœurs | une tragédie classique | un drame romantique
+Qui a écrit « En attendant Godot » ? | Samuel Beckett | Eugène Ionesco | Jean Anouilh | Albert Camus
+Qu'est-ce que la préciosité au XVIIe siècle ? | un mouvement recherchant le raffinement du langage et des manières | un courant réaliste | une école de peinture | un style rural
+Quel mouvement du XIXe siècle exalte le moi et les sentiments ? | le romantisme | le classicisme | le naturalisme | l'humanisme
+Qui a écrit la préface de « Cromwell », manifeste du drame romantique ? | Victor Hugo | Alfred de Vigny | Musset | Lamartine
+Qu'est-ce qu'un apologue ? | un court récit à visée argumentative (fable, conte philosophique) | une épopée | une autobiographie | une tragédie
+Qui a écrit le conte philosophique « Candide » ? | Voltaire | Montesquieu | Diderot | Rousseau
+Quel type de raisonnement part d'exemples pour arriver à une loi générale ? | inductif | déductif | concessif | par l'absurde
+Qu'est-ce qu'une prosopopée ? | faire parler un absent, un mort ou un objet | une exagération | une répétition | une question rhétorique
+Qu'est-ce qu'une question rhétorique ? | une question qui n'attend pas de réponse | une question de grammaire | une question fermée | une interrogation indirecte
+## maths
+Quelle est la dérivée de x² ? | 2x | x | x³/3 | 2
+Quelle est la dérivée de 1/x ? | −1/x² | 1/x² | ln x | −1/x
+Quelle est la dérivée de √x ? | 1/(2√x) | 2√x | √x/2 | 1/√x
+Quelle est la dérivée de eˣ ? | eˣ | x·eˣ⁻¹ | 1/x | e
+Si f'(x) > 0 sur un intervalle, f est… | croissante sur cet intervalle | décroissante | constante | nulle
+Si Δ < 0, combien de solutions réelles a ax² + bx + c = 0 ? | aucune | une | deux | une infinité
+Si Δ = 0, combien de solutions ? | une (double) | aucune | deux | trois
+Somme des racines de ax² + bx + c (si elles existent) ? | −b/a | c/a | b/a | −c/a
+Une suite arithmétique de raison r vérifie… | uₙ₊₁ = uₙ + r | uₙ₊₁ = r × uₙ | uₙ = rⁿ | uₙ₊₁ = uₙ²
+Une suite géométrique de raison q vérifie… | uₙ₊₁ = q × uₙ | uₙ₊₁ = uₙ + q | uₙ = n × q | uₙ₊₁ = uₙ − q
+Deux vecteurs sont orthogonaux si leur produit scalaire est… | nul | égal à 1 | négatif | égal à leur norme
+Que vaut cos(π/3) ? | 1/2 | √3/2 | 0 | 1
+Que vaut sin(π/2) ? | 1 | 0 | 1/2 | −1
+Combien vaut 180° en radians ? | π | 2π | π/2 | 180
+Que vaut P_A(B) (probabilité conditionnelle) ? | P(A ∩ B) / P(A) | P(A) × P(B) | P(A) + P(B) | P(B) / P(A ∩ B)
+Deux événements A et B sont indépendants si… | P(A ∩ B) = P(A) × P(B) | P(A) = P(B) | P(A ∪ B) = 1 | A et B sont incompatibles
+Que vaut e⁰ ? | 1 | 0 | e | non défini
+Que vaut eᵃ × eᵇ ? | eᵃ⁺ᵇ | eᵃᵇ | eᵃ⁻ᵇ | 2e
+## svt
+Qu'est-ce que la méiose ? | une division qui produit des cellules à n chromosomes (gamètes) | une division qui donne des cellules identiques | une fécondation | une mutation
+Qu'est-ce qu'un brassage interchromosomique ? | la répartition aléatoire des chromosomes homologues en méiose | une fusion de gamètes | un crossing-over | une duplication
+Qu'est-ce que le crossing-over ? | un échange de fragments entre chromosomes homologues | une mitose | une mutation ponctuelle | une réparation de l'ADN
+Qu'est-ce qu'une mutation somatique ? | une mutation non transmise à la descendance | une mutation des gamètes | une mutation bénéfique toujours | une mutation volontaire
+Qu'est-ce qu'un cancer ? | une multiplication incontrôlée de cellules | une infection virale toujours | une maladie héréditaire toujours | une allergie
+Quelle immunité est présente dès la naissance et agit rapidement ? | l'immunité innée | l'immunité adaptative | la vaccination | la mémoire immunitaire
+Quels lymphocytes détruisent les cellules infectées ? | les lymphocytes T cytotoxiques | les lymphocytes B | les globules rouges | les plaquettes
+Qu'est-ce que la réaction inflammatoire ? | une réponse innée : rougeur, chaleur, gonflement, douleur | une réaction allergique toujours | une vaccination | une fièvre seulement
+Qu'est-ce que la lithosphère océanique ? | une plaque formée aux dorsales | la croûte continentale | le noyau | l'asthénosphère
+Quelle roche forme la croûte océanique ? | le basalte et le gabbro | le granite | le calcaire | le grès
+Quelle roche caractérise la croûte continentale ? | le granite | le basalte | la péridotite | le sel
+Comment date-t-on les fonds océaniques ? | grâce aux anomalies magnétiques | au carbone 14 uniquement | à la couleur de l'eau | à la profondeur seulement
+Qu'est-ce qu'un service écosystémique ? | un bénéfice que l'humain tire des écosystèmes | un service public | une réserve naturelle | une entreprise écologique
+Où se fait la reconnaissance des molécules odorantes ? | dans l'épithélium olfactif | dans l'oreille | dans la langue seulement | dans la peau
+Qu'est-ce qu'un phénotype ? | l'ensemble des caractères observables | l'ensemble des gènes | une cellule | une mutation
+## physique
+Qu'est-ce qu'un tableau d'avancement ? | un outil pour suivre les quantités de matière d'une réaction | un graphique de vitesse | un tableau de notes | un spectre
+Qu'est-ce que le réactif limitant ? | le réactif entièrement consommé en premier | le réactif en excès | le produit | le solvant
+Qu'est-ce qu'un oxydant ? | une espèce capable de capter des électrons | une espèce qui cède des électrons | un acide | une base
+Quelle relation donne une quantité de matière d'un gaz parfait ? | PV = nRT | U = RI | E = mc² | F = ma
+Que vaut l'énergie potentielle de pesanteur ? | m × g × h | ½ × m × v² | m × v | P × t
+Si seules des forces conservatives agissent, l'énergie mécanique… | se conserve | augmente | diminue | s'annule
+Qu'est-ce que la deuxième loi de Newton (forme simple) ? | ΣF = m × a | E = mc² | F = qE seulement | P = mg
+Quelle est la relation entre longueur d'onde, célérité et fréquence ? | λ = v / f | λ = v × f | λ = f / v | λ = v + f
+Qu'est-ce qu'une onde mécanique progressive ? | la propagation d'une perturbation sans transport de matière | un déplacement de matière | une onde lumineuse | un courant électrique
+Quelle relation de conjugaison pour une lentille mince ? | 1/OA' − 1/OA = 1/f' | OA × OA' = f' | OA + OA' = f' | 1/OA + 1/OA' = 1/f'
+Qu'est-ce qu'un photon ? | une particule de lumière | un électron | un noyau | une onde sonore
+Énergie d'un photon ? | E = h × ν | E = m × c | E = ½ mv² | E = P × t
+Quelle est la couleur complémentaire du rouge (synthèse additive) ? | le cyan | le vert | le bleu | le jaune
+Qu'est-ce qu'un spectre d'émission de raies ? | des raies colorées caractéristiques d'un élément | une lumière blanche continue | une ombre | un arc-en-ciel complet
+Qu'est-ce que la polarité d'une molécule comme l'eau ? | une répartition inégale des charges | une charge globale négative | une molécule aimantée | une molécule chauffée
+## histgeo
+Quel texte de 1789 abolit les privilèges ? | les décrets du 4 août 1789 | la Constitution de 1791 | le Code civil | la Charte de 1814
+Quelle période révolutionnaire est appelée « la Terreur » ? | 1793-1794 | 1789-1790 | 1799-1804 | 1815-1830
+Quel régime suit le Premier Empire en 1814-1815 ? | la Restauration | la IIe République | le Second Empire | la Commune
+Qui dirige le Second Empire (1852-1870) ? | Napoléon III | Napoléon Ier | Louis-Philippe | Charles X
+Qu'est-ce que la Commune de Paris (1871) ? | une insurrection parisienne écrasée lors de la « Semaine sanglante » | un conseil municipal ordinaire | un traité de paix | une exposition universelle
+Quelle affaire divise la France entre 1894 et 1906 ? | l'affaire Dreyfus | l'affaire Calas | le scandale de Panama seul | l'affaire Stavisky
+Qu'est-ce que l'unification italienne ? | le Risorgimento | le Kulturkampf | la Reconquista | le Printemps arabe
+Quel chancelier dirige l'unification allemande en 1871 ? | Bismarck | Guillaume II | Metternich | Hindenburg
+Qu'est-ce que l'Union sacrée en 1914 ? | le rassemblement des forces politiques pour la guerre | une alliance militaire | un traité religieux | une grève générale
+Quelle bataille de 1916 sur la Somme fait des centaines de milliers de victimes ? | la bataille de la Somme | la bataille de la Marne | Verdun | Gallipoli
+Qu'est-ce que la métropolisation ? | la concentration des populations, activités et pouvoirs dans les grandes villes | l'exode urbain | la désindustrialisation | la création de villages
+Qu'est-ce qu'une ville mondiale ? | une métropole qui exerce des fonctions de commandement à l'échelle mondiale | une capitale nationale | une ville portuaire | une ville touristique
+Quelle puissance est appelée « l'atelier du monde » depuis les années 2000 ? | la Chine | l'Allemagne | le Brésil | le Japon
+Qu'est-ce qu'une zone économique spéciale (ZES) en Chine ? | une zone ouverte aux capitaux étrangers avec des avantages fiscaux | une zone militaire | un parc naturel | une zone agricole
+Qu'est-ce que la multifonctionnalité des espaces ruraux ? | des fonctions agricole, résidentielle, touristique, environnementale | seulement l'agriculture | une ville | un désert
+## anglais
+Que veut dire « to be bound to » ? | être forcément voué à | être relié à | être lié par une corde | être interdit de
+Complète : « Had I known, I … have come. » | would | will | had | did
+Complète : « It's high time we … » | left | leave | leaving | will leave
+Que veut dire « a landmark » ? | un monument emblématique (ou un tournant) | un paysage | une marque déposée | une borne kilométrique
+Que veut dire « to overcome » ? | surmonter | dépasser en voiture | recouvrir | arriver tard
+Quel auteur a écrit « Nineteen Eighty-Four » ? | George Orwell | Aldous Huxley | Ray Bradbury | H. G. Wells
+Quel auteur a écrit « Brave New World » ? | Aldous Huxley | George Orwell | Ray Bradbury | Margaret Atwood
+Qui a écrit « Pride and Prejudice » ? | Jane Austen | Charlotte Brontë | Virginia Woolf | Mary Shelley
+Qui a écrit « Frankenstein » ? | Mary Shelley | Bram Stoker | Edgar Allan Poe | Robert Louis Stevenson
+Que veut dire « the American Dream » ? | l'idée que chacun peut réussir par son travail aux États-Unis | un film | un rêve récurrent | la Constitution
+Que veut dire « to struggle » ? | lutter, avoir du mal | étrangler | voyager | se détendre
+Que veut dire « a stakeholder » ? | une partie prenante | un vendeur de steak | un actionnaire unique | un témoin
+Que veut dire « hardly » ? | à peine | durement | difficile | fortement
+Que veut dire « to spread » ? | répandre, se propager | dépenser | sauter | séparer
+Que veut dire « a breakthrough » ? | une percée, une avancée majeure | une panne | une fracture | une pause

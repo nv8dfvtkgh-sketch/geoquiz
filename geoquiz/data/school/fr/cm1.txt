@@ -1,0 +1,106 @@
+# CM1 — cycle 3
+## francais
+Quel est le COD dans « Lucas lit un roman » ? | un roman | Lucas | lit | Lucas lit
+Dans « Elle parle à sa sœur », « à sa sœur » est un… | COI | COD | sujet | attribut
+Quelle phrase est à la forme interrogative ? | Viens-tu ce soir ? | Viens ce soir ! | Tu viens ce soir. | Tu ne viens pas.
+Quelle phrase est impérative ? | Ferme la porte. | Tu fermes la porte. | Fermes-tu la porte ? | Il ferme la porte.
+Au passé simple : « Il march… » | a | ait | ât | ais
+Au passé simple : « Ils finir… » → « Ils … » | finirent | finissaient | finiront | finissent
+Au futur : « Je (pouvoir) … » | pourrai | pouvrai | pourais | peuvrai
+Au futur : « Tu (voir) … » | verras | voiras | voyeras | vairas
+À l'imparfait : « Nous (faire) … » | faisions | fesions | faisons | ferions
+Quel est le radical de « chanteur » ? | chant | chanteur | eur | ch
+Quel suffixe forme un nom de métier dans « boulanger » ? | -er | boul- | -ange | -anger
+Quel mot est un adverbe ? | rapidement | rapide | rapidité | rapides
+Quel est l'homophone correct : « Ils … mangé. » | ont | on | onts | hont
+Quel est l'homophone correct : « … dit que c'est vrai. » | On | Ont | Om | Hon
+Que veut dire « un mot polysémique » ? | un mot qui a plusieurs sens | un mot très long | un mot étranger | un mot inventé
+Dans « un chat noir », « noir » est… | un adjectif épithète | un nom | un verbe | un COD
+Dans « Le ciel est gris », « gris » est… | un attribut du sujet | un COD | un épithète | un sujet
+Accorde : « Les filles sont part… » | ies | is | i | ie
+Quel est le pluriel de « un travail » ? | des travaux | des travails | des travailles | des travaus
+Qu'est-ce qu'un conte ? | un récit merveilleux souvent pour enfants | un poème rimé | un article de journal | une recette
+Quelle formule commence souvent un conte ? | Il était une fois | En conclusion | Cher ami | Mode d'emploi
+Comment s'appelle un texte écrit en vers ? | un poème | un roman | une fable en prose | un dialogue
+Quel signe introduit un dialogue ? | les guillemets ou le tiret | le point-virgule | les parenthèses | l'astérisque
+Quel mot est un pronom personnel ? | nous | notre | nos | non
+## maths
+Que vaut 3/4 d'heure en minutes ? | 45 | 34 | 30 | 75
+Quelle fraction représente la moitié ? | 1/2 | 2/1 | 1/4 | 2/2
+Quelle fraction est égale à 1 ? | 5/5 | 1/5 | 5/10 | 0/5
+Quel nombre décimal s'écrit « trois unités et sept dixièmes » ? | 3,7 | 3,07 | 37 | 0,37
+Dans 4,58, quel est le chiffre des centièmes ? | 8 | 5 | 4 | 58
+Que vaut 0,5 sous forme de fraction ? | 1/2 | 1/5 | 5/1 | 1/50
+Combien de millilitres dans 1 litre ? | 1 000 | 100 | 10 | 10 000
+Comment s'appelle un angle plus petit qu'un angle droit ? | un angle aigu | un angle obtus | un angle plat | un angle plein
+Comment s'appelle un angle plus grand qu'un angle droit (et moins qu'un plat) ? | un angle obtus | un angle aigu | un angle nul | un angle droit
+Deux droites qui se coupent à angle droit sont… | perpendiculaires | parallèles | égales | courbes
+Deux droites qui ne se coupent jamais sont… | parallèles | perpendiculaires | sécantes | obliques
+Un quadrilatère avec 4 côtés égaux et 4 angles droits est un… | carré | losange quelconque | trapèze | rectangle quelconque
+Combien de millions dans un milliard ? | 1 000 | 100 | 10 | 1 000 000
+Quel nombre est le plus grand ? | 1 200 000 | 999 999 | 1 020 000 | 120 000
+Lequel est un multiple de 5 ? | 85 | 52 | 58 | 101
+Un nombre divisible par 2 est… | pair | impair | premier | décimal
+## sciences
+Quelle est la source d'énergie de la Terre ? | le Soleil | la Lune | le vent | le pétrole
+Quelle énergie est renouvelable ? | l'énergie solaire | le pétrole | le charbon | le gaz naturel
+Quelle énergie est fossile ? | le charbon | le vent | le soleil | l'eau des barrages
+Qu'est-ce qu'un mélange homogène ? | on ne distingue pas ses constituants | on voit plusieurs couches | il est toujours solide | il ne contient que de l'eau
+Comment séparer le sable de l'eau ? | par filtration | en remuant | en ajoutant du sel | en le chauffant à 20 °C
+Le sel dans l'eau : il se… | dissout | évapore immédiatement | transforme en sucre | solidifie
+Combien de planètes dans le système solaire ? | 8 | 9 | 7 | 12
+Quelle planète est la plus proche du Soleil ? | Mercure | Vénus | Mars | la Terre
+Quelle est la plus grande planète du système solaire ? | Jupiter | Saturne | la Terre | Neptune
+Qu'est-ce qui provoque l'alternance du jour et de la nuit ? | la rotation de la Terre sur elle-même | le tour de la Lune | les nuages | le tour du Soleil autour de la Terre
+Comment appelle-t-on les êtres vivants qui fabriquent leur matière grâce à la lumière ? | les végétaux chlorophylliens | les champignons | les animaux | les bactéries seulement
+Que rejettent les plantes à la lumière ? | du dioxygène | du dioxyde de carbone uniquement | de la fumée | de l'azote liquide
+Quelle est la fonction de l'os ? | soutenir le corps | digérer | respirer | voir
+Qu'est-ce qui permet de bouger les os ? | les muscles | le sang | la peau | les poumons
+Où commence la digestion ? | dans la bouche | dans l'intestin | dans l'estomac | dans le foie
+Que transporte le sang ? | du dioxygène et des nutriments | de l'air seulement | de la nourriture solide | de l'eau salée
+Comment s'appelle une roche qui sort des volcans ? | la lave | le calcaire | la craie | le charbon
+Qu'est-ce qu'un séisme ? | un tremblement de terre | une éruption | une tempête | une marée
+Pourquoi trier les déchets ? | pour les recycler | pour qu'ils sentent bon | pour les brûler tous | pour rien
+Quel objet est un levier ? | une paire de ciseaux | un verre | une balle | un tapis
+## histgeo
+Comment appelle-t-on la période avant l'invention de l'écriture ? | la Préhistoire | l'Antiquité | le Moyen Âge | les Temps modernes
+Où trouve-t-on des peintures préhistoriques célèbres en France ? | à Lascaux | à Versailles | à Carcassonne | au Louvre
+Qui étaient les Gaulois ? | des peuples celtes vivant en Gaule | des Romains | des Vikings | des Francs
+Quel chef gaulois s'est opposé à Jules César ? | Vercingétorix | Clovis | Charlemagne | Attila
+Quelle bataille marque la défaite de Vercingétorix en 52 av. J.-C. ? | Alésia | Gergovie | Poitiers | Marignan
+Quel roi des Francs s'est fait baptiser vers 496 ? | Clovis | Charlemagne | Hugues Capet | Louis XIV
+Qui fut couronné empereur en l'an 800 ? | Charlemagne | Clovis | Napoléon | Saint Louis
+Comment appelle-t-on le roi Louis IX ? | Saint Louis | le Roi-Soleil | le Bien-Aimé | le Gros
+Quel roi a signé l'édit de Nantes en 1598 ? | Henri IV | Louis XIV | François Ier | Louis XVI
+Quel roi est surnommé le Roi-Soleil ? | Louis XIV | Louis XVI | Henri IV | Louis IX
+Quel château Louis XIV a-t-il fait agrandir ? | Versailles | Chambord | Fontainebleau | le Louvre seulement
+Quel roi a protégé Léonard de Vinci et fait construire Chambord ? | François Ier | Henri IV | Louis XIII | Philippe Auguste
+En quelle année a lieu la prise de la Bastille ? | 1789 | 1492 | 1515 | 1815
+Que proclame la Déclaration des droits de l'homme de 1789 ? | les hommes naissent libres et égaux en droits | le roi a tous les pouvoirs | la fin de l'école | la création de l'euro
+Qui est devenu empereur des Français en 1804 ? | Napoléon Bonaparte | Louis XVI | Charlemagne | Jules Ferry
+Quel texte de Napoléon organise les lois civiles ? | le Code civil | la Magna Carta | l'édit de Nantes | la Constitution de 1958
+Quelle est la devise de la République française ? | Liberté, Égalité, Fraternité | Unité, Travail, Progrès | Paix et Justice | Dieu et mon droit
+Comment s'appelle le maire ? | l'élu qui dirige la commune | le chef de l'État | le directeur d'école | le préfet de région
+Combien de régions en France métropolitaine ? | 13 | 22 | 101 | 5
+Quel est le plus long fleuve entièrement en France ? | la Loire | la Seine | le Rhône | la Garonne
+Quel est le plus haut sommet de France ? | le mont Blanc | le Puy de Dôme | le Vignemale | le mont Ventoux
+Quelles mers ou océans bordent la France métropolitaine ? | la Manche, l'Atlantique et la Méditerranée | seulement la Méditerranée | la mer du Nord seulement | l'océan Indien
+Qu'appelle-t-on un espace rural ? | la campagne | une grande ville | une banlieue | un aéroport
+## anglais
+Quel est le pluriel de « child » ? | children | childs | childes | childrens
+Quel est le pluriel de « mouse » ? | mice | mouses | mousies | meese
+Complète : « He … football every Saturday. » | plays | play | playing | is play
+Complète : « They … from Spain. » | are | is | am | be
+Quelle question demande l'âge ? | How old are you? | How are you? | Where are you from? | What's your name?
+Que veut dire « Where do you live? » ? | Où habites-tu ? | Quel âge as-tu ? | Qu'aimes-tu ? | D'où viens-tu ?
+Que veut dire « I can swim » ? | Je sais nager. | Je dois nager. | J'aime nager. | Je nage hier.
+Que veut dire « Turn left » ? | Tourne à gauche. | Tourne à droite. | Va tout droit. | Arrête-toi.
+Que veut dire « Go straight on » ? | Va tout droit. | Tourne à gauche. | Recule. | Monte.
+Comment dit-on « mercredi » ? | Wednesday | Thursday | Tuesday | Weekend
+Comment dit-on « juillet » ? | July | June | January | August
+Que veut dire « breakfast » ? | petit-déjeuner | déjeuner | dîner | goûter
+Quelle est la capitale du Royaume-Uni ? | London | Dublin | Edinburgh | Manchester
+Que veut dire « favourite » ? | préféré | fatigué | facile | fameux
+Que veut dire « I don't like carrots » ? | Je n'aime pas les carottes. | J'aime les carottes. | Je mange des carottes. | Je n'ai pas de carottes.
+Que veut dire « twenty-five » ? | 25 | 52 | 15 | 205
+Que veut dire « Easter » ? | Pâques | Noël | l'été | l'est

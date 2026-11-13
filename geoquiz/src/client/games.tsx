@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -79,12 +79,10 @@ export const FAMILIES: Family[] = [
     id: 'world',
     tint: 'tint-sand',
     games: [
-      { id: 'maroc', icon: 'star', fresh: true },
       { id: 'food', icon: 'bowl', fresh: true },
       { id: 'animals', icon: 'paw', fresh: true },
       { id: 'monuments', icon: 'columns', fresh: true },
       { id: 'hello', icon: 'wave', fresh: true },
-      { id: 'macities', icon: 'pin', fresh: true },
       { id: 'peaks', icon: 'mountain', fresh: true },
       { id: 'records', icon: 'trophy', fresh: true },
       { id: 'tifinagh', icon: 'yaz', fresh: true },
@@ -96,6 +94,8 @@ export const FAMILIES: Family[] = [
     id: 'programme',
     tint: 'tint-sage',
     games: [
+      { id: 'rev_fr', icon: 'school', fresh: true, screen: 'revision' },
+      { id: 'rev_us', icon: 'book', fresh: true, screen: 'revision' },
       { id: 'prog_geo', icon: 'regions', fresh: true },
       { id: 'prog_hist', icon: 'columns', fresh: true },
       { id: 'prog_sci', icon: 'flask', fresh: true },
@@ -143,7 +143,11 @@ export const FAMILIES: Family[] = [
   },
 ];
 
-export const findGame = (id: string) => FAMILIES.flatMap((f) => f.games.map((g) => ({ ...g, tint: f.tint }))).find((g) => g.id === id);
+export const findGame = (id: string) => {
+  const all = FAMILIES.flatMap((f) => f.games.map((g) => ({ ...g, tint: f.tint })));
+  // Révisions (rev_fr_cm1_maths…) : la tuile du programme.
+  return all.find((g) => g.id === id) ?? (id.startsWith('rev_') ? all.find((g) => g.id === id.slice(0, 6)) : undefined);
+};
 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 

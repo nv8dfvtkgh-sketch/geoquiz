@@ -1,0 +1,109 @@
+# 3e — cycle 4 (programme du brevet)
+## francais
+Qu'est-ce qu'une autobiographie ? | le récit de sa propre vie par l'auteur | la biographie d'un autre | un roman d'aventures | un journal de bord de navire
+Quel pacte l'auteur passe-t-il avec le lecteur dans une autobiographie ? | le pacte autobiographique (dire la vérité) | le pacte fantastique | le pacte de lecture policière | aucun pacte
+Qui a écrit « Les Confessions », autobiographie fondatrice ? | Jean-Jacques Rousseau | Voltaire | Montaigne | Proust
+Qui a écrit le « Journal » tenu pendant la guerre dans une cachette à Amsterdam ? | Anne Frank | Simone Veil | Primo Levi | Elie Wiesel
+Qui a écrit « Si c'est un homme » sur Auschwitz ? | Primo Levi | Albert Camus | Jean Giono | Louis Aragon
+Quel poète de la Résistance a écrit « Liberté » ? | Paul Éluard | Arthur Rimbaud | Charles Baudelaire | Jacques Prévert
+Quel roman d'Erich Maria Remarque décrit la vie des soldats en 1914-1918 ? | À l'Ouest, rien de nouveau | La Peste | Le Grand Meaulnes | La Guerre des mondes
+Qu'est-ce qu'un texte engagé ? | un texte qui défend une cause | un texte publicitaire | un texte scientifique | une notice
+Qu'est-ce que la satire ? | une critique moqueuse des travers de la société | un éloge | un récit fantastique | une tragédie
+Quel mode est employé dans « Bien qu'il pleuve, je sors » ? | le subjonctif | l'indicatif | le conditionnel | l'impératif
+Quelle proposition est une subordonnée relative ? | qui chante | parce qu'il chante | quand il chante | si tu chantes
+Quelle subordonnée exprime la cause ? | parce qu'il était malade | bien qu'il soit malade | afin qu'il guérisse | si bien qu'il resta
+Quelle subordonnée exprime le but ? | pour qu'il comprenne | parce qu'il comprend | bien qu'il comprenne | quand il comprend
+Quelle subordonnée exprime la concession ? | bien qu'il soit tard | puisqu'il est tard | dès qu'il est tard | afin qu'il soit tard
+Quel est l'antonyme de « éphémère » ? | durable | bref | fragile | rapide
+Que signifie « un euphémisme » ? | une expression qui atténue une réalité | une exagération | une contradiction | une répétition
+Quelle figure de style : « Ô rage ! ô désespoir ! » ? | une apostrophe | une litote | une métonymie | une ellipse
+Qui a écrit « J'accuse… ! » pendant l'affaire Dreyfus ? | Émile Zola | Victor Hugo | Jean Jaurès | Clemenceau
+Comment s'appelle la mise en page d'un poème sans rimes ni mètre régulier ? | le vers libre | l'alexandrin | le sonnet | la ballade
+Que signifie l'expression « faire table rase » ? | tout recommencer à zéro | mettre la table | manger beaucoup | se taire
+## maths
+Développe : (x + 3)² | x² + 6x + 9 | x² + 9 | x² + 3x + 9 | 2x + 6
+Développe : (x − 2)(x + 2) | x² − 4 | x² + 4 | x² − 4x − 4 | 2x
+Résous : (x − 1)(x + 5) = 0 | x = 1 ou x = −5 | x = −1 ou x = 5 | x = 4 | x = 1 seulement
+Quelle est l'image de 3 par la fonction f(x) = 2x − 1 ? | 5 | 6 | 2 | 7
+Une fonction linéaire s'écrit… | f(x) = ax | f(x) = ax + b avec b ≠ 0 | f(x) = x² | f(x) = a/x
+La représentation graphique d'une fonction affine est… | une droite | une parabole | un cercle | une hyperbole
+Que dit le théorème de Thalès ? | des droites parallèles créent des longueurs proportionnelles | la somme des angles vaut 180° | BC² = AB² + AC² | un triangle a 3 hauteurs
+Que vaut sin 30° ? | 0,5 | 1 | 0 | 0,866
+Que vaut tan 45° ? | 1 | 0 | 0,5 | √2
+Qu'est-ce qu'un nombre premier ? | un nombre qui a exactement deux diviseurs : 1 et lui-même | un nombre impair | un nombre pair | un nombre divisible par 3
+Décompose 60 en facteurs premiers. | 2² × 3 × 5 | 6 × 10 | 2 × 30 | 4 × 15
+Quel est le PGCD de 24 et 36 ? | 12 | 6 | 4 | 72
+Le volume d'une boule de rayon r vaut… | 4/3 × π × r³ | π × r² | 4 × π × r² | 2 × π × r
+Le volume d'un cône vaut… | (aire de la base × hauteur) / 3 | aire de la base × hauteur | π × r × h | base + hauteur
+Dans un agrandissement de rapport 2, les aires sont multipliées par… | 4 | 2 | 8 | 6
+Dans un agrandissement de rapport 2, les volumes sont multipliés par… | 8 | 2 | 4 | 6
+Un prix augmente de 20 % : par combien le multiplie-t-on ? | 1,2 | 0,2 | 1,02 | 0,8
+## svt
+Combien de chromosomes dans une cellule humaine (hors gamètes) ? | 46 | 23 | 48 | 92
+Combien de chromosomes dans un gamète humain ? | 23 | 46 | 12 | 92
+Qu'est-ce qu'un gène ? | une portion d'ADN qui porte une information héréditaire | une cellule sexuelle | une protéine | un organe
+Comment s'appellent les différentes versions d'un gène ? | les allèles | les chromosomes | les caryotypes | les mutations seulement
+Qu'est-ce que la mitose ? | une division cellulaire qui donne deux cellules identiques | la formation des gamètes | une fécondation | une mutation
+Quels globules blancs fabriquent les anticorps ? | les lymphocytes B | les globules rouges | les plaquettes | les phagocytes
+Qu'est-ce que la phagocytose ? | l'ingestion d'un microbe par une cellule immunitaire | la fabrication d'anticorps | une vaccination | une allergie
+Comment agit un vaccin ? | il prépare le système immunitaire à reconnaître un microbe | il tue tous les virus | il remplace les anticorps à vie | il est un antibiotique
+Les antibiotiques sont efficaces contre… | les bactéries | les virus | les champignons | les allergies
+Qu'est-ce que la sélection naturelle ? | la survie et la reproduction des individus les mieux adaptés | le choix des éleveurs | une mutation volontaire | une classification
+Quel savant a proposé la théorie de l'évolution par sélection naturelle ? | Charles Darwin | Louis Pasteur | Gregor Mendel | Isaac Newton
+Qui a mis au point le vaccin contre la rage en 1885 ? | Louis Pasteur | Alexander Fleming | Robert Koch | Marie Curie
+Qui a découvert la pénicilline ? | Alexander Fleming | Louis Pasteur | Edward Jenner | Claude Bernard
+Qu'est-ce qu'un écosystème ? | un milieu et l'ensemble des êtres vivants qui y vivent | une seule espèce | un parc d'attractions | un climat
+Pourquoi faire du sport régulièrement ? | pour la santé du cœur, des muscles et le moral | pour respirer moins | pour manger moins de légumes | aucun intérêt
+## physique
+Quelle force maintient la Lune en orbite autour de la Terre ? | la gravitation | le magnétisme | la poussée d'Archimède | le frottement
+Quelle est la relation entre poids et masse ? | P = m × g | P = m / g | P = m + g | P = g / m
+Quelle est la valeur de g sur Terre ? | environ 9,8 N/kg | 1,6 N/kg | 98 N/kg | 0,98 N/kg
+Quelle est l'unité du poids ? | le newton | le kilogramme | le joule | le watt
+Quelle est l'unité de la masse ? | le kilogramme | le newton | le litre | le pascal
+Quelle est l'énergie liée au mouvement ? | l'énergie cinétique | l'énergie potentielle | l'énergie chimique | l'énergie nucléaire
+L'énergie cinétique vaut… | ½ × m × v² | m × g × h | m × v | U × I × t
+Quelle est l'unité de l'énergie ? | le joule | le watt | le newton | l'ampère
+Qu'est-ce qu'un ion ? | un atome ou groupe d'atomes qui a gagné ou perdu des électrons | un neutron | une molécule d'eau | un gaz rare
+Quelle particule a une charge négative ? | l'électron | le proton | le neutron | le noyau
+De quoi est composé le noyau d'un atome ? | de protons et de neutrons | d'électrons | de molécules | d'ions
+Quel test révèle les ions chlorure ? | le nitrate d'argent (précipité blanc) | l'eau de chaux | la flamme | le papier pH seul
+Quel test met en évidence le dioxyde de carbone ? | l'eau de chaux qui se trouble | le nitrate d'argent | une allumette qui se rallume | le sulfate de cuivre
+Une centrale nucléaire produit de l'électricité à partir de… | la fission de l'uranium | la combustion du charbon | la lumière | le vent
+Quelle conversion réalise un panneau photovoltaïque ? | lumière → électricité | chaleur → mouvement | électricité → lumière | mouvement → chaleur
+## histgeo
+Quand commence la Première Guerre mondiale ? | 1914 | 1918 | 1939 | 1905
+Qu'est-ce que le génocide arménien (1915) ? | l'extermination des Arméniens par l'Empire ottoman | une guerre civile en France | une révolution russe | un traité de paix
+Quel traité met fin à la Première Guerre mondiale avec l'Allemagne en 1919 ? | le traité de Versailles | le traité de Rome | le traité de Maastricht | les accords d'Évian
+Quelle révolution porte les bolcheviks au pouvoir en 1917 ? | la révolution russe | la révolution française | la révolution industrielle | la révolution chinoise
+Qui dirige l'URSS de 1924 à 1953 ? | Staline | Lénine | Khrouchtchev | Gorbatchev
+Quand Hitler arrive-t-il au pouvoir en Allemagne ? | 1933 | 1919 | 1939 | 1945
+Qu'est-ce qu'un régime totalitaire ? | un État qui contrôle toute la société par la terreur et la propagande | une démocratie | une monarchie constitutionnelle | une fédération
+Quel débarquement allié a lieu le 6 juin 1944 ? | en Normandie | en Provence | en Sicile | à Dunkerque
+Quelles villes japonaises sont frappées par la bombe atomique en 1945 ? | Hiroshima et Nagasaki | Tokyo et Osaka | Kyoto et Kobe | Pékin et Shanghai
+Qui dirige le Conseil national de la Résistance (1943) ? | Jean Moulin | Charles de Gaulle | Philippe Pétain | Pierre Laval
+Qu'est-ce que la guerre froide ? | l'affrontement indirect entre États-Unis et URSS (1947-1991) | une guerre en Antarctique | la Seconde Guerre mondiale | une crise économique
+Quand le mur de Berlin tombe-t-il ? | 1989 | 1961 | 1991 | 1945
+Quand l'Algérie devient-elle indépendante ? | 1962 | 1954 | 1956 | 1945
+Qui fonde la Ve République en 1958 ? | Charles de Gaulle | François Mitterrand | Georges Pompidou | Vincent Auriol
+Quel traité fonde la Communauté économique européenne en 1957 ? | le traité de Rome | le traité de Maastricht | le traité de Versailles | le traité de Lisbonne
+Qui fait voter la loi sur l'IVG en 1975 ? | Simone Veil | Gisèle Halimi | Simone de Beauvoir | Olympe de Gouges
+Qu'est-ce qu'une aire d'attraction d'une ville ? | la ville-centre et les communes où vivent ses travailleurs | uniquement le centre-ville | une zone commerciale | un parc naturel
+Qu'est-ce que la périurbanisation ? | l'extension des villes vers les campagnes proches | le retour au centre | la désertification | la construction de gratte-ciel
+Qu'est-ce qu'un territoire ultramarin français ? | un territoire français situé outre-mer | une colonie étrangère | un pays indépendant | une région de montagne
+Combien de départements et régions d'outre-mer (DROM) compte la France ? | 5 | 3 | 13 | 101
+## anglais
+Complète : « The man … lives next door is a doctor. » | who | which | what | whose
+Complète : « The book … I read was great. » | that | who | whom | whose
+Complète : « I wish I … more time. » | had | have | will have | am having
+Complète : « She said she … tired. » | was | is | will be | be
+Quelle phrase est correcte ? | I'm used to getting up early. | I'm used to get up early. | I use to getting up. | I used getting up early.
+Que veut dire « to fight for one's rights » ? | se battre pour ses droits | perdre ses droits | écrire ses droits | oublier ses droits
+Qui a prononcé le discours « I Have a Dream » en 1963 ? | Martin Luther King | Malcolm X | Barack Obama | Abraham Lincoln
+Qui a refusé de céder sa place dans un bus à Montgomery en 1955 ? | Rosa Parks | Harriet Tubman | Michelle Obama | Maya Angelou
+Qui était le Premier ministre britannique pendant la Seconde Guerre mondiale (à partir de 1940) ? | Winston Churchill | Tony Blair | Margaret Thatcher | Neville Chamberlain
+Que veut dire « unless » ? | à moins que | même si | parce que | depuis que
+Que veut dire « to be worth » ? | valoir | vouloir | pire | gagner
+Que veut dire « throughout » ? | tout au long de | en dessous de | autour de | au-dessus de
+Quel est le participe passé de « bring » ? | brought | bringed | brang | bought
+Quel est le participe passé de « teach » ? | taught | teached | thought | teacht
+Que veut dire « a refugee » ? | un réfugié | un refus | un réfrigérateur | une récompense

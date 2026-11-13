@@ -1,0 +1,60 @@
+# Grade 11 — Common Core ELA 11–12 (American literature) & Algebra II, NGSS high school physics, U.S. history
+## ela
+Who wrote "The Great Gatsby"? | F. Scott Fitzgerald | Ernest Hemingway | John Steinbeck | William Faulkner
+What does the green light symbolize in "The Great Gatsby"? | Gatsby's hopes and dreams, especially Daisy | money | jealousy | danger
+Who wrote "The Crucible," set during the Salem witch trials? | Arthur Miller | Tennessee Williams | Eugene O'Neill | Nathaniel Hawthorne
+Who wrote "The Scarlet Letter"? | Nathaniel Hawthorne | Herman Melville | Edgar Allan Poe | Mark Twain
+Who wrote "Adventures of Huckleberry Finn"? | Mark Twain | Jack London | Harper Lee | Washington Irving
+Who wrote "Moby-Dick"? | Herman Melville | Nathaniel Hawthorne | Walt Whitman | Henry David Thoreau
+Which poet wrote "Leaves of Grass"? | Walt Whitman | Emily Dickinson | Robert Frost | Langston Hughes
+Which writer is a central figure of the Harlem Renaissance? | Langston Hughes | Robert Frost | T. S. Eliot | Ezra Pound
+Who wrote "Walden" about simple living? | Henry David Thoreau | Ralph Waldo Emerson | Walt Whitman | Emily Dickinson
+What was Transcendentalism? | a movement valuing intuition, nature, and self-reliance | a type of realism | a war novel genre | a religious law
+Who wrote "The Raven"? | Edgar Allan Poe | Washington Irving | H. P. Lovecraft | Nathaniel Hawthorne
+Who wrote "Their Eyes Were Watching God"? | Zora Neale Hurston | Toni Morrison | Alice Walker | Maya Angelou
+Who wrote "Beloved"? | Toni Morrison | Maya Angelou | Alice Walker | Octavia Butler
+What is a "synthesis essay"? | an essay combining several sources to support an argument | a summary of one text | a poem analysis only | a narrative
+What does "pragmatic" mean? | practical and realistic | dreamy | angry | ancient
+## math
+What is log₁₀(1000)? | 3 | 100 | 30 | 10
+What is i² (imaginary unit)? | −1 | 1 | i | 0
+What is the inverse of f(x) = 2x + 3? | (x − 3)/2 | 2x − 3 | x/2 + 3 | 1/(2x + 3)
+What is the sum of the first n terms of an arithmetic sequence? | n(a₁ + aₙ)/2 | a₁ × rⁿ | n × aₙ | a₁ + n
+What does the graph of y = 2ˣ look like? | exponential growth | a straight line | a parabola | a circle
+What is log₂(32)? | 5 | 16 | 6 | 4
+What is the period of sin(x)? | 2π | π | π/2 | 1
+Expand (x + 1)³. | x³ + 3x² + 3x + 1 | x³ + 1 | x³ + 3x + 1 | x³ + x² + x + 1
+In a normal distribution, about what percent of data is within one standard deviation of the mean? | 68% | 95% | 50% | 99.7%
+What is the end behavior of y = −x² as x → ∞? | y → −∞ | y → ∞ | y → 0 | y → 1
+## science
+What is velocity? | speed in a given direction | distance only | mass times speed | acceleration
+What is acceleration? | the rate of change of velocity | speed | position | mass
+What is Newton's second law? | F = ma | E = mc² | F = mv | P = mgh
+What is the acceleration due to gravity on Earth? | about 9.8 m/s² | about 1.6 m/s² | about 98 m/s² | about 0.98 m/s²
+What is momentum? | mass × velocity | mass × acceleration | force × distance | energy ÷ time
+What is the law of conservation of energy? | energy cannot be created or destroyed, only transformed | energy always increases | energy is lost in all reactions | mass equals energy always
+What is the unit of work and energy? | the joule | the newton | the watt | the pascal
+What is the unit of power? | the watt | the joule | the volt | the ampere
+What is Ohm's law? | V = IR | P = IV only | F = qE | E = hf
+What is the speed of light in a vacuum? | about 300,000 km/s | about 340 m/s | about 3,000 km/s | infinite
+What is the frequency unit? | hertz | decibel | meter | second
+What happens to light when it passes from air into water? | it bends (refraction) | it stops | it speeds up | it becomes sound
+What is a transverse wave? | a wave that vibrates perpendicular to its direction of travel | a wave that vibrates parallel | a sound wave in air | a stationary wave only
+What is Einstein's mass–energy equation? | E = mc² | F = ma | PV = nRT | V = IR
+What causes a magnetic field? | moving electric charges | gravity | heat | sound
+## social
+What was the Gilded Age? | a late-1800s era of industrial growth and inequality | the colonial era | the Great Depression | the 1960s
+What was the Progressive Era? | an early-1900s reform movement | a war | a gold rush | a depression
+What caused the Great Depression to begin in 1929? | the stock market crash and bank failures | WWII | the Civil War | the Dust Bowl only
+What was the New Deal? | Franklin D. Roosevelt's programs to fight the Depression | a WWI treaty | a card game | a civil rights law
+What event brought the U.S. into World War II? | the attack on Pearl Harbor | the sinking of the Lusitania | the fall of France | D-Day
+What was the Brown v. Board of Education (1954) decision? | it ruled school segregation unconstitutional | it allowed segregation | it gave women the vote | it ended the Civil War
+What did the Civil Rights Act of 1964 do? | banned discrimination based on race, color, religion, sex, or national origin | gave 18-year-olds the vote | ended slavery | created Social Security
+What was the Montgomery Bus Boycott? | a protest against segregated buses (1955–1956) | a strike by factory workers | a war protest | a trade embargo
+What was the Cuban Missile Crisis (1962)? | a U.S.–Soviet standoff over missiles in Cuba | a war in Vietnam | a revolution in Mexico | a space race victory
+Who was the first person to walk on the Moon (1969)? | Neil Armstrong | Buzz Aldrin | Yuri Gagarin | John Glenn
+What was the Watergate scandal? | a political scandal that led President Nixon to resign | a flood | a bank collapse | a sports scandal
+What were the Jim Crow laws? | state and local laws enforcing racial segregation | anti-trust laws | labor laws | immigration laws only
+What was the Great Migration? | the movement of millions of African Americans from the South to the North and West | settlers moving to Oregon | immigrants from Europe | the Gold Rush
+What happened on September 11, 2001? | terrorist attacks on the U.S. | the end of the Cold War | the moon landing | the stock market crash
+What did the 19th Amendment (1920) do? | gave women the right to vote | ended prohibition | created income tax | abolished slavery

@@ -1,0 +1,108 @@
+# 4e — cycle 4
+## francais
+Qui a écrit « Le Horla » et de nombreuses nouvelles réalistes ? | Guy de Maupassant | Émile Zola | Jules Verne | Molière
+Qu'est-ce qu'une nouvelle ? | un récit bref avec peu de personnages | un très long roman | une pièce de théâtre | un poème en vers
+Qu'est-ce que le fantastique ? | l'irruption de l'inexplicable dans le réel, qui laisse le doute | un monde entièrement magique | un récit historique | un texte comique
+Quel mouvement littéraire veut représenter la réalité telle qu'elle est (XIXe siècle) ? | le réalisme | le romantisme | le surréalisme | l'humanisme
+Qui a écrit « Les Misérables » ? | Victor Hugo | Balzac | Flaubert | Zola
+Qui est l'auteur de « La Comédie humaine » ? | Honoré de Balzac | Victor Hugo | Stendhal | Maupassant
+Qu'est-ce qu'un alexandrin ? | un vers de 12 syllabes | un vers de 8 syllabes | un poème de 14 vers | une strophe de 4 vers
+Qu'est-ce qu'un sonnet ? | un poème de 14 vers (2 quatrains et 2 tercets) | un poème de 12 vers | une chanson | une fable
+Qu'est-ce qu'une lettre ouverte ? | une lettre destinée à être publiée | une lettre sans enveloppe | une carte postale | un courriel privé
+Quelle figure de style : « Cette obscure clarté » ? | un oxymore | une litote | une anaphore | une hyperbole
+Quelle figure : « Va, je ne te hais point » (pour dire « je t'aime ») ? | une litote | une hyperbole | une métaphore | une personnification
+Qu'est-ce qu'une métaphore ? | une comparaison sans outil de comparaison | une répétition en début de vers | une exagération | une question sans réponse
+Quel mode exprime une action soumise à une condition ? | le conditionnel | l'impératif | l'infinitif | le participe
+Complète : « Si j'avais le temps, je (venir) … » | viendrais | viendrai | venais | vienne
+Quelle subordonnée : « Je pense qu'il viendra » ? | complétive (conjonctive) | relative | circonstancielle de temps | indépendante
+Quelle subordonnée : « Quand il pleut, je lis » ? | circonstancielle de temps | relative | complétive | interrogative
+Qu'est-ce qu'un discours indirect ? | des paroles rapportées dans une subordonnée sans guillemets | des paroles entre guillemets | un monologue | un dialogue de théâtre
+Quel connecteur exprime l'opposition ? | pourtant | donc | ensuite | car
+Quel connecteur exprime la conséquence ? | c'est pourquoi | cependant | bien que | puisque
+Qu'est-ce qu'un argument ? | une idée qui justifie une thèse | un exemple seul | un titre | un résumé
+## maths
+Combien vaut 2³ ? | 8 | 6 | 9 | 5
+Combien vaut 10⁻² ? | 0,01 | −100 | 0,1 | −20
+Combien vaut 5⁰ ? | 1 | 0 | 5 | 50
+Que vaut a² × a³ ? | a⁵ | a⁶ | 2a⁵ | a¹
+Écris 0,0003 en notation scientifique. | 3 × 10⁻⁴ | 3 × 10⁻³ | 3 × 10⁴ | 0,3 × 10⁻³
+Que dit le théorème de Pythagore (triangle ABC rectangle en A) ? | BC² = AB² + AC² | AB² = BC² + AC² | BC = AB + AC | AB × AC = BC
+Un triangle de côtés 3, 4, 5 est-il rectangle ? | oui | non | seulement si 5 est un angle | on ne peut pas savoir
+Comment s'appelle le plus grand côté d'un triangle rectangle ? | l'hypoténuse | la médiane | la hauteur | la bissectrice
+Résous : 3x = 12 | x = 4 | x = 9 | x = 36 | x = 15
+Résous : x − 7 = 2 | x = 9 | x = −5 | x = 5 | x = 14
+Quel est le cosinus d'un angle aigu dans un triangle rectangle ? | côté adjacent / hypoténuse | côté opposé / hypoténuse | côté opposé / côté adjacent | hypoténuse / côté adjacent
+Factorise : 5x + 15 | 5(x + 3) | 5(x + 15) | x(5 + 15) | 15(x + 5)
+Calcule 2/3 × 3/4. | 1/2 | 6/7 | 5/7 | 8/9
+Calcule 1/2 + 1/3. | 5/6 | 2/5 | 1/6 | 2/6
+Quelle est la vitesse si on parcourt 120 km en 2 h ? | 60 km/h | 240 km/h | 120 km/h | 30 km/h
+Combien de m/s font 36 km/h ? | 10 m/s | 36 m/s | 3,6 m/s | 100 m/s
+Qu'est-ce que la médiane d'une série ? | la valeur qui partage la série ordonnée en deux moitiés | la moyenne | la plus grande valeur | l'écart entre max et min
+## svt
+Quels organes produisent les spermatozoïdes ? | les testicules | les ovaires | l'utérus | la prostate seule
+Quels organes produisent les ovules ? | les ovaires | les testicules | l'utérus | les trompes
+Où se fait la fécondation chez la femme ? | dans une trompe | dans l'utérus | dans l'ovaire | dans le vagin
+Comment s'appelle l'œuf issu de la fécondation ? | la cellule-œuf (zygote) | le gamète | l'embryon de 3 mois | le placenta
+Qu'est-ce qu'une IST ? | une infection sexuellement transmissible | un test de grossesse | un vaccin | une hormone
+Quel système transmet les messages nerveux ? | le système nerveux | le système digestif | le système urinaire | le squelette
+Qu'est-ce qu'un réflexe ? | une réponse involontaire et rapide | un mouvement réfléchi | une pensée | une émotion
+Quel organe commande les mouvements volontaires ? | le cerveau | la moelle seule | le cœur | les muscles eux-mêmes
+Comment s'appelle la couche rigide qui forme les plaques de la Terre ? | la lithosphère | l'atmosphère | le noyau | l'hydrosphère
+Que se passe-t-il quand deux plaques s'éloignent sous l'océan ? | une dorsale crée de la nouvelle croûte | une montagne se forme | un séisme dans le désert | rien
+Que mesure l'échelle de Richter ou la magnitude ? | l'énergie libérée par un séisme | la hauteur d'un volcan | la vitesse du vent | la température
+Qu'est-ce que la subduction ? | une plaque qui plonge sous une autre | une plaque qui monte au ciel | une éruption sous-marine | une érosion
+Quel type de volcan produit des coulées de lave fluide ? | volcan effusif | volcan explosif | volcan éteint | volcan de boue
+Qu'est-ce qu'une mutation ? | une modification de l'ADN | une maladie contagieuse | une vaccination | une migration d'oiseaux
+Quelle molécule porte l'information génétique ? | l'ADN | le glucose | l'hémoglobine | l'amidon
+## physique
+De quoi est faite la matière ? | d'atomes | de cellules | de lumière | de vide uniquement
+Quelle est la formule de l'eau ? | H₂O | CO₂ | O₂ | NaCl
+Quelle est la formule du dioxyde de carbone ? | CO₂ | CO | C₂O | O₂C₂
+Que forme la combustion du carbone dans le dioxygène ? | du dioxyde de carbone | de l'eau | de l'azote | du fer
+Lors d'une transformation chimique, la masse totale… | se conserve | augmente | diminue | disparaît
+Qu'est-ce qu'une molécule ? | un assemblage d'atomes liés | une seule particule chargée | un mélange | une cellule
+Quelle est la loi d'Ohm ? | U = R × I | P = U × I | E = mc² | F = m × a
+Quelle est l'unité de la résistance électrique ? | l'ohm (Ω) | le volt | l'ampère | le watt
+Quelle est l'unité de la puissance ? | le watt | le joule | le volt | le newton
+Dans quel milieu le son ne se propage-t-il pas ? | le vide | l'air | l'eau | le métal
+Quelle est la vitesse du son dans l'air (environ) ? | 340 m/s | 300 000 km/s | 34 m/s | 3 400 km/s
+Quelle est l'unité de la fréquence ? | le hertz | le décibel | le mètre | la seconde
+Comment calcule-t-on une vitesse ? | distance ÷ durée | durée ÷ distance | distance × durée | masse ÷ volume
+Quel est le pH d'une solution neutre ? | 7 | 0 | 14 | 1
+Une solution de pH 3 est… | acide | basique | neutre | salée seulement
+## histgeo
+Qu'est-ce que les Lumières au XVIIIe siècle ? | un mouvement d'idées qui défend la raison et la liberté | un éclairage public | une guerre | un style de peinture uniquement
+Qui a écrit « De l'esprit des lois » et défendu la séparation des pouvoirs ? | Montesquieu | Voltaire | Rousseau | Diderot
+Qui dirige l'Encyclopédie avec d'Alembert ? | Diderot | Voltaire | Montesquieu | Rousseau
+Qu'est-ce que la traite atlantique ? | le commerce d'esclaves africains vers les Amériques | un échange de lettres | un commerce de blé | une course de bateaux
+Quand l'esclavage est-il définitivement aboli en France ? | 1848 | 1789 | 1802 | 1905
+Qui fait voter l'abolition de l'esclavage en 1848 ? | Victor Schœlcher | Jules Ferry | Napoléon III | Robespierre
+Quel régime remplace la monarchie en France en 1792 ? | la République | l'Empire | la monarchie constitutionnelle | le Consulat
+Quand Louis XVI est-il exécuté ? | 1793 | 1789 | 1815 | 1799
+Quand Napoléon est-il définitivement battu à Waterloo ? | 1815 | 1804 | 1799 | 1830
+Quelle révolution instaure la IIe République et le suffrage universel masculin ? | 1848 | 1830 | 1789 | 1870
+Quand commence la IIIe République ? | 1870 | 1848 | 1804 | 1958
+Qu'est-ce que l'exode rural ? | le départ des campagnes vers les villes | le départ des villes vers les campagnes | une migration d'oiseaux | un voyage touristique
+Quel continent est presque entièrement colonisé par les Européens vers 1914 ? | l'Afrique | l'Amérique du Nord | l'Australie seulement | l'Europe
+Qu'est-ce que l'urbanisation ? | l'augmentation de la part de population vivant en ville | la construction de routes | la désertification | la mondialisation des sports
+Qu'est-ce qu'une mégapole ? | une ville de plus de 10 millions d'habitants | une petite ville | une capitale d'État | une ville portuaire uniquement
+Quel phénomène met en relation les territoires du monde par les échanges ? | la mondialisation | la décentralisation | la désindustrialisation | la colonisation
+Quel transport assure environ 80 % du commerce mondial en volume ? | le transport maritime | l'avion | le train | le camion
+Qu'est-ce qu'un migrant ? | une personne qui quitte son pays pour s'installer ailleurs | un touriste | un voyageur d'affaires d'un jour | un sportif
+Quel est le principal pôle touristique mondial (par nombre d'arrivées) ? | la France | les États-Unis | la Chine | l'Italie
+## anglais
+Complète : « I have lived here … 2015. » | since | for | ago | during
+Complète : « She has been waiting … two hours. » | for | since | ago | from
+Complète : « If it rains, we … stay home. » | will | would | did | are
+Complète : « If I were rich, I … travel. » | would | will | am | did
+Quelle phrase est au passif ? | The house was built in 1900. | They built the house. | The house builds. | Building the house.
+Que veut dire « although » ? | bien que | parce que | ainsi | sauf si
+Que veut dire « however » ? | cependant | comment | toujours | partout
+Quel est le participe passé de « write » ? | written | wrote | writed | writen
+Quel est le participe passé de « go » ? | gone | went | goed | going
+Que veut dire « You should see a doctor » ? | Tu devrais voir un médecin. | Tu dois voir un médecin. | Tu as vu un médecin. | Tu vas voir un médecin.
+Qui a écrit « Romeo and Juliet » ? | Shakespeare | Charles Dickens | Mark Twain | J. K. Rowling
+Qui est le personnage principal d'« Oliver Twist » ? | un orphelin | un détective | un pirate | un roi
+Que veut dire « to apply for a job » ? | postuler à un emploi | quitter un emploi | appliquer un travail | perdre un emploi
+Que veut dire « a slave » ? | un esclave | un slave | un salaire | un soldat
+Que veut dire « suddenly » ? | soudain | sûrement | doucement | tristement

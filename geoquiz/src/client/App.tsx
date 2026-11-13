@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { RevisionScreen } from './screens/Revision';
 import { LANGS, type Catalog, type Lang, type Me, type Settings } from '../shared/protocol';
 import { applyLang, detectLang, LANG_LABELS, makeT } from './i18n';
 import { net, saveSession, savedSession } from './net';
@@ -173,6 +174,7 @@ export function App() {
           {s.screen === 'quick' && <QuickWait />}
           {s.screen === 'game' && (s.room?.settings.category === 'board' ? <BoardOnline /> : <Game />)}
           {s.screen === 'duel' && <DuelScreen />}
+          {s.screen === 'revision' && <RevisionScreen />}
           {s.screen === 'final' && <Final />}
           {s.screen === 'myquizzes' && <MyQuizzes />}
           {s.screen === 'editor' && <QuizEditor />}

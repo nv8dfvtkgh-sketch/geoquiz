@@ -5,6 +5,7 @@ import { HomeworkCard } from './School';
 import { useEvents } from '../events';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
+import { chooseSystem } from './Revision';
 import type { BoardGame } from '../../shared/boards';
 
 import { useApp } from '../state';
@@ -80,7 +81,7 @@ function Games() {
   };
   const pick = (g: GameDef) => {
     if (g.soon) return;
-    if (g.screen) { cameFrom('home'); if (g.screen === 'duel') chooseDuel(g.id as BoardGame); go(g.screen); window.scrollTo(0, 0); return; }
+    if (g.screen) { cameFrom('home'); if (g.screen === 'duel') chooseDuel(g.id as BoardGame); if (g.screen === 'revision') chooseSystem(g.id === 'rev_us' ? 'us' : 'fr'); go(g.screen); window.scrollTo(0, 0); return; }
     openGame(g.id);
   };
   const lastDef = last ? findGame(last.category) : undefined;

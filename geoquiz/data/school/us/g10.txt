@@ -1,0 +1,60 @@
+# Grade 10 — Common Core ELA 9–10 & Geometry, NGSS high school physical science (Chemistry), world history
+## ela
+Who wrote "Julius Caesar" and "Macbeth"? | William Shakespeare | Christopher Marlowe | Ben Jonson | John Milton
+In "Macbeth," who urges Macbeth to kill King Duncan? | Lady Macbeth | Banquo | Macduff | the porter
+Who wrote "Animal Farm"? | George Orwell | Aldous Huxley | William Golding | Ray Bradbury
+Who wrote "Lord of the Flies"? | William Golding | George Orwell | J. R. R. Tolkien | Jack London
+Who wrote "Fahrenheit 451"? | Ray Bradbury | Isaac Asimov | Philip K. Dick | George Orwell
+What is an allegory? | a story with a hidden moral or political meaning | a short poem | a true biography | a list of facts
+What is a dystopia? | an imagined society that is oppressive or frightening | a perfect society | a fairy tale | a historical event
+Who wrote "Things Fall Apart"? | Chinua Achebe | Wole Soyinka | Ngũgĩ wa Thiong'o | Chimamanda Ngozi Adichie
+What is the "rhetorical situation"? | the speaker, audience, purpose, and context of a text | the length of a text | the font of a text | the grammar rules
+What is a logical fallacy? | an error in reasoning | strong evidence | a valid argument | a type of poem
+What is an "ad hominem" fallacy? | attacking the person instead of the argument | appealing to authority | false cause | a slippery slope
+What is a "slippery slope" fallacy? | claiming one step will lead to extreme results without evidence | attacking the speaker | using statistics | repeating a claim
+What is a colon used for? | to introduce a list, quote, or explanation | to end a sentence | to join two subjects | to show possession
+What is diction? | an author's word choice | the plot | the setting | the theme
+What is syntax? | the arrangement of words in sentences | the meaning of words | the sound of words | the font
+## math
+What is the sum of interior angles of a quadrilateral? | 360° | 180° | 540° | 90°
+What is the sum of interior angles of a pentagon? | 540° | 360° | 720° | 450°
+What does "congruent" mean? | same shape and same size | same shape, different size | different shape | parallel
+What does "similar" mean for triangles? | same shape with proportional sides | same size | different angles | equal areas
+What is sin of an angle in a right triangle? | opposite / hypotenuse | adjacent / hypotenuse | opposite / adjacent | hypotenuse / opposite
+What is the area of a circle with radius r? | πr² | 2πr | πd | r²
+What is the equation of a circle centered at (0, 0) with radius 5? | x² + y² = 25 | x² + y² = 5 | x + y = 5 | (x − 5)² = y
+What is the midpoint of (2, 4) and (6, 8)? | (4, 6) | (8, 12) | (2, 2) | (3, 4)
+What is the distance between (0, 0) and (3, 4)? | 5 | 7 | 25 | 1
+What is the volume of a sphere with radius r? | 4/3 πr³ | 4πr² | πr²h | 2πr
+## science
+What is the atomic number of an element? | the number of protons | the number of neutrons | the mass | the number of molecules
+What are isotopes? | atoms of the same element with different numbers of neutrons | different elements | ions | molecules
+What is a covalent bond? | atoms sharing electrons | atoms transferring electrons | a magnetic bond | a nuclear bond
+What is an ionic bond? | attraction between oppositely charged ions after electron transfer | sharing electrons | a hydrogen bond | a metallic shine
+What is the chemical formula of table salt? | NaCl | KCl | H₂O | CO₂
+How many atoms are in one molecule of H₂O? | 3 | 2 | 1 | 4
+What is a mole in chemistry? | 6.02 × 10²³ particles | one gram | a small animal | one liter
+What is the pH of pure water at 25°C? | 7 | 0 | 14 | 1
+Which is an acid? | lemon juice | soap | baking soda solution | bleach
+Balance: H₂ + O₂ → H₂O. What goes before H₂O? | 2 | 1 | 3 | 4
+What does a catalyst do? | speeds up a reaction without being used up | slows a reaction | stops a reaction | becomes a product
+What are elements in the same column of the periodic table called? | a group (family) | a period | an isotope | a compound
+Which group contains the noble gases? | Group 18 | Group 1 | Group 2 | Group 17
+What happens to gas volume when temperature rises (constant pressure)? | it increases | it decreases | it stays the same | it becomes zero
+Who created the first widely recognized periodic table? | Dmitri Mendeleev | Marie Curie | Antoine Lavoisier | John Dalton
+## social
+What was the Industrial Revolution? | the shift to machine production starting in Britain in the 1700s | a war | a religious movement | a farming law
+What was the main power source of early factories? | steam engines (and water power) | electricity | solar power | oil
+What was the Enlightenment? | an 18th-century movement emphasizing reason and rights | a religious war | a plague | an empire
+Which thinker wrote about natural rights to life, liberty, and property? | John Locke | Thomas Hobbes | Machiavelli | Karl Marx
+What started World War I in 1914? | the assassination of Archduke Franz Ferdinand | the bombing of Pearl Harbor | the fall of the Berlin Wall | the Russian Revolution
+What was the Treaty of Versailles (1919)? | the peace treaty that ended WWI and punished Germany | a WWII treaty | the founding of the UN | a trade deal
+Who led the Soviet Union during World War II? | Joseph Stalin | Vladimir Lenin | Nikita Khrushchev | Leon Trotsky
+What was the Holocaust? | the Nazi genocide of six million Jews and millions of others | a natural disaster | a WWI battle | a famine
+When did World War II end? | 1945 | 1918 | 1939 | 1950
+What organization was founded in 1945 to keep world peace? | the United Nations | NATO | the League of Nations | the European Union
+What was the Cold War? | a rivalry between the U.S. and the USSR (1947–1991) | a war in the Arctic | WWII | a trade war with China
+What was apartheid? | a system of racial segregation in South Africa | a European alliance | a trade agreement | an Indian independence movement
+Who led India's nonviolent movement for independence? | Mahatma Gandhi | Jawaharlal Nehru | Nelson Mandela | Mao Zedong
+Who became South Africa's first Black president in 1994? | Nelson Mandela | Desmond Tutu | Thabo Mbeki | Steve Biko
+What was decolonization? | colonies gaining independence after WWII | building new colonies | a type of farming | a European war

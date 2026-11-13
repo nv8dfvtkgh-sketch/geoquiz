@@ -1,0 +1,89 @@
+# CP — cycle 2 (programmes 2025 de français et de mathématiques, Questionner le monde, langues vivantes)
+## francais
+Quel mot commence par le son [m] ? | maison | tomate | lapin | ballon
+Quel mot commence par le son [r] ? | robot | vélo | cheval | soleil
+Quel mot rime avec « chat » ? | rat | chien | lune | porte
+Quel mot rime avec « bateau » ? | gâteau | voiture | arbre | fleur
+Combien de syllabes dans « éléphant » ? | 3 | 2 | 4 | 1
+Combien de syllabes dans « chocolat » ? | 3 | 2 | 4 | 5
+Combien de syllabes dans « lit » ? | 1 | 2 | 3 | 0
+Quelle lettre manque : « p_mme » ? | o | a | i | u
+Quelle lettre manque : « l_ne » (dans le ciel la nuit) ? | u | a | i | o
+Dans quel mot entend-on le son [ou] ? | loup | lune | lait | lion
+Dans quel mot entend-on le son [an] ? | maman | ami | moto | lune
+Dans quel mot entend-on le son [on] ? | ballon | banane | bébé | tapis
+Dans quel mot entend-on le son [ch] ? | chat | sac | gâteau | jupe
+Quel mot est écrit correctement ? | papa | pappa | papaa | ppapa
+Quelle est la première lettre de l'alphabet ? | A | B | Z | E
+Quelle lettre vient après « D » dans l'alphabet ? | E | C | F | B
+Combien y a-t-il de lettres dans le mot « vélo » ? | 4 | 3 | 5 | 6
+Quel mot désigne un animal ? | lapin | table | rouge | courir
+Quel mot est le contraire de « grand » ? | petit | gros | haut | long
+Quel mot est le contraire de « chaud » ? | froid | tiède | sec | doux
+Quel signe termine une phrase qui pose une question ? | ? | . | , | !
+Par quoi commence toujours une phrase ? | une majuscule | une virgule | un point | un chiffre
+« Le chat dort. » Qui dort ? | le chat | le chien | la souris | l'enfant
+Quel mot est un prénom ? | Léa | lune | lit | lait
+Quel petit mot va devant « pomme » ? | une | un | des | le
+Le son [o] peut s'écrire « o », « au » ou… | eau | ou | oi | on
+Dans quel mot entend-on le son [oi] ? | roi | rue | riz | rat
+Quel mot a le même son à la fin que « cadeau » ? | chapeau | cadre | carte | canard
+## maths
+Combien de doigts as-tu sur une main ? | 5 | 4 | 10 | 6
+Quel nombre s'écrit « douze » ? | 12 | 2 | 20 | 21
+Quel nombre s'écrit « vingt » ? | 20 | 12 | 2 | 22
+Combien de côtés a un triangle ? | 3 | 4 | 2 | 5
+Combien de côtés a un carré ? | 4 | 3 | 5 | 6
+Quelle forme est toute ronde ? | le cercle | le carré | le triangle | le rectangle
+Combien de jours dans une semaine ? | 7 | 5 | 10 | 12
+Quel jour vient après lundi ? | mardi | dimanche | jeudi | samedi
+Une pièce de 2 € et une pièce de 1 €, cela fait… | 3 € | 2 € | 21 € | 4 €
+J'ai 10 billes, j'en perds 3. Combien m'en reste-t-il ? | 7 | 13 | 3 | 6
+Lina a 6 bonbons, Tom lui en donne 4. Combien en a-t-elle ? | 10 | 2 | 64 | 9
+Combien de roues ont 2 vélos ? | 4 | 2 | 3 | 6
+Quel nombre est entre 14 et 16 ? | 15 | 13 | 17 | 41
+Combien d'unités dans une dizaine ? | 10 | 1 | 100 | 5
+Quel objet est le plus long ? | une règle de 30 cm | une gomme | un trombone | une craie
+Dans 35, quel est le chiffre des dizaines ? | 3 | 5 | 35 | 8
+Quelle est la moitié de 10 ? | 5 | 2 | 20 | 8
+## qlm
+Combien de saisons dans une année ? | 4 | 2 | 12 | 7
+Quelle saison vient après l'hiver ? | le printemps | l'été | l'automne | la rentrée
+Combien de mois dans une année ? | 12 | 10 | 7 | 4
+Avec quel sens sent-on les odeurs ? | l'odorat (le nez) | l'ouïe | le toucher | la vue
+Avec quel sens entend-on ? | l'ouïe (les oreilles) | le goût | la vue | l'odorat
+Que devient l'eau quand il fait très froid ? | de la glace | de la vapeur | du sable | de l'huile
+Que devient la glace quand il fait chaud ? | de l'eau liquide | de la neige | du sel | de la pierre
+De quoi une plante a-t-elle besoin pour pousser ? | d'eau et de lumière | de sucre | de lait | de bruit
+Quel animal pond des œufs ? | la poule | le chat | la vache | le chien
+Quel est le petit de la vache ? | le veau | le poulain | l'agneau | le chiot
+Quel est le petit du mouton ? | l'agneau | le chevreau | le veau | le porcelet
+Comment s'appelle la chenille quand elle devient adulte ? | un papillon | une abeille | une coccinelle | une fourmi
+Que faut-il faire avant de traverser la rue ? | regarder à gauche et à droite | courir | fermer les yeux | jouer
+À quoi sert une brosse à dents ? | se laver les dents | se coiffer | écrire | dessiner
+Quel aliment est un fruit ? | la pomme | la carotte | le pain | le fromage
+Que mange-t-on pour avoir des os solides (calcium) ? | des produits laitiers | des bonbons | des chips | du soda
+Quand fait-il nuit ? | quand le Soleil est caché | à midi | le matin à l'école | en été seulement
+Où vit le poisson ? | dans l'eau | dans un arbre | sous la terre | dans le désert
+Combien de pattes a une araignée ? | 8 | 6 | 4 | 10
+Combien de pattes a un insecte ? | 6 | 8 | 4 | 2
+Quel objet utilise de l'électricité ? | une lampe | un crayon | un livre | une cuillère
+Quel est le numéro des urgences en Europe ? | 112 | 18 | 911 | 123
+## anglais
+Comment dit-on « bonjour » en anglais ? | hello | goodbye | please | thank you
+Comment dit-on « au revoir » en anglais ? | goodbye | hello | yes | sorry
+Comment dit-on « merci » en anglais ? | thank you | please | sorry | hello
+Que veut dire « red » ? | rouge | bleu | vert | jaune
+Que veut dire « blue » ? | bleu | blanc | noir | rose
+Que veut dire « green » ? | vert | gris | rouge | orange
+Que veut dire « yellow » ? | jaune | vert | violet | marron
+Comment dit-on « un » en anglais ? | one | two | three | ten
+Comment dit-on « trois » en anglais ? | three | tree | two | four
+Que veut dire « five » ? | cinq | quatre | six | neuf
+Que veut dire « cat » ? | chat | chien | souris | vache
+Que veut dire « dog » ? | chien | chat | canard | lapin
+Que veut dire « mother » ? | mère | père | sœur | grand-mère
+Comment dit-on « oui » en anglais ? | yes | no | okay | good
+Que répond-on à « How are you? » ? | I'm fine, thank you. | My name is Tom. | I'm six. | Goodbye.
+Que demande « What's your name? » ? | ton prénom | ton âge | ta couleur préférée | où tu habites
+Que veut dire « apple » ? | pomme | banane | poire | orange

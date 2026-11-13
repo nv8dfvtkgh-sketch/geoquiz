@@ -1135,5 +1135,21 @@
   "duel.wins": "{name} wins!",
   "duel.youWin": "You won!",
   "duel.quit": "Change game",
-  "duel.waitRematch": "Waiting for your opponent…"
+  "duel.waitRematch": "Waiting for your opponent…",
+  "cat.rev_fr": "French curriculum",
+  "cat.rev_us": "US curriculum",
+  "game.rev_fr": "Revision from CP to Terminale, by class or cycle.",
+  "game.rev_us": "Revision from Kindergarten to Grade 12, by grade or school level.",
+  "rev.title": "School revision",
+  "rev.hint": "Pick your grade, then one subject or all of them.",
+  "rev.sys.fr": "France",
+  "rev.sys.us": "United States",
+  "rev.byClass": "By grade",
+  "rev.byCycle": "By school level",
+  "rev.subjectFor": "Subjects · {level}",
+  "rev.mixed": "One quiz mixing every subject",
+  "rev.back": "Revision",
+  "rev.long": "Revision questions written from the current official standards.",
+  "rev.src.fr": "Original questions aligned with the French national curriculum (Éduscol, Bulletin officiel, 2025-2026 programmes).",
+  "rev.src.us": "Original questions aligned with US standards: Common Core (math, ELA), NGSS (science), C3 Framework (social studies)."
 }

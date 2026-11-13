@@ -1,0 +1,64 @@
+# Kindergarten — Common Core (ELA, Math), NGSS (K-PS2, K-PS3, K-LS1, K-ESS2, K-ESS3), C3 social studies
+## ela
+Which word starts with the same sound as "ball"? | bat | cat | sun | map
+Which word starts with the same sound as "sun"? | sock | moon | fish | dog
+Which word rhymes with "cat"? | hat | cup | dog | sit
+Which word rhymes with "bug"? | rug | bag | bed | big
+Which word rhymes with "pig"? | wig | pan | pot | peg
+What sound does the letter "m" make? | /m/ as in "mom" | /n/ as in "no" | /s/ as in "sun" | /b/ as in "bat"
+Which letter comes after "B"? | C | A | D | E
+Which is an uppercase letter? | T | t | b | g
+Which is a lowercase letter? | g | G | M | R
+How many sounds are in the word "cat"? | 3 | 2 | 4 | 1
+Which word has the short "a" sound? | map | cake | bee | kite
+Which word is a sight word? | the | elephant | banana | butterfly
+What do you call the person who writes a book? | the author | the illustrator | the reader | the teacher
+What do you call the person who draws the pictures in a book? | the illustrator | the author | the publisher | the librarian
+What is on the front of a book? | the cover | the last page | the index | the spine label only
+What do we put at the end of a telling sentence? | a period | a question mark | a comma | nothing
+Which word names an animal? | duck | jump | blue | soft
+Which word is an action word? | run | tree | red | cup
+Blend the sounds /d/ /o/ /g/. What word is it? | dog | dig | log | god
+## math
+How many sides does a triangle have? | 3 | 4 | 5 | 2
+How many corners does a square have? | 4 | 3 | 5 | 6
+Which shape is flat? | circle | ball | cube | cone
+Which shape is solid (3D)? | cube | square | triangle | circle
+Which number is greater: 7 or 4? | 7 | 4 | they are equal | 11
+You have 3 apples and get 2 more. How many now? | 5 | 1 | 6 | 32
+You have 5 balloons. 1 floats away. How many are left? | 4 | 6 | 5 | 3
+Count by tens: 10, 20, 30, … | 40 | 31 | 35 | 50
+What is 10 + 0? | 10 | 0 | 100 | 1
+Which is longer: a pencil or a school bus? | a school bus | a pencil | the same | a crayon
+## science
+What happens when you push a ball? | it moves away from you | it gets bigger | it changes color | nothing ever
+A pull moves an object… | toward you | away from you | up into space | nowhere
+What makes a sandbox warmer? | sunlight | the Moon | shade | rain
+What do plants need to grow? | water and light | candy | milk | darkness only
+What do animals need to live? | food, water, and air | toys | electricity | books
+Which animal eats plants only? | rabbit | lion | shark | eagle
+Where does a bird build a nest? | in a tree | under the sea | in the clouds | inside a rock
+What should you wear on a very cold day? | a coat | a swimsuit | sandals only | sunglasses only
+What tool tells us how hot or cold it is? | a thermometer | a ruler | a scale | a clock
+What do we call water falling from clouds? | rain | snow only | wind | fog
+Which season is usually the coldest? | winter | summer | spring | fall
+What can you do to help the Earth? | recycle | litter | waste water | leave lights on
+Which one is a living thing? | a tree | a rock | a chair | a cloud
+What does a roof do during a storm? | keeps us dry | makes rain | makes wind | makes snow
+What gives us light during the day? | the Sun | the Moon | stars | lamps only
+## social
+What color is NOT on the American flag? | green | red | white | blue
+How many stars are on the American flag? | 50 | 13 | 52 | 100
+Who helps put out fires? | a firefighter | a chef | a farmer | a pilot
+Who helps you when you are sick? | a doctor | a mail carrier | a baker | a builder
+Who brings letters to your house? | a mail carrier | a firefighter | a dentist | a pilot
+Why do we have rules at school? | to keep everyone safe and fair | to make school boring | to stop learning | for no reason
+What is a map? | a drawing of a place from above | a photo of a person | a calendar | a book about animals
+What do we call the place where you live with your family? | home | school | store | park
+What is a need? | something you must have to live, like food | a toy | a video game | candy
+What is a want? | something nice to have but not needed | water | food | shelter
+What do you say when someone helps you? | thank you | go away | no | goodbye
+Who is the leader of a school? | the principal | the bus driver | the nurse | a student
+What holiday celebrates America's birthday? | the Fourth of July | Halloween | Valentine's Day | New Year's Day
+What do we use money for? | to buy things | to eat | to draw | to sleep
+What is a community? | a group of people who live or work in the same place | a single house | a toy | a type of food

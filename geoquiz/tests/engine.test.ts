@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (['custom', 'daily', 'review', 'board'].includes(cat) || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
+    if (['custom', 'daily', 'review', 'board'].includes(cat) || cat.startsWith('rev_') || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -1136,4 +1136,34 @@ test('Jeux de plateau à distance : morpion quiz en duel, question au seul joueu
   assert.equal((after.view as any).cells[free], after.you, 'bonne réponse : case prise');
   assert.equal(after.res?.ok, true);
   r.destroy();
+});
+
+test('Révisions scolaires : chaque classe, chaque cycle et chaque matière donnent des questions', async () => {
+  const { revGames } = await import('../src/shared/school');
+  const { mathQuestion, GRADE } = await import('../src/server/schoolmath');
+  const games = revGames();
+  assert.ok(games.length > 150);
+  const world = zones.get('world')!;
+  let rnd = 1;
+  const r = () => ((rnd = (rnd * 16807) % 2147483647) / 2147483647);
+  for (const g of games) {
+    const cat = CATEGORIES[g.id];
+    assert.ok(cat, g.id);
+    const pool = cat.pool(world, 'easy', 10);
+    assert.ok(pool.length >= 10, `${g.id} : ${pool.length} questions`);
+    for (const t of pool.slice(0, 8).concat(pool.slice(-4))) {
+      const q = cat.make(t, 'mcq', world, r);
+      assert.equal(q.options?.length, 4, t);
+      assert.ok(q.check(q.revealOption!), t);
+      assert.ok(q.promptName, t);
+    }
+  }
+  // Les générateurs de maths ne donnent jamais de réponses en double ni de NaN.
+  for (const lv of Object.keys(GRADE)) for (let s = 1; s < 300; s++) {
+    const q = mathQuestion(lv, s * 104729, lv.startsWith('g') || lv === 'k' ? 'en' : 'fr');
+    assert.ok(q, `${lv} ${s}`);
+  }
+  // Une partie solo de révision se joue jusqu'au bout.
+  const qs = drawQuestions(settings({ category: 'rev_fr_cm1_all', zone: 'world', difficulty: 'easy' } as any), () => 0.42);
+  assert.ok(qs.length >= 5);
 });

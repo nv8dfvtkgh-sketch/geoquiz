@@ -1135,5 +1135,21 @@
   "duel.wins": "{name} gagne !",
   "duel.youWin": "Tu as gagné !",
   "duel.quit": "Changer de jeu",
-  "duel.waitRematch": "En attente de ton adversaire…"
+  "duel.waitRematch": "En attente de ton adversaire…",
+  "cat.rev_fr": "Programme français",
+  "cat.rev_us": "Programme américain",
+  "game.rev_fr": "Révisions du CP à la Terminale, par classe ou par cycle.",
+  "game.rev_us": "Révisions du Kindergarten au Grade 12, par classe ou par école.",
+  "rev.title": "Révisions scolaires",
+  "rev.hint": "Choisis ta classe, puis une matière ou toutes les matières.",
+  "rev.sys.fr": "France",
+  "rev.sys.us": "États-Unis",
+  "rev.byClass": "Par classe",
+  "rev.byCycle": "Par cycle",
+  "rev.subjectFor": "Matières · {level}",
+  "rev.mixed": "Un quiz qui mélange toutes les matières",
+  "rev.back": "Révisions",
+  "rev.long": "Questions de révision écrites d’après le programme officiel en vigueur.",
+  "rev.src.fr": "Questions originales alignées sur les programmes officiels de l’Éducation nationale (Éduscol, Bulletin officiel, programmes 2025-2026).",
+  "rev.src.us": "Questions originales alignées sur les standards américains : Common Core (maths, anglais), NGSS (sciences), cadre C3 (sciences sociales)."
 }

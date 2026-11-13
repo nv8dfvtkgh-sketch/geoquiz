@@ -1,0 +1,98 @@
+# CM2 — cycle 3
+## francais
+Quelle est la nature de « très » ? | adverbe | adjectif | nom | verbe
+Dans « Il semble fatigué », « fatigué » est… | attribut du sujet | COD | complément du nom | sujet
+Dans « le livre de Paul », « de Paul » est… | un complément du nom | un COD | un sujet | un attribut
+Combien de propositions dans « Je rentre et je mange » ? | 2 | 1 | 3 | 4
+Quel mot coordonne deux propositions ? | mais | qui | quand | que
+Au passé composé : « Elles (partir) … » | sont parties | ont parties | sont parti | ont parti
+Au passé composé : « Nous (finir) … » | avons fini | sommes finis | avons finit | avons finir
+Au plus-que-parfait : « J'(manger) … » | avais mangé | ai mangé | aurai mangé | mangeais
+Au conditionnel présent : « Je (vouloir) … » | voudrais | voudrai | voulais | veuillerais
+Au passé simple : « Ils (être) … » | furent | étaient | seront | sont
+Quel est le participe passé de « prendre » ? | pris | prendu | prit | prenu
+Quel est le participe passé de « peindre » ? | peint | peindu | peigné | peinté
+« ces » ou « ses » : « Il range … affaires. » (les siennes) | ses | ces | c'est | s'est
+« c'est » ou « s'est » : « Il … blessé. » | s'est | c'est | ses | ces
+« leur » ou « leurs » : « Je … parle. » | leur | leurs | leure | leurent
+Que signifie l'expression « avoir un poil dans la main » ? | être paresseux | être poilu | être malade | être généreux
+Que signifie « tomber dans les pommes » ? | s'évanouir | tomber d'un arbre | manger des fruits | rater un examen
+Quel est le sens figuré de « une montagne de devoirs » ? | beaucoup de devoirs | des devoirs en montagne | des devoirs faciles | des devoirs de géographie
+Comment s'appelle l'auteur d'une pièce de théâtre ? | un dramaturge | un romancier | un poète lyrique | un journaliste
+Qui a écrit « Les Fables » avec « Le Corbeau et le Renard » ? | Jean de La Fontaine | Victor Hugo | Molière | Charles Perrault
+Qui a écrit « Le Petit Chaperon rouge » (version de 1697) ? | Charles Perrault | La Fontaine | Jules Verne | Hans Christian Andersen
+Qui a écrit « Vingt mille lieues sous les mers » ? | Jules Verne | Victor Hugo | Alexandre Dumas | Antoine de Saint-Exupéry
+Qui a écrit « Le Petit Prince » ? | Antoine de Saint-Exupéry | Jules Verne | Daniel Pennac | Marcel Pagnol
+Quelle est la morale d'une fable ? | la leçon à retenir | le titre | le premier vers | le nom de l'auteur
+## maths
+25 %, c'est… | un quart | la moitié | un tiers | un dixième
+Quel est le périmètre d'un carré de 5 cm de côté ? | 20 cm | 25 cm | 10 cm | 15 cm
+Quelle est l'aire d'un carré de 5 cm de côté ? | 25 cm² | 20 cm² | 10 cm² | 50 cm²
+Combien de centimètres carrés dans 1 m² ? | 10 000 | 100 | 1 000 | 1 000 000
+Comment s'appelle le segment qui passe par le centre d'un cercle et le coupe en deux points ? | le diamètre | le rayon | la corde quelconque | l'arc
+Le diamètre d'un cercle vaut… | deux fois le rayon | le rayon | la moitié du rayon | trois fois le rayon
+Combien mesure un angle droit ? | 90° | 180° | 45° | 360°
+Combien mesure un angle plat ? | 180° | 90° | 360° | 100°
+Avec quel instrument mesure-t-on un angle ? | le rapporteur | le compas | l'équerre | la règle
+Quel nombre est un nombre premier ? | 7 | 9 | 15 | 21
+Un train part à 9 h 45 et roule 1 h 30. Il arrive à… | 11 h 15 | 10 h 75 | 11 h 75 | 10 h 15
+Un livre à 20 € est soldé à −10 %. Son prix ? | 18 € | 10 € | 19 € | 2 €
+1,5 h = combien de minutes ? | 90 | 150 | 105 | 65
+Quel solide a une base et un sommet, sans être une pyramide ? | le cône | le cylindre | le cube | la sphère
+Combien de faces a une pyramide à base carrée ? | 5 | 4 | 6 | 8
+## sciences
+Quels sont les trois états de la matière ? | solide, liquide, gazeux | dur, mou, liquide | chaud, froid, tiède | métal, bois, plastique
+L'air a-t-il une masse ? | oui | non | seulement l'hiver | seulement sous l'eau
+Qu'est-ce que la puberté ? | la période où le corps devient adulte | une maladie | un sport | la vieillesse
+Que fait le cœur ? | il pompe le sang | il filtre l'air | il digère | il pense
+Quel organe filtre le sang pour fabriquer l'urine ? | les reins | le foie | les poumons | l'estomac
+Les microbes utiles aident à fabriquer… | le yaourt | le plastique | le verre | le fer
+Comment s'appelle la transformation de la chenille en papillon ? | la métamorphose | la mue | la germination | la photosynthèse
+Qu'est-ce qu'un fossile ? | une trace d'être vivant conservée dans la roche | un minéral brillant | une plante vivante | un volcan éteint
+Pourquoi a-t-on des saisons ? | l'axe de la Terre est incliné | la Terre s'éloigne beaucoup du Soleil en hiver | la Lune cache le Soleil | les nuages
+Qu'est-ce qu'une éclipse de Soleil ? | la Lune passe devant le Soleil | la Terre passe devant le Soleil | le Soleil s'éteint | un nuage cache le Soleil
+Combien de temps met la Lune pour faire le tour de la Terre ? | environ 1 mois | 1 jour | 1 an | 1 semaine
+Quel est le rôle d'un interrupteur ? | ouvrir ou fermer le circuit | produire l'électricité | stocker l'énergie | faire de la lumière
+Qu'est-ce qu'un isolant électrique ? | un matériau qui ne laisse pas passer le courant | un fil de cuivre | une pile | une ampoule
+Qu'est-ce qu'un algorithme ? | une suite d'instructions | un robot | un écran | une langue étrangère
+Quelle énergie utilise une éolienne ? | le vent | le soleil | l'eau | le charbon
+Quelle énergie utilise un barrage ? | l'eau | le vent | le gaz | l'uranium
+Que respire-t-on dans l'air pour vivre ? | le dioxygène | l'azote | le dioxyde de carbone | l'hélium
+Comment s'appelle le milieu de vie d'un être vivant ? | son habitat | son régime | son espèce | son squelette
+## histgeo
+Quelle loi de 1881-1882 rend l'école gratuite, laïque et obligatoire ? | les lois Jules Ferry | le Code civil | l'édit de Nantes | la loi de 1905
+En quelle année les femmes obtiennent-elles le droit de vote en France ? | 1944 | 1789 | 1848 | 1968
+Quelle loi de 1905 sépare les Églises et l'État ? | la loi de séparation des Églises et de l'État | la loi Ferry | la loi Veil | la loi Debré
+Quelle invention fait démarrer la révolution industrielle ? | la machine à vapeur | l'ordinateur | l'avion | le téléphone portable
+Quelle ressource fait tourner les usines au XIXe siècle ? | le charbon | le pétrole | le nucléaire | l'énergie solaire
+Quand la Première Guerre mondiale a-t-elle eu lieu ? | 1914-1918 | 1939-1945 | 1870-1871 | 1789-1799
+Comment appelle-t-on les soldats français de 1914-1918 ? | les poilus | les grognards | les mousquetaires | les sans-culottes
+Quelle bataille de 1916 est un symbole de la Grande Guerre ? | Verdun | Waterloo | Austerlitz | Alésia
+Le 11 novembre commémore… | l'armistice de 1918 | la prise de la Bastille | la victoire de 1945 | la fête du travail
+Quand la Seconde Guerre mondiale a-t-elle eu lieu ? | 1939-1945 | 1914-1918 | 1945-1950 | 1929-1933
+Qui lance l'appel du 18 juin 1940 ? | le général de Gaulle | Pétain | Napoléon | Jean Moulin
+Comment appelle-t-on l'extermination des Juifs par les nazis ? | la Shoah | la Résistance | l'Occupation | la Libération
+Le 8 mai commémore… | la victoire de 1945 | l'armistice de 1918 | la fête nationale | la Révolution
+Quelle monnaie est utilisée en France depuis 2002 ? | l'euro | le franc | la livre | le dollar
+Combien de pays dans l'Union européenne (depuis 2020) ? | 27 | 28 | 12 | 50
+Quelle est la capitale de l'Union européenne où siège la Commission ? | Bruxelles | Paris | Berlin | Strasbourg
+Quel moyen de transport relie Paris à Londres sous la Manche ? | le tunnel sous la Manche (Eurostar) | un pont | un téléphérique | un bac à vapeur
+Qu'est-ce qu'un câble sous-marin ? | un câble au fond de la mer qui transporte Internet | un sous-marin | une ligne de pêche | un pipeline de pétrole
+Quel est l'aéroport le plus fréquenté de France ? | Paris-Charles-de-Gaulle | Lyon | Nice | Marseille
+Qu'est-ce qu'un écoquartier ? | un quartier conçu pour respecter l'environnement | un quartier sans maisons | une zone industrielle | une forêt protégée
+## anglais
+Complète au prétérit : « Yesterday, I … to the park. » | went | go | goes | going
+Complète : « She … watching TV now. » | is | are | am | be
+Quelle phrase est correcte ? | There are three apples. | There is three apples. | There be three apples. | There are three apple.
+Que veut dire « because » ? | parce que | mais | donc | quand
+Quel mot est un adjectif ? | beautiful | quickly | dance | table
+Comparatif de « big » ? | bigger | more big | biggest | bigest
+Superlatif de « tall » ? | the tallest | the taller | the most tall | the tallst
+Que veut dire « a cup of tea » ? | une tasse de thé | un sachet de thé | un thé froid | une théière
+Que veut dire « weekend » ? | la fin de semaine | le lundi | la semaine prochaine | les vacances
+Quelle est la nationalité de quelqu'un né en Irlande ? | Irish | Ireland | Irelandish | Irishman's
+Que veut dire « What's the weather like? » ? | Quel temps fait-il ? | Comment vas-tu ? | Que fais-tu ? | Qu'est-ce que tu aimes ?
+Que veut dire « to wake up » ? | se réveiller | se coucher | se laver | s'habiller
+Que veut dire « library » ? | bibliothèque | librairie | laboratoire | liberté
+Quelle est la capitale des États-Unis ? | Washington, D.C. | New York | Los Angeles | Chicago
+Que veut dire « I would like… » ? | Je voudrais… | J'aime… | J'ai… | Je dois…

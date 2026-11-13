@@ -60,9 +60,9 @@ export function Setup() {
   return (
     <div className="setup panel">
       <div className={`game-hero ${def?.tint ?? 'tint-ocean'}`}>
-        <button type="button" className="back-pill" onClick={() => go(editing ? 'lobby' : 'home')}>
+        <button type="button" className="back-pill" onClick={() => go(editing ? 'lobby' : cfg.category.startsWith('rev_') ? 'revision' : 'home')}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-          {editing ? t('setup.back') : t('setup.backHome')}
+          {editing ? t('setup.back') : cfg.category.startsWith('rev_') ? t('rev.back') : t('setup.backHome')}
         </button>
         {def && <Icon name={def.icon} size={64} />}
       </div>

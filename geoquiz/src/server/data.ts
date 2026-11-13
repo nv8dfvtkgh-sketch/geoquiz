@@ -137,11 +137,14 @@ export interface Extras {
   macities: MaCity[];
   events: GameEvent[];
   landscapes: Landscape[];
+  /** Révisions : système → niveau → matière → [question, bonne réponse, 3 pièges]. */
+  school: SchoolData;
 }
-export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds', 'macities', 'events', 'landscapes'] as const;
+export type SchoolData = Record<string, Record<string, Record<string, string[][]>>>;
+export const EXTRA_FILES = ['languages', 'food', 'animals', 'truefalse', 'emoji', 'monuments', 'cinema', 'packs', 'timeline', 'timezones', 'stadiums', 'kits', 'sounds', 'macities', 'events', 'landscapes', 'school'] as const;
 
 export let world: MapData = { w: 0, h: 0, features: [] };
-export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [], macities: [], events: [], landscapes: [] };
+export let extras: Extras = { languages: [], food: [], animals: [], truefalse: [], emoji: [], monuments: [], cinema: { films: [], people: {} }, packs: {}, timeline: [], timezones: [], stadiums: [], kits: [], sounds: [], macities: [], events: [], landscapes: [], school: {} };
 export let countries: Record<string, CountryMeta> = {};
 export let worldById: Record<string, MapFeature> = {};
 export let worldJson = '';
@@ -235,6 +238,7 @@ export function initData(w: MapData, c: Record<string, CountryMeta>, regionLoade
     macities: extra.macities ?? [],
     events: extra.events ?? [],
     landscapes: ((extra.landscapes ?? []) as Landscape[]).filter((x) => c[x.country]),
+    school: extra.school && !Array.isArray(extra.school) ? (extra.school as SchoolData) : {},
   };
   countries = c;
   loader = regionLoader;

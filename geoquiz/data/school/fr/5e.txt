@@ -1,0 +1,106 @@
+# 5e — cycle 4
+## francais
+Qui a écrit « Le Bourgeois gentilhomme » et « Les Fourberies de Scapin » ? | Molière | Racine | Corneille | Victor Hugo
+Qu'est-ce qu'une didascalie ? | une indication de mise en scène | une réplique | un long monologue | un vers
+Comment s'appelle un long discours d'un personnage seul en scène ? | un monologue | un aparté | une tirade à deux | un dialogue
+Qu'est-ce qu'un aparté ? | une réplique que le public entend mais pas les autres personnages | une scène muette | la fin de la pièce | un changement de décor
+Quel est le registre d'une farce ? | comique | tragique | épique | lyrique
+Quel chevalier de la Table ronde part en quête du Graal chez Chrétien de Troyes ? | Perceval | Lancelot du Lac seul | Roland | Ulysse
+Qui est le roi de la Table ronde ? | Arthur | Charlemagne | Louis IX | Richard Cœur de Lion
+Quelle chanson de geste raconte la mort d'un neveu de Charlemagne à Roncevaux ? | La Chanson de Roland | Tristan et Iseut | Le Roman de Renart | Yvain
+Qu'est-ce qu'un récit de voyage ? | le récit d'un voyageur qui raconte ses découvertes | une carte routière | un poème d'amour | une fable animale
+Quel marchand vénitien a raconté son voyage en Chine dans « Le Devisement du monde » ? | Marco Polo | Christophe Colomb | Magellan | Ibn Battuta
+Quel temps emploie-t-on pour une action antérieure à une autre au passé ? | le plus-que-parfait | le futur | le présent | l'impératif
+Au subjonctif présent : « Il faut que tu (faire) … » | fasses | fais | feras | faisais
+Au subjonctif présent : « Il faut que nous (être) … » | soyons | sommes | serons | soyions
+Quel mot est un pronom relatif ? | dont | donc | dans | dent
+Dans « Le livre que je lis », « que » est… | un pronom relatif | une conjonction de coordination | un adverbe | un déterminant
+Quelle phrase est à la voix passive ? | La souris est mangée par le chat. | Le chat mange la souris. | Le chat a mangé. | La souris mange.
+Qu'est-ce qu'une comparaison ? | un rapprochement avec un outil comme « comme » | une répétition | une exagération | une question
+Quelle figure de style : « Il pleut des cordes » ? | une hyperbole | une litote | une anaphore | une antithèse
+Quel est le complément d'agent dans « Le gâteau est préparé par Léa » ? | par Léa | le gâteau | est préparé | préparé
+Accord du participe avec « avoir » : « Les fleurs que j'ai … » (cueillir) | cueillies | cueilli | cueillis | cueillie
+## maths
+Combien font (−5) + 8 ? | 3 | −13 | 13 | −3
+Combien font (−4) × (−6) ? | 24 | −24 | −10 | 10
+Combien font 2 + 3 × 4 ? | 14 | 20 | 24 | 9
+Combien font (2 + 3) × 4 ? | 20 | 14 | 24 | 9
+Quel est l'opposé de 7 ? | −7 | 1/7 | 7 | 0
+Quelle situation est proportionnelle ? | le prix payé et le nombre de kilos de pommes au même prix | l'âge et la taille | la pointure et le poids | la note et le temps de révision
+Un angle de 30° et un angle de 60° sont… | complémentaires | supplémentaires | opposés | égaux
+Deux angles dont la somme fait 180° sont… | supplémentaires | complémentaires | droits | alternes-internes seulement
+Qu'est-ce qu'un parallélogramme ? | un quadrilatère aux côtés opposés parallèles | un triangle | un cercle | un quadrilatère sans côté parallèle
+Les diagonales d'un parallélogramme… | se coupent en leur milieu | sont toujours égales | sont perpendiculaires toujours | ne se coupent pas
+Quel est le volume d'un prisme droit ? | aire de la base × hauteur | base + hauteur | aire de la base ÷ 3 | côté³
+Probabilité d'obtenir 6 avec un dé équilibré ? | 1/6 | 1/2 | 6 | 1/3
+Probabilité d'obtenir pile avec une pièce équilibrée ? | 1/2 | 1/4 | 1 | 2
+Réduis : 3x + 5x | 8x | 15x | 8x² | 35x
+Développe : 4(x + 2) | 4x + 8 | 4x + 2 | x + 8 | 6x
+## svt
+Quel gaz les poumons absorbent-ils dans l'air ? | le dioxygène | le dioxyde de carbone | l'azote | la vapeur d'eau
+Quel gaz rejette-t-on en expirant (plus que dans l'air inspiré) ? | le dioxyde de carbone | le dioxygène | l'hélium | l'ozone
+Où se font les échanges gazeux dans les poumons ? | dans les alvéoles pulmonaires | dans la trachée | dans le nez | dans le cœur
+Comment respirent les poissons ? | avec des branchies | avec des poumons | par la peau seulement | ils ne respirent pas
+Où les nutriments passent-ils dans le sang ? | dans l'intestin grêle | dans l'estomac | dans la bouche | dans le gros intestin seulement
+Que sont les enzymes digestives ? | des molécules qui découpent les aliments | des bactéries | des vitamines | des os
+Quel organe produit la bile ? | le foie | le pancréas | l'estomac | le rein
+Qu'est-ce que le microbiote intestinal ? | les bactéries qui vivent dans l'intestin | un organe | une maladie | un muscle
+Qu'est-ce qu'une roche sédimentaire ? | une roche formée par l'accumulation de dépôts | une roche volcanique | un métal | un cristal de glace
+Quel paysage est façonné par les glaciers ? | une vallée en U | une vallée en V | un delta | une dune
+Comment s'appelle la limite entre terre et mer qui recule à cause de l'érosion ? | le trait de côte | l'horizon | l'équateur | le méridien
+Qu'est-ce que la biodiversité ? | la diversité des êtres vivants | le nombre d'humains | une espèce rare | une forêt
+Quel est le rôle des pollinisateurs ? | transporter le pollen d'une fleur à l'autre | manger les feuilles | décomposer le bois | produire de la lumière
+Comment s'appelle la reproduction sans fécondation chez les plantes (bouture, stolon) ? | la reproduction asexuée | la reproduction sexuée | la pollinisation | la germination
+Qu'est-ce qui provoque le rythme cardiaque plus rapide pendant l'effort ? | le besoin accru des muscles en dioxygène | la digestion | le froid | le sommeil
+## physique
+Comment s'appelle le passage de l'état gazeux à l'état liquide ? | la liquéfaction (condensation) | la vaporisation | la fusion | la sublimation
+Comment s'appelle le passage de l'état liquide à l'état solide ? | la solidification | la fusion | la vaporisation | la liquéfaction
+La masse change-t-elle lors d'un changement d'état ? | non, elle se conserve | oui, elle double | oui, elle disparaît | seulement pour l'eau
+Le volume de l'eau quand elle gèle… | augmente | diminue | reste toujours identique | devient nul
+À quelle température fond la glace (pression normale) ? | 0 °C | 100 °C | −10 °C | 37 °C
+Qu'est-ce qu'un corps pur ? | une substance composée d'une seule espèce chimique | un mélange | de l'eau salée | de l'air
+L'eau salée est… | un mélange homogène | un corps pur | un mélange hétérogène | un gaz
+Quel est le symbole du volt ? | V | A | W | Ω
+Quel appareil mesure une tension ? | le voltmètre | l'ampèremètre | le thermomètre | la balance
+Dans un circuit en série, si une lampe grille… | toutes les autres s'éteignent | les autres brillent plus | rien ne change | la pile explose
+Qu'est-ce qu'un court-circuit ? | une liaison qui laisse passer le courant sans passer par le récepteur | un circuit très court | un circuit ouvert | une pile neuve
+La lumière se propage… | en ligne droite | en zigzag | en cercle | seulement dans l'eau
+Quelle est la vitesse de la lumière dans le vide (environ) ? | 300 000 km/s | 340 m/s | 300 km/h | 1 000 km/s
+Une source primaire de lumière, c'est… | un objet qui produit sa propre lumière | un objet éclairé | un miroir | la Lune
+La Lune est une source de lumière… | secondaire (elle est éclairée) | primaire | artificielle | électrique
+## histgeo
+Qui est le fondateur de l'islam au VIIe siècle ? | le prophète Mahomet | Charlemagne | Saint Paul | Constantin
+Quelle ville est le premier lieu saint de l'islam ? | La Mecque | Jérusalem | Bagdad | Cordoue
+Quel empire chrétien a Constantinople pour capitale ? | l'Empire byzantin | l'Empire carolingien | l'Empire ottoman | l'Empire romain d'Occident
+En quelle année débute l'hégire ? | 622 | 800 | 1095 | 476
+Qu'est-ce qu'un seigneur au Moyen Âge ? | un noble qui possède une seigneurie et protège ses paysans | un marchand | un moine | un paysan libre
+Que doivent les paysans à leur seigneur ? | des taxes et des corvées | rien | un salaire | l'impôt sur le revenu
+Comment appelle-t-on la cérémonie où un vassal jure fidélité ? | l'hommage | le sacre | le baptême | l'adoubement
+Quand a lieu la première croisade ? | 1096-1099 | 1492 | 1789 | 800
+Qui découvre l'Amérique pour l'Europe en 1492 ? | Christophe Colomb | Vasco de Gama | Magellan | Marco Polo
+Quelle expédition réalise le premier tour du monde (1519-1522) ? | celle de Magellan | celle de Colomb | celle de Cartier | celle de Cook
+Qui a inventé l'imprimerie à caractères mobiles en Europe vers 1450 ? | Gutenberg | Léonard de Vinci | Luther | Galilée
+Qui lance la Réforme protestante en 1517 ? | Martin Luther | Calvin seul | Érasme | Henri VIII
+Quel artiste a peint « La Joconde » ? | Léonard de Vinci | Michel-Ange | Raphaël | Botticelli
+Quel est le principe de la monarchie absolue de Louis XIV ? | le roi détient tous les pouvoirs | le peuple vote les lois | le Parlement gouverne | le pape choisit le roi
+Qu'est-ce que le développement durable ? | répondre aux besoins présents sans compromettre ceux des générations futures | produire toujours plus | ne plus rien consommer | développer les villes seulement
+Quelle ressource vitale manque dans de nombreuses régions du monde ? | l'eau potable | le sable | l'air | le vent
+Qu'est-ce que la transition démographique ? | le passage d'une forte à une faible natalité et mortalité | une migration | une guerre | une épidémie
+Quel pays est le plus peuplé du monde depuis 2023 ? | l'Inde | la Chine | les États-Unis | l'Indonésie
+Quel gaz est le principal responsable humain du réchauffement climatique ? | le dioxyde de carbone | le dioxygène | l'azote | l'hélium
+## anglais
+Complète : « I … to London last year. » | went | go | have gone | goes
+Complète : « She … TV when I arrived. » | was watching | watched | is watching | watches
+Complète : « We … finished our homework yet. » | haven't | didn't | don't | weren't
+Quelle forme exprime l'avenir proche ? | be going to | used to | have to | can
+Que veut dire « I used to play tennis » ? | Je jouais au tennis (avant). | Je vais jouer au tennis. | J'ai l'habitude de jouer. | Je joue au tennis.
+Comparatif de « good » ? | better | gooder | more good | best
+Superlatif de « bad » ? | the worst | the baddest | the worse | the most bad
+Que veut dire « must » ? | devoir (obligation) | pouvoir | vouloir | savoir
+Quel est le prétérit de « think » ? | thought | thinked | thank | taught
+Quel est le prétérit de « catch » ? | caught | catched | cought | catch
+Quelle question est correcte ? | What did you do yesterday? | What you did yesterday? | What did you did yesterday? | What do you did yesterday?
+Que veut dire « a castle » ? | un château fort | un chat | une cassette | un costume
+Que veut dire « a knight » ? | un chevalier | une nuit | un couteau | un nœud
+Que veut dire « actually » ? | en fait | actuellement | activement | exactement
+Quel pays fait partie du Royaume-Uni ? | l'Écosse | l'Irlande (République) | l'Islande | la Norvège

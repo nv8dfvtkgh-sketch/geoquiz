@@ -1,0 +1,60 @@
+# Grade 12 — Common Core ELA 11–12 (British & world literature, rhetoric), precalculus/calculus/statistics, NGSS Earth & environmental science, government & economics
+## ela
+Who wrote "Hamlet"? | William Shakespeare | Christopher Marlowe | Geoffrey Chaucer | John Donne
+Which famous line comes from "Hamlet"? | "To be, or not to be" | "Call me Ishmael" | "It was the best of times" | "All animals are equal"
+Who wrote "The Canterbury Tales"? | Geoffrey Chaucer | William Shakespeare | John Milton | Edmund Spenser
+Who wrote "Paradise Lost"? | John Milton | John Donne | William Blake | Alexander Pope
+Which Old English epic features the hero who fights Grendel? | Beowulf | Sir Gawain and the Green Knight | The Odyssey | Le Morte d'Arthur
+Who wrote "Jane Eyre"? | Charlotte Brontë | Emily Brontë | Jane Austen | George Eliot
+Who wrote "Wuthering Heights"? | Emily Brontë | Charlotte Brontë | Mary Shelley | Virginia Woolf
+Who wrote "A Tale of Two Cities"? | Charles Dickens | Thomas Hardy | Oscar Wilde | Joseph Conrad
+Who wrote "Heart of Darkness"? | Joseph Conrad | Rudyard Kipling | E. M. Forster | Graham Greene
+Which literary movement valued emotion, nature, and imagination (early 1800s)? | Romanticism | Realism | Modernism | Neoclassicism
+What is stream of consciousness? | a narrative style following a character's flowing thoughts | a poem about rivers | a plot summary | a stage direction
+What is the purpose of a rebuttal in an argument? | to respond to and refute opposing claims | to restate the thesis | to introduce the topic | to list sources
+What does "ubiquitous" mean? | found everywhere | very rare | very old | invisible
+What does "ephemeral" mean? | lasting a very short time | eternal | heavy | colorful
+What is a sonnet? | a 14-line poem | a 3-line poem | a long epic | a play in five acts
+## math
+What is the derivative of x³? | 3x² | x² | 3x | x⁴/4
+What is the derivative of sin(x)? | cos(x) | −cos(x) | sin(x) | −sin(x)
+What is the integral of 2x dx? | x² + C | 2x² + C | x + C | 2 + C
+What is the limit of 1/x as x → ∞? | 0 | ∞ | 1 | undefined
+What is 5! (5 factorial)? | 120 | 25 | 60 | 15
+How many ways can you choose 2 items from 4 (combinations)? | 6 | 12 | 8 | 4
+What is the mean of a data set? | the sum divided by the number of values | the middle value | the most frequent value | the range
+What is a correlation coefficient of −1? | a perfect negative linear relationship | no relationship | a perfect positive relationship | a weak relationship
+What is a p-value used for? | to judge evidence against a null hypothesis | to compute the mean | to draw a graph | to find a slope
+What is the slope of the tangent line to y = x² at x = 3? | 6 | 9 | 3 | 2
+## science
+What percentage of Earth's water is fresh water (about)? | 3% | 50% | 30% | 97%
+What drives plate tectonics? | convection currents in the mantle | the Moon's gravity | ocean waves | wind
+What is the greenhouse effect? | gases trapping heat in the atmosphere | plants growing in greenhouses | the ozone hole | acid rain
+Which gas in the stratosphere protects us from UV radiation? | ozone | carbon dioxide | methane | nitrogen
+What is the main cause of current global warming according to scientists? | human greenhouse gas emissions | changes in the Moon | volcanic eruptions only | the Sun getting much hotter
+What is the carbon cycle? | the movement of carbon among air, living things, oceans, and rocks | a bicycle race | the water cycle | rock layers
+How old is Earth (approximately)? | 4.5 billion years | 6,000 years | 45 million years | 450 billion years
+What is the Big Bang theory? | the universe expanded from a very hot, dense state about 13.8 billion years ago | Earth was hit by a comet | the Sun exploded | a theory of earthquakes
+What powers the Sun? | nuclear fusion of hydrogen into helium | burning coal | nuclear fission of uranium | chemical reactions with oxygen
+What is a renewable resource? | a resource that can be replaced naturally in a short time | coal | oil | natural gas
+What is ocean acidification? | the ocean absorbing CO₂ and becoming more acidic | salt being added to oceans | oil spills | rising sea level only
+What is sustainability? | meeting present needs without harming future generations | using all resources now | stopping all industry | building more cities only
+What is radiometric dating used for? | finding the absolute age of rocks | measuring temperature | weighing fossils | predicting weather
+What type of plate boundary forms mid-ocean ridges? | divergent | convergent | transform | stationary
+What is biomagnification? | toxins increasing in concentration up a food chain | animals growing larger | more biodiversity | faster photosynthesis
+## social
+What is GDP? | the total value of goods and services produced in a country in a year | the national debt | a stock index | the unemployment rate
+What is inflation? | a general rise in prices over time | a fall in prices | a tax increase | a bank loan
+What does the Federal Reserve do? | sets U.S. monetary policy and oversees banks | writes laws | collects taxes | runs elections
+What is opportunity cost? | the value of the next best alternative given up | the price of an item | a tax | profit
+What is fiscal policy? | government decisions on taxes and spending | central bank interest rates | trade agreements only | election rules
+What is a monopoly? | a market with a single seller | many sellers | a type of tax | a bank account
+What is the role of the Supreme Court? | to interpret the Constitution and laws | to make laws | to enforce laws | to elect the President
+How many votes are needed to win the Electoral College? | 270 | 538 | 218 | 51
+Who can propose a constitutional amendment? | two-thirds of both houses of Congress or a national convention | the President alone | the Supreme Court | any state governor
+What is a filibuster? | a tactic to delay a vote in the Senate by prolonged debate | a type of tax | a court ruling | an executive order
+What are civil liberties? | basic freedoms protected from government interference | government powers | military rules | business profits
+What is the "Miranda warning"? | police informing suspects of their rights | a tax notice | a weather alert | a jury instruction
+What is a primary election? | an election where party members choose their candidates | the final presidential election | a school vote | a recall
+What is lobbying? | trying to influence lawmakers | voting in Congress | judging cases | collecting taxes
+What is the minimum age to be President? | 35 | 30 | 25 | 40

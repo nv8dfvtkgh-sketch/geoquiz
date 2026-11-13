@@ -1,0 +1,119 @@
+# Seconde générale et technologique
+## francais
+Quel mouvement du XVIe siècle place l'homme au centre et redécouvre l'Antiquité ? | l'humanisme | le romantisme | le classicisme | le réalisme
+Qui a écrit « Gargantua » et « Pantagruel » ? | Rabelais | Montaigne | Ronsard | Du Bellay
+Quel poète de la Pléiade a écrit « Mignonne, allons voir si la rose » ? | Ronsard | Du Bellay | Marot | Villon
+Qui a écrit « Les Essais » ? | Montaigne | Pascal | Descartes | La Boétie
+Quelles sont les règles du théâtre classique ? | unité de temps, de lieu et d'action | trois actes et un chœur | vers libres et prose | pas de règles
+Qui a écrit « Phèdre » et « Andromaque » ? | Racine | Corneille | Molière | Marivaux
+Qui a écrit « Le Cid » ? | Corneille | Racine | Molière | Beaumarchais
+Qu'est-ce qu'un dilemme cornélien ? | un choix douloureux entre devoir et passion | un quiproquo comique | une erreur de jugement | un monologue lyrique
+Quel roman de Flaubert raconte la vie d'une femme insatisfaite en province ? | Madame Bovary | Germinal | Le Rouge et le Noir | Nana
+Quel roman de Zola raconte une grève de mineurs ? | Germinal | L'Assommoir | Au Bonheur des Dames | La Bête humaine
+Qui a écrit « Le Rouge et le Noir » ? | Stendhal | Balzac | Flaubert | Maupassant
+Quel recueil de Baudelaire paraît en 1857 ? | Les Fleurs du mal | Les Contemplations | Alcools | Les Châtiments
+Qui a écrit « Alcools » ? | Guillaume Apollinaire | Paul Verlaine | Arthur Rimbaud | Paul Éluard
+Qu'est-ce qu'une focalisation interne ? | le récit adopte le point de vue d'un personnage | le narrateur sait tout | le narrateur est un témoin extérieur | il n'y a pas de narrateur
+Qu'est-ce qu'un narrateur omniscient ? | un narrateur qui sait tout des personnages | un narrateur personnage | un narrateur aveugle | un narrateur muet
+Quelle figure reprend un mot en début de vers ou de phrase ? | l'anaphore | le chiasme | la litote | la prétérition
+Quelle figure inverse l'ordre de deux termes (A B / B A) ? | le chiasme | l'anaphore | la gradation | l'hyperbole
+Qu'est-ce qu'une rime embrassée ? | ABBA | AABB | ABAB | AAAA
+Qu'est-ce qu'une diérèse ? | la prononciation en deux syllabes de deux voyelles voisines | la suppression d'une syllabe | une rime pauvre | un enjambement
+Qu'est-ce qu'un enjambement ? | une phrase qui déborde sur le vers suivant | une rime riche | un vers de 12 syllabes | une pause au milieu du vers
+## maths
+Que vaut la valeur absolue de −7 ? | 7 | −7 | 0 | 49
+Que vaut √50 simplifié ? | 5√2 | 25√2 | 2√5 | 10√5
+Résous x² = 9. | x = 3 ou x = −3 | x = 3 | x = 4,5 | x = 81
+Quel ensemble contient les nombres comme 1/3 ? | ℚ (rationnels) | ℕ seulement | ℤ seulement | aucun
+√2 est un nombre… | irrationnel | entier | décimal | rationnel
+L'intervalle [2 ; 5[ contient-il 5 ? | non | oui | seulement si 5 est entier | on ne peut pas savoir
+Quelle est la forme d'une fonction carré ? | une parabole | une droite | un cercle | une hyperbole
+Sur quel intervalle la fonction carré est-elle croissante ? | [0 ; +∞[ | ]−∞ ; 0] | ℝ tout entier | aucun
+Quelle fonction a pour courbe une hyperbole ? | la fonction inverse | la fonction carré | une fonction affine | la fonction racine
+Deux vecteurs égaux ont… | même direction, même sens et même norme | seulement la même norme | des sens opposés | la même origine
+Équation réduite d'une droite non verticale ? | y = mx + p | x = a | ax² + bx + c = 0 | y = x²
+Quel est le coefficient directeur de y = −3x + 5 ? | −3 | 5 | 3 | −5
+Une hausse de 10 % puis une baisse de 10 % donnent… | une baisse de 1 % | aucun changement | une hausse de 1 % | une baisse de 10 %
+Quelle est l'étendue de la série 3 ; 8 ; 12 ; 5 ? | 9 | 12 | 7 | 28
+P(A ou B) pour deux événements incompatibles vaut… | P(A) + P(B) | P(A) × P(B) | P(A) − P(B) | 1
+En Python, quelle instruction crée une boucle bornée ? | for | if | def | print
+## svt
+Quelle est l'unité structurale du vivant ? | la cellule | l'atome | la molécule d'eau | l'organe
+Quelle molécule universelle porte l'information génétique ? | l'ADN | l'ATP | le glucose | la chlorophylle
+Quelles bases composent l'ADN ? | A, T, C, G | A, U, C, G | A, B, C, D | X, Y, Z, W
+Que fabrique un organe à partir de l'information génétique ? | des protéines | des minéraux | de l'ADN neuf seulement | de l'eau
+Qu'est-ce que le métabolisme ? | l'ensemble des réactions chimiques d'un organisme | un organe | un régime alimentaire | une maladie
+Dans quel organite se fait la photosynthèse ? | le chloroplaste | la mitochondrie | le noyau | la vacuole
+Dans quel organite se fait la respiration cellulaire ? | la mitochondrie | le chloroplaste | le ribosome | la paroi
+Qu'est-ce qu'un agrosystème ? | un écosystème cultivé par l'humain | une forêt primaire | un récif corallien | un désert
+Qu'est-ce que la biodiversité génétique ? | la diversité des allèles au sein d'une espèce | le nombre d'espèces | la variété des paysages | la taille des populations
+Qu'est-ce que la dérive génétique ? | une variation aléatoire des fréquences d'allèles | une mutation voulue | une migration d'oiseaux | une sélection par l'éleveur
+Comment s'appelle la couche supérieure du sol riche en matière organique ? | l'humus | la roche mère | le manteau | le granite
+Quel est le rôle des stomates ? | permettre les échanges gazeux des feuilles | absorber l'eau du sol | produire des graines | attirer les insectes
+Pourquoi l'activité physique augmente-t-elle le débit cardiaque ? | les muscles consomment plus de dioxygène et de glucose | le cœur se fatigue | l'air est plus chaud | le sang devient plus épais
+Qu'est-ce que la fécondation in vitro ? | une fécondation en laboratoire | une fécondation naturelle | une contraception | un dépistage
+Qu'est-ce qu'un microbiote ? | l'ensemble des micro-organismes vivant dans un milieu | une seule bactérie | un virus | un organe humain
+## physique
+Combien de moles dans 18 g d'eau (M = 18 g/mol) ? | 1 mol | 18 mol | 0,1 mol | 2 mol
+Quel est le nombre d'Avogadro (environ) ? | 6,02 × 10²³ | 3 × 10⁸ | 9,8 | 1,6 × 10⁻¹⁹
+Que représente le numéro atomique Z ? | le nombre de protons | le nombre de neutrons | le nombre de nucléons | la masse de l'atome
+Qu'est-ce qu'un isotope ? | un atome ayant le même Z mais un nombre de neutrons différent | un ion | une molécule | un électron
+Comment calcule-t-on une concentration en masse ? | masse de soluté / volume de solution | volume / masse | masse × volume | masse de solvant / masse de soluté
+Qu'est-ce qu'une dilution ? | ajouter du solvant pour diminuer la concentration | ajouter du soluté | évaporer le solvant | chauffer la solution
+Selon le principe d'inertie, un objet sur lequel les forces se compensent… | est immobile ou en mouvement rectiligne uniforme | accélère toujours | tourne en rond | s'arrête toujours
+Quelle est l'unité de la force ? | le newton | le joule | le pascal | le watt
+Quelle loi décrit la réfraction de la lumière ? | la loi de Snell-Descartes | la loi d'Ohm | la loi de Newton | la loi de Boyle
+Que fait un prisme avec la lumière blanche ? | il la décompose en couleurs | il l'éteint | il la rend blanche | il la transforme en son
+Quel domaine de longueurs d'onde est visible par l'œil humain (environ) ? | 400 à 800 nm | 1 à 10 nm | 1 à 10 m | 0,1 à 1 mm
+Que mesure un oscilloscope sur un signal sonore ? | sa période et son amplitude | sa couleur | sa masse | sa température
+Quelle grandeur est liée à la hauteur d'un son ? | la fréquence | l'amplitude | la vitesse | la masse
+Un son de fréquence 20 kHz est à la limite… | des ultrasons | des infrasons | de la lumière | du silence total
+Quelle relation lie puissance, énergie et durée ? | E = P × t | E = P / t | P = E × t | E = P + t
+## histgeo
+Quelle cité grecque a pour institutions l'ecclésia et la boulè ? | Athènes | Sparte | Rome | Carthage
+Qui est le stratège qui donne son nom au « siècle » d'Athènes (Ve siècle av. J.-C.) ? | Périclès | Clisthène | Solon | Alexandre
+Quel empereur romain accorde la citoyenneté à tous les hommes libres de l'Empire en 212 ? | Caracalla | Auguste | Constantin | Néron
+Quelle ville est la capitale de l'Empire byzantin ? | Constantinople | Rome | Bagdad | Damas
+Quelle dynastie de califes fonde Bagdad en 762 ? | les Abbassides | les Omeyyades de Cordoue | les Capétiens | les Ottomans
+Quel événement de 1453 marque la fin de l'Empire byzantin ? | la prise de Constantinople par les Ottomans | la découverte de l'Amérique | la Réforme | la guerre de Cent Ans
+Quel navigateur portugais atteint l'Inde par la mer en 1498 ? | Vasco de Gama | Bartolomeu Dias | Magellan | Cabral
+Quel astronome propose l'héliocentrisme en 1543 ? | Copernic | Galilée | Ptolémée | Kepler
+Quel édit révoque l'édit de Nantes en 1685 ? | l'édit de Fontainebleau | l'édit de Villers-Cotterêts | l'édit de Paris | le traité de Westphalie
+Quelle révolution anglaise de 1688-1689 limite le pouvoir royal ? | la Glorieuse Révolution | la révolution industrielle | la Fronde | la guerre des Deux-Roses
+Qu'est-ce que le développement durable articule ? | économie, société et environnement | politique, armée et religion | ville, campagne et mer | école, travail et loisirs
+Qu'est-ce qu'une transition énergétique ? | le passage vers des énergies moins carbonées | l'augmentation du pétrole | la fin de l'électricité | un changement d'heure
+Qu'est-ce que le stress hydrique ? | une situation où la demande en eau dépasse la ressource disponible | une inondation | une marée noire | une pluie acide
+Qu'est-ce qu'un risque naturel ? | un aléa naturel menaçant des populations vulnérables | une catastrophe sans victime | un accident industriel | une épidémie animale
+Quelle région du monde concentre le plus de mégapoles ? | l'Asie | l'Europe | l'Océanie | l'Amérique du Nord
+## ses
+Quels sont les trois grands agents économiques classiques ? | ménages, entreprises, administrations publiques | élèves, profs, parents | banques, États, ONG uniquement | villes, régions, nations
+Qu'est-ce que le PIB ? | la valeur de la richesse produite dans un pays en un an | la dette publique | le budget d'une entreprise | le salaire moyen
+Qu'est-ce que la valeur ajoutée ? | chiffre d'affaires moins consommations intermédiaires | profit plus salaires | prix de vente moins TVA | salaire brut moins net
+Qu'est-ce qu'un marché ? | un lieu réel ou fictif où se rencontrent offre et demande | uniquement un marché couvert | une banque | une usine
+Quand le prix augmente, la demande en général… | diminue | augmente | ne bouge jamais | disparaît
+Qu'est-ce que la socialisation ? | l'apprentissage des normes et valeurs de la société | le fait d'aller en soirée | une politique économique | un réseau social
+Quelles sont les deux grandes instances de socialisation primaire ? | la famille et l'école | les médias et l'entreprise | l'armée et l'Église | le club de sport et l'État
+Qu'est-ce que le taux de chômage ? | la part des chômeurs dans la population active | le nombre de chômeurs | la part des retraités | le nombre d'emplois
+Qui est compté dans la population active ? | les personnes en emploi et les chômeurs | seulement les salariés | les retraités | les élèves
+Qu'est-ce que l'opinion publique ? | l'ensemble des opinions partagées dans une société | l'avis du président | un sondage unique | une loi
+Qu'est-ce qu'un sondage ? | une enquête auprès d'un échantillon représentatif | un vote officiel | un recensement complet | un débat télévisé
+Qu'est-ce que la monnaie ? | un instrument d'échange, de mesure et de réserve de valeur | uniquement des pièces | un bien de consommation | un impôt
+Qui émet l'euro ? | la Banque centrale européenne (et les banques centrales nationales) | l'État français seul | la Commission européenne | les banques commerciales seulement
+Qu'est-ce qu'un diplôme pour l'insertion professionnelle ? | une protection relative contre le chômage | une garantie absolue d'emploi | un obstacle | sans effet
+Qu'est-ce que l'INSEE ? | l'Institut national de la statistique et des études économiques | un ministère de l'éducation | une banque | un syndicat
+## anglais
+Quelle phrase utilise correctement le present perfect ? | I have just finished. | I have finish yesterday. | I just finished since now. | I have finishing.
+Complète : « By the time we arrived, the film … » | had started | has started | starts | was start
+Complète : « He suggested … to the cinema. » | going | to go | go | went
+Que veut dire « to take something for granted » ? | considérer quelque chose comme acquis | prendre quelque chose en photo | remercier | refuser
+Que veut dire « nevertheless » ? | néanmoins | jamais plus | à moins que | ainsi
+Que veut dire « to raise awareness » ? | sensibiliser | élever des animaux | augmenter les prix | se réveiller
+Quelle est la bonne traduction de « il y a deux ans » ? | two years ago | since two years | for two years ago | two years before now since
+Que veut dire « a gap year » ? | une année de césure | une année bissextile | un trou de mémoire | une année scolaire
+Que veut dire « to be on the verge of » ? | être sur le point de | être au bord de la mer | être contre | être en retard
+Que veut dire « the NHS » au Royaume-Uni ? | le système public de santé | la police | la télévision publique | le Parlement
+Quel est le pluriel de « phenomenon » ? | phenomena | phenomenons | phenomenas | phenomenes
+Que veut dire « a deadline » ? | une date limite | une ligne morte | une impasse | un décès
+Que veut dire « to cope with » ? | faire face à | copier | coopérer | couper
+Que veut dire « whereas » ? | alors que (opposition) | où | pourquoi | partout
+Que veut dire « to look forward to » ? | avoir hâte de | regarder devant | chercher | oublier

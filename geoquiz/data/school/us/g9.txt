@@ -1,0 +1,60 @@
+# Grade 9 — Common Core ELA 9–10 & Algebra I, NGSS high school life science (Biology), civics & world geography
+## ela
+In "Romeo and Juliet," which families are feuding? | the Montagues and the Capulets | the Lannisters and the Starks | the Bennets and the Darcys | the Montagues and the Medicis
+Who wrote "The Odyssey"? | Homer | Virgil | Sophocles | Shakespeare
+What is iambic pentameter? | a line of ten syllables alternating unstressed and stressed | a poem of five lines | a rhyme scheme | a type of novel
+What is a soliloquy? | a character speaking thoughts alone on stage | a conversation between two characters | a song | a stage direction
+What is a tragic flaw (hamartia)? | a character trait that leads to downfall | a spelling error | a happy ending | a setting detail
+Who wrote "To Kill a Mockingbird"? | Harper Lee | John Steinbeck | Mark Twain | F. Scott Fitzgerald
+Who narrates "To Kill a Mockingbird"? | Scout Finch | Atticus Finch | Boo Radley | Tom Robinson
+Who wrote "Of Mice and Men"? | John Steinbeck | Ernest Hemingway | William Faulkner | Harper Lee
+What is a semicolon used for? | to join two closely related independent clauses | to end a question | to show ownership | to introduce a quotation only
+What is parallel structure? | using the same grammatical pattern for similar ideas | a sentence with two subjects | writing in columns | repeating the same word
+What is an unreliable narrator? | a narrator whose account can't be fully trusted | an omniscient narrator | a narrator who is absent | an author's note
+What does "juxtaposition" mean? | placing contrasting things side by side | a long sentence | a rhyme | a summary
+What does "ambiguous" mean? | open to more than one interpretation | very clear | angry | brief
+What is an epic? | a long narrative poem about a hero's deeds | a short joke | a diary | a news article
+What is the purpose of a works cited page? | to list sources used in a paper | to summarize the paper | to thank people | to add pictures
+## math
+What is the slope between (1, 2) and (3, 8)? | 3 | 6 | 2 | 1/3
+Solve 5x − 3 = 2x + 9. | 4 | 2 | 12 | 3
+Which is the slope-intercept form of a line? | y = mx + b | ax + by = c | y − y₁ = m(x − x₁) only | x = my + b
+What are the solutions of x² − 9 = 0? | x = 3 and x = −3 | x = 9 | x = 3 only | x = 81
+Factor x² + 5x + 6. | (x + 2)(x + 3) | (x + 1)(x + 6) | (x − 2)(x − 3) | (x + 5)(x + 1)
+What is the vertex of y = x²? | (0, 0) | (1, 1) | (0, 1) | (1, 0)
+What is the domain of f(x) = √x? | x ≥ 0 | all real numbers | x > 1 | x ≤ 0
+Solve the system x + y = 10 and x − y = 2. | x = 6, y = 4 | x = 4, y = 6 | x = 5, y = 5 | x = 8, y = 2
+What is the quadratic formula? | x = (−b ± √(b² − 4ac)) / (2a) | x = −b / a | x = b² − 4ac | x = (a + b) / c
+A function grows by the same percent each year. It is… | exponential | linear | constant | quadratic
+## science
+What is the main function of DNA? | to store genetic instructions | to digest food | to carry oxygen | to make light
+What are the building blocks of proteins? | amino acids | nucleotides | fatty acids | sugars
+What is homeostasis? | maintaining a stable internal environment | cell death | growth only | a type of tissue
+What is the result of mitosis? | two identical daughter cells | four different gametes | one cell | no cells
+What is the result of meiosis? | four gametes with half the chromosomes | two identical body cells | one large cell | a zygote
+What does "dominant allele" mean? | its trait shows if at least one copy is present | it is always harmful | it needs two copies to show | it is never inherited
+What are enzymes? | proteins that speed up chemical reactions | sugars that store energy | fats in cell membranes | minerals in bones
+What is the cell membrane's job? | controls what enters and leaves the cell | makes proteins | stores DNA | captures sunlight
+Which molecule carries energy for cells? | ATP | DNA | RNA | glucose only
+What is an ecosystem's carrying capacity? | the largest population it can support over time | the total area | the number of species | the amount of rain
+What is a keystone species? | a species with a large effect on its ecosystem | the most common species | an extinct species | a plant only
+What is the role of vaccines? | train the immune system to recognize a pathogen | kill all bacteria | cure every disease | replace blood cells
+Who first described the double helix structure of DNA (with Rosalind Franklin's data)? | Watson and Crick | Darwin and Wallace | Mendel and Pasteur | Newton and Hooke
+Who is known as the father of genetics? | Gregor Mendel | Charles Darwin | Louis Pasteur | Robert Hooke
+What is an invasive species? | a non-native species that harms a new ecosystem | a native predator | an endangered animal | a decomposer
+## social
+How many members are in the U.S. House of Representatives? | 435 | 100 | 50 | 538
+How many senators does each state have? | 2 | 1 | 435 | depends on population
+How long is a U.S. President's term? | 4 years | 6 years | 2 years | 8 years
+How many justices sit on the U.S. Supreme Court? | 9 | 7 | 12 | 5
+What is the Electoral College? | the system that formally elects the President | a university | the Senate | the Supreme Court
+Which amendment lowered the voting age to 18? | the 26th | the 19th | the 15th | the 1st
+Which amendment gave women the right to vote? | the 19th | the 13th | the 26th | the 2nd
+What is judicial review? | the power of courts to declare laws unconstitutional | electing judges | writing laws | vetoing bills
+Which case established judicial review in 1803? | Marbury v. Madison | Brown v. Board of Education | Roe v. Wade | Plessy v. Ferguson
+What is a veto? | the President's rejection of a bill | a court decision | a tax | an election
+What is latitude? | distance north or south of the equator | distance east or west of the prime meridian | height above sea level | a time zone
+What is longitude? | distance east or west of the prime meridian | distance north or south of the equator | ocean depth | a type of map
+What is the most populous country in the world (since 2023)? | India | China | the United States | Indonesia
+What is the largest country by area? | Russia | Canada | China | the United States
+What is urbanization? | the growth of cities as people move from rural areas | the growth of farms | the building of roads | the loss of jobs

@@ -1,0 +1,60 @@
+# Grade 8 — Common Core, NGSS middle school (physical science emphasis), C3 / U.S. history to Reconstruction
+## ela
+What is a gerund? | a verb ending in -ing used as a noun | a verb in the past | an adjective | a pronoun
+Which sentence is in the passive voice? | The ball was thrown by Max. | Max threw the ball. | Max throws. | Throw the ball!
+Which sentence is in the subjunctive mood? | If I were you, I would study. | I am you. | Study now! | You studied.
+What is an infinitive? | "to" plus a verb, like "to run" | a verb ending in -ed | a noun | a conjunction
+What is an ellipsis (…) used for? | to show omitted words or a pause | to end a question | to show possession | to separate items
+What is a dash used for? | to add emphasis or an interruption | to end a sentence | to show a question | to join two letters
+What is a theme in literature? | a universal message about life | the plot summary | the setting | the narrator
+What is an archetype? | a typical character or pattern, like the hero | a rare word | a punctuation mark | a type of poem only
+What is satire? | humor used to criticize society | a sad story | a love poem | a biography
+What is the difference between a primary and secondary source? | a primary source is firsthand; a secondary source interprets it | there is none | secondary is older | primary is always a book
+What is the rhetorical appeal to logic called? | logos | ethos | pathos | kairos
+What is the appeal to emotion called? | pathos | logos | ethos | mythos
+What is the appeal to credibility called? | ethos | pathos | logos | bathos
+What is a "red herring" in an argument? | a distraction from the real issue | strong evidence | a valid conclusion | a citation
+Which word means "to make something less severe"? | mitigate | aggravate | intensify | ignite
+## math
+What is 2⁵? | 32 | 10 | 25 | 64
+Write 0.00045 in scientific notation. | 4.5 × 10⁻⁴ | 4.5 × 10⁴ | 45 × 10⁻⁵ | 4.5 × 10⁻⁵
+What is √81? | 9 | 8 | 40.5 | 81
+What is the slope of y = 3x − 2? | 3 | −2 | 2 | −3
+What is the y-intercept of y = 3x − 2? | −2 | 3 | 2 | 0
+A right triangle has legs 6 and 8. What is the hypotenuse? | 10 | 14 | 48 | 100
+Which number is irrational? | √2 | 0.5 | 3/4 | −7
+Solve 2x + 3 = x + 9. | 6 | 12 | 3 | 4
+A function assigns each input… | exactly one output | many outputs | no output | the same output always
+What is the volume of a cylinder? | πr²h | 2πrh | πr² | 4/3 πr³
+## science
+What is Newton's first law? | an object stays at rest or in motion unless a force acts on it | F = ma | every action has an equal reaction | gravity pulls down
+What is Newton's third law? | for every action there is an equal and opposite reaction | objects stay in motion | F = ma | energy is conserved
+Which object has more kinetic energy at the same speed? | the heavier one | the lighter one | both the same | neither
+What is the unit of force? | the newton | the joule | the watt | the meter
+What is potential energy? | stored energy due to position or condition | energy of motion only | heat only | sound
+What is an atom made of? | protons, neutrons, and electrons | cells | molecules | ions only
+What is a chemical reaction sign? | a new substance forms (gas, color change, heat) | ice melts | paper is cut | water boils
+In a chemical reaction, atoms are… | rearranged, not created or destroyed | destroyed | created from nothing | turned into energy only
+What is the periodic table organized by? | atomic number | color | weight only | date discovered
+What is the chemical symbol for sodium? | Na | So | S | Sd
+What is an exothermic reaction? | a reaction that releases heat | a reaction that absorbs heat | a reaction with no energy change | a nuclear reaction only
+What is a wave's amplitude related to? | its energy | its color only | its speed in vacuum | its direction
+Which wave can travel through empty space? | light (electromagnetic) | sound | water waves | seismic waves
+What is natural selection? | individuals with helpful traits survive and reproduce more | animals choosing mates randomly | humans breeding plants | species never change
+What evidence supports evolution? | fossils, anatomy, and DNA similarities | myths | weather | the Moon
+## social
+What were the Articles of Confederation? | the first U.S. government plan, with a weak central government | the Declaration of Independence | the Bill of Rights | a treaty with Britain
+Where was the Constitution written in 1787? | Philadelphia | Boston | New York | Washington, D.C.
+What is federalism? | power shared between national and state governments | rule by one king | only state power | only national power
+Who was "the Father of the Constitution"? | James Madison | George Washington | Thomas Jefferson | Alexander Hamilton
+What was the Louisiana Purchase (1803)? | the U.S. buying a huge territory from France | a war with Spain | a treaty with Britain | the purchase of Alaska
+What was "Manifest Destiny"? | the belief that the U.S. should expand west to the Pacific | a religious law | a type of farming | a treaty
+What was the Trail of Tears? | the forced removal of Native nations, including the Cherokee | a pioneer road | a river in Texas | a gold rush route
+What was the Missouri Compromise (1820)? | an agreement balancing free and slave states | a war treaty | a trade deal | a voting law for women
+When did the Civil War take place? | 1861–1865 | 1775–1783 | 1812–1815 | 1914–1918
+Who was President during the Civil War? | Abraham Lincoln | Andrew Jackson | Ulysses S. Grant | Thomas Jefferson
+What did the Emancipation Proclamation (1863) do? | declared enslaved people in Confederate states free | ended the war | gave women the vote | created the Union
+Which battle in 1863 was a turning point of the Civil War? | Gettysburg | Yorktown | Bunker Hill | Saratoga
+Which amendment abolished slavery? | the 13th | the 1st | the 19th | the 15th
+What was Reconstruction? | the period of rebuilding the South after the Civil War | the building of railroads only | the Revolutionary War | the Great Depression
+Who escaped slavery and became a famous abolitionist speaker and writer? | Frederick Douglass | Robert E. Lee | Andrew Johnson | John Brown

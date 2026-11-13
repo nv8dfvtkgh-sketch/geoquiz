@@ -1135,5 +1135,21 @@
   "duel.wins": "¡Gana {name}!",
   "duel.youWin": "¡Has ganado!",
   "duel.quit": "Cambiar de juego",
-  "duel.waitRematch": "Esperando a tu rival…"
+  "duel.waitRematch": "Esperando a tu rival…",
+  "cat.rev_fr": "Programa francés",
+  "cat.rev_us": "Programa estadounidense",
+  "game.rev_fr": "Repaso del CP a la Terminale, por curso o ciclo.",
+  "game.rev_us": "Repaso del Kindergarten al Grade 12, por curso o etapa.",
+  "rev.title": "Repaso escolar",
+  "rev.hint": "Elige tu curso y luego una asignatura o todas.",
+  "rev.sys.fr": "Francia",
+  "rev.sys.us": "Estados Unidos",
+  "rev.byClass": "Por curso",
+  "rev.byCycle": "Por ciclo",
+  "rev.subjectFor": "Asignaturas · {level}",
+  "rev.mixed": "Un quiz que mezcla todas las asignaturas",
+  "rev.back": "Repaso",
+  "rev.long": "Preguntas de repaso escritas según el programa oficial vigente.",
+  "rev.src.fr": "Preguntas originales alineadas con los programas oficiales franceses (Éduscol, Bulletin officiel, 2025-2026).",
+  "rev.src.us": "Preguntas originales alineadas con los estándares de EE. UU.: Common Core, NGSS y marco C3."
 }

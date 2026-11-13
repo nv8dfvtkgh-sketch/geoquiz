@@ -1,0 +1,100 @@
+# 6e — cycle 3
+## francais
+Quelle est la classe grammaticale de « sous » ? | préposition | adverbe | conjonction | nom
+Quelle est la classe grammaticale de « car » ? | conjonction de coordination | préposition | adverbe | pronom
+Quelles sont les conjonctions de coordination ? | mais, ou, et, donc, or, ni, car | qui, que, dont, où | à, de, pour, sans | le, la, les
+Dans « Le héros affronte le monstre », quelle est la fonction de « le monstre » ? | COD | sujet | COI | attribut
+Quel groupe est un complément circonstanciel de temps ? | pendant la nuit | dans la forêt | avec courage | le chevalier
+Quel est le sujet inversé dans « Au loin passait un cavalier » ? | un cavalier | au loin | passait | loin
+Au passé simple : « Ulysse (prendre) la mer. » → « Ulysse … » | prit | prenait | prendit | pris
+Au passé simple : « Nous (avoir) … » | eûmes | avions | avons eu | eumes
+Au passé simple : « Ils (venir) … » | vinrent | venirent | venaient | vinent
+Quel temps exprime une action de premier plan dans un récit au passé ? | le passé simple | l'imparfait | le présent de vérité générale | le futur
+Quel temps sert souvent aux descriptions dans un récit au passé ? | l'imparfait | le passé simple | le futur antérieur | le conditionnel
+Qui est le héros de l'« Odyssée » ? | Ulysse | Achille | Hercule | Énée
+Qui est l'auteur présumé de l'« Iliade » et de l'« Odyssée » ? | Homère | Ovide | Virgile | Sophocle
+Quel monstre à un œil Ulysse affronte-t-il ? | le Cyclope Polyphème | Méduse | le Minotaure | l'Hydre
+Qui tue le Minotaure dans le labyrinthe ? | Thésée | Persée | Jason | Ulysse
+Qui décapite Méduse ? | Persée | Thésée | Héraclès | Achille
+Comment s'appelle la femme d'Ulysse qui l'attend vingt ans ? | Pénélope | Hélène | Athéna | Circé
+Quel recueil d'Ovide raconte des transformations ? | Les Métamorphoses | L'Énéide | Les Fables | Le Roman de Renart
+Qu'est-ce qu'une épopée ? | un long récit des exploits d'un héros | une courte histoire drôle | une lettre | une pièce comique
+Quel personnage rusé est le héros du « Roman de Renart » ? | un renard | un loup | un corbeau | un lion
+Qu'est-ce qu'un récit à la première personne ? | le narrateur dit « je » | le narrateur dit « il » | il n'y a pas de narrateur | c'est un dialogue
+Quel mot contient un préfixe signifiant « contre » ? | antivol | revoir | prévoir | déplacer
+Que signifie le suffixe « -phobe » ? | qui craint | qui aime | qui mange | qui écrit
+Quel est l'homophone correct : « Il faut … aller. » | s'en | sans | cent | sang
+Quel est le mot correctement accordé ? | des robes bleu marine | des robes bleues marines | des robes bleus marine | des robes bleue marine
+## maths
+Comment s'écrit 3/4 en nombre décimal ? | 0,75 | 3,4 | 0,34 | 1,33
+Comment écrire 0,25 en pourcentage ? | 25 % | 2,5 % | 0,25 % | 250 %
+Quelle est la valeur approchée de π ? | 3,14 | 3,41 | 2,72 | 1,41
+Comment calcule-t-on l'aire d'un disque ? | π × r × r | 2 × π × r | π × d | r × r
+Comment calcule-t-on le périmètre d'un cercle ? | 2 × π × r | π × r × r | r × 4 | π + r
+Quelle est la somme des angles d'un triangle ? | 180° | 360° | 90° | 270°
+Qu'est-ce que la médiatrice d'un segment ? | la droite perpendiculaire passant par son milieu | une droite parallèle | la moitié du segment | un cercle
+Qu'est-ce qu'un triangle isocèle ? | un triangle avec deux côtés égaux | un triangle avec un angle droit | un triangle sans côté égal | un triangle plat
+Combien d'axes de symétrie a un carré ? | 4 | 2 | 1 | 8
+Combien d'axes de symétrie a un rectangle (non carré) ? | 2 | 4 | 1 | 0
+Un nombre divisible par 3 a la somme de ses chiffres… | divisible par 3 | égale à 3 | paire | se terminant par 3
+Un nombre divisible par 9 : lequel ? | 819 | 818 | 910 | 109
+Quel est le quotient de 17 ÷ 5 dans la division euclidienne ? | 3 | 2 | 5 | 4
+Quel est le volume d'un cube de 3 cm d'arête ? | 27 cm³ | 9 cm³ | 18 cm³ | 12 cm³
+Combien de litres dans 1 dm³ ? | 1 | 10 | 100 | 1 000
+Quelle fraction est égale à 2/3 ? | 8/12 | 3/2 | 4/9 | 6/8
+## sciences
+Qu'est-ce qu'une cellule ? | l'unité de base des êtres vivants | un organe du corps | un minéral | une molécule d'eau
+Avec quel instrument observe-t-on une cellule ? | un microscope | une loupe de poche | un télescope | des jumelles
+Comment s'appelle la classification qui regroupe les êtres vivants selon leurs attributs communs ? | la classification phylogénétique | le tri alphabétique | la chaîne alimentaire | la météo
+Quel groupe a un squelette interne ? | les vertébrés | les insectes | les mollusques | les vers
+Que fait une plante lors de la photosynthèse ? | elle fabrique sa matière avec la lumière, l'eau et le CO₂ | elle respire seulement la nuit | elle mange des insectes | elle dort
+Qu'est-ce qu'un décomposeur ? | un être vivant qui transforme la matière morte | un prédateur | une plante verte | un herbivore
+Quelle est la masse volumique de l'eau ? | 1 kg/L | 10 kg/L | 0,1 kg/L | 100 kg/L
+Que mesure un ampèremètre ? | l'intensité du courant | la tension | la température | la masse
+Quelle est la tension d'une pile plate courante ? | 4,5 V | 230 V | 1 000 V | 0,5 V
+Quelle est la tension du secteur en France ? | 230 V | 4,5 V | 12 V | 1 000 V
+Qu'est-ce qu'une énergie renouvelable ? | une énergie dont la source se reconstitue rapidement | une énergie qui pollue toujours | le charbon | une énergie qu'on ne peut pas utiliser
+Quelle force nous attire vers le sol ? | la pesanteur (gravité) | le magnétisme | le frottement de l'air | la force du vent
+Quelle couche de la Terre est la plus profonde ? | le noyau | la croûte | le manteau | l'atmosphère
+Qu'est-ce que l'érosion ? | l'usure des roches par l'eau, le vent ou la glace | une éruption | un séisme | la formation des nuages
+Quel est le cycle de l'eau ? | évaporation, condensation, précipitations, ruissellement | eau, glace, eau, glace | mer, pluie, neige, mer | nuage, vent, soleil, lune
+Qu'est-ce qu'un objet technique ? | un objet fabriqué pour répondre à un besoin | un objet naturel | un animal | une roche
+Quel est le rôle d'un capteur dans un robot ? | recueillir une information | fournir l'énergie | décorer | refroidir
+Qu'est-ce qu'une boucle « répéter » en programmation ? | une instruction répétée plusieurs fois | une erreur | un dessin | une variable
+## histgeo
+Où sont apparues les premières villes et l'écriture vers 3300 av. J.-C. ? | en Mésopotamie | en Gaule | en Chine seulement | en Amérique
+Comment s'appelle l'écriture des Mésopotamiens ? | cunéiforme | hiéroglyphes | alphabet latin | idéogrammes chinois
+Comment s'appelle l'écriture des anciens Égyptiens ? | les hiéroglyphes | le cunéiforme | l'alphabet grec | le braille
+Comment s'appelait le roi de l'Égypte antique ? | le pharaon | le consul | l'empereur | le calife
+Quel fleuve fait vivre l'Égypte antique ? | le Nil | le Tigre | le Danube | le Gange
+Comment s'appelle une cité grecque indépendante ? | une polis (cité-État) | un empire | un royaume franc | une province
+Où avaient lieu les Jeux olympiques antiques ? | à Olympie | à Athènes | à Rome | à Sparte
+Quelle cité grecque invente la démocratie au Ve siècle av. J.-C. ? | Athènes | Sparte | Corinthe | Troie
+Quel dieu est le roi des dieux grecs ? | Zeus | Apollon | Poséidon | Hadès
+Qui sont les fondateurs légendaires de Rome ? | Romulus et Rémus | Castor et Pollux | Ulysse et Achille | César et Pompée
+Selon la tradition, en quelle année Rome est-elle fondée ? | 753 av. J.-C. | 476 | 52 av. J.-C. | 1492
+Qui est le premier empereur romain ? | Auguste | Jules César | Néron | Constantin
+Quelle religion monothéiste les Hébreux pratiquent-ils ? | le judaïsme | le polythéisme grec | l'islam | le bouddhisme
+Quel empereur se convertit au christianisme au IVe siècle ? | Constantin | Néron | Auguste | Trajan
+Qu'est-ce qu'une métropole ? | une très grande ville qui concentre pouvoirs et activités | un petit village | une région agricole | une île
+Qu'appelle-t-on un espace de faible densité ? | un espace peu peuplé | une grande ville | un quartier d'affaires | une plage bondée
+Combien d'habitants environ sur Terre en 2025 ? | plus de 8 milliards | 2 milliards | 1 milliard | 20 milliards
+Quel continent est le plus peuplé ? | l'Asie | l'Afrique | l'Europe | l'Amérique
+Qu'est-ce qu'un littoral ? | la zone de contact entre la terre et la mer | le sommet d'une montagne | une forêt tropicale | un désert de sable
+Quelle zone est la plus difficile à habiter à cause du froid ? | les régions polaires | les littoraux tempérés | les plaines fertiles | les vallées fluviales
+## anglais
+Complète : « I … got a brother. » | have | has | am | is
+Complète : « Does she like music? — Yes, she … » | does | do | is | likes
+Quelle est la bonne question ? | Where do you live? | Where you live? | Where does you live? | Where are you live?
+Quel est le prétérit de « see » ? | saw | seed | seen | sawed
+Quel est le prétérit de « buy » ? | bought | buyed | brought | buys
+Que veut dire « never » ? | jamais | toujours | souvent | parfois
+Que veut dire « sometimes » ? | parfois | jamais | toujours | souvent
+Quelle est la bonne place de « always » ? | I always get up early. | I get always up early. | Always I get up early always. | I get up always early.
+Que veut dire « How much is it? » ? | Combien ça coûte ? | Combien y en a-t-il ? | Quelle heure est-il ? | Comment ça va ?
+Comment dit-on « 1 h 15 » ? | a quarter past one | a quarter to one | one and fifteen past | half past one
+Que veut dire « half past seven » ? | 7 h 30 | 6 h 30 | 7 h 15 | 7 h 45
+Quel pronom remplace « my sister and I » ? | we | they | us | she
+Que veut dire « mustn't » ? | interdiction | obligation | capacité | souhait
+Quel jour fête-t-on Thanksgiving aux États-Unis ? | le 4e jeudi de novembre | le 4 juillet | le 31 octobre | le 1er janvier
+Que fête-t-on le 4 juillet aux États-Unis ? | l'indépendance | Noël | la fête du travail | Halloween

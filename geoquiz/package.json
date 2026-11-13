@@ -8,8 +8,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "data": "tsx scripts/build-data.ts",
-    "data:demo": "tsx scripts/demo-data.ts && tsx scripts/build-data.ts --demo",
+    "data": "tsx scripts/build-school.ts && tsx scripts/build-data.ts",
+    "data:demo": "tsx scripts/build-school.ts && tsx scripts/demo-data.ts && tsx scripts/build-data.ts --demo",
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "start": "node dist/server.js",
