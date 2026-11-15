@@ -112,13 +112,19 @@ export const PACK_GAMES: Record<string, string[]> = {
   peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
-export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names }
-export function activeEvent(now = Date.now()): GameEvent | undefined {
+/** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */
+export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily'; minAge?: '13-17' | '18+' }
+const activeOf = (kind: GameEvent['kind'], now: number) => {
   const day = new Date(now).toISOString().slice(0, 10);
-  return extras.events.find((e) => e.start <= day && day <= e.end);
-}
+  return extras.events.find((e) => e.kind === kind && e.start <= day && day <= e.end);
+};
+export const activeEvent = (now = Date.now()) => activeOf(undefined, now);
+/** Défi de la semaine en cours. */
+export const activeWeek = (now = Date.now()) => activeOf('week', now);
+/** Thème du défi du jour en cours (le défi du jour pioche alors dans ce thème). */
+export const activeDailyTheme = (now = Date.now()) => activeOf('daily', now);
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['board', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event'];
+export const NO_ZONE_GAMES = ['board', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event', 'week'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];

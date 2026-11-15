@@ -2,7 +2,7 @@
 // Le serveur tire le contenu (comme une partie) et renvoie aussi le corrigé.
 import { LANGS, type Difficulty, type Lang, type Names } from '../shared/protocol';
 import { CATEGORIES, countryPool, localize, toLonLat } from './categories';
-import { activeEvent, countries, ensureRegion, extras, regionMap, world, worldById, zones } from './data';
+import { activeDailyTheme, activeEvent, activeWeek, countries, ensureRegion, extras, regionMap, world, worldById, zones } from './data';
 import { drawQuestions } from './rooms';
 
 /** Jeux qu'on peut imprimer en quiz à cocher (pas de carte cliquable, de photo ni de son). */
@@ -67,7 +67,13 @@ export async function printSheet(req: PrintReq): Promise<{ status: number; json:
 /** Événements : celui en cours, et tous (noms des badges). */
 export function eventList() {
   const cur = activeEvent();
-  return { active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end } : null, all: extras.events.map(({ id, emoji, names }) => ({ id, emoji, names })) };
+  const wk = activeWeek(), th = activeDailyTheme();
+  return {
+    active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end } : null,
+    week: wk ? { id: wk.id, emoji: wk.emoji, names: wk.names, end: wk.end, minAge: wk.minAge } : null,
+    daily: th ? { id: th.id, emoji: th.emoji, names: th.names, end: th.end } : null,
+    all: extras.events.filter((e) => !e.kind).map(({ id, emoji, names }) => ({ id, emoji, names })),
+  };
 }
 
 /** Liste des pays (passeport) : nom dans la langue, continent. */

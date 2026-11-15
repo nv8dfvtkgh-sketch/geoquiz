@@ -3,7 +3,8 @@
 //   Question | bonne réponse | piège | piège | piège
 import fs from 'node:fs';
 import path from 'node:path';
-import { SCHOOL, type SchoolSystem } from '../src/shared/school';
+import { MATH_SUBJECT, SCHOOL, type SchoolSystem } from '../src/shared/school';
+import { topicFor } from '../src/shared/mathtopics';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const out: Record<string, Record<string, Record<string, string[][]>>> = {};
@@ -26,7 +27,9 @@ for (const sys of ['fr', 'us'] as SchoolSystem[]) {
       if (new Set(parts.slice(1)).size !== 4) { console.error(`${where} : réponses en double`); errors++; return; }
       if (seen.has(parts[0])) { console.error(`${where} : question en double`); errors++; return; }
       seen.add(parts[0]);
-      (lv2[sub] ??= []).push(parts);
+      // Maths : la notion du programme (« puissances »…) devinée d'après l'énoncé.
+      const tp = MATH_SUBJECT.has(sub) ? topicFor(lv.id, parts[0]) : undefined;
+      (lv2[sub] ??= []).push(tp ? [...parts, tp] : parts);
       total++;
     });
   }

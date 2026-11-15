@@ -23,7 +23,7 @@ export function makeT(lang: Lang): T {
 
 /** Jeux de révision (rev_fr_cm1_maths…) : nom fabriqué à partir du programme. */
 function revKey(key: string, d: Record<string, string>): string | undefined {
-  const m = /^(cat|game)\.(rev_[a-z0-9]+_[a-z0-9]+_[a-z]+)(\.long)?$/.exec(key);
+  const m = /^(cat|game)\.(rev_[a-z0-9]+_[a-z0-9]+_[a-z]+(?:-[a-z0-9-]+)?)(\.long)?$/.exec(key);
   if (!m) return undefined;
   if (m[1] === 'game') return d['rev.long'] ?? (fr as Record<string, string>)['rev.long'];
   return revName(m[2]);

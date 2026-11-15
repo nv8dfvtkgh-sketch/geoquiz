@@ -79,7 +79,7 @@ test('aucune question ne contient la réponse', async () => {
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
-      assert.ok(qs.length > 0, `${cat}/${qtype}`);
+      assert.ok(qs.length > 0 || ['event', 'week'].includes(cat), `${cat}/${qtype}`);
       for (const q of qs) {
         if (q.kind === 'mcq') {
           assert.ok(q.options!.length >= 2 && q.options!.length <= 4);

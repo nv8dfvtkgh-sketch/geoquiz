@@ -1,7 +1,8 @@
 // Révisions scolaires : choisir le programme (France ou États-Unis), la classe (ou le cycle),
 // puis la matière (ou toutes). La partie s'ouvre ensuite comme n'importe quel jeu.
 import { useState } from 'react';
-import { revId, SCHOOL, type SchoolSystem } from '../../shared/school';
+import { MATH_SUBJECT, revId, SCHOOL, type SchoolSystem } from '../../shared/school';
+import { TOPIC_NAMES, topicsOf } from '../../shared/mathtopics';
 import { useApp } from '../state';
 import { PuzzleBack } from './Puzzles';
 
@@ -18,12 +19,14 @@ export function RevisionScreen() {
   const { t, openGame } = useApp();
   const [sys, setSys] = useState<SchoolSystem>(chosen);
   const [level, setLevel] = useState<string | null>(() => loadLast()[chosen] ?? null);
+  const [topics, setTopics] = useState<string | null>(null); // matière dont on choisit la notion
   const S = SCHOOL[sys];
   const cls = S.levels.find((l) => l.id === level);
   const cyc = S.cycles.find((c) => c.id === level);
   const subjects = cls ? cls.subjects : cyc ? [...new Set(S.levels.filter((l) => cyc.levels.includes(l.id)).flatMap((l) => l.subjects))] : [];
   const pickLevel = (id: string) => {
     setLevel(id);
+    setTopics(null);
     try { localStorage.setItem(KEY, JSON.stringify({ ...loadLast(), [sys]: id })); } catch { /* ignoré */ }
     requestAnimationFrame(() => document.getElementById('rev-subjects')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   };
@@ -64,9 +67,28 @@ export function RevisionScreen() {
               <span aria-hidden="true">🎒</span><strong>{sys === 'fr' ? 'Toutes les matières' : 'All subjects'}</strong><small>{t('rev.mixed')}</small>
             </button>
             {subjects.map((sub) => (
-              <button type="button" key={sub} className="rev-sub" onClick={() => openGame(revId(sys, level, sub))}>
+              <button type="button" key={sub} className={`rev-sub ${topics === sub ? 'on' : ''}`}
+                onClick={() => {
+                  // Maths d'une classe : on choisit d'abord la notion à réviser.
+                  if (cls && MATH_SUBJECT.has(sub) && topicsOf(level).length) {
+                    setTopics(sub);
+                    requestAnimationFrame(() => document.getElementById('rev-topics')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                  } else openGame(revId(sys, level, sub));
+                }}>
                 <span aria-hidden="true">{S.subjects[sub].emoji}</span><strong>{S.subjects[sub].name}</strong>
+                {cls && MATH_SUBJECT.has(sub) && <small>{t('rev.byTopic')}</small>}
               </button>
+            ))}
+          </div>
+        </section>
+      )}
+      {level && cls && topics && (
+        <section id="rev-topics" className="rev-subjects">
+          <h2 className="rev-h">{t('rev.topicFor', { level: cls.name })}</h2>
+          <div className="rev-topics">
+            <button type="button" className="rev-topic all" onClick={() => openGame(revId(sys, level, topics))}>{t('rev.allTopics')}</button>
+            {topicsOf(level).map((tp) => (
+              <button type="button" key={tp} className="rev-topic" onClick={() => openGame(revId(sys, level, topics, tp))}>{TOPIC_NAMES[tp]?.[sys === 'fr' ? 'fr' : 'en'] ?? tp}</button>
             ))}
           </div>
         </section>

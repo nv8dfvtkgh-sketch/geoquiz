@@ -108,7 +108,7 @@ export function lastGame(): CreateRoomReq['settings'] | null {
   try { return JSON.parse(localStorage.getItem('gq.last') ?? 'null'); } catch { return null; }
 }
 export async function createGame(req: CreateRoomReq, name: string, lang: Lang): Promise<string | null> {
-  if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event'].includes(req.settings.category)) {
+  if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event', 'week'].includes(req.settings.category)) {
     try { localStorage.setItem('gq.last', JSON.stringify(req.settings)); } catch { /* stockage indisponible */ }
   }
   // Anti-répétition : les questions déjà vues dans ce jeu sur cet appareil.

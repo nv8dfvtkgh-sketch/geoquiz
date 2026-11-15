@@ -5,7 +5,7 @@ import { api } from './account';
 import { FAMILIES, Icon, type GameDef } from './games';
 import type { Screen } from './state';
 import { useApp } from './state';
-import { useEvents } from './events';
+import { useEvents, weekFor } from './events';
 import { HomeworkCard } from './screens/School';
 import { DailyBoard } from './screens/Setup';
 import { LeaderboardScreen, Stars } from './screens/Account';
@@ -69,7 +69,10 @@ export function BottomNav() {
 /** Onglet « Aujourd'hui » : défi du jour, révisions, devoirs, ligue, tournoi, événement. */
 export function TodayScreen() {
   const { t, me, name, setName, openGame, go, lang } = useApp();
-  const ev = useEvents()?.active;
+  const evs = useEvents();
+  const ev = evs?.active;
+  const week = weekFor(evs);
+  const theme = evs?.daily;
   const fam = FAMILIES.find((f) => f.id === 'today')!;
   const pick = (g: GameDef) => {
     if (!name.trim()) setName(t('home.guestName', { n: 100 + Math.floor(Math.random() * 900) }));
@@ -81,6 +84,20 @@ export function TodayScreen() {
     <div className="home today">
       <div className="home-head"><h1>{t('nav.today')}</h1><p className="muted">{t('today.hint')}</p></div>
       <HomeworkCard />
+      {theme && (
+        <button type="button" className="event-card" onClick={() => openGame('daily')}>
+          <span className="event-emoji" aria-hidden="true">{theme.emoji}</span>
+          <span><strong>{t('cat.daily')} · {theme.names[lang]}</strong><small>{t('daily.themeHint')}</small></span>
+          <span aria-hidden="true">›</span>
+        </button>
+      )}
+      {week && (
+        <button type="button" className="event-card" onClick={() => openGame('week')}>
+          <span className="event-emoji" aria-hidden="true">{week.emoji}</span>
+          <span><strong>{week.names[lang]}</strong><small>{t('event.until', { date: new Date(week.end!).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) })}</small></span>
+          <span aria-hidden="true">›</span>
+        </button>
+      )}
       {ev && (
         <button type="button" className="event-card" onClick={() => openGame('event')}>
           <span className="event-emoji" aria-hidden="true">{ev.emoji}</span>

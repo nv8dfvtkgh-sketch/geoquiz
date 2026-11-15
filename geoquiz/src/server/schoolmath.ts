@@ -122,7 +122,7 @@ G[7] = [
   (r, l) => { const a = ri(r, 2, 9), x = ri(r, -9, 12) || 4; return q(tr(l, `Résous : ${a}x = ${num(a * x, l)}`, `Solve: ${a}x = ${num(a * x, l)}`), x, r, l, [a * x - a, a * x * a, -x]); },
   (r, l) => { const a = ri(r, 30, 80), b = ri(r, 30, 150 - a); return q(tr(l, `Un triangle a deux angles de ${a}° et ${b}°. Combien mesure le troisième ?`, `A triangle has angles of ${a}° and ${b}°. What is the third angle?`), 180 - a - b, r, l, [360 - a - b, 90 - Math.abs(a - b) + 1, 180 - a]); },
   (r, l) => { const rr = ri(r, 1, 10); return q(tr(l, `Périmètre d'un cercle de rayon ${rr} cm, avec π ≈ 3,14 (en cm) ?`, `Circumference of a circle with radius ${rr} cm, using π ≈ 3.14 (in cm)?`), Math.round(2 * 3.14 * rr * 100) / 100, r, l, [Math.round(3.14 * rr * rr * 100) / 100, Math.round(3.14 * rr * 100) / 100]); },
-  (r, l) => { const a = ri(r, 1, 6), b = ri(r, 1, 6); return strs(tr(l, `Un sac contient ${a} billes rouges et ${b} billes bleues. Probabilité de tirer une rouge ?`, `A bag holds ${a} red and ${b} blue marbles. Probability of drawing red?`), frac(a, a + b), [frac(b, a + b), `${a}/${b}`, frac(1, a + b), frac(a, a + b + 1)]); },
+  (r, l) => { const a = ri(r, 1, 6), b = ri(r, 1, 6); return strs(tr(l, `Un sac contient ${a} bille${a > 1 ? 's' : ''} rouge${a > 1 ? 's' : ''} et ${b} bille${b > 1 ? 's' : ''} bleue${b > 1 ? 's' : ''}. Probabilité de tirer une rouge ?`, `A bag holds ${a} red and ${b} blue marbles. Probability of drawing red?`), frac(a, a + b), [frac(b, a + b), `${a}/${b}`, frac(1, a + b), frac(a, a + b + 1)]); },
   (r, l) => { const a = ri(r, 2, 8), b = ri(r, 3, 12), c = a * ri(r, 2, 6); return q(tr(l, `Tableau de proportionnalité : ${a} → ${b}, ${c} → ?`, `Proportional table: ${a} → ${b}, ${c} → ?`), (b * c) / a, r, l, [b + c - a, b * c, (b * c) / a + b]); },
 ];
 // ---- 4e / Grade 8
@@ -178,11 +178,27 @@ G[12] = [
   (r, l) => { const a = ri(r, 1, 5), n = ri(r, 2, 4); return strs(tr(l, `Une primitive de ${a * (n + 1)}x${sup(n)} ?`, `An antiderivative of ${a * (n + 1)}x${sup(n)}?`), `${a === 1 ? '' : a}x${sup(n + 1)}`, [`${a * (n + 1) * n}x${sup(n - 1)}`, `${a * (n + 1)}x${sup(n + 1)}`, `${a}x${sup(n)}`]); },
 ];
 
+// Notions ajoutées pour couvrir le programme de l'année (même ordre que MATH_TAGS).
+G[3].push((r, l) => { const h1 = ri(r, 8, 15), m1 = pick(r, [0, 15, 30, 45]), d = pick(r, [15, 30, 45, 60, 90]); const t = h1 * 60 + m1 + d; const f = (x: number) => `${Math.floor(x / 60)} h ${String(x % 60).padStart(2, '0')}`; return strs(tr(l, `Un film commence à ${f(h1 * 60 + m1)} et dure ${d} min. À quelle heure finit-il ?`, `A film starts at ${f(h1 * 60 + m1)} and lasts ${d} min. When does it end?`), f(t), [f(t + 10), f(t - 15), f(h1 * 60 + m1 + d + 60)]); });
+G[5].push((r, l) => { const a = ri(r, 2, 5), b = ri(r, 3, 9) * 10, k = ri(r, 2, 6); return q(tr(l, `${a} cahiers coûtent ${b} €. Combien coûtent ${a * k} cahiers (en €) ?`, `${a} notebooks cost $${b}. How much do ${a * k} notebooks cost (in $)?`), b * k, r, l, [b + a * k, b * a * k, b * (k + 1)]); });
+G[6].push((r, l) => { const d = pick(r, [3, 4, 5, 6, 8, 10]), n = ri(r, 1, d - 1), k = ri(r, 2, 12); return q(tr(l, `Combien font ${n}/${d} de ${d * k} ?`, `What is ${n}/${d} of ${d * k}?`), n * k, r, l, [k, d * k - n * k, n * d]); });
+G[7].push((r, l) => { const a = ri(r, 2, 9), b = ri(r, -9, 9) || 4; return strs(tr(l, `Réduis : ${a}x ${signed(b)}x`, `Simplify: ${a}x ${signed(b)}x`), `${a + b === 1 ? '' : a + b === -1 ? '−' : num(a + b, l)}x`.replace(/^0x$/, '0'), [`${num(a * b, l)}x`, `${num(a + b, l)}x²`, `${num(a - b, l)}x`]); });
+G[8].push((r, l) => { const b = ri(r, 2, 6), d = ri(r, 2, 6), a = ri(r, 1, b - 1), c = ri(r, 1, d - 1); const n = a * d + c * b, m = b * d; return strs(`${a}/${b} + ${c}/${d} = ?`, frac(n, m), [`${a + c}/${b + d}`, frac(a * c, m), frac(n + 1, m)]); });
+G[8].push((r, l) => { const v = pick(r, [40, 50, 60, 80, 90, 100, 120]), t = pick(r, [0.5, 1.5, 2, 2.5, 3]); return q(tr(l, `Une voiture roule à ${v} km/h pendant ${num(t, l)} h. Distance parcourue (en km) ?`, `A car travels at ${v} km/h for ${num(t, l)} h. Distance (in km)?`), v * t, r, l, [v / t, v + t, v * t * 2]); });
+G[8].push((r, l) => { const a = ri(r, 2, 9), b = ri(r, 2, 9), c = pick(r, [-1, 1]) * ri(r, 2, 5); const sa = r() < 0.5 ? -1 : 1, sb = r() < 0.5 ? -1 : 1; const x = sa * a, y = sb * b; return q(`(${num(x, l)}) × (${num(y, l)}) × (${num(c, l)}) = ?`, x * y * c, r, l, [-(x * y * c), x + y + c, x * y]); });
+G[8].push((r, l) => { const k = pick(r, [2, 3, 4, 5]), a = ri(r, 2, 6), p = ri(r, 2, 9) * 0.5, b = a * k; return q(tr(l, `${a} kg de pommes coûtent ${num(a * p, l)} €. Combien coûtent ${b} kg (en €) ?`, `${a} kg of apples cost $${num(a * p, l)}. How much do ${b} kg cost (in $)?`), b * p, r, l, [a * p + b, b * p + p, a * p * b]); });
+G[9].push((r, l) => { const cases = [[tr(l, 'un nombre pair', 'an even number'), 3], [tr(l, 'un multiple de 3', 'a multiple of 3'), 2], [tr(l, 'un nombre premier', 'a prime number'), 3], [tr(l, 'un 6', 'a 6'), 1], [tr(l, 'un nombre plus grand que 4', 'a number greater than 4'), 2]] as [string, number][]; const [w, n] = pick(r, cases); return strs(tr(l, `On lance un dé équilibré à 6 faces. Probabilité d'obtenir ${w} ?`, `A fair six-sided die is rolled. Probability of ${w}?`), frac(n, 6), [frac(n + 1, 6), frac(6 - n, 6) === frac(n, 6) ? '1/3' : frac(6 - n, 6), `${n}/${n + 6}`]); });
+G[9].push((r, l) => { const xs = Array.from({ length: 4 }, () => ri(r, 6, 20)); const w = [1, 2, 1, 2]; const s = xs.reduce((a, x, i) => a + x * w[i], 0); return q(tr(l, `Moyenne pondérée : notes ${xs.join(', ')} avec coefficients ${w.join(', ')} ?`, `Weighted mean: scores ${xs.join(', ')} with weights ${w.join(', ')}?`), Math.round((s / 6) * 100) / 100, r, l, [Math.round((xs.reduce((a, b) => a + b, 0) / 4) * 100) / 100, s, Math.round((s / 4) * 100) / 100]); });
+G[9].push((r, l) => { const P = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97], C = [21, 27, 33, 39, 49, 51, 57, 63, 69, 77, 81, 87, 91, 93]; const ok = pick(r, P); const bad = [...C].sort(() => r() - 0.5).slice(0, 3); return strs(tr(l, 'Lequel est un nombre premier ?', 'Which one is a prime number?'), String(ok), bad.map(String)); });
+G[10].push((r, l) => { const xs = Array.from({ length: 5 }, () => ri(r, 1, 30)); const s = [...xs].sort((a, b) => a - b); const mean = Math.round((xs.reduce((a, b) => a + b, 0) / 5) * 10) / 10; return q(tr(l, `Médiane de ${xs.join(' ; ')} ?`, `Median of ${xs.join(', ')}?`), s[2], r, l, [mean !== s[2] ? mean : s[2] + 1, s[4] - s[0] !== s[2] ? s[4] - s[0] : s[1], xs[2] !== s[2] ? xs[2] : s[3]]); });
+G[11].push((r, l) => { const a = ri(r, 1, 5), b = ri(r, -9, 9) || 2, c = pick(r, [-9, -7, -5, -3, -2, 2, 3, 4, 5, 6, 8]); return strs(tr(l, `Dérivée de f(x) = ${a}x³ ${signed(b)}x² ${signed(c)}x ?`, `Derivative of f(x) = ${a}x³ ${signed(b)}x² ${signed(c)}x?`), `${3 * a}x² ${signed(2 * b)}x ${signed(c)}`, [`${a}x² ${signed(b)}x ${signed(c)}`, `${3 * a}x³ ${signed(2 * b)}x² ${signed(c)}x`, `${3 * a}x² ${signed(b)}x ${signed(c)}`]); });
+G[12].push((r, l) => { const a = ri(r, 2, 9), b = ri(r, 2, 9); return strs(`e${sup(a)} × e${sup(b)} = ?`, `e${sup(a + b)}`, [`e${sup(a * b)}`, `e${sup(Math.abs(a - b) || a + b + 1)}`, `${2}e${sup(a + b)}`]); });
+
 function sup(n: number) { return String(n).split('').map((c) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+c] ?? '⁻').join(''); }
 function sub(n: number) { return String(n).split('').map((c) => '₀₁₂₃₄₅₆₇₈₉'[+c]).join(''); }
 
-/** Niveau scolaire (0 = Kindergarten, 1 = CP / Grade 1 … 12 = Terminale / Grade 12). */
-export const GRADE: Record<string, number> = { k: 0, cp: 1, ce1: 2, ce2: 3, cm1: 4, cm2: 5, '6e': 6, '5e': 7, '4e': 8, '3e': 9, '2nde': 10, '1re': 11, tle: 12, ...Object.fromEntries(Array.from({ length: 12 }, (_, i) => [`g${i + 1}`, i + 1])) };
+import { GRADE, MATH_TAGS } from '../shared/mathtopics';
+export { GRADE };
 
 function seeded(seed: number): R {
   let s = seed >>> 0 || 1;
@@ -190,12 +206,15 @@ function seeded(seed: number): R {
 }
 
 /** Une question de maths du niveau, toujours la même pour une même graine. */
-export function mathQuestion(level: string, seed: number, lang: L): string[] | null {
+export function mathQuestion(level: string, seed: number, lang: L, topic?: string): string[] | null {
   const g = GRADE[level];
   const gens = G[g];
   if (!gens) return null;
+  // Une notion : seulement ses générateurs (« puissances », « proportionnalité »…).
+  const idx = gens.map((_, i) => i).filter((i) => !topic || MATH_TAGS[g]?.[i] === topic);
+  if (!idx.length) return null;
   const r = seeded(seed);
-  const gen = gens[seed % gens.length];
+  const gen = gens[idx[seed % idx.length]];
   for (let i = 0; i < 5; i++) {
     const out = gen(r, lang).map((x) => (lang === 'en' ? x.replace(/ ; /g, ', ') : x));
     if (new Set(out.slice(1)).size === 4 && out.every((x) => x && !x.includes('NaN') && !x.includes('undefined'))) return out;

@@ -44213,5 +44213,5781 @@
    ],
    "emoji": "🏅"
   }
+ ],
+ "wk_gta": [
+  {
+   "id": "wk_gta-1",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année est sorti le tout premier Grand Theft Auto ?",
+    "en": "In what year was the very first Grand Theft Auto released?",
+    "es": "¿En qué año salió el primer Grand Theft Auto?",
+    "ar": "في أي سنة صدرت أول لعبة Grand Theft Auto؟"
+   },
+   "a": [
+    {
+     "fr": "1997",
+     "en": "1997",
+     "es": "1997",
+     "ar": "1997"
+    },
+    {
+     "fr": "1992",
+     "en": "1992",
+     "es": "1992",
+     "ar": "1992"
+    },
+    {
+     "fr": "2001",
+     "en": "2001",
+     "es": "2001",
+     "ar": "2001"
+    },
+    {
+     "fr": "2004",
+     "en": "2004",
+     "es": "2004",
+     "ar": "2004"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-2",
+   "tier": 2,
+   "q": {
+    "fr": "Quel studio écossais a créé le premier GTA ?",
+    "en": "Which Scottish studio created the first GTA?",
+    "es": "¿Qué estudio escocés creó el primer GTA?",
+    "ar": "أي استوديو اسكتلندي صنع أول GTA؟"
+   },
+   "a": [
+    {
+     "fr": "DMA Design",
+     "en": "DMA Design",
+     "es": "DMA Design",
+     "ar": "DMA Design"
+    },
+    {
+     "fr": "Ubisoft",
+     "en": "Ubisoft",
+     "es": "Ubisoft",
+     "ar": "Ubisoft"
+    },
+    {
+     "fr": "Bungie",
+     "en": "Bungie",
+     "es": "Bungie",
+     "ar": "Bungie"
+    },
+    {
+     "fr": "Naughty Dog",
+     "en": "Naughty Dog",
+     "es": "Naughty Dog",
+     "ar": "Naughty Dog"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-3",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quelle ville se trouve Rockstar North, le studio principal de GTA ?",
+    "en": "In which city is Rockstar North, GTA's lead studio, based?",
+    "es": "¿En qué ciudad está Rockstar North, el estudio principal de GTA?",
+    "ar": "في أي مدينة يوجد استوديو Rockstar North المطوّر الرئيسي لـ GTA؟"
+   },
+   "a": [
+    {
+     "fr": "Édimbourg",
+     "en": "Edinburgh",
+     "es": "Edimburgo",
+     "ar": "إدنبرة"
+    },
+    {
+     "fr": "Londres",
+     "en": "London",
+     "es": "Londres",
+     "ar": "لندن"
+    },
+    {
+     "fr": "New York",
+     "en": "New York",
+     "es": "Nueva York",
+     "ar": "نيويورك"
+    },
+    {
+     "fr": "Montréal",
+     "en": "Montreal",
+     "es": "Montreal",
+     "ar": "مونتريال"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-4",
+   "tier": 1,
+   "q": {
+    "fr": "Quel éditeur publie la série GTA ?",
+    "en": "Which publisher releases the GTA series?",
+    "es": "¿Qué editora publica la saga GTA?",
+    "ar": "أي شركة تنشر سلسلة GTA؟"
+   },
+   "a": [
+    {
+     "fr": "Rockstar Games",
+     "en": "Rockstar Games",
+     "es": "Rockstar Games",
+     "ar": "Rockstar Games"
+    },
+    {
+     "fr": "Electronic Arts",
+     "en": "Electronic Arts",
+     "es": "Electronic Arts",
+     "ar": "Electronic Arts"
+    },
+    {
+     "fr": "Nintendo",
+     "en": "Nintendo",
+     "es": "Nintendo",
+     "ar": "Nintendo"
+    },
+    {
+     "fr": "Activision",
+     "en": "Activision",
+     "es": "Activision",
+     "ar": "Activision"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-5",
+   "tier": 2,
+   "q": {
+    "fr": "Quel groupe possède Rockstar Games ?",
+    "en": "Which company owns Rockstar Games?",
+    "es": "¿Qué empresa es dueña de Rockstar Games?",
+    "ar": "أي شركة تملك Rockstar Games؟"
+   },
+   "a": [
+    {
+     "fr": "Take-Two Interactive",
+     "en": "Take-Two Interactive",
+     "es": "Take-Two Interactive",
+     "ar": "Take-Two Interactive"
+    },
+    {
+     "fr": "Sony",
+     "en": "Sony",
+     "es": "Sony",
+     "ar": "Sony"
+    },
+    {
+     "fr": "Microsoft",
+     "en": "Microsoft",
+     "es": "Microsoft",
+     "ar": "Microsoft"
+    },
+    {
+     "fr": "Ubisoft",
+     "en": "Ubisoft",
+     "es": "Ubisoft",
+     "ar": "Ubisoft"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-6",
+   "tier": 2,
+   "q": {
+    "fr": "Quels frères ont cofondé Rockstar Games ?",
+    "en": "Which brothers co-founded Rockstar Games?",
+    "es": "¿Qué hermanos cofundaron Rockstar Games?",
+    "ar": "أي أخوين شاركا في تأسيس Rockstar Games؟"
+   },
+   "a": [
+    {
+     "fr": "Sam et Dan Houser",
+     "en": "Sam and Dan Houser",
+     "es": "Sam y Dan Houser",
+     "ar": "سام ودان هاوزر"
+    },
+    {
+     "fr": "Mario et Luigi Rossi",
+     "en": "Mario and Luigi Rossi",
+     "es": "Mario y Luigi Rossi",
+     "ar": "ماريو ولويجي روسي"
+    },
+    {
+     "fr": "les frères Lumière",
+     "en": "the Lumière brothers",
+     "es": "los hermanos Lumière",
+     "ar": "الأخوان لوميير"
+    },
+    {
+     "fr": "les frères Wright",
+     "en": "the Wright brothers",
+     "es": "los hermanos Wright",
+     "ar": "الأخوان رايت"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-7",
+   "tier": 1,
+   "q": {
+    "fr": "Que signifie « Grand Theft Auto » ?",
+    "en": "What does “Grand Theft Auto” mean?",
+    "es": "¿Qué significa «Grand Theft Auto»?",
+    "ar": "ماذا يعني «Grand Theft Auto»؟"
+   },
+   "a": [
+    {
+     "fr": "vol de voiture (terme juridique américain)",
+     "en": "car theft (a US legal term)",
+     "es": "robo de coche (término legal de EE. UU.)",
+     "ar": "سرقة سيارة (مصطلح قانوني أمريكي)"
+    },
+    {
+     "fr": "grande course automobile",
+     "en": "great car race",
+     "es": "gran carrera de coches",
+     "ar": "سباق سيارات كبير"
+    },
+    {
+     "fr": "grand garage automatique",
+     "en": "big automatic garage",
+     "es": "gran taller automático",
+     "ar": "مرآب آلي كبير"
+    },
+    {
+     "fr": "auto-école géante",
+     "en": "giant driving school",
+     "es": "autoescuela gigante",
+     "ar": "مدرسة سياقة عملاقة"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-8",
+   "tier": 2,
+   "q": {
+    "fr": "En quelle année est sorti GTA III ?",
+    "en": "When was GTA III released?",
+    "es": "¿En qué año salió GTA III?",
+    "ar": "متى صدرت GTA III؟"
+   },
+   "a": [
+    {
+     "fr": "2001",
+     "en": "2001",
+     "es": "2001",
+     "ar": "2001"
+    },
+    {
+     "fr": "1999",
+     "en": "1999",
+     "es": "1999",
+     "ar": "1999"
+    },
+    {
+     "fr": "2004",
+     "en": "2004",
+     "es": "2004",
+     "ar": "2004"
+    },
+    {
+     "fr": "2008",
+     "en": "2008",
+     "es": "2008",
+     "ar": "2008"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-9",
+   "tier": 1,
+   "q": {
+    "fr": "Dans quelle ville se déroule GTA III ?",
+    "en": "In which city is GTA III set?",
+    "es": "¿En qué ciudad transcurre GTA III?",
+    "ar": "في أي مدينة تدور أحداث GTA III؟"
+   },
+   "a": [
+    {
+     "fr": "Liberty City",
+     "en": "Liberty City",
+     "es": "Liberty City",
+     "ar": "Liberty City"
+    },
+    {
+     "fr": "Vice City",
+     "en": "Vice City",
+     "es": "Vice City",
+     "ar": "Vice City"
+    },
+    {
+     "fr": "Los Santos",
+     "en": "Los Santos",
+     "es": "Los Santos",
+     "ar": "Los Santos"
+    },
+    {
+     "fr": "San Fierro",
+     "en": "San Fierro",
+     "es": "San Fierro",
+     "ar": "San Fierro"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-10",
+   "tier": 1,
+   "q": {
+    "fr": "De quelle vraie ville Liberty City s'inspire-t-elle ?",
+    "en": "Which real city is Liberty City based on?",
+    "es": "¿En qué ciudad real se inspira Liberty City?",
+    "ar": "أي مدينة حقيقية تستوحي منها Liberty City؟"
+   },
+   "a": [
+    {
+     "fr": "New York",
+     "en": "New York",
+     "es": "Nueva York",
+     "ar": "نيويورك"
+    },
+    {
+     "fr": "Chicago",
+     "en": "Chicago",
+     "es": "Chicago",
+     "ar": "شيكاغو"
+    },
+    {
+     "fr": "Londres",
+     "en": "London",
+     "es": "Londres",
+     "ar": "لندن"
+    },
+    {
+     "fr": "Miami",
+     "en": "Miami",
+     "es": "Miami",
+     "ar": "ميامي"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-11",
+   "tier": 2,
+   "q": {
+    "fr": "Comment s'appelle le héros silencieux de GTA III ?",
+    "en": "What is the name of GTA III's silent hero?",
+    "es": "¿Cómo se llama el héroe silencioso de GTA III?",
+    "ar": "ما اسم البطل الصامت في GTA III؟"
+   },
+   "a": [
+    {
+     "fr": "Claude",
+     "en": "Claude",
+     "es": "Claude",
+     "ar": "Claude"
+    },
+    {
+     "fr": "Tommy",
+     "en": "Tommy",
+     "es": "Tommy",
+     "ar": "Tommy"
+    },
+    {
+     "fr": "Niko",
+     "en": "Niko",
+     "es": "Niko",
+     "ar": "Niko"
+    },
+    {
+     "fr": "Franklin",
+     "en": "Franklin",
+     "es": "Franklin",
+     "ar": "Franklin"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-12",
+   "tier": 2,
+   "q": {
+    "fr": "En quelle année est sorti GTA Vice City ?",
+    "en": "When was GTA Vice City released?",
+    "es": "¿En qué año salió GTA Vice City?",
+    "ar": "متى صدرت GTA Vice City؟"
+   },
+   "a": [
+    {
+     "fr": "2002",
+     "en": "2002",
+     "es": "2002",
+     "ar": "2002"
+    },
+    {
+     "fr": "2005",
+     "en": "2005",
+     "es": "2005",
+     "ar": "2005"
+    },
+    {
+     "fr": "1998",
+     "en": "1998",
+     "es": "1998",
+     "ar": "1998"
+    },
+    {
+     "fr": "2010",
+     "en": "2010",
+     "es": "2010",
+     "ar": "2010"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-13",
+   "tier": 1,
+   "q": {
+    "fr": "De quelle vraie ville Vice City s'inspire-t-elle ?",
+    "en": "Which real city is Vice City based on?",
+    "es": "¿En qué ciudad real se inspira Vice City?",
+    "ar": "أي مدينة حقيقية تستوحي منها Vice City؟"
+   },
+   "a": [
+    {
+     "fr": "Miami",
+     "en": "Miami",
+     "es": "Miami",
+     "ar": "ميامي"
+    },
+    {
+     "fr": "Las Vegas",
+     "en": "Las Vegas",
+     "es": "Las Vegas",
+     "ar": "لاس فيغاس"
+    },
+    {
+     "fr": "San Francisco",
+     "en": "San Francisco",
+     "es": "San Francisco",
+     "ar": "سان فرانسيسكو"
+    },
+    {
+     "fr": "Boston",
+     "en": "Boston",
+     "es": "Boston",
+     "ar": "بوسطن"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-14",
+   "tier": 1,
+   "q": {
+    "fr": "Qui est le héros de GTA Vice City ?",
+    "en": "Who is the hero of GTA Vice City?",
+    "es": "¿Quién es el protagonista de GTA Vice City?",
+    "ar": "من هو بطل GTA Vice City؟"
+   },
+   "a": [
+    {
+     "fr": "Tommy Vercetti",
+     "en": "Tommy Vercetti",
+     "es": "Tommy Vercetti",
+     "ar": "Tommy Vercetti"
+    },
+    {
+     "fr": "Carl Johnson",
+     "en": "Carl Johnson",
+     "es": "Carl Johnson",
+     "ar": "Carl Johnson"
+    },
+    {
+     "fr": "Niko Bellic",
+     "en": "Niko Bellic",
+     "es": "Niko Bellic",
+     "ar": "Niko Bellic"
+    },
+    {
+     "fr": "Trevor Philips",
+     "en": "Trevor Philips",
+     "es": "Trevor Philips",
+     "ar": "Trevor Philips"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-15",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quelle décennie se déroule GTA Vice City ?",
+    "en": "In which decade is GTA Vice City set?",
+    "es": "¿En qué década transcurre GTA Vice City?",
+    "ar": "في أي عقد تدور أحداث GTA Vice City؟"
+   },
+   "a": [
+    {
+     "fr": "les années 1980",
+     "en": "the 1980s",
+     "es": "los años 80",
+     "ar": "الثمانينيات"
+    },
+    {
+     "fr": "les années 1950",
+     "en": "the 1950s",
+     "es": "los años 50",
+     "ar": "الخمسينيات"
+    },
+    {
+     "fr": "les années 2010",
+     "en": "the 2010s",
+     "es": "los años 2010",
+     "ar": "العقد الثاني من الألفية"
+    },
+    {
+     "fr": "les années 1920",
+     "en": "the 1920s",
+     "es": "los años 20",
+     "ar": "العشرينيات"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-16",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année est sorti GTA San Andreas ?",
+    "en": "When was GTA San Andreas released?",
+    "es": "¿En qué año salió GTA San Andreas?",
+    "ar": "متى صدرت GTA San Andreas؟"
+   },
+   "a": [
+    {
+     "fr": "2004",
+     "en": "2004",
+     "es": "2004",
+     "ar": "2004"
+    },
+    {
+     "fr": "2001",
+     "en": "2001",
+     "es": "2001",
+     "ar": "2001"
+    },
+    {
+     "fr": "2008",
+     "en": "2008",
+     "es": "2008",
+     "ar": "2008"
+    },
+    {
+     "fr": "2013",
+     "en": "2013",
+     "es": "2013",
+     "ar": "2013"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-17",
+   "tier": 1,
+   "q": {
+    "fr": "Quel est le surnom du héros de GTA San Andreas, Carl Johnson ?",
+    "en": "What is the nickname of GTA San Andreas hero Carl Johnson?",
+    "es": "¿Cuál es el apodo de Carl Johnson, protagonista de GTA San Andreas?",
+    "ar": "ما لقب كارل جونسون بطل GTA San Andreas؟"
+   },
+   "a": [
+    {
+     "fr": "CJ",
+     "en": "CJ",
+     "es": "CJ",
+     "ar": "CJ"
+    },
+    {
+     "fr": "Big Smoke",
+     "en": "Big Smoke",
+     "es": "Big Smoke",
+     "ar": "Big Smoke"
+    },
+    {
+     "fr": "Ryder",
+     "en": "Ryder",
+     "es": "Ryder",
+     "ar": "Ryder"
+    },
+    {
+     "fr": "Sweet",
+     "en": "Sweet",
+     "es": "Sweet",
+     "ar": "Sweet"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-18",
+   "tier": 2,
+   "q": {
+    "fr": "Dans GTA San Andreas, de quel quartier vient la bande de CJ ?",
+    "en": "In GTA San Andreas, which street does CJ's gang come from?",
+    "es": "En GTA San Andreas, ¿de qué calle es la banda de CJ?",
+    "ar": "في GTA San Andreas، من أي شارع تنحدر عصابة CJ؟"
+   },
+   "a": [
+    {
+     "fr": "Grove Street",
+     "en": "Grove Street",
+     "es": "Grove Street",
+     "ar": "Grove Street"
+    },
+    {
+     "fr": "Vinewood",
+     "en": "Vinewood",
+     "es": "Vinewood",
+     "ar": "Vinewood"
+    },
+    {
+     "fr": "Ocean Drive",
+     "en": "Ocean Drive",
+     "es": "Ocean Drive",
+     "ar": "Ocean Drive"
+    },
+    {
+     "fr": "Broker",
+     "en": "Broker",
+     "es": "Broker",
+     "ar": "Broker"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-19",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle ville de San Andreas s'inspire de San Francisco ?",
+    "en": "Which San Andreas city is based on San Francisco?",
+    "es": "¿Qué ciudad de San Andreas se inspira en San Francisco?",
+    "ar": "أي مدينة في San Andreas مستوحاة من سان فرانسيسكو؟"
+   },
+   "a": [
+    {
+     "fr": "San Fierro",
+     "en": "San Fierro",
+     "es": "San Fierro",
+     "ar": "San Fierro"
+    },
+    {
+     "fr": "Las Venturas",
+     "en": "Las Venturas",
+     "es": "Las Venturas",
+     "ar": "Las Venturas"
+    },
+    {
+     "fr": "Los Santos",
+     "en": "Los Santos",
+     "es": "Los Santos",
+     "ar": "Los Santos"
+    },
+    {
+     "fr": "Vice City",
+     "en": "Vice City",
+     "es": "Vice City",
+     "ar": "Vice City"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-20",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle ville de San Andreas s'inspire de Las Vegas ?",
+    "en": "Which San Andreas city is based on Las Vegas?",
+    "es": "¿Qué ciudad de San Andreas se inspira en Las Vegas?",
+    "ar": "أي مدينة في San Andreas مستوحاة من لاس فيغاس؟"
+   },
+   "a": [
+    {
+     "fr": "Las Venturas",
+     "en": "Las Venturas",
+     "es": "Las Venturas",
+     "ar": "Las Venturas"
+    },
+    {
+     "fr": "San Fierro",
+     "en": "San Fierro",
+     "es": "San Fierro",
+     "ar": "San Fierro"
+    },
+    {
+     "fr": "Los Santos",
+     "en": "Los Santos",
+     "es": "Los Santos",
+     "ar": "Los Santos"
+    },
+    {
+     "fr": "Liberty City",
+     "en": "Liberty City",
+     "es": "Liberty City",
+     "ar": "Liberty City"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-21",
+   "tier": 1,
+   "q": {
+    "fr": "De quelle vraie ville Los Santos s'inspire-t-elle ?",
+    "en": "Which real city is Los Santos based on?",
+    "es": "¿En qué ciudad real se inspira Los Santos?",
+    "ar": "أي مدينة حقيقية تستوحي منها Los Santos؟"
+   },
+   "a": [
+    {
+     "fr": "Los Angeles",
+     "en": "Los Angeles",
+     "es": "Los Ángeles",
+     "ar": "لوس أنجلوس"
+    },
+    {
+     "fr": "Houston",
+     "en": "Houston",
+     "es": "Houston",
+     "ar": "هيوستن"
+    },
+    {
+     "fr": "Seattle",
+     "en": "Seattle",
+     "es": "Seattle",
+     "ar": "سياتل"
+    },
+    {
+     "fr": "Atlanta",
+     "en": "Atlanta",
+     "es": "Atlanta",
+     "ar": "أتلانتا"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-22",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quelle décennie se déroule GTA San Andreas ?",
+    "en": "In which decade is GTA San Andreas set?",
+    "es": "¿En qué década transcurre GTA San Andreas?",
+    "ar": "في أي عقد تدور أحداث GTA San Andreas؟"
+   },
+   "a": [
+    {
+     "fr": "les années 1990",
+     "en": "the 1990s",
+     "es": "los años 90",
+     "ar": "التسعينيات"
+    },
+    {
+     "fr": "les années 1970",
+     "en": "the 1970s",
+     "es": "los años 70",
+     "ar": "السبعينيات"
+    },
+    {
+     "fr": "les années 2000",
+     "en": "the 2000s",
+     "es": "los años 2000",
+     "ar": "العقد الأول من الألفية"
+    },
+    {
+     "fr": "les années 1960",
+     "en": "the 1960s",
+     "es": "los años 60",
+     "ar": "الستينيات"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-23",
+   "tier": 3,
+   "q": {
+    "fr": "Comment s'appelle le policier corrompu de GTA San Andreas ?",
+    "en": "What is the name of the corrupt police officer in GTA San Andreas?",
+    "es": "¿Cómo se llama el policía corrupto de GTA San Andreas?",
+    "ar": "ما اسم الشرطي الفاسد في GTA San Andreas؟"
+   },
+   "a": [
+    {
+     "fr": "Frank Tenpenny",
+     "en": "Frank Tenpenny",
+     "es": "Frank Tenpenny",
+     "ar": "Frank Tenpenny"
+    },
+    {
+     "fr": "Lester Crest",
+     "en": "Lester Crest",
+     "es": "Lester Crest",
+     "ar": "Lester Crest"
+    },
+    {
+     "fr": "Roman Bellic",
+     "en": "Roman Bellic",
+     "es": "Roman Bellic",
+     "ar": "Roman Bellic"
+    },
+    {
+     "fr": "Lance Vance",
+     "en": "Lance Vance",
+     "es": "Lance Vance",
+     "ar": "Lance Vance"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-24",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle réplique de CJ au début de San Andreas est devenue un mème ?",
+    "en": "Which line CJ says at the start of San Andreas became a meme?",
+    "es": "¿Qué frase de CJ al principio de San Andreas se volvió meme?",
+    "ar": "أي جملة قالها CJ في بداية San Andreas أصبحت ميمًا؟"
+   },
+   "a": [
+    {
+     "fr": "« Ah shit, here we go again »",
+     "en": "« Ah shit, here we go again »",
+     "es": "« Ah shit, here we go again »",
+     "ar": "« Ah shit, here we go again »"
+    },
+    {
+     "fr": "« Mission passed »",
+     "en": "« Mission passed »",
+     "es": "« Mission passed »",
+     "ar": "« Mission passed »"
+    },
+    {
+     "fr": "« Wasted »",
+     "en": "« Wasted »",
+     "es": "« Wasted »",
+     "ar": "« Wasted »"
+    },
+    {
+     "fr": "« Game over »",
+     "en": "« Game over »",
+     "es": "« Game over »",
+     "ar": "« Game over »"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-25",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année est sorti GTA IV ?",
+    "en": "When was GTA IV released?",
+    "es": "¿En qué año salió GTA IV?",
+    "ar": "متى صدرت GTA IV؟"
+   },
+   "a": [
+    {
+     "fr": "2008",
+     "en": "2008",
+     "es": "2008",
+     "ar": "2008"
+    },
+    {
+     "fr": "2004",
+     "en": "2004",
+     "es": "2004",
+     "ar": "2004"
+    },
+    {
+     "fr": "2011",
+     "en": "2011",
+     "es": "2011",
+     "ar": "2011"
+    },
+    {
+     "fr": "2013",
+     "en": "2013",
+     "es": "2013",
+     "ar": "2013"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-26",
+   "tier": 1,
+   "q": {
+    "fr": "Qui est le héros de GTA IV ?",
+    "en": "Who is the hero of GTA IV?",
+    "es": "¿Quién es el protagonista de GTA IV?",
+    "ar": "من هو بطل GTA IV؟"
+   },
+   "a": [
+    {
+     "fr": "Niko Bellic",
+     "en": "Niko Bellic",
+     "es": "Niko Bellic",
+     "ar": "Niko Bellic"
+    },
+    {
+     "fr": "Tommy Vercetti",
+     "en": "Tommy Vercetti",
+     "es": "Tommy Vercetti",
+     "ar": "Tommy Vercetti"
+    },
+    {
+     "fr": "Michael De Santa",
+     "en": "Michael De Santa",
+     "es": "Michael De Santa",
+     "ar": "Michael De Santa"
+    },
+    {
+     "fr": "Claude",
+     "en": "Claude",
+     "es": "Claude",
+     "ar": "Claude"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-27",
+   "tier": 2,
+   "q": {
+    "fr": "D'où vient Niko Bellic, le héros de GTA IV ?",
+    "en": "Where does GTA IV hero Niko Bellic come from?",
+    "es": "¿De dónde viene Niko Bellic, protagonista de GTA IV?",
+    "ar": "من أين يأتي نيكو بيليك بطل GTA IV؟"
+   },
+   "a": [
+    {
+     "fr": "d'Europe de l'Est",
+     "en": "Eastern Europe",
+     "es": "Europa del Este",
+     "ar": "أوروبا الشرقية"
+    },
+    {
+     "fr": "du Mexique",
+     "en": "Mexico",
+     "es": "México",
+     "ar": "المكسيك"
+    },
+    {
+     "fr": "du Japon",
+     "en": "Japan",
+     "es": "Japón",
+     "ar": "اليابان"
+    },
+    {
+     "fr": "d'Australie",
+     "en": "Australia",
+     "es": "Australia",
+     "ar": "أستراليا"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-28",
+   "tier": 2,
+   "q": {
+    "fr": "Comment s'appelle le cousin de Niko qui l'appelle sans arrêt dans GTA IV ?",
+    "en": "What is the name of Niko's cousin who keeps calling him in GTA IV?",
+    "es": "¿Cómo se llama el primo de Niko que no para de llamarle en GTA IV?",
+    "ar": "ما اسم ابن عم نيكو الذي يتصل به باستمرار في GTA IV؟"
+   },
+   "a": [
+    {
+     "fr": "Roman",
+     "en": "Roman",
+     "es": "Roman",
+     "ar": "Roman"
+    },
+    {
+     "fr": "Lamar",
+     "en": "Lamar",
+     "es": "Lamar",
+     "ar": "Lamar"
+    },
+    {
+     "fr": "Ken",
+     "en": "Ken",
+     "es": "Ken",
+     "ar": "Ken"
+    },
+    {
+     "fr": "Sonny",
+     "en": "Sonny",
+     "es": "Sonny",
+     "ar": "Sonny"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-29",
+   "tier": 3,
+   "q": {
+    "fr": "Quelles sont les deux extensions de GTA IV (2009) ?",
+    "en": "What are GTA IV's two expansions (2009)?",
+    "es": "¿Cuáles son las dos expansiones de GTA IV (2009)?",
+    "ar": "ما هما توسعتا GTA IV (2009)؟"
+   },
+   "a": [
+    {
+     "fr": "The Lost and Damned et The Ballad of Gay Tony",
+     "en": "The Lost and Damned et The Ballad of Gay Tony",
+     "es": "The Lost and Damned et The Ballad of Gay Tony",
+     "ar": "The Lost and Damned et The Ballad of Gay Tony"
+    },
+    {
+     "fr": "Vice City Stories et Liberty City Stories",
+     "en": "Vice City Stories et Liberty City Stories",
+     "es": "Vice City Stories et Liberty City Stories",
+     "ar": "Vice City Stories et Liberty City Stories"
+    },
+    {
+     "fr": "Chinatown Wars et London 1969",
+     "en": "Chinatown Wars et London 1969",
+     "es": "Chinatown Wars et London 1969",
+     "ar": "Chinatown Wars et London 1969"
+    },
+    {
+     "fr": "Online et Director Mode",
+     "en": "Online et Director Mode",
+     "es": "Online et Director Mode",
+     "ar": "Online et Director Mode"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-30",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année est sorti GTA V ?",
+    "en": "When was GTA V released?",
+    "es": "¿En qué año salió GTA V?",
+    "ar": "متى صدرت GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "2013",
+     "en": "2013",
+     "es": "2013",
+     "ar": "2013"
+    },
+    {
+     "fr": "2010",
+     "en": "2010",
+     "es": "2010",
+     "ar": "2010"
+    },
+    {
+     "fr": "2015",
+     "en": "2015",
+     "es": "2015",
+     "ar": "2015"
+    },
+    {
+     "fr": "2008",
+     "en": "2008",
+     "es": "2008",
+     "ar": "2008"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-31",
+   "tier": 1,
+   "q": {
+    "fr": "Combien de personnages principaux jouables compte GTA V ?",
+    "en": "How many playable main characters does GTA V have?",
+    "es": "¿Cuántos protagonistas jugables tiene GTA V?",
+    "ar": "كم عدد الشخصيات الرئيسية القابلة للعب في GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "3",
+     "en": "3",
+     "es": "3",
+     "ar": "3"
+    },
+    {
+     "fr": "1",
+     "en": "1",
+     "es": "1",
+     "ar": "1"
+    },
+    {
+     "fr": "2",
+     "en": "2",
+     "es": "2",
+     "ar": "2"
+    },
+    {
+     "fr": "4",
+     "en": "4",
+     "es": "4",
+     "ar": "4"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-32",
+   "tier": 1,
+   "q": {
+    "fr": "Lequel n'est PAS un héros de GTA V ?",
+    "en": "Which one is NOT a hero of GTA V?",
+    "es": "¿Cuál NO es protagonista de GTA V?",
+    "ar": "من ليس من أبطال GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "Niko",
+     "en": "Niko",
+     "es": "Niko",
+     "ar": "Niko"
+    },
+    {
+     "fr": "Michael",
+     "en": "Michael",
+     "es": "Michael",
+     "ar": "Michael"
+    },
+    {
+     "fr": "Franklin",
+     "en": "Franklin",
+     "es": "Franklin",
+     "ar": "Franklin"
+    },
+    {
+     "fr": "Trevor",
+     "en": "Trevor",
+     "es": "Trevor",
+     "ar": "Trevor"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-33",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quel État fictif se trouve Los Santos dans GTA V ?",
+    "en": "In which fictional state is Los Santos in GTA V?",
+    "es": "¿En qué estado ficticio está Los Santos en GTA V?",
+    "ar": "في أي ولاية خيالية تقع Los Santos في GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "San Andreas",
+     "en": "San Andreas",
+     "es": "San Andreas",
+     "ar": "San Andreas"
+    },
+    {
+     "fr": "Leonida",
+     "en": "Leonida",
+     "es": "Leonida",
+     "ar": "Leonida"
+    },
+    {
+     "fr": "Liberty",
+     "en": "Liberty",
+     "es": "Liberty",
+     "ar": "Liberty"
+    },
+    {
+     "fr": "Vice",
+     "en": "Vice",
+     "es": "Vice",
+     "ar": "Vice"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-34",
+   "tier": 2,
+   "q": {
+    "fr": "Quel record GTA V a-t-il battu en 2013 ?",
+    "en": "Which record did GTA V break in 2013?",
+    "es": "¿Qué récord batió GTA V en 2013?",
+    "ar": "أي رقم قياسي حطمته GTA V سنة 2013؟"
+   },
+   "a": [
+    {
+     "fr": "1 milliard de dollars de ventes en 3 jours",
+     "en": "$1 billion in sales in 3 days",
+     "es": "1.000 millones de dólares en 3 días",
+     "ar": "مليار دولار من المبيعات في 3 أيام"
+    },
+    {
+     "fr": "le jeu le plus long jamais créé",
+     "en": "the longest game ever made",
+     "es": "el juego más largo jamás creado",
+     "ar": "أطول لعبة صُنعت"
+    },
+    {
+     "fr": "le premier jeu en 3D",
+     "en": "the first 3D game",
+     "es": "el primer juego en 3D",
+     "ar": "أول لعبة ثلاثية الأبعاد"
+    },
+    {
+     "fr": "le jeu le moins cher",
+     "en": "the cheapest game",
+     "es": "el juego más barato",
+     "ar": "أرخص لعبة"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-35",
+   "tier": 2,
+   "q": {
+    "fr": "Combien d'exemplaires de GTA V ont été vendus (environ) ?",
+    "en": "Roughly how many copies of GTA V have been sold?",
+    "es": "¿Cuántas copias de GTA V se han vendido (aprox.)?",
+    "ar": "كم نسخة بيعت من GTA V تقريبًا؟"
+   },
+   "a": [
+    {
+     "fr": "plus de 200 millions",
+     "en": "over 200 million",
+     "es": "más de 200 millones",
+     "ar": "أكثر من 200 مليون"
+    },
+    {
+     "fr": "5 millions",
+     "en": "5 million",
+     "es": "5 millones",
+     "ar": "5 ملايين"
+    },
+    {
+     "fr": "20 millions",
+     "en": "20 million",
+     "es": "20 millones",
+     "ar": "20 مليون"
+    },
+    {
+     "fr": "1 milliard",
+     "en": "1 billion",
+     "es": "1.000 millones",
+     "ar": "مليار"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-36",
+   "tier": 2,
+   "q": {
+    "fr": "Où vit Trevor au début de GTA V ?",
+    "en": "Where does Trevor live at the start of GTA V?",
+    "es": "¿Dónde vive Trevor al principio de GTA V?",
+    "ar": "أين يعيش تريفور في بداية GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "Sandy Shores",
+     "en": "Sandy Shores",
+     "es": "Sandy Shores",
+     "ar": "Sandy Shores"
+    },
+    {
+     "fr": "Vinewood Hills",
+     "en": "Vinewood Hills",
+     "es": "Vinewood Hills",
+     "ar": "Vinewood Hills"
+    },
+    {
+     "fr": "Rockford Hills",
+     "en": "Rockford Hills",
+     "es": "Rockford Hills",
+     "ar": "Rockford Hills"
+    },
+    {
+     "fr": "Grove Street",
+     "en": "Grove Street",
+     "es": "Grove Street",
+     "ar": "Grove Street"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-37",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle est la plus haute montagne de la carte de GTA V ?",
+    "en": "What is the tallest mountain on the GTA V map?",
+    "es": "¿Cuál es la montaña más alta del mapa de GTA V?",
+    "ar": "ما أعلى جبل في خريطة GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "Mount Chiliad",
+     "en": "Mount Chiliad",
+     "es": "Mount Chiliad",
+     "ar": "Mount Chiliad"
+    },
+    {
+     "fr": "Mount Gordo",
+     "en": "Mount Gordo",
+     "es": "Mount Gordo",
+     "ar": "Mount Gordo"
+    },
+    {
+     "fr": "Mount Josiah",
+     "en": "Mount Josiah",
+     "es": "Mount Josiah",
+     "ar": "Mount Josiah"
+    },
+    {
+     "fr": "Mount Kilimanjaro",
+     "en": "Mount Kilimanjaro",
+     "es": "Mount Kilimanjaro",
+     "ar": "Mount Kilimanjaro"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-38",
+   "tier": 2,
+   "q": {
+    "fr": "Quel était le métier de Michael avant de se cacher, dans GTA V ?",
+    "en": "What was Michael's job before going into hiding in GTA V?",
+    "es": "¿A qué se dedicaba Michael antes de esconderse en GTA V?",
+    "ar": "ماذا كان يعمل مايكل قبل أن يختبئ في GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "braqueur de banques",
+     "en": "bank robber",
+     "es": "atracador de bancos",
+     "ar": "سارق بنوك"
+    },
+    {
+     "fr": "pilote de course",
+     "en": "racing driver",
+     "es": "piloto de carreras",
+     "ar": "سائق سباقات"
+    },
+    {
+     "fr": "médecin",
+     "en": "doctor",
+     "es": "médico",
+     "ar": "طبيب"
+    },
+    {
+     "fr": "cuisinier",
+     "en": "chef",
+     "es": "cocinero",
+     "ar": "طباخ"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-39",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année a été lancé GTA Online ?",
+    "en": "In what year did GTA Online launch?",
+    "es": "¿En qué año se lanzó GTA Online?",
+    "ar": "في أي سنة أُطلق GTA Online؟"
+   },
+   "a": [
+    {
+     "fr": "2013",
+     "en": "2013",
+     "es": "2013",
+     "ar": "2013"
+    },
+    {
+     "fr": "2008",
+     "en": "2008",
+     "es": "2008",
+     "ar": "2008"
+    },
+    {
+     "fr": "2018",
+     "en": "2018",
+     "es": "2018",
+     "ar": "2018"
+    },
+    {
+     "fr": "2020",
+     "en": "2020",
+     "es": "2020",
+     "ar": "2020"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-40",
+   "tier": 1,
+   "q": {
+    "fr": "Que montrent les étoiles en haut de l'écran dans GTA ?",
+    "en": "What do the stars at the top of the screen show in GTA?",
+    "es": "¿Qué indican las estrellas arriba de la pantalla en GTA?",
+    "ar": "ماذا تعني النجوم أعلى الشاشة في GTA؟"
+   },
+   "a": [
+    {
+     "fr": "le niveau de recherche par la police",
+     "en": "the police wanted level",
+     "es": "el nivel de búsqueda policial",
+     "ar": "مستوى ملاحقة الشرطة"
+    },
+    {
+     "fr": "la note du joueur",
+     "en": "the player's rating",
+     "es": "la nota del jugador",
+     "ar": "تقييم اللاعب"
+    },
+    {
+     "fr": "l'argent gagné",
+     "en": "money earned",
+     "es": "el dinero ganado",
+     "ar": "المال المكتسب"
+    },
+    {
+     "fr": "la météo",
+     "en": "the weather",
+     "es": "el tiempo",
+     "ar": "الطقس"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-41",
+   "tier": 2,
+   "q": {
+    "fr": "Quel garage repeint la voiture pour semer la police dans GTA ?",
+    "en": "Which garage repaints your car to lose the police in GTA?",
+    "es": "¿Qué taller repinta el coche para despistar a la policía en GTA?",
+    "ar": "أي مرآب يعيد طلاء السيارة للإفلات من الشرطة في GTA؟"
+   },
+   "a": [
+    {
+     "fr": "Pay 'n' Spray",
+     "en": "Pay 'n' Spray",
+     "es": "Pay 'n' Spray",
+     "ar": "Pay 'n' Spray"
+    },
+    {
+     "fr": "Ammu-Nation",
+     "en": "Ammu-Nation",
+     "es": "Ammu-Nation",
+     "ar": "Ammu-Nation"
+    },
+    {
+     "fr": "Cluckin' Bell",
+     "en": "Cluckin' Bell",
+     "es": "Cluckin' Bell",
+     "ar": "Cluckin' Bell"
+    },
+    {
+     "fr": "Burger Shot",
+     "en": "Burger Shot",
+     "es": "Burger Shot",
+     "ar": "Burger Shot"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-42",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle classification PEGI ont les jeux GTA ?",
+    "en": "What PEGI rating do GTA games have?",
+    "es": "¿Qué clasificación PEGI tienen los GTA?",
+    "ar": "ما تصنيف PEGI لألعاب GTA؟"
+   },
+   "a": [
+    {
+     "fr": "PEGI 18",
+     "en": "PEGI 18",
+     "es": "PEGI 18",
+     "ar": "PEGI 18"
+    },
+    {
+     "fr": "PEGI 3",
+     "en": "PEGI 3",
+     "es": "PEGI 3",
+     "ar": "PEGI 3"
+    },
+    {
+     "fr": "PEGI 7",
+     "en": "PEGI 7",
+     "es": "PEGI 7",
+     "ar": "PEGI 7"
+    },
+    {
+     "fr": "PEGI 12",
+     "en": "PEGI 12",
+     "es": "PEGI 12",
+     "ar": "PEGI 12"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-43",
+   "tier": 1,
+   "q": {
+    "fr": "Quand sort GTA VI ?",
+    "en": "When does GTA VI come out?",
+    "es": "¿Cuándo sale GTA VI?",
+    "ar": "متى تصدر GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "le 19 novembre 2026",
+     "en": "19 November 2026",
+     "es": "el 19 de noviembre de 2026",
+     "ar": "19 نوفمبر 2026"
+    },
+    {
+     "fr": "le 26 mai 2026",
+     "en": "26 May 2026",
+     "es": "el 26 de mayo de 2026",
+     "ar": "26 مايو 2026"
+    },
+    {
+     "fr": "à l'automne 2025",
+     "en": "autumn 2025",
+     "es": "otoño de 2025",
+     "ar": "خريف 2025"
+    },
+    {
+     "fr": "en 2028",
+     "en": "in 2028",
+     "es": "en 2028",
+     "ar": "سنة 2028"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-44",
+   "tier": 1,
+   "q": {
+    "fr": "Dans quelle ville se déroule GTA VI ?",
+    "en": "In which city is GTA VI set?",
+    "es": "¿En qué ciudad transcurre GTA VI?",
+    "ar": "في أي مدينة تدور أحداث GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "Vice City",
+     "en": "Vice City",
+     "es": "Vice City",
+     "ar": "Vice City"
+    },
+    {
+     "fr": "Liberty City",
+     "en": "Liberty City",
+     "es": "Liberty City",
+     "ar": "Liberty City"
+    },
+    {
+     "fr": "Los Santos",
+     "en": "Los Santos",
+     "es": "Los Santos",
+     "ar": "Los Santos"
+    },
+    {
+     "fr": "San Fierro",
+     "en": "San Fierro",
+     "es": "San Fierro",
+     "ar": "San Fierro"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-45",
+   "tier": 2,
+   "q": {
+    "fr": "Comment s'appelle l'État fictif de GTA VI ?",
+    "en": "What is the name of GTA VI's fictional state?",
+    "es": "¿Cómo se llama el estado ficticio de GTA VI?",
+    "ar": "ما اسم الولاية الخيالية في GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "Leonida",
+     "en": "Leonida",
+     "es": "Leonida",
+     "ar": "Leonida"
+    },
+    {
+     "fr": "San Andreas",
+     "en": "San Andreas",
+     "es": "San Andreas",
+     "ar": "San Andreas"
+    },
+    {
+     "fr": "Liberty",
+     "en": "Liberty",
+     "es": "Liberty",
+     "ar": "Liberty"
+    },
+    {
+     "fr": "Alderney",
+     "en": "Alderney",
+     "es": "Alderney",
+     "ar": "Alderney"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-46",
+   "tier": 2,
+   "q": {
+    "fr": "Quel vrai État américain inspire Leonida, dans GTA VI ?",
+    "en": "Which real US state inspired Leonida in GTA VI?",
+    "es": "¿Qué estado real de EE. UU. inspira Leonida en GTA VI?",
+    "ar": "أي ولاية أمريكية حقيقية ألهمت Leonida في GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "la Floride",
+     "en": "Florida",
+     "es": "Florida",
+     "ar": "فلوريدا"
+    },
+    {
+     "fr": "le Texas",
+     "en": "Texas",
+     "es": "Texas",
+     "ar": "تكساس"
+    },
+    {
+     "fr": "la Californie",
+     "en": "California",
+     "es": "California",
+     "ar": "كاليفورنيا"
+    },
+    {
+     "fr": "l'Alaska",
+     "en": "Alaska",
+     "es": "Alaska",
+     "ar": "ألاسكا"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-47",
+   "tier": 1,
+   "q": {
+    "fr": "Comment s'appellent les deux héros de GTA VI ?",
+    "en": "What are the names of GTA VI's two heroes?",
+    "es": "¿Cómo se llaman los dos protagonistas de GTA VI?",
+    "ar": "ما اسما بطلي GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "Lucia et Jason",
+     "en": "Lucia and Jason",
+     "es": "Lucia y Jason",
+     "ar": "لوسيا وجيسون"
+    },
+    {
+     "fr": "Michael et Franklin",
+     "en": "Michael and Franklin",
+     "es": "Michael y Franklin",
+     "ar": "مايكل وفرانكلين"
+    },
+    {
+     "fr": "Niko et Roman",
+     "en": "Niko and Roman",
+     "es": "Niko y Roman",
+     "ar": "نيكو ورومان"
+    },
+    {
+     "fr": "Tommy et Lance",
+     "en": "Tommy and Lance",
+     "es": "Tommy y Lance",
+     "ar": "تومي ولانس"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-48",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle nouveauté représente Lucia dans la série GTA moderne ?",
+    "en": "What is new about Lucia in the modern GTA series?",
+    "es": "¿Qué novedad supone Lucia en la saga GTA moderna?",
+    "ar": "ما الجديد الذي تمثله لوسيا في سلسلة GTA الحديثة؟"
+   },
+   "a": [
+    {
+     "fr": "première héroïne principale jouable",
+     "en": "first playable female lead",
+     "es": "primera protagonista femenina jugable",
+     "ar": "أول بطلة رئيسية قابلة للعب"
+    },
+    {
+     "fr": "première policière",
+     "en": "first police officer",
+     "es": "primera policía",
+     "ar": "أول شرطية"
+    },
+    {
+     "fr": "premier personnage qui vole",
+     "en": "first character who can fly",
+     "es": "primer personaje que vuela",
+     "ar": "أول شخصية تطير"
+    },
+    {
+     "fr": "premier robot",
+     "en": "first robot",
+     "es": "primer robot",
+     "ar": "أول روبوت"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-49",
+   "tier": 2,
+   "q": {
+    "fr": "Sur quelles consoles sort GTA VI au lancement ?",
+    "en": "Which consoles does GTA VI launch on?",
+    "es": "¿En qué consolas sale GTA VI de lanzamiento?",
+    "ar": "على أي أجهزة تصدر GTA VI عند إطلاقها؟"
+   },
+   "a": [
+    {
+     "fr": "PS5 et Xbox Series X|S",
+     "en": "PS5 et Xbox Series X|S",
+     "es": "PS5 et Xbox Series X|S",
+     "ar": "PS5 et Xbox Series X|S"
+    },
+    {
+     "fr": "PS4 et Xbox One",
+     "en": "PS4 et Xbox One",
+     "es": "PS4 et Xbox One",
+     "ar": "PS4 et Xbox One"
+    },
+    {
+     "fr": "Nintendo Switch 2",
+     "en": "Nintendo Switch 2",
+     "es": "Nintendo Switch 2",
+     "ar": "Nintendo Switch 2"
+    },
+    {
+     "fr": "PC uniquement",
+     "en": "PC uniquement",
+     "es": "PC uniquement",
+     "ar": "PC uniquement"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-50",
+   "tier": 2,
+   "q": {
+    "fr": "Quand est sortie la première bande-annonce de GTA VI ?",
+    "en": "When was the first GTA VI trailer released?",
+    "es": "¿Cuándo salió el primer tráiler de GTA VI?",
+    "ar": "متى صدر أول إعلان لـ GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "en décembre 2023",
+     "en": "December 2023",
+     "es": "en diciembre de 2023",
+     "ar": "ديسمبر 2023"
+    },
+    {
+     "fr": "en janvier 2020",
+     "en": "January 2020",
+     "es": "en enero de 2020",
+     "ar": "يناير 2020"
+    },
+    {
+     "fr": "en mai 2026",
+     "en": "May 2026",
+     "es": "en mayo de 2026",
+     "ar": "مايو 2026"
+    },
+    {
+     "fr": "en septembre 2013",
+     "en": "September 2013",
+     "es": "en septiembre de 2013",
+     "ar": "سبتمبر 2013"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-51",
+   "tier": 3,
+   "q": {
+    "fr": "Quelle chanson de Tom Petty accompagne la première bande-annonce de GTA VI ?",
+    "en": "Which Tom Petty song plays in the first GTA VI trailer?",
+    "es": "¿Qué canción de Tom Petty suena en el primer tráiler de GTA VI?",
+    "ar": "أي أغنية لتوم بيتي ترافق أول إعلان لـ GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "Love Is a Long Road",
+     "en": "Love Is a Long Road",
+     "es": "Love Is a Long Road",
+     "ar": "Love Is a Long Road"
+    },
+    {
+     "fr": "Free Fallin’",
+     "en": "Free Fallin’",
+     "es": "Free Fallin’",
+     "ar": "Free Fallin’"
+    },
+    {
+     "fr": "I Won’t Back Down",
+     "en": "I Won’t Back Down",
+     "es": "I Won’t Back Down",
+     "ar": "I Won’t Back Down"
+    },
+    {
+     "fr": "Learning to Fly",
+     "en": "Learning to Fly",
+     "es": "Learning to Fly",
+     "ar": "Learning to Fly"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-52",
+   "tier": 2,
+   "q": {
+    "fr": "Quel record a battu la première bande-annonce de GTA VI ?",
+    "en": "What record did the first GTA VI trailer break?",
+    "es": "¿Qué récord batió el primer tráiler de GTA VI?",
+    "ar": "أي رقم قياسي حطمه أول إعلان لـ GTA VI؟"
+   },
+   "a": [
+    {
+     "fr": "vues sur YouTube en 24 h (hors musique)",
+     "en": "most YouTube views in 24 h (non-music)",
+     "es": "más vistas en YouTube en 24 h (sin música)",
+     "ar": "أكثر مشاهدات على يوتيوب في 24 ساعة (خارج الموسيقى)"
+    },
+    {
+     "fr": "la plus longue bande-annonce",
+     "en": "longest trailer ever",
+     "es": "el tráiler más largo",
+     "ar": "أطول إعلان"
+    },
+    {
+     "fr": "la première en noir et blanc",
+     "en": "first in black and white",
+     "es": "el primero en blanco y negro",
+     "ar": "أول إعلان بالأبيض والأسود"
+    },
+    {
+     "fr": "la moins regardée",
+     "en": "least watched",
+     "es": "el menos visto",
+     "ar": "الأقل مشاهدة"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-53",
+   "tier": 3,
+   "q": {
+    "fr": "Sur quelle console portable est sorti GTA Chinatown Wars en 2009 ?",
+    "en": "On which handheld was GTA Chinatown Wars released in 2009?",
+    "es": "¿En qué portátil salió GTA Chinatown Wars en 2009?",
+    "ar": "على أي جهاز محمول صدرت GTA Chinatown Wars سنة 2009؟"
+   },
+   "a": [
+    {
+     "fr": "Nintendo DS",
+     "en": "Nintendo DS",
+     "es": "Nintendo DS",
+     "ar": "Nintendo DS"
+    },
+    {
+     "fr": "Game Boy Color",
+     "en": "Game Boy Color",
+     "es": "Game Boy Color",
+     "ar": "Game Boy Color"
+    },
+    {
+     "fr": "PS Vita",
+     "en": "PS Vita",
+     "es": "PS Vita",
+     "ar": "PS Vita"
+    },
+    {
+     "fr": "Nintendo Switch",
+     "en": "Nintendo Switch",
+     "es": "Nintendo Switch",
+     "ar": "Nintendo Switch"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-54",
+   "tier": 3,
+   "q": {
+    "fr": "Quelle extension de 1999 se déroule en Angleterre ?",
+    "en": "Which 1999 expansion is set in England?",
+    "es": "¿Qué expansión de 1999 transcurre en Inglaterra?",
+    "ar": "أي توسعة سنة 1999 تدور في إنجلترا؟"
+   },
+   "a": [
+    {
+     "fr": "GTA London 1969",
+     "en": "GTA London 1969",
+     "es": "GTA London 1969",
+     "ar": "GTA London 1969"
+    },
+    {
+     "fr": "GTA Vice City Stories",
+     "en": "GTA Vice City Stories",
+     "es": "GTA Vice City Stories",
+     "ar": "GTA Vice City Stories"
+    },
+    {
+     "fr": "GTA Advance",
+     "en": "GTA Advance",
+     "es": "GTA Advance",
+     "ar": "GTA Advance"
+    },
+    {
+     "fr": "GTA Online",
+     "en": "GTA Online",
+     "es": "GTA Online",
+     "ar": "GTA Online"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-55",
+   "tier": 2,
+   "q": {
+    "fr": "Sur quelle console portable sont sortis Liberty City Stories et Vice City Stories ?",
+    "en": "Which handheld got Liberty City Stories and Vice City Stories?",
+    "es": "¿En qué portátil salieron Liberty City Stories y Vice City Stories?",
+    "ar": "على أي جهاز محمول صدرت Liberty City Stories وVice City Stories؟"
+   },
+   "a": [
+    {
+     "fr": "PSP",
+     "en": "PSP",
+     "es": "PSP",
+     "ar": "PSP"
+    },
+    {
+     "fr": "Nintendo DS",
+     "en": "Nintendo DS",
+     "es": "Nintendo DS",
+     "ar": "Nintendo DS"
+    },
+    {
+     "fr": "Game Boy Advance",
+     "en": "Game Boy Advance",
+     "es": "Game Boy Advance",
+     "ar": "Game Boy Advance"
+    },
+    {
+     "fr": "PS Vita",
+     "en": "PS Vita",
+     "es": "PS Vita",
+     "ar": "PS Vita"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-56",
+   "tier": 2,
+   "q": {
+    "fr": "Quel autre jeu célèbre de Rockstar se passe au Far West ?",
+    "en": "Which other famous Rockstar game is set in the Wild West?",
+    "es": "¿Qué otro juego famoso de Rockstar transcurre en el Lejano Oeste?",
+    "ar": "أي لعبة مشهورة أخرى لـ Rockstar تدور في الغرب الأمريكي؟"
+   },
+   "a": [
+    {
+     "fr": "Red Dead Redemption",
+     "en": "Red Dead Redemption",
+     "es": "Red Dead Redemption",
+     "ar": "Red Dead Redemption"
+    },
+    {
+     "fr": "Minecraft",
+     "en": "Minecraft",
+     "es": "Minecraft",
+     "ar": "Minecraft"
+    },
+    {
+     "fr": "Fortnite",
+     "en": "Fortnite",
+     "es": "Fortnite",
+     "ar": "Fortnite"
+    },
+    {
+     "fr": "The Witcher",
+     "en": "The Witcher",
+     "es": "The Witcher",
+     "ar": "The Witcher"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-57",
+   "tier": 1,
+   "q": {
+    "fr": "Avant GTA VI, quel était le dernier épisode principal de la série ?",
+    "en": "Before GTA VI, what was the latest main game in the series?",
+    "es": "Antes de GTA VI, ¿cuál fue el último juego principal de la saga?",
+    "ar": "قبل GTA VI، ما آخر جزء رئيسي في السلسلة؟"
+   },
+   "a": [
+    {
+     "fr": "GTA V",
+     "en": "GTA V",
+     "es": "GTA V",
+     "ar": "GTA V"
+    },
+    {
+     "fr": "GTA IV",
+     "en": "GTA IV",
+     "es": "GTA IV",
+     "ar": "GTA IV"
+    },
+    {
+     "fr": "GTA San Andreas",
+     "en": "GTA San Andreas",
+     "es": "GTA San Andreas",
+     "ar": "GTA San Andreas"
+    },
+    {
+     "fr": "GTA Online",
+     "en": "GTA Online",
+     "es": "GTA Online",
+     "ar": "GTA Online"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-58",
+   "tier": 3,
+   "q": {
+    "fr": "Combien de générations de consoles GTA V a-t-il connues ?",
+    "en": "On how many console generations has GTA V been released?",
+    "es": "¿En cuántas generaciones de consolas ha salido GTA V?",
+    "ar": "على كم جيل من الأجهزة صدرت GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "3",
+     "en": "3",
+     "es": "3",
+     "ar": "3"
+    },
+    {
+     "fr": "1",
+     "en": "1",
+     "es": "1",
+     "ar": "1"
+    },
+    {
+     "fr": "2",
+     "en": "2",
+     "es": "2",
+     "ar": "2"
+    },
+    {
+     "fr": "4",
+     "en": "4",
+     "es": "4",
+     "ar": "4"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-59",
+   "tier": 3,
+   "q": {
+    "fr": "Pour qui Tommy Vercetti travaille-t-il au début de Vice City ?",
+    "en": "Who does Tommy Vercetti work for at the start of Vice City?",
+    "es": "¿Para quién trabaja Tommy Vercetti al principio de Vice City?",
+    "ar": "لمن يعمل تومي فيرسيتي في بداية Vice City؟"
+   },
+   "a": [
+    {
+     "fr": "Sonny Forelli",
+     "en": "Sonny Forelli",
+     "es": "Sonny Forelli",
+     "ar": "Sonny Forelli"
+    },
+    {
+     "fr": "Big Smoke",
+     "en": "Big Smoke",
+     "es": "Big Smoke",
+     "ar": "Big Smoke"
+    },
+    {
+     "fr": "Lester Crest",
+     "en": "Lester Crest",
+     "es": "Lester Crest",
+     "ar": "Lester Crest"
+    },
+    {
+     "fr": "Dimitri Rascalov",
+     "en": "Dimitri Rascalov",
+     "es": "Dimitri Rascalov",
+     "ar": "Dimitri Rascalov"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-60",
+   "tier": 2,
+   "q": {
+    "fr": "En quelle année sort GTA 2 ?",
+    "en": "When was GTA 2 released?",
+    "es": "¿En qué año salió GTA 2?",
+    "ar": "متى صدرت GTA 2؟"
+   },
+   "a": [
+    {
+     "fr": "1999",
+     "en": "1999",
+     "es": "1999",
+     "ar": "1999"
+    },
+    {
+     "fr": "1997",
+     "en": "1997",
+     "es": "1997",
+     "ar": "1997"
+    },
+    {
+     "fr": "2001",
+     "en": "2001",
+     "es": "2001",
+     "ar": "2001"
+    },
+    {
+     "fr": "2004",
+     "en": "2004",
+     "es": "2004",
+     "ar": "2004"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-61",
+   "tier": 3,
+   "q": {
+    "fr": "Quel ami hacker aide Michael à préparer les braquages dans GTA V ?",
+    "en": "Which hacker friend helps Michael plan heists in GTA V?",
+    "es": "¿Qué amigo hacker ayuda a Michael a planear los golpes en GTA V?",
+    "ar": "أي صديق مخترق يساعد مايكل على التخطيط في GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "Lester Crest",
+     "en": "Lester Crest",
+     "es": "Lester Crest",
+     "ar": "Lester Crest"
+    },
+    {
+     "fr": "Lamar Davis",
+     "en": "Lamar Davis",
+     "es": "Lamar Davis",
+     "ar": "Lamar Davis"
+    },
+    {
+     "fr": "Roman Bellic",
+     "en": "Roman Bellic",
+     "es": "Roman Bellic",
+     "ar": "Roman Bellic"
+    },
+    {
+     "fr": "Ryder",
+     "en": "Ryder",
+     "es": "Ryder",
+     "ar": "Ryder"
+    }
+   ],
+   "emoji": "🎮"
+  },
+  {
+   "id": "wk_gta-62",
+   "tier": 2,
+   "q": {
+    "fr": "Quel est le meilleur ami de Franklin dans GTA V ?",
+    "en": "Who is Franklin's best friend in GTA V?",
+    "es": "¿Quién es el mejor amigo de Franklin en GTA V?",
+    "ar": "من هو أعز أصدقاء فرانكلين في GTA V؟"
+   },
+   "a": [
+    {
+     "fr": "Lamar",
+     "en": "Lamar",
+     "es": "Lamar",
+     "ar": "Lamar"
+    },
+    {
+     "fr": "Roman",
+     "en": "Roman",
+     "es": "Roman",
+     "ar": "Roman"
+    },
+    {
+     "fr": "Lance",
+     "en": "Lance",
+     "es": "Lance",
+     "ar": "Lance"
+    },
+    {
+     "fr": "Ken",
+     "en": "Ken",
+     "es": "Ken",
+     "ar": "Ken"
+    }
+   ],
+   "emoji": "🎮"
+  }
+ ],
+ "dy_eurofoot": [
+  {
+   "id": "dy_eurofoot-1",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1960 ?",
+    "en": "Who won Euro 1960?",
+    "es": "¿Quién ganó la Eurocopa 1960?",
+    "ar": "من فاز ببطولة أمم أوروبا 1960؟"
+   },
+   "a": [
+    {
+     "fr": "URSS",
+     "en": "Soviet Union",
+     "es": "URSS",
+     "ar": "الاتحاد السوفيتي"
+    },
+    {
+     "fr": "Yougoslavie",
+     "en": "Yugoslavia",
+     "es": "Yugoslavia",
+     "ar": "يوغوسلافيا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-2",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1964 ?",
+    "en": "Who won Euro 1964?",
+    "es": "¿Quién ganó la Eurocopa 1964?",
+    "ar": "من فاز ببطولة أمم أوروبا 1964؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "URSS",
+     "en": "Soviet Union",
+     "es": "URSS",
+     "ar": "الاتحاد السوفيتي"
+    },
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-3",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1968 ?",
+    "en": "Who won Euro 1968?",
+    "es": "¿Quién ganó la Eurocopa 1968?",
+    "ar": "من فاز ببطولة أمم أوروبا 1968؟"
+   },
+   "a": [
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Yougoslavie",
+     "en": "Yugoslavia",
+     "es": "Yugoslavia",
+     "ar": "يوغوسلافيا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "URSS",
+     "en": "Soviet Union",
+     "es": "URSS",
+     "ar": "الاتحاد السوفيتي"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-4",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1972 ?",
+    "en": "Who won Euro 1972?",
+    "es": "¿Quién ganó la Eurocopa 1972?",
+    "ar": "من فاز ببطولة أمم أوروبا 1972؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne de l'Ouest",
+     "en": "West Germany",
+     "es": "Alemania Occidental",
+     "ar": "ألمانيا الغربية"
+    },
+    {
+     "fr": "URSS",
+     "en": "Soviet Union",
+     "es": "URSS",
+     "ar": "الاتحاد السوفيتي"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-5",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1976 ?",
+    "en": "Who won Euro 1976?",
+    "es": "¿Quién ganó la Eurocopa 1976?",
+    "ar": "من فاز ببطولة أمم أوروبا 1976؟"
+   },
+   "a": [
+    {
+     "fr": "Tchécoslovaquie",
+     "en": "Czechoslovakia",
+     "es": "Checoslovaquia",
+     "ar": "تشيكوسلوفاكيا"
+    },
+    {
+     "fr": "Allemagne de l'Ouest",
+     "en": "West Germany",
+     "es": "Alemania Occidental",
+     "ar": "ألمانيا الغربية"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Yougoslavie",
+     "en": "Yugoslavia",
+     "es": "Yugoslavia",
+     "ar": "يوغوسلافيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-6",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1980 ?",
+    "en": "Who won Euro 1980?",
+    "es": "¿Quién ganó la Eurocopa 1980?",
+    "ar": "من فاز ببطولة أمم أوروبا 1980؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne de l'Ouest",
+     "en": "West Germany",
+     "es": "Alemania Occidental",
+     "ar": "ألمانيا الغربية"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Tchécoslovaquie",
+     "en": "Czechoslovakia",
+     "es": "Checoslovaquia",
+     "ar": "تشيكوسلوفاكيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-7",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1984 ?",
+    "en": "Who won Euro 1984?",
+    "es": "¿Quién ganó la Eurocopa 1984?",
+    "ar": "من فاز ببطولة أمم أوروبا 1984؟"
+   },
+   "a": [
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-8",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1988 ?",
+    "en": "Who won Euro 1988?",
+    "es": "¿Quién ganó la Eurocopa 1988?",
+    "ar": "من فاز ببطولة أمم أوروبا 1988؟"
+   },
+   "a": [
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "URSS",
+     "en": "Soviet Union",
+     "es": "URSS",
+     "ar": "الاتحاد السوفيتي"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Allemagne de l'Ouest",
+     "en": "West Germany",
+     "es": "Alemania Occidental",
+     "ar": "ألمانيا الغربية"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-9",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1992 ?",
+    "en": "Who won Euro 1992?",
+    "es": "¿Quién ganó la Eurocopa 1992?",
+    "ar": "من فاز ببطولة أمم أوروبا 1992؟"
+   },
+   "a": [
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Suède",
+     "en": "Sweden",
+     "es": "Suecia",
+     "ar": "السويد"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-10",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté l'Euro 1996 ?",
+    "en": "Who won Euro 1996?",
+    "es": "¿Quién ganó la Eurocopa 1996?",
+    "ar": "من فاز ببطولة أمم أوروبا 1996؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Tchécoslovaquie",
+     "en": "Czechoslovakia",
+     "es": "Checoslovaquia",
+     "ar": "تشيكوسلوفاكيا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-11",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2000 ?",
+    "en": "Who won Euro 2000?",
+    "es": "¿Quién ganó la Eurocopa 2000?",
+    "ar": "من فاز ببطولة أمم أوروبا 2000؟"
+   },
+   "a": [
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-12",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2004 ?",
+    "en": "Who won Euro 2004?",
+    "es": "¿Quién ganó la Eurocopa 2004?",
+    "ar": "من فاز ببطولة أمم أوروبا 2004؟"
+   },
+   "a": [
+    {
+     "fr": "Grèce",
+     "en": "Greece",
+     "es": "Grecia",
+     "ar": "اليونان"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-13",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2008 ?",
+    "en": "Who won Euro 2008?",
+    "es": "¿Quién ganó la Eurocopa 2008?",
+    "ar": "من فاز ببطولة أمم أوروبا 2008؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Turquie",
+     "en": "Turkey",
+     "es": "Turquía",
+     "ar": "تركيا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-14",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2012 ?",
+    "en": "Who won Euro 2012?",
+    "es": "¿Quién ganó la Eurocopa 2012?",
+    "ar": "من فاز ببطولة أمم أوروبا 2012؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-15",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2016 ?",
+    "en": "Who won Euro 2016?",
+    "es": "¿Quién ganó la Eurocopa 2016?",
+    "ar": "من فاز ببطولة أمم أوروبا 2016؟"
+   },
+   "a": [
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "pays de Galles",
+     "en": "Wales",
+     "es": "Gales",
+     "ar": "ويلز"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-16",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2020 ?",
+    "en": "Who won Euro 2020?",
+    "es": "¿Quién ganó la Eurocopa 2020?",
+    "ar": "من فاز ببطولة أمم أوروبا 2020؟"
+   },
+   "a": [
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-17",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté l'Euro 2024 ?",
+    "en": "Who won Euro 2024?",
+    "es": "¿Quién ganó la Eurocopa 2024?",
+    "ar": "من فاز ببطولة أمم أوروبا 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-18",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection a remporté le plus d'Euros (4) ?",
+    "en": "Which team has won the most Euros (4)?",
+    "es": "¿Qué selección ha ganado más Eurocopas (4)?",
+    "ar": "أي منتخب فاز بأكبر عدد من بطولات أمم أوروبا (4)؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-19",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a remporté la Coupe du monde 2026 ?",
+    "en": "Who won the 2026 World Cup?",
+    "es": "¿Quién ganó el Mundial 2026?",
+    "ar": "من فاز بكأس العالم 2026؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Argentine",
+     "en": "Argentina",
+     "es": "Argentina",
+     "ar": "الأرجنتين"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-20",
+   "tier": 2,
+   "q": {
+    "fr": "Contre qui l'Espagne a-t-elle gagné la finale du Mondial 2026 ?",
+    "en": "Who did Spain beat in the 2026 World Cup final?",
+    "es": "¿A quién ganó España en la final del Mundial 2026?",
+    "ar": "على من فازت إسبانيا في نهائي كأس العالم 2026؟"
+   },
+   "a": [
+    {
+     "fr": "Argentine",
+     "en": "Argentina",
+     "es": "Argentina",
+     "ar": "الأرجنتين"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Brésil",
+     "en": "Brazil",
+     "es": "Brasil",
+     "ar": "البرازيل"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-21",
+   "tier": 2,
+   "q": {
+    "fr": "Quel a été le score de la finale du Mondial 2026 ?",
+    "en": "What was the score of the 2026 World Cup final?",
+    "es": "¿Cuál fue el resultado de la final del Mundial 2026?",
+    "ar": "ما نتيجة نهائي كأس العالم 2026؟"
+   },
+   "a": [
+    {
+     "fr": "1-0 après prolongation",
+     "en": "1-0 after extra time",
+     "es": "1-0 en la prórroga",
+     "ar": "1-0 بعد الأشواط الإضافية"
+    },
+    {
+     "fr": "2-1",
+     "en": "2-1",
+     "es": "2-1",
+     "ar": "2-1"
+    },
+    {
+     "fr": "2-2",
+     "en": "2-2",
+     "es": "2-2",
+     "ar": "2-2"
+    },
+    {
+     "fr": "4-2",
+     "en": "4-2",
+     "es": "4-2",
+     "ar": "4-2"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-22",
+   "tier": 3,
+   "q": {
+    "fr": "Quel record l'Espagne a-t-elle établi en 2026 ?",
+    "en": "What record did Spain set in 2026?",
+    "es": "¿Qué récord estableció España en 2026?",
+    "ar": "أي رقم قياسي حققته إسبانيا سنة 2026؟"
+   },
+   "a": [
+    {
+     "fr": "championne du monde chez les hommes et les femmes en même temps",
+     "en": "men’s and women’s world champions at the same time",
+     "es": "campeona del mundo masculina y femenina a la vez",
+     "ar": "بطلة العالم للرجال والسيدات في الوقت نفسه"
+    },
+    {
+     "fr": "100 buts dans le tournoi",
+     "en": "100 goals in the tournament",
+     "es": "100 goles en el torneo",
+     "ar": "100 هدف في البطولة"
+    },
+    {
+     "fr": "aucun remplacement",
+     "en": "no substitutions",
+     "es": "ningún cambio",
+     "ar": "دون أي تبديل"
+    },
+    {
+     "fr": "vainqueur sans gardien",
+     "en": "won without a goalkeeper",
+     "es": "ganó sin portero",
+     "ar": "فازت دون حارس"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-23",
+   "tier": 2,
+   "q": {
+    "fr": "Combien de Coupes du monde l'Espagne a-t-elle gagnées après 2026 ?",
+    "en": "How many World Cups has Spain won after 2026?",
+    "es": "¿Cuántos Mundiales tiene España tras 2026?",
+    "ar": "كم كأس عالم فازت بها إسبانيا بعد 2026؟"
+   },
+   "a": [
+    {
+     "fr": "2",
+     "en": "2",
+     "es": "2",
+     "ar": "2"
+    },
+    {
+     "fr": "1",
+     "en": "1",
+     "es": "1",
+     "ar": "1"
+    },
+    {
+     "fr": "3",
+     "en": "3",
+     "es": "3",
+     "ar": "3"
+    },
+    {
+     "fr": "4",
+     "en": "4",
+     "es": "4",
+     "ar": "4"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-24",
+   "tier": 2,
+   "q": {
+    "fr": "Quelles sélections européennes ont gagné 4 Coupes du monde ?",
+    "en": "Which European teams have won 4 World Cups?",
+    "es": "¿Qué selecciones europeas tienen 4 Mundiales?",
+    "ar": "أي منتخبات أوروبية فازت بـ 4 كؤوس عالم؟"
+   },
+   "a": [
+    {
+     "fr": "l'Italie et l'Allemagne",
+     "en": "Italy and Germany",
+     "es": "Italia y Alemania",
+     "ar": "إيطاليا وألمانيا"
+    },
+    {
+     "fr": "la France et l’Espagne",
+     "en": "France and Spain",
+     "es": "Francia y España",
+     "ar": "فرنسا وإسبانيا"
+    },
+    {
+     "fr": "l'Angleterre et les Pays-Bas",
+     "en": "England and the Netherlands",
+     "es": "Inglaterra y Países Bajos",
+     "ar": "إنجلترا وهولندا"
+    },
+    {
+     "fr": "le Portugal et la Belgique",
+     "en": "Portugal and Belgium",
+     "es": "Portugal y Bélgica",
+     "ar": "البرتغال وبلجيكا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-25",
+   "tier": 1,
+   "q": {
+    "fr": "En quelle année l'Angleterre a-t-elle gagné sa seule Coupe du monde ?",
+    "en": "When did England win its only World Cup?",
+    "es": "¿En qué año ganó Inglaterra su único Mundial?",
+    "ar": "متى فازت إنجلترا بكأس العالم الوحيدة؟"
+   },
+   "a": [
+    {
+     "fr": "1966",
+     "en": "1966",
+     "es": "1966",
+     "ar": "1966"
+    },
+    {
+     "fr": "1970",
+     "en": "1970",
+     "es": "1970",
+     "ar": "1970"
+    },
+    {
+     "fr": "1990",
+     "en": "1990",
+     "es": "1990",
+     "ar": "1990"
+    },
+    {
+     "fr": "1954",
+     "en": "1954",
+     "es": "1954",
+     "ar": "1954"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-26",
+   "tier": 1,
+   "q": {
+    "fr": "En quelles années la France a-t-elle été championne du monde ?",
+    "en": "In which years did France win the World Cup?",
+    "es": "¿En qué años Francia fue campeona del mundo?",
+    "ar": "في أي سنوات فازت فرنسا بكأس العالم؟"
+   },
+   "a": [
+    {
+     "fr": "1998 et 2018",
+     "en": "1998 and 2018",
+     "es": "1998 y 2018",
+     "ar": "1998 و2018"
+    },
+    {
+     "fr": "1984 et 2000",
+     "en": "1984 and 2000",
+     "es": "1984 y 2000",
+     "ar": "1984 و2000"
+    },
+    {
+     "fr": "2006 et 2022",
+     "en": "2006 and 2022",
+     "es": "2006 y 2022",
+     "ar": "2006 و2022"
+    },
+    {
+     "fr": "1958 et 1986",
+     "en": "1958 and 1986",
+     "es": "1958 y 1986",
+     "ar": "1958 و1986"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-27",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a gagné la Coupe du monde 2010 ?",
+    "en": "Who won the 2010 World Cup?",
+    "es": "¿Quién ganó el Mundial 2010?",
+    "ar": "من فاز بكأس العالم 2010؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-28",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a marqué le but de la victoire en finale du Mondial 2010 ?",
+    "en": "Who scored the winning goal in the 2010 World Cup final?",
+    "es": "¿Quién marcó el gol de la victoria en la final de 2010?",
+    "ar": "من سجل هدف الفوز في نهائي 2010؟"
+   },
+   "a": [
+    {
+     "fr": "Andrés Iniesta",
+     "en": "Andrés Iniesta",
+     "es": "Andrés Iniesta",
+     "ar": "Andrés Iniesta"
+    },
+    {
+     "fr": "David Villa",
+     "en": "David Villa",
+     "es": "David Villa",
+     "ar": "David Villa"
+    },
+    {
+     "fr": "Fernando Torres",
+     "en": "Fernando Torres",
+     "es": "Fernando Torres",
+     "ar": "Fernando Torres"
+    },
+    {
+     "fr": "Xavi",
+     "en": "Xavi",
+     "es": "Xavi",
+     "ar": "Xavi"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-29",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a gagné la Coupe du monde 2006 ?",
+    "en": "Who won the 2006 World Cup?",
+    "es": "¿Quién ganó el Mundial 2006?",
+    "ar": "من فاز بكأس العالم 2006؟"
+   },
+   "a": [
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-30",
+   "tier": 1,
+   "q": {
+    "fr": "Qui a gagné la Coupe du monde 2014 ?",
+    "en": "Who won the 2014 World Cup?",
+    "es": "¿Quién ganó el Mundial 2014?",
+    "ar": "من فاز بكأس العالم 2014؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Argentine",
+     "en": "Argentina",
+     "es": "Argentina",
+     "ar": "الأرجنتين"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Brésil",
+     "en": "Brazil",
+     "es": "Brasil",
+     "ar": "البرازيل"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-31",
+   "tier": 2,
+   "q": {
+    "fr": "Quel score l'Allemagne a-t-elle infligé au Brésil en demi-finale en 2014 ?",
+    "en": "By what score did Germany beat Brazil in the 2014 semi-final?",
+    "es": "¿Por cuánto ganó Alemania a Brasil en la semifinal de 2014?",
+    "ar": "بأي نتيجة فازت ألمانيا على البرازيل في نصف نهائي 2014؟"
+   },
+   "a": [
+    {
+     "fr": "7-1",
+     "en": "7-1",
+     "es": "7-1",
+     "ar": "7-1"
+    },
+    {
+     "fr": "3-0",
+     "en": "3-0",
+     "es": "3-0",
+     "ar": "3-0"
+    },
+    {
+     "fr": "2-1",
+     "en": "2-1",
+     "es": "2-1",
+     "ar": "2-1"
+    },
+    {
+     "fr": "5-2",
+     "en": "5-2",
+     "es": "5-2",
+     "ar": "5-2"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-32",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a perdu trois finales de Coupe du monde (1974, 1978, 2010) ?",
+    "en": "Which team lost three World Cup finals (1974, 1978, 2010)?",
+    "es": "¿Qué selección perdió tres finales del Mundial (1974, 1978, 2010)?",
+    "ar": "أي منتخب خسر ثلاث نهائيات لكأس العالم (1974، 1978، 2010)؟"
+   },
+   "a": [
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-33",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a atteint la finale du Mondial 2018 contre la France ?",
+    "en": "Which team reached the 2018 World Cup final against France?",
+    "es": "¿Qué selección jugó la final de 2018 contra Francia?",
+    "ar": "أي منتخب بلغ نهائي 2018 أمام فرنسا؟"
+   },
+   "a": [
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-34",
+   "tier": 2,
+   "q": {
+    "fr": "Quel joueur croate a reçu le Ballon d'Or 2018 ?",
+    "en": "Which Croatian player won the 2018 Ballon d'Or?",
+    "es": "¿Qué jugador croata ganó el Balón de Oro 2018?",
+    "ar": "أي لاعب كرواتي فاز بالكرة الذهبية 2018؟"
+   },
+   "a": [
+    {
+     "fr": "Luka Modrić",
+     "en": "Luka Modrić",
+     "es": "Luka Modrić",
+     "ar": "Luka Modrić"
+    },
+    {
+     "fr": "Ivan Rakitić",
+     "en": "Ivan Rakitić",
+     "es": "Ivan Rakitić",
+     "ar": "Ivan Rakitić"
+    },
+    {
+     "fr": "Mario Mandžukić",
+     "en": "Mario Mandžukić",
+     "es": "Mario Mandžukić",
+     "ar": "Mario Mandžukić"
+    },
+    {
+     "fr": "Ivan Perišić",
+     "en": "Ivan Perišić",
+     "es": "Ivan Perišić",
+     "ar": "Ivan Perišić"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-35",
+   "tier": 1,
+   "q": {
+    "fr": "Qui détient le record de buts en sélection chez les hommes ?",
+    "en": "Who holds the men's record for international goals?",
+    "es": "¿Quién tiene el récord de goles con su selección (masculino)?",
+    "ar": "من يحمل الرقم القياسي لأهداف المنتخبات عند الرجال؟"
+   },
+   "a": [
+    {
+     "fr": "Cristiano Ronaldo",
+     "en": "Cristiano Ronaldo",
+     "es": "Cristiano Ronaldo",
+     "ar": "Cristiano Ronaldo"
+    },
+    {
+     "fr": "Lionel Messi",
+     "en": "Lionel Messi",
+     "es": "Lionel Messi",
+     "ar": "Lionel Messi"
+    },
+    {
+     "fr": "Miroslav Klose",
+     "en": "Miroslav Klose",
+     "es": "Miroslav Klose",
+     "ar": "Miroslav Klose"
+    },
+    {
+     "fr": "Pelé",
+     "en": "Pelé",
+     "es": "Pelé",
+     "ar": "Pelé"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-36",
+   "tier": 1,
+   "q": {
+    "fr": "Quel est le plus grand buteur de l'histoire de l'Euro ?",
+    "en": "Who is the all-time top scorer in Euro history?",
+    "es": "¿Quién es el máximo goleador de la historia de la Eurocopa?",
+    "ar": "من هو الهداف التاريخي لبطولة أمم أوروبا؟"
+   },
+   "a": [
+    {
+     "fr": "Cristiano Ronaldo",
+     "en": "Cristiano Ronaldo",
+     "es": "Cristiano Ronaldo",
+     "ar": "Cristiano Ronaldo"
+    },
+    {
+     "fr": "Michel Platini",
+     "en": "Michel Platini",
+     "es": "Michel Platini",
+     "ar": "Michel Platini"
+    },
+    {
+     "fr": "Antoine Griezmann",
+     "en": "Antoine Griezmann",
+     "es": "Antoine Griezmann",
+     "ar": "Antoine Griezmann"
+    },
+    {
+     "fr": "Alan Shearer",
+     "en": "Alan Shearer",
+     "es": "Alan Shearer",
+     "ar": "Alan Shearer"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-37",
+   "tier": 2,
+   "q": {
+    "fr": "Combien de buts Michel Platini a-t-il marqués à l'Euro 1984 (record sur un seul tournoi) ?",
+    "en": "How many goals did Michel Platini score at Euro 1984 (single-tournament record)?",
+    "es": "¿Cuántos goles marcó Platini en la Euro 1984 (récord en un torneo)?",
+    "ar": "كم هدفًا سجل بلاتيني في يورو 1984 (رقم قياسي في بطولة واحدة)؟"
+   },
+   "a": [
+    {
+     "fr": "9",
+     "en": "9",
+     "es": "9",
+     "ar": "9"
+    },
+    {
+     "fr": "5",
+     "en": "5",
+     "es": "5",
+     "ar": "5"
+    },
+    {
+     "fr": "7",
+     "en": "7",
+     "es": "7",
+     "ar": "7"
+    },
+    {
+     "fr": "12",
+     "en": "12",
+     "es": "12",
+     "ar": "12"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-38",
+   "tier": 2,
+   "q": {
+    "fr": "Quel pays a organisé l'Euro 2024 ?",
+    "en": "Which country hosted Euro 2024?",
+    "es": "¿Qué país organizó la Eurocopa 2024?",
+    "ar": "أي بلد نظم يورو 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-39",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quelle ville s'est jouée la finale de l'Euro 2024 ?",
+    "en": "In which city was the Euro 2024 final played?",
+    "es": "¿En qué ciudad se jugó la final de la Euro 2024?",
+    "ar": "في أي مدينة لُعب نهائي يورو 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Berlin",
+     "en": "Berlin",
+     "es": "Berlín",
+     "ar": "برلين"
+    },
+    {
+     "fr": "Munich",
+     "en": "Munich",
+     "es": "Múnich",
+     "ar": "ميونخ"
+    },
+    {
+     "fr": "Dortmund",
+     "en": "Dortmund",
+     "es": "Dortmund",
+     "ar": "دورتموند"
+    },
+    {
+     "fr": "Hambourg",
+     "en": "Hamburg",
+     "es": "Hamburgo",
+     "ar": "هامبورغ"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-40",
+   "tier": 2,
+   "q": {
+    "fr": "Quel score en finale de l'Euro 2024 entre l'Espagne et l'Angleterre ?",
+    "en": "What was the score of the Euro 2024 final, Spain v England?",
+    "es": "¿Resultado de la final de la Euro 2024, España-Inglaterra?",
+    "ar": "ما نتيجة نهائي يورو 2024 بين إسبانيا وإنجلترا؟"
+   },
+   "a": [
+    {
+     "fr": "2-1",
+     "en": "2-1",
+     "es": "2-1",
+     "ar": "2-1"
+    },
+    {
+     "fr": "1-0",
+     "en": "1-0",
+     "es": "1-0",
+     "ar": "1-0"
+    },
+    {
+     "fr": "3-1",
+     "en": "3-1",
+     "es": "3-1",
+     "ar": "3-1"
+    },
+    {
+     "fr": "0-0",
+     "en": "0-0",
+     "es": "0-0",
+     "ar": "0-0"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-41",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a été élu meilleur jeune joueur de l'Euro 2024 ?",
+    "en": "Who was named Young Player of Euro 2024?",
+    "es": "¿Quién fue el mejor jugador joven de la Euro 2024?",
+    "ar": "من اختير أفضل لاعب شاب في يورو 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Lamine Yamal",
+     "en": "Lamine Yamal",
+     "es": "Lamine Yamal",
+     "ar": "Lamine Yamal"
+    },
+    {
+     "fr": "Jude Bellingham",
+     "en": "Jude Bellingham",
+     "es": "Jude Bellingham",
+     "ar": "Jude Bellingham"
+    },
+    {
+     "fr": "Jamal Musiala",
+     "en": "Jamal Musiala",
+     "es": "Jamal Musiala",
+     "ar": "Jamal Musiala"
+    },
+    {
+     "fr": "Kobbie Mainoo",
+     "en": "Kobbie Mainoo",
+     "es": "Kobbie Mainoo",
+     "ar": "Kobbie Mainoo"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-42",
+   "tier": 3,
+   "q": {
+    "fr": "Qui a été élu meilleur joueur de l'Euro 2024 ?",
+    "en": "Who was named Player of the Tournament at Euro 2024?",
+    "es": "¿Quién fue el mejor jugador de la Euro 2024?",
+    "ar": "من اختير أفضل لاعب في يورو 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Rodri",
+     "en": "Rodri",
+     "es": "Rodri",
+     "ar": "Rodri"
+    },
+    {
+     "fr": "Harry Kane",
+     "en": "Harry Kane",
+     "es": "Harry Kane",
+     "ar": "Harry Kane"
+    },
+    {
+     "fr": "Kylian Mbappé",
+     "en": "Kylian Mbappé",
+     "es": "Kylian Mbappé",
+     "ar": "Kylian Mbappé"
+    },
+    {
+     "fr": "Dani Olmo",
+     "en": "Dani Olmo",
+     "es": "Dani Olmo",
+     "ar": "Dani Olmo"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-43",
+   "tier": 2,
+   "q": {
+    "fr": "Quels pays organiseront l'Euro 2028 ?",
+    "en": "Which countries will host Euro 2028?",
+    "es": "¿Qué países organizarán la Euro 2028?",
+    "ar": "أي دول ستنظم يورو 2028؟"
+   },
+   "a": [
+    {
+     "fr": "le Royaume-Uni et l’Irlande",
+     "en": "the UK and Ireland",
+     "es": "Reino Unido e Irlanda",
+     "ar": "المملكة المتحدة وأيرلندا"
+    },
+    {
+     "fr": "la France et la Belgique",
+     "en": "France and Belgium",
+     "es": "Francia y Bélgica",
+     "ar": "فرنسا وبلجيكا"
+    },
+    {
+     "fr": "l'Espagne et le Portugal",
+     "en": "Spain and Portugal",
+     "es": "España y Portugal",
+     "ar": "إسبانيا والبرتغال"
+    },
+    {
+     "fr": "les pays nordiques",
+     "en": "the Nordic countries",
+     "es": "los países nórdicos",
+     "ar": "دول الشمال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-44",
+   "tier": 2,
+   "q": {
+    "fr": "Quels pays organiseront l'Euro 2032 ?",
+    "en": "Which countries will host Euro 2032?",
+    "es": "¿Qué países organizarán la Euro 2032?",
+    "ar": "أي دول ستنظم يورو 2032؟"
+   },
+   "a": [
+    {
+     "fr": "l'Italie et la Turquie",
+     "en": "Italy and Turkey",
+     "es": "Italia y Turquía",
+     "ar": "إيطاليا وتركيا"
+    },
+    {
+     "fr": "l'Allemagne et l'Autriche",
+     "en": "Germany and Austria",
+     "es": "Alemania y Austria",
+     "ar": "ألمانيا والنمسا"
+    },
+    {
+     "fr": "la Grèce et Chypre",
+     "en": "Greece and Cyprus",
+     "es": "Grecia y Chipre",
+     "ar": "اليونان وقبرص"
+    },
+    {
+     "fr": "la Pologne et l’Ukraine",
+     "en": "Poland and Ukraine",
+     "es": "Polonia y Ucrania",
+     "ar": "بولندا وأوكرانيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-45",
+   "tier": 1,
+   "q": {
+    "fr": "Tous les combien d'années se joue l'Euro ?",
+    "en": "How often is the Euro played?",
+    "es": "¿Cada cuántos años se juega la Eurocopa?",
+    "ar": "كل كم سنة تقام بطولة أمم أوروبا؟"
+   },
+   "a": [
+    {
+     "fr": "tous les 4 ans",
+     "en": "every 4 years",
+     "es": "cada 4 años",
+     "ar": "كل 4 سنوات"
+    },
+    {
+     "fr": "tous les ans",
+     "en": "every year",
+     "es": "cada año",
+     "ar": "كل سنة"
+    },
+    {
+     "fr": "tous les 2 ans",
+     "en": "every 2 years",
+     "es": "cada 2 años",
+     "ar": "كل سنتين"
+    },
+    {
+     "fr": "tous les 5 ans",
+     "en": "every 5 years",
+     "es": "cada 5 años",
+     "ar": "كل 5 سنوات"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-46",
+   "tier": 2,
+   "q": {
+    "fr": "Combien d'équipes jouent la phase finale de l'Euro depuis 2016 ?",
+    "en": "How many teams play in the Euro finals since 2016?",
+    "es": "¿Cuántas selecciones juegan la fase final de la Euro desde 2016?",
+    "ar": "كم منتخبًا يشارك في نهائيات يورو منذ 2016؟"
+   },
+   "a": [
+    {
+     "fr": "24",
+     "en": "24",
+     "es": "24",
+     "ar": "24"
+    },
+    {
+     "fr": "16",
+     "en": "16",
+     "es": "16",
+     "ar": "16"
+    },
+    {
+     "fr": "32",
+     "en": "32",
+     "es": "32",
+     "ar": "32"
+    },
+    {
+     "fr": "48",
+     "en": "48",
+     "es": "48",
+     "ar": "48"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-47",
+   "tier": 2,
+   "q": {
+    "fr": "Comment s'appelle le trophée de l'Euro ?",
+    "en": "What is the Euro trophy called?",
+    "es": "¿Cómo se llama el trofeo de la Eurocopa?",
+    "ar": "ما اسم كأس بطولة أمم أوروبا؟"
+   },
+   "a": [
+    {
+     "fr": "Coupe Henri-Delaunay",
+     "en": "Henri Delaunay Cup",
+     "es": "Copa Henri Delaunay",
+     "ar": "كأس هنري ديلوناي"
+    },
+    {
+     "fr": "Coupe Jules-Rimet",
+     "en": "Jules Rimet Trophy",
+     "es": "Copa Jules Rimet",
+     "ar": "كأس جول ريميه"
+    },
+    {
+     "fr": "Coupe Stanley",
+     "en": "Stanley Cup",
+     "es": "Copa Stanley",
+     "ar": "كأس ستانلي"
+    },
+    {
+     "fr": "Coupe Davis",
+     "en": "Davis Cup",
+     "es": "Copa Davis",
+     "ar": "كأس ديفيز"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-48",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quel pays se trouve le siège de l'UEFA ?",
+    "en": "In which country is UEFA's headquarters?",
+    "es": "¿En qué país está la sede de la UEFA?",
+    "ar": "في أي بلد يوجد مقر الاتحاد الأوروبي لكرة القدم؟"
+   },
+   "a": [
+    {
+     "fr": "Suisse",
+     "en": "Switzerland",
+     "es": "Suiza",
+     "ar": "سويسرا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-49",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a remplacé la Yougoslavie à l'Euro 1992… et l'a gagné ?",
+    "en": "Which team replaced Yugoslavia at Euro 1992… and won it?",
+    "es": "¿Qué selección sustituyó a Yugoslavia en la Euro 1992… y la ganó?",
+    "ar": "أي منتخب عوّض يوغوسلافيا في يورو 1992… وفاز بها؟"
+   },
+   "a": [
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    },
+    {
+     "fr": "Suède",
+     "en": "Sweden",
+     "es": "Suecia",
+     "ar": "السويد"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-50",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a marqué le but de la victoire de la Grèce en finale de l'Euro 2004 ?",
+    "en": "Who scored Greece's winner in the Euro 2004 final?",
+    "es": "¿Quién marcó el gol de Grecia en la final de la Euro 2004?",
+    "ar": "من سجل هدف فوز اليونان في نهائي يورو 2004؟"
+   },
+   "a": [
+    {
+     "fr": "Angelos Charisteas",
+     "en": "Angelos Charisteas",
+     "es": "Angelos Charisteas",
+     "ar": "Angelos Charisteas"
+    },
+    {
+     "fr": "Theodoros Zagorakis",
+     "en": "Theodoros Zagorakis",
+     "es": "Theodoros Zagorakis",
+     "ar": "Theodoros Zagorakis"
+    },
+    {
+     "fr": "Giorgos Karagounis",
+     "en": "Giorgos Karagounis",
+     "es": "Giorgos Karagounis",
+     "ar": "Giorgos Karagounis"
+    },
+    {
+     "fr": "Traianos Dellas",
+     "en": "Traianos Dellas",
+     "es": "Traianos Dellas",
+     "ar": "Traianos Dellas"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-51",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a marqué le but du titre du Portugal en finale de l'Euro 2016 ?",
+    "en": "Who scored Portugal's winning goal in the Euro 2016 final?",
+    "es": "¿Quién marcó el gol del título de Portugal en la final de la Euro 2016?",
+    "ar": "من سجل هدف تتويج البرتغال في نهائي يورو 2016؟"
+   },
+   "a": [
+    {
+     "fr": "Éder",
+     "en": "Éder",
+     "es": "Éder",
+     "ar": "Éder"
+    },
+    {
+     "fr": "Cristiano Ronaldo",
+     "en": "Cristiano Ronaldo",
+     "es": "Cristiano Ronaldo",
+     "ar": "Cristiano Ronaldo"
+    },
+    {
+     "fr": "Nani",
+     "en": "Nani",
+     "es": "Nani",
+     "ar": "Nani"
+    },
+    {
+     "fr": "Renato Sanches",
+     "en": "Renato Sanches",
+     "es": "Renato Sanches",
+     "ar": "Renato Sanches"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-52",
+   "tier": 2,
+   "q": {
+    "fr": "Dans quel stade s'est jouée la finale de l'Euro 2016 ?",
+    "en": "In which stadium was the Euro 2016 final played?",
+    "es": "¿En qué estadio se jugó la final de la Euro 2016?",
+    "ar": "في أي ملعب لُعب نهائي يورو 2016؟"
+   },
+   "a": [
+    {
+     "fr": "Stade de France",
+     "en": "Stade de France",
+     "es": "Stade de France",
+     "ar": "ملعب فرنسا"
+    },
+    {
+     "fr": "Wembley",
+     "en": "Wembley",
+     "es": "Wembley",
+     "ar": "ويمبلي"
+    },
+    {
+     "fr": "Allianz Arena",
+     "en": "Allianz Arena",
+     "es": "Allianz Arena",
+     "ar": "أليانز أرينا"
+    },
+    {
+     "fr": "Santiago-Bernabéu",
+     "en": "Santiago Bernabéu",
+     "es": "Santiago Bernabéu",
+     "ar": "سانتياغو برنابيو"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-53",
+   "tier": 2,
+   "q": {
+    "fr": "Comment l'Italie a-t-elle battu l'Angleterre en finale de l'Euro 2020 ?",
+    "en": "How did Italy beat England in the Euro 2020 final?",
+    "es": "¿Cómo ganó Italia a Inglaterra en la final de la Euro 2020?",
+    "ar": "كيف فازت إيطاليا على إنجلترا في نهائي يورو 2020؟"
+   },
+   "a": [
+    {
+     "fr": "aux tirs au but",
+     "en": "on penalties",
+     "es": "en los penaltis",
+     "ar": "بركلات الترجيح"
+    },
+    {
+     "fr": "3-0",
+     "en": "3-0",
+     "es": "3-0",
+     "ar": "3-0"
+    },
+    {
+     "fr": "par un but en or",
+     "en": "with a golden goal",
+     "es": "con un gol de oro",
+     "ar": "بهدف ذهبي"
+    },
+    {
+     "fr": "sur tapis vert",
+     "en": "by forfeit",
+     "es": "en los despachos",
+     "ar": "بقرار إداري"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-54",
+   "tier": 3,
+   "q": {
+    "fr": "En quelle année l'Euro 2020 s'est-il réellement joué ?",
+    "en": "In what year was Euro 2020 actually played?",
+    "es": "¿En qué año se jugó realmente la Euro 2020?",
+    "ar": "في أي سنة لُعبت يورو 2020 فعليًا؟"
+   },
+   "a": [
+    {
+     "fr": "2021",
+     "en": "2021",
+     "es": "2021",
+     "ar": "2021"
+    },
+    {
+     "fr": "2020",
+     "en": "2020",
+     "es": "2020",
+     "ar": "2020"
+    },
+    {
+     "fr": "2019",
+     "en": "2019",
+     "es": "2019",
+     "ar": "2019"
+    },
+    {
+     "fr": "2022",
+     "en": "2022",
+     "es": "2022",
+     "ar": "2022"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-55",
+   "tier": 2,
+   "q": {
+    "fr": "Quel gardien soviétique est le seul à avoir reçu le Ballon d'Or (1963) ?",
+    "en": "Which Soviet goalkeeper is the only one to win the Ballon d'Or (1963)?",
+    "es": "¿Qué portero soviético es el único con Balón de Oro (1963)?",
+    "ar": "أي حارس سوفيتي هو الوحيد الفائز بالكرة الذهبية (1963)؟"
+   },
+   "a": [
+    {
+     "fr": "Lev Yachine",
+     "en": "Lev Yachine",
+     "es": "Lev Yachine",
+     "ar": "Lev Yachine"
+    },
+    {
+     "fr": "Gianluigi Buffon",
+     "en": "Gianluigi Buffon",
+     "es": "Gianluigi Buffon",
+     "ar": "Gianluigi Buffon"
+    },
+    {
+     "fr": "Oliver Kahn",
+     "en": "Oliver Kahn",
+     "es": "Oliver Kahn",
+     "ar": "Oliver Kahn"
+    },
+    {
+     "fr": "Iker Casillas",
+     "en": "Iker Casillas",
+     "es": "Iker Casillas",
+     "ar": "Iker Casillas"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-56",
+   "tier": 2,
+   "q": {
+    "fr": "Quel joueur tchécoslovaque a donné son nom à un tir au but piqué en 1976 ?",
+    "en": "Which Czechoslovak player gave his name to a chipped penalty in 1976?",
+    "es": "¿Qué jugador checoslovaco dio nombre a un penalti picado en 1976?",
+    "ar": "أي لاعب تشيكوسلوفاكي أعطى اسمه لركلة جزاء مرفوعة سنة 1976؟"
+   },
+   "a": [
+    {
+     "fr": "Antonín Panenka",
+     "en": "Antonín Panenka",
+     "es": "Antonín Panenka",
+     "ar": "Antonín Panenka"
+    },
+    {
+     "fr": "Pavel Nedvěd",
+     "en": "Pavel Nedvěd",
+     "es": "Pavel Nedvěd",
+     "ar": "Pavel Nedvěd"
+    },
+    {
+     "fr": "Josef Masopust",
+     "en": "Josef Masopust",
+     "es": "Josef Masopust",
+     "ar": "Josef Masopust"
+    },
+    {
+     "fr": "Petr Čech",
+     "en": "Petr Čech",
+     "es": "Petr Čech",
+     "ar": "Petr Čech"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-57",
+   "tier": 1,
+   "q": {
+    "fr": "Quel est le surnom de l'équipe de France ?",
+    "en": "What is France's national team nickname?",
+    "es": "¿Cuál es el apodo de la selección francesa?",
+    "ar": "ما لقب منتخب فرنسا؟"
+   },
+   "a": [
+    {
+     "fr": "les Bleus",
+     "en": "Les Bleus",
+     "es": "Les Bleus",
+     "ar": "الزرق"
+    },
+    {
+     "fr": "la Roja",
+     "en": "La Roja",
+     "es": "La Roja",
+     "ar": "لاروخا"
+    },
+    {
+     "fr": "les Diables rouges",
+     "en": "the Red Devils",
+     "es": "los Diablos Rojos",
+     "ar": "الشياطين الحمر"
+    },
+    {
+     "fr": "les Oranje",
+     "en": "Oranje",
+     "es": "la Oranje",
+     "ar": "البرتقالي"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-58",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection surnomme-t-on « la Roja » ?",
+    "en": "Which team is nicknamed “La Roja”?",
+    "es": "¿Qué selección se apoda «la Roja»?",
+    "ar": "أي منتخب يلقب بـ«لاروخا»؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Suisse",
+     "en": "Switzerland",
+     "es": "Suiza",
+     "ar": "سويسرا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-59",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection surnomme-t-on « les Diables rouges » ?",
+    "en": "Which team is nicknamed “the Red Devils”?",
+    "es": "¿Qué selección se apoda «los Diablos Rojos»?",
+    "ar": "أي منتخب يلقب بـ«الشياطين الحمر»؟"
+   },
+   "a": [
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    },
+    {
+     "fr": "Suisse",
+     "en": "Switzerland",
+     "es": "Suiza",
+     "ar": "سويسرا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-60",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection surnomme-t-on « la Squadra Azzurra » ?",
+    "en": "Which team is nicknamed “the Squadra Azzurra”?",
+    "es": "¿Qué selección se apoda «la Squadra Azzurra»?",
+    "ar": "أي منتخب يلقب بـ«السكوادرا أزورا»؟"
+   },
+   "a": [
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Grèce",
+     "en": "Greece",
+     "es": "Grecia",
+     "ar": "اليونان"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-61",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection surnomme-t-on « les Three Lions » ?",
+    "en": "Which team is nicknamed “the Three Lions”?",
+    "es": "¿Qué selección se apoda «los Tres Leones»?",
+    "ar": "أي منتخب يلقب بـ«الأسود الثلاثة»؟"
+   },
+   "a": [
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "pays de Galles",
+     "en": "Wales",
+     "es": "Gales",
+     "ar": "ويلز"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-62",
+   "tier": 1,
+   "q": {
+    "fr": "De quelle couleur joue l'équipe des Pays-Bas ?",
+    "en": "What colour does the Netherlands play in?",
+    "es": "¿De qué color juega Países Bajos?",
+    "ar": "بأي لون يلعب منتخب هولندا؟"
+   },
+   "a": [
+    {
+     "fr": "orange",
+     "en": "orange",
+     "es": "naranja",
+     "ar": "البرتقالي"
+    },
+    {
+     "fr": "bleu",
+     "en": "blue",
+     "es": "azul",
+     "ar": "الأزرق"
+    },
+    {
+     "fr": "vert",
+     "en": "green",
+     "es": "verde",
+     "ar": "الأخضر"
+    },
+    {
+     "fr": "jaune",
+     "en": "yellow",
+     "es": "amarillo",
+     "ar": "الأصفر"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-63",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection surnomme-t-on « les Vatreni » (les Flamboyants) ?",
+    "en": "Which team is nicknamed “Vatreni” (the Blazers)?",
+    "es": "¿Qué selección se apoda «Vatreni»?",
+    "ar": "أي منتخب يلقب بـ«فاتريني»؟"
+   },
+   "a": [
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "Pologne",
+     "en": "Poland",
+     "es": "Polonia",
+     "ar": "بولندا"
+    },
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    },
+    {
+     "fr": "Autriche",
+     "en": "Austria",
+     "es": "Austria",
+     "ar": "النمسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-64",
+   "tier": 1,
+   "q": {
+    "fr": "Dans quel stade joue l'équipe d'Angleterre ?",
+    "en": "Where does England play its home games?",
+    "es": "¿En qué estadio juega Inglaterra?",
+    "ar": "في أي ملعب يلعب منتخب إنجلترا؟"
+   },
+   "a": [
+    {
+     "fr": "Wembley",
+     "en": "Wembley",
+     "es": "Wembley",
+     "ar": "ويمبلي"
+    },
+    {
+     "fr": "Old Trafford",
+     "en": "Old Trafford",
+     "es": "Old Trafford",
+     "ar": "أولد ترافورد"
+    },
+    {
+     "fr": "Anfield",
+     "en": "Anfield",
+     "es": "Anfield",
+     "ar": "أنفيلد"
+    },
+    {
+     "fr": "Hampden Park",
+     "en": "Hampden Park",
+     "es": "Hampden Park",
+     "ar": "هامبدن بارك"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-65",
+   "tier": 1,
+   "q": {
+    "fr": "Quelle sélection a remporté la première Ligue des nations (2019) ?",
+    "en": "Which team won the first Nations League (2019)?",
+    "es": "¿Qué selección ganó la primera Liga de Naciones (2019)?",
+    "ar": "أي منتخب فاز بأول دوري أمم أوروبية (2019)؟"
+   },
+   "a": [
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-66",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté la Ligue des nations 2021 ?",
+    "en": "Who won the 2021 Nations League?",
+    "es": "¿Quién ganó la Liga de Naciones 2021?",
+    "ar": "من فاز بدوري الأمم 2021؟"
+   },
+   "a": [
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-67",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté la Ligue des nations 2023 ?",
+    "en": "Who won the 2023 Nations League?",
+    "es": "¿Quién ganó la Liga de Naciones 2023?",
+    "ar": "من فاز بدوري الأمم 2023؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-68",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a remporté la Ligue des nations 2025, aux tirs au but contre l'Espagne ?",
+    "en": "Who won the 2025 Nations League on penalties against Spain?",
+    "es": "¿Quién ganó la Liga de Naciones 2025 en los penaltis ante España?",
+    "ar": "من فاز بدوري الأمم 2025 بركلات الترجيح أمام إسبانيا؟"
+   },
+   "a": [
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-69",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle petite nation a éliminé l'Angleterre à l'Euro 2016 et rendu célèbre le « clapping viking » ?",
+    "en": "Which small nation knocked England out of Euro 2016, making the “Viking clap” famous?",
+    "es": "¿Qué pequeña nación eliminó a Inglaterra en la Euro 2016 y popularizó el «aplauso vikingo»?",
+    "ar": "أي بلد صغير أقصى إنجلترا في يورو 2016 وجعل «التصفيق الفايكنغي» مشهورًا؟"
+   },
+   "a": [
+    {
+     "fr": "Islande",
+     "en": "Iceland",
+     "es": "Islandia",
+     "ar": "آيسلندا"
+    },
+    {
+     "fr": "Norvège",
+     "en": "Norway",
+     "es": "Noruega",
+     "ar": "النرويج"
+    },
+    {
+     "fr": "pays de Galles",
+     "en": "Wales",
+     "es": "Gales",
+     "ar": "ويلز"
+    },
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-70",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a atteint les demi-finales de l'Euro 2016 avec Gareth Bale ?",
+    "en": "Which team reached the Euro 2016 semi-finals with Gareth Bale?",
+    "es": "¿Qué selección llegó a semifinales de la Euro 2016 con Gareth Bale?",
+    "ar": "أي منتخب بلغ نصف نهائي يورو 2016 مع غاريث بيل؟"
+   },
+   "a": [
+    {
+     "fr": "pays de Galles",
+     "en": "Wales",
+     "es": "Gales",
+     "ar": "ويلز"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    },
+    {
+     "fr": "Irlande",
+     "en": "Ireland",
+     "es": "Irlanda",
+     "ar": "أيرلندا"
+    },
+    {
+     "fr": "Islande",
+     "en": "Iceland",
+     "es": "Islandia",
+     "ar": "آيسلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-71",
+   "tier": 2,
+   "q": {
+    "fr": "Pour quelle sélection joue Erling Haaland ?",
+    "en": "Which national team does Erling Haaland play for?",
+    "es": "¿Con qué selección juega Erling Haaland?",
+    "ar": "مع أي منتخب يلعب إرلينغ هالاند؟"
+   },
+   "a": [
+    {
+     "fr": "Norvège",
+     "en": "Norway",
+     "es": "Noruega",
+     "ar": "النرويج"
+    },
+    {
+     "fr": "Suède",
+     "en": "Sweden",
+     "es": "Suecia",
+     "ar": "السويد"
+    },
+    {
+     "fr": "Danemark",
+     "en": "Denmark",
+     "es": "Dinamarca",
+     "ar": "الدنمارك"
+    },
+    {
+     "fr": "Islande",
+     "en": "Iceland",
+     "es": "Islandia",
+     "ar": "آيسلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-72",
+   "tier": 1,
+   "q": {
+    "fr": "Pour quelle sélection joue Kylian Mbappé ?",
+    "en": "Which national team does Kylian Mbappé play for?",
+    "es": "¿Con qué selección juega Kylian Mbappé?",
+    "ar": "مع أي منتخب يلعب كيليان مبابي؟"
+   },
+   "a": [
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Suisse",
+     "en": "Switzerland",
+     "es": "Suiza",
+     "ar": "سويسرا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-73",
+   "tier": 1,
+   "q": {
+    "fr": "Pour quelle sélection joue Lamine Yamal ?",
+    "en": "Which national team does Lamine Yamal play for?",
+    "es": "¿Con qué selección juega Lamine Yamal?",
+    "ar": "مع أي منتخب يلعب لامين يامال؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-74",
+   "tier": 1,
+   "q": {
+    "fr": "Pour quelle sélection joue Harry Kane ?",
+    "en": "Which national team does Harry Kane play for?",
+    "es": "¿Con qué selección juega Harry Kane?",
+    "ar": "مع أي منتخب يلعب هاري كين؟"
+   },
+   "a": [
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "Irlande",
+     "en": "Ireland",
+     "es": "Irlanda",
+     "ar": "أيرلندا"
+    },
+    {
+     "fr": "pays de Galles",
+     "en": "Wales",
+     "es": "Gales",
+     "ar": "ويلز"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-75",
+   "tier": 1,
+   "q": {
+    "fr": "Pour quelle sélection joue Jamal Musiala ?",
+    "en": "Which national team does Jamal Musiala play for?",
+    "es": "¿Con qué selección juega Jamal Musiala?",
+    "ar": "مع أي منتخب يلعب جمال موسيالا؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "Autriche",
+     "en": "Austria",
+     "es": "Austria",
+     "ar": "النمسا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-76",
+   "tier": 2,
+   "q": {
+    "fr": "Pour quelle sélection joue Khvicha Kvaratskhelia ?",
+    "en": "Which national team does Khvicha Kvaratskhelia play for?",
+    "es": "¿Con qué selección juega Khvicha Kvaratskhelia?",
+    "ar": "مع أي منتخب يلعب خفيتشا كفاراتسخيليا؟"
+   },
+   "a": [
+    {
+     "fr": "Géorgie",
+     "en": "Georgia",
+     "es": "Georgia",
+     "ar": "جورجيا"
+    },
+    {
+     "fr": "Turquie",
+     "en": "Turkey",
+     "es": "Turquía",
+     "ar": "تركيا"
+    },
+    {
+     "fr": "Pologne",
+     "en": "Poland",
+     "es": "Polonia",
+     "ar": "بولندا"
+    },
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-77",
+   "tier": 3,
+   "q": {
+    "fr": "Quelle sélection disputait son tout premier grand tournoi à l'Euro 2024 ?",
+    "en": "Which team played its very first major tournament at Euro 2024?",
+    "es": "¿Qué selección jugó su primer gran torneo en la Euro 2024?",
+    "ar": "أي منتخب خاض أول بطولة كبرى له في يورو 2024؟"
+   },
+   "a": [
+    {
+     "fr": "Géorgie",
+     "en": "Georgia",
+     "es": "Georgia",
+     "ar": "جورجيا"
+    },
+    {
+     "fr": "Turquie",
+     "en": "Turkey",
+     "es": "Turquía",
+     "ar": "تركيا"
+    },
+    {
+     "fr": "Autriche",
+     "en": "Austria",
+     "es": "Austria",
+     "ar": "النمسا"
+    },
+    {
+     "fr": "Écosse",
+     "en": "Scotland",
+     "es": "Escocia",
+     "ar": "اسكتلندا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-78",
+   "tier": 2,
+   "q": {
+    "fr": "Quel joueur a marqué un triplé en finale de Coupe du monde 2022 ?",
+    "en": "Who scored a hat-trick in the 2022 World Cup final?",
+    "es": "¿Quién marcó un triplete en la final del Mundial 2022?",
+    "ar": "من سجل ثلاثية في نهائي كأس العالم 2022؟"
+   },
+   "a": [
+    {
+     "fr": "Kylian Mbappé",
+     "en": "Kylian Mbappé",
+     "es": "Kylian Mbappé",
+     "ar": "Kylian Mbappé"
+    },
+    {
+     "fr": "Olivier Giroud",
+     "en": "Olivier Giroud",
+     "es": "Olivier Giroud",
+     "ar": "Olivier Giroud"
+    },
+    {
+     "fr": "Antoine Griezmann",
+     "en": "Antoine Griezmann",
+     "es": "Antoine Griezmann",
+     "ar": "Antoine Griezmann"
+    },
+    {
+     "fr": "Ousmane Dembélé",
+     "en": "Ousmane Dembélé",
+     "es": "Ousmane Dembélé",
+     "ar": "Ousmane Dembélé"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-79",
+   "tier": 3,
+   "q": {
+    "fr": "Quel Anglais avait réussi le premier triplé en finale de Coupe du monde (1966) ?",
+    "en": "Which Englishman scored the first World Cup final hat-trick (1966)?",
+    "es": "¿Qué inglés hizo el primer triplete en una final del Mundial (1966)?",
+    "ar": "أي إنجليزي سجل أول ثلاثية في نهائي كأس العالم (1966)؟"
+   },
+   "a": [
+    {
+     "fr": "Geoff Hurst",
+     "en": "Geoff Hurst",
+     "es": "Geoff Hurst",
+     "ar": "Geoff Hurst"
+    },
+    {
+     "fr": "Bobby Charlton",
+     "en": "Bobby Charlton",
+     "es": "Bobby Charlton",
+     "ar": "Bobby Charlton"
+    },
+    {
+     "fr": "Bobby Moore",
+     "en": "Bobby Moore",
+     "es": "Bobby Moore",
+     "ar": "Bobby Moore"
+    },
+    {
+     "fr": "Gary Lineker",
+     "en": "Gary Lineker",
+     "es": "Gary Lineker",
+     "ar": "Gary Lineker"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-80",
+   "tier": 3,
+   "q": {
+    "fr": "Quelle équipe hongroise légendaire perd la finale de 1954 (« miracle de Berne ») ?",
+    "en": "Which legendary team lost the 1954 final (“Miracle of Bern”)?",
+    "es": "¿Qué legendaria selección perdió la final de 1954 («milagro de Berna»)?",
+    "ar": "أي منتخب أسطوري خسر نهائي 1954 («معجزة برن»)؟"
+   },
+   "a": [
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    },
+    {
+     "fr": "Autriche",
+     "en": "Austria",
+     "es": "Austria",
+     "ar": "النمسا"
+    },
+    {
+     "fr": "Yougoslavie",
+     "en": "Yugoslavia",
+     "es": "Yugoslavia",
+     "ar": "يوغوسلافيا"
+    },
+    {
+     "fr": "Tchécoslovaquie",
+     "en": "Czechoslovakia",
+     "es": "Checoslovaquia",
+     "ar": "تشيكوسلوفاكيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-81",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a gagné la Coupe du monde 1954 (« miracle de Berne ») ?",
+    "en": "Who won the 1954 World Cup (“Miracle of Bern”)?",
+    "es": "¿Quién ganó el Mundial 1954 («milagro de Berna»)?",
+    "ar": "من فاز بكأس العالم 1954 («معجزة برن»)؟"
+   },
+   "a": [
+    {
+     "fr": "Allemagne de l'Ouest",
+     "en": "West Germany",
+     "es": "Alemania Occidental",
+     "ar": "ألمانيا الغربية"
+    },
+    {
+     "fr": "Hongrie",
+     "en": "Hungary",
+     "es": "Hungría",
+     "ar": "المجر"
+    },
+    {
+     "fr": "Brésil",
+     "en": "Brazil",
+     "es": "Brasil",
+     "ar": "البرازيل"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-82",
+   "tier": 2,
+   "q": {
+    "fr": "Quel sélectionneur a mené l'Espagne au titre mondial 2026 ?",
+    "en": "Which coach led Spain to the 2026 World Cup title?",
+    "es": "¿Qué seleccionador llevó a España al título mundial de 2026?",
+    "ar": "أي مدرب قاد إسبانيا إلى لقب كأس العالم 2026؟"
+   },
+   "a": [
+    {
+     "fr": "Luis de la Fuente",
+     "en": "Luis de la Fuente",
+     "es": "Luis de la Fuente",
+     "ar": "Luis de la Fuente"
+    },
+    {
+     "fr": "Luis Enrique",
+     "en": "Luis Enrique",
+     "es": "Luis Enrique",
+     "ar": "Luis Enrique"
+    },
+    {
+     "fr": "Vicente del Bosque",
+     "en": "Vicente del Bosque",
+     "es": "Vicente del Bosque",
+     "ar": "Vicente del Bosque"
+    },
+    {
+     "fr": "Julen Lopetegui",
+     "en": "Julen Lopetegui",
+     "es": "Julen Lopetegui",
+     "ar": "Julen Lopetegui"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-83",
+   "tier": 3,
+   "q": {
+    "fr": "Quel gardien espagnol a réussi 7 matchs sans encaisser de but au Mondial 2026 ?",
+    "en": "Which Spanish goalkeeper kept 7 clean sheets at the 2026 World Cup?",
+    "es": "¿Qué portero español dejó la portería a cero 7 veces en el Mundial 2026?",
+    "ar": "أي حارس إسباني حافظ على نظافة شباكه 7 مرات في مونديال 2026؟"
+   },
+   "a": [
+    {
+     "fr": "Unai Simón",
+     "en": "Unai Simón",
+     "es": "Unai Simón",
+     "ar": "Unai Simón"
+    },
+    {
+     "fr": "David Raya",
+     "en": "David Raya",
+     "es": "David Raya",
+     "ar": "David Raya"
+    },
+    {
+     "fr": "Iker Casillas",
+     "en": "Iker Casillas",
+     "es": "Iker Casillas",
+     "ar": "Iker Casillas"
+    },
+    {
+     "fr": "David de Gea",
+     "en": "David de Gea",
+     "es": "David de Gea",
+     "ar": "David de Gea"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-84",
+   "tier": 1,
+   "q": {
+    "fr": "Quel sélectionneur a mené la France au titre mondial 2018 ?",
+    "en": "Which coach led France to the 2018 World Cup title?",
+    "es": "¿Qué seleccionador llevó a Francia al título de 2018?",
+    "ar": "أي مدرب قاد فرنسا إلى لقب 2018؟"
+   },
+   "a": [
+    {
+     "fr": "Didier Deschamps",
+     "en": "Didier Deschamps",
+     "es": "Didier Deschamps",
+     "ar": "Didier Deschamps"
+    },
+    {
+     "fr": "Zinédine Zidane",
+     "en": "Zinédine Zidane",
+     "es": "Zinédine Zidane",
+     "ar": "Zinédine Zidane"
+    },
+    {
+     "fr": "Laurent Blanc",
+     "en": "Laurent Blanc",
+     "es": "Laurent Blanc",
+     "ar": "Laurent Blanc"
+    },
+    {
+     "fr": "Aimé Jacquet",
+     "en": "Aimé Jacquet",
+     "es": "Aimé Jacquet",
+     "ar": "Aimé Jacquet"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-85",
+   "tier": 2,
+   "q": {
+    "fr": "Quel sélectionneur a mené la France au titre mondial 1998 ?",
+    "en": "Which coach led France to the 1998 World Cup title?",
+    "es": "¿Qué seleccionador llevó a Francia al título de 1998?",
+    "ar": "أي مدرب قاد فرنسا إلى لقب 1998؟"
+   },
+   "a": [
+    {
+     "fr": "Aimé Jacquet",
+     "en": "Aimé Jacquet",
+     "es": "Aimé Jacquet",
+     "ar": "Aimé Jacquet"
+    },
+    {
+     "fr": "Didier Deschamps",
+     "en": "Didier Deschamps",
+     "es": "Didier Deschamps",
+     "ar": "Didier Deschamps"
+    },
+    {
+     "fr": "Michel Hidalgo",
+     "en": "Michel Hidalgo",
+     "es": "Michel Hidalgo",
+     "ar": "Michel Hidalgo"
+    },
+    {
+     "fr": "Roger Lemerre",
+     "en": "Roger Lemerre",
+     "es": "Roger Lemerre",
+     "ar": "Roger Lemerre"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-86",
+   "tier": 2,
+   "q": {
+    "fr": "Qui a marqué deux buts de la tête en finale du Mondial 1998 ?",
+    "en": "Who scored two headers in the 1998 World Cup final?",
+    "es": "¿Quién marcó dos goles de cabeza en la final de 1998?",
+    "ar": "من سجل هدفين بالرأس في نهائي 1998؟"
+   },
+   "a": [
+    {
+     "fr": "Zinédine Zidane",
+     "en": "Zinédine Zidane",
+     "es": "Zinédine Zidane",
+     "ar": "Zinédine Zidane"
+    },
+    {
+     "fr": "Thierry Henry",
+     "en": "Thierry Henry",
+     "es": "Thierry Henry",
+     "ar": "Thierry Henry"
+    },
+    {
+     "fr": "Emmanuel Petit",
+     "en": "Emmanuel Petit",
+     "es": "Emmanuel Petit",
+     "ar": "Emmanuel Petit"
+    },
+    {
+     "fr": "Lilian Thuram",
+     "en": "Lilian Thuram",
+     "es": "Lilian Thuram",
+     "ar": "Lilian Thuram"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-87",
+   "tier": 2,
+   "q": {
+    "fr": "Quel est le joueur le plus capé de l'histoire chez les hommes ?",
+    "en": "Who is the most-capped men's international player ever?",
+    "es": "¿Quién es el jugador con más partidos internacionales (masculino)?",
+    "ar": "من هو اللاعب الأكثر خوضًا للمباريات الدولية عند الرجال؟"
+   },
+   "a": [
+    {
+     "fr": "Cristiano Ronaldo",
+     "en": "Cristiano Ronaldo",
+     "es": "Cristiano Ronaldo",
+     "ar": "Cristiano Ronaldo"
+    },
+    {
+     "fr": "Sergio Ramos",
+     "en": "Sergio Ramos",
+     "es": "Sergio Ramos",
+     "ar": "Sergio Ramos"
+    },
+    {
+     "fr": "Gianluigi Buffon",
+     "en": "Gianluigi Buffon",
+     "es": "Gianluigi Buffon",
+     "ar": "Gianluigi Buffon"
+    },
+    {
+     "fr": "Lothar Matthäus",
+     "en": "Lothar Matthäus",
+     "es": "Lothar Matthäus",
+     "ar": "Lothar Matthäus"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-88",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a terminé 3e de la Coupe du monde 2018 ?",
+    "en": "Which team finished 3rd at the 2018 World Cup?",
+    "es": "¿Qué selección quedó 3.ª en el Mundial 2018?",
+    "ar": "أي منتخب احتل المركز الثالث في مونديال 2018؟"
+   },
+   "a": [
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    },
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-89",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection a terminé 3e de la Coupe du monde 2022, face au Maroc ?",
+    "en": "Which team finished 3rd at the 2022 World Cup, against Morocco?",
+    "es": "¿Qué selección quedó 3.ª en el Mundial 2022 ante Marruecos?",
+    "ar": "أي منتخب احتل المركز الثالث في مونديال 2022 أمام المغرب؟"
+   },
+   "a": [
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Pays-Bas",
+     "en": "Netherlands",
+     "es": "Países Bajos",
+     "ar": "هولندا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-90",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection européenne le Maroc a-t-il éliminée en quart de finale en 2022 ?",
+    "en": "Which European team did Morocco knock out in the 2022 quarter-final?",
+    "es": "¿A qué selección europea eliminó Marruecos en cuartos de 2022?",
+    "ar": "أي منتخب أوروبي أقصاه المغرب في ربع نهائي 2022؟"
+   },
+   "a": [
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Belgique",
+     "en": "Belgium",
+     "es": "Bélgica",
+     "ar": "بلجيكا"
+    },
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-91",
+   "tier": 2,
+   "q": {
+    "fr": "Quelle sélection européenne le Maroc a-t-il éliminée en 8e de finale en 2022 ?",
+    "en": "Which European team did Morocco knock out in the 2022 round of 16?",
+    "es": "¿A qué selección europea eliminó Marruecos en octavos de 2022?",
+    "ar": "أي منتخب أوروبي أقصاه المغرب في ثمن نهائي 2022؟"
+   },
+   "a": [
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Portugal",
+     "en": "Portugal",
+     "es": "Portugal",
+     "ar": "البرتغال"
+    },
+    {
+     "fr": "Croatie",
+     "en": "Croatia",
+     "es": "Croacia",
+     "ar": "كرواتيا"
+    },
+    {
+     "fr": "Allemagne",
+     "en": "Germany",
+     "es": "Alemania",
+     "ar": "ألمانيا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-92",
+   "tier": 1,
+   "q": {
+    "fr": "Quel pays a organisé le premier Euro, en 1960 ?",
+    "en": "Which country hosted the first Euro in 1960?",
+    "es": "¿Qué país organizó la primera Eurocopa en 1960?",
+    "ar": "أي بلد نظم أول بطولة أمم أوروبا سنة 1960؟"
+   },
+   "a": [
+    {
+     "fr": "France",
+     "en": "France",
+     "es": "Francia",
+     "ar": "فرنسا"
+    },
+    {
+     "fr": "Italie",
+     "en": "Italy",
+     "es": "Italia",
+     "ar": "إيطاليا"
+    },
+    {
+     "fr": "Espagne",
+     "en": "Spain",
+     "es": "España",
+     "ar": "إسبانيا"
+    },
+    {
+     "fr": "Angleterre",
+     "en": "England",
+     "es": "Inglaterra",
+     "ar": "إنجلترا"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-93",
+   "tier": 3,
+   "q": {
+    "fr": "Dans combien de pays différents s'est joué l'Euro 2020 ?",
+    "en": "In how many countries was Euro 2020 played?",
+    "es": "¿En cuántos países se jugó la Euro 2020?",
+    "ar": "في كم بلدًا لُعبت يورو 2020؟"
+   },
+   "a": [
+    {
+     "fr": "11",
+     "en": "11",
+     "es": "11",
+     "ar": "11"
+    },
+    {
+     "fr": "1",
+     "en": "1",
+     "es": "1",
+     "ar": "1"
+    },
+    {
+     "fr": "2",
+     "en": "2",
+     "es": "2",
+     "ar": "2"
+    },
+    {
+     "fr": "24",
+     "en": "24",
+     "es": "24",
+     "ar": "24"
+    }
+   ],
+   "emoji": "⚽"
+  },
+  {
+   "id": "dy_eurofoot-94",
+   "tier": 2,
+   "q": {
+    "fr": "Quel âge avait Lamine Yamal en marquant à l'Euro 2024, record de précocité ?",
+    "en": "How old was Lamine Yamal when he scored at Euro 2024, a record?",
+    "es": "¿Qué edad tenía Lamine Yamal al marcar en la Euro 2024, récord?",
+    "ar": "كم كان عمر لامين يامال عندما سجل في يورو 2024، رقمًا قياسيًا؟"
+   },
+   "a": [
+    {
+     "fr": "16 ans",
+     "en": "16",
+     "es": "16 años",
+     "ar": "16 سنة"
+    },
+    {
+     "fr": "19 ans",
+     "en": "19",
+     "es": "19 años",
+     "ar": "19 سنة"
+    },
+    {
+     "fr": "18 ans",
+     "en": "18",
+     "es": "18 años",
+     "ar": "18 سنة"
+    },
+    {
+     "fr": "21 ans",
+     "en": "21",
+     "es": "21 años",
+     "ar": "21 سنة"
+    }
+   ],
+   "emoji": "⚽"
+  }
  ]
 }

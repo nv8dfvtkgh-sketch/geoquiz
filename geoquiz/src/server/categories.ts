@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, KitSpec, Lang, MapSpec, Names, QKind } from '../shared/protocol';
 import {
-  activeEvent, capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
+  activeDailyTheme, activeEvent, activeWeek, capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
 } from './data';
 import { MATH_SUBJECT, revGames, revId, SCHOOL } from '../shared/school';
 import { mathQuestion } from './schoolmath';
@@ -719,18 +719,19 @@ function revCat(g: ReturnType<typeof revGames>[number]): Category {
         for (const sub of g.subjects) {
           if (!info?.subjects.includes(sub)) continue;
           const list = extras.school[g.sys]?.[lv]?.[sub] ?? [];
-          list.forEach((_, i) => ids.push(`s:${lv}:${sub}:${i}`));
+          // Une notion : seulement les questions écrites rangées dans cette notion.
+          list.forEach((row, i) => { if (!g.topic || row[5] === g.topic) ids.push(`s:${lv}:${sub}:${i}`); });
           if (MATH_SUBJECT.has(sub)) {
             const k = g.subjects.length > 1 ? Math.max(10, Math.round(list.length * 0.8)) : Math.max(2 * n, 60);
-            for (let i = 0; i < k; i++) ids.push(`m:${lv}:${sub}:${1 + Math.floor(Math.random() * 1e9)}`);
+            for (let i = 0; i < k; i++) ids.push(`m:${lv}:${sub}:${1 + Math.floor(Math.random() * 1e9)}${g.topic ? `:${g.topic}` : ''}`);
           }
         }
       }
       return ids;
     },
     make(target, _kind, _zone, rnd) {
-      const [t, lv, sub, x] = target.split(':');
-      const row = t === 'm' ? mathQuestion(lv, Number(x), lang) : extras.school[g.sys]?.[lv]?.[sub]?.[Number(x)];
+      const [t, lv, sub, x, topic] = target.split(':');
+      const row = t === 'm' ? mathQuestion(lv, Number(x), lang, topic) : extras.school[g.sys]?.[lv]?.[sub]?.[Number(x)];
       if (!row || row.length < 5) throw new Error(`révision introuvable : ${target}`);
       const N = (v: string) => ({ [lang]: v }) as unknown as Names;
       const { options, correct } = optionsFrom('a0', ['a1', 'a2', 'a3'], rnd, (k) => ({ label: N(row[1 + Number(k.slice(1))]) }));
@@ -753,6 +754,19 @@ const eventCat: Category = {
     const ev = activeEvent();
     const pack = ev?.pack ?? extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? '';
     return packCat('event', [pack]).make(target, kind, zone, rnd);
+  },
+};
+
+/** Défi de la semaine : le pack du thème de la semaine (vide hors période). */
+const weekCat: Category = {
+  id: 'week',
+  noZone: true,
+  qtypes: ['mcq'],
+  zoneKinds: ['world'],
+  pool(zone, d, n) { const ev = activeWeek(); return ev ? packCat('week', [ev.pack]).pool(zone, d, n) : []; },
+  make(target, kind, zone, rnd) {
+    const pack = activeWeek()?.pack ?? extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? '';
+    return packCat('week', [pack]).make(target, kind, zone, rnd);
   },
 };
 
@@ -1227,6 +1241,18 @@ export function dailyQuestions(day = dayKey()): InternalQuestion[] {
   const rnd = seeded(`quizellige:${day}`);
   const world = zones.get('world')!;
   const out: InternalQuestion[] = [];
+  // Semaine à thème : 10 questions du thème, jamais les mêmes d'un jour à l'autre de la période.
+  const theme = activeDailyTheme(Date.parse(`${day}T12:00:00Z`));
+  const themed = theme ? extras.packs[theme.pack] ?? [] : [];
+  if (theme && themed.length >= 10) {
+    const order = themed.map((x) => x.id).sort();
+    const r0 = seeded(`theme:${theme.id}`);
+    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(r0() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    const idx = Math.max(0, Math.round((Date.parse(day) - Date.parse(theme.start)) / 86400000));
+    const cat = packCat('daily', [theme.pack]);
+    for (let k = 0; k < 10; k++) out.push(cat.make(order[(idx * 10 + k) % order.length], 'mcq', world, rnd));
+    return out;
+  }
   for (const id of DAILY_GAMES) {
     const cat = CATEGORIES[id];
     if (!cat) continue;
@@ -1402,7 +1428,7 @@ const survivalCat: Category = {
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, whereamiCat, whoamiCat, survivalCat, boardCat, ...revCats].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, ...revCats].map((c) => [c.id, c]),
 );
 
 /**

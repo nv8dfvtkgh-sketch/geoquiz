@@ -1164,5 +1164,13 @@
   "install.hint": "On your home screen, like an app.",
   "install.ios": "On iPhone: tap Share, then “Add to Home Screen”.",
   "install.btn": "Install",
-  "install.hide": "Hide"
+  "install.hide": "Hide",
+  "cat.week": "Challenge of the week",
+  "game.week": "A different theme every week.",
+  "game.week.long": "A new theme every week: 10 questions, replay as often as you like during the week.",
+  "week.label": "Challenge of the week",
+  "daily.themeHint": "This week the daily challenge has a theme: 10 new questions every day.",
+  "rev.byTopic": "Pick a topic",
+  "rev.topicFor": "What do you want to review in {level}?",
+  "rev.allTopics": "Whole curriculum"
 }

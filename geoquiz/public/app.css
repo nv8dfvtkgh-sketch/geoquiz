@@ -1771,3 +1771,18 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .install-card small { color: var(--ink-2); }
 .install-x { border: 0; background: none; font-size: 1.4rem; color: var(--ink-2); cursor: pointer; padding: 4px 8px; }
 @media (max-width: 380px) { .install-card { grid-template-columns: auto 1fr auto; } .install-card .btn { grid-column: 1 / -1; } }
+
+/* Cette semaine : thème du défi du jour et défi de la semaine */
+.week-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.week-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 0; border-radius: 18px; font: inherit; text-align: start; cursor: pointer; color: #fff; box-shadow: var(--shadow); min-width: 0; }
+.week-card.week { background: linear-gradient(135deg, #6D28D9, #DB2777); }
+.week-card.daily { background: linear-gradient(135deg, #0071E3, #16A34A); }
+.week-card > span:nth-child(2) { display: grid; min-width: 0; flex: 1; }
+.week-card small { opacity: .85; font-size: .78rem; }
+.week-card strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.week-emoji { font-size: 1.7rem; line-height: 1; }
+.rev-sub.on { border-color: var(--accent); }
+.rev-topics { display: flex; flex-wrap: wrap; gap: 8px; scroll-margin-top: 70px; }
+.rev-topic { padding: 10px 16px; border-radius: 999px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+.rev-topic:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.rev-topic.all { background: var(--accent); color: #fff; }

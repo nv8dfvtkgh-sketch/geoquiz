@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FAMILIES, findGame, Icon, type GameDef } from '../games';
 import { createGame, joinGame, lastGame } from '../net';
 import { HomeworkCard } from './School';
-import { useEvents } from '../events';
+import { useEvents, weekFor } from '../events';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
 import { chooseSystem } from './Revision';
@@ -105,6 +105,9 @@ function Games() {
 
   // Série de défis du jour joués d'affilée (sur cet appareil).
   const streak = dailyStreak();
+  const evs = useEvents();
+  const week = weekFor(evs);
+  const theme = evs?.daily ?? null;
   const [install, setInstall] = useState(installOffer);
   useEffect(() => { const on = () => setInstall(installOffer()); window.addEventListener('gq:install', on); return () => window.removeEventListener('gq:install', on); }, []);
   const doneToday = dailyDoneHere();
@@ -128,9 +131,27 @@ function Games() {
       ) : (
         <button type="button" className="continue-card daily" onClick={() => openGame('daily')}>
           <span className="continue-ic"><Icon name="calendar" size={26} /></span>
-          <span className="continue-text"><strong>{t('cat.daily')}</strong><small>{dailyDoneHere() ? t('daily.doneTitle') : t('game.daily')}</small></span>
+          <span className="continue-text"><strong>{t('cat.daily')}</strong><small>{dailyDoneHere() ? t('daily.doneTitle') : theme ? `${theme.emoji} ${theme.names[lang]}` : t('game.daily')}</small></span>
           <span className="continue-go">{dailyDoneHere() ? '✅' : t('home.play')}</span>
         </button>
+      )}
+
+      {(week || (theme && last && lastDef)) && (
+        <div className="week-row">
+          {theme && last && lastDef && (
+            <button type="button" className="week-card daily" onClick={() => openGame('daily')}>
+              <span className="week-emoji" aria-hidden="true">{theme.emoji}</span>
+              <span><small>{t('cat.daily')}</small><strong>{theme.names[lang]}</strong></span>
+              {doneToday && <span aria-hidden="true">✅</span>}
+            </button>
+          )}
+          {week && (
+            <button type="button" className="week-card week" onClick={() => openGame('week')}>
+              <span className="week-emoji" aria-hidden="true">{week.emoji}</span>
+              <span><small>{t('week.label')}</small><strong>{week.names[lang].replace(/^[^:]*:\s*/, '')}</strong></span>
+            </button>
+          )}
+        </div>
       )}
 
       <div className="quick-row">

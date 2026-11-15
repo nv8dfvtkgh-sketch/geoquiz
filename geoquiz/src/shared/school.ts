@@ -49,17 +49,23 @@ export const SCHOOL: Record<SchoolSystem, { levels: SchoolLevel[]; cycles: Schoo
     },
   },
 };
+import { TOPIC_NAMES, topicsOf } from './mathtopics';
 export const MATH_SUBJECT = new Set(['maths', 'math']);
 
-export const revId = (sys: SchoolSystem, level: string, subject: string) => `rev_${sys}_${level}_${subject}`;
+export const revId = (sys: SchoolSystem, level: string, subject: string, topic?: string) => `rev_${sys}_${level}_${subject}${topic ? `-${topic}` : ''}`;
 /** Les jeux de révision : chaque classe et chaque cycle, chaque matière et « toutes les matières ». */
-export function revGames(): { id: string; sys: SchoolSystem; levels: string[]; subjects: string[]; name: string }[] {
-  const out: { id: string; sys: SchoolSystem; levels: string[]; subjects: string[]; name: string }[] = [];
+export interface RevGame { id: string; sys: SchoolSystem; levels: string[]; subjects: string[]; name: string; topic?: string }
+export function revGames(): RevGame[] {
+  const out: RevGame[] = [];
   for (const sys of ['fr', 'us'] as SchoolSystem[]) {
     const S = SCHOOL[sys];
     const all = sys === 'fr' ? 'Toutes les matières' : 'All subjects';
     for (const l of S.levels) {
-      for (const sub of l.subjects) out.push({ id: revId(sys, l.id, sub), sys, levels: [l.id], subjects: [sub], name: `${l.name} · ${S.subjects[sub].name}` });
+      for (const sub of l.subjects) {
+        out.push({ id: revId(sys, l.id, sub), sys, levels: [l.id], subjects: [sub], name: `${l.name} · ${S.subjects[sub].name}` });
+        // Maths : une partie par notion du programme de la classe.
+        if (MATH_SUBJECT.has(sub)) for (const tp of topicsOf(l.id)) out.push({ id: revId(sys, l.id, sub, tp), sys, levels: [l.id], subjects: [sub], topic: tp, name: `${l.name} · ${TOPIC_NAMES[tp]?.[sys === 'fr' ? 'fr' : 'en'] ?? tp}` });
+      }
       out.push({ id: revId(sys, l.id, 'all'), sys, levels: [l.id], subjects: l.subjects, name: `${l.name} · ${all}` });
     }
     for (const c of S.cycles) {
@@ -73,8 +79,9 @@ export function revGames(): { id: string; sys: SchoolSystem; levels: string[]; s
 
 /** « CM1 · Mathématiques », « Cycle 3 · Toutes les matières », « Grade 5 · Math »… */
 export function revName(id: string): string | undefined {
-  const m = /^rev_(fr|us)_([a-z0-9]+)_([a-z]+)$/.exec(id);
+  const m = /^rev_(fr|us)_([a-z0-9]+)_([a-z]+)(?:-([a-z0-9-]+))?$/.exec(id);
   if (!m) return undefined;
+  if (m[4]) { const lv = SCHOOL[m[1] as SchoolSystem].levels.find((l) => l.id === m[2])?.name; const tn = TOPIC_NAMES[m[4]]?.[m[1] === 'fr' ? 'fr' : 'en']; return lv && tn ? `${lv} · ${tn}` : undefined; }
   const S = SCHOOL[m[1] as SchoolSystem];
   const lv = S.levels.find((l) => l.id === m[2])?.name ?? S.cycles.find((c) => c.id === m[2])?.name.replace(/ \(.*\)$/, '');
   const sub = m[3] === 'all' ? (m[1] === 'fr' ? 'Toutes les matières' : 'All subjects') : S.subjects[m[3]]?.name;

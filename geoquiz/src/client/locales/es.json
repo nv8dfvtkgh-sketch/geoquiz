@@ -1164,5 +1164,13 @@
   "install.hint": "En tu pantalla de inicio, como una app.",
   "install.ios": "En iPhone: toca Compartir y luego «Añadir a pantalla de inicio».",
   "install.btn": "Instalar",
-  "install.hide": "Ocultar"
+  "install.hide": "Ocultar",
+  "cat.week": "Reto de la semana",
+  "game.week": "Un tema distinto cada semana.",
+  "game.week.long": "Cada semana, un tema nuevo: 10 preguntas, rejugable toda la semana.",
+  "week.label": "Reto de la semana",
+  "daily.themeHint": "Esta semana el reto del día tiene tema: 10 preguntas nuevas cada día.",
+  "rev.byTopic": "Elige un tema",
+  "rev.topicFor": "¿Qué quieres repasar en {level}?",
+  "rev.allTopics": "Todo el programa"
 }

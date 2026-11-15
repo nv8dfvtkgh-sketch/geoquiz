@@ -1164,5 +1164,13 @@
   "install.hint": "Sur ton écran d'accueil, comme une application.",
   "install.ios": "Sur iPhone : touche Partager, puis « Sur l'écran d'accueil ».",
   "install.btn": "Installer",
-  "install.hide": "Masquer"
+  "install.hide": "Masquer",
+  "cat.week": "Défi de la semaine",
+  "game.week": "Un thème différent chaque semaine.",
+  "game.week.long": "Chaque semaine, un nouveau thème : 10 questions, rejouable autant que tu veux pendant la semaine.",
+  "week.label": "Défi de la semaine",
+  "daily.themeHint": "Cette semaine, le défi du jour a un thème : 10 nouvelles questions chaque jour.",
+  "rev.byTopic": "Choisis une notion",
+  "rev.topicFor": "Que veux-tu réviser en {level} ?",
+  "rev.allTopics": "Tout le programme"
 }
