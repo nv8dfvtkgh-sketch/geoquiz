@@ -96,3 +96,42 @@ Que veut dire « to wake up » ? | se réveiller | se coucher | se laver | s'hab
 Que veut dire « library » ? | bibliothèque | librairie | laboratoire | liberté
 Quelle est la capitale des États-Unis ? | Washington, D.C. | New York | Los Angeles | Chicago
 Que veut dire « I would like… » ? | Je voudrais… | J'aime… | J'ai… | Je dois…
+
+## sciences
+### matiere
+Quels sont les trois états de l'eau ? | solide, liquide, gazeux | dur, mou, chaud | glace, sel, sucre | rond, plat, carré
+Comment s'appelle le passage de l'état liquide à l'état solide ? | la solidification | l'évaporation | la fusion | la condensation
+Que fait le sucre dans l'eau chaude ? | il se dissout | il flotte toujours | il devient du sel | il gèle
+Quelle méthode permet de séparer le sable de l'eau ? | la filtration | la dissolution | l'évaporation de l'eau du robinet | la congélation
+### corps
+Que fournissent les poumons au sang ? | de l'oxygène | du sucre | de l'eau salée | des os
+Quel organe filtre le sang et fabrique l'urine ? | les reins | le cœur | l'estomac | les poumons
+### vivant
+Comment appelle-t-on un être vivant qui décompose les feuilles mortes ? | un décomposeur | un prédateur | un herbivore | un parasite
+Que fabrique une plante grâce à la lumière ? | sa propre matière (sa nourriture) | de la viande | du plastique | du sel
+Dans la chaîne alimentaire « herbe → lapin → renard », qui est le prédateur ? | le renard | l'herbe | le lapin | aucun
+Quelle est la partie de la fleur qui devient le fruit ? | le pistil | la tige | la racine | la feuille
+### terre-univers
+Comment s'appelle l'ensemble du Soleil et des planètes qui tournent autour ? | le système solaire | la Voie lactée | l'Univers | une constellation
+Combien de planètes compte le système solaire ? | 8 | 9 | 7 | 12
+Qu'est-ce qu'un volcan rejette quand il entre en éruption ? | de la lave | de l'eau douce | du sable fin | de la neige
+Qu'est-ce qui provoque les saisons sur Terre ? | l'inclinaison de l'axe de la Terre | la distance à la Lune | les nuages | le vent
+### energie
+Quelle centrale utilise la force de l'eau ? | une centrale hydraulique (barrage) | une centrale à charbon | une centrale nucléaire | une centrale solaire
+Pourquoi faut-il économiser l'énergie ? | pour préserver les ressources et limiter la pollution | pour que l'électricité coûte plus cher | parce que le Soleil va s'éteindre | pour faire du bruit
+
+## histgeo
+### revolution
+Qui a créé le Code civil en 1804 ? | Napoléon Bonaparte | Louis XIV | Jules Ferry | Clovis
+Quelle invention a marqué le début de la révolution industrielle ? | la machine à vapeur | l'ordinateur | l'avion | la télévision
+Quel ministre a rendu l'école gratuite, laïque et obligatoire dans les années 1880 ? | Jules Ferry | Napoléon | Victor Hugo | Charles de Gaulle
+### monde-actuel
+Quelle monnaie de nombreux pays européens partagent-ils depuis 2002 ? | l'euro | le franc | le dollar | la livre
+Combien de pays compte l'Union européenne en 2026 ? | 27 | 12 | 50 | 15
+Quel est le drapeau de l'Union européenne ? | 12 étoiles jaunes sur fond bleu | une croix rouge | trois bandes vertes | un soleil rouge
+Qui fut le premier président de la Ve République ? | Charles de Gaulle | François Mitterrand | Jacques Chirac | Napoléon
+En quelle année les femmes ont-elles voté pour la première fois en France ? | 1945 | 1789 | 1918 | 1981
+### geographie
+Comment appelle-t-on un trajet quotidien entre son domicile et son travail ? | une migration pendulaire | un exode | un voyage d'affaires | une croisière
+Quel réseau de câbles sous-marins sert surtout à transporter ? | les données d'Internet | l'eau potable | le pétrole | le courrier papier
+Quel outil permet de communiquer instantanément dans le monde entier ? | Internet | le pigeon voyageur | la lettre | le télégraphe à fumée

@@ -106,3 +106,44 @@ Qui est le personnage principal d'« Oliver Twist » ? | un orphelin | un détec
 Que veut dire « to apply for a job » ? | postuler à un emploi | quitter un emploi | appliquer un travail | perdre un emploi
 Que veut dire « a slave » ? | un esclave | un slave | un salaire | un soldat
 Que veut dire « suddenly » ? | soudain | sûrement | doucement | tristement
+
+## svt
+### geologie
+Que se passe-t-il au niveau d'une dorsale océanique ? | de la nouvelle lithosphère se forme | une plaque plonge sous une autre | une montagne s'effondre | la mer gèle
+Comment s'appelle le plongement d'une plaque sous une autre ? | la subduction | la collision | l'érosion | la sédimentation
+### genetique
+Où se trouve l'information génétique dans une cellule ? | dans le noyau (ADN) | dans la membrane | dans le cytoplasme seul | dans les ongles
+Combien de chromosomes possède une cellule humaine (hors cellules sexuelles) ? | 46 | 23 | 48 | 12
+Comment appelle-t-on une cellule sexuelle ? | un gamète | un neurone | un globule | un muscle
+Quelle division cellulaire produit des cellules identiques ? | la mitose | la méiose | la fécondation | la mutation
+Qui a énoncé les lois de l'hérédité en étudiant des petits pois ? | Mendel | Pasteur | Darwin | Newton
+Combien de chromosomes contient un gamète humain ? | 23 | 46 | 12 | 92
+
+## physique
+### electricite
+Quelle est l'unité de l'intensité du courant ? | l'ampère | le volt | l'ohm | le watt
+Quelle loi s'écrit U = R × I ? | la loi d'Ohm | la loi des nœuds | la loi de Newton | la loi d'Archimède
+Dans un circuit en série, l'intensité est… | la même partout | plus grande près de la pile | nulle au milieu | différente dans chaque fil
+Quel est le rôle d'un fusible ? | protéger le circuit en coupant le courant en cas de surintensité | augmenter la tension | stocker l'électricité | éclairer
+Une résistance de 10 Ω parcourue par 0,5 A a une tension de… | 5 V | 20 V | 0,05 V | 10,5 V
+### mouvement
+Quelle est l'unité d'une force ? | le newton | le kilogramme | le joule | le mètre
+Quelle est la différence entre masse et poids ? | la masse s'exprime en kg, le poids est une force en N | ce sont exactement la même chose | la masse change sur la Lune | le poids s'exprime en kg
+Sur la Lune, la masse d'un astronaute… | est la même que sur Terre | est six fois plus petite | est nulle | double
+Quelle formule relie le poids et la masse ? | P = m × g | P = m + g | P = m ÷ g | P = g ÷ m
+Comment représente-t-on une force ? | par un vecteur (flèche) | par un cercle | par un nombre seul | par une couleur
+### ondes
+Quelle est la fréquence audible par l'oreille humaine ? | environ 20 Hz à 20 000 Hz | 0 à 5 Hz | 1 million de Hz | 100 000 à 200 000 Hz
+Comment appelle-t-on un son de fréquence supérieure à 20 000 Hz ? | un ultrason | un infrason | un écho | un bruit blanc
+Quel est l'ordre des couleurs obtenues avec un prisme ? | rouge, orange, jaune, vert, bleu, indigo, violet | bleu, rouge, vert | noir puis blanc | violet seulement
+Quel phénomène produit un écho ? | la réflexion du son sur un obstacle | l'absorption totale du son | la réfraction de la lumière | la fusion de la glace
+Que mesure le décibel ? | le niveau sonore | la vitesse du son | la fréquence de la lumière | la masse
+
+## histgeo
+### temps-modernes
+Quel philosophe des Lumières a écrit « De l'esprit des lois » ? | Montesquieu | Voltaire | Rousseau | Diderot
+Qu'est-ce que le commerce triangulaire ? | un commerce entre Europe, Afrique et Amérique fondé sur la traite des esclaves | un commerce de sel entre trois villes | un échange entre la France et l'Asie | un marché local
+Qui dirigea l'Encyclopédie avec d'Alembert ? | Diderot | Montesquieu | Louis XV | Napoléon
+### geographie
+Comment appelle-t-on une très grande ville de plus de 10 millions d'habitants ? | une mégapole | un bourg | une commune rurale | un hameau
+Qu'est-ce que la mondialisation ? | la mise en relation des différents espaces du monde par les échanges | la disparition des frontières naturelles | la fin des transports | un régime politique

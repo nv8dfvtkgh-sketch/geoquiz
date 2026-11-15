@@ -58,3 +58,9 @@ What was apartheid? | a system of racial segregation in South Africa | a Europea
 Who led India's nonviolent movement for independence? | Mahatma Gandhi | Jawaharlal Nehru | Nelson Mandela | Mao Zedong
 Who became South Africa's first Black president in 1994? | Nelson Mandela | Desmond Tutu | Thabo Mbeki | Steve Biko
 What was decolonization? | colonies gaining independence after WWII | building new colonies | a type of farming | a European war
+
+## social
+### civics
+What document did King John of England sign in 1215, limiting royal power? | the Magna Carta | the Bill of Rights | the Constitution | the Treaty of Paris
+Which philosopher argued that people have natural rights to life, liberty, and property? | John Locke | Machiavelli | Confucius | Karl Marx
+What does the United Nations Universal Declaration of Human Rights (1948) list? | basic rights for all people | the borders of every nation | the rules of war only | trade prices

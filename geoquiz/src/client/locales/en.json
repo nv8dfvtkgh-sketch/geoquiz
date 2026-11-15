@@ -1172,5 +1172,7 @@
   "daily.themeHint": "This week the daily challenge has a theme: 10 new questions every day.",
   "rev.byTopic": "Pick a topic",
   "rev.topicFor": "What do you want to review in {level}?",
-  "rev.allTopics": "Whole curriculum"
+  "rev.allTopics": "Whole curriculum",
+  "rev.byChapter": "Pick a chapter",
+  "rev.chapterFor": "{subject}, {level}: which chapter?"
 }

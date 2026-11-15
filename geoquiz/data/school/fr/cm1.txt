@@ -104,3 +104,46 @@ Que veut dire « favourite » ? | préféré | fatigué | facile | fameux
 Que veut dire « I don't like carrots » ? | Je n'aime pas les carottes. | J'aime les carottes. | Je mange des carottes. | Je n'ai pas de carottes.
 Que veut dire « twenty-five » ? | 25 | 52 | 15 | 205
 Que veut dire « Easter » ? | Pâques | Noël | l'été | l'est
+
+## sciences
+### vivant
+Comment appelle-t-on un animal qui a une colonne vertébrale ? | un vertébré | un invertébré | un insecte | un mollusque
+Quel animal est un insecte ? | la fourmi | l'araignée | l'escargot | le ver de terre
+Combien de pattes a un insecte ? | 6 | 8 | 4 | 10
+Comment s'appelle la transformation de la chenille en papillon ? | la métamorphose | la germination | la digestion | la fusion
+### terre-univers
+Combien de temps met la Terre pour faire le tour du Soleil ? | environ 365 jours | 24 heures | un mois | 10 ans
+Pourquoi y a-t-il le jour et la nuit ? | la Terre tourne sur elle-même | la Lune cache le Soleil | le Soleil s'éteint la nuit | les nuages bloquent la lumière
+Quel astre est une étoile ? | le Soleil | la Lune | la Terre | Mars
+### corps
+Quel trajet suit la nourriture après l'estomac ? | l'intestin grêle | les poumons | le cœur | la vessie
+Que transportent les vaisseaux sanguins ? | le sang | l'air | la nourriture non digérée | l'urine
+Qu'est-ce qu'un muscle permet de faire ? | bouger les os | digérer | voir | respirer sous l'eau
+### energie
+Quelle source d'énergie est renouvelable ? | le vent | le pétrole | le charbon | le gaz naturel
+Que faut-il pour qu'une lampe s'allume dans un circuit ? | un circuit fermé avec une pile | un circuit ouvert | une pile sans fils | un fil en plastique
+Quelle énergie utilise une éolienne ? | l'énergie du vent | l'énergie du charbon | l'énergie nucléaire | l'énergie du pétrole
+Quel objet transforme l'énergie électrique en lumière ? | une lampe | une pile | un interrupteur | un aimant
+Le pétrole est une énergie… | fossile, non renouvelable | renouvelable | inépuisable | solaire
+Quel matériau est un isolant électrique ? | le plastique | le cuivre | le fer | l'aluminium
+
+## histgeo
+### antiquite
+Quel chef gaulois a résisté à Jules César à Gergovie ? | Vercingétorix | Clovis | Astérix | Charlemagne
+Quelle peinture préhistorique célèbre se trouve en Dordogne ? | la grotte de Lascaux | la Joconde | les Nymphéas | la tapisserie de Bayeux
+### moyen-age
+Quelle bataille de 732 est associée à Charles Martel ? | Poitiers | Marignan | Waterloo | Alésia
+En quelle année Charlemagne est-il couronné empereur ? | 800 | 1066 | 1515 | 476
+Comment s'appelle la cérémonie où un vassal jure fidélité à son seigneur ? | l'hommage | le sacre | le baptême | la croisade
+Quel roi a fondé la dynastie des Capétiens en 987 ? | Hugues Capet | Clovis | Louis XIV | Philippe le Bel
+### temps-modernes
+Quel roi a fait construire le château de Versailles tel qu'on le connaît ? | Louis XIV | François Ier | Henri IV | Louis XVI
+En quelle année François Ier remporte-t-il la bataille de Marignan ? | 1515 | 1789 | 1610 | 800
+Quel artiste italien François Ier a-t-il invité en France ? | Léonard de Vinci | Picasso | Victor Hugo | Molière
+### revolution
+En quelle année a eu lieu la prise de la Bastille ? | 1789 | 1492 | 1815 | 1914
+Quel texte proclame en 1789 que « les hommes naissent libres et égaux en droits » ? | la Déclaration des droits de l'homme et du citoyen | le Code civil | l'édit de Nantes | la Constitution de 1958
+### geographie
+Comment appelle-t-on une ville qui regroupe de nombreuses activités et habitants autour d'elle ? | une métropole | un hameau | un village | une ferme
+Comment appelle-t-on l'endroit où l'on achète beaucoup de produits en un seul lieu ? | un hypermarché | une mairie | une gare | un musée
+Comment appelle-t-on une zone construite autour d'une grande ville ? | la banlieue | le centre-ville | la campagne | la montagne

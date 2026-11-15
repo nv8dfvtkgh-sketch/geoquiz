@@ -98,3 +98,25 @@ Quel pronom remplace « my sister and I » ? | we | they | us | she
 Que veut dire « mustn't » ? | interdiction | obligation | capacité | souhait
 Quel jour fête-t-on Thanksgiving aux États-Unis ? | le 4e jeudi de novembre | le 4 juillet | le 31 octobre | le 1er janvier
 Que fête-t-on le 4 juillet aux États-Unis ? | l'indépendance | Noël | la fête du travail | Halloween
+
+## sciences
+### vivant
+Quelle est l'unité de base de tous les êtres vivants ? | la cellule | l'atome | l'organe | le tissu
+### matiere
+Qu'est-ce qu'un mélange homogène ? | un mélange où l'on ne distingue plus les constituants | un mélange où l'on voit plusieurs parties | un corps pur | un solide
+Quelle est la masse d'un litre d'eau ? | 1 kg | 100 g | 10 kg | 500 g
+Quel état de la matière n'a pas de forme propre et occupe tout l'espace disponible ? | le gaz | le solide | le liquide | la glace
+À quelle température l'eau pure bout-elle (au niveau de la mer) ? | 100 °C | 0 °C | 50 °C | 37 °C
+L'air est-il de la matière ? | oui, il a une masse | non, il ne pèse rien | seulement quand il pleut | seulement en hiver
+Comment s'appelle le passage de l'état solide à l'état liquide ? | la fusion | la solidification | la condensation | la vaporisation
+### energie
+Quelle forme d'énergie possède un objet en mouvement ? | l'énergie cinétique (de mouvement) | l'énergie chimique | l'énergie nucléaire | aucune énergie
+Que transforme un panneau solaire photovoltaïque ? | la lumière en électricité | le vent en chaleur | l'eau en gaz | le charbon en lumière
+### terre-univers
+Comment s'appelle la couche de gaz qui entoure la Terre ? | l'atmosphère | la lithosphère | le noyau | le manteau
+Quelle force nous retient au sol ? | la pesanteur (gravité) | le magnétisme | le vent | la friction
+### technologie
+Qu'est-ce qu'un algorithme ? | une suite d'instructions pour résoudre un problème | un robot | un écran | un câble
+Quel élément d'un robot lui permet de détecter un obstacle ? | un capteur | un moteur | une batterie | une roue
+Comment appelle-t-on une instruction répétée plusieurs fois dans un programme ? | une boucle | un capteur | une variable cassée | un bug
+Quelle fonction remplit un vélo ? | se déplacer | chauffer | éclairer une pièce | conserver les aliments

@@ -60,3 +60,34 @@ What is supply? | how much of a product is available | how much people want it |
 What is demand? | how much people want to buy a product | how much is made | a law | a bank
 Which European country set up the Jamestown colony in 1607? | England | Spain | France | the Netherlands
 What is immigration? | moving to a new country to live | moving to a new house | a vacation | a trade deal
+
+## science
+### physical
+What kind of energy does a battery store? | chemical energy | sound energy | light energy | motion energy
+What happens to energy when two objects collide? | some is transferred | it is destroyed | it doubles | it turns into water
+What does a wave carry from place to place? | energy | water from one ocean to another | sand only | air only
+### life
+What part of a plant takes in water from the soil? | the roots | the flowers | the leaves | the seeds
+What sense organ detects sound? | the ear | the eye | the nose | the tongue
+Why do some animals have thick fur? | to stay warm in cold places | to swim faster | to see better | to fly
+### earth
+Which landform is made by a river carrying away rock over millions of years? | a canyon | a volcano | a glacier | a sand dune
+
+## social
+### history
+Why did the Lewis and Clark expedition happen? | to explore the land of the Louisiana Purchase | to find gold in California | to fight the British | to build a railroad
+What was the Gold Rush of 1849? | a rush of people to California to find gold | a war over gold | a bank closing | a horse race
+What did the transcontinental railroad connect in 1869? | the eastern and western United States | Canada and Mexico | Europe and America | Alaska and Hawaii
+Who were the first people to live in your state? | Native American nations | European kings | the Pilgrims | the Vikings
+What was the Underground Railroad? | a secret network that helped enslaved people escape to freedom | a subway in New York | a train line under mountains | a mine
+### civics
+What is the leader of a state government called? | the governor | the mayor | the president | the senator
+Where do state lawmakers meet? | in the state capitol | in the White House | at city hall | at the Supreme Court
+What document describes how a state government works? | the state constitution | the Declaration of Independence | a phone book | a map
+What are the three branches of government? | legislative, executive, and judicial | army, navy, and air force | city, state, and nation | federal, local, and school
+What is the job of the legislative branch? | to make laws | to enforce laws | to judge laws | to collect garbage
+### economics
+What does it mean to export a product? | to sell it to another state or country | to buy it from another country | to throw it away | to store it
+How does a state's natural resources affect its economy? | they shape what people produce and sell | they have no effect | they decide the weather | they change the state's name
+Which job is part of agriculture? | farmer | pilot | banker | programmer
+Why do states trade with each other? | each produces different goods and resources | they must all make the same things | trading is illegal | to avoid using money

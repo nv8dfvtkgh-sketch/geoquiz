@@ -50,6 +50,8 @@ export const SCHOOL: Record<SchoolSystem, { levels: SchoolLevel[]; cycles: Schoo
   },
 };
 import { TOPIC_NAMES, topicsOf } from './mathtopics';
+import { CHAPTERS } from './chapters';
+import REV_CHAPTERS from './revchapters.json';
 export const MATH_SUBJECT = new Set(['maths', 'math']);
 
 export const revId = (sys: SchoolSystem, level: string, subject: string, topic?: string) => `rev_${sys}_${level}_${subject}${topic ? `-${topic}` : ''}`;
@@ -64,7 +66,8 @@ export function revGames(): RevGame[] {
       for (const sub of l.subjects) {
         out.push({ id: revId(sys, l.id, sub), sys, levels: [l.id], subjects: [sub], name: `${l.name} · ${S.subjects[sub].name}` });
         // Maths : une partie par notion du programme de la classe.
-        if (MATH_SUBJECT.has(sub)) for (const tp of topicsOf(l.id)) out.push({ id: revId(sys, l.id, sub, tp), sys, levels: [l.id], subjects: [sub], topic: tp, name: `${l.name} · ${TOPIC_NAMES[tp]?.[sys === 'fr' ? 'fr' : 'en'] ?? tp}` });
+        // Autres matières : une partie par chapitre du programme de la classe.
+        for (const tp of chaptersFor(sys, l.id, sub)) out.push({ id: revId(sys, l.id, sub, tp), sys, levels: [l.id], subjects: [sub], topic: tp, name: `${l.name} · ${topicName(sys, sub, tp) ?? tp}` });
       }
       out.push({ id: revId(sys, l.id, 'all'), sys, levels: [l.id], subjects: l.subjects, name: `${l.name} · ${all}` });
     }
@@ -77,11 +80,23 @@ export function revGames(): RevGame[] {
   return out;
 }
 
+/** Les notions (maths) ou chapitres (autres matières) qu'on peut réviser à part dans une classe. */
+export function chaptersFor(sys: SchoolSystem, level: string, subject: string): string[] {
+  if (MATH_SUBJECT.has(subject)) return topicsOf(level);
+  return Object.keys((REV_CHAPTERS as Record<string, Record<string, Record<string, Record<string, number>>>>)[sys]?.[level]?.[subject] ?? {});
+}
+/** Nom d'une notion ou d'un chapitre (« Puissances », « Conjugaison »…). */
+export function topicName(sys: SchoolSystem, subject: string, topic: string): string | undefined {
+  const l = sys === 'fr' ? 'fr' : 'en';
+  if (MATH_SUBJECT.has(subject)) return TOPIC_NAMES[topic]?.[l];
+  return CHAPTERS[subject]?.find((c) => c.id === topic)?.[l];
+}
+
 /** « CM1 · Mathématiques », « Cycle 3 · Toutes les matières », « Grade 5 · Math »… */
 export function revName(id: string): string | undefined {
   const m = /^rev_(fr|us)_([a-z0-9]+)_([a-z]+)(?:-([a-z0-9-]+))?$/.exec(id);
   if (!m) return undefined;
-  if (m[4]) { const lv = SCHOOL[m[1] as SchoolSystem].levels.find((l) => l.id === m[2])?.name; const tn = TOPIC_NAMES[m[4]]?.[m[1] === 'fr' ? 'fr' : 'en']; return lv && tn ? `${lv} · ${tn}` : undefined; }
+  if (m[4]) { const lv = SCHOOL[m[1] as SchoolSystem].levels.find((l) => l.id === m[2])?.name; const tn = topicName(m[1] as SchoolSystem, m[3], m[4]); return lv && tn ? `${lv} · ${tn}` : undefined; }
   const S = SCHOOL[m[1] as SchoolSystem];
   const lv = S.levels.find((l) => l.id === m[2])?.name ?? S.cycles.find((c) => c.id === m[2])?.name.replace(/ \(.*\)$/, '');
   const sub = m[3] === 'all' ? (m[1] === 'fr' ? 'Toutes les matières' : 'All subjects') : S.subjects[m[3]]?.name;

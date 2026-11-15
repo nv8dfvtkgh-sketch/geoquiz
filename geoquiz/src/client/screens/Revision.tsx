@@ -1,8 +1,7 @@
 // Révisions scolaires : choisir le programme (France ou États-Unis), la classe (ou le cycle),
 // puis la matière (ou toutes). La partie s'ouvre ensuite comme n'importe quel jeu.
 import { useState } from 'react';
-import { MATH_SUBJECT, revId, SCHOOL, type SchoolSystem } from '../../shared/school';
-import { TOPIC_NAMES, topicsOf } from '../../shared/mathtopics';
+import { chaptersFor, MATH_SUBJECT, revId, SCHOOL, topicName, type SchoolSystem } from '../../shared/school';
 import { useApp } from '../state';
 import { PuzzleBack } from './Puzzles';
 
@@ -69,14 +68,14 @@ export function RevisionScreen() {
             {subjects.map((sub) => (
               <button type="button" key={sub} className={`rev-sub ${topics === sub ? 'on' : ''}`}
                 onClick={() => {
-                  // Maths d'une classe : on choisit d'abord la notion à réviser.
-                  if (cls && MATH_SUBJECT.has(sub) && topicsOf(level).length) {
+                  // Une classe : on choisit d'abord la notion ou le chapitre à réviser (s'il y en a).
+                  if (cls && chaptersFor(sys, level, sub).length) {
                     setTopics(sub);
                     requestAnimationFrame(() => document.getElementById('rev-topics')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
                   } else openGame(revId(sys, level, sub));
                 }}>
                 <span aria-hidden="true">{S.subjects[sub].emoji}</span><strong>{S.subjects[sub].name}</strong>
-                {cls && MATH_SUBJECT.has(sub) && <small>{t('rev.byTopic')}</small>}
+                {cls && chaptersFor(sys, level, sub).length > 0 && <small>{t(MATH_SUBJECT.has(sub) ? 'rev.byTopic' : 'rev.byChapter')}</small>}
               </button>
             ))}
           </div>
@@ -84,11 +83,11 @@ export function RevisionScreen() {
       )}
       {level && cls && topics && (
         <section id="rev-topics" className="rev-subjects">
-          <h2 className="rev-h">{t('rev.topicFor', { level: cls.name })}</h2>
+          <h2 className="rev-h">{t(MATH_SUBJECT.has(topics) ? 'rev.topicFor' : 'rev.chapterFor', { level: cls.name, subject: S.subjects[topics].name })}</h2>
           <div className="rev-topics">
             <button type="button" className="rev-topic all" onClick={() => openGame(revId(sys, level, topics))}>{t('rev.allTopics')}</button>
-            {topicsOf(level).map((tp) => (
-              <button type="button" key={tp} className="rev-topic" onClick={() => openGame(revId(sys, level, topics, tp))}>{TOPIC_NAMES[tp]?.[sys === 'fr' ? 'fr' : 'en'] ?? tp}</button>
+            {chaptersFor(sys, level, topics).map((tp) => (
+              <button type="button" key={tp} className="rev-topic" onClick={() => openGame(revId(sys, level, topics, tp))}>{topicName(sys, topics, tp) ?? tp}</button>
             ))}
           </div>
         </section>

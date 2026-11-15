@@ -7,6 +7,7 @@ import {
 } from './data';
 import { MATH_SUBJECT, revGames, revId, SCHOOL } from '../shared/school';
 import { mathQuestion } from './schoolmath';
+import { GEN_CHAPTERS, hasGen, langQuestion } from './schoollang';
 import { mediaOff, photoFor, soundFor } from './photos';
 import { matches, normalize } from './text';
 
@@ -721,6 +722,12 @@ function revCat(g: ReturnType<typeof revGames>[number]): Category {
           const list = extras.school[g.sys]?.[lv]?.[sub] ?? [];
           // Une notion : seulement les questions écrites rangées dans cette notion.
           list.forEach((row, i) => { if (!g.topic || row[5] === g.topic) ids.push(`s:${lv}:${sub}:${i}`); });
+          // Langues : questions fabriquées (conjugaison, pluriels, vocabulaire, verbes irréguliers…).
+          for (const ch of Object.keys(GEN_CHAPTERS[g.sys]?.[sub] ?? {})) {
+            if ((g.topic && g.topic !== ch) || !hasGen(g.sys, lv, sub, ch)) continue;
+            const k = g.topic ? Math.max(2 * n, 40) : g.subjects.length > 1 ? 4 : Math.max(6, Math.round(list.length * 0.25));
+            for (let i = 0; i < k; i++) ids.push(`l:${lv}:${sub}:${1 + Math.floor(Math.random() * 1e9)}:${ch}`);
+          }
           if (MATH_SUBJECT.has(sub)) {
             const k = g.subjects.length > 1 ? Math.max(10, Math.round(list.length * 0.8)) : Math.max(2 * n, 60);
             for (let i = 0; i < k; i++) ids.push(`m:${lv}:${sub}:${1 + Math.floor(Math.random() * 1e9)}${g.topic ? `:${g.topic}` : ''}`);
@@ -731,7 +738,7 @@ function revCat(g: ReturnType<typeof revGames>[number]): Category {
     },
     make(target, _kind, _zone, rnd) {
       const [t, lv, sub, x, topic] = target.split(':');
-      const row = t === 'm' ? mathQuestion(lv, Number(x), lang, topic) : extras.school[g.sys]?.[lv]?.[sub]?.[Number(x)];
+      const row = t === 'm' ? mathQuestion(lv, Number(x), lang, topic) : t === 'l' ? langQuestion(g.sys, lv, sub, topic, Number(x)) : extras.school[g.sys]?.[lv]?.[sub]?.[Number(x)];
       if (!row || row.length < 5) throw new Error(`révision introuvable : ${target}`);
       const N = (v: string) => ({ [lang]: v }) as unknown as Names;
       const { options, correct } = optionsFrom('a0', ['a1', 'a2', 'a3'], rnd, (k) => ({ label: N(row[1 + Number(k.slice(1))]) }));

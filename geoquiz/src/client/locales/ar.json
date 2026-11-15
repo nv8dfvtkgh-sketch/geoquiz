@@ -1172,5 +1172,7 @@
   "daily.themeHint": "هذا الأسبوع لتحدي اليوم موضوع: 10 أسئلة جديدة كل يوم.",
   "rev.byTopic": "اختر درسًا",
   "rev.topicFor": "ماذا تريد أن تراجع في {level}؟",
-  "rev.allTopics": "كل البرنامج"
+  "rev.allTopics": "كل البرنامج",
+  "rev.byChapter": "اختر فصلًا",
+  "rev.chapterFor": "{subject} – {level}: أي فصل؟"
 }

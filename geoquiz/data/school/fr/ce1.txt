@@ -85,3 +85,18 @@ Comment dit-on « s'il te plaît » ? | please | thank you | sorry | welcome
 Que veut dire « horse » ? | cheval | maison | hibou | cochon
 Que veut dire « bird » ? | oiseau | ours | poisson | lapin
 Que veut dire « Happy birthday! » ? | Joyeux anniversaire ! | Bonne année ! | Joyeux Noël ! | Bonne nuit !
+
+## qlm
+### corps
+Quel organe nous permet de respirer ? | les poumons | l'estomac | les reins | le foie
+Que protège le crâne ? | le cerveau | le cœur | les poumons | l'estomac
+### vivant
+De quoi une plante a-t-elle besoin pour grandir ? | d'eau et de lumière | de sucre et de sel | de lait | de noir complet
+Quel animal sort d'un œuf ? | la poule | la vache | le chat | le lapin
+### matiere
+Quel matériau laisse passer le courant électrique ? | le métal | le plastique | le bois | le carton
+Que devient l'eau qui bout longtemps dans une casserole ? | de la vapeur | de la glace | du sel | de l'huile
+### espace-temps
+Combien y a-t-il de mois dans une année ? | 12 | 10 | 7 | 52
+Quelle saison vient après l'hiver ? | le printemps | l'été | l'automne | encore l'hiver
+Avec quel objet mesure-t-on la durée d'une course ? | un chronomètre | une règle | une balance | un thermomètre

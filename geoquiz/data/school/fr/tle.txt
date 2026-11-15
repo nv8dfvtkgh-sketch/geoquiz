@@ -107,3 +107,57 @@ Que veut dire « a loophole » ? | une faille (juridique) | un trou de serrure |
 Que veut dire « regardless of » ? | indépendamment de | en regardant | à cause de | grâce à
 Que veut dire « to undermine » ? | saper, affaiblir | souligner | creuser une mine | sous-estimer
 Que veut dire « an outcome » ? | un résultat | une sortie de secours | un revenu | une dépense
+
+## philo
+### culture
+Selon Kant, le beau est ce qui plaît… | universellement sans concept | seulement à son créateur | parce qu'il est utile | parce qu'il est cher
+Qui espérait que les sciences nous rendent « comme maîtres et possesseurs de la nature » ? | Descartes | Rousseau | Heidegger | Platon
+Quel philosophe voit dans la religion « l'opium du peuple » ? | Karl Marx | Kant | Spinoza | Pascal
+Qu'est-ce que le génie selon Kant ? | le talent qui donne ses règles à l'art | le simple fait de copier la nature | l'habileté technique | la folie
+Qu'est-ce qui distingue l'œuvre d'art d'un objet technique ? | elle n'a pas d'abord une fonction utile | elle est toujours en bois | elle est fabriquée en série | elle coûte moins cher
+Selon Rousseau, la culture et les sciences ont… | souvent corrompu les mœurs | toujours rendu l'homme meilleur | créé la nature | supprimé le langage
+Qu'est-ce que la nature au sens philosophique, opposée à la culture ? | ce qui est inné, non produit par l'homme | tout ce qu'on apprend à l'école | les institutions | les coutumes
+### sujet
+Qu'est-ce que la conscience réflexive ? | la capacité de se prendre soi-même pour objet de pensée | la simple perception du monde | le sommeil profond | l'instinct animal
+### politique
+Selon Max Weber, l'État détient le monopole… | de la violence physique légitime | de l'économie | de la religion | de l'éducation
+Qu'est-ce que l'équité selon Aristote ? | une correction de la loi pour l'adapter au cas particulier | l'égalité stricte en toutes choses | la loi du plus fort | l'absence de règles
+
+## svt
+### genetique
+Comment appelle-t-on l'apparition de nouvelles espèces ? | la spéciation | la mitose | la photosynthèse | la fossilisation
+Quel brassage a lieu pendant la méiose ? | les brassages inter- et intrachromosomiques | aucun brassage | un brassage par la digestion | un brassage par la respiration
+### geologie
+Quelle méthode permet de dater une roche en années ? | la radiochronologie | la stratigraphie seule | la photographie | le microscope optique
+Quelle chaîne de montagnes est née de la collision Inde-Asie ? | l'Himalaya | les Andes | les Alpes | les Rocheuses
+### corps
+Quel organe régule la glycémie grâce à l'insuline ? | le pancréas | le foie seul | le cœur | les poumons
+Quelle hormone est libérée en situation de stress aigu ? | l'adrénaline | l'insuline | la mélatonine | la testostérone
+
+## physique
+### mouvement
+Selon la troisième loi de Kepler, T²/a³ est… | constant pour toutes les planètes d'un même astre | variable selon la planète | toujours égal à 1 | nul
+Un projectile lancé sans frottement a une trajectoire… | parabolique | rectiligne | circulaire | elliptique toujours
+Pour un satellite en orbite circulaire, le mouvement est… | circulaire uniforme | rectiligne accéléré | parabolique | immobile
+Que dit la poussée d'Archimède ? | un corps immergé subit une force verticale vers le haut égale au poids du fluide déplacé | un corps immergé coule toujours | un fluide n'exerce aucune force | la pression diminue avec la profondeur
+### energie
+Qu'est-ce que la demi-vie d'un élément radioactif ? | la durée pour que la moitié des noyaux se désintègrent | la moitié de sa masse | la durée de vie d'un atome | la moitié de son énergie
+Que dit le premier principe de la thermodynamique ? | la variation d'énergie interne égale le travail plus le transfert thermique reçus | l'entropie diminue toujours | la chaleur va du froid au chaud | l'énergie se crée
+Quel mode de transfert thermique se fait sans contact matériel ? | le rayonnement | la conduction | la convection | la friction
+Dans quel sens se fait spontanément un transfert thermique ? | du corps chaud vers le corps froid | du froid vers le chaud | dans les deux sens à égalité | jamais
+### electricite
+Comment évolue la tension aux bornes d'un condensateur qui se charge ? | elle augmente puis tend vers une valeur limite | elle reste nulle | elle diminue toujours | elle oscille sans fin
+Que vaut la constante de temps d'un circuit RC ? | τ = R × C | τ = R ÷ C | τ = R + C | τ = C ÷ R
+
+## histgeo
+### xxe
+Quel krach boursier marque le début de la grande crise des années 1930 ? | le krach de Wall Street en 1929 | le krach de 1987 | la crise de 2008 | le krach de 1873
+Quel programme lance Roosevelt pour lutter contre la crise ? | le New Deal | le plan Marshall | la NEP | le Front populaire
+### monde-actuel
+En quelle année l'URSS disparaît-elle ? | 1991 | 1989 | 1945 | 2001
+Quel traité de 1992 crée l'Union européenne ? | le traité de Maastricht | le traité de Rome | le traité de Lisbonne | le traité de Versailles
+### geographie
+Qu'est-ce que la ZEE d'un État ? | un espace maritime de 200 milles nautiques où il exploite les ressources | une zone de libre-échange | une zone de guerre | un parc naturel terrestre
+Quel détroit est un passage stratégique entre l'océan Indien et le Pacifique ? | le détroit de Malacca | le détroit de Gibraltar | le Bosphore | le pas de Calais
+Pourquoi la France a-t-elle le 2e espace maritime du monde ? | grâce à ses territoires ultramarins | grâce à la Méditerranée seule | grâce à la Manche | grâce à ses fleuves
+Quelle part du commerce mondial (en volume) passe par la mer ? | environ 80 % | 10 % | 30 % | 50 %

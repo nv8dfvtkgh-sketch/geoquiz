@@ -60,3 +60,31 @@ What does a mayor do? | leads a city government | leads the country | runs a cou
 Why do people pay taxes? | to pay for public services like roads and schools | to buy toys | to travel | no reason
 What is a citizen's right in the U.S.? | freedom of speech | owning a country | making laws alone | skipping all rules
 Who was Harriet Tubman? | a leader who helped enslaved people escape on the Underground Railroad | a president | an inventor | an astronaut
+
+## science
+### physical
+What happens to an object when balanced forces act on it? | its motion does not change | it always speeds up | it always falls | it disappears
+What is the force that pulls a ball back down after you throw it up? | gravity | magnetism | friction | electricity
+What happens when you put the north poles of two magnets together? | they push apart | they pull together | they melt | nothing ever
+What kind of force slows a sliding book on a table? | friction | magnetism | electricity | gravity pushing up
+### earth
+Which kind of cloud often brings thunderstorms? | cumulonimbus | cirrus | fog | contrail
+How can people reduce damage from a hurricane? | build stronger homes and follow evacuation plans | open all windows | stand on the beach | ignore the warnings
+What tool measures rainfall? | a rain gauge | a thermometer | a ruler for wind | a compass
+
+## social
+### geography
+What do we call the land and water features of a place? | physical features | buildings | holidays | laws
+Why do many cities grow near rivers? | for water, farming, and transportation | because rivers are quiet | to avoid fish | because there is no wind
+### history
+Why do communities change over time? | people move, build new things, and new technology appears | they never change | only the weather changes them | because of homework
+What does a timeline show? | events in the order they happened | the weather each day | a map of a city | a list of prices
+Who were the Pilgrims? | English settlers who sailed on the Mayflower in 1620 | Spanish explorers | astronauts | Native American chiefs
+What is a landmark? | an important place or object people recognize | a kind of money | a bus stop | a road sign
+Why is the Statue of Liberty important? | it is a symbol of freedom and welcome to immigrants | it was a lighthouse for pirates | it is the home of the President | it marks the border with Canada
+### economics
+What is a budget? | a plan for how to spend and save money | a type of bank | a store sale | a tax form
+What is a tax? | money people pay to the government for public services | a gift to friends | a store discount | a loan
+Why do people specialize in jobs? | to become good at one thing and trade for the rest | because they must do everything alone | to avoid working | because of the weather
+### economics
+What does an entrepreneur do? | starts and runs a new business | only works for the government | never takes risks | prints money

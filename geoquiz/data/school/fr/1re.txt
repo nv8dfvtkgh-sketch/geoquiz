@@ -103,3 +103,57 @@ Que veut dire « a stakeholder » ? | une partie prenante | un vendeur de steak 
 Que veut dire « hardly » ? | à peine | durement | difficile | fortement
 Que veut dire « to spread » ? | répandre, se propager | dépenser | sauter | séparer
 Que veut dire « a breakthrough » ? | une percée, une avancée majeure | une panne | une fracture | une pause
+
+## svt
+### genetique
+Comment appelle-t-on la copie de l'ADN avant une division cellulaire ? | la réplication | la traduction | la transcription | la fécondation
+Quelle molécule fait le lien entre l'ADN et la synthèse des protéines ? | l'ARN messager | le glucose | l'hémoglobine | le cholestérol
+### corps
+Quelles cellules immunitaires produisent les anticorps ? | les lymphocytes B (plasmocytes) | les globules rouges | les neurones | les plaquettes
+Quel est le principe d'un vaccin ? | provoquer une mémoire immunitaire sans la maladie | tuer directement les bactéries | remplacer les globules blancs | soigner une maladie déjà déclarée
+### geologie
+Quelle couche du globe se situe entre la croûte et le noyau ? | le manteau | l'atmosphère | la lithosphère seule | l'hydrosphère
+Quelle méthode permet d'étudier l'intérieur de la Terre ? | l'étude de la propagation des ondes sismiques | le forage jusqu'au noyau | la photographie satellite | la radiographie
+De quoi est principalement constitué le noyau terrestre ? | de fer et de nickel | de granite | d'eau | de basalte
+Quelle roche forme majoritairement la croûte océanique ? | le basalte | le granite | le calcaire | le grès
+
+## physique
+### mouvement
+Que dit la deuxième loi de Newton ? | la somme des forces est égale à la masse fois l'accélération | tout corps reste immobile | l'action égale la réaction | la vitesse est constante
+Quelle est l'unité de l'accélération ? | le m/s² | le m/s | le N | le J
+Quelle grandeur se conserve pour un système isolé sans frottements ? | l'énergie mécanique | la vitesse | la hauteur | la masse volumique
+Quelle est l'expression de l'énergie cinétique ? | ½ × m × v² | m × g × h | m × v | ½ × m × g
+### ondes
+Que mesure la distance focale d'une lentille ? | la distance entre le centre de la lentille et son foyer | son épaisseur | son diamètre | sa masse
+Quelle lentille fait converger les rayons lumineux ? | une lentille convergente | une lentille divergente | un miroir plan | une vitre
+Quelle relation lie longueur d'onde, célérité et fréquence ? | λ = v ÷ f | λ = v × f | λ = f ÷ v | λ = v + f
+Quelle couleur de lumière visible a la plus grande longueur d'onde ? | le rouge | le violet | le bleu | le vert
+Quel modèle décrit la lumière comme un flux de particules d'énergie ? | le photon | l'électron | le neutron | le proton
+### energie
+Quelle est l'expression de l'énergie potentielle de pesanteur ? | m × g × h | ½ × m × v² | m × v | P × t
+Qu'est-ce que l'effet Joule ? | la transformation d'énergie électrique en chaleur dans un conducteur | la production de lumière par un laser | la fusion nucléaire | la rotation d'un moteur
+Comment s'écrit la puissance électrique reçue par un dipôle ? | P = U × I | P = U ÷ I | P = R ÷ I | P = U + I
+Que définit le rendement d'un convertisseur ? | l'énergie utile divisée par l'énergie reçue | la masse du convertisseur | sa vitesse | sa tension
+Quelle énergie est stockée dans une batterie ? | l'énergie chimique | l'énergie nucléaire | l'énergie cinétique | l'énergie thermique solaire
+Quelle source d'électricité ne rejette presque pas de CO₂ en fonctionnement ? | une éolienne | une centrale à charbon | une centrale au fioul | une centrale à gaz
+
+## histgeo
+### xxe
+Quel attentat déclenche la Première Guerre mondiale en 1914 ? | l'assassinat de l'archiduc François-Ferdinand à Sarajevo | l'invasion de la Pologne | l'attaque de Pearl Harbor | l'incendie du Reichstag
+Quelle bataille de 1916 symbolise l'enfer des tranchées pour les Français ? | Verdun | Waterloo | Stalingrad | Austerlitz
+Comment appelle-t-on la guerre où les soldats restent enterrés face à face ? | la guerre de position (tranchées) | la guerre éclair | la guerre froide | la guérilla
+Quand l'armistice de la Première Guerre mondiale est-il signé ? | le 11 novembre 1918 | le 8 mai 1945 | le 14 juillet 1919 | le 1er septembre 1939
+Quel traité règle la paix avec l'Allemagne en 1919 ? | le traité de Versailles | le traité de Rome | le traité de Vienne | le traité de Brest-Litovsk
+### geographie
+Quel type d'espace concentre les fonctions de commandement de l'économie mondiale ? | les grandes métropoles | les espaces ruraux isolés | les déserts | les littoraux touristiques
+Comment appelle-t-on l'espace rural proche des villes, gagné par l'urbanisation ? | l'espace périurbain | le centre-ville | la zone franche | le désert
+Quel pays est surnommé « l'atelier du monde » ? | la Chine | le Brésil | la France | le Canada
+
+## francais
+### grammaire
+Dans « Je pense qu'il viendra », quelle est la nature de « qu'il viendra » ? | une proposition subordonnée complétive | une proposition relative | une proposition principale | un groupe nominal
+Quelle phrase est à la forme négative ? | « Il ne vient jamais. » | « Vient-il ? » | « Qu'il vienne ! » | « Il vient souvent. »
+Dans « Le livre que tu lis est passionnant », « que tu lis » est… | une proposition subordonnée relative | une subordonnée circonstancielle | une complétive | une principale
+Quelle est l'interrogation totale ? | une question à laquelle on répond par oui ou non | une question avec « pourquoi » | une question rhétorique | une exclamation
+Dans « Bien qu'il pleuve, nous sortons », la subordonnée exprime… | la concession | la cause | le but | la conséquence
+Dans « Il travaille pour réussir », « pour réussir » exprime… | le but | la cause | le temps | la comparaison

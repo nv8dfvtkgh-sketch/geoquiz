@@ -87,3 +87,22 @@ Comment dit-on « oui » en anglais ? | yes | no | okay | good
 Que répond-on à « How are you? » ? | I'm fine, thank you. | My name is Tom. | I'm six. | Goodbye.
 Que demande « What's your name? » ? | ton prénom | ton âge | ta couleur préférée | où tu habites
 Que veut dire « apple » ? | pomme | banane | poire | orange
+
+## qlm
+### corps
+Combien avons-nous de mains ? | 2 | 1 | 3 | 4
+Avec quoi sent-on les odeurs ? | le nez | les oreilles | les yeux | la langue
+Quel geste faut-il faire avant de manger ? | se laver les mains | courir | se coucher | chanter
+### matiere
+Que devient un glaçon posé au soleil ? | de l'eau | du sable | de la neige | du bois
+Dans quoi est faite une vitre ? | du verre | du bois | du papier | de la laine
+Quel objet est attiré par un aimant ? | un clou en fer | une gomme | un crayon en bois | une feuille
+Quel objet flotte sur l'eau ? | un bouchon en liège | une bille en fer | un caillou | une clé
+### espace-temps
+Combien y a-t-il de jours dans une semaine ? | 7 | 5 | 10 | 12
+
+## francais
+### grammaire
+Combien de mots y a-t-il dans la phrase « Le chat dort. » ? | 3 | 2 | 4 | 5
+Quel mot est un nom ? | un ballon | joli | courir | vite
+Par quel signe se termine la phrase « Le chat dort » ? | un point | une virgule | un tiret | rien

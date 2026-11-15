@@ -117,3 +117,70 @@ Que veut dire « a deadline » ? | une date limite | une ligne morte | une impas
 Que veut dire « to cope with » ? | faire face à | copier | coopérer | couper
 Que veut dire « whereas » ? | alors que (opposition) | où | pourquoi | partout
 Que veut dire « to look forward to » ? | avoir hâte de | regarder devant | chercher | oublier
+
+## svt
+### genetique
+Quelle molécule porte l'information génétique ? | l'ADN | le glucose | l'hémoglobine | l'amidon
+Comment appelle-t-on la diversification des êtres vivants au cours des temps géologiques ? | l'évolution | la germination | la digestion | la fermentation
+### ecologie
+Que mesure la biodiversité à l'échelle génétique ? | la diversité des allèles au sein d'une espèce | le nombre d'écosystèmes | la taille des individus | le nombre de pays
+Quel facteur fait disparaître la biodiversité aujourd'hui ? | la destruction des habitats | la photosynthèse | la pollinisation | la respiration
+Comment appelle-t-on la proportion d'individus d'une population portant un allèle ? | la fréquence allélique | la densité | la natalité | le phénotype
+Quel est le principal facteur de la sélection naturelle ? | l'avantage reproductif de certains individus dans un milieu | le hasard des saisons | la volonté des animaux | la taille des continents
+### corps
+Qu'est-ce que le microbiote intestinal ? | l'ensemble des micro-organismes vivant dans l'intestin | un organe de la digestion | une enzyme | une hormone
+Quelle hormone est produite par les testicules ? | la testostérone | l'insuline | l'adrénaline | l'œstradiol
+Quel moyen protège à la fois des grossesses et des IST ? | le préservatif | la pilule | le stérilet | le calendrier
+Où a lieu la fécondation chez la femme ? | dans les trompes (oviductes) | dans l'utérus | dans les ovaires | dans le vagin
+### geologie
+Comment appelle-t-on la couche superficielle meuble issue de l'altération des roches et de la matière organique ? | le sol | le manteau | la croûte océanique | le noyau
+Quelle activité humaine accélère l'érosion des sols ? | la déforestation | le reboisement | les haies | les prairies permanentes
+
+## physique
+### ondes
+Quelle relation lie vitesse, distance et durée pour une onde sonore ? | v = d ÷ Δt | v = d × Δt | v = Δt ÷ d | v = d + Δt
+Quel phénomène dévie la lumière quand elle change de milieu ? | la réfraction | la réflexion totale toujours | la diffusion | l'absorption
+### mouvement
+Que dit le principe d'inertie ? | un objet soumis à des forces qui se compensent est immobile ou en mouvement rectiligne uniforme | tout objet finit par s'arrêter | un objet accélère toujours | la vitesse dépend de la couleur
+Comment appelle-t-on l'objet par rapport auquel on décrit un mouvement ? | le référentiel | le vecteur | la trajectoire | la masse
+Quelle est l'expression de la force de gravitation entre deux masses ? | F = G × m₁ × m₂ ÷ d² | F = m × v | F = G × d² | F = m₁ + m₂
+Une balle lâchée sans vitesse tombe. Son mouvement est… | rectiligne accéléré | rectiligne uniforme | circulaire | immobile
+Quelle loi associe action et réaction ? | le principe des actions réciproques | la loi d'Ohm | la loi de Snell-Descartes | la loi de Mariotte
+Comment appelle-t-on l'ensemble des positions successives d'un point ? | la trajectoire | le référentiel | la vitesse | la force
+Quelle est l'unité de la constante g ? | le N/kg | le kg/N | le m/s | le J
+### electricite
+Qu'est-ce qu'une caractéristique tension-intensité d'un dipôle ? | la courbe U en fonction de I | la masse du dipôle | sa couleur | sa température
+Comment appelle-t-on un dipôle dont la tension est proportionnelle à l'intensité ? | un conducteur ohmique | une diode | une pile | un moteur
+Quel capteur voit sa résistance varier avec la température ? | une thermistance | une photorésistance | une diode | un interrupteur
+Que vaut la tension aux bornes d'un fil de connexion idéal ? | 0 V | 230 V | 12 V | elle est infinie
+Quelle loi dit que la somme des intensités entrant dans un nœud égale la somme des sortantes ? | la loi des nœuds | la loi des mailles | la loi d'Ohm | la loi de Joule
+
+## histgeo
+### antiquite
+Quel régime politique se développe à Athènes au Ve siècle av. J.-C. ? | la démocratie | la monarchie absolue | l'empire | la féodalité
+Quel empereur a donné la citoyenneté romaine à tous les hommes libres de l'Empire en 212 ? | Caracalla | Auguste | Néron | Constantin
+### moyen-age
+Quelle langue sert de langue savante et religieuse en Occident au Moyen Âge ? | le latin | l'anglais | l'arabe | le grec moderne
+En quelle année Constantinople est-elle prise par les Ottomans ? | 1453 | 1492 | 1204 | 1789
+Quelle dynastie califale fait de Bagdad sa capitale ? | les Abbassides | les Omeyyades de Cordoue | les Capétiens | les Ottomans
+Comment appelle-t-on les expéditions militaires chrétiennes vers Jérusalem ? | les croisades | les razzias | les grandes découvertes | les invasions barbares
+Quel royaume chrétien de la péninsule Ibérique a mené la Reconquista avec l'Aragon ? | la Castille | la France | l'Angleterre | Venise
+Quel grand port italien domine le commerce méditerranéen au Moyen Âge avec Gênes ? | Venise | Naples | Marseille | Lisbonne
+### temps-modernes
+Qui a publié les 95 thèses en 1517 ? | Martin Luther | Jean Calvin | Érasme | Henri VIII
+Quel navigateur a ouvert la route maritime des Indes par le cap de Bonne-Espérance ? | Vasco de Gama | Christophe Colomb | Magellan | Cartier
+Qu'est-ce que l'humanisme ? | un mouvement intellectuel qui place l'être humain au centre de la réflexion | une religion | un style de peinture médiévale | une réforme agricole
+### geographie
+Comment appelle-t-on la croissance de la population des villes ? | l'urbanisation | la désertification | la déforestation | la mondialisation
+Comment appelle-t-on les personnes forcées de quitter leur pays à cause de persécutions ? | des réfugiés | des touristes | des expatriés | des frontaliers
+
+## ses
+### sociologie
+Comment appelle-t-on la socialisation qui a lieu pendant l'enfance ? | la socialisation primaire | la socialisation secondaire | la stratification | la mobilité sociale
+Quelle est l'instance de socialisation la plus importante pendant l'enfance ? | la famille | l'entreprise | l'armée | le parti politique
+### politique
+Qu'est-ce que l'abstention ? | le fait de ne pas voter alors qu'on est inscrit | voter blanc | voter nul | voter pour un petit parti
+Qu'est-ce qu'un sondage d'opinion ? | une enquête auprès d'un échantillon représentatif | un vote officiel | un recensement complet | un référendum
+Quel facteur influence le vote selon les sociologues ? | l'âge, le diplôme et la catégorie sociale | la couleur des yeux | le signe astrologique | la taille
+Comment appelle-t-on le vote qui varie d'une élection à l'autre ? | la volatilité électorale | l'abstention | le vote obligatoire | le vote blanc
+Qu'est-ce qu'un échantillon représentatif ? | un groupe qui reproduit les caractéristiques de la population | un groupe d'amis | toute la population | un seul individu

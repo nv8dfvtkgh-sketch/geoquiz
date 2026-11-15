@@ -1172,5 +1172,7 @@
   "daily.themeHint": "Esta semana el reto del día tiene tema: 10 preguntas nuevas cada día.",
   "rev.byTopic": "Elige un tema",
   "rev.topicFor": "¿Qué quieres repasar en {level}?",
-  "rev.allTopics": "Todo el programa"
+  "rev.allTopics": "Todo el programa",
+  "rev.byChapter": "Elige un capítulo",
+  "rev.chapterFor": "{subject} en {level}: ¿qué capítulo?"
 }

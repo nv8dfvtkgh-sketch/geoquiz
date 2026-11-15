@@ -1172,5 +1172,7 @@
   "daily.themeHint": "Cette semaine, le défi du jour a un thème : 10 nouvelles questions chaque jour.",
   "rev.byTopic": "Choisis une notion",
   "rev.topicFor": "Que veux-tu réviser en {level} ?",
-  "rev.allTopics": "Tout le programme"
+  "rev.allTopics": "Tout le programme",
+  "rev.byChapter": "Choisis un chapitre",
+  "rev.chapterFor": "{subject} en {level} : quel chapitre ?"
 }

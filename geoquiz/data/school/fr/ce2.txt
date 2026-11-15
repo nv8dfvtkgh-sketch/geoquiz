@@ -84,3 +84,17 @@ Que veut dire « What time is it? » ? | Quelle heure est-il ? | Quel temps fait
 Que veut dire « Christmas » ? | Noël | Pâques | Halloween | anniversaire
 Que veut dire « shoes » ? | chaussures | chaussettes | chemise | chapeau
 Que veut dire « I'm hungry » ? | J'ai faim. | J'ai soif. | J'ai froid. | J'ai peur.
+
+## qlm
+### corps
+Quel organe pompe le sang dans le corps ? | le cœur | les poumons | l'estomac | le cerveau
+Où va la nourriture après la bouche ? | dans l'œsophage puis l'estomac | dans les poumons | dans le cœur | dans le cerveau
+Combien d'heures environ un enfant de 8 ans devrait-il dormir par nuit ? | 10 heures | 4 heures | 6 heures | 15 heures
+Quels aliments faut-il manger chaque jour ? | des fruits et des légumes | seulement des bonbons | seulement de la viande | rien le matin
+Qu'est-ce qui relie les os entre eux ? | les articulations | les cheveux | les ongles | les dents
+Quel sens utilise-t-on pour reconnaître le sucré et le salé ? | le goût | l'ouïe | la vue | l'odorat
+Pourquoi se brosser les dents après les repas ? | pour éviter les caries | pour grandir | pour mieux voir | pour courir vite
+### vivant
+Comment s'appelle un animal qui mange des plantes ? | un herbivore | un carnivore | un insecte | un prédateur
+### espace-temps
+Combien de minutes y a-t-il dans une heure ? | 60 | 100 | 24 | 30

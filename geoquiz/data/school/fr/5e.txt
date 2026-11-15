@@ -104,3 +104,50 @@ Que veut dire « a castle » ? | un château fort | un chat | une cassette | un 
 Que veut dire « a knight » ? | un chevalier | une nuit | un couteau | un nœud
 Que veut dire « actually » ? | en fait | actuellement | activement | exactement
 Quel pays fait partie du Royaume-Uni ? | l'Écosse | l'Irlande (République) | l'Islande | la Norvège
+
+## svt
+### geologie
+Comment s'appelle le déplacement lent des plaques à la surface de la Terre ? | la tectonique des plaques | l'érosion | la photosynthèse | la marée
+Quel phénomène use et transporte les roches à la surface ? | l'érosion | la fusion | la digestion | la fermentation
+Comment appelle-t-on les débris de roches déposés au fond de l'eau ? | des sédiments | des minéraux fondus | des fossiles vivants | du magma
+Quel instrument enregistre les secousses d'un séisme ? | un sismographe | un baromètre | un thermomètre | un microscope
+### genetique
+Comment appelle-t-on la rencontre d'un ovule et d'un spermatozoïde ? | la fécondation | la mitose | la digestion | la germination
+Qu'appelle-t-on un caractère héréditaire ? | un caractère transmis par les parents | une cicatrice | une langue apprise | un bronzage
+Comment s'appelle l'ensemble des êtres vivants capables de se reproduire entre eux ? | une espèce | une famille | un écosystème | une population mondiale
+Qu'est-ce qu'un fossile ? | un reste ou une trace d'être vivant conservé dans une roche | une roche volcanique | un cristal | un minerai
+### ecologie
+Qu'est-ce qu'un écosystème ? | un milieu de vie et les êtres vivants qui y vivent | un seul animal | une usine | une roche
+Qui sont les producteurs dans une chaîne alimentaire ? | les végétaux chlorophylliens | les carnivores | les décomposeurs | les herbivores
+Que signifie « biodiversité » ? | la diversité des êtres vivants | la quantité d'eau d'un milieu | la taille d'une forêt | le nombre d'humains
+Quel insecte participe beaucoup à la pollinisation ? | l'abeille | la mouche domestique | la fourmi | le moustique
+Quel gaz les plantes absorbent-elles pour fabriquer leur matière ? | le dioxyde de carbone | l'hélium | l'azote seul | l'hydrogène
+Qu'est-ce qu'une espèce invasive ? | une espèce introduite qui prolifère et menace les espèces locales | une espèce disparue | une espèce protégée | une espèce domestiquée
+
+## physique
+### electricite
+Quel appareil mesure une tension électrique ? | un voltmètre | un ampèremètre | un thermomètre | une balance
+Dans un circuit en série, si une lampe grille, que font les autres ? | elles s'éteignent | elles brillent plus | rien ne change | elles explosent
+### ondes
+Comment voit-on un objet qui ne produit pas de lumière ? | il diffuse la lumière qu'il reçoit vers nos yeux | nos yeux envoient de la lumière | il devient lumineux tout seul | on ne peut pas le voir
+Le son peut-il se propager dans le vide ? | non | oui | seulement s'il est fort | seulement en hiver
+Quelle est la vitesse approximative du son dans l'air ? | 340 m/s | 300 000 km/s | 3 m/s | 34 km/s
+Comment appelle-t-on un objet qui produit sa propre lumière ? | une source primaire | un objet diffusant | un écran | une ombre
+Que se passe-t-il derrière un objet opaque éclairé ? | une ombre se forme | la lumière le traverse | il devient transparent | rien
+Quelle est la vitesse de la lumière dans le vide ? | environ 300 000 km/s | 340 m/s | 1 000 km/h | 30 km/s
+### mouvement
+Comment calcule-t-on une vitesse moyenne ? | distance ÷ durée | durée ÷ distance | distance × durée | distance + durée
+Un objet qui va toujours à la même vitesse en ligne droite a un mouvement… | rectiligne uniforme | circulaire | accéléré | ralenti
+Quelle est l'unité de vitesse dans le système international ? | le mètre par seconde | le kilogramme | le newton | le volt
+Un train parcourt 300 km en 2 h. Quelle est sa vitesse moyenne ? | 150 km/h | 600 km/h | 300 km/h | 100 km/h
+Par rapport à un passager assis dans un bus qui roule, le chauffeur est… | immobile | en mouvement | en chute | en rotation
+Le mouvement d'une roue de vélo autour de son axe est… | circulaire | rectiligne | immobile | aléatoire
+
+## histgeo
+### temps-modernes
+Qui a découvert l'Amérique pour les Européens en 1492 ? | Christophe Colomb | Magellan | Vasco de Gama | Marco Polo
+### geographie
+Combien d'habitants compte la Terre environ en 2026 ? | plus de 8 milliards | 2 milliards | 15 milliards | 500 millions
+Quel continent compte le plus d'habitants ? | l'Asie | l'Afrique | l'Europe | l'Amérique
+Comment s'appelle une région où les pluies sont très rares ? | un désert | une forêt tropicale | un delta | une banquise
+Comment appelle-t-on une ressource qui se renouvelle rapidement ? | une ressource renouvelable | une ressource fossile | une ressource rare | une ressource minière

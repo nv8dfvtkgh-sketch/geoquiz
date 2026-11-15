@@ -1150,7 +1150,8 @@ test('Révisions scolaires : chaque classe, chaque cycle et chaque matière donn
     const cat = CATEGORIES[g.id];
     assert.ok(cat, g.id);
     const pool = cat.pool(world, 'easy', 10);
-    assert.ok(pool.length >= 10, `${g.id} : ${pool.length} questions`);
+    // Un chapitre (hors maths et questions fabriquées) peut n'avoir que 6 questions écrites.
+    assert.ok(pool.length >= (g.topic ? 6 : 10), `${g.id} : ${pool.length} questions`);
     for (const t of pool.slice(0, 8).concat(pool.slice(-4))) {
       const q = cat.make(t, 'mcq', world, r);
       assert.equal(q.options?.length, 4, t);
@@ -1163,6 +1164,14 @@ test('Révisions scolaires : chaque classe, chaque cycle et chaque matière donn
     const q = mathQuestion(lv, s * 104729, lv.startsWith('g') || lv === 'k' ? 'en' : 'fr');
     assert.ok(q, `${lv} ${s}`);
   }
+  // Chapitres : chaque question jouée appartient bien au chapitre choisi.
+  const { extras } = await import('../src/server/data');
+  const extrasRow = (t: string) => { const [, lv, sub, i] = t.split(':'); return extras.school.fr?.[lv]?.[sub]?.[Number(i)]; };
+  const conj = CATEGORIES['rev_fr_cm1_francais-conjugaison'];
+  assert.ok(conj, 'chapitre conjugaison CM1');
+  for (const t of conj.pool(world, 'easy', 10).slice(0, 30)) assert.ok(t.startsWith('l:') || extrasRow(t)?.[5] === 'conjugaison', t);
+  assert.ok(CATEGORIES['rev_fr_tle_philo-culture'], 'chapitre de philosophie');
+  assert.ok(CATEGORIES['rev_us_g4_social-civics'], 'chapitre US');
   // Une partie solo de révision se joue jusqu'au bout.
   const qs = drawQuestions(settings({ category: 'rev_fr_cm1_all', zone: 'world', difficulty: 'easy' } as any), () => 0.42);
   assert.ok(qs.length >= 5);

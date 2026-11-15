@@ -61,3 +61,33 @@ Which is the largest ocean? | Pacific | Atlantic | Indian | Arctic
 Who was the first President of the United States? | George Washington | Abraham Lincoln | Thomas Jefferson | John Adams
 What is a tax? | money people pay to the government for services | a type of store | a holiday | a map
 Who invented a way for blind people to read with raised dots? | Louis Braille | Thomas Edison | Benjamin Franklin | Alexander Graham Bell
+
+## science
+### physical
+Which property describes how something feels? | texture | color | weight on the Moon | its name
+What happens to chocolate when it is heated? | it melts | it freezes | it turns into wood | it becomes a gas instantly
+What happens to water when it is put in a freezer? | it becomes ice | it becomes steam | it disappears | it becomes sand
+Which object is flexible? | a rubber band | a glass cup | a brick | a metal spoon
+Can a melted ice cube be turned back into ice? | yes, by freezing it again | no, never | only by heating it | only by adding salt
+### earth
+What can slowly change the shape of land? | wind and water | music | shadows | moonlight
+What is a map of a place used for? | to show where things are | to tell time | to measure weight | to play music
+### life
+How do bees help flowers? | they move pollen from flower to flower | they water them | they eat the roots | they plant the seeds in dirt
+How can animals spread seeds? | by carrying them on their fur or eating fruit | by painting them | by freezing them | by singing to them
+
+## social
+### civics
+What do citizens do to choose leaders? | they vote | they draw straws | they flip a coin | they race
+Which building is where a city's government works? | city hall | the library | the grocery store | the zoo
+### economics
+Which is an example of a good? | an apple sold at a market | a haircut | a doctor's checkup | a music lesson
+What do people earn when they work at a job? | income (money) | homework | a vacation every day | nothing
+What does it mean when something is scarce? | there is not enough of it for everyone who wants it | there is too much of it | it is free | it is broken
+What do people trade when they barter? | goods or services, without money | only coins | only credit cards | only promises
+### history
+How did people mostly travel long distances 200 years ago? | by horse, wagon, or boat | by airplane | by electric car | by rocket
+How is life today different from long ago? | we have electricity and phones | people never went to school | there were no families | nobody ate food
+Who is Martin Luther King Jr.? | a leader who worked for civil rights | the first President | an inventor of the light bulb | an astronaut
+Which group lived in North America before European explorers arrived? | Native Americans | Vikings only | Romans | Egyptians
+What are primary sources? | items or records from the time being studied | stories made up today | video games | cartoons

@@ -62,3 +62,43 @@ Who is the leader of a school? | the principal | the bus driver | the nurse | a 
 What holiday celebrates America's birthday? | the Fourth of July | Halloween | Valentine's Day | New Year's Day
 What do we use money for? | to buy things | to eat | to draw | to sleep
 What is a community? | a group of people who live or work in the same place | a single house | a toy | a type of food
+
+## ela
+### literature
+Who writes the words of a book? | the author | the illustrator | the reader | the teacher
+Who draws the pictures in a book? | the illustrator | the author | the librarian | the publisher
+Where is the title of a book usually found? | on the front cover | on the last page only | inside the spine only | nowhere
+In a story, who are the people or animals the story is about? | the characters | the setting | the title | the pages
+
+## science
+### physical
+What happens when you pull a wagon? | it moves toward you | it gets smaller | it turns into a car | it floats away
+What do we call a push or a pull? | a force | a color | a sound | a shape
+What makes a swing go higher? | a stronger push | a softer push | no push at all | painting it
+What happens when two moving toy cars bump into each other? | they change direction or speed | they melt | they get bigger | nothing ever happens
+What can you use to make a toy car go faster down a ramp? | make the ramp steeper | make the car wet | paint the ramp | close your eyes
+### life
+What do all animals need to live? | food, water, and air | only toys | only sunlight | only sleep
+Where do fish live? | in water | in trees | in the desert sand | in the clouds
+Why do squirrels dig holes in the ground? | to store food | to swim | to sleep in water | to make music
+### earth
+What does the Sun do to the ground? | it warms it | it cools it | it makes it wet | it makes it dark
+
+## social
+### civics
+Why do classrooms have rules? | to keep everyone safe and fair | to make school boring | to stop learning | to punish everyone
+Who helps keep people safe in a community? | police officers and firefighters | cartoon characters | only children | nobody
+What should you do when the teacher is talking? | listen quietly | shout | walk away | sing loudly
+What should you do when you disagree with a friend? | talk about it calmly | hit them | yell at them | take their toys
+### geography
+Which place is in a neighborhood? | a park | the Moon | the bottom of the ocean | the Sun
+What do we call a small model of the Earth? | a globe | a puzzle | a ball for soccer | a kite
+What does blue usually show on a map? | water | roads | mountains | cities
+### economics
+Which one is a need? | food | a video game | a toy car | candy
+Which one is a want? | a new toy | water | a home | clothes for winter
+What do people use to buy things? | money | leaves | rocks | stickers
+### civics
+Why do we wait in line? | so everyone gets a fair turn | to win a prize | because lines are fun | to be first always
+### geography
+Which of these is a body of water? | a lake | a hill | a road | a house

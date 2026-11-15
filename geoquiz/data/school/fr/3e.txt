@@ -107,3 +107,38 @@ Que veut dire « throughout » ? | tout au long de | en dessous de | autour de |
 Quel est le participe passé de « bring » ? | brought | bringed | brang | bought
 Quel est le participe passé de « teach » ? | taught | teached | thought | teacht
 Que veut dire « a refugee » ? | un réfugié | un refus | un réfrigérateur | une récompense
+
+## svt
+### corps
+Que produit le système immunitaire contre un microbe précis ? | des anticorps | des hormones de croissance | des globules rouges uniquement | du sucre
+### ecologie
+Quel gaz à effet de serre est surtout produit par la combustion des énergies fossiles ? | le dioxyde de carbone | l'oxygène | l'hélium | l'azote
+Qu'est-ce qu'un service écosystémique ? | un bénéfice que les écosystèmes rendent aux humains | une entreprise de nettoyage | un parc d'attractions | une loi
+Comment appelle-t-on la culture sans pesticides ni engrais chimiques de synthèse ? | l'agriculture biologique | l'agriculture intensive | la monoculture | la déforestation
+Pourquoi la déforestation menace-t-elle la biodiversité ? | elle détruit les habitats des espèces | elle augmente les espèces | elle refroidit la planète | elle crée des forêts
+Qu'est-ce qu'un agrosystème ? | un écosystème créé et entretenu par l'humain pour produire | une forêt vierge | un désert | un océan
+Quel est l'effet d'une augmentation de l'effet de serre ? | le réchauffement climatique | le refroidissement de la planète | la baisse du niveau des mers | la disparition des saisons
+
+## physique
+### mouvement
+Qui a énoncé la loi de la gravitation universelle ? | Isaac Newton | Albert Einstein | Galilée | Marie Curie
+Sur Terre, g vaut environ… | 9,8 N/kg | 1,6 N/kg | 98 N/kg | 0,98 N/kg
+Quel est le poids d'un objet de 2 kg sur Terre ? | environ 20 N | 2 N | 200 N | 0,2 N
+### energie
+Que vaut 1 kWh en joules ? | 3,6 millions de joules | 1 000 joules | 3 600 joules | 100 joules
+Quelle est l'unité de la puissance ? | le watt | le joule | le volt | le kilogramme
+Quelle relation lie énergie, puissance et durée ? | E = P × t | E = P ÷ t | E = P + t | E = t ÷ P
+Que dit le principe de conservation de l'énergie ? | l'énergie ne se crée pas et ne disparaît pas, elle se transforme | l'énergie disparaît avec le temps | l'énergie se crée dans les piles | l'énergie ne se transforme jamais
+Quelle énergie possède un objet placé en hauteur ? | l'énergie de position (potentielle) | l'énergie cinétique seulement | l'énergie nucléaire | l'énergie lumineuse
+Un appareil de 1 000 W fonctionne 2 h. Quelle énergie consomme-t-il ? | 2 kWh | 500 Wh | 1 kWh | 2 000 kWh
+
+## histgeo
+### monde-actuel
+Quel mur, construit en 1961, séparait Berlin-Est de Berlin-Ouest ? | le mur de Berlin | le mur d'Hadrien | la ligne Maginot | la Grande Muraille
+Quel traité de 1957 a créé la Communauté économique européenne ? | le traité de Rome | le traité de Versailles | le traité de Maastricht | le traité de Lisbonne
+En quelle année l'Algérie devient-elle indépendante ? | 1962 | 1945 | 1954 | 1830
+### geographie
+Comment appelle-t-on l'espace autour d'une ville où vivent des personnes qui y travaillent ? | l'aire d'attraction d'une ville | le centre historique | la zone blanche | le littoral
+Quels territoires français sont situés hors d'Europe ? | les territoires ultramarins | les régions alpines | les départements bretons | les métropoles
+Combien de régions compte la France métropolitaine depuis 2016 ? | 13 | 22 | 27 | 101
+Qu'est-ce que l'espace productif agricole ? | un espace consacré à la production agricole | une zone commerciale | une zone portuaire | un parc d'attraction

@@ -58,3 +58,7 @@ What is the "Miranda warning"? | police informing suspects of their rights | a t
 What is a primary election? | an election where party members choose their candidates | the final presidential election | a school vote | a recall
 What is lobbying? | trying to influence lawmakers | voting in Congress | judging cases | collecting taxes
 What is the minimum age to be President? | 35 | 30 | 25 | 40
+
+## social
+### economics
+What does GDP measure? | the total value of goods and services produced in a country | the number of people employed | the national debt | the price of gold

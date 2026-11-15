@@ -62,3 +62,34 @@ What is a citizen? | a member of a community or country | a visitor from space |
 What is the bald eagle a symbol of? | the United States | France | Canada | Mexico
 Why do people trade? | to get things they need or want | to throw things away | to make rules | to vote
 What is a neighborhood? | an area where people live near each other | a single room | a country | an ocean
+
+## science
+### physical
+What makes sound? | vibrations | colors | shadows | smells
+What do you need to see objects? | light | sound | wind | water
+What happens when light hits an object you cannot see through? | it makes a shadow | it makes a sound | it makes the object hot instantly | it turns blue
+What happens when you hit a drum harder? | the sound gets louder | the sound stops | it changes color | it gets quieter
+### earth
+When can we usually see the stars? | at night | at noon | never | only in summer at noon
+What shape does the Moon seem to change through the month? | it goes through phases | it turns square | it becomes a star | it stays exactly the same
+Where does the Sun appear to rise in the morning? | in the east | in the west | in the north | under the ground
+In which season are days the longest in the United States? | summer | winter | fall | they never change
+### life
+Why do baby animals look like their parents? | they inherit traits from their parents | they copy them on purpose | they eat the same food | they live in the same house
+
+## social
+### civics
+Who makes the rules in a family? | parents or guardians | the pets | the neighbors | the mail carrier
+What is the job of a mayor? | to lead a town or city | to fly airplanes | to teach first grade | to deliver mail
+### geography
+What is a map key (legend)? | a list that explains the symbols on a map | the title of a map | a real key for a door | the compass rose
+Which direction is opposite of north? | south | east | west | up
+What do we call the place where we live with our neighbors? | a community | a continent | an ocean | a planet
+### economics
+Who is a worker who provides a service? | a doctor | a toy truck | a loaf of bread | a pencil
+Where can people keep their money safe? | in a bank | under a tree | in a mailbox | at the playground
+What does it mean to save money? | to keep it to use later | to spend it all now | to throw it away | to give it to strangers
+### history
+What do we call events that happened long ago? | the past | the future | the present | tomorrow
+Which holiday celebrates the birthday of the United States? | Independence Day (July 4th) | Thanksgiving | Labor Day | Halloween
+Who was the first President of the United States? | George Washington | Abraham Lincoln | Barack Obama | Thomas Edison
