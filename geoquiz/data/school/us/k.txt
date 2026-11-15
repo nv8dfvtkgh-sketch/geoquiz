@@ -102,3 +102,42 @@ What do people use to buy things? | money | leaves | rocks | stickers
 Why do we wait in line? | so everyone gets a fair turn | to win a prize | because lines are fun | to be first always
 ### geography
 Which of these is a body of water? | a lake | a hill | a road | a house
+
+## ela
+### literature
+What do we call the start of a story? | the beginning | the end | the middle | the cover
+What is a fairy tale? | a made-up story that often has magic | a true news report | a list of words | a recipe
+In "The Three Little Pigs," what did the wolf try to do to the houses? | blow them down | paint them | sell them | build them
+
+## science
+### life
+What do baby birds hatch from? | eggs | seeds | leaves | shells of snails
+What do animals need to stay safe from bad weather? | shelter | toys | music | paint
+Which living thing makes its own food from sunlight? | a plant | a dog | a fish | a bird
+### earth
+What do we wear when it is very cold outside? | a warm coat and hat | a swimsuit | sandals only | sunglasses only
+What do we see in the sky during the day? | the Sun | the stars only | the Moon only | nothing
+What should you do when you hear thunder outside? | go indoors | stand under a tall tree | go swimming | climb a pole
+### physical
+What makes a ball roll down a slide? | gravity pulling it down | wind only | the color of the ball | music
+Which is harder to push: an empty box or a box full of books? | a box full of books | an empty box | they are the same | neither moves
+What happens to a toy car when it hits a wall? | it stops or bounces back | it goes through the wall | it flies up | it gets faster
+
+## social
+### civics
+What is a good way to show respect for others? | listen and take turns | push in line | take their things | yell at them
+What do we pledge allegiance to in the United States? | the flag | a teacher | a school bus | a book
+Why do we have traffic lights? | to keep people safe on the road | to decorate streets | to make noise | to light up houses
+### economics
+What do people do to earn money? | work at a job | play all day | sleep | watch TV
+Which one is a good? | a loaf of bread | a haircut | a teacher teaching | a doctor's visit
+What can you do if you want something that costs money? | save your money | take it without paying | cry | throw coins away
+Where can families buy food? | at a grocery store | at a fire station | at a library | at a post office
+### geography
+What is an address? | the place where you live, with a number and street | your age | your phone color | your favorite food
+Which one is a landform? | a mountain | a car | a house | a school
+What do we call a very large body of salt water? | an ocean | a pond | a puddle | a river
+### history
+What does "long ago" mean? | a time far in the past | tomorrow | right now | next week
+What did children use long ago to write in school? | slates and chalk | tablets and computers | phones | video games
+Which holiday is celebrated on the fourth Thursday of November in the U.S.? | Thanksgiving | Independence Day | Halloween | New Year's Day

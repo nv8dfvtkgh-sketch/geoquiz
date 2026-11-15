@@ -91,3 +91,33 @@ What does it mean to export a product? | to sell it to another state or country 
 How does a state's natural resources affect its economy? | they shape what people produce and sell | they have no effect | they decide the weather | they change the state's name
 Which job is part of agriculture? | farmer | pilot | banker | programmer
 Why do states trade with each other? | each produces different goods and resources | they must all make the same things | trading is illegal | to avoid using money
+
+## science
+### life
+How do plants make food? | through photosynthesis using sunlight | by eating insects | by drinking milk | from rocks
+What does the brain do with information from the senses? | processes it and decides how to respond | stores food | pumps blood | digests it
+Which structure helps a fish breathe underwater? | gills | lungs | feathers | fur
+### earth
+Which force carves valleys as glaciers move? | the weight and movement of ice | the Moon's light | wind from fans | earthquakes only
+Which natural hazard happens when two plates of Earth's crust suddenly move? | an earthquake | a tornado | a drought | a hurricane
+What can fossils of sea animals found on a mountain tell us? | the area was once under water | the mountain is made of ice | animals climbed it | it was always a desert
+### physical
+How does energy from the Sun reach Earth? | as light (radiation) | through wires | as sound | it does not
+What happens to the speed of an object when more energy is added? | it can move faster | it always stops | it gets lighter | it shrinks
+Which is an example of energy changing form? | a light bulb turning electricity into light and heat | a rock sitting still | a closed book | a cold spoon
+
+## social
+### civics
+What is the job of the executive branch? | to carry out and enforce laws | to make laws | to judge laws | to collect stamps
+What is the job of the judicial branch? | to interpret laws and decide cases | to make laws | to enforce laws | to elect the President
+Who is the leader of the executive branch of a state? | the governor | the mayor | the chief justice | the senator
+What are the two parts of Congress? | the Senate and the House of Representatives | the President and the Vice President | the courts and the police | the states and the cities
+### economics
+What is a natural resource found in many states that is used for energy? | coal or oil | plastic | glass | paper
+What does a state earn when it sells goods to other states? | income that helps its economy | nothing at all | more taxes to pay | fewer jobs
+What is a business that makes products in large amounts called? | a factory or manufacturer | a library | a park | a museum
+What do we call businesses that provide jobs in tourism? | the tourism industry | farming | mining | fishing
+### history
+Who explored the Pacific Northwest with Lewis? | William Clark | Daniel Boone | Christopher Columbus | Hernando de Soto
+What was the main purpose of the Pony Express? | to deliver mail quickly across the West | to race horses | to carry gold | to farm land
+Which canal, opened in 1825, connected the Great Lakes to New York City by water? | the Erie Canal | the Panama Canal | the Suez Canal | the Chicago Canal

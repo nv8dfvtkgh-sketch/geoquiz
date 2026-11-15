@@ -2,24 +2,62 @@
 ## francais
 Quelles sont les deux épreuves anticipées de français du bac ? | un écrit et un oral | deux oraux | deux écrits | un QCM et un oral
 Quels sont les sujets possibles à l'écrit du bac de français (voie générale) ? | commentaire ou dissertation | résumé ou synthèse | QCM | traduction
+### poesie
 Qui a écrit « Cahier de Douai » (poèmes de 1870) ? | Arthur Rimbaud | Paul Verlaine | Victor Hugo | Charles Baudelaire
-Qui a écrit « Manon Lescaut » ? | l'abbé Prévost | Marivaux | Diderot | Rousseau
-Qui a écrit « La Peau de chagrin » ? | Honoré de Balzac | Émile Zola | Gustave Flaubert | Stendhal
-Qui a écrit « On ne badine pas avec l'amour » ? | Alfred de Musset | Victor Hugo | Marivaux | Edmond Rostand
-Qui a écrit la « Déclaration des droits de la femme et de la citoyenne » (1791) ? | Olympe de Gouges | Madame de Staël | George Sand | Madame Roland
-Qui a écrit « Les Caractères » (1688) ? | La Bruyère | La Rochefoucauld | La Fontaine | Pascal
 Qui a écrit « Le Parti pris des choses » ? | Francis Ponge | Paul Valéry | Saint-John Perse | René Char
+Qu'est-ce qu'une prosopopée ? | faire parler un absent, un mort ou un objet | une exagération | une répétition | une question rhétorique
+Qui a écrit « Les Contemplations » ? | Victor Hugo | Baudelaire | Lamartine | Musset
+Quel poète a écrit « Le Bateau ivre » ? | Arthur Rimbaud | Paul Verlaine | Stéphane Mallarmé | Charles Baudelaire
+Qu'est-ce qu'un poème en prose ? | un texte poétique sans vers ni rimes obligatoires | un sonnet en alexandrins | une pièce de théâtre | un roman court
+Quel mouvement du XXe siècle, mené par André Breton, explore le rêve et l'inconscient ? | le surréalisme | le romantisme | le Parnasse | le symbolisme
+Qu'est-ce que le vers libre ? | un vers sans mètre ni rime imposés | un alexandrin | un octosyllabe | un vers rimé en ABBA
+Qui a écrit « Capitale de la douleur » ? | Paul Éluard | Louis Aragon | Jacques Prévert | Guillaume Apollinaire
+Quel mouvement de la fin du XIXe siècle cherche à suggérer plutôt qu'à décrire ? | le symbolisme | le réalisme | le classicisme | l'humanisme
+### theatre
+Qui a écrit « On ne badine pas avec l'amour » ? | Alfred de Musset | Victor Hugo | Marivaux | Edmond Rostand
 Qui a écrit « Pour un oui ou pour un non » ? | Nathalie Sarraute | Marguerite Duras | Samuel Beckett | Eugène Ionesco
 Qu'est-ce que le théâtre de l'absurde ? | un théâtre qui montre l'absurdité de la condition humaine | une comédie de mœurs | une tragédie classique | un drame romantique
 Qui a écrit « En attendant Godot » ? | Samuel Beckett | Eugène Ionesco | Jean Anouilh | Albert Camus
-Qu'est-ce que la préciosité au XVIIe siècle ? | un mouvement recherchant le raffinement du langage et des manières | un courant réaliste | une école de peinture | un style rural
-Quel mouvement du XIXe siècle exalte le moi et les sentiments ? | le romantisme | le classicisme | le naturalisme | l'humanisme
 Qui a écrit la préface de « Cromwell », manifeste du drame romantique ? | Victor Hugo | Alfred de Vigny | Musset | Lamartine
+Qui a écrit « Cyrano de Bergerac » ? | Edmond Rostand | Victor Hugo | Molière | Musset
+Qu'est-ce que la catharsis selon Aristote ? | la purgation des passions du spectateur par la tragédie | une règle de rime | un décor | une fin heureuse
+Qui a écrit « Le Mariage de Figaro » ? | Beaumarchais | Marivaux | Molière | Diderot
+Qui a écrit « Rhinocéros » ? | Eugène Ionesco | Samuel Beckett | Jean Genet | Jean-Paul Sartre
+Qu'est-ce que la double énonciation au théâtre ? | les personnages se parlent mais s'adressent aussi au public | deux pièces jouées en même temps | deux auteurs pour une pièce | un monologue silencieux
+### roman
+Qui a écrit « Manon Lescaut » ? | l'abbé Prévost | Marivaux | Diderot | Rousseau
+Qui a écrit « La Peau de chagrin » ? | Honoré de Balzac | Émile Zola | Gustave Flaubert | Stendhal
+Qui a écrit « La Princesse de Clèves » (1678) ? | Madame de La Fayette | Madame de Sévigné | George Sand | Madame de Staël
+Qui a écrit « Les Misérables » ? | Victor Hugo | Alexandre Dumas | Émile Zola | Balzac
+Qu'est-ce qu'un roman épistolaire ? | un roman composé de lettres | un roman de science-fiction | un roman en vers | un roman sans personnages
+Qui a écrit « Les Liaisons dangereuses », roman par lettres ? | Choderlos de Laclos | Rousseau | Voltaire | Marivaux
+Qui a écrit « L'Étranger » (1942) ? | Albert Camus | Jean-Paul Sartre | André Malraux | Marguerite Yourcenar
+Qu'est-ce qu'un roman de chevalerie au Moyen Âge ? | un récit des aventures de chevaliers, comme ceux de Chrétien de Troyes | un roman policier | un roman réaliste | une autobiographie
+Comment appelle-t-on un roman qui raconte la formation d'un jeune héros ? | un roman d'apprentissage | un roman épistolaire | un roman policier | un nouveau roman
+Qu'est-ce qu'une analepse dans un récit ? | un retour en arrière | une anticipation | une pause descriptive | une ellipse
+### idees
+Qui a écrit la « Déclaration des droits de la femme et de la citoyenne » (1791) ? | Olympe de Gouges | Madame de Staël | George Sand | Madame Roland
+Qui a écrit « Les Caractères » (1688) ? | La Bruyère | La Rochefoucauld | La Fontaine | Pascal
+Qu'est-ce que la préciosité au XVIIe siècle ? | un mouvement recherchant le raffinement du langage et des manières | un courant réaliste | une école de peinture | un style rural
 Qu'est-ce qu'un apologue ? | un court récit à visée argumentative (fable, conte philosophique) | une épopée | une autobiographie | une tragédie
 Qui a écrit le conte philosophique « Candide » ? | Voltaire | Montesquieu | Diderot | Rousseau
 Quel type de raisonnement part d'exemples pour arriver à une loi générale ? | inductif | déductif | concessif | par l'absurde
-Qu'est-ce qu'une prosopopée ? | faire parler un absent, un mort ou un objet | une exagération | une répétition | une question rhétorique
 Qu'est-ce qu'une question rhétorique ? | une question qui n'attend pas de réponse | une question de grammaire | une question fermée | une interrogation indirecte
+Qui a écrit les « Lettres persanes » ? | Montesquieu | Voltaire | Diderot | Rousseau
+Quel moraliste a écrit les « Maximes » ? | La Rochefoucauld | La Bruyère | Pascal | Montaigne
+Qu'est-ce que l'ironie ? | dire le contraire de ce que l'on pense pour critiquer ou se moquer | une simple répétition | une exagération sincère | une comparaison
+### grammaire
+Dans « Je pense qu'il viendra », quelle est la nature de « qu'il viendra » ? | une proposition subordonnée complétive | une proposition relative | une proposition principale | un groupe nominal
+Quelle phrase est à la forme négative ? | « Il ne vient jamais. » | « Vient-il ? » | « Qu'il vienne ! » | « Il vient souvent. »
+Dans « Le livre que tu lis est passionnant », « que tu lis » est… | une proposition subordonnée relative | une subordonnée circonstancielle | une complétive | une principale
+Quelle est l'interrogation totale ? | une question à laquelle on répond par oui ou non | une question avec « pourquoi » | une question rhétorique | une exclamation
+Dans « Bien qu'il pleuve, nous sortons », la subordonnée exprime… | la concession | la cause | le but | la conséquence
+Dans « Il travaille pour réussir », « pour réussir » exprime… | le but | la cause | le temps | la comparaison
+Dans « Il est parti parce qu'il était fatigué », la subordonnée exprime… | la cause | le but | la conséquence | la concession
+Quelle phrase contient une interrogation partielle ? | « Où vas-tu ? » | « Viens-tu ? » | « Est-ce que tu viens ? » | « Tu viens ? »
+Dans « Il ne mange que des fruits », la tournure « ne… que » exprime… | la restriction | la négation totale | l'interrogation | l'exclamation
+Dans « Il faisait si froid que le lac a gelé », la subordonnée exprime… | la conséquence | la cause | le but | l'opposition
+
 ## maths
 Quelle est la dérivée de x² ? | 2x | x | x³/3 | 2
 Quelle est la dérivée de 1/x ? | −1/x² | 1/x² | ln x | −1/x
@@ -149,11 +187,46 @@ Quel type d'espace concentre les fonctions de commandement de l'économie mondia
 Comment appelle-t-on l'espace rural proche des villes, gagné par l'urbanisation ? | l'espace périurbain | le centre-ville | la zone franche | le désert
 Quel pays est surnommé « l'atelier du monde » ? | la Chine | le Brésil | la France | le Canada
 
-## francais
-### grammaire
-Dans « Je pense qu'il viendra », quelle est la nature de « qu'il viendra » ? | une proposition subordonnée complétive | une proposition relative | une proposition principale | un groupe nominal
-Quelle phrase est à la forme négative ? | « Il ne vient jamais. » | « Vient-il ? » | « Qu'il vienne ! » | « Il vient souvent. »
-Dans « Le livre que tu lis est passionnant », « que tu lis » est… | une proposition subordonnée relative | une subordonnée circonstancielle | une complétive | une principale
-Quelle est l'interrogation totale ? | une question à laquelle on répond par oui ou non | une question avec « pourquoi » | une question rhétorique | une exclamation
-Dans « Bien qu'il pleuve, nous sortons », la subordonnée exprime… | la concession | la cause | le but | la conséquence
-Dans « Il travaille pour réussir », « pour réussir » exprime… | le but | la cause | le temps | la comparaison
+
+## svt
+### genetique
+Qu'est-ce que le code génétique ? | la correspondance entre triplets de nucléotides et acides aminés | la liste des chromosomes | une maladie | un vaccin
+Que peut provoquer une mutation dans une cellule de la peau exposée aux UV ? | un cancer | une modification transmise aux enfants | une nouvelle espèce | rien jamais
+Comment s'appelle la lecture de l'ARN messager pour fabriquer une protéine ? | la traduction | la réplication | la transcription | la mitose
+### corps
+Comment appelle-t-on la réponse immunitaire rapide et non spécifique ? | la réaction inflammatoire (immunité innée) | la production d'anticorps | la vaccination | la mémoire immunitaire
+Qu'est-ce qu'un antigène ? | une molécule reconnue comme étrangère par le système immunitaire | un antibiotique | une hormone | un globule rouge
+Pourquoi faut-il plusieurs injections pour certains vaccins ? | pour renforcer la mémoire immunitaire | pour tuer le vaccin | pour remplacer le sang | pour rien
+### geologie
+Qu'est-ce que le Moho ? | la limite entre la croûte et le manteau | le centre de la Terre | une roche volcanique | une faille
+Comment varie la température avec la profondeur dans la Terre ? | elle augmente (gradient géothermique) | elle diminue | elle reste constante | elle devient négative
+Pourquoi la lithosphère océanique plonge-t-elle en subduction ? | elle devient plus dense en vieillissant et en refroidissant | elle est trop chaude | elle est poussée par les vagues | elle est attirée par la Lune
+
+## physique
+### mouvement
+Qu'est-ce que la variation du vecteur vitesse indique ? | qu'une force non compensée agit sur le système | que le système est immobile | que la masse change | rien
+Un objet en chute libre est soumis à… | son poids uniquement | aucune force | la poussée d'Archimède seule | une force vers le haut
+Que vaut le travail du poids quand un objet se déplace horizontalement ? | zéro | m × g × h | toujours négatif | infini
+Quelle force dissipe l'énergie mécanique d'un skieur ? | les frottements | le poids | la réaction normale | la gravitation lunaire
+### ondes
+Quelle relation donne la vergence d'une lentille ? | V = 1 ÷ f' | V = f' × 2 | V = f' ÷ 2 | V = f' + 1
+Où se forme l'image dans l'œil ? | sur la rétine | sur le cristallin | sur la pupille | sur l'iris
+Quel défaut de l'œil est corrigé par une lentille divergente ? | la myopie | l'hypermétropie | la presbytie seule | le daltonisme
+Quelle couleur obtient-on en mélangeant les peintures cyan et jaune (synthèse soustractive) ? | le vert | le rouge | le bleu | le blanc
+### energie
+Quelle énergie convertit une centrale hydraulique ? | l'énergie mécanique de l'eau en énergie électrique | l'énergie nucléaire | l'énergie chimique | l'énergie lumineuse
+Que vaut l'énergie électrique consommée par un appareil de puissance P pendant Δt ? | E = P × Δt | E = P ÷ Δt | E = U ÷ I | E = R × I
+Un moteur reçoit 100 J et fournit 80 J d'énergie mécanique. Son rendement est… | 80 % | 20 % | 100 % | 125 %
+Que représente l'énergie mécanique ? | la somme de l'énergie cinétique et de l'énergie potentielle | l'énergie électrique | la chaleur | la masse
+
+## histgeo
+### revolution
+Quel régime politique est instauré en France après la défaite de 1870 ? | la IIIe République | le Second Empire | la Restauration | la Ve République
+Quel empereur a gouverné la France de 1852 à 1870 ? | Napoléon III | Napoléon Ier | Louis-Philippe | Charles X
+### xxe
+Quel traité de 1920 démantèle l'Empire ottoman ? | le traité de Sèvres | le traité de Versailles | le traité de Rome | le traité de Paris
+Quel génocide est commis par l'Empire ottoman en 1915 ? | le génocide des Arméniens | la Shoah | le génocide des Tutsi | le génocide cambodgien
+Quel président américain propose les « Quatorze points » en 1918 ? | Woodrow Wilson | Franklin Roosevelt | Abraham Lincoln | Theodore Roosevelt
+### geographie
+Qu'est-ce qu'un espace productif ? | un espace aménagé pour produire des biens ou des services | un espace naturel protégé | un désert | une zone sans habitants
+Qu'est-ce que l'agriculture productiviste ? | une agriculture qui cherche les rendements les plus élevés | une agriculture sans machines | une agriculture uniquement biologique | une agriculture de jardin

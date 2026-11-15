@@ -142,3 +142,43 @@ Comment appelle-t-on l'espace autour d'une ville où vivent des personnes qui y 
 Quels territoires français sont situés hors d'Europe ? | les territoires ultramarins | les régions alpines | les départements bretons | les métropoles
 Combien de régions compte la France métropolitaine depuis 2016 ? | 13 | 22 | 27 | 101
 Qu'est-ce que l'espace productif agricole ? | un espace consacré à la production agricole | une zone commerciale | une zone portuaire | un parc d'attraction
+
+## svt
+### genetique
+Qu'est-ce qu'un allèle ? | une version d'un gène | un chromosome entier | une cellule | un organe
+Qu'est-ce que la biodiversité génétique ? | la variété des allèles au sein d'une espèce | le nombre d'espèces | la taille des animaux | la couleur des fleurs
+Quel scientifique a proposé la théorie de l'évolution par sélection naturelle ? | Charles Darwin | Louis Pasteur | Gregor Mendel | Isaac Newton
+### corps
+À quoi servent les antibiotiques ? | à lutter contre les bactéries | à lutter contre les virus | à remplacer les vaccins | à fabriquer des anticorps
+Quel organe produit l'insuline ? | le pancréas | le foie | le cœur | les poumons
+Qu'est-ce qu'une IST ? | une infection sexuellement transmissible | une maladie génétique | un vaccin | une hormone
+### ecologie
+Qu'est-ce qu'une énergie renouvelable ? | une énergie dont la source se reconstitue rapidement | une énergie fossile | une énergie qui s'épuise | le charbon
+Comment limiter le réchauffement climatique ? | réduire les émissions de gaz à effet de serre | augmenter la déforestation | brûler plus de charbon | utiliser plus de pesticides
+Quel est l'impact des pesticides sur la biodiversité ? | ils peuvent tuer des espèces utiles comme les pollinisateurs | ils augmentent toujours la biodiversité | ils n'ont aucun effet | ils nourrissent les abeilles
+
+## physique
+### chimie
+De quoi est constitué le noyau d'un atome ? | de protons et de neutrons | d'électrons | de molécules | d'ions uniquement
+### mouvement
+Quel est le poids d'un objet de 10 kg sur la Lune (g = 1,6 N/kg) ? | 16 N | 100 N | 10 N | 1,6 N
+Comment évolue la force de gravitation si la distance entre deux objets augmente ? | elle diminue | elle augmente | elle reste la même | elle s'annule
+Pourquoi un satellite tourne-t-il autour de la Terre sans tomber ? | sa vitesse et l'attraction terrestre le maintiennent en orbite | il n'est pas attiré | il est accroché | il flotte dans l'air
+Quel savant a montré que tous les objets tombent de la même façon dans le vide ? | Galilée | Archimède | Pasteur | Darwin
+### energie
+Quelle centrale électrique ne rejette pas de CO₂ en fonctionnant ? | une centrale nucléaire | une centrale à charbon | une centrale au fioul | une centrale au gaz
+Quelle énergie est stockée dans les aliments ? | l'énergie chimique | l'énergie nucléaire | l'énergie lumineuse | l'énergie électrique
+
+## histgeo
+### xxe
+Quel génocide les nazis ont-ils commis contre les Juifs d'Europe ? | la Shoah | le génocide arménien | la Saint-Barthélemy | les Dragonnades
+Quel régime collabore avec l'Allemagne nazie en France de 1940 à 1944 ? | le régime de Vichy | la IVe République | le Front populaire | la IIIe République
+Quel conflit oppose de 1914 à 1918 les Alliés aux Empires centraux ? | la Première Guerre mondiale | la guerre froide | la guerre de Cent Ans | la guerre d'Algérie
+### monde-actuel
+Quelle crise de 1962 a failli provoquer une guerre nucléaire ? | la crise de Cuba | la crise de Berlin de 1948 | le krach de 1929 | la guerre du Golfe
+Quelle loi de 1975 dépénalise l'IVG en France ? | la loi Veil | la loi Ferry | la loi Badinter | la loi Neuwirth
+Quelle organisation internationale est créée en 1945 pour maintenir la paix ? | l'ONU | l'OTAN | l'Union européenne | la SDN
+### geographie
+Quel est le plus grand port de France pour les conteneurs ? | Le Havre | Brest | Nice | Bordeaux
+Quelle est la plus grande métropole française ? | Paris | Lyon | Marseille | Lille
+Qu'est-ce qu'un espace de faible densité en France ? | un espace rural peu peuplé, comme certaines zones de montagne | le centre de Paris | une zone portuaire | un quartier d'affaires

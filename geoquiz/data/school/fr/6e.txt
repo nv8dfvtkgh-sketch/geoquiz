@@ -120,3 +120,41 @@ Qu'est-ce qu'un algorithme ? | une suite d'instructions pour résoudre un probl�
 Quel élément d'un robot lui permet de détecter un obstacle ? | un capteur | un moteur | une batterie | une roue
 Comment appelle-t-on une instruction répétée plusieurs fois dans un programme ? | une boucle | un capteur | une variable cassée | un bug
 Quelle fonction remplit un vélo ? | se déplacer | chauffer | éclairer une pièce | conserver les aliments
+
+## francais
+### litterature
+Quel héros grec a voyagé dix ans pour rentrer à Ithaque ? | Ulysse | Achille | Hercule | Thésée
+Qui a écrit « L'Odyssée » selon la tradition ? | Homère | Ovide | Virgile | Ésope
+Quel monstre Thésée a-t-il tué dans le labyrinthe ? | le Minotaure | le cyclope | Méduse | l'hydre de Lerne
+Qu'est-ce qu'un conte merveilleux ? | un récit avec des éléments magiques, souvent « Il était une fois » | un article de journal | une recette | un poème scientifique
+
+## sciences
+### vivant
+Comment classe-t-on les êtres vivants ? | selon les caractères qu'ils partagent | selon leur taille | selon leur couleur | selon leur lieu de vie seulement
+Quel caractère partagent les oiseaux ? | ils ont des plumes | ils volent tous | ils vivent dans l'eau | ils ont quatre pattes
+Comment les végétaux verts fabriquent-ils leur matière ? | par photosynthèse, grâce à la lumière | en mangeant des insectes | en buvant du lait | grâce au vent
+### matiere
+Dans quel état la matière a-t-elle une forme propre ? | solide | liquide | gazeux | aucun
+Avec quel instrument mesure-t-on un volume de liquide ? | une éprouvette graduée | une balance | un thermomètre | un chronomètre
+Un objet flotte-t-il sur l'eau s'il est moins dense qu'elle ? | oui | non | seulement s'il est rouge | seulement la nuit
+### energie
+Quelle source d'énergie est fossile ? | le gaz naturel | le soleil | le vent | la biomasse
+Comment appelle-t-on une chaîne qui montre les transformations d'énergie ? | une chaîne d'énergie | une chaîne alimentaire | un circuit fermé | une chaîne de montagnes
+Que produit une dynamo de vélo quand la roue tourne ? | de l'électricité | du vent | de la chaleur seulement | du son
+Pourquoi isoler les murs d'une maison ? | pour limiter les pertes de chaleur | pour rendre la maison plus lourde | pour avoir plus de lumière | pour faire du bruit
+### terre-univers
+Quelle est la forme de la Terre ? | une sphère (légèrement aplatie) | un cube | un disque plat | un cône
+Combien de temps met la lumière du Soleil pour atteindre la Terre ? | environ 8 minutes | 1 seconde | 1 jour | 1 an
+Comment appelle-t-on les mouvements de l'eau entre mers, nuages et rivières ? | le cycle de l'eau | la photosynthèse | la marée noire | l'érosion
+Qu'est-ce qui use les reliefs au fil du temps ? | l'érosion (eau, vent, glace) | la photosynthèse | la Lune | les étoiles
+### technologie
+Quel est le rôle d'un cahier des charges ? | décrire ce qu'un objet doit faire et ses contraintes | dessiner un plan de ville | noter ses devoirs | compter l'argent
+Comment appelle-t-on le matériau dont est faite une canette de soda ? | l'aluminium | le bois | le verre | le papier
+Pourquoi recycler les objets techniques ? | pour économiser les matières premières et réduire les déchets | pour les rendre plus lourds | pour les colorier | pour les casser
+
+## histgeo
+### geographie
+Qu'est-ce qu'un espace de faible densité ? | un territoire où vivent peu d'habitants au km² | une grande ville | un quartier d'affaires | une zone très peuplée
+Quel désert est le plus grand désert chaud du monde ? | le Sahara | le Gobi | l'Atacama | le Kalahari
+Pourquoi beaucoup d'habitants vivent-ils sur les littoraux ? | pour le commerce, la pêche et le tourisme | parce qu'il n'y a pas de vent | parce que c'est en altitude | parce qu'il n'y a pas d'eau
+Comment appelle-t-on l'extension d'une ville sur la campagne ? | l'étalement urbain | l'exode urbain | la désertification | la déforestation

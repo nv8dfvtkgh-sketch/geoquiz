@@ -106,3 +106,38 @@ Combien y a-t-il de jours dans une semaine ? | 7 | 5 | 10 | 12
 Combien de mots y a-t-il dans la phrase « Le chat dort. » ? | 3 | 2 | 4 | 5
 Quel mot est un nom ? | un ballon | joli | courir | vite
 Par quel signe se termine la phrase « Le chat dort » ? | un point | une virgule | un tiret | rien
+
+## anglais
+### expressions
+Que répond-on à « Hello! » ? | Hello! | Thank you! | Sorry! | Please!
+Que veut dire « Bye-bye! » ? | Au revoir ! | Bonjour ! | Merci ! | Pardon !
+Que veut dire « Sorry! » ? | Pardon ! | Merci ! | Bravo ! | Bonjour !
+Que veut dire « What's your name? » ? | Comment t'appelles-tu ? | Quel âge as-tu ? | Où habites-tu ? | Comment vas-tu ?
+Comment répond-on à « What's your name? » ? | My name is Léa. | I'm fine. | I'm seven. | Goodbye.
+Que veut dire « How are you? » ? | Comment vas-tu ? | Comment t'appelles-tu ? | Quelle heure est-il ? | Où vas-tu ?
+Que veut dire « Well done! » ? | Bravo ! | Bonne nuit ! | Au revoir ! | Attention !
+Comment dit-on « s'il te plaît » en anglais ? | please | thank you | sorry | hello
+Que veut dire « Good night » ? | Bonne nuit | Bonjour | Bon appétit | Bonne chance
+Comment dit-on « Je vais bien » en anglais ? | I'm fine. | I'm six. | My name is Tom. | Goodbye.
+
+## francais
+### grammaire
+Quel mot est un verbe ? | sauter | une table | rouge | demain
+Dans « Le chien court », qui court ? | le chien | le chat | personne | la balle
+Quel mot désigne une personne ? | la maîtresse | un crayon | une pomme | un vélo
+
+## qlm
+### corps
+Avec quoi entend-on les sons ? | les oreilles | les yeux | le nez | les mains
+Combien de doigts a-t-on à une main ? | 5 | 4 | 6 | 10
+### vivant
+Quel animal vit dans l'eau ? | le poisson | le lapin | la poule | le chat
+Que mange la vache ? | de l'herbe | de la viande | des poissons | des insectes
+Comment s'appelle le bébé du chat ? | le chaton | le chiot | le poulain | le veau
+### matiere
+Que devient l'eau dans un congélateur ? | de la glace | de la vapeur | du sable | du lait
+Quel objet est fait en bois ? | une chaise en bois | une bouteille en verre | une canette en métal | un sac en plastique
+### espace-temps
+Quel moment vient après le matin ? | l'après-midi | la nuit | la veille | le lendemain matin
+Quelle saison est la plus froide ? | l'hiver | l'été | le printemps | l'automne
+Quel jour vient avant dimanche ? | samedi | lundi | vendredi | mardi

@@ -2,20 +2,31 @@
 // grandes parties des programmes (Éduscol / BO ; Common Core, NGSS, cadre C3).
 // Une question écrite est rangée d'après son énoncé (mots-clés, dans l'ordre) ou par un
 // en-tête « ### chapitre » dans data/school/<système>/<classe>.txt.
-export interface Chapter { id: string; fr: string; en: string; kw: RegExp }
+export interface Chapter { id: string; fr: string; en: string; kw: RegExp; levels?: string[] }
 
-const C = (id: string, fr: string, en: string, kw: RegExp): Chapter => ({ id, fr, en, kw });
+const C = (id: string, fr: string, en: string, kw: RegExp, levels?: string[]): Chapter => ({ id, fr, en, kw, levels });
+const NEVER = /(?!)/; // chapitre attribué seulement par un en-tête « ### chapitre »
+const LYCEE_FR = ['2nde', '1re'];
+const ELEM_US = ['k', 'g1', 'g2', 'g3', 'g4', 'g5'];
+const SECOND_US = ['g6', 'g7', 'g8', 'g9', 'g10', 'g11', 'g12'];
 
 export const CHAPTERS: Record<string, Chapter[]> = {
   francais: [
+    // Lycée : les quatre objets d'étude du programme (BO spécial n° 1 du 22 janvier 2019).
+    C('poesie', 'La poésie', 'Poetry', /poème|poésie|poète|vers|sonnet|alexandrin|strophe|rime|ronsard|baudelaire|rimbaud|verlaine|apollinaire|hugo.*contemplations|fleurs du mal|calligramme|ode|ballade/i, LYCEE_FR),
+    C('theatre', 'Le théâtre', 'Drama', /théâtre|tragédie|comédie|didascalie|monologue|tirade|aparté|scène|acte|molière|racine|corneille|beckett|ionesco|dramaturge|catharsis|règle des trois unités|quiproquo/i, LYCEE_FR),
+    C('idees', "La littérature d'idées", 'Essays and ideas', /essai|argument|lettre ouverte|apologue|satire|montaigne|voltaire|rousseau|diderot|montesquieu|lumières|humanisme|pamphlet|presse|article|éditorial|zola|j'accuse|engagé|fable|la fontaine|conte philosophique|candide/i, LYCEE_FR),
+    C('roman', 'Le roman et le récit', 'Novels and narratives', /roman|récit|narrateur|personnage|focalisation|incipit|nouvelle|balzac|flaubert|stendhal|proust|camus|réalisme|naturalisme|chevalerie|chrétien de troyes|autobiograph|héros/i, LYCEE_FR),
     C('conjugaison', 'Conjugaison', 'Verb tenses', /conjug|présent|imparfait|futur|passé (simple|composé)|plus-que-parfait|conditionnel|subjonctif|impératif|infinitif|participe|groupe|temps :|au (présent|futur)|complète.*«.*(je|tu|il|nous|vous|ils|elles) /i),
     C('sons', 'Lecture et sons', 'Phonics', /\bson\b|\[\w+\]|syllabe|lettre|alphabet|rime|commence par/i),
     C('orthographe', 'Orthographe et accords', 'Spelling and agreement', /pluriel|féminin|masculin|accord|homophone|« (a|à|et|est|son|sont|ces|ses|c'est|s'est|leur|leurs|on|ont|s'en|sans) »|écrit correctement|s muet/i),
     C('grammaire', 'Grammaire', 'Grammar', /sujet|verbe|nom\b|adjectif|adverbe|déterminant|pronom|préposition|conjonction|complément|COD|COI|attribut|épithète|proposition|subordonnée|phrase|nature|fonction|voix passive|signe|ponctuation|virgule|guillemets|majuscule/i),
     C('vocabulaire', 'Vocabulaire', 'Vocabulary', /synonyme|contraire|antonyme|préfixe|suffixe|radical|famille|sens|signifie|expression|polysémique|veut dire|dictionnaire/i),
-    C('litterature', 'Littérature', 'Literature', /écrit|auteur|roman|poème|poésie|théâtre|conte|fable|récit|héros|personnage|figure|métaphore|comparaison|hyperbole|litote|oxymore|anaphore|vers|sonnet|alexandrin|mouvement|narrateur|registre|épopée|nouvelle|tragédie|comédie|didascalie|monologue|lettre ouverte|autobiographie|engagé|satire|apologue/i),
+    C('litterature', 'Littérature', 'Literature', /écrit|auteur|roman|poème|poésie|théâtre|conte|fable|récit|héros|personnage|figure|métaphore|comparaison|hyperbole|litote|oxymore|anaphore|vers|sonnet|alexandrin|mouvement|narrateur|registre|épopée|nouvelle|tragédie|comédie|didascalie|monologue|lettre ouverte|autobiographie|engagé|satire|apologue/i, ['cp', 'ce1', 'ce2', 'cm1', 'cm2', '6e', '5e', '4e', '3e', 'tle']),
   ],
   anglais: [
+    // Cycle 2 : saluer, se présenter, dire son âge… (programme de langues vivantes, Éduscol).
+    C('expressions', 'Saluer et se présenter', 'Everyday phrases', NEVER),
     C('verbes', 'Verbes et temps', 'Verbs and tenses', /prétérit|participe passé|complète|present perfect|passif|passive|would|will|since|for|wish|used to|going to|must|should|can\b|mustn't/i),
     C('grammaire', 'Grammaire', 'Grammar', /pluriel|comparatif|superlatif|pronom|bonne (phrase|question|place)|phrase.*correcte|correcte|place de/i),
     C('civilisation', 'Culture et civilisation', 'Culture', /capitale|fête|nationalité|royaume|united|états-unis|thanksgiving|4 juillet|qui a écrit|auteur|discours|premier ministre|parlement|écosse|irlande|nhs|brexit|rosa parks|king/i),
@@ -77,9 +88,21 @@ export const CHAPTERS: Record<string, Chapter[]> = {
     C('writing', 'Reading and writing skills', 'Reading and writing skills', /claim|evidence|argument|thesis|source|plagiarism|summary|main idea|central idea|fact|opinion|persuasive|rhetoric|logos|pathos|ethos|fallacy|works cited|synthesis|tone|text structure|glossary|rebuttal|herring|ad hominem|slippery/i),
   ],
   science: [
-    C('life', 'Life science', 'Life science', /plant|animal|cell|organ|DNA|gene|trait|allele|mitosis|meiosis|protein|enzyme|habitat|ecosystem|food (chain|web)|predator|producer|decomposer|species|evolution|natural selection|fossil|offspring|life cycle|photosynthesis|respiration|homeostasis|vaccine|immune|brain|heart|biodiversity|population|symbiosis|pollen|bee|seed|nest|fur|shell|carrying capacity|invasive|punnett|darwin|mendel|watson/i),
-    C('earth', 'Earth and space science', 'Earth and space science', /earth|sun|moon|star|planet|galaxy|orbit|season|day and night|shadow|weather|climate|rain|cloud|water cycle|rock|plate|earthquake|volcano|erosion|weathering|landform|ocean|glacier|atmosphere|greenhouse|ozone|carbon cycle|fossil fuel|renewable|flood|tornado|front|big bang|sky|constellation|eclipse|fresh water|sustainability|acidification|radiometric|anemometer|thermometer|recycl/i),
-    C('physical', 'Physical science', 'Physical science', /force|push|pull|motion|magnet|gravity|energy|wave|light|sound|vibrat|matter|solid|liquid|gas|melt|dissolve|mixture|atom|element|molecule|reaction|chemical|periodic|mole|pH|acid|bond|isotope|newton|velocity|acceleration|momentum|ohm|circuit|electric|frequency|refraction|joule|watt|kinetic|potential|heat|catalyst|sodium|NaCl|H₂O/i),
+    // Collège et lycée : thèmes des NGSS (« topic arrangements »).
+    C('organisms', 'Cells and body systems', 'Cells and body systems', /cell|organelle|nucleus|mitochondri|ribosome|membrane|tissue|organ system|neuron|brain|homeostasis|immune|vaccine|heart|digest|stimul|protein synthesis|enzyme|microscope/i, SECOND_US),
+    C('heredity', 'Heredity and evolution', 'Heredity and evolution', /DNA|gene|allele|trait|chromosome|mitosis|meiosis|mutation|punnett|dominant|recessive|evolution|natural selection|adaptation|darwin|mendel|watson|inherit|offspring|speciation/i, SECOND_US),
+    C('ecosystems', 'Ecosystems', 'Ecosystems', /ecosystem|food (chain|web)|producer|consumer|decomposer|photosynthesis|cellular respiration|population|carrying capacity|symbiosis|biodiversity|predator|invasive|biome|energy pyramid|habitat/i, SECOND_US),
+    C('matter', 'Atoms and matter', 'Atoms and matter', /atom|proton|neutron|electron|periodic|element|isotope|molecule|compound|bond|ionic|covalent|state of matter|density|valence|noble gas|atomic number|mixture|solution/i, SECOND_US),
+    C('reactions', 'Chemical reactions', 'Chemical reactions', /reaction|reactant|product|mole|avogadro|balanc|conservation of mass|acid|base|pH|catalyst|exothermic|endothermic|combustion|oxidation|stoichiometr|NaCl|H₂O/i, SECOND_US),
+    C('forces', 'Forces and motion', 'Forces and motion', /force|newton|motion|velocity|speed|acceleration|momentum|friction|gravity|inertia|mass and weight|magnet|projectile|net force/i, SECOND_US),
+    C('energy', 'Energy', 'Energy', /energy|kinetic|potential|joule|watt|power|heat|thermal|conduction|convection|radiation transfer|conservation of energy|circuit|current|voltage|ohm|electric/i, SECOND_US),
+    C('waves', 'Waves and light', 'Waves and light', /wave|frequency|wavelength|amplitude|light|sound|refraction|reflection|electromagnetic|spectrum|x-ray|microwave|ultraviolet|infrared|doppler|photon/i, SECOND_US),
+    C('space', 'Space systems', 'Space systems', /sun|moon|planet|star|galaxy|orbit|solar system|season|eclipse|big bang|universe|light-year|comet|asteroid|telescope|nebula|kepler|tide|lunar|phase/i, SECOND_US),
+    C('earth-history', "Earth's history and systems", "Earth's history and systems", /rock|plate|tectonic|earthquake|volcano|fossil|erosion|weathering|water cycle|mineral|radiometric|layer|mantle|crust|core|continent|pangaea|seafloor|glacier|geologic/i, SECOND_US),
+    C('climate', 'Weather, climate and human impact', 'Weather, climate and human impact', /weather|climate|atmosphere|greenhouse|carbon cycle|fossil fuel|renewable|ozone|ocean current|front|humidity|sustainab|deforestation|pollution|global warming|hurricane|air pressure|el niño/i, SECOND_US),
+    C('life', 'Life science', 'Life science', /plant|animal|cell|organ|DNA|gene|trait|allele|mitosis|meiosis|protein|enzyme|habitat|ecosystem|food (chain|web)|predator|producer|decomposer|species|evolution|natural selection|fossil|offspring|life cycle|photosynthesis|respiration|homeostasis|vaccine|immune|brain|heart|biodiversity|population|symbiosis|pollen|bee|seed|nest|fur|shell|carrying capacity|invasive|punnett|darwin|mendel|watson/i, ELEM_US),
+    C('earth', 'Earth and space science', 'Earth and space science', /earth|sun|moon|star|planet|galaxy|orbit|season|day and night|shadow|weather|climate|rain|cloud|water cycle|rock|plate|earthquake|volcano|erosion|weathering|landform|ocean|glacier|atmosphere|greenhouse|ozone|carbon cycle|fossil fuel|renewable|flood|tornado|front|big bang|sky|constellation|eclipse|fresh water|sustainability|acidification|radiometric|anemometer|thermometer|recycl/i, ELEM_US),
+    C('physical', 'Physical science', 'Physical science', /force|push|pull|motion|magnet|gravity|energy|wave|light|sound|vibrat|matter|solid|liquid|gas|melt|dissolve|mixture|atom|element|molecule|reaction|chemical|periodic|mole|pH|acid|bond|isotope|newton|velocity|acceleration|momentum|ohm|circuit|electric|frequency|refraction|joule|watt|kinetic|potential|heat|catalyst|sodium|NaCl|H₂O/i, ELEM_US),
   ],
   social: [
     C('civics', 'Civics and government', 'Civics and government', /government|branch|congress|senate|house of representatives|president|supreme court|justice|constitution|amendment|bill of rights|law|vote|voting|election|electoral|veto|judicial|federalism|citizen|right|freedom|mayor|governor|rules|pledge|checks and balances|filibuster|lobbying|miranda|civil liberties|primary|leader|tax/i),
@@ -89,10 +112,13 @@ export const CHAPTERS: Record<string, Chapter[]> = {
   ],
 };
 
-export function chaptersOf(subject: string): Chapter[] { return CHAPTERS[subject] ?? []; }
+/** Chapitres d'une matière ; avec une classe, seulement ceux qui s'y appliquent. */
+export function chaptersOf(subject: string, level?: string): Chapter[] {
+  return (CHAPTERS[subject] ?? []).filter((c) => !level || !c.levels || c.levels.includes(level));
+}
 /** Range une question dans le premier chapitre dont les mots-clés correspondent. */
-export function chapterFor(subject: string, question: string, answer = ''): string | undefined {
+export function chapterFor(subject: string, question: string, answer = '', level?: string): string | undefined {
   const text = `${question} ${answer}`;
-  for (const c of chaptersOf(subject)) if (c.kw.test(text)) return c.id;
+  for (const c of chaptersOf(subject, level)) if (c.kw.test(text)) return c.id;
   return undefined;
 }

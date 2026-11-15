@@ -1,25 +1,51 @@
 # Seconde générale et technologique
 ## francais
-Quel mouvement du XVIe siècle place l'homme au centre et redécouvre l'Antiquité ? | l'humanisme | le romantisme | le classicisme | le réalisme
-Qui a écrit « Gargantua » et « Pantagruel » ? | Rabelais | Montaigne | Ronsard | Du Bellay
+### poesie
 Quel poète de la Pléiade a écrit « Mignonne, allons voir si la rose » ? | Ronsard | Du Bellay | Marot | Villon
-Qui a écrit « Les Essais » ? | Montaigne | Pascal | Descartes | La Boétie
+Quel recueil de Baudelaire paraît en 1857 ? | Les Fleurs du mal | Les Contemplations | Alcools | Les Châtiments
+Qui a écrit « Alcools » ? | Guillaume Apollinaire | Paul Verlaine | Arthur Rimbaud | Paul Éluard
+Quelle figure reprend un mot en début de vers ou de phrase ? | l'anaphore | le chiasme | la litote | la prétérition
+Qu'est-ce qu'une rime embrassée ? | ABBA | AABB | ABAB | AAAA
+Qu'est-ce qu'une diérèse ? | la prononciation en deux syllabes de deux voyelles voisines | la suppression d'une syllabe | une rime pauvre | un enjambement
+Qu'est-ce qu'un enjambement ? | une phrase qui déborde sur le vers suivant | une rime riche | un vers de 12 syllabes | une pause au milieu du vers
+Combien de syllabes compte un alexandrin ? | 12 | 10 | 8 | 14
+Comment s'appelle un poème de 14 vers formé de deux quatrains et deux tercets ? | un sonnet | une ballade | un rondeau | une ode
+Quel poète du XVe siècle a écrit la « Ballade des pendus » ? | François Villon | Ronsard | Clément Marot | Joachim du Bellay
+Qui a écrit « Heureux qui, comme Ulysse, a fait un beau voyage » ? | Joachim du Bellay | Ronsard | Malherbe | Louise Labé
+### theatre
 Quelles sont les règles du théâtre classique ? | unité de temps, de lieu et d'action | trois actes et un chœur | vers libres et prose | pas de règles
 Qui a écrit « Phèdre » et « Andromaque » ? | Racine | Corneille | Molière | Marivaux
 Qui a écrit « Le Cid » ? | Corneille | Racine | Molière | Beaumarchais
 Qu'est-ce qu'un dilemme cornélien ? | un choix douloureux entre devoir et passion | un quiproquo comique | une erreur de jugement | un monologue lyrique
+Comment appelle-t-on les indications de mise en scène écrites par l'auteur ? | les didascalies | les répliques | les tirades | les apartés
+Qu'est-ce qu'un aparté ? | une réplique que le personnage dit pour lui, sans être entendu des autres | un long discours | une scène d'exposition | la fin de la pièce
+Qu'est-ce qu'une tirade ? | une longue réplique d'un personnage | une réplique très courte | une indication scénique | un changement de décor
+Qui a écrit « Le Malade imaginaire » ? | Molière | Racine | Corneille | Marivaux
+À quoi sert la scène d'exposition ? | présenter les personnages et la situation | conclure l'intrigue | faire rire seulement | changer de décor
+Qu'est-ce qu'un quiproquo ? | une méprise qui fait prendre une personne ou une chose pour une autre | un monologue tragique | une règle classique | un dénouement heureux
+### roman
 Quel roman de Flaubert raconte la vie d'une femme insatisfaite en province ? | Madame Bovary | Germinal | Le Rouge et le Noir | Nana
 Quel roman de Zola raconte une grève de mineurs ? | Germinal | L'Assommoir | Au Bonheur des Dames | La Bête humaine
 Qui a écrit « Le Rouge et le Noir » ? | Stendhal | Balzac | Flaubert | Maupassant
-Quel recueil de Baudelaire paraît en 1857 ? | Les Fleurs du mal | Les Contemplations | Alcools | Les Châtiments
-Qui a écrit « Alcools » ? | Guillaume Apollinaire | Paul Verlaine | Arthur Rimbaud | Paul Éluard
 Qu'est-ce qu'une focalisation interne ? | le récit adopte le point de vue d'un personnage | le narrateur sait tout | le narrateur est un témoin extérieur | il n'y a pas de narrateur
 Qu'est-ce qu'un narrateur omniscient ? | un narrateur qui sait tout des personnages | un narrateur personnage | un narrateur aveugle | un narrateur muet
-Quelle figure reprend un mot en début de vers ou de phrase ? | l'anaphore | le chiasme | la litote | la prétérition
+Comment appelle-t-on le début d'un roman ? | l'incipit | l'épilogue | le dénouement | la chute
+Quel mouvement littéraire veut représenter la réalité sans l'embellir au XIXe siècle ? | le réalisme | le romantisme | le surréalisme | le classicisme
+Quel ensemble de romans Balzac a-t-il réuni sous un titre général ? | La Comédie humaine | Les Rougon-Macquart | À la recherche du temps perdu | Les Misérables
+Qui a écrit le cycle des « Rougon-Macquart » ? | Émile Zola | Balzac | Flaubert | Maupassant
+Qu'est-ce qu'une nouvelle ? | un récit bref, souvent avec une chute | un très long roman | une pièce de théâtre | un poème en vers
+### idees
+Quel mouvement du XVIe siècle place l'homme au centre et redécouvre l'Antiquité ? | l'humanisme | le romantisme | le classicisme | le réalisme
+Qui a écrit « Gargantua » et « Pantagruel » ? | Rabelais | Montaigne | Ronsard | Du Bellay
+Qui a écrit « Les Essais » ? | Montaigne | Pascal | Descartes | La Boétie
 Quelle figure inverse l'ordre de deux termes (A B / B A) ? | le chiasme | l'anaphore | la gradation | l'hyperbole
-Qu'est-ce qu'une rime embrassée ? | ABBA | AABB | ABAB | AAAA
-Qu'est-ce qu'une diérèse ? | la prononciation en deux syllabes de deux voyelles voisines | la suppression d'une syllabe | une rime pauvre | un enjambement
-Qu'est-ce qu'un enjambement ? | une phrase qui déborde sur le vers suivant | une rime riche | un vers de 12 syllabes | une pause au milieu du vers
+Quel article de Zola paru dans L'Aurore en 1898 défend Dreyfus ? | « J'accuse… ! » | « Lettre à la jeunesse » | « Le Manifeste » | « Les Châtiments »
+Qu'est-ce qu'un éditorial ? | un article qui exprime la position d'un journal | une petite annonce | une brève | un horoscope
+Qu'est-ce que la thèse d'un texte argumentatif ? | l'opinion que l'auteur défend | un exemple | une citation | le titre
+À quoi sert un exemple dans une argumentation ? | à illustrer et rendre concret un argument | à changer de sujet | à conclure toujours | à remplacer la thèse
+Qu'est-ce qu'un argument d'autorité ? | un argument qui s'appuie sur une personne ou une source reconnue | une insulte | un exemple personnel | une question
+Qui a écrit « Discours de la servitude volontaire » ? | La Boétie | Montaigne | Rabelais | Calvin
+
 ## maths
 Que vaut la valeur absolue de −7 ? | 7 | −7 | 0 | 49
 Que vaut √50 simplifié ? | 5√2 | 25√2 | 2√5 | 10√5
@@ -184,3 +210,66 @@ Qu'est-ce qu'un sondage d'opinion ? | une enquête auprès d'un échantillon rep
 Quel facteur influence le vote selon les sociologues ? | l'âge, le diplôme et la catégorie sociale | la couleur des yeux | le signe astrologique | la taille
 Comment appelle-t-on le vote qui varie d'une élection à l'autre ? | la volatilité électorale | l'abstention | le vote obligatoire | le vote blanc
 Qu'est-ce qu'un échantillon représentatif ? | un groupe qui reproduit les caractéristiques de la population | un groupe d'amis | toute la population | un seul individu
+
+## svt
+### genetique
+Comment s'appelle la séquence d'ADN qui code une protéine ? | un gène | un chromosome entier | un ribosome | une enzyme
+Quelle structure de la cellule eucaryote contient l'ADN ? | le noyau | la membrane | la paroi | le chloroplaste seul
+Pourquoi parle-t-on d'unité du vivant ? | tous les êtres vivants sont faits de cellules et utilisent l'ADN | tous les êtres vivants ont des os | tous respirent par des poumons | tous font la photosynthèse
+### corps
+Quelles cellules produisent les gamètes chez l'homme ? | les cellules des testicules | les cellules du foie | les globules rouges | les neurones
+Quel est le rôle du microbiote intestinal ? | participer à la digestion et à la défense de l'organisme | fabriquer les os | produire le sang | stocker l'oxygène
+Quelle hormone, produite par l'hypophyse, déclenche l'ovulation ? | la LH | l'insuline | l'adrénaline | la testostérone
+### ecologie
+Qu'est-ce qu'une population en écologie ? | l'ensemble des individus d'une même espèce dans un milieu | tous les êtres vivants de la planète | un écosystème | une seule cellule
+Quel modèle prédit que les fréquences alléliques restent stables sans perturbation ? | le modèle de Hardy-Weinberg | le modèle de Kepler | la loi d'Ohm | le principe d'Archimède
+Qu'est-ce que la sélection naturelle favorise ? | les individus les mieux adaptés à leur milieu | les individus les plus gros | les individus les plus vieux | tous les individus de la même façon
+
+## physique
+### chimie
+Quelle est la valeur de la constante d'Avogadro ? | 6,02 × 10²³ mol⁻¹ | 3,00 × 10⁸ mol⁻¹ | 9,8 mol⁻¹ | 1,6 × 10⁻¹⁹ mol⁻¹
+Combien d'électrons possède un atome de numéro atomique Z = 8 ? | 8 | 16 | 4 | 2
+Comment s'appelle un ion chargé positivement ? | un cation | un anion | un isotope | un électron
+### electricite
+Quelle est l'unité de la résistance électrique ? | l'ohm | le volt | l'ampère | le watt
+Quelle loi des circuits dit que dans une boucle la somme des tensions est nulle ? | la loi des mailles | la loi des nœuds | la loi d'Ohm | la loi de Joule
+Qu'est-ce qu'une photorésistance ? | un capteur dont la résistance varie avec la lumière | une pile | un moteur | une lampe
+### mouvement
+Quelle est la valeur du vecteur vitesse d'un objet immobile ? | nulle | 9,8 m/s | infinie | 1 m/s
+Si les forces sur un objet ne se compensent pas, sa vitesse… | varie | reste constante | est toujours nulle | devient infinie
+Quelle est l'unité de la constante de gravitation G ? | N·m²·kg⁻² | kg | m/s | N/kg
+### ondes
+Qu'est-ce qu'un son pur ? | un son dont le signal est sinusoïdal | un son très fort | un son grave | un bruit
+Quel est le domaine de longueurs d'onde de la lumière visible ? | environ 400 à 800 nm | 1 à 10 m | 1 à 10 mm | 1 à 10 km
+Quelle grandeur caractérise la hauteur d'un son ? | sa fréquence | son amplitude seule | sa vitesse | sa couleur
+
+## histgeo
+### antiquite
+Quelle mer est au cœur du monde grec et romain ? | la Méditerranée | la mer du Nord | la Baltique | la mer Rouge
+Qui était Périclès ? | un stratège qui dirigea Athènes au Ve siècle av. J.-C. | un empereur romain | un pharaon | un roi perse
+Qui pouvait participer à l'ecclésia à Athènes ? | les citoyens : hommes libres nés de parents athéniens | toutes les personnes de la cité | les esclaves | les femmes uniquement
+### moyen-age
+Quelle religion devient majoritaire dans l'Empire romain au IVe siècle ? | le christianisme | l'islam | le bouddhisme | le judaïsme
+Comment s'appelle le schisme de 1054 ? | la séparation entre chrétiens d'Orient et d'Occident | la Réforme protestante | la fin de l'Empire romain | la première croisade
+Quelle cité andalouse était un grand centre de savoir sous les Omeyyades ? | Cordoue | Paris | Londres | Moscou
+### temps-modernes
+Quelle ville est le grand centre de la Renaissance italienne au XVe siècle ? | Florence | Londres | Lisbonne | Moscou
+Quel réformateur protestant s'est installé à Genève ? | Jean Calvin | Martin Luther | Érasme | Thomas More
+Quel traité de 1494 partage le monde entre Espagnols et Portugais ? | le traité de Tordesillas | le traité de Versailles | le traité de Westphalie | le traité d'Utrecht
+### geographie
+Quel aléa naturel menace surtout les littoraux bas avec le réchauffement ? | la montée du niveau de la mer | les séismes | les avalanches | les éruptions
+Qu'est-ce qu'une ressource en eau virtuelle ? | l'eau utilisée pour produire un bien | l'eau de pluie | l'eau d'un lac | l'eau gelée
+Quel est le principal motif des migrations internationales de travail ? | la recherche d'emploi et de meilleurs revenus | le tourisme | le climat seulement | le sport
+
+## ses
+### economie
+Qu'est-ce qu'un marché en économie ? | un lieu, réel ou virtuel, où se rencontrent l'offre et la demande | un supermarché uniquement | une banque | une usine
+Que se passe-t-il en général quand le prix d'un bien augmente ? | la quantité demandée diminue | la quantité demandée augmente | rien ne change | l'offre disparaît
+### sociologie
+Qu'est-ce que la socialisation secondaire ? | la socialisation à l'âge adulte (travail, couple…) | la socialisation dans l'enfance | une fête de famille | un diplôme
+Qu'est-ce qu'une norme sociale ? | une règle de conduite partagée dans un groupe | une loi votée | une valeur mathématique | un salaire
+Quel lien existe souvent entre le diplôme et le chômage ? | plus le diplôme est élevé, plus le taux de chômage est faible | aucun lien | plus le diplôme est élevé, plus le chômage est fort | le diplôme supprime le chômage
+### politique
+Qu'est-ce qu'un parti politique ? | une organisation qui cherche à exercer le pouvoir | une entreprise | un syndicat d'élèves | une association sportive
+Qu'est-ce que le vote blanc ? | un bulletin sans choix de candidat | ne pas voter | un vote annulé par la police | un vote par procuration
+Qui peut voter aux élections présidentielles en France ? | les citoyens français majeurs inscrits sur les listes | tous les habitants | les plus de 21 ans seulement | les députés

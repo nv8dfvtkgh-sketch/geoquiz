@@ -161,3 +161,66 @@ Qu'est-ce que la ZEE d'un État ? | un espace maritime de 200 milles nautiques o
 Quel détroit est un passage stratégique entre l'océan Indien et le Pacifique ? | le détroit de Malacca | le détroit de Gibraltar | le Bosphore | le pas de Calais
 Pourquoi la France a-t-elle le 2e espace maritime du monde ? | grâce à ses territoires ultramarins | grâce à la Méditerranée seule | grâce à la Manche | grâce à ses fleuves
 Quelle part du commerce mondial (en volume) passe par la mer ? | environ 80 % | 10 % | 30 % | 50 %
+
+## philo
+### sujet
+Selon Freud, comment se manifeste l'inconscient ? | par les rêves, les lapsus et les actes manqués | par la volonté consciente | par le raisonnement mathématique | par la mémoire volontaire seulement
+### politique
+Selon Rousseau, qu'est-ce que la volonté générale ? | la volonté du peuple tournée vers l'intérêt commun | la somme des intérêts privés | la volonté du roi | l'opinion majoritaire d'un jour
+### connaissance
+Selon Karl Popper, qu'est-ce qu'une théorie scientifique ? | une théorie réfutable par l'expérience | une théorie impossible à tester | une opinion partagée | une vérité révélée
+Que dit Descartes du doute méthodique ? | il faut douter de tout pour trouver une certitude | il ne faut jamais douter | le doute est inutile | seul le doute existe
+### culture
+Selon Hegel, l'art est-il une simple imitation de la nature ? | non, il manifeste l'esprit | oui, toujours | oui, mais en moins bien | non, c'est une technique
+Qui a écrit « L'Œuvre d'art à l'époque de sa reproductibilité technique » ? | Walter Benjamin | Theodor Adorno | Hannah Arendt | Michel Foucault
+Selon Bergson, qu'est-ce qui distingue l'homme ? | il est « homo faber », il fabrique des outils | il ne fabrique rien | il vit sans langage | il ne pense pas
+
+## svt
+### genetique
+Qu'est-ce que l'hybridation entre deux espèces proches ? | le croisement donnant des descendants mêlant leurs génomes | une mutation dans une cellule | une division cellulaire | un fossile
+Que permet un arbre phylogénétique ? | représenter les liens de parenté entre espèces | mesurer les séismes | classer les roches | dater un volcan
+Qu'est-ce que la sélection artificielle ? | la sélection d'organismes par l'humain pour certains caractères | la sélection naturelle sans humain | une mutation provoquée par la Lune | un clonage obligatoire
+### corps
+Quel est le rôle du glucagon ? | augmenter la glycémie | diminuer la glycémie | digérer les protéines | transporter l'oxygène
+Comment appelle-t-on le diabète lié à une destruction des cellules qui produisent l'insuline ? | le diabète de type 1 | le diabète de type 2 | l'anémie | l'asthme
+Où se trouve la synapse ? | entre deux neurones (ou neurone et muscle) | dans l'estomac | dans les os | dans le sang
+### geologie
+Quels indices montrent qu'un océan a disparu dans une chaîne de montagnes ? | les ophiolites (restes de lithosphère océanique) | des fossiles de dinosaures seulement | des glaciers | du sable de plage
+Quel principe dit qu'une couche est plus récente que celle qu'elle recouvre ? | le principe de superposition | le principe de recoupement | le principe de continuité | le principe d'Archimède
+Qu'est-ce qu'un climat glaciaire ? | une période froide avec des calottes de glace étendues | une période sans saisons | un été très chaud | une période sans pluie
+Quel gaz piégé dans les glaces permet de reconstituer les climats passés ? | l'air (dont le CO₂) | l'hélium | le néon | la vapeur de mercure
+
+## physique
+### chimie
+Qu'est-ce qu'un acide selon Brønsted ? | une espèce capable de céder un proton H⁺ | une espèce qui capte un proton | un métal | un gaz rare
+Quelle est la relation entre pH et concentration en ions oxonium ? | pH = −log[H₃O⁺] | pH = [H₃O⁺] | pH = log[OH⁻] × 2 | pH = 14 × [H₃O⁺]
+Que fait un catalyseur sur une réaction ? | il l'accélère sans être consommé | il la ralentit | il change ses produits | il est entièrement consommé
+### electricite
+Quel est le rôle d'un condensateur dans un circuit ? | stocker de l'énergie électrique | produire de la lumière | mesurer une tension | augmenter la résistance
+Au bout de combien de τ considère-t-on un condensateur chargé ? | environ 5 τ | 1 τ | 0,5 τ | 100 τ
+Quelle est la relation entre charge et tension d'un condensateur ? | q = C × u | q = u ÷ C | q = C + u | q = R × i
+Que vaut la tension aux bornes d'un condensateur déchargé ? | 0 V | sa tension maximale | 230 V | elle est infinie
+### mouvement
+Quelle est la direction de l'accélération dans un mouvement circulaire uniforme ? | vers le centre du cercle | tangente au cercle | vers l'extérieur | nulle
+Quelle grandeur se conserve pour un système isolé (lancement d'une fusée) ? | la quantité de mouvement | la vitesse | l'énergie cinétique seule | la hauteur
+Selon la deuxième loi de Kepler, une planète va plus vite… | près du Soleil | loin du Soleil | toujours à la même vitesse | jamais
+Quelle est l'expression de la quantité de mouvement ? | p = m × v | p = m × a | p = ½ m v² | p = m × g
+### energie
+Qu'est-ce que la capacité thermique massique ? | l'énergie pour élever de 1 °C un kilogramme d'une substance | la masse d'un corps chaud | la température de fusion | la puissance d'un radiateur
+Quel phénomène nucléaire se produit au cœur du Soleil ? | la fusion | la fission | la combustion | l'électrolyse
+Quel type de rayonnement radioactif est arrêté par une feuille de papier ? | alpha | gamma | bêta seulement | aucun
+Quelle loi décrit le refroidissement d'un corps dans l'air (modèle simple) ? | la loi de Newton du refroidissement | la loi d'Ohm | la loi de Snell | la loi de Coulomb
+
+## histgeo
+### xxe
+Quel régime totalitaire Mussolini installe-t-il en Italie ? | le fascisme | le communisme | la monarchie absolue | la démocratie libérale
+Quand l'Allemagne nazie envahit-elle l'URSS ? | en juin 1941 | en septembre 1939 | en juin 1944 | en mai 1945
+Quelle bataille de 1942-1943 marque un tournant sur le front de l'Est ? | Stalingrad | Verdun | El Alamein | Midway
+### monde-actuel
+Quel événement du 11 septembre 2001 marque le début du XXIe siècle géopolitique ? | les attentats contre les États-Unis | la chute du mur de Berlin | la création de l'euro | la fin de l'URSS
+Qu'est-ce que la décolonisation ? | l'accès à l'indépendance des colonies | la conquête de nouvelles colonies | une crise économique | une réforme agricole
+Quelle année marque l'arrivée de la monnaie euro en pièces et billets ? | 2002 | 1992 | 1999 | 2008
+### geographie
+Qu'est-ce qu'une région transfrontalière ? | un espace qui s'organise de part et d'autre d'une frontière | une région sans frontière naturelle | une île | un désert
+Quel est le rôle des fonds européens de cohésion ? | réduire les écarts de développement entre régions | financer l'armée | payer les retraites | fixer les prix
+Quel canal relie la mer Méditerranée à la mer Rouge ? | le canal de Suez | le canal de Panama | le canal de Kiel | le canal du Midi

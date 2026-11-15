@@ -27,21 +27,29 @@ What is the midpoint of (2, 4) and (6, 8)? | (4, 6) | (8, 12) | (2, 2) | (3, 4)
 What is the distance between (0, 0) and (3, 4)? | 5 | 7 | 25 | 1
 What is the volume of a sphere with radius r? | 4/3 πr³ | 4πr² | πr²h | 2πr
 ## science
+### matter
 What is the atomic number of an element? | the number of protons | the number of neutrons | the mass | the number of molecules
 What are isotopes? | atoms of the same element with different numbers of neutrons | different elements | ions | molecules
 What is a covalent bond? | atoms sharing electrons | atoms transferring electrons | a magnetic bond | a nuclear bond
 What is an ionic bond? | attraction between oppositely charged ions after electron transfer | sharing electrons | a hydrogen bond | a metallic shine
-What is the chemical formula of table salt? | NaCl | KCl | H₂O | CO₂
 How many atoms are in one molecule of H₂O? | 3 | 2 | 1 | 4
+What are elements in the same column of the periodic table called? | a group (family) | a period | an isotope | a compound
+Which group contains the noble gases? | Group 18 | Group 1 | Group 2 | Group 17
+Who created the first widely recognized periodic table? | Dmitri Mendeleev | Marie Curie | Antoine Lavoisier | John Dalton
+What happens to gas volume when temperature rises (constant pressure)? | it increases | it decreases | it stays the same | it becomes zero
+What are valence electrons? | electrons in the outermost shell | electrons in the nucleus | protons with no charge | neutrons that move
+### reactions
+What is the chemical formula of table salt? | NaCl | KCl | H₂O | CO₂
 What is a mole in chemistry? | 6.02 × 10²³ particles | one gram | a small animal | one liter
 What is the pH of pure water at 25°C? | 7 | 0 | 14 | 1
 Which is an acid? | lemon juice | soap | baking soda solution | bleach
 Balance: H₂ + O₂ → H₂O. What goes before H₂O? | 2 | 1 | 3 | 4
 What does a catalyst do? | speeds up a reaction without being used up | slows a reaction | stops a reaction | becomes a product
-What are elements in the same column of the periodic table called? | a group (family) | a period | an isotope | a compound
-Which group contains the noble gases? | Group 18 | Group 1 | Group 2 | Group 17
-What happens to gas volume when temperature rises (constant pressure)? | it increases | it decreases | it stays the same | it becomes zero
-Who created the first widely recognized periodic table? | Dmitri Mendeleev | Marie Curie | Antoine Lavoisier | John Dalton
+What does an acid and a base produce in a neutralization reaction? | a salt and water | only oxygen | only a metal | a stronger acid
+What is the molar mass of water (H₂O) to the nearest gram? | 18 g/mol | 10 g/mol | 16 g/mol | 32 g/mol
+Which factor usually makes a reaction go faster? | higher temperature | lower temperature | larger pieces of reactant | less concentration
+In a combustion reaction, what does a fuel react with? | oxygen | nitrogen | helium | water
+
 ## social
 What was the Industrial Revolution? | the shift to machine production starting in Britain in the 1700s | a war | a religious movement | a farming law
 What was the main power source of early factories? | steam engines (and water power) | electricity | solar power | oil
@@ -64,3 +72,15 @@ What was decolonization? | colonies gaining independence after WWII | building n
 What document did King John of England sign in 1215, limiting royal power? | the Magna Carta | the Bill of Rights | the Constitution | the Treaty of Paris
 Which philosopher argued that people have natural rights to life, liberty, and property? | John Locke | Machiavelli | Confucius | Karl Marx
 What does the United Nations Universal Declaration of Human Rights (1948) list? | basic rights for all people | the borders of every nation | the rules of war only | trade prices
+
+## ela
+### literature
+In "Animal Farm," what do the animals represent? | people and events of the Russian Revolution | real farm life only | the American Revolution | ancient Rome
+Who wrote the novel "1984" about a surveillance state? | George Orwell | Aldous Huxley | Ray Bradbury | H. G. Wells
+
+## social
+### civics
+What is a constitutional monarchy? | a system where a monarch's power is limited by a constitution | a monarchy with no laws | a democracy without voting | a military government
+What is a totalitarian state? | a government that controls almost every part of public and private life | a government with free elections | a small city-state | a federal republic
+What is the Geneva Convention about? | the treatment of soldiers, prisoners, and civilians in war | trade between countries | climate change | space exploration
+What is self-determination? | the right of a people to choose their own government | a type of tax | a voting machine | a religious law

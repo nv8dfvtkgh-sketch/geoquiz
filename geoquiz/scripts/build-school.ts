@@ -22,7 +22,7 @@ for (const sys of ['fr', 'us'] as SchoolSystem[]) {
     const seen = new Set<string>();
     fs.readFileSync(file, 'utf8').split('\n').forEach((raw, i) => {
       const line = raw.trim();
-      if (line.startsWith('###')) { head = line.slice(3).trim(); if (!chaptersOf(sub).some((c) => c.id === head)) { console.error(`${file}:${i + 1} chapitre inconnu « ${head} »`); errors++; } return; }
+      if (line.startsWith('###')) { head = line.slice(3).trim(); if (!chaptersOf(sub, lv.id).some((c) => c.id === head)) { console.error(`${file}:${i + 1} chapitre inconnu « ${head} »`); errors++; } return; }
       if (!line || line.startsWith('#') && !line.startsWith('##')) return;
       if (line.startsWith('##')) { head = ''; sub = line.slice(2).trim(); if (!lv.subjects.includes(sub)) { console.error(`${file}:${i + 1} matière inconnue « ${sub} »`); errors++; } return; }
       const parts = line.split('|').map((x) => x.trim());
@@ -32,7 +32,7 @@ for (const sys of ['fr', 'us'] as SchoolSystem[]) {
       if (seen.has(parts[0])) { console.error(`${where} : question en double`); errors++; return; }
       seen.add(parts[0]);
       // Maths : la notion du programme (« puissances »…) devinée d'après l'énoncé.
-      const tp = MATH_SUBJECT.has(sub) ? topicFor(lv.id, parts[0]) : head || chapterFor(sub, parts[0], parts[1]);
+      const tp = MATH_SUBJECT.has(sub) ? topicFor(lv.id, parts[0]) : head || chapterFor(sub, parts[0], parts[1], lv.id);
       (lv2[sub] ??= []).push(tp ? [...parts, tp] : parts);
       total++;
     });
@@ -47,7 +47,7 @@ for (const [sys, lvs] of Object.entries(out)) for (const [lv, subs] of Object.en
   const n: Record<string, number> = {};
   for (const r of rows) if (r[5]) n[r[5]] = (n[r[5]] ?? 0) + 1;
   // Un chapitre est proposé s'il a assez de questions écrites, ou des questions fabriquées (conjugaison…).
-  const keep = Object.fromEntries(chaptersOf(sb).filter((c) => (n[c.id] ?? 0) >= MIN || hasGen(sys, lv, sb, c.id)).map((c) => [c.id, n[c.id] ?? 0]));
+  const keep = Object.fromEntries(chaptersOf(sb, lv).filter((c) => (n[c.id] ?? 0) >= MIN || hasGen(sys, lv, sb, c.id)).map((c) => [c.id, n[c.id] ?? 0]));
   if (Object.keys(keep).length >= 2) (((chapters[sys] ??= {})[lv] ??= {})[sb] = keep);
 }
 fs.writeFileSync(path.join(ROOT, 'src/shared/revchapters.json'), JSON.stringify(chapters, null, 0) + '\n');

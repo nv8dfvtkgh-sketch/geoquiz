@@ -147,3 +147,47 @@ Quel texte proclame en 1789 que « les hommes naissent libres et égaux en droit
 Comment appelle-t-on une ville qui regroupe de nombreuses activités et habitants autour d'elle ? | une métropole | un hameau | un village | une ferme
 Comment appelle-t-on l'endroit où l'on achète beaucoup de produits en un seul lieu ? | un hypermarché | une mairie | une gare | un musée
 Comment appelle-t-on une zone construite autour d'une grande ville ? | la banlieue | le centre-ville | la campagne | la montagne
+
+## sciences
+### corps
+Où commence la digestion des aliments ? | dans la bouche | dans l'estomac | dans les poumons | dans le cœur
+Quel gaz rejetons-nous en expirant ? | le dioxyde de carbone | l'oxygène pur | l'hélium | l'azote seul
+Pourquoi faut-il bouger chaque jour ? | pour garder ses muscles, ses os et son cœur en bonne santé | pour perdre ses dents | pour dormir moins | pour grandir d'un coup
+### vivant
+Comment appelle-t-on la naissance d'une plante à partir d'une graine ? | la germination | la métamorphose | la pollinisation | la floraison
+Quel animal est un mammifère ? | la baleine | le requin | le crocodile | le saumon
+Comment se nourrit un bébé mammifère ? | avec le lait de sa mère | avec des graines | avec de l'herbe seulement | il ne mange pas
+### matiere
+Qu'est-ce qu'un mélange hétérogène ? | un mélange où l'on distingue plusieurs constituants | un mélange où l'on ne voit qu'une seule chose | de l'eau pure | un gaz pur
+Que devient l'eau d'une flaque au soleil ? | elle s'évapore | elle gèle | elle devient du sable | elle se transforme en sel
+Comment séparer le sel de l'eau salée ? | en faisant évaporer l'eau | en filtrant | en secouant | en refroidissant
+### energie
+Quelle énergie permet aux plantes de fabriquer leur nourriture ? | l'énergie lumineuse du Soleil | l'énergie du vent | l'énergie électrique | l'énergie nucléaire
+De quoi a besoin notre corps pour avoir de l'énergie ? | de nourriture | d'électricité | d'essence | de lumière seulement
+Quel geste permet d'économiser l'électricité ? | éteindre la lumière en quittant une pièce | laisser la télévision allumée | ouvrir le réfrigérateur longtemps | chauffer avec les fenêtres ouvertes
+### terre-univers
+Quel est le satellite naturel de la Terre ? | la Lune | le Soleil | Mars | une étoile filante
+Quelle planète est surnommée la planète rouge ? | Mars | Vénus | Jupiter | Saturne
+Dans quel sens la Terre tourne-t-elle sur elle-même ? | d'ouest en est | d'est en ouest | du nord au sud | elle ne tourne pas
+
+## histgeo
+### antiquite
+Quelle ville gauloise a été le lieu de la défaite de Vercingétorix en 52 av. J.-C. ? | Alésia | Gergovie | Paris | Marseille
+Quel peuple a fondé Marseille (Massalia) vers 600 av. J.-C. ? | les Grecs | les Romains | les Vikings | les Francs
+Quel monument romain servait aux combats de gladiateurs ? | l'amphithéâtre | l'aqueduc | les thermes | le forum
+### moyen-age
+Que construisaient les seigneurs pour se protéger ? | des châteaux forts | des gratte-ciel | des usines | des gares
+Qui travaillait la terre au Moyen Âge ? | les paysans | les chevaliers | les rois | les moines copistes uniquement
+Qu'est-ce qu'un moine copiste ? | un religieux qui recopiait des livres à la main | un chevalier | un marchand | un paysan
+### temps-modernes
+Quel ministre de Louis XIV a développé le commerce et les manufactures ? | Colbert | Richelieu | Sully | Mazarin
+Quel château de la Loire a été construit sous François Ier ? | Chambord | Versailles | le Louvre | Vincennes
+Quel navigateur a fait le premier tour du monde (expédition de 1519-1522) ? | Magellan (et son équipage) | Christophe Colomb | Jacques Cartier | Marco Polo
+### revolution
+Quel roi a été guillotiné en 1793 ? | Louis XVI | Louis XIV | Napoléon | Charles X
+Quelle bataille marque la défaite définitive de Napoléon en 1815 ? | Waterloo | Austerlitz | Marignan | Verdun
+Quand Napoléon Ier se fait-il sacrer empereur ? | en 1804 | en 1789 | en 1815 | en 1848
+### geographie
+Comment s'appelle l'endroit où l'on habite et ses alentours ? | son lieu de vie | un continent | un océan | un pays étranger
+Quel est le nom de la carte qui montre le monde entier à plat ? | un planisphère | un plan de quartier | un globe | une boussole
+Comment appelle-t-on les espaces avec peu d'habitants, loin des villes ? | des espaces ruraux | des métropoles | des banlieues | des centres-villes

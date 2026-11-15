@@ -98,3 +98,32 @@ Pourquoi se brosser les dents après les repas ? | pour éviter les caries | pou
 Comment s'appelle un animal qui mange des plantes ? | un herbivore | un carnivore | un insecte | un prédateur
 ### espace-temps
 Combien de minutes y a-t-il dans une heure ? | 60 | 100 | 24 | 30
+
+## anglais
+### expressions
+Comment dit-on « J'habite à Paris » en anglais ? | I live in Paris. | I love Paris. | I am Paris. | I go Paris.
+Que veut dire « Where do you live? » ? | Où habites-tu ? | Quel âge as-tu ? | Comment vas-tu ? | Que fais-tu ?
+Que veut dire « Have you got a pet? » ? | As-tu un animal de compagnie ? | Où est ton chat ? | Aimes-tu les chiens ? | Quel âge a ton chien ?
+Comment demande-t-on « Quelle est ta couleur préférée ? » ? | What's your favourite colour? | What colour is it? | Do you like red? | Where is the colour?
+Que veut dire « Can I have a pencil, please? » ? | Est-ce que je peux avoir un crayon, s'il te plaît ? | J'ai un crayon. | Où est mon crayon ? | Le crayon est bleu.
+Comment dit-on « Quel temps fait-il ? » en anglais ? | What's the weather like? | What time is it? | How old are you? | What's your name?
+Que veut dire « Let's play! » ? | Jouons ! | Mangeons ! | Dormons ! | Chantons !
+Comment demande-t-on l'heure en anglais ? | What time is it? | How are you? | What's the weather like? | How old are you?
+Que veut dire « See you tomorrow! » ? | À demain ! | Bonne nuit ! | Joyeux Noël ! | Bon appétit !
+Comment dit-on « Je suis désolé » en anglais ? | I'm sorry. | I'm happy. | I'm hungry. | I'm tired.
+
+## qlm
+### corps
+Combien d'os environ compte le squelette d'un adulte ? | 206 | 20 | 1 000 | 50
+### vivant
+Comment s'appelle un animal qui mange de la viande ? | un carnivore | un herbivore | un végétal | un insecte
+Quel animal passe l'hiver à dormir (hiberne) ? | la marmotte | le chien | la vache | le pigeon
+Que devient un têtard en grandissant ? | une grenouille | un poisson | un serpent | un oiseau
+### matiere
+À quelle température l'eau gèle-t-elle ? | 0 °C | 100 °C | 10 °C | 50 °C
+Avec quel instrument mesure-t-on la température ? | un thermomètre | une balance | une règle | une montre
+Quel matériau est attiré par un aimant ? | le fer | le bois | le verre | le plastique
+### espace-temps
+Combien y a-t-il de jours dans une année (non bissextile) ? | 365 | 100 | 52 | 12
+Combien d'années y a-t-il dans un siècle ? | 100 | 10 | 1 000 | 50
+Sur une carte, comment s'appelle le dessin qui indique le nord ? | la rose des vents | la légende | l'échelle | le titre

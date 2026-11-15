@@ -27,21 +27,40 @@ What is a correlation coefficient of −1? | a perfect negative linear relations
 What is a p-value used for? | to judge evidence against a null hypothesis | to compute the mean | to draw a graph | to find a slope
 What is the slope of the tangent line to y = x² at x = 3? | 6 | 9 | 3 | 2
 ## science
-What percentage of Earth's water is fresh water (about)? | 3% | 50% | 30% | 97%
+### space
+What is the Big Bang theory? | the universe expanded from a very hot, dense state about 13.8 billion years ago | Earth was hit by a comet | the Sun exploded | a theory of earthquakes
+What powers the Sun? | nuclear fusion of hydrogen into helium | burning coal | nuclear fission of uranium | chemical reactions with oxygen
+What is a light-year? | the distance light travels in one year | the time it takes Earth to orbit the Sun | a very bright year | the age of a star
+What evidence shows that the universe is expanding? | light from distant galaxies is redshifted | the Moon is getting closer | stars are all the same color | Earth is getting hotter
+What will happen to the Sun at the end of its life? | it will become a red giant, then a white dwarf | it will become a black hole | it will explode as a supernova right away | it will turn into a planet
+What shape are planetary orbits according to Kepler? | ellipses | perfect squares | straight lines | spirals
+What is the cosmic microwave background? | leftover radiation from the early universe | heat from microwave ovens | light from the Moon | radio from cell phones
+Which elements were mostly made in the Big Bang? | hydrogen and helium | iron and gold | carbon and oxygen | uranium and lead
+What is a black hole? | a region where gravity is so strong that not even light escapes | an empty part of space | a dark planet | a hole in Earth's crust
+How do heavier elements like iron form? | by fusion inside stars | in Earth's oceans | in the Big Bang only | by rusting
+### earth-history
 What drives plate tectonics? | convection currents in the mantle | the Moon's gravity | ocean waves | wind
+How old is Earth (approximately)? | 4.5 billion years | 6,000 years | 45 million years | 450 billion years
+What is radiometric dating used for? | finding the absolute age of rocks | measuring temperature | weighing fossils | predicting weather
+What type of plate boundary forms mid-ocean ridges? | divergent | convergent | transform | stationary
+What type of boundary is the San Andreas Fault? | a transform boundary | a divergent boundary | a convergent boundary | a hot spot
+What evidence supports seafloor spreading? | magnetic stripes in rocks on the ocean floor | coral reefs | the color of seawater | sunken ships
+What formed the Himalayas? | a collision between the Indian and Eurasian plates | a volcano | a meteor impact | glaciers only
+Which layer of Earth is liquid? | the outer core | the inner core | the crust | the lithosphere
+What is a half-life? | the time for half of a radioactive sample to decay | half of Earth's age | half a year | half a rock layer
+What created the Hawaiian Islands? | a volcanic hot spot under a moving plate | a plate collision | glaciers | coral only
+### climate
+What percentage of Earth's water is fresh water (about)? | 3% | 50% | 30% | 97%
 What is the greenhouse effect? | gases trapping heat in the atmosphere | plants growing in greenhouses | the ozone hole | acid rain
 Which gas in the stratosphere protects us from UV radiation? | ozone | carbon dioxide | methane | nitrogen
 What is the main cause of current global warming according to scientists? | human greenhouse gas emissions | changes in the Moon | volcanic eruptions only | the Sun getting much hotter
 What is the carbon cycle? | the movement of carbon among air, living things, oceans, and rocks | a bicycle race | the water cycle | rock layers
-How old is Earth (approximately)? | 4.5 billion years | 6,000 years | 45 million years | 450 billion years
-What is the Big Bang theory? | the universe expanded from a very hot, dense state about 13.8 billion years ago | Earth was hit by a comet | the Sun exploded | a theory of earthquakes
-What powers the Sun? | nuclear fusion of hydrogen into helium | burning coal | nuclear fission of uranium | chemical reactions with oxygen
 What is a renewable resource? | a resource that can be replaced naturally in a short time | coal | oil | natural gas
 What is ocean acidification? | the ocean absorbing CO₂ and becoming more acidic | salt being added to oceans | oil spills | rising sea level only
 What is sustainability? | meeting present needs without harming future generations | using all resources now | stopping all industry | building more cities only
-What is radiometric dating used for? | finding the absolute age of rocks | measuring temperature | weighing fossils | predicting weather
-What type of plate boundary forms mid-ocean ridges? | divergent | convergent | transform | stationary
 What is biomagnification? | toxins increasing in concentration up a food chain | animals growing larger | more biodiversity | faster photosynthesis
+What happens to sea level as glaciers and ice sheets melt? | it rises | it falls | it stays exactly the same | the oceans freeze
+
 ## social
 What is GDP? | the total value of goods and services produced in a country in a year | the national debt | a stock index | the unemployment rate
 What is inflation? | a general rise in prices over time | a fall in prices | a tax increase | a bank loan
@@ -62,3 +81,10 @@ What is the minimum age to be President? | 35 | 30 | 25 | 40
 ## social
 ### economics
 What does GDP measure? | the total value of goods and services produced in a country | the number of people employed | the national debt | the price of gold
+
+## social
+### economics
+What is a recession? | a significant decline in economic activity lasting months | a rise in stock prices | a new tax law | a trade surplus
+What is a tariff? | a tax on imported goods | a type of bank loan | a government grant | a minimum wage
+What is the law of supply? | producers offer more of a good as its price rises | consumers buy more as prices rise | prices never change | supply always equals zero
+What is comparative advantage? | producing a good at a lower opportunity cost than others | having the most money | owning all resources | selling at the highest price

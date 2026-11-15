@@ -151,3 +151,57 @@ Combien d'habitants compte la Terre environ en 2026 ? | plus de 8 milliards | 2 
 Quel continent compte le plus d'habitants ? | l'Asie | l'Afrique | l'Europe | l'Amérique
 Comment s'appelle une région où les pluies sont très rares ? | un désert | une forêt tropicale | un delta | une banquise
 Comment appelle-t-on une ressource qui se renouvelle rapidement ? | une ressource renouvelable | une ressource fossile | une ressource rare | une ressource minière
+
+## francais
+### litterature
+Quel personnage de chevalier est le héros du « Conte du Graal » ? | Perceval | Roland | Lancelot | Ulysse
+
+## svt
+### genetique
+Comment appelle-t-on la reproduction sans fécondation, par exemple par bouture ? | la reproduction asexuée | la reproduction sexuée | la pollinisation | la germination
+Que contient un spermatozoïde ? | la moitié de l'information génétique du père | toute l'information génétique de la mère | du lait | de l'oxygène
+Pourquoi les enfants ressemblent-ils à leurs deux parents ? | ils reçoivent des caractères des deux parents | ils les imitent | ils mangent la même chose | par hasard seulement
+Comment appelle-t-on l'œuf issu de la fécondation ? | la cellule-œuf (zygote) | le gamète | le fœtus | le placenta
+### corps
+Quel organe échange l'oxygène entre l'air et le sang ? | les poumons (alvéoles) | l'estomac | le foie | les reins
+Pourquoi le cœur bat-il plus vite pendant un effort ? | pour apporter plus d'oxygène aux muscles | pour digérer | pour dormir | pour refroidir le cerveau
+### geologie
+Qu'est-ce qu'un volcan effusif ? | un volcan qui émet des coulées de lave fluide | un volcan qui explose violemment | un volcan éteint | une montagne sans magma
+Comment se forme un paysage de gorges ? | par l'érosion d'une rivière dans la roche | par un séisme seul | par le vent du désert | par la neige
+Quel risque naturel est lié aux mouvements des plaques ? | les séismes | les marées | les éclipses | les arcs-en-ciel
+### ecologie
+Qu'est-ce qu'un réseau trophique ? | l'ensemble des chaînes alimentaires d'un milieu | un réseau électrique | une route de migration | un groupe d'arbres
+Qui sont les décomposeurs ? | des êtres vivants qui recyclent la matière morte | des prédateurs | des plantes à fleurs | des herbivores
+Pourquoi planter des haies autour des champs ? | pour abriter la biodiversité et limiter l'érosion | pour supprimer les insectes | pour assécher le sol | pour bloquer la lumière
+
+## physique
+### chimie
+Quel test met en évidence le dioxyde de carbone ? | l'eau de chaux qui se trouble | le sulfate de cuivre qui bleuit | une allumette qui se rallume | l'odeur
+Quel test met en évidence l'eau ? | le sulfate de cuivre anhydre qui devient bleu | l'eau de chaux | la flamme | un aimant
+La masse se conserve-t-elle lors d'un changement d'état ? | oui | non | seulement pour la glace | seulement pour la vapeur
+### electricite
+Quel est le symbole d'une pile dans un schéma électrique ? | deux traits parallèles de longueurs différentes | un rond avec une croix | un carré vide | une flèche
+Dans un circuit en dérivation, si une lampe grille, l'autre… | reste allumée | s'éteint | explose | brille deux fois plus
+Pourquoi ne faut-il jamais toucher une prise avec des mains mouillées ? | l'eau favorise le passage du courant dans le corps | l'eau éteint le courant | la prise rouillerait | c'est sans danger
+### mouvement
+Une voiture qui freine en ligne droite a un mouvement… | rectiligne ralenti | rectiligne accéléré | circulaire uniforme | immobile
+Un cycliste parcourt 30 km en 1 h 30. Quelle est sa vitesse moyenne ? | 20 km/h | 45 km/h | 30 km/h | 15 km/h
+Comment convertir 36 km/h en m/s ? | 10 m/s | 36 m/s | 3,6 m/s | 100 m/s
+### ondes
+Pourquoi voit-on l'éclair avant d'entendre le tonnerre ? | la lumière va beaucoup plus vite que le son | le son part plus tard | les yeux sont plus près | le tonnerre vient d'ailleurs
+Qu'est-ce qu'un objet transparent ? | un objet qui laisse passer la lumière et qu'on voit à travers | un objet qui arrête toute la lumière | un objet lumineux | un objet noir
+Quels sont les phénomènes qui expliquent une éclipse de Lune ? | la Terre se place entre le Soleil et la Lune | la Lune s'éteint | les nuages cachent la Lune | la Lune passe derrière le Soleil
+
+## histgeo
+### moyen-age
+Qui est le prophète de l'islam ? | Mahomet (Muhammad) | Charlemagne | Constantin | Saint Louis
+Quelle grande construction religieuse gothique se trouve à Paris ? | Notre-Dame | le Colisée | la mosquée de Cordoue | le Parthénon
+Comment appelle-t-on le territoire contrôlé par un seigneur ? | une seigneurie | un empire | une république | un département
+### temps-modernes
+Quel savant affirme que la Terre tourne autour du Soleil ? | Copernic | Ptolémée | Aristote | Charlemagne
+Quelle invention de Gutenberg diffuse les idées au XVe siècle ? | l'imprimerie à caractères mobiles | la boussole | la poudre | le télescope
+Quel empire d'Amérique les Espagnols de Cortés ont-ils conquis ? | l'Empire aztèque | l'Empire romain | l'Empire ottoman | l'Empire inca uniquement
+### geographie
+Quelle énergie l'humanité consomme-t-elle le plus aujourd'hui ? | les énergies fossiles | l'énergie éolienne | l'énergie solaire | la géothermie
+Qu'est-ce que l'accès à l'eau potable ? | la possibilité de boire une eau saine | avoir une piscine | habiter près de la mer | avoir de la pluie
+Pourquoi la population mondiale augmente-t-elle ? | les naissances restent supérieures aux décès | il n'y a plus de décès | les migrations | la Lune

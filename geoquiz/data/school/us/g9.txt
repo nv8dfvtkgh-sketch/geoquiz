@@ -27,21 +27,40 @@ Solve the system x + y = 10 and x − y = 2. | x = 6, y = 4 | x = 4, y = 6 | x =
 What is the quadratic formula? | x = (−b ± √(b² − 4ac)) / (2a) | x = −b / a | x = b² − 4ac | x = (a + b) / c
 A function grows by the same percent each year. It is… | exponential | linear | constant | quadratic
 ## science
-What is the main function of DNA? | to store genetic instructions | to digest food | to carry oxygen | to make light
+### organisms
 What are the building blocks of proteins? | amino acids | nucleotides | fatty acids | sugars
 What is homeostasis? | maintaining a stable internal environment | cell death | growth only | a type of tissue
-What is the result of mitosis? | two identical daughter cells | four different gametes | one cell | no cells
-What is the result of meiosis? | four gametes with half the chromosomes | two identical body cells | one large cell | a zygote
-What does "dominant allele" mean? | its trait shows if at least one copy is present | it is always harmful | it needs two copies to show | it is never inherited
 What are enzymes? | proteins that speed up chemical reactions | sugars that store energy | fats in cell membranes | minerals in bones
 What is the cell membrane's job? | controls what enters and leaves the cell | makes proteins | stores DNA | captures sunlight
 Which molecule carries energy for cells? | ATP | DNA | RNA | glucose only
-What is an ecosystem's carrying capacity? | the largest population it can support over time | the total area | the number of species | the amount of rain
-What is a keystone species? | a species with a large effect on its ecosystem | the most common species | an extinct species | a plant only
 What is the role of vaccines? | train the immune system to recognize a pathogen | kill all bacteria | cure every disease | replace blood cells
+Which organelle makes proteins? | the ribosome | the lysosome | the vacuole | the cell wall
+What is the main difference between prokaryotic and eukaryotic cells? | eukaryotic cells have a nucleus | prokaryotic cells are always larger | eukaryotic cells have no DNA | prokaryotic cells have mitochondria
+What is diffusion? | movement of particles from high to low concentration | movement from low to high concentration using energy | cell division | the making of proteins
+Which hormone lowers blood sugar levels? | insulin | adrenaline | estrogen | thyroxine
+### heredity
+What is the main function of DNA? | to store genetic instructions | to digest food | to carry oxygen | to make light
+What is the result of mitosis? | two identical daughter cells | four different gametes | one cell | no cells
+What is the result of meiosis? | four gametes with half the chromosomes | two identical body cells | one large cell | a zygote
+What does "dominant allele" mean? | its trait shows if at least one copy is present | it is always harmful | it needs two copies to show | it is never inherited
 Who first described the double helix structure of DNA (with Rosalind Franklin's data)? | Watson and Crick | Darwin and Wallace | Mendel and Pasteur | Newton and Hooke
 Who is known as the father of genetics? | Gregor Mendel | Charles Darwin | Louis Pasteur | Robert Hooke
+In DNA, which base pairs with adenine? | thymine | guanine | cytosine | uracil
+Two heterozygous parents (Aa × Aa) have a child. What is the chance it shows the recessive trait? | 25% | 50% | 75% | 0%
+What process copies DNA into messenger RNA? | transcription | translation | replication | mutation
+Who proposed the theory of evolution by natural selection, with Alfred Russel Wallace? | Charles Darwin | Gregor Mendel | Louis Pasteur | Isaac Newton
+### ecosystems
+What is an ecosystem's carrying capacity? | the largest population it can support over time | the total area | the number of species | the amount of rain
+What is a keystone species? | a species with a large effect on its ecosystem | the most common species | an extinct species | a plant only
 What is an invasive species? | a non-native species that harms a new ecosystem | a native predator | an endangered animal | a decomposer
+About what share of energy passes from one trophic level to the next? | about 10% | about 90% | 100% | about 50%
+What are the products of photosynthesis? | glucose and oxygen | carbon dioxide and water | protein and fat | nitrogen and ATP only
+What is mutualism? | a relationship where both species benefit | one species is harmed | both species are harmed | no species is affected
+What is ecological succession? | the gradual change of a community over time | the extinction of all species | the migration of birds | a single storm
+What is a biome? | a large region with a typical climate and community of organisms | one single cell | a type of rock | a small pond only
+What is a limiting factor? | something in the environment that limits population growth | a type of predator only | a food that has no nutrients | a gene
+How do humans most often reduce biodiversity? | by destroying habitats | by planting native species | by protecting parks | by recycling
+
 ## social
 How many members are in the U.S. House of Representatives? | 435 | 100 | 50 | 538
 How many senators does each state have? | 2 | 1 | 435 | depends on population
@@ -58,3 +77,18 @@ What is longitude? | distance east or west of the prime meridian | distance nort
 What is the most populous country in the world (since 2023)? | India | China | the United States | Indonesia
 What is the largest country by area? | Russia | Canada | China | the United States
 What is urbanization? | the growth of cities as people move from rural areas | the growth of farms | the building of roads | the loss of jobs
+
+## ela
+### literature
+What is the climax of a story? | the turning point of greatest tension | the first sentence | the list of characters | the title page
+What is dramatic irony? | when the audience knows something a character does not | when a character tells a joke | a sad ending | a long speech alone on stage
+Who is the narrator of "To Kill a Mockingbird"? | Scout Finch | Atticus Finch | Boo Radley | Jem Finch
+
+## social
+### civics
+What is the term length of a U.S. senator? | 6 years | 2 years | 4 years | for life
+### geography
+What line divides Earth into Northern and Southern Hemispheres? | the equator | the prime meridian | the Tropic of Cancer | the International Date Line
+What do lines of longitude measure? | distance east or west of the prime meridian | distance north or south of the equator | elevation | temperature
+What is the largest country in the world by area? | Russia | Canada | China | the United States
+What is a thematic map? | a map that shows a specific topic like population or climate | a map of a theme park | a road map only | a globe

@@ -100,3 +100,38 @@ Que devient l'eau qui bout longtemps dans une casserole ? | de la vapeur | de la
 Combien y a-t-il de mois dans une année ? | 12 | 10 | 7 | 52
 Quelle saison vient après l'hiver ? | le printemps | l'été | l'automne | encore l'hiver
 Avec quel objet mesure-t-on la durée d'une course ? | un chronomètre | une règle | une balance | un thermomètre
+
+## anglais
+### expressions
+Que veut dire « How old are you? » ? | Quel âge as-tu ? | Comment vas-tu ? | Comment t'appelles-tu ? | Où habites-tu ?
+Comment répond-on à « How old are you? » ? | I'm seven. | I'm fine. | My name is Sam. | I like cats.
+Comment dit-on « J'aime les pommes » en anglais ? | I like apples. | I have apples. | I am an apple. | I eat a pear.
+Que veut dire « Good morning » ? | Bonjour (le matin) | Bonne nuit | Au revoir | Bon anniversaire
+Comment dit-on « Joyeux anniversaire » en anglais ? | Happy birthday! | Merry Christmas! | Good luck! | Well done!
+Que veut dire « Sit down, please » ? | Assieds-toi, s'il te plaît. | Lève-toi. | Ouvre ton livre. | Tais-toi.
+Que veut dire « Stand up » ? | Lève-toi. | Assieds-toi. | Viens ici. | Regarde.
+Comment demande-t-on « Comment vas-tu ? » en anglais ? | How are you? | Who are you? | Where are you? | What are you?
+Que veut dire « I don't like spiders » ? | Je n'aime pas les araignées. | J'aime les araignées. | J'ai une araignée. | Je suis une araignée.
+Comment dit-on « Je m'appelle Hugo » en anglais ? | My name is Hugo. | I'm Hugo years old. | I like Hugo. | Hugo is fine.
+
+## francais
+### grammaire
+Dans « Les enfants jouent », quel est le verbe ? | jouent | les | enfants | aucun
+Dans « Léa mange une pomme », qui fait l'action ? | Léa | une pomme | mange | personne
+Quel mot est un déterminant ? | la | chanter | grand | vite
+
+## qlm
+### corps
+Quel organe nous permet de voir ? | les yeux | les oreilles | la langue | la peau
+Que se passe-t-il pour le cœur quand on court ? | il bat plus vite | il s'arrête | il bat moins vite | rien
+Quelle partie du corps protège-t-on avec un casque à vélo ? | la tête | les pieds | les mains | le ventre
+### vivant
+Que devient une graine plantée et arrosée ? | une plante | un caillou | un insecte | rien
+Quel animal pond des œufs ? | la tortue | la vache | le chien | le cheval
+Combien de pattes a une araignée ? | 8 | 6 | 4 | 10
+### matiere
+Que devient le chocolat chauffé ? | il fond | il gèle | il devient dur comme une pierre | il disparaît
+Quel matériau est transparent ? | le verre | le bois | le carton | le fer
+### espace-temps
+Combien y a-t-il d'heures dans une journée ? | 24 | 12 | 60 | 7
+Quel mois vient après janvier ? | février | mars | décembre | juin

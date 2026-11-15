@@ -27,21 +27,40 @@ Expand (x + 1)³. | x³ + 3x² + 3x + 1 | x³ + 1 | x³ + 3x + 1 | x³ + x² + x
 In a normal distribution, about what percent of data is within one standard deviation of the mean? | 68% | 95% | 50% | 99.7%
 What is the end behavior of y = −x² as x → ∞? | y → −∞ | y → ∞ | y → 0 | y → 1
 ## science
+### forces
 What is velocity? | speed in a given direction | distance only | mass times speed | acceleration
 What is acceleration? | the rate of change of velocity | speed | position | mass
 What is Newton's second law? | F = ma | E = mc² | F = mv | P = mgh
 What is the acceleration due to gravity on Earth? | about 9.8 m/s² | about 1.6 m/s² | about 98 m/s² | about 0.98 m/s²
 What is momentum? | mass × velocity | mass × acceleration | force × distance | energy ÷ time
+What causes a magnetic field? | moving electric charges | gravity | heat | sound
+What net force is needed to accelerate a 2 kg mass at 3 m/s²? | 6 N | 1.5 N | 5 N | 9 N
+In a closed system with no outside forces, what happens to total momentum? | it is conserved | it always increases | it always decreases | it becomes zero
+Ignoring air resistance, how do a heavy ball and a light ball fall? | with the same acceleration | the heavy one falls much faster | the light one falls faster | they float
+What force keeps a car moving in a circle on a curved road? | centripetal force (from friction) | magnetism | air pressure | buoyancy
+### energy
 What is the law of conservation of energy? | energy cannot be created or destroyed, only transformed | energy always increases | energy is lost in all reactions | mass equals energy always
 What is the unit of work and energy? | the joule | the newton | the watt | the pascal
 What is the unit of power? | the watt | the joule | the volt | the ampere
 What is Ohm's law? | V = IR | P = IV only | F = qE | E = hf
+What is Einstein's mass–energy equation? | E = mc² | F = ma | PV = nRT | V = IR
+What is the formula for kinetic energy? | ½mv² | mgh | mv | Fd²
+What is the formula for gravitational potential energy? | mgh | ½mv² | ma | IR
+What is work in physics? | force times distance in the direction of the force | power times mass | speed times time | voltage times current only
+A 60 W bulb runs for 10 seconds. How much energy does it use? | 600 J | 6 J | 70 J | 0.6 J
+What is electric current? | the flow of electric charge | stored charge only | a type of magnet | the resistance of a wire
+### waves
 What is the speed of light in a vacuum? | about 300,000 km/s | about 340 m/s | about 3,000 km/s | infinite
 What is the frequency unit? | hertz | decibel | meter | second
 What happens to light when it passes from air into water? | it bends (refraction) | it stops | it speeds up | it becomes sound
 What is a transverse wave? | a wave that vibrates perpendicular to its direction of travel | a wave that vibrates parallel | a sound wave in air | a stationary wave only
-What is Einstein's mass–energy equation? | E = mc² | F = ma | PV = nRT | V = IR
-What causes a magnetic field? | moving electric charges | gravity | heat | sound
+What equation links wave speed, frequency, and wavelength? | v = fλ | v = f ÷ λ | v = λ ÷ f | v = f + λ
+What type of wave is sound in air? | a longitudinal wave | a transverse wave | an electromagnetic wave | a standing light wave
+What is the Doppler effect? | a change in observed frequency when a source moves | a type of eclipse | the bending of light in glass | an echo in a cave
+Which electromagnetic wave has the highest energy? | gamma rays | radio waves | microwaves | visible light
+What happens when two waves meet crest to crest? | constructive interference (bigger wave) | the waves disappear | they turn into light | destructive interference only
+What is the particle of light called? | the photon | the electron | the proton | the neutron
+
 ## social
 What was the Gilded Age? | a late-1800s era of industrial growth and inequality | the colonial era | the Great Depression | the 1960s
 What was the Progressive Era? | an early-1900s reform movement | a war | a gold rush | a depression
@@ -62,3 +81,10 @@ What did the 19th Amendment (1920) do? | gave women the right to vote | ended pr
 ## social
 ### civics
 Which amendment gave women the right to vote in 1920? | the 19th Amendment | the 13th Amendment | the 1st Amendment | the 26th Amendment
+
+## social
+### civics
+What did Brown v. Board of Education (1954) decide? | racial segregation in public schools is unconstitutional | women can vote | the President can veto laws | states can leave the Union
+What did the Civil Rights Act of 1964 ban? | discrimination based on race, color, religion, sex, or national origin | all immigration | voting by mail | labor unions
+What did the Voting Rights Act of 1965 do? | protected the voting rights of African Americans | lowered the voting age to 18 | gave women the vote | created the Electoral College
+Which amendment lowered the voting age to 18? | the 26th Amendment | the 19th Amendment | the 15th Amendment | the 21st Amendment

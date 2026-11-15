@@ -27,21 +27,40 @@ What is the mean of 2, 4, 6, 8? | 5 | 4 | 6 | 20
 What is the GCF of 12 and 18? | 6 | 3 | 36 | 2
 What is 3/4 ÷ 1/2? | 3/2 | 3/8 | 2/3 | 1/2
 ## science
+### space
 What causes the Moon's phases? | the changing view of the Moon's sunlit half as it orbits Earth | Earth's shadow every night | clouds | the Moon changing shape
 What causes a lunar eclipse? | Earth's shadow falling on the Moon | the Moon's shadow on Earth | a cloud | the Sun turning off
 What causes seasons on Earth? | the tilt of Earth's axis | Earth's distance from the Sun | the Moon | ocean currents
 What force keeps planets in orbit around the Sun? | gravity | magnetism | friction | wind
 What is a galaxy? | a huge system of stars, gas, and dust | a single star | a planet | a moon
 What galaxy do we live in? | the Milky Way | Andromeda | the Large Magellanic Cloud | Orion
+What causes a solar eclipse? | the Moon passing between the Sun and Earth | Earth passing between the Sun and the Moon | the Sun moving behind a planet | a large cloud
+What mainly causes ocean tides on Earth? | the Moon's gravity | the wind | earthquakes | the rotation of the Sun
+Which planet is the largest in our solar system? | Jupiter | Saturn | Earth | Neptune
+How long does it take Earth to rotate once on its axis? | about 24 hours | about 365 days | about 30 days | about 1 hour
+### earth-history
 What are the three main types of rock? | igneous, sedimentary, metamorphic | hard, soft, liquid | granite, marble, clay only | lava, magma, ash
 How does igneous rock form? | from cooled magma or lava | from layers of sediment | from heat and pressure on other rocks | from ice
 What is the theory of plate tectonics? | Earth's outer layer is made of moving plates | Earth is flat | the Moon controls earthquakes | the oceans are shrinking
-Which layer of the atmosphere do we live in? | troposphere | stratosphere | mesosphere | thermosphere
 What drives the water cycle? | energy from the Sun and gravity | the Moon | wind only | plants only
+How does sedimentary rock usually form? | layers of sediment are pressed and cemented together | lava cools quickly | rocks melt completely | crystals grow in space
+In undisturbed rock layers, where are the oldest layers? | at the bottom | at the top | in the middle | anywhere at random
+What was Pangaea? | a supercontinent that broke apart millions of years ago | an ancient ocean animal | a volcano in Hawaii | a type of rock
+What is the rock cycle? | the ways rocks change from one type to another over time | the orbit of rocks around the Sun | a type of erosion only | the way rocks grow like plants
+What forms when an oceanic plate sinks under a continental plate? | a deep-sea trench and volcanoes | a desert | a coral reef | a glacier
+What do fossils found in rock layers tell scientists? | what life was like in the past | the weather tomorrow | the age of the Moon | the depth of the ocean today
+### climate
+Which layer of the atmosphere do we live in? | troposphere | stratosphere | mesosphere | thermosphere
 What is a front in weather? | a boundary between two air masses | a type of cloud | a tornado | a rainbow
 Why do coastal areas have milder climates? | the ocean absorbs and releases heat slowly | there is more wind | there are fewer people | the Sun is weaker there
 What is a greenhouse gas? | a gas that traps heat in the atmosphere | a gas plants need only | a gas found only in greenhouses | a poisonous gas only
 Which human activity adds the most CO₂ to the atmosphere? | burning fossil fuels | planting trees | using solar panels | recycling paper
+What is the difference between weather and climate? | weather is short-term conditions, climate is the long-term pattern | they are exactly the same | climate changes every hour | weather only happens in summer
+What instrument measures air pressure? | a barometer | a thermometer | an anemometer | a rain gauge
+What happens when warm, moist air rises and cools? | clouds can form | the air becomes heavier | it turns into rock | the wind stops forever
+What is one way people can reduce their impact on the environment? | use less energy and recycle | burn more trash | cut down more forests | waste more water
+Which energy source is renewable? | solar energy | coal | oil | natural gas
+
 ## social
 Where did the first civilizations develop? | in river valleys like Mesopotamia, Egypt, the Indus, and China | in deserts far from water | on mountaintops | in Antarctica
 What is the "Fertile Crescent"? | a fertile region in the Middle East where farming began | a desert in Africa | a moon-shaped island | a river in China
@@ -69,3 +88,16 @@ In which ancient city did democracy first develop? | Athens | Sparta | Rome | Ba
 What was the Code of Hammurabi? | one of the earliest written sets of laws | a Greek poem | an Egyptian pyramid | a Roman road
 What was the Roman Senate? | a council of leaders that advised and governed the Roman Republic | a sports stadium | a temple | an army unit
 Which Chinese philosopher taught respect for family and good government? | Confucius | Plato | Hammurabi | Julius Caesar
+
+## social
+### civics
+What was the role of a pharaoh in ancient Egypt? | a ruler seen as a god-king | an elected mayor | a judge chosen by citizens | a merchant
+What is a monarchy? | a government ruled by a king or queen | a government by elected representatives | a government with no leader | rule by a council of students
+What were the Twelve Tables in ancient Rome? | the first written Roman laws | a set of dining tables | a calendar | a temple
+### geography
+Which mountains did the ancient Greeks live among? | rugged mountains that separated city-states | the Himalayas | the Andes | the Rockies
+Along which river did ancient Indian civilization (Harappa) develop? | the Indus River | the Nile | the Tigris | the Amazon
+Along which river did early Chinese civilization develop? | the Huang He (Yellow River) | the Nile | the Danube | the Thames
+### history
+Which ancient city-state was known for its strong army and military training? | Sparta | Athens | Babylon | Memphis
+What did the ancient Egyptians build as tombs for their pharaohs? | pyramids | castles | skyscrapers | igloos

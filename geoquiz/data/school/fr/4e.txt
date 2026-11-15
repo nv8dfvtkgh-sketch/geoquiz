@@ -147,3 +147,50 @@ Qui dirigea l'Encyclopédie avec d'Alembert ? | Diderot | Montesquieu | Louis XV
 ### geographie
 Comment appelle-t-on une très grande ville de plus de 10 millions d'habitants ? | une mégapole | un bourg | une commune rurale | un hameau
 Qu'est-ce que la mondialisation ? | la mise en relation des différents espaces du monde par les échanges | la disparition des frontières naturelles | la fin des transports | un régime politique
+
+## francais
+### litterature
+Quel auteur réaliste a écrit « Le Horla » et « Boule de suif » ? | Guy de Maupassant | Émile Zola | Victor Hugo | Molière
+Qu'est-ce qu'un récit fantastique ? | un récit où un événement étrange fait hésiter entre explication rationnelle et surnaturelle | un récit de chevalerie | un récit historique vrai | une fable
+
+## svt
+### genetique
+Que porte un chromosome ? | des gènes | des globules | des muscles | des os
+Combien de paires de chromosomes possède l'être humain ? | 23 | 46 | 12 | 32
+### corps
+Quel est le rôle des globules blancs ? | défendre l'organisme contre les microbes | transporter l'oxygène | coaguler le sang | digérer
+Quel est le rôle des globules rouges ? | transporter le dioxygène | lutter contre les microbes | fabriquer des hormones | digérer les graisses
+### geologie
+Qu'est-ce qu'un magma ? | de la roche fondue en profondeur | une roche sédimentaire | un fossile | un nuage de poussière
+Sur quelle limite de plaques se trouvent beaucoup de volcans explosifs ? | les zones de subduction | les dorsales | le centre des plaques | les déserts
+Quel est le nom de la ceinture de volcans autour du Pacifique ? | la ceinture de feu | la dorsale atlantique | le rift africain | l'arc alpin
+
+## physique
+### chimie
+Quelle est la formule de la molécule d'eau ? | H₂O | CO₂ | O₂ | NaCl
+Lors d'une combustion, quel gaz est consommé ? | le dioxygène | l'azote | l'hélium | la vapeur d'eau
+### electricite
+Que se passe-t-il lors d'un court-circuit ? | le courant passe sans traverser les récepteurs, ce qui peut être dangereux | la lampe brille normalement | le circuit est ouvert | la pile se recharge
+Dans un circuit en dérivation, comment sont les tensions aux bornes des branches ? | égales | différentes et nulles | toujours doublées | impossibles à mesurer
+Comment branche-t-on un ampèremètre ? | en série | en dérivation | en dehors du circuit | à la place de la pile
+### mouvement
+Qu'est-ce qu'une interaction de contact ? | une action entre deux objets qui se touchent | une action à distance | une attraction magnétique | la gravitation
+Quelle interaction agit à distance ? | l'attraction gravitationnelle | le frottement | la poussée d'une main | la tension d'un fil
+Que vaut le poids d'un objet de 5 kg sur Terre (g = 10 N/kg) ? | 50 N | 5 N | 0,5 N | 500 N
+### ondes
+Peut-on entendre une explosion sur la Lune ? | non, le son ne se propage pas dans le vide | oui, très fort | seulement la nuit | seulement avec un casque
+Quelle est la vitesse de la lumière comparée à celle du son ? | environ un million de fois plus grande | égale | deux fois plus grande | plus petite
+Quelle couleur obtient-on en superposant les lumières rouge, verte et bleue ? | du blanc | du noir | du marron | du violet
+
+## histgeo
+### temps-modernes
+Quel est le principe de la monarchie absolue ? | le roi concentre tous les pouvoirs | le peuple élit le roi | le pouvoir est partagé entre trois assemblées | il n'y a pas de roi
+Quel texte anglais de 1689 limite le pouvoir du roi ? | la Déclaration des droits (Bill of Rights) | la Magna Carta | l'édit de Nantes | le Code noir
+Quelle révolution a donné l'indépendance aux États-Unis ? | la révolution américaine (1776) | la révolution russe | la révolution industrielle | la Fronde
+### revolution
+Quel régime remplace la monarchie en septembre 1792 ? | la République | l'Empire | le Consulat | la Restauration
+Comment appelle-t-on la période de 1793-1794 marquée par les exécutions ? | la Terreur | la Renaissance | la Restauration | la Belle Époque
+### geographie
+Qu'est-ce qu'un pays émergent ? | un pays à forte croissance qui s'affirme dans l'économie mondiale | un pays sans habitants | un pays en guerre | un pays sous la mer
+Quel est le premier pays exportateur de marchandises au monde ? | la Chine | la France | le Brésil | le Canada
+Comment appelle-t-on les déplacements de personnes pour leurs loisirs ? | le tourisme | l'exode rural | la migration de travail | la transhumance

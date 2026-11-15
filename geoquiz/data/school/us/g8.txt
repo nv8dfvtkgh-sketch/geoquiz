@@ -27,21 +27,62 @@ Solve 2x + 3 = x + 9. | 6 | 12 | 3 | 4
 A function assigns each input… | exactly one output | many outputs | no output | the same output always
 What is the volume of a cylinder? | πr²h | 2πrh | πr² | 4/3 πr³
 ## science
-What is Newton's first law? | an object stays at rest or in motion unless a force acts on it | F = ma | every action has an equal reaction | gravity pulls down
-What is Newton's third law? | for every action there is an equal and opposite reaction | objects stay in motion | F = ma | energy is conserved
-Which object has more kinetic energy at the same speed? | the heavier one | the lighter one | both the same | neither
-What is the unit of force? | the newton | the joule | the watt | the meter
-What is potential energy? | stored energy due to position or condition | energy of motion only | heat only | sound
+### matter
 What is an atom made of? | protons, neutrons, and electrons | cells | molecules | ions only
-What is a chemical reaction sign? | a new substance forms (gas, color change, heat) | ice melts | paper is cut | water boils
-In a chemical reaction, atoms are… | rearranged, not created or destroyed | destroyed | created from nothing | turned into energy only
 What is the periodic table organized by? | atomic number | color | weight only | date discovered
 What is the chemical symbol for sodium? | Na | So | S | Sd
+What is a molecule? | two or more atoms bonded together | a single proton | a type of cell | a kind of energy
+Which particle has a negative charge? | the electron | the proton | the neutron | the nucleus
+In which state of matter are particles closest together and only vibrating? | solid | liquid | gas | plasma
+What is density? | mass divided by volume | volume divided by mass | weight times speed | the color of an object
+What is the chemical symbol for oxygen? | O | Ox | Om | Og
+Which is a pure substance? | gold | salad | air | sand and water
+What happens to particles of a substance when it is heated? | they move faster | they stop moving | they get smaller | they disappear
+### reactions
+What is a chemical reaction sign? | a new substance forms (gas, color change, heat) | ice melts | paper is cut | water boils
+In a chemical reaction, atoms are… | rearranged, not created or destroyed | destroyed | created from nothing | turned into energy only
 What is an exothermic reaction? | a reaction that releases heat | a reaction that absorbs heat | a reaction with no energy change | a nuclear reaction only
+What are the starting substances in a chemical reaction called? | reactants | products | catalysts | mixtures
+What are the new substances made in a chemical reaction called? | products | reactants | elements only | solvents
+Which is a chemical change? | iron rusting | ice melting | cutting paper | dissolving sugar
+What is an endothermic reaction? | a reaction that absorbs heat | a reaction that releases heat | a reaction with no energy | a reaction that makes light only
+What does the law of conservation of mass say? | the total mass stays the same in a reaction | mass always increases | mass always disappears | mass turns into light
+Which is a physical change? | water freezing | wood burning | an egg cooking | a cake baking
+What gas is produced when baking soda reacts with vinegar? | carbon dioxide | oxygen | hydrogen | nitrogen
+### forces
+What is Newton's first law? | an object stays at rest or in motion unless a force acts on it | F = ma | every action has an equal reaction | gravity pulls down
+What is Newton's third law? | for every action there is an equal and opposite reaction | objects stay in motion | F = ma | energy is conserved
+What is the unit of force? | the newton | the joule | the watt | the meter
+What happens when balanced forces act on an object? | its motion does not change | it always speeds up | it always stops | it changes direction
+What force opposes motion between two surfaces? | friction | gravity | magnetism | buoyancy
+What happens to the force of gravity between two objects if they move farther apart? | it gets weaker | it gets stronger | it stays the same | it becomes magnetic
+What does a magnet attract strongly? | iron | wood | glass | plastic
+What is speed? | distance traveled divided by time | time divided by distance | mass times distance | force times time
+A car travels 120 miles in 2 hours. What is its average speed? | 60 miles per hour | 240 miles per hour | 120 miles per hour | 30 miles per hour
+What is the net force when 10 N pushes right and 4 N pushes left? | 6 N to the right | 14 N to the right | 6 N to the left | 0 N
+### energy
+Which object has more kinetic energy at the same speed? | the heavier one | the lighter one | both the same | neither
+What is potential energy? | stored energy due to position or condition | energy of motion only | heat only | sound
+What is kinetic energy? | the energy of motion | stored energy | energy of light only | energy of sound only
+What happens to the kinetic energy of an object if its speed doubles? | it becomes four times larger | it doubles | it stays the same | it halves
+How is thermal energy transferred through a metal spoon in hot soup? | conduction | convection | radiation only | it is not transferred
+How does the Sun's energy reach Earth? | by radiation | by conduction | by convection | by sound waves
+What energy transformation happens in a battery-powered flashlight? | chemical energy to light energy | light energy to chemical energy | sound energy to heat | kinetic energy to chemical energy
+Which material is a good thermal insulator? | wool | copper | aluminum | iron
+When a ball rolls down a hill, what happens to its potential energy? | it changes into kinetic energy | it increases | it disappears completely | it turns into mass
+What is the law of conservation of energy? | energy cannot be created or destroyed, only transformed | energy always increases | energy is lost forever | energy is made by machines
+### waves
 What is a wave's amplitude related to? | its energy | its color only | its speed in vacuum | its direction
 Which wave can travel through empty space? | light (electromagnetic) | sound | water waves | seismic waves
-What is natural selection? | individuals with helpful traits survive and reproduce more | animals choosing mates randomly | humans breeding plants | species never change
-What evidence supports evolution? | fossils, anatomy, and DNA similarities | myths | weather | the Moon
+What is the wavelength of a wave? | the distance from one crest to the next | the height of a wave | the speed of a wave | the number of waves per minute
+What is frequency? | the number of waves passing a point each second | the height of a wave | the length of a wave | the energy of a wave only
+Through which medium does sound travel fastest? | solids | gases | a vacuum | it is the same in all
+What happens when light bounces off a mirror? | reflection | refraction | absorption | diffraction
+Which color of visible light has the shortest wavelength? | violet | red | orange | yellow
+Why do we see a red apple as red? | it reflects red light and absorbs other colors | it absorbs red light | it makes its own red light | it reflects all colors
+Which type of electromagnetic wave do microwave ovens use? | microwaves | X-rays | gamma rays | ultraviolet light
+How do digital signals send information? | as patterns of 0s and 1s | as continuous smells | as water waves | as heat only
+
 ## social
 What were the Articles of Confederation? | the first U.S. government plan, with a weak central government | the Declaration of Independence | the Bill of Rights | a treaty with Britain
 Where was the Constitution written in 1787? | Philadelphia | Boston | New York | Washington, D.C.
@@ -58,3 +99,15 @@ Which battle in 1863 was a turning point of the Civil War? | Gettysburg | Yorkto
 Which amendment abolished slavery? | the 13th | the 1st | the 19th | the 15th
 What was Reconstruction? | the period of rebuilding the South after the Civil War | the building of railroads only | the Revolutionary War | the Great Depression
 Who escaped slavery and became a famous abolitionist speaker and writer? | Frederick Douglass | Robert E. Lee | Andrew Johnson | John Brown
+
+## social
+### civics
+What is the Preamble to the Constitution? | its introduction, beginning "We the People" | the last amendment | a list of Presidents | a treaty with France
+What is separation of powers? | dividing government power among three branches | giving all power to the President | sharing power with other nations | having no government
+What did the 13th Amendment do? | abolished slavery | gave women the vote | created the income tax | lowered the voting age
+Which compromise created a Congress with a Senate and a House? | the Great Compromise | the Missouri Compromise | the Three-Fifths Compromise only | the Compromise of 1850
+### history
+In what year did the Civil War begin? | 1861 | 1776 | 1812 | 1898
+What did the Emancipation Proclamation (1863) declare? | enslaved people in Confederate states were free | the war was over | women could vote | Texas joined the Union
+Which 1848 event drew thousands of people to the West? | the California Gold Rush | the Boston Tea Party | the Louisiana Purchase | the Great Depression
+Where did Robert E. Lee surrender to Ulysses S. Grant in 1865? | Appomattox Court House | Gettysburg | Yorktown | Fort Sumter

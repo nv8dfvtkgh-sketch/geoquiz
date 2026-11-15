@@ -135,3 +135,49 @@ En quelle année les femmes ont-elles voté pour la première fois en France ? |
 Comment appelle-t-on un trajet quotidien entre son domicile et son travail ? | une migration pendulaire | un exode | un voyage d'affaires | une croisière
 Quel réseau de câbles sous-marins sert surtout à transporter ? | les données d'Internet | l'eau potable | le pétrole | le courrier papier
 Quel outil permet de communiquer instantanément dans le monde entier ? | Internet | le pigeon voyageur | la lettre | le télégraphe à fumée
+
+## francais
+### litterature
+Qui a écrit les « Fables » où l'on trouve « Le Corbeau et le Renard » ? | Jean de La Fontaine | Charles Perrault | Victor Hugo | Molière
+Qu'est-ce que la morale d'une fable ? | la leçon que l'histoire veut enseigner | le titre | le premier vers | le nom de l'auteur
+Qui a écrit « Sans famille » ? | Hector Malot | Jules Verne | Charles Perrault | Victor Hugo
+Dans un conte, comment appelle-t-on le personnage qui aide le héros ? | l'adjuvant | l'opposant | le narrateur | le lecteur
+
+## sciences
+### corps
+Quel organe contrôle tous les mouvements du corps ? | le cerveau | l'estomac | le foie | les reins
+Que transporte le sang vers les muscles ? | de l'oxygène et des nutriments | de l'urine | de l'air pur | des os
+Quel organe permet de sentir le chaud et le froid sur tout le corps ? | la peau | les cheveux | les ongles | les dents
+### vivant
+Comment appelle-t-on le transport du pollen d'une fleur à une autre ? | la pollinisation | la germination | la digestion | l'évaporation
+Comment appelle-t-on un animal sans colonne vertébrale ? | un invertébré | un vertébré | un mammifère | un reptile
+Quel être vivant n'est ni un animal ni un végétal ? | le champignon | le chêne | le lapin | la rose
+### matiere
+Comment s'appelle le passage de l'état gazeux à l'état liquide ? | la condensation | la fusion | la solidification | la sublimation
+Qu'arrive-t-il à la masse d'un glaçon qui fond dans un verre fermé ? | elle reste la même | elle double | elle disparaît | elle diminue de moitié
+Quel gaz représente environ 21 % de l'air ? | le dioxygène | le dioxyde de carbone | l'hélium | l'hydrogène
+### energie
+Quelle source d'énergie utilise un panneau solaire ? | la lumière du Soleil | le vent | le charbon | l'eau des rivières
+Pourquoi le charbon n'est-il pas renouvelable ? | il met des millions d'années à se former | il pousse trop vite | il est fabriqué en usine | il vient du Soleil
+Quel appareil transforme l'énergie électrique en mouvement ? | un moteur | une lampe | une pile | un panneau solaire
+Quel danger présente l'électricité du secteur (prise de courant) ? | elle peut électrocuter | elle est sans danger | elle fait seulement de la lumière | elle est trop faible
+### terre-univers
+Quelle est l'étoile la plus proche de la Terre ? | le Soleil | l'étoile Polaire | Sirius | la Lune
+Qu'est-ce qu'un séisme ? | un tremblement de terre | une éruption de lave | une tempête de vent | une marée haute
+Dans quel ordre trouve-t-on les planètes après la Terre ? | Mars, Jupiter, Saturne, Uranus, Neptune | Vénus, Mars, Jupiter | Jupiter, Mars, Neptune | Saturne, Mars, Vénus
+Pourquoi voit-on la Lune briller la nuit ? | elle renvoie la lumière du Soleil | elle produit sa propre lumière | elle brûle | elle reflète les villes
+
+## histgeo
+### revolution
+Quel mouvement a fait quitter les campagnes pour les villes au XIXe siècle ? | l'exode rural | la Renaissance | la colonisation | la Réforme
+Quelle invention de la fin du XIXe siècle permet d'éclairer les villes ? | l'ampoule électrique | la bougie | la lampe à huile | le feu de bois
+En quelle année l'esclavage est-il définitivement aboli en France ? | 1848 | 1789 | 1905 | 1945
+### xxe
+Qui a lancé l'appel du 18 juin 1940 ? | le général de Gaulle | Jean Moulin | Philippe Pétain | Georges Clemenceau
+### monde-actuel
+Que garantit la carte d'identité européenne et l'espace Schengen ? | la libre circulation des personnes entre les pays membres | une monnaie unique | un seul président | une seule langue
+Quel texte de 1958 fonde la Ve République ? | la Constitution | le Code civil | la Déclaration des droits de l'homme | le traité de Rome
+Qui élit le président de la République française depuis 1962 ? | les citoyens, au suffrage universel direct | les députés | les maires | le Sénat
+### geographie
+Quel moyen de transport rejette le moins de CO₂ par voyageur ? | le train | l'avion | la voiture | le bateau de croisière
+Pourquoi construit-on des pistes cyclables en ville ? | pour encourager des déplacements moins polluants | pour faire rouler les camions | pour décorer | pour réduire les trottoirs

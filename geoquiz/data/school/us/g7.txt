@@ -27,21 +27,40 @@ Two angles adding to 90° are… | complementary | supplementary | vertical | co
 The probability of an impossible event is… | 0 | 1 | 1/2 | 100
 Simplify 2(x + 5) − x. | x + 10 | 3x + 10 | x + 5 | 2x + 10
 ## science
+### organisms
 What is the basic unit of life? | the cell | the atom | the organ | the tissue
 Which organelle controls the cell's activities? | the nucleus | the cell wall | the vacuole | the ribosome
 Which organelle releases energy from food? | the mitochondrion | the chloroplast | the nucleus | the cell membrane
 Which structure is found in plant cells but not animal cells? | the cell wall | the nucleus | the cell membrane | mitochondria
 What is the order of organization in living things? | cells → tissues → organs → organ systems | organs → cells → tissues | tissues → cells → organs | systems → organs → cells
-What is photosynthesis? | plants using sunlight to make sugar from CO₂ and water | animals digesting food | cells dividing | breathing out oxygen only
-What is cellular respiration? | cells breaking down sugar to release energy | making sugar from sunlight | cell division | water absorption
+Which organelle captures sunlight in plant cells? | the chloroplast | the mitochondrion | the nucleus | the vacuole
+Which body system carries blood around the body? | the circulatory system | the digestive system | the skeletal system | the nervous system
+Which body system sends messages between the brain and the body? | the nervous system | the respiratory system | the digestive system | the muscular system
+What tool lets scientists see cells? | a microscope | a telescope | a thermometer | a stethoscope
+What part of the cell controls what goes in and out? | the cell membrane | the nucleus | the ribosome | the cell wall only
+### heredity
 What is a gene? | a section of DNA that codes for a trait | a type of cell | an organ | a protein only
 What is a Punnett square used for? | predicting possible offspring traits | measuring cells | drawing food webs | naming species
 What is sexual reproduction? | offspring get genes from two parents | one parent makes a copy | plants only | bacteria only
+What is asexual reproduction? | one parent produces offspring with the same genes | two parents mix their genes | reproduction with seeds only | a type of photosynthesis
+Which trait is inherited? | eye color | a scar | a tan | a language learned at school
+What is a mutation? | a change in the DNA sequence | a type of cell wall | a kind of food | a healthy habit
+What is an adaptation? | a trait that helps an organism survive in its environment | a disease | a change of seasons | a type of rock
+What is natural selection? | organisms with helpful traits survive and reproduce more | the strongest animal always wins every fight | humans choosing pets | species never change
+Where is DNA found in plant and animal cells? | mainly in the nucleus | in the cell wall | in the vacuole only | outside the cell
+Why do siblings with the same parents look different? | they inherit different combinations of their parents' genes | they eat different foods | they were born in different seasons | they choose their genes
+### ecosystems
+What is photosynthesis? | plants using sunlight to make sugar from CO₂ and water | animals digesting food | cells dividing | breathing out oxygen only
+What is cellular respiration? | cells breaking down sugar to release energy | making sugar from sunlight | cell division | water absorption
 What is a predator? | an animal that hunts others for food | an animal that is hunted | a plant | a decomposer
 What is symbiosis? | a close relationship between two species | a disease | a food chain | a habitat
 In a food chain, what are producers? | organisms that make their own food | organisms that eat meat | decomposers | top predators
 What is biodiversity? | the variety of life in an area | the number of people | a single species | the size of a forest only
 What can cause a population to decrease? | loss of habitat or food | more food | more space | fewer predators
+What do decomposers return to the soil? | nutrients | plastic | sunlight | rocks
+In an energy pyramid, which level has the most energy? | producers | top predators | secondary consumers | decomposers only
+What is competition in an ecosystem? | organisms trying to use the same limited resources | animals playing together | plants making food | rain falling
+
 ## social
 What was feudalism? | a medieval system of land in exchange for loyalty and service | a democracy | a trade route | a religion
 Who was at the bottom of the feudal system? | serfs/peasants | knights | lords | kings
@@ -67,3 +86,10 @@ Which desert did trans-Saharan trade caravans cross? | the Sahara | the Gobi | t
 Why were monsoons important in South Asia? | their seasonal rains made farming possible | they froze the rivers | they stopped all trade | they created deserts
 Which empire built Machu Picchu high in the Andes? | the Inca | the Aztec | the Maya | the Mongol
 On which islands did the samurai and shoguns rule? | Japan | the Philippines | Hawaii | Indonesia
+
+## social
+### geography
+Which city was the capital of the Byzantine Empire? | Constantinople | Rome | Paris | Baghdad
+Which empire controlled the trans-Saharan gold trade under Mansa Musa? | the Mali Empire | the Roman Empire | the Mongol Empire | the Inca Empire
+On which continent was the feudal system of knights and lords common? | Europe | Australia | South America | Antarctica
+Which city became a great center of learning in the Islamic world, home of the House of Wisdom? | Baghdad | London | Lima | Kyoto

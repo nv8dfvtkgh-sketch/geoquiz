@@ -93,3 +93,41 @@ What does it mean to save money? | to keep it to use later | to spend it all now
 What do we call events that happened long ago? | the past | the future | the present | tomorrow
 Which holiday celebrates the birthday of the United States? | Independence Day (July 4th) | Thanksgiving | Labor Day | Halloween
 Who was the first President of the United States? | George Washington | Abraham Lincoln | Barack Obama | Thomas Edison
+
+## ela
+### phonics
+Which word has the long "a" sound? | cake | cat | cap | can
+Which word begins with the "sh" sound? | ship | chip | sip | hip
+Which word rhymes with "frog"? | log | fish | frame | flag
+
+## science
+### life
+What part of a plant makes seeds? | the flower | the root | the stem | the bark
+Why do some animals have sharp claws? | to catch food and protect themselves | to sing | to swim faster | to see in the dark
+What do baby mammals drink? | milk from their mothers | juice | rainwater only | nectar
+### earth
+Which season comes after summer? | fall (autumn) | spring | winter | summer again
+At what time of day is the Sun highest in the sky? | around noon | at sunrise | at sunset | at midnight
+### physical
+How can people send messages over a distance using light? | with flashlights or signals | by whispering | with a pillow | with a rock
+What happens to a guitar string when you pluck it? | it vibrates and makes sound | it melts | it glows | it disappears
+
+## social
+### civics
+What is a law? | a rule that everyone in a community must follow | a game | a song | a story
+Who makes laws for the whole country? | Congress | the school principal | the mayor | a family
+What do we call a person who belongs to a country? | a citizen | a visitor | a pet | a tourist
+Why is voting important? | it lets people choose their leaders | it is a game | it makes taxes go away | it closes schools
+### economics
+What is a need? | something you must have to live, like food | something nice to have | a toy | a vacation
+What does a farmer produce? | food like vegetables and milk | cars | computers | haircuts
+Why can't people have everything they want? | resources and money are limited | there is nothing to buy | everything is free | stores never open
+What is trading? | giving something to get something else | stealing | throwing things away | sleeping
+### geography
+What is a globe? | a round model of Earth | a flat map of a city | a picture of the Sun | a compass
+Which continent do we live on in the United States? | North America | Europe | Africa | Asia
+How many continents are there? | 7 | 5 | 10 | 3
+### history
+What do we call a story about someone's real life? | a biography | a fairy tale | a fable | a comic
+What is a tradition? | something families or groups do again and again over time | a new invention | a rule at school | a TV show
+Which tool tells us the order in which events happened? | a timeline | a thermometer | a map key | a scale

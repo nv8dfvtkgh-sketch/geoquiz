@@ -91,3 +91,35 @@ How is life today different from long ago? | we have electricity and phones | pe
 Who is Martin Luther King Jr.? | a leader who worked for civil rights | the first President | an inventor of the light bulb | an astronaut
 Which group lived in North America before European explorers arrived? | Native Americans | Vikings only | Romans | Egyptians
 What are primary sources? | items or records from the time being studied | stories made up today | video games | cartoons
+
+## science
+### life
+What do plants need to grow besides water and light? | air and nutrients from soil | candy | darkness | salt
+How do some birds survive cold winters? | they migrate to warmer places | they turn into fish | they stop eating forever | they grow leaves
+### earth
+What can cause a landslide? | heavy rain loosening soil on a hill | a sunny day | a quiet night | a rainbow
+Which is a way to slow erosion on a hillside? | planting grass and trees | removing all plants | digging holes | pouring sand
+What is most of Earth's surface covered by? | water | sand | ice | cities
+### physical
+Which material would be best for a raincoat? | plastic that keeps water out | paper | cotton gauze | a sponge
+What can you build with small pieces like blocks? | a larger object | nothing | only water | only sound
+
+## social
+### civics
+Who is the leader of the United States? | the President | the mayor | the governor | the principal
+Where does the President live and work? | the White House | the Capitol | the Supreme Court | City Hall
+What is the job of a judge? | to decide if laws were broken and settle disagreements | to make bread | to build roads | to teach math
+What is a responsibility of a good citizen? | following laws and helping the community | breaking rules | littering | ignoring others
+### economics
+What is a service that firefighters provide? | putting out fires and keeping people safe | selling bread | making cars | growing food
+How do factories help make goods? | they use machines and workers to make many products | they plant crops | they put out fires | they teach children
+What is an example of a natural resource used to make paper? | trees | oil | rocks | gold
+What is a price? | the amount of money needed to buy something | a type of coin | a store name | a gift
+### geography
+What is the name of the longest river in the United States? | the Missouri River | the Nile | the Amazon | the Seine
+What do we call a piece of land surrounded by water? | an island | a peninsula | a valley | a plain
+### history
+Who was Abraham Lincoln? | the 16th President, who led the U.S. during the Civil War | the first President | an astronaut | a famous inventor
+Who invented the light bulb that became widely used? | Thomas Edison | George Washington | Benjamin Franklin | Neil Armstrong
+Who was the first person to walk on the Moon? | Neil Armstrong | Buzz Aldrin | John Glenn | Sally Ride
+How did families get water long ago? | from wells, rivers, and pumps | from faucets in every room | from bottles at stores | from vending machines
