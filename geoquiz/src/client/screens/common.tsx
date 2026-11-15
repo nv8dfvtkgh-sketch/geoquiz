@@ -1,5 +1,6 @@
 import { BATTLE_LIVES, type PublicPlayer, type Settings, type TeamScore } from '../../shared/protocol';
 import { useApp } from '../state';
+import { catLabel } from '../../shared/bac';
 import { TEAM_EMOJI } from '../Party';
 
 export function SettingsSummary({ settings }: { settings: Settings }) {
@@ -9,6 +10,17 @@ export function SettingsSummary({ settings }: { settings: Settings }) {
     : z.kind === 'world' ? t('zone.world')
       : z.kind === 'regions' ? `${z.names?.[lang]} (${t(`level.${z.level}`)})`
         : t(`zone.${z.id.replace(':', '.')}`);
+  if (settings.category === 'bac' && settings.bac) {
+    const b = settings.bac;
+    return (
+      <dl className="summary">
+        <div><dt>{t('setup.category')}</dt><dd>{t('cat.bac')}</dd></div>
+        <div><dt>{t('bac.cats')}</dt><dd>{b.cats.map((c) => catLabel(c, lang)).join(', ')}</dd></div>
+        <div><dt>{t('bac.rounds')}</dt><dd>{b.rounds}</dd></div>
+        <div><dt>{t('bac.time')}</dt><dd>{t('setup.seconds', { n: b.time })}</dd></div>
+      </dl>
+    );
+  }
   if (settings.category === 'board') {
     return (
       <dl className="summary">

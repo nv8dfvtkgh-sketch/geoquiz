@@ -55,8 +55,8 @@ export function Lobby() {
             ))}
           </ul>
         )}
-        {room.kind === 'room' && room.settings.category !== 'board' && <ModePicker />}
-        {room.kind !== 'solo' && room.settings.category !== 'board' && <PartyOptions />}
+        {room.kind === 'room' && room.settings.category !== 'board' && room.settings.category !== 'bac' && <ModePicker />}
+        {room.kind !== 'solo' && room.settings.category !== 'board' && room.settings.category !== 'bac' && <PartyOptions />}
         <SettingsSummary settings={room.settings} />
         {room.kind !== 'solo' && room.players.length > 1 && <ReactionBar />}
         {s.error && <p className="error" role="alert">{t(`err.${s.error}`)}</p>}
@@ -65,7 +65,7 @@ export function Lobby() {
             <p className="waiting">{enough ? '…' : t('lobby.waitOpponent')}</p>
           ) : s.isHost ? (
             <>
-              <button type="button" className="btn ghost" onClick={() => go('setup', 'edit')}>{t('lobby.edit')}</button>
+              {room.settings.category !== 'bac' && <button type="button" className="btn ghost" onClick={() => go('setup', 'edit')}>{t('lobby.edit')}</button>}
               <button type="button" className="btn primary" disabled={!enough} onClick={() => send({ t: 'start' })}>
                 {enough ? t('lobby.start') : t('lobby.needTwo')}
               </button>

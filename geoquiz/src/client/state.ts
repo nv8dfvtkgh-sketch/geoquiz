@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac';
 
 export interface Feedback {
   q: number;
@@ -40,6 +40,8 @@ export interface State {
   wager?: { q: number; category: string; until: number; bets?: Record<string, number> };
   /** Jeu de plateau à distance : dernière vue reçue du serveur. */
   board?: Extract<ServerMsg, { t: 'board' }>;
+  /** Petit Bac : dernière vue reçue du serveur. */
+  bac?: import('../shared/bac').BacView;
   finished?: Extract<ServerMsg, { t: 'finished' }>;
   error?: string;
   joinCode?: string;
@@ -86,14 +88,14 @@ export function reducer(s: State, a: Action): State {
 
 function screenFor(room: RoomSnapshot, cur: Screen): Screen {
   if (room.state === 'lobby') return cur === 'setup' ? 'setup' : 'lobby';
-  if (room.state === 'finished') return room.settings.category === 'board' ? 'game' : 'final';
+  if (room.state === 'finished') return room.settings.category === 'board' || room.settings.category === 'bac' ? 'game' : 'final';
   return 'game';
 }
 
 function onServer(s: State, m: ServerMsg): State {
   switch (m.t) {
     case 'joined':
-      return { ...s, board: undefined, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined, challenge: undefined };
+      return { ...s, board: undefined, bac: undefined, room: m.room, you: m.you, isHost: m.host, screen: m.room.kind === 'solo' ? 'game' : screenFor(m.room, 'lobby'), error: undefined, joinCode: undefined, reward: undefined, challenge: undefined };
     case 'room': {
       const screen = s.screen === 'home' || s.screen === 'quick' ? s.screen : screenFor(m.room, s.screen);
       return { ...s, room: m.room, isHost: m.room.hostId === s.you, screen: s.room ? screen : s.screen };
@@ -124,6 +126,8 @@ function onServer(s: State, m: ServerMsg): State {
     }
     case 'board':
       return { ...s, board: m, screen: 'game' };
+    case 'bac':
+      return { ...s, bac: m.view, screen: 'game' };
     case 'wager':
       return { ...s, wager: { q: m.q, category: m.category, until: performance.now() + m.ms, bets: m.bets }, screen: 'game' };
     case 'finished':

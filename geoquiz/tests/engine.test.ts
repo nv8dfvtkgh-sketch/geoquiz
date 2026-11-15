@@ -75,7 +75,7 @@ test('saisie tolérante', () => {
 test('aucune question ne contient la réponse', async () => {
   for (const z of zones.values()) if (z.region) await ensureRegion(z.region.iso);
   for (const cat of Object.keys(CATEGORIES)) {
-    if (['custom', 'daily', 'review', 'board'].includes(cat) || cat.startsWith('rev_') || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
+    if (['custom', 'daily', 'review', 'board', 'bac'].includes(cat) || cat.startsWith('rev_') || CATEGORIES[cat].media) continue; // quiz créés, photos et sons : tests dédiés plus bas
     const zone = [...zones.values()].find((z) => z.info.categories.includes(cat))!;
     for (const qtype of ['map', 'mcq', 'type'] as const) {
       const qs = drawQuestions(settings({ category: cat, zone: zone.info.id, qtype }));
@@ -1247,4 +1247,64 @@ test('Album : chaque jeu donne un autocollant de sa page', async () => {
   const ev = JSON.parse(fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), '../data/games/events.json'), 'utf8'));
   for (const e of ev) assert.ok(pages.has(e.album), `${e.id} : page d'album`);
   assert.equal(ev.find((e: { id: string }) => e.id === 'week-gta-2026').album, 'games');
+});
+
+test('Petit Bac : lettre, STOP, vérification, vote et points', async () => {
+  const { checkWord, BAC_MS } = await import('../src/server/bacplay');
+  // Vérification d'un mot seul.
+  assert.equal(checkWord('pays', 'Maroc', 'M', false), 'known');
+  assert.equal(checkWord('pays', 'Marrakech', 'M', false), 'bad');
+  assert.equal(checkWord('capitale', 'Madrid', 'M', false), 'known');
+  assert.equal(checkWord('pays', 'la France', 'F', false), 'known');
+  assert.equal(checkWord('pays', 'le Mali', 'M', false), 'known');
+  assert.equal(checkWord('animal', 'Éléphant', 'E', false), 'known');
+  assert.equal(checkWord('animal', 'Marmotte', 'T', false), 'letter');
+  assert.equal(checkWord('prenom', 'Mehdi', 'M', false), 'vote');
+  assert.equal(checkWord('prenom', 'Mehdi', 'M', true), 'unchecked');
+  assert.equal(checkWord('animal', '  ', 'M', false), 'empty');
+
+  const r = create('room', settings({ category: 'bac', zone: 'world', bac: { cats: ['pays', 'prenom', 'animal'], rounds: 1, time: 60, rare: false } } as any));
+  assert.deepEqual(r.settings.bac!.cats, ['pays', 'prenom', 'animal']);
+  const a = client(), b = client();
+  onMessage(a.conn, r.code, { t: 'join', name: 'A', lang: 'fr' });
+  onMessage(b.conn, r.code, { t: 'join', name: 'B', lang: 'fr' });
+  onMessage(a.conn, r.code, { t: 'start' });
+  const g = r.bac!;
+  assert.ok(g, 'partie lancée');
+  assert.equal(a.last('bac')!.view.phase, 'spin');
+  g.stop(); g.phase = 'write';
+  const L = g.letter;
+  // Mots : un pays qui commence (ou pas) par la lettre, un prénom inventé.
+  const country = Object.values(countries).find((c) => !c.dependency && c.names.fr.normalize('NFKD').replace(/[̀-ͯ]/g, '').toUpperCase().startsWith(L))?.names.fr ?? '';
+  onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 0, v: country || `${L}nulpart` });
+  onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 1, v: `${L}zorglub` });
+  onMessage(a.conn, r.code, { t: 'bac', a: 'stop' });
+  assert.equal(g.phase, 'write', 'STOP refusé : une case vide');
+  onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 2, v: `${L}xyzanimal` });
+  onMessage(b.conn, r.code, { t: 'bac', a: 'fill', i: 0, v: country || `${L}nulpart` });
+  assert.equal(a.last('bac')!.view.filled[r.players().find((p) => p.name === 'B')!.id], 1, 'les autres voient les cases remplies');
+  onMessage(a.conn, r.code, { t: 'bac', a: 'stop' });
+  const v = b.last('bac')!.view;
+  assert.equal(v.phase, 'vote');
+  assert.equal(v.stopBy, 'A');
+  assert.equal(v.votes!.length, 2, 'le prénom et l\'animal inconnus sont votés');
+  const animal = v.votes!.find((x) => x.cat === 2)!;
+  onMessage(b.conn, r.code, { t: 'bac', a: 'veto', key: animal.key });
+  onMessage(a.conn, r.code, { t: 'bac', a: 'veto', key: animal.key }); // pas sur son propre mot
+  assert.equal(b.last('bac')!.view.votes!.find((x) => x.cat === 2)!.rejects, 1);
+  onMessage(a.conn, r.code, { t: 'bac', a: 'done' });
+  onMessage(b.conn, r.code, { t: 'bac', a: 'done' });
+  const end = a.last('bac')!.view;
+  assert.equal(end.phase, 'end');
+  const rowA = end.table!.find((x) => x.name === 'A')!, rowB = end.table!.find((x) => x.name === 'B')!;
+  if (country) {
+    assert.equal(rowA.cells[0].points, 5, 'même pays que B : 5 points');
+    assert.equal(rowB.cells[0].points, 5);
+  }
+  assert.equal(rowA.cells[1].points, 10, 'prénom accepté (pas de refus) : 10');
+  assert.equal(rowA.cells[2].status, 'rejected', 'animal refusé par vote');
+  assert.equal(r.state, 'finished');
+  assert.equal(r.players().find((p) => p.name === 'A')!.score, rowA.total);
+  assert.ok(BAC_MS.spin > 0);
+  r.destroy();
 });

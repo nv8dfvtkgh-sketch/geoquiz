@@ -7,6 +7,8 @@ import {
 } from '../shared/protocol';
 import { answer as boardAnswer, BOARD_GAMES, BOARD_MAX, BOARD_THEMES, botMove, hangNext, initBoard, legal as boardLegal, play as boardPlay, viewFor, type BoardGame, type BoardState } from '../shared/boards';
 import { boardCtx, boardQ, boardQuestion } from './boardplay';
+import { BacGame } from './bacplay';
+import { cleanBac } from '../shared/bac';
 import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
@@ -147,6 +149,7 @@ export function validSettings(s: any): Settings | null {
     teams: clamp(s.teams, 2, 4, 2),
     chests: !!s.chests,
     wager: !!s.wager,
+    ...(cat.id === 'bac' ? { bac: cleanBac(s.bac) } : {}),
     ...(cat.id === 'board' ? { board: BOARD_GAMES.includes(s.board) ? s.board : 'ttt', theme: BOARD_THEMES[s.theme] ? s.theme : 'geo' } : {}),
   };
 }
@@ -389,6 +392,7 @@ export class Room {
     const conn = m.conn;
     if (!conn) return;
     if (this.board) return this.sendBoard(m);
+    if (this.bac) return conn.send({ t: 'bac', view: this.bac.viewFor(m.id) });
     if (this.state === 'question' && this.round) {
       conn.send({ t: 'question', q: this.questionFor(m.lang) });
       const a = this.round.answers.get(m.id);
@@ -450,6 +454,7 @@ export class Room {
   }
 
   destroy() {
+    this.bac?.stop();
     if (this.board?.timer) clearTimeout(this.board.timer);
     if (this.timer) clearTimeout(this.timer);
     if (this.autoTimer) clearTimeout(this.autoTimer);
@@ -559,6 +564,16 @@ export class Room {
       case 'banswer':
         this.boardAnswer(m, msg.value);
         break;
+      case 'bac': {
+        const g = this.bac;
+        if (!g || this.state !== 'question') break;
+        if (msg.a === 'fill' && m.role === 'player') g.fill(m.id, msg.i, msg.v);
+        else if (msg.a === 'stop' && m.role === 'player') g.stopRound(m.id);
+        else if (msg.a === 'veto' && m.role === 'player' && typeof msg.key === 'string') g.veto(m.id, msg.key);
+        else if (msg.a === 'done' && m.role === 'player') g.voteDone(m.id);
+        else if (msg.a === 'next' && (m.role === 'player' || isHost)) { if (m.role === 'player') g.next(m.id); else g.nextRound(); }
+        break;
+      }
       case 'react': {
         // Réactions : emojis d'une liste fixe, pas plus d'une toutes les 0,7 s par joueur.
         const now = Date.now();
@@ -619,6 +634,7 @@ export class Room {
     const min = this.kind === 'solo' ? 1 : 2;
     if (players.length < min) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'room.notEnough' });
     if (this.settings.category === 'board') return this.startBoard();
+    if (this.settings.category === 'bac') return this.startBac();
     const retry = this.retryQs;
     this.retryQs = undefined;
     this.retrying = !!retry;
@@ -711,6 +727,8 @@ export class Room {
       this.round = null;
       if (this.board?.timer) clearTimeout(this.board.timer);
       this.board = undefined;
+      this.bac?.stop();
+      this.bac = undefined;
       for (const p of this.players()) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; }
       this.pairs = [];
       // On retire les joueurs partis pendant la partie.
@@ -760,6 +778,39 @@ export class Room {
     this.broadcast((m) => ({ t: 'question', q: this.questionFor(m.lang) }));
     this.sendProgress();
     if (timed) this.timer = setTimeout(() => this.endRound(), this.settings.timeLimit * 1000 + GRACE_MS);
+  }
+
+  // ---------------------------------------------------------------- Petit Bac
+  bac?: BacGame;
+  startBac() {
+    this.bac?.stop();
+    for (const p of this.players()) { p.score = 0; p.streak = 0; }
+    this.rematchVotes.clear();
+    this.bac = new BacGame({
+      players: () => this.players().map((p) => ({ id: p.id, name: p.name, connected: !!p.conn })),
+      watchers: () => [...this.members.values()].filter((x) => x.role !== 'player').map((x) => x.id),
+      send: (id, view) => this.members.get(id)?.conn?.send({ t: 'bac', view }),
+      end: (totals, stats) => this.endBac(totals, stats),
+    }, this.settings.bac ?? cleanBac(null), this.kind === 'solo');
+    this.state = 'question';
+    this.broadcastRoom();
+    this.bac.start();
+  }
+  endBac(totals: Map<string, number>, stats: Map<string, { n: number; ok: number }>) {
+    this.state = 'finished';
+    const ranked = this.players().map((p) => ({ p, score: totals.get(p.id) ?? 0 })).sort((a, b) => b.score - a.score);
+    for (const { p, score } of ranked) p.score = score;
+    this.broadcastRoom();
+    for (const { p } of ranked) {
+      if (!p.auth) continue;
+      const st = stats.get(p.id) ?? { n: 0, ok: 0 };
+      const rank = 1 + ranked.filter((x) => x.score > (totals.get(p.id) ?? 0)).length;
+      const result: GameResult = {
+        category: 'bac', difficulty: this.settings.difficulty, kind: this.kind, mode: 'classic', zone: 'world', lang: p.lang,
+        total: st.n, correct: st.ok, accuracy: st.n ? (st.ok / st.n) * 100 : 0, rank, players: ranked.length,
+      };
+      config.recordGame(p.auth, result).then((reward) => { if (reward) p.conn?.send({ t: 'reward', reward }); }).catch(() => {});
+    }
   }
 
   // ---------------------------------------------------------------- jeux de duel sur plateau

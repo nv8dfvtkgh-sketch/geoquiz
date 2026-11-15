@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -64,6 +64,7 @@ export const FAMILIES: Family[] = [
     id: 'duels',
     tint: 'tint-rose',
     games: [
+      { id: 'bac', icon: 'bac', fresh: true, screen: 'bac' },
       { id: 'ttt', icon: 'ttt', fresh: true, screen: 'duel' },
       { id: 'c4q', icon: 'c4', fresh: true, screen: 'duel' },
       { id: 'ships', icon: 'ship', fresh: true, screen: 'duel' },
@@ -161,6 +162,7 @@ export const ICONS = {
   awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
   bulb: <g {...P}><path d="M9 17h6M10 20h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></g>,
+  bac: <g {...P}><rect x="3" y="3" width="18" height="18" rx="4" /><path d="M9 16l3-8 3 8M10.2 13h3.6" /></g>,
   sticker: <g {...P}><path d="M5 4h14v9l-6 7H5z" /><path d="M19 13h-6v7" /><path d="M9 9.5h.01M14 9.5h.01" strokeWidth="2.4" /></g>,
   camera: <g {...P}><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></g>,
   question: <g {...P}><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.7" /><path d="M12 17h.01" strokeWidth="2.4" /></g>,

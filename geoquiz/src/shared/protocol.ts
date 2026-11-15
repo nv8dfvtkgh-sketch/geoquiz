@@ -29,6 +29,7 @@ export interface Settings {
   wager?: boolean; // mise avant la dernière question (duel, salle)
   board?: string; // jeu de duel sur plateau (catégorie « board »)
   theme?: string; // thème des questions du plateau
+  bac?: import('./bac').BacConfig; // Petit Bac : catégories, manches, temps, lettres rares
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -225,6 +226,7 @@ export type ClientMsg =
   | { t: 'resume'; token: string; lang: Lang }
   | { t: 'quick'; settings: Settings }
   | { t: 'cancelQuick' }
+  | { t: 'bac'; a: 'fill'; i: number; v: string } | { t: 'bac'; a: 'stop' | 'done' | 'next' } | { t: 'bac'; a: 'veto'; key: string }
   | { t: 'auth'; token: string }
   | { t: 'challenge' }
   | { t: 'retry' }
@@ -255,6 +257,7 @@ export type ServerMsg =
   | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> }
   | { t: 'wager'; q: number; category: string; ms: number; bets?: Record<string, number> }
   | { t: 'react'; e: number; name: string }
+  | { t: 'bac'; view: import('./bac').BacView }
   | { t: 'board'; view: import('./boards').BoardState; order: string[]; you: number; q?: BoardQ; deadline?: number; res?: { ok: boolean; correct?: string } }
   | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }
   | { t: 'quickWaiting' }

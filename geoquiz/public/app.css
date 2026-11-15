@@ -1786,3 +1786,65 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .rev-topic { padding: 10px 16px; border-radius: 999px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
 .rev-topic:hover { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
 .rev-topic.all { background: var(--accent); color: #fff; }
+
+/* ------------------------------------------------------------------ Petit Bac */
+.bac-setup, .bac { display: grid; gap: 14px; padding-bottom: 110px; }
+.bac-tile { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--accent); color: var(--accent-ink); font-size: 2rem; font-weight: 800; }
+.bac-box { display: grid; gap: 10px; background: var(--card); border-radius: var(--radius-l); padding: 16px; box-shadow: var(--shadow); }
+.bac-count { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.bac-step { display: flex; align-items: center; gap: 8px; }
+.bac-step button { width: 44px; height: 44px; border-radius: 22px; border: 0; background: var(--fill); color: var(--ink); font: 700 1.3rem/1 inherit; cursor: pointer; }
+.bac-step button:disabled { opacity: .4; cursor: default; }
+.bac-step b { min-width: 2ch; text-align: center; font-size: 1.4rem; }
+.bac-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.bac-chips button { min-height: 40px; padding: 6px 12px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--paper-2); color: var(--ink); font: 600 .9rem inherit; cursor: pointer; }
+.bac-chips button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.bac-chips button small { opacity: .85; }
+.bac-custom { display: flex; gap: 8px; }
+.bac-custom input { flex: 1; min-width: 0; height: 44px; border-radius: 12px; border: 1px solid var(--border); background: var(--paper-2); color: var(--ink); padding: 0 12px; font: inherit; }
+.bac-rare { display: flex; align-items: center; gap: 8px; font-size: .92rem; }
+.bac-rare input { width: 20px; height: 20px; }
+.bac-go { display: grid; gap: 10px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.bac-head { display: flex; align-items: center; gap: 12px; background: var(--card); border-radius: var(--radius-l); padding: 10px 14px; box-shadow: var(--shadow); position: sticky; top: calc(env(safe-area-inset-top, 0px) + 60px); z-index: 3; }
+.bac-head > div { display: grid; }
+.bac-letter { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--accent); color: var(--accent-ink); font-size: 1.8rem; font-weight: 800; }
+.bac-clock { margin-inline-start: auto; font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.bac-clock.low { color: var(--bad); }
+.bac-spin { display: grid; justify-items: center; gap: 14px; padding: 30px 0; text-align: center; }
+.bac-wheel { width: 220px; height: 220px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(#0A6CD8 0 60deg, #B5420C 60deg 120deg, #15803D 120deg 180deg, #7C3AED 180deg 240deg, #BE185D 240deg 300deg, #A16207 300deg 360deg); box-shadow: var(--shadow-up); animation: bac-spin 1s linear infinite; }
+.bac-wheel span { display: grid; place-items: center; width: 130px; height: 130px; border-radius: 50%; background: var(--card); color: var(--accent); font-size: 5rem; font-weight: 800; animation: bac-spin 1s linear infinite reverse; }
+.bac-wheel.done, .bac-wheel.done span { animation: none; }
+.bac-wheel.done span { transform: scale(1.08); transition: transform .3s; }
+@keyframes bac-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .bac-wheel, .bac-wheel span { animation: none; } }
+.bac-grid { display: grid; gap: 10px; }
+.bac-grid label { display: grid; gap: 4px; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
+.bac-grid input { height: 50px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--paper-2); color: var(--ink); padding: 0 14px; font: 600 1.05rem inherit; }
+.bac-grid input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px #0071E333; }
+.bac-grid label.warn input { border-color: var(--hl); }
+.bac-warn { color: #B25000; font-weight: 600; }
+.bac-stop { min-height: 56px; background: var(--bad); color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: .03em; }
+.bac-stop:disabled { background: var(--fill); color: var(--ink-2); font-size: .95rem; letter-spacing: 0; font-weight: 600; }
+.bac-stopby { margin: 0; padding: 10px 14px; border-radius: 12px; background: #FDECEE; color: #9A0010; font-weight: 600; }
+.bac-votes { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.bac-votes li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--card); border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow); }
+.bac-votes li > div { display: grid; flex: 1; min-width: 0; }
+.bac-votes li strong { font-size: 1.15rem; overflow-wrap: anywhere; }
+.bac-votes li.no strong { text-decoration: line-through; color: var(--ink-2); }
+.bac-rej { font-size: .8rem; color: var(--bad); font-weight: 600; }
+.bac-table { margin: 0; display: grid; gap: 6px; }
+.bac-table > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 8px; align-items: baseline; }
+.bac-table dt { color: var(--ink-2); font-size: .88rem; }
+.bac-table dd { margin: 0; overflow-wrap: anywhere; }
+.bac-table dd small { color: var(--ink-2); }
+.bac-table .pts { font-weight: 800; min-width: 2ch; text-align: end; }
+.bac-table .st-ok .pts, .bac-table .st-known .pts { color: var(--good); }
+.bac-table .st-bad dd:not(.pts), .bac-table .st-letter dd:not(.pts), .bac-table .st-rejected dd:not(.pts) { color: var(--bad); }
+.bac-sum { display: flex; justify-content: space-between; margin: 0; padding-top: 8px; border-top: 1px solid var(--border); }
+.bac-rank { margin: 0; padding: 0; list-style: none; counter-reset: r; display: grid; gap: 6px; }
+.bac-rank li { counter-increment: r; display: grid; grid-template-columns: 2ch minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 10px; }
+.bac-rank li::before { content: counter(r) "."; color: var(--ink-2); }
+.bac-rank li.me { background: #0071E31a; }
+.bac-total { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 0; }
+.bac-others { margin: 0; }
