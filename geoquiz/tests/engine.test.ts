@@ -1308,3 +1308,43 @@ test('Petit Bac : lettre, STOP, vérification, vote et points', async () => {
   assert.ok(BAC_MS.spin > 0);
   r.destroy();
 });
+
+test('Challenge Trivia : 12 questions, 6 thèmes, niveaux qui montent, jokers et série ×2', async () => {
+  const { triviaQuestions, TRIVIA_THEMES } = await import('../src/server/categories');
+  for (let k = 0; k < 20; k++) {
+    const qs = triviaQuestions();
+    assert.equal(qs.length, 12, 'douze questions');
+    const count: Record<string, number> = {};
+    for (const q of qs) count[q.theme!] = (count[q.theme!] ?? 0) + 1;
+    for (const th of Object.keys(TRIVIA_THEMES)) assert.equal(count[th], 2, `thème ${th} deux fois`);
+    assert.deepEqual(qs.map((q) => q.level), [...Array(4).fill('easy'), ...Array(4).fill('medium'), ...Array(4).fill('hard')]);
+    assert.equal(new Set(qs.map((q) => q.target)).size, 12, 'pas de doublon');
+    for (const q of qs) assert.ok(q.kind === 'mcq' && q.options!.length >= 2 && q.revealOption, `${q.target} : QCM`);
+  }
+  const r = create('solo', settings({ category: 'trivia', zone: 'world', count: 5 } as any));
+  const a = client();
+  onMessage(a.conn, r.code, { t: 'join', name: 'A', lang: 'fr' });
+  await new Promise((res) => setTimeout(res, 50));
+  assert.equal(r.questions.length, 12);
+  const qm = a.last('question')!.q;
+  assert.ok(qm.theme && qm.level === 'easy', 'thème et niveau envoyés');
+  // 50/50 : deux mauvaises réponses retirées (jamais la bonne), une seule fois.
+  const ok = r.round!.q.revealOption!;
+  if ((r.round!.q.options ?? []).length >= 3) {
+    onMessage(a.conn, r.code, { t: 'joker', kind: 'fifty' });
+    const j = a.last('joker')!;
+    assert.ok(j.remove!.length >= 1 && !j.remove!.includes(ok));
+    assert.equal(j.left.fifty, false);
+  }
+  onMessage(a.conn, r.code, { t: 'joker', kind: 'double' });
+  onMessage(a.conn, r.code, { t: 'answer', q: 0, value: ok });
+  const p1 = a.last('feedback')!.points;
+  assert.equal(p1, 2000, 'joker ×2 : 2 × 1000');
+  // Série : à partir de 3 bonnes réponses d'affilée, points ×2.
+  for (let i = 1; i <= 3; i++) {
+    onMessage(a.conn, r.code, { t: 'next' });
+    onMessage(a.conn, r.code, { t: 'answer', q: i, value: r.round!.q.revealOption! });
+    assert.equal(a.last('feedback')!.points, i >= 3 ? 2000 : 1000, `question ${i + 1}`);
+  }
+  r.destroy();
+});

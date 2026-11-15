@@ -49,6 +49,9 @@ export interface InternalQuestion {
   /** Pour la carte : entité à faire clignoter ; pour le QCM : option correcte. */
   revealId?: string;
   revealOption?: string;
+  /** Challenge Trivia : thème tiré à la roue et niveau de la question. */
+  theme?: string;
+  level?: Difficulty;
 }
 
 export interface Category extends CategoryInfo {
@@ -1397,6 +1400,57 @@ const whoamiCat: Category = {
 // ------------------------------------------------------------------ survie (3 vies)
 /** Questions de plus en plus dures, tous jeux de géographie mélangés (QCM). */
 export const SURVIVAL_GAMES = ['flags', 'capitals', 'countries', 'currencies', 'silhouettes', 'languages', 'whoami'];
+// ------------------------------------------------------------------ Challenge Trivia
+// 12 questions de culture générale : 6 thèmes, deux questions chacun, tirés dans le désordre ;
+// 4 faciles, 4 moyennes, 4 difficiles. Les questions viennent des autres jeux du site.
+export const TRIVIA_THEMES: Record<string, string[]> = {
+  geo: ['capitals', 'flags', 'currencies', 'languages', 'peaks', 'records'],
+  hist: ['tr_hist', 'tr_hist', 'prog_hist'],
+  sci: ['space', 'body', 'dinos', 'inventions'],
+  sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport'],
+  screens: ['cinema', 'emoji'],
+  arts: ['tr_arts'],
+};
+export const TRIVIA_COUNT = 12;
+const triviaCat = (id: string): Category | undefined => CATEGORIES[id] ?? (extras.packs[id] ? packCat(id, [id]) : undefined);
+/** Cibles propres à un niveau : les « difficiles » qui ne sont pas déjà « moyennes », etc. */
+function levelPool(cat: Category, zone: ZoneCtx, d: Difficulty): string[] {
+  const all = cat.pool(zone, d, 40);
+  if (d === 'easy') return all;
+  const below = new Set(cat.pool(zone, d === 'hard' ? 'medium' : 'easy', 40));
+  const own = all.filter((t) => !below.has(t));
+  return own.length ? own : all;
+}
+export function triviaQuestions(rnd: () => number = Math.random, avoid: string[] = []): InternalQuestion[] {
+  const zone = zones.get('world')!;
+  const seen = new Set(avoid);
+  const themes = shuffle(Object.keys(TRIVIA_THEMES).flatMap((t) => [t, t]), rnd);
+  const out: InternalQuestion[] = [];
+  themes.forEach((theme, i) => {
+    const level: Difficulty = i < 4 ? 'easy' : i < 8 ? 'medium' : 'hard';
+    for (let tries = 0; tries < 12; tries++) {
+      const ids = TRIVIA_THEMES[theme];
+      const cat = triviaCat(ids[Math.floor(rnd() * ids.length)]);
+      if (!cat || !cat.qtypes.includes('mcq')) continue;
+      const pool = levelPool(cat, zone, level);
+      const fresh = pool.filter((t) => !seen.has(`${cat.id}|${t}`));
+      const list = fresh.length ? fresh : tries > 8 ? pool : [];
+      if (!list.length) continue;
+      const t = list[Math.floor(rnd() * list.length)];
+      try {
+        const q = cat.make(t, 'mcq', zone, rnd);
+        if (!q.options || q.options.length < 2) continue;
+        if (q.map?.map === 'world') q.map = { ...q.map, active: q.map.active.filter((x) => x === t || !countries[x]?.dependency) };
+        seen.add(`${cat.id}|${t}`);
+        out.push({ ...q, target: `${cat.id}|${t}`, theme, level });
+        return;
+      } catch { continue; }
+    }
+  });
+  return out;
+}
+const triviaCatInfo: Category = { id: 'trivia', noZone: true, qtypes: ['mcq'], zoneKinds: ['world'], pool: () => [], make() { throw new Error('trivia : voir triviaQuestions'); } };
+
 export function survivalQuestions(rnd: () => number = Math.random): InternalQuestion[] {
   const zone = zones.get('world')!;
   const out: InternalQuestion[] = [];
@@ -1437,7 +1491,7 @@ const survivalCat: Category = {
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, ...revCats].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, triviaCatInfo, ...revCats].map((c) => [c.id, c]),
 );
 
 /**

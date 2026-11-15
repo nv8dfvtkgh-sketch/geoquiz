@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { QuestionMsg, Reveal } from '../../shared/protocol';
 import { MapView, type Mark } from '../MapView';
 import { isMuted, sfx } from '../sound';
+import { TriviaBar, TriviaWheel, winCrown } from './Trivia';
 import { useApp } from '../state';
 import { markDailyDone } from '../dailyLock';
 import { RoadSign } from '../RoadSign';
@@ -130,10 +131,13 @@ function Play({ q }: { q: QuestionMsg }) {
   const fb = s.fb?.q === q.index ? s.fb : undefined;
   const reveal = useReveal(q);
   const solo = s.room!.kind === 'solo';
+  const trivia = s.room!.settings.category === 'trivia';
   const me = s.room!.players.find((p) => p.id === s.you);
   // Battle Royale : un joueur éliminé regarde la partie sans pouvoir répondre.
   const locked = !!fb?.done || !!reveal || (q.remaining !== null && s.reveal?.q === q.index) || !!me?.out;
 
+  const [crown, setCrown] = useState<string | null>(null);
+  useEffect(() => setCrown(null), [q.index]);
   // Sons au retour du serveur.
   const lastSeen = useRef('');
   useEffect(() => {
@@ -142,6 +146,8 @@ function Play({ q }: { q: QuestionMsg }) {
     if (k === lastSeen.current) return;
     lastSeen.current = k;
     fb.correct ? sfx.good() : sfx.bad();
+    // Challenge Trivia : bonne réponse à une question difficile = couronne du thème.
+    if (fb.done && fb.correct && trivia && q.level === 'hard' && q.theme && winCrown(q.theme)) setCrown(q.theme);
     // Petite vibration sur téléphone (sauf son coupé).
     if (fb.done && !isMuted()) try { navigator.vibrate?.(fb.correct ? 30 : [60, 40, 60]); } catch { /* non pris en charge */ }
   }, [fb]);
@@ -176,6 +182,9 @@ function Play({ q }: { q: QuestionMsg }) {
 
       <ModeBar />
 
+      {trivia && <TriviaBar q={q} locked={locked} />}
+      {trivia && <TriviaWheel q={q} />}
+
       {q.category === 'tables' && <RaceTrack players={s.room!.players} you={s.you} total={q.total} />}
 
       <Prompt q={q} open={locked} />
@@ -192,10 +201,11 @@ function Play({ q }: { q: QuestionMsg }) {
         <MapView spec={q.map} highlight={q.highlight} marks={reveal?.id ? { [reveal.id]: fb?.correct ? 'good' : 'reveal' } : {}} t={t} />
       )}
 
-      {q.kind === 'mcq' && <Options q={q} chosen={fb?.value} correctId={reveal?.optionId ?? (fb?.correct ? fb.value : undefined)} wrongId={fb && !fb.correct ? fb.value : undefined} onPick={locked ? undefined : answer} />}
+      {q.kind === 'mcq' && <Options q={q} chosen={fb?.value} correctId={reveal?.optionId ?? (fb?.correct ? fb.value : undefined)} wrongId={fb && !fb.correct ? fb.value : undefined} onPick={locked ? undefined : answer} hidden={s.jokers?.q === q.index ? s.jokers.removed : undefined} />}
 
       {q.kind === 'type' && <TypeBox key={q.index} disabled={locked} onSubmit={answer} numeric={q.category === 'calc'} />}
 
+      {crown && <p className="trivia-crown-won" role="status">👑 {t('trivia.newCrown', { theme: t(`trivia.theme.${crown}`) })}</p>}
       <Status q={q} />
     </div>
   );
@@ -228,12 +238,14 @@ function Progress({ q }: { q: QuestionMsg }) {
   );
 }
 
-function Options({ q, chosen, correctId, wrongId, onPick }: { q: QuestionMsg; chosen?: string; correctId?: string; wrongId?: string; onPick?: (v: string) => void }) {
+function Options({ q, chosen, correctId, wrongId, onPick, hidden }: { q: QuestionMsg; chosen?: string; correctId?: string; wrongId?: string; onPick?: (v: string) => void; hidden?: string[] }) {
   const flags = q.options!.some((o) => o.flag);
   return (
     <div className={`options ${flags ? 'flags' : ''}`}>
       {q.options!.map((o, i) => {
         const cls = o.id === correctId ? 'good' : o.id === wrongId ? 'bad' : o.id === chosen ? 'chosen' : '';
+        // 50/50 : les réponses retirées restent à leur place, barrées.
+        if (hidden?.includes(o.id) && !cls) return <button type="button" key={o.id} className="opt gone" disabled aria-hidden="true" style={{ '--i': i } as React.CSSProperties}><span>{o.label}</span></button>;
         return (
           <button type="button" key={o.id} className={`opt ${cls}`} disabled={!onPick && !cls} onClick={() => onPick?.(o.id)} style={{ '--i': i } as React.CSSProperties}>
             {o.flag && <FlagImg token={o.flag} />}

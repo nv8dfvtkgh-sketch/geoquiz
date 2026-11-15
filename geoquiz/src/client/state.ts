@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia';
 
 export interface Feedback {
   q: number;
@@ -40,6 +40,8 @@ export interface State {
   wager?: { q: number; category: string; until: number; bets?: Record<string, number> };
   /** Jeu de plateau à distance : dernière vue reçue du serveur. */
   board?: Extract<ServerMsg, { t: 'board' }>;
+  /** Challenge Trivia : jokers restants et effets sur la question en cours. */
+  jokers?: { left: { fifty: boolean; double: boolean }; q?: number; removed?: string[]; double?: boolean };
   /** Petit Bac : dernière vue reçue du serveur. */
   bac?: import('../shared/bac').BacView;
   finished?: Extract<ServerMsg, { t: 'finished' }>;
@@ -105,6 +107,7 @@ function onServer(s: State, m: ServerMsg): State {
       return {
         ...s, question: m.q, qAt: performance.now(), screen: 'game', reward: m.q.index === 0 ? undefined : s.reward,
         hist: m.q.index === 0 && !same ? {} : s.hist,
+        jokers: m.q.index === 0 && !same ? undefined : s.jokers,
         fb: same ? s.fb : undefined, reveal: same ? s.reveal : undefined, progress: same ? s.progress : undefined,
       };
     }
@@ -128,6 +131,10 @@ function onServer(s: State, m: ServerMsg): State {
       return { ...s, board: m, screen: 'game' };
     case 'bac':
       return { ...s, bac: m.view, screen: 'game' };
+    case 'joker': {
+      const cur = s.jokers?.q === m.q ? s.jokers : undefined;
+      return { ...s, jokers: { left: m.left, q: m.q, removed: m.remove ?? cur?.removed, double: m.kind === 'double' || cur?.double } };
+    }
     case 'wager':
       return { ...s, wager: { q: m.q, category: m.category, until: performance.now() + m.ms, bets: m.bets }, screen: 'game' };
     case 'finished':

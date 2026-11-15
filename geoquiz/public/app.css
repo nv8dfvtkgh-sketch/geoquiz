@@ -1848,3 +1848,30 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .bac-rank li.me { background: #0071E31a; }
 .bac-total { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 0; }
 .bac-others { margin: 0; }
+
+/* ------------------------------------------------------------------ Challenge Trivia */
+.trivia-home { display: grid; gap: 14px; padding-bottom: 110px; }
+.trivia-crowns-head { display: flex; justify-content: space-between; align-items: baseline; }
+.trivia-crowns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.trivia-crowns > div { display: grid; gap: 2px; padding: 10px; border-radius: 14px; border: 1.5px dashed var(--border); color: var(--ink-2); min-width: 0; }
+.trivia-crowns > div span { font-size: 1.4rem; }
+.trivia-crowns > div strong { color: var(--ink); font-size: .86rem; hyphens: auto; overflow-wrap: break-word; }
+.trivia-crowns > div small { font-size: .75rem; }
+.trivia-crowns > div.won { border: 0; background: var(--c); color: #fff; }
+.trivia-crowns > div.won strong, .trivia-crowns > div.won small { color: #fff; }
+.trivia-rules { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; color: var(--ink-2); }
+.trivia-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.tb-info { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tb-theme { padding: 5px 10px; border-radius: 12px; background: var(--c); color: #fff; font-weight: 700; font-size: .85rem; }
+.tb-level { font-size: .8rem; font-weight: 700; color: var(--ink-2); }
+.tb-level.lv-hard { color: #B25000; }
+.tb-streak { padding: 4px 9px; border-radius: 12px; background: #FFE8C2; color: #6B3B00; font-weight: 700; font-size: .8rem; }
+.tb-jokers { display: flex; gap: 6px; }
+.tb-jokers .btn { min-height: 40px; padding: 6px 12px; font-size: .88rem; }
+.opt.gone { opacity: .35; text-decoration: line-through; pointer-events: none; }
+.trivia-wheel { position: fixed; inset: 0; z-index: 40; display: grid; place-content: center; justify-items: center; gap: 16px; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(4px); text-align: center; padding: 20px; }
+.tw-disc { width: 200px; height: 200px; border-radius: 50%; display: grid; place-content: center; justify-items: center; gap: 6px; background: var(--c); color: #fff; box-shadow: 0 0 0 10px color-mix(in srgb, var(--c) 25%, transparent), var(--shadow-up); transition: background .15s; }
+.tw-disc span { font-size: 3.2rem; }
+.tw-disc strong { font-size: 1.3rem; }
+.trivia-wheel p { margin: 0; font-weight: 700; font-size: 1.05rem; }
+.trivia-crown-won { margin: 0; padding: 10px 14px; border-radius: 12px; background: #FFF3DF; color: #6B3B00; font-weight: 700; text-align: center; }

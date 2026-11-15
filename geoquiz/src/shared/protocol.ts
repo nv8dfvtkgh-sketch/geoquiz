@@ -163,6 +163,9 @@ export interface QuestionMsg {
   index: number;
   total: number;
   category: CategoryId;
+  /** Challenge Trivia : thème tiré à la roue et niveau. */
+  theme?: string;
+  level?: Difficulty;
   /** pin : placer un point sur la carte ; order : remettre les réponses dans l'ordre */
   kind: QKind;
   promptKey: string; // clé i18n
@@ -226,6 +229,7 @@ export type ClientMsg =
   | { t: 'resume'; token: string; lang: Lang }
   | { t: 'quick'; settings: Settings }
   | { t: 'cancelQuick' }
+  | { t: 'joker'; kind: 'fifty' | 'double' }
   | { t: 'bac'; a: 'fill'; i: number; v: string } | { t: 'bac'; a: 'stop' | 'done' | 'next' } | { t: 'bac'; a: 'veto'; key: string }
   | { t: 'auth'; token: string }
   | { t: 'challenge' }
@@ -257,6 +261,7 @@ export type ServerMsg =
   | { t: 'reveal'; q: number; reveal: Reveal; results: PlayerRound[]; players: PublicPlayer[]; next: number | null; teams?: TeamScore[]; battle?: { lost: string[]; out: string[] }; chests?: Record<string, ChestResult> }
   | { t: 'wager'; q: number; category: string; ms: number; bets?: Record<string, number> }
   | { t: 'react'; e: number; name: string }
+  | { t: 'joker'; q: number; kind: 'fifty' | 'double'; remove?: string[]; left: { fifty: boolean; double: boolean } }
   | { t: 'bac'; view: import('./bac').BacView }
   | { t: 'board'; view: import('./boards').BoardState; order: string[]; you: number; q?: BoardQ; deadline?: number; res?: { ok: boolean; correct?: string } }
   | { t: 'finished'; players: PublicPlayer[]; recap: RecapItem[]; solo?: { accuracy: number; timeMs: number; correct: number; total: number }; teams?: TeamScore[] }

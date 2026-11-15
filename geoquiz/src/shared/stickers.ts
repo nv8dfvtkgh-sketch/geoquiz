@@ -122,7 +122,7 @@ put('wonders', 'monuments peaks records');
 put('space', 'space');
 put('sports', 'sport football tennis rugby basketball afrisport olympics motorsport stadiums kits');
 put('food', 'food');
-put('games', 'cinema emoji ttt c4q ships hangman dots memory caravan awale c4 board');
+put('games', 'trivia cinema emoji ttt c4q ships hangman dots memory caravan awale c4 board');
 put('school', 'bac calc tables timeline truefalse body dinos vocab roadsigns inventions prog_sci');
 /** Page d'album d'un jeu (undefined : n'importe quelle page). Révisions : selon la matière. */
 export function albumPageFor(game?: string): string | undefined {

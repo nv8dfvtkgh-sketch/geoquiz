@@ -25,6 +25,7 @@ import { CardsScreen, ColorFlagScreen, NameAllScreen } from './screens/Solo';
 import { AlbumScreen, StickerToast } from './screens/Collect';
 import { BoardOnline, DuelScreen } from './screens/Duels';
 import { BacOnline, BacSetup } from './screens/Bac';
+import { TriviaScreen } from './screens/Trivia';
 import { earnSticker, syncAlbum } from './album';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
@@ -175,6 +176,7 @@ export function App() {
           {s.screen === 'quick' && <QuickWait />}
           {s.screen === 'game' && (s.room?.settings.category === 'board' ? <BoardOnline /> : s.room?.settings.category === 'bac' ? <BacOnline /> : <Game />)}
           {s.screen === 'bac' && <BacSetup />}
+          {s.screen === 'trivia' && <TriviaScreen />}
           {s.screen === 'duel' && <DuelScreen />}
           {s.screen === 'revision' && <RevisionScreen />}
           {s.screen === 'final' && <Final />}

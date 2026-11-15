@@ -9,7 +9,7 @@ import { answer as boardAnswer, BOARD_GAMES, BOARD_MAX, BOARD_THEMES, botMove, h
 import { boardCtx, boardQ, boardQuestion } from './boardplay';
 import { BacGame } from './bacplay';
 import { cleanBac } from '../shared/bac';
-import { CATEGORIES, customQuestions, dailyQuestions, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, ensureSounds, mediaOff, mediaSnapshot, photosLoaded, restoreMedia, setMediaOff, type MediaSnapshot } from './photos';
@@ -87,6 +87,7 @@ interface Member {
   shield?: boolean; // coffre « bouclier » : protégé du prochain vol
   bet?: number; // mise finale (en points)
   reactAt?: number; // dernière réaction envoyée (anti-déluge)
+  jokers?: { fifty: boolean; double: boolean }; // Challenge Trivia : jokers encore disponibles
 }
 
 interface AnswerState {
@@ -109,6 +110,8 @@ interface Round {
   revealByLang: Partial<Record<Lang, Reveal>>;
   flagTokens: Record<string, string>;
   buzzed?: string; // mode Buzzer : premier joueur à avoir trouvé
+  doubles?: Set<string>; // Challenge Trivia : joueurs qui ont joué « points ×2 »
+  fifty?: Set<string>; // … et le 50/50
 }
 
 // Aléatoire cryptographique standard (disponible dans Node 20+ et dans Cloudflare Workers).
@@ -141,7 +144,7 @@ export function validSettings(s: any): Settings | null {
     zone: s.zone,
     difficulty: ['easy', 'medium', 'hard'].includes(s.difficulty) ? s.difficulty : 'easy',
     qtype,
-    count: clamp(s.count, LIMITS.minCount, LIMITS.maxCount, DEFAULT_SETTINGS.count),
+    count: s.category === 'trivia' ? TRIVIA_COUNT : clamp(s.count, LIMITS.minCount, LIMITS.maxCount, DEFAULT_SETTINGS.count),
     timeLimit: clamp(s.timeLimit, LIMITS.minTime, LIMITS.maxTime, DEFAULT_SETTINGS.timeLimit),
     soloMode: s.soloMode === 'timed' ? 'timed' : 'training',
     mode: ['battle', 'teams', 'buzzer'].includes(s.mode) ? s.mode : 'classic',
@@ -164,6 +167,7 @@ export const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = []): InternalQuestion[] {
   if (settings.category === 'daily') return dailyQuestions();
   if (settings.category === 'survival') return survivalQuestions(rnd);
+  if (settings.category === 'trivia') return triviaQuestions(rnd, avoid);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
   const strict = cat.pool(zone, settings.difficulty, settings.count);
@@ -522,6 +526,9 @@ export class Room {
       case 'answer':
         if (m.role === 'player') this.answer(m, msg.q, String(msg.value ?? '').slice(0, 80));
         break;
+      case 'joker':
+        if (m.role === 'player') this.joker(m, msg.kind);
+        break;
       case 'next':
         if (this.kind === 'solo' && this.state === 'reveal') this.nextQuestion();
         else if (isHost && this.state === 'reveal') this.advance();
@@ -646,6 +653,7 @@ export class Room {
     if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-400);
     this.madeChallenge = undefined;
     if (!this.questions.length) return this.members.get(this.hostId)?.conn?.send({ t: 'error', code: 'settings.empty' });
+    for (const p of players) { p.jokers = { fifty: true, double: true }; }
     for (const p of players) { p.score = 0; p.streak = 0; p.team = undefined; p.lives = undefined; p.outAt = undefined; p.shield = undefined; p.bet = undefined; }
     this.betting = undefined;
     this.lastChests = undefined;
@@ -957,6 +965,8 @@ export class Room {
       index: this.qIndex,
       total: this.questions.length,
       category: q.category,
+      theme: q.theme,
+      level: q.level,
       kind: q.kind,
       promptKey: q.promptKey,
       params: { ...(q.extraParams ?? {}), ...(q.promptName ? { name: localize(q.promptName, lang) } : {}) },
@@ -1021,6 +1031,11 @@ export class Room {
         const speed = r.deadline ? Math.max(0, 1 - Math.min(a.timeMs, limit) / limit) : 1;
         a.points = Math.round((500 + 500 * speed) * a.credit);
       }
+      // Challenge Trivia : série de 3 bonnes réponses et joker « ×2 » doublent les points.
+      if (this.settings.category === 'trivia' && a.points > 0) {
+        if (m.streak >= 3) a.points *= 2;
+        if (r.doubles?.has(m.id)) a.points *= 2;
+      }
       if (this.mode === 'buzzer') {
         // Buzzer : seul le premier à trouver marque ; une erreur coûte des points.
         if (ok && !r.buzzed) { r.buzzed = m.id; a.points = 1000; }
@@ -1042,6 +1057,23 @@ export class Room {
         this.timer = setTimeout(() => this.endRound(), 700);
       } else { this.sendProgress(); this.maybeEndRound(); }
     }
+  }
+
+  /** Challenge Trivia : 50/50 (deux mauvaises réponses retirées) ou points ×2, une fois chacun par partie. */
+  joker(m: Member, kind: 'fifty' | 'double') {
+    const r = this.round;
+    if (!r || this.state !== 'question' || this.settings.category !== 'trivia' || (kind !== 'fifty' && kind !== 'double')) return;
+    const j = (m.jokers ??= { fifty: true, double: true });
+    if (!j[kind] || r.answers.get(m.id)?.done) return;
+    let remove: string[] | undefined;
+    if (kind === 'fifty') {
+      const wrong = (r.q.options ?? []).map((o) => o.id).filter((id) => id !== r.q.revealOption);
+      if (wrong.length < 2) return;
+      remove = shuffle(wrong, Math.random).slice(0, Math.min(2, wrong.length - 1));
+      (r.fifty ??= new Set()).add(m.id);
+    } else (r.doubles ??= new Set()).add(m.id);
+    j[kind] = false;
+    m.conn?.send({ t: 'joker', q: this.qIndex, kind, remove, left: { ...j } });
   }
 
   maybeEndRound() {
