@@ -1,6 +1,7 @@
 // Album d'autocollants : un autocollant à chaque partie terminée. Sur l'appareil pour les
 // invités ; sur le compte (et l'appareil) pour les joueurs connectés.
-import { STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
+import { albumPageFor, ALBUM, STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
+import { loadEvents } from './events';
 import { api, savedAuth } from './account';
 
 const KEY = 'gq.album';
@@ -14,24 +15,37 @@ function saveAlbum(a: Album) {
   window.dispatchEvent(new CustomEvent('gq:album'));
 }
 
-/** Tirage : les autocollants pas encore collés sortent deux fois plus souvent, les rares moins. */
-function draw(have: Album): Sticker {
-  const w = STICKERS.map((x) => (have[x.id] ? 1 : 2) * (x.rare ? 0.3 : 1));
+/** Tirage dans la page du jeu (ou tout l'album) : les autocollants pas encore collés sortent
+ *  deux fois plus souvent, les rares moins. */
+function draw(have: Album, page?: string): Sticker {
+  const list = ALBUM.find((p) => p.id === page)?.stickers ?? STICKERS;
+  const w = list.map((x) => (have[x.id] ? 1 : 2) * (x.rare ? 0.3 : 1));
   let r = Math.random() * w.reduce((a, b) => a + b, 0);
-  for (let i = 0; i < STICKERS.length; i++) { r -= w[i]; if (r <= 0) return STICKERS[i]; }
-  return STICKERS[0];
+  for (let i = 0; i < list.length; i++) { r -= w[i]; if (r <= 0) return list[i]; }
+  return list[0];
+}
+
+/** Page d'album du jeu terminé ; défis du jour, de la semaine et événements : selon leur thème. */
+async function pageFor(game?: string): Promise<string | undefined> {
+  if (game === 'week' || game === 'daily' || game === 'event') {
+    const ev = await loadEvents().catch(() => null);
+    const e = game === 'week' ? ev?.week : game === 'daily' ? ev?.daily : ev?.active;
+    return e?.album ?? (game === 'daily' ? 'travel' : undefined);
+  }
+  return albumPageFor(game);
 }
 
 let lastEarn = 0;
 const seen = new Set<string>();
 /** Partie terminée : un nouvel autocollant (une fois par fin de partie, même après une reconnexion). */
-export function earnSticker(key?: string) {
+export async function earnSticker(key?: string, game?: string) {
   const now = Date.now();
   if (now - lastEarn < 1500 || (key && seen.has(key))) return;
   if (key) seen.add(key);
   lastEarn = now;
+  const page = await pageFor(game);
   const a = loadAlbum();
-  const st = draw(a);
+  const st = draw(a, page);
   const isNew = !a[st.id];
   a[st.id] = Math.min(99, (a[st.id] ?? 0) + 1);
   saveAlbum(a);

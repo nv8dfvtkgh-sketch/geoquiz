@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import type { Names } from '../shared/protocol';
 
-export interface EventInfo { id: string; emoji: string; names: Names; end?: string; minAge?: '13-17' | '18+' }
+export interface EventInfo { id: string; emoji: string; names: Names; end?: string; minAge?: '13-17' | '18+'; album?: string }
 export interface Events { active: EventInfo | null; week?: EventInfo | null; daily?: EventInfo | null; all: EventInfo[] }
 
 /** Défi de la semaine visible pour ce joueur (certains thèmes sont réservés aux 13 ans et plus). */

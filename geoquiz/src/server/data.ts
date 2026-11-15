@@ -113,7 +113,7 @@ export const PACK_GAMES: Record<string, string[]> = {
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */
-export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily'; minAge?: '13-17' | '18+' }
+export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily'; minAge?: '13-17' | '18+'; album?: string }
 const activeOf = (kind: GameEvent['kind'], now: number) => {
   const day = new Date(now).toISOString().slice(0, 10);
   return extras.events.find((e) => e.kind === kind && e.start <= day && day <= e.end);

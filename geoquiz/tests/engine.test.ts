@@ -1230,3 +1230,21 @@ test('Aperçu d\'un lien de défi : qui défie, le score et le jeu', async () =>
   assert.ok(out.includes('og:url" content="https://q.example/defi/ABC123'));
   assert.ok(!out.includes('<b>'));
 });
+
+test('Album : chaque jeu donne un autocollant de sa page', async () => {
+  const { albumPageFor, ALBUM } = await import('../src/shared/stickers');
+  const { FAMILIES } = await import('../src/client/games');
+  const pages = new Set(ALBUM.map((p) => p.id));
+  const skip = new Set(['daily', 'review', 'league', 'album', 'tournament', 'classes', 'brands', 'rev_fr', 'rev_us']);
+  for (const f of FAMILIES) for (const g of f.games) {
+    if (skip.has(g.id)) continue;
+    const p = albumPageFor(g.id);
+    assert.ok(p && pages.has(p), `${g.id} : pas de page d'album`);
+  }
+  assert.equal(albumPageFor('animals'), 'animals');
+  assert.equal(albumPageFor('rev_fr_cm1_histgeo-moyen-age'), 'travel');
+  assert.equal(albumPageFor('rev_us_g8_science-forces'), 'school');
+  const ev = JSON.parse(fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), '../data/games/events.json'), 'utf8'));
+  for (const e of ev) assert.ok(pages.has(e.album), `${e.id} : page d'album`);
+  assert.equal(ev.find((e: { id: string }) => e.id === 'week-gta-2026').album, 'games');
+});

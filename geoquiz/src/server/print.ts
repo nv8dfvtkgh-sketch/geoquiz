@@ -69,9 +69,9 @@ export function eventList() {
   const cur = activeEvent();
   const wk = activeWeek(), th = activeDailyTheme();
   return {
-    active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end } : null,
-    week: wk ? { id: wk.id, emoji: wk.emoji, names: wk.names, end: wk.end, minAge: wk.minAge } : null,
-    daily: th ? { id: th.id, emoji: th.emoji, names: th.names, end: th.end } : null,
+    active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end, album: cur.album } : null,
+    week: wk ? { id: wk.id, emoji: wk.emoji, names: wk.names, end: wk.end, minAge: wk.minAge, album: wk.album } : null,
+    daily: th ? { id: th.id, emoji: th.emoji, names: th.names, end: th.end, album: th.album } : null,
     all: extras.events.filter((e) => !e.kind).map(({ id, emoji, names }) => ({ id, emoji, names })),
   };
 }

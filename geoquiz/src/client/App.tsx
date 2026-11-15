@@ -118,7 +118,7 @@ export function App() {
       if (msg.t === 'joined' && authRef.current) net.send({ t: 'auth', token: authRef.current });
       if (msg.t === 'reward') setTimeout(refreshMe, 0);
       // Fin de partie : un autocollant pour l'album.
-      if (msg.t === 'finished') { const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; setTimeout(() => earnSticker(k), 1200); }
+      if (msg.t === 'finished') { const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; const game = net.category; setTimeout(() => void earnSticker(k, game), 1200); }
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.
       if (msg.t === 'matched') {
         net.open(msg.code);
@@ -129,7 +129,7 @@ export function App() {
     });
     net.statusListeners.add(setOnline);
     // Jeux joués dans le navigateur (énigmes, tout nommer…) : un autocollant aussi.
-    const onFinished = () => setTimeout(() => earnSticker(), 900);
+    const onFinished = (e: Event) => { const game = (e as CustomEvent<{ game?: string }>).detail?.game; setTimeout(() => void earnSticker(undefined, game), 900); };
     window.addEventListener('gq:finished', onFinished);
     const session = savedSession();
     if (session) net.open(session.code);

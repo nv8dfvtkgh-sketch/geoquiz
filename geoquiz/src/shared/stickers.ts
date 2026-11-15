@@ -73,9 +73,63 @@ export const ALBUM: AlbumPage[] = [
       s('pretzel', '🥨', 'Bretzel', 'Pretzel', 'Pretzel', 'بريتزل'), s('mooncake', '🥮', 'Gâteau de lune', 'Mooncake', 'Pastel de luna', 'كعكة القمر', true),
     ],
   },
+  {
+    id: 'travel', e: '🧭', n: { fr: 'Cartes et voyages', en: 'Maps and travel', es: 'Mapas y viajes', ar: 'خرائط وأسفار' },
+    stickers: [
+      s('map', '🗺️', 'Carte du monde', 'World map', 'Mapa del mundo', 'خريطة العالم'), s('compass', '🧭', 'Boussole', 'Compass', 'Brújula', 'بوصلة'),
+      s('globe', '🌐', 'Globe', 'Globe', 'Globo', 'كرة أرضية'), s('pin', '📍', 'Épingle', 'Map pin', 'Chincheta', 'دبوس'),
+      s('plane', '✈️', 'Avion', 'Plane', 'Avión', 'طائرة'), s('suitcase', '🧳', 'Valise', 'Suitcase', 'Maleta', 'حقيبة سفر'),
+      s('island', '🏝️', 'Île', 'Island', 'Isla', 'جزيرة'), s('train', '🚂', 'Train', 'Train', 'Tren', 'قطار'),
+      s('sailboat', '⛵', 'Voilier', 'Sailboat', 'Velero', 'مركب شراعي'), s('passport', '🛂', 'Passeport', 'Passport', 'Pasaporte', 'جواز سفر'),
+      s('flagpin', '🚩', 'Drapeau', 'Flag', 'Bandera', 'علم'), s('balloon', '🎈', 'Montgolfière', 'Hot-air balloon', 'Globo aerostático', 'منطاد', true),
+    ],
+  },
+  {
+    id: 'games', e: '🎮', n: { fr: 'Jeux et écrans', en: 'Games and screens', es: 'Juegos y pantallas', ar: 'ألعاب وشاشات' },
+    stickers: [
+      s('controller', '🎮', 'Manette', 'Controller', 'Mando', 'يد تحكم'), s('joystick', '🕹️', 'Joystick', 'Joystick', 'Joystick', 'عصا التحكم'),
+      s('invader', '👾', 'Monstre pixel', 'Pixel monster', 'Monstruo píxel', 'وحش البكسل'), s('racecar', '🏎️', 'Bolide', 'Race car', 'Bólido', 'سيارة سباق'),
+      s('helicopter', '🚁', 'Hélicoptère', 'Helicopter', 'Helicóptero', 'مروحية'), s('nightcity', '🌃', 'Ville la nuit', 'City at night', 'Ciudad de noche', 'المدينة ليلًا'),
+      s('clapper', '🎬', 'Clap de cinéma', 'Clapperboard', 'Claqueta', 'لوح التصوير'), s('popcorn', '🍿', 'Pop-corn', 'Popcorn', 'Palomitas', 'فشار'),
+      s('tv', '📺', 'Télévision', 'Television', 'Televisión', 'تلفاز'), s('headphones', '🎧', 'Casque audio', 'Headphones', 'Auriculares', 'سماعات'),
+      s('dice', '🎲', 'Dé', 'Die', 'Dado', 'نرد'), s('crown', '👑', 'Couronne du champion', "Champion's crown", 'Corona del campeón', 'تاج البطل', true),
+    ],
+  },
+  {
+    id: 'school', e: '🎒', n: { fr: 'École et savoirs', en: 'School and knowledge', es: 'Escuela y saberes', ar: 'المدرسة والمعرفة' },
+    stickers: [
+      s('books', '📚', 'Livres', 'Books', 'Libros', 'كتب'), s('pencil', '✏️', 'Crayon', 'Pencil', 'Lápiz', 'قلم رصاص'),
+      s('ruler', '📐', 'Équerre', 'Set square', 'Escuadra', 'مثلث قياس'), s('microscope', '🔬', 'Microscope', 'Microscope', 'Microscopio', 'مجهر'),
+      s('testtube', '🧪', 'Éprouvette', 'Test tube', 'Probeta', 'أنبوب اختبار'), s('abacus', '🧮', 'Boulier', 'Abacus', 'Ábaco', 'معداد'),
+      s('dino', '🦕', 'Dinosaure', 'Dinosaur', 'Dinosaurio', 'ديناصور'), s('heart', '🫀', 'Cœur', 'Heart', 'Corazón', 'قلب'),
+      s('bulb', '💡', 'Ampoule', 'Light bulb', 'Bombilla', 'مصباح'), s('trafficlight', '🚦', 'Feu tricolore', 'Traffic light', 'Semáforo', 'إشارة مرور'),
+      s('backpack', '🎒', 'Cartable', 'School bag', 'Mochila', 'محفظة'), s('gradcap', '🎓', 'Toque de diplômé', 'Graduation cap', 'Birrete', 'قبعة التخرج', true),
+    ],
+  },
 ];
 export const STICKERS: Sticker[] = ALBUM.flatMap((p) => p.stickers);
 export const STICKER_IDS = new Set(STICKERS.map((x) => x.id));
+
+// ------------------------------------------------------------------ page selon le jeu
+// L'autocollant gagné vient de la page qui correspond au jeu joué (un koala après un quiz
+// sur les animaux, une manette après le défi jeux vidéo…).
+const PAGE_OF: Record<string, string> = {};
+const put = (page: string, ids: string) => { for (const id of ids.split(' ')) PAGE_OF[id] = page; };
+put('travel', 'countries regions flags capitals silhouettes currencies languages pin flagreveal higher chain timezones globle capword compass nameall cards colorflag whereami whoami survival hello prog_geo passport');
+put('animals', 'animals sounds');
+put('morocco', 'maroc macities tifinagh prog_hist');
+put('wonders', 'monuments peaks records');
+put('space', 'space');
+put('sports', 'sport football tennis rugby basketball afrisport olympics motorsport stadiums kits');
+put('food', 'food');
+put('games', 'cinema emoji ttt c4q ships hangman dots memory caravan awale c4 board');
+put('school', 'calc tables timeline truefalse body dinos vocab roadsigns inventions prog_sci');
+/** Page d'album d'un jeu (undefined : n'importe quelle page). Révisions : selon la matière. */
+export function albumPageFor(game?: string): string | undefined {
+  if (!game) return undefined;
+  if (game.startsWith('rev_')) return /_(histgeo|social)/.test(game) ? 'travel' : 'school';
+  return PAGE_OF[game];
+}
 
 // ------------------------------------------------------------------ tenues d'avatar
 export type LookSlot = 'hat' | 'pin' | 'frame';
