@@ -1421,8 +1421,8 @@
   "admin.reportsEmpty": "Aucune question signalée pour l'instant.",
   "admin.reportDone": "Traité ✓",
   "err.report.invalid": "Signalement incomplet.",
-  "sheet.summary": "Importer depuis Excel, Google Sheets ou une page HTML",
-  "sheet.intro": "Plus rapide pour un long quiz : remplis le modèle Excel (une question par ligne : la question, la bonne réponse, 1 à 3 mauvaises réponses, et si tu veux une photo collée sur la ligne) et importe-le. Les fichiers CSV et les pages HTML avec un tableau marchent aussi.",
+  "sheet.summary": "Importer un fichier : modèle HTML, Excel, Google Sheets",
+  "sheet.intro": "Plus rapide pour un long quiz. Le modèle HTML s'ouvre dans ton navigateur : tu écris tes questions, tu ajoutes des photos, tu vois l'aperçu, tu enregistres, puis tu importes le fichier ici. Le modèle Excel marche aussi (une question par ligne, photo collée sur la ligne si tu veux), comme les fichiers CSV.",
   "sheet.template": "Télécharger le modèle Excel",
   "sheet.import": "Importer un fichier",
   "sheet.export": "Télécharger en Excel",
@@ -1469,5 +1469,6 @@
   "sheet.photosDone": "Photos : {n} placée(s) sur leur question, {m} nouvelle(s) question(s) à compléter.",
   "sheet.photosFailed": "{n} photo(s) non ajoutée(s) (fichier illisible ou plus de 50 questions).",
   "sheet.photoExpected": "Photo attendue : {name}",
-  "sheet.withPhotos": "Photos trouvées dans le fichier : {n}."
+  "sheet.withPhotos": "Photos trouvées dans le fichier : {n}.",
+  "sheet.templateHtml": "Télécharger le modèle HTML (avec photos)"
 }

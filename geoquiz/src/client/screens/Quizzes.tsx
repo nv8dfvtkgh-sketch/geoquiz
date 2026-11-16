@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_SETTINGS, type RoomKind, type Settings } from '../../shared/protocol';
 import { createGame } from '../net';
 import { useApp } from '../state';
-import { download, fileSafe, photoKey, quizToRows, readDelimited, readTableFile, rowsToQuiz, writeXlsx, type SheetLabels, type SheetQuestion } from '../sheet';
+import { download, fileSafe, photoKey, quizToRows, readQuizHtml, readDelimited, readTableFile, rowsToQuiz, writeXlsx, type SheetLabels, type SheetQuestion } from '../sheet';
 
 // ------------------------------------------------------------------ outils
 interface MyQuiz { id: string; token: string; title: string }
@@ -150,11 +150,11 @@ function quizWorkbook(t: (k: string, p?: Record<string, string | number>) => str
 
 /** Import et export Excel / CSV / HTML / copier-coller dans l'éditeur. */
 function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void | Promise<void>; onPhotos: (files: File[]) => Promise<{ matched: number; added: number; failed: number }> }) {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [paste, setPaste] = useState('');
-  const apply = (rows: string[][], images?: Map<number, Blob>) => {
-    const r = rowsToQuiz(rows, 50, images);
+  const apply = (rows: string[][], images?: Map<number, Blob>, ready?: ReturnType<typeof rowsToQuiz>) => {
+    const r = ready ?? rowsToQuiz(rows, 50, images);
     if (!r.questions.length) return setMsg({ ok: false, text: t('sheet.none') });
     void onImport(r.title, r.questions);
     const ph = r.questions.filter((q) => q.image).length;
@@ -162,7 +162,11 @@ function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: Edit
   };
   const pick = async (f?: File) => {
     if (!f) return;
-    try { const tb = await readTableFile(f); apply(tb.rows, tb.images); }
+    try {
+      // Modèle HTML de Quizellige : les questions et les photos sont dans le fichier.
+      if (/\.html?$/i.test(f.name)) { const h = readQuizHtml(await f.text()); if (h) return apply([], undefined, h); }
+      const tb = await readTableFile(f); apply(tb.rows, tb.images);
+    }
     catch (e) { setMsg({ ok: false, text: t((e as Error).message === 'oldFormat' ? 'sheet.oldFormat' : 'sheet.unreadable') }); }
   };
   const waiting = qs.filter((q) => q.wantPhoto && !q.preview).map((q) => q.wantPhoto!);
@@ -176,6 +180,13 @@ function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: Edit
       <p className="muted small">{t('sheet.intro')}</p>
       <div className="row-actions">
         <button type="button" className="btn ghost" onClick={() => download(quizWorkbook(t, '', []), 'quizellige-modele.xlsx')}>⬇️ {t('sheet.template')}</button>
+        <button type="button" className="btn ghost" onClick={async () => {
+          // Modèle HTML, dans la langue du joueur.
+          const r = await fetch('/quizellige-modele.html');
+          if (!r.ok) return;
+          const html = (await r.text()).replace('{"v":1,"title":"","lang":"","questions":[]}', JSON.stringify({ v: 1, title: '', lang, questions: [] }));
+          download(new Blob([html], { type: 'text/html' }), 'quizellige-modele.html');
+        }}>⬇️ {t('sheet.templateHtml')}</button>
         <label className="btn primary sheet-file">
           <input type="file" className="sr" accept=".xlsx,.csv,.txt,.html,.htm" onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ''; }} />
           ⬆️ {t('sheet.import')}

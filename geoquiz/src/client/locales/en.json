@@ -1421,8 +1421,8 @@
   "admin.reportsEmpty": "No reported questions yet.",
   "admin.reportDone": "Done ✓",
   "err.report.invalid": "Incomplete report.",
-  "sheet.summary": "Import from Excel, Google Sheets or an HTML page",
-  "sheet.intro": "Faster for a long quiz: fill in the Excel template (one question per row: the question, the right answer, 1 to 3 wrong answers, and a photo pasted on the row if you like) and import it. CSV files and HTML pages with a table work too.",
+  "sheet.summary": "Import a file: HTML template, Excel, Google Sheets",
+  "sheet.intro": "Faster for a long quiz. The HTML template opens in your browser: write your questions, add photos, check the preview, save, then import the file here. The Excel template works too (one question per row, with a photo pasted on the row if you like), as do CSV files.",
   "sheet.template": "Download the Excel template",
   "sheet.import": "Import a file",
   "sheet.export": "Download as Excel",
@@ -1469,5 +1469,6 @@
   "sheet.photosDone": "Photos: {n} placed on their question, {m} new question(s) to fill in.",
   "sheet.photosFailed": "{n} photo(s) not added (unreadable file or over 50 questions).",
   "sheet.photoExpected": "Expected photo: {name}",
-  "sheet.withPhotos": "Photos found in the file: {n}."
+  "sheet.withPhotos": "Photos found in the file: {n}.",
+  "sheet.templateHtml": "Download the HTML template (with photos)"
 }

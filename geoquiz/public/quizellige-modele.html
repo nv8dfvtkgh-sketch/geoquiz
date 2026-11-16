@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon quiz Quizellige</title>
+<style>
+:root {
+  --paper: #F5F5F7; --card: #FFFFFF; --fill: #ECECF0; --ink: #1D1D1F; --ink-2: #6E6E73; --line: #1D1D1F1A;
+  --accent: #0071E3; --accent-ink: #FFFFFF; --good: #1F8A3B; --good-bg: #E7F6EC; --bad: #C4161C; --bad-bg: #FDECEC;
+  --z1: #0071E3; --z2: #16A34A; --z3: #FFC800; --z4: #FF8A1F;
+  --shadow: 0 1px 2px #0000000a, 0 8px 24px #0000000f; --shadow-up: 0 2px 4px #0000000d, 0 18px 44px #0000001f;
+  --radius: 16px;
+  --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Arabic', sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #0B0B0C; --card: #1C1C1E; --fill: #2C2C2E; --ink: #F5F5F7; --ink-2: #A1A1A6; --line: #FFFFFF1F;
+    --accent: #2997FF; --good: #34C759; --good-bg: #12301C; --bad: #FF6961; --bad-bg: #3A1716;
+    --shadow: 0 0 0 1px #FFFFFF14; --shadow-up: 0 0 0 1px #FFFFFF24, 0 18px 44px #00000099; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.45 var(--font); -webkit-font-smoothing: antialiased; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* bande de zellige */
+.zellige { height: 6px; background: repeating-linear-gradient(90deg, var(--z1) 0 24px, var(--z2) 24px 48px, var(--z3) 48px 72px, var(--z4) 72px 96px); }
+
+/* barre du haut */
+.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); border-bottom: 1px solid var(--line); }
+.top-in { max-width: 980px; margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 10px max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left)); }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; }
+.brand svg { width: 28px; height: 28px; }
+.top-sp { flex: 1; }
+.lang { border: 0; background: var(--fill); border-radius: 999px; padding: 6px 10px; font-size: .85rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 8px 16px; border: 0; border-radius: 999px; background: var(--fill); font-weight: 600; white-space: nowrap; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: .45; cursor: default; }
+
+main { max-width: 980px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right)) 120px max(16px, env(safe-area-inset-left)); display: grid; gap: 18px; }
+.intro h1 { margin: 0 0 4px; font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -.02em; text-wrap: balance; }
+.intro p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+.title-field { display: grid; gap: 6px; padding: 18px 20px; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); }
+.title-field label { font-size: .8rem; font-weight: 600; color: var(--ink-2); }
+.title-field input { border: 0; background: transparent; font-size: 1.35rem; font-weight: 700; padding: 2px 0; width: 100%; }
+.title-field input::placeholder { color: var(--ink-2); opacity: .6; }
+.count { display: flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: .9rem; }
+.count b { color: var(--ink); }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: var(--fill); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--good); transition: width .3s; }
+
+/* cartes de questions */
+#list { display: grid; gap: 14px; }
+.q { position: relative; display: grid; grid-template-columns: 1fr 200px; gap: 14px 18px; padding: 18px 20px 16px; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border-inline-start: 5px solid var(--fill); }
+.q.ok { border-inline-start-color: var(--good); }
+.q.todo { border-inline-start-color: var(--z3); }
+.q-head { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; }
+.num { display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 8px; border-radius: 10px; background: var(--fill); font-weight: 700; font-size: .9rem; }
+.q.ok .num { background: var(--good-bg); color: var(--good); }
+.state { font-size: .8rem; color: var(--ink-2); }
+.q-tools { margin-inline-start: auto; display: flex; gap: 2px; }
+.icon { width: 34px; height: 34px; border: 0; border-radius: 10px; background: transparent; color: var(--ink-2); display: grid; place-items: center; }
+.icon:hover { background: var(--fill); color: var(--ink); }
+.icon.del:hover { color: var(--bad); }
+.icon svg { width: 18px; height: 18px; }
+.q-main { display: grid; gap: 12px; min-width: 0; }
+.q-text { width: 100%; min-height: 52px; resize: vertical; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 10px 12px; font-size: 1.02rem; font-weight: 600; }
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ans { display: flex; align-items: center; gap: 8px; border-radius: 12px; padding: 0 10px; border: 1px solid var(--line); background: var(--paper); }
+.ans .mark { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: .75rem; font-weight: 800; }
+.ans.good { background: var(--good-bg); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
+.ans.good .mark { background: var(--good); color: #fff; }
+.ans.bad .mark { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
+.ans input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 10px 0; }
+.hint { font-size: .78rem; color: var(--ink-2); }
+
+/* photo */
+.photo { position: relative; display: grid; place-items: center; align-content: center; gap: 4px; min-height: 150px; border: 2px dashed var(--line); border-radius: 14px; background: var(--paper); color: var(--ink-2); text-align: center; padding: 10px; font-size: .82rem; overflow: hidden; transition: border-color .2s, background .2s; }
+.photo:hover, .photo.drag { border-color: var(--accent); color: var(--accent); }
+.photo svg { width: 26px; height: 26px; }
+.photo input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.photo.has { border-style: solid; padding: 0; align-content: stretch; }
+.photo.has img { width: 100%; height: 100%; min-height: 150px; max-height: 240px; object-fit: cover; display: block; }
+.photo .rm { position: absolute; top: 6px; inset-inline-end: 6px; z-index: 2; border: 0; border-radius: 999px; background: #000000a6; color: #fff; padding: 4px 10px; font-size: .78rem; }
+
+.add-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.add { flex: 1 1 220px; min-height: 64px; border: 2px dashed var(--line); border-radius: var(--radius); background: transparent; color: var(--accent); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
+.add:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.add input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.step { padding: 14px 16px; border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); font-size: .88rem; color: var(--ink-2); }
+.step b { display: block; color: var(--ink); margin-bottom: 2px; }
+.rules { font-size: .8rem; color: var(--ink-2); max-width: 75ch; }
+
+/* barre d'action en bas (mobile) */
+.dock { position: fixed; inset: auto 0 0 0; z-index: 20; display: flex; gap: 10px; justify-content: center; padding: 12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--line); }
+.dock .btn { flex: 0 1 240px; min-height: 46px; }
+.toast { position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 40; background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .9rem; box-shadow: var(--shadow-up); max-width: 92vw; text-align: center; }
+
+/* aperçu façon jeu */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: #000000a0; }
+.phone { width: min(400px, 100%); max-height: calc(100vh - 32px); overflow: auto; border-radius: 34px; background: var(--paper); box-shadow: var(--shadow-up); padding: 18px 18px 20px; display: grid; gap: 14px; border: 8px solid #1D1D1F; }
+.p-top { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--ink-2); }
+.p-top .btn { min-height: 32px; padding: 4px 12px; font-size: .85rem; }
+.p-prog { flex: 1; height: 6px; border-radius: 3px; background: var(--fill); overflow: hidden; }
+.p-prog i { display: block; height: 100%; background: var(--accent); }
+.p-q { margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.25; text-wrap: balance; }
+.p-img { width: 100%; max-height: 220px; object-fit: cover; border-radius: 18px; }
+.p-opts { display: grid; gap: 10px; }
+.p-opt { min-height: 54px; border: 0; border-radius: 16px; background: var(--card); box-shadow: var(--shadow); font-weight: 600; font-size: 1rem; text-align: start; padding: 12px 16px; display: flex; gap: 10px; align-items: center; }
+.p-opt span { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--fill); font-size: .8rem; font-weight: 800; flex: none; }
+.p-opt.good { background: var(--good-bg); box-shadow: 0 0 0 2px var(--good); }
+.p-opt.bad { background: var(--bad-bg); box-shadow: 0 0 0 2px var(--bad); }
+.p-nav { display: flex; justify-content: space-between; gap: 8px; }
+.p-empty { text-align: center; color: var(--ink-2); padding: 30px 0; }
+
+@media (max-width: 720px) {
+  .q { grid-template-columns: 1fr; }
+  .photo { min-height: 110px; }
+  .steps { grid-template-columns: 1fr; }
+  .top .btn.hide-m { display: none; }
+}
+@media (max-width: 460px) { .answers { grid-template-columns: 1fr; } }
+@media print { .top, .dock, .add-row, .q-tools, .photo:not(.has) { display: none !important; } .q { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="zellige" aria-hidden="true"></div>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="62.07,7.2 84.8,29.93 70.94,35.67 56.33,21.06" fill="#0071E3"/><polygon points="84.8,29.93 84.8,62.07 70.94,56.33 70.94,35.67" fill="#16A34A"/><polygon points="84.8,62.07 62.07,84.8 56.33,70.94 70.94,56.33" fill="#FFC800"/><polygon points="62.07,84.8 29.93,84.8 35.67,70.94 56.33,70.94" fill="#FF8A1F"/><polygon points="29.93,84.8 7.2,62.07 21.06,56.33 35.67,70.94" fill="#0071E3"/><polygon points="7.2,62.07 7.2,29.93 21.06,35.67 21.06,56.33" fill="#16A34A"/><polygon points="7.2,29.93 29.93,7.2 35.67,21.06 21.06,35.67" fill="#FFC800"/><polygon points="29.93,7.2 62.07,7.2 56.33,21.06 35.67,21.06" fill="#FF8A1F"/><polygon points="72.87,61.56 96.91,85.6 85.6,96.91 61.56,72.87" fill="#0071E3"/><polygon points="46,27 50.21,35.84 59.44,32.56 56.16,41.79 65,46 56.16,50.21 59.44,59.44 50.21,56.16 46,65 41.79,56.16 32.56,59.44 35.84,50.21 27,46 35.84,41.79 32.56,32.56 41.79,35.84" fill="#FFC800"/></svg>
+      Quizellige
+    </div>
+    <div class="top-sp"></div>
+    <select class="lang" id="lang" aria-label="Langue">
+      <option value="fr">Français</option><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option>
+    </select>
+    <button class="btn hide-m" id="preview-top" data-t="preview"></button>
+    <button class="btn primary hide-m" id="save-top" data-t="save"></button>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h1 data-t="h1"></h1>
+    <p data-t="lead"></p>
+  </section>
+
+  <div class="steps">
+    <div class="step"><b data-t="s1t"></b><span data-t="s1"></span></div>
+    <div class="step"><b data-t="s2t"></b><span data-t="s2"></span></div>
+    <div class="step"><b data-t="s3t"></b><span data-t="s3"></span></div>
+  </div>
+
+  <div class="title-field">
+    <label for="title" data-t="titleLabel"></label>
+    <input id="title" maxlength="80" dir="auto">
+  </div>
+
+  <div class="count"><span id="count"></span><div class="bar"><i id="bar"></i></div></div>
+
+  <div id="list"></div>
+
+  <div class="add-row">
+    <button class="add" id="add"><span aria-hidden="true">＋</span> <span data-t="add"></span></button>
+    <label class="add"><input type="file" id="many" accept="image/*" multiple><span aria-hidden="true">📷</span> <span data-t="addPhotos"></span></label>
+  </div>
+
+  <p class="rules" data-t="rules"></p>
+</main>
+
+<div class="dock">
+  <button class="btn" id="preview" data-t="preview"></button>
+  <button class="btn primary" id="save" data-t="save"></button>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="phone" role="dialog" aria-modal="true" aria-labelledby="p-q">
+    <div class="p-top"><span id="p-n"></span><div class="p-prog"><i id="p-bar"></i></div><button class="btn" id="p-close" data-t="close"></button></div>
+    <div id="p-body"></div>
+    <div class="p-nav"><button class="btn" id="p-prev" data-t="prev"></button><button class="btn primary" id="p-next" data-t="next"></button></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<!-- Contenu du quiz : rempli par cette page, relu par Quizellige à l'import. -->
+<script type="application/json" id="quiz-data">{"v":1,"title":"","lang":"","questions":[]}</script>
+<script>
+(() => {
+'use strict';
+const MAX = 50, MIN = 3;
+const T = {
+  fr: { h1: 'Crée ton quiz', lead: "Écris tes questions, ajoute des photos si tu veux, regarde l'aperçu, puis envoie ce fichier sur Quizellige.",
+    s1t: '1. Remplis', s1: 'Une question, la bonne réponse en vert, 1 à 3 mauvaises réponses en rouge.', s2t: '2. Enregistre', s2: '« Enregistrer » télécharge ce fichier avec tes questions : tu peux le rouvrir et continuer plus tard.', s3t: '3. Envoie', s3: 'Sur Quizellige : Crée ton quiz › Importer un fichier, choisis ce fichier, vérifie puis envoie.',
+    titleLabel: 'Titre du quiz', titlePh: 'Par exemple : Les monuments du Maroc', add: 'Ajouter une question', addPhotos: 'Ajouter plusieurs photos', preview: 'Aperçu', save: 'Enregistrer',
+    q: 'Question', qPh: 'Écris ta question…', good: 'Bonne réponse', bad: 'Mauvaise réponse', photo: 'Ajouter une photo', photoHint: 'facultatif · glisse-la ici', remove: 'Retirer',
+    up: 'Monter', down: 'Descendre', dup: 'Dupliquer', del: 'Supprimer', ok: 'Prête', todo: 'À compléter', count: '{n} question(s) prête(s) sur {t} · 3 au minimum, 50 au maximum',
+    close: 'Fermer', prev: '‹ Précédente', next: 'Suivante ›', pn: 'Question {i} / {n}', pEmpty: "Aucune question prête pour l'instant.", untitled: 'Mon quiz',
+    saved: 'Fichier enregistré : envoie-le sur Quizellige quand il est prêt.', tooMany: '50 questions au maximum.', bigPhoto: 'Photo illisible.', confirmDel: 'Supprimer cette question ?',
+    rules: "Utilise uniquement des photos que tu as prises ou que tu as le droit de partager : pas de logos de marques, d'affiches de films ni de personnes reconnaissables sans leur accord. Chaque quiz est relu avant d'être publié." },
+  en: { h1: 'Create your quiz', lead: 'Write your questions, add photos if you like, check the preview, then upload this file to Quizellige.',
+    s1t: '1. Fill in', s1: 'A question, the right answer in green, 1 to 3 wrong answers in red.', s2t: '2. Save', s2: '“Save” downloads this file with your questions: you can reopen it and carry on later.', s3t: '3. Upload', s3: 'On Quizellige: Create your quiz › Import a file, pick this file, check it, then send it.',
+    titleLabel: 'Quiz title', titlePh: 'For example: Monuments of Morocco', add: 'Add a question', addPhotos: 'Add several photos', preview: 'Preview', save: 'Save',
+    q: 'Question', qPh: 'Write your question…', good: 'Right answer', bad: 'Wrong answer', photo: 'Add a photo', photoHint: 'optional · drop it here', remove: 'Remove',
+    up: 'Move up', down: 'Move down', dup: 'Duplicate', del: 'Delete', ok: 'Ready', todo: 'To finish', count: '{n} question(s) ready out of {t} · 3 minimum, 50 maximum',
+    close: 'Close', prev: '‹ Previous', next: 'Next ›', pn: 'Question {i} / {n}', pEmpty: 'No question ready yet.', untitled: 'My quiz',
+    saved: 'File saved: upload it to Quizellige when it is ready.', tooMany: '50 questions maximum.', bigPhoto: "Couldn't read this photo.", confirmDel: 'Delete this question?',
+    rules: "Only use photos you took or have the right to share: no brand logos, film posters or recognisable people without their consent. Every quiz is reviewed before it goes live." },
+  es: { h1: 'Crea tu quiz', lead: 'Escribe tus preguntas, añade fotos si quieres, mira la vista previa y luego sube este archivo a Quizellige.',
+    s1t: '1. Rellena', s1: 'Una pregunta, la respuesta correcta en verde y de 1 a 3 incorrectas en rojo.', s2t: '2. Guarda', s2: '«Guardar» descarga este archivo con tus preguntas: puedes volver a abrirlo y seguir más tarde.', s3t: '3. Envía', s3: 'En Quizellige: Crea tu quiz › Importar un archivo, elige este archivo, revisa y envía.',
+    titleLabel: 'Título del quiz', titlePh: 'Por ejemplo: Los monumentos de Marruecos', add: 'Añadir una pregunta', addPhotos: 'Añadir varias fotos', preview: 'Vista previa', save: 'Guardar',
+    q: 'Pregunta', qPh: 'Escribe tu pregunta…', good: 'Respuesta correcta', bad: 'Respuesta incorrecta', photo: 'Añadir una foto', photoHint: 'opcional · arrástrala aquí', remove: 'Quitar',
+    up: 'Subir', down: 'Bajar', dup: 'Duplicar', del: 'Eliminar', ok: 'Lista', todo: 'Por completar', count: '{n} pregunta(s) lista(s) de {t} · mínimo 3, máximo 50',
+    close: 'Cerrar', prev: '‹ Anterior', next: 'Siguiente ›', pn: 'Pregunta {i} / {n}', pEmpty: 'Todavía no hay ninguna pregunta lista.', untitled: 'Mi quiz',
+    saved: 'Archivo guardado: súbelo a Quizellige cuando esté listo.', tooMany: 'Máximo 50 preguntas.', bigPhoto: 'No se pudo leer la foto.', confirmDel: '¿Eliminar esta pregunta?',
+    rules: 'Usa solo fotos que hayas hecho tú o que tengas derecho a compartir: nada de logotipos de marcas, carteles de películas ni personas reconocibles sin su permiso. Cada quiz se revisa antes de publicarse.' },
+  ar: { h1: 'أنشئ اختبارك', lead: 'اكتب أسئلتك، وأضف صوراً إن أردت، وشاهد المعاينة، ثم ارفع هذا الملف على Quizellige.',
+    s1t: '1. املأ', s1: 'سؤال، والإجابة الصحيحة بالأخضر، ومن 1 إلى 3 إجابات خاطئة بالأحمر.', s2t: '2. احفظ', s2: '«حفظ» ينزّل هذا الملف مع أسئلتك: يمكنك فتحه من جديد والمتابعة لاحقاً.', s3t: '3. أرسل', s3: 'على Quizellige: أنشئ اختبارك › استيراد ملف، اختر هذا الملف، راجع ثم أرسل.',
+    titleLabel: 'عنوان الاختبار', titlePh: 'مثلاً: معالم المغرب', add: 'إضافة سؤال', addPhotos: 'إضافة عدة صور', preview: 'معاينة', save: 'حفظ',
+    q: 'السؤال', qPh: 'اكتب سؤالك…', good: 'الإجابة الصحيحة', bad: 'إجابة خاطئة', photo: 'إضافة صورة', photoHint: 'اختياري · اسحبها إلى هنا', remove: 'إزالة',
+    up: 'إلى الأعلى', down: 'إلى الأسفل', dup: 'نسخ', del: 'حذف', ok: 'جاهز', todo: 'غير مكتمل', count: '{n} سؤال جاهز من {t} · 3 على الأقل و50 على الأكثر',
+    close: 'إغلاق', prev: 'السابق ›', next: '‹ التالي', pn: 'السؤال {i} / {n}', pEmpty: 'لا يوجد أي سؤال جاهز بعد.', untitled: 'اختباري',
+    saved: 'تم حفظ الملف: ارفعه على Quizellige عندما يكون جاهزاً.', tooMany: '50 سؤالاً كحد أقصى.', bigPhoto: 'تعذّرت قراءة الصورة.', confirmDel: 'حذف هذا السؤال؟',
+    rules: 'استعمل فقط صوراً التقطتها أو يحق لك مشاركتها: لا شعارات علامات تجارية ولا ملصقات أفلام ولا أشخاص يمكن التعرّف عليهم دون موافقتهم. تتم مراجعة كل اختبار قبل نشره.' },
+};
+const ICON = {
+  up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
+  down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>',
+  dup: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+  del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+  cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+};
+
+const dataEl = document.getElementById('quiz-data');
+let data;
+try { data = JSON.parse(dataEl.textContent); } catch { data = { v: 1, title: '', questions: [] }; }
+const KEY = 'quizellige-modele';
+if (!data.questions.length) { try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.questions) data = d; } catch {} }
+const blank = () => ({ text: '', answers: ['', '', '', ''], image: null });
+while (data.questions.length < 3) data.questions.push(blank());
+let lang = data.lang || (navigator.language || 'fr').slice(0, 2);
+if (!T[lang]) lang = 'fr';
+const t = (k, p) => (T[lang][k] || T.fr[k] || k).replace(/\{(\w+)\}/g, (_, x) => (p && p[x] != null ? p[x] : ''));
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const ready = (q) => q.text.trim() && q.answers[0].trim() && q.answers.slice(1).some((a) => a.trim());
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch {} };
+let toastTimer;
+const toast = (msg) => { const el = $('toast'); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => (el.hidden = true), 3200); };
+
+/** Photo réduite (1000 px au plus, JPEG) pour garder un fichier léger. */
+function shrink(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const s = Math.min(1, 1000 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('img')); };
+    img.src = url;
+  });
+}
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  $('lang').value = lang;
+  document.querySelectorAll('[data-t]').forEach((el) => (el.textContent = t(el.dataset.t)));
+  $('title').placeholder = t('titlePh');
+  document.title = (data.title || t('untitled')) + ' · Quizellige';
+}
+
+function updateCount() {
+  const n = data.questions.filter(ready).length;
+  $('count').innerHTML = esc(t('count', { n: '§', t: data.questions.length })).replace('§', `<b>${n}</b>`);
+  $('bar').style.width = Math.min(100, (n / Math.max(MIN, data.questions.length)) * 100) + '%';
+}
+
+function cardState(card, q) {
+  const ok = ready(q);
+  card.classList.toggle('ok', !!ok);
+  card.classList.toggle('todo', !ok && !!(q.text || q.answers.some(Boolean)));
+  card.querySelector('.state').textContent = ok ? '✓ ' + t('ok') : (q.text || q.answers.some(Boolean)) ? t('todo') : '';
+}
+
+function render() {
+  const list = $('list');
+  list.innerHTML = '';
+  data.questions.forEach((q, i) => {
+    const card = document.createElement('section');
+    card.className = 'q';
+    card.innerHTML = `
+      <div class="q-head">
+        <span class="num">${i + 1}</span><span class="state"></span>
+        <div class="q-tools">
+          <button class="icon" data-a="up" title="${esc(t('up'))}" aria-label="${esc(t('up'))}" ${i === 0 ? 'disabled' : ''}>${ICON.up}</button>
+          <button class="icon" data-a="down" title="${esc(t('down'))}" aria-label="${esc(t('down'))}" ${i === data.questions.length - 1 ? 'disabled' : ''}>${ICON.down}</button>
+          <button class="icon" data-a="dup" title="${esc(t('dup'))}" aria-label="${esc(t('dup'))}">${ICON.dup}</button>
+          <button class="icon del" data-a="del" title="${esc(t('del'))}" aria-label="${esc(t('del'))}">${ICON.del}</button>
+        </div>
+      </div>
+      <div class="q-main">
+        <label class="sr" for="qt${i}">${esc(t('q'))} ${i + 1}</label>
+        <textarea class="q-text" id="qt${i}" maxlength="200" rows="2" dir="auto" placeholder="${esc(t('qPh'))}">${esc(q.text)}</textarea>
+        <div class="answers">
+          ${q.answers.map((a, k) => `<label class="ans ${k ? 'bad' : 'good'}"><span class="mark" aria-hidden="true">${k ? '✕' : '✓'}</span><span class="sr">${esc(k ? t('bad') + ' ' + k : t('good'))}</span><input data-k="${k}" maxlength="80" dir="auto" value="${esc(a)}" placeholder="${esc(k ? t('bad') + ' ' + k : t('good'))}"></label>`).join('')}
+        </div>
+      </div>
+      <div class="photo ${q.image ? 'has' : ''}">
+        ${q.image ? `<img src="${q.image}" alt=""><button class="rm" data-a="rmimg">${esc(t('remove'))}</button>` : `${ICON.cam}<strong>${esc(t('photo'))}</strong><span>${esc(t('photoHint'))}</span>`}
+        <input type="file" accept="image/*" aria-label="${esc(t('photo'))}" ${q.image ? 'hidden' : ''}>
+      </div>`;
+    const area = card.querySelector('textarea');
+    area.addEventListener('input', () => { q.text = area.value; cardState(card, q); updateCount(); persist(); });
+    card.querySelectorAll('.answers input').forEach((inp) => inp.addEventListener('input', () => { q.answers[+inp.dataset.k] = inp.value; cardState(card, q); updateCount(); persist(); }));
+    const zone = card.querySelector('.photo');
+    const setImg = async (f) => { if (!f || !f.type.startsWith('image/')) return; try { q.image = await shrink(f); persist(); render(); } catch { toast(t('bigPhoto')); } };
+    zone.querySelector('input').addEventListener('change', (e) => setImg(e.target.files[0]));
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+    zone.addEventListener('drop', (e) => { e.preventDefault(); zone.classList.remove('drag'); setImg(e.dataTransfer.files[0]); });
+    card.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-a]');
+      if (!b) return;
+      const a = b.dataset.a, L = data.questions;
+      if (a === 'up' && i > 0) [L[i - 1], L[i]] = [L[i], L[i - 1]];
+      else if (a === 'down' && i < L.length - 1) [L[i + 1], L[i]] = [L[i], L[i + 1]];
+      else if (a === 'dup') { if (L.length >= MAX) return toast(t('tooMany')); L.splice(i + 1, 0, JSON.parse(JSON.stringify(q))); }
+      else if (a === 'del') { if ((q.text || q.image) && !confirm(t('confirmDel'))) return; L.splice(i, 1); if (!L.length) L.push(blank()); }
+      else if (a === 'rmimg') q.image = null;
+      persist(); render();
+    });
+    cardState(card, q);
+    list.appendChild(card);
+  });
+  $('add').disabled = data.questions.length >= MAX;
+  updateCount();
+}
+
+$('title').value = data.title || '';
+$('title').addEventListener('input', (e) => { data.title = e.target.value; document.title = (data.title || t('untitled')) + ' · Quizellige'; persist(); });
+$('lang').addEventListener('change', (e) => { lang = e.target.value; data.lang = lang; persist(); applyLang(); render(); });
+$('add').addEventListener('click', () => {
+  if (data.questions.length >= MAX) return toast(t('tooMany'));
+  data.questions.push(blank()); persist(); render();
+  const last = $('list').lastElementChild; last.scrollIntoView({ behavior: 'smooth', block: 'center' }); last.querySelector('textarea').focus({ preventScroll: true });
+});
+$('many').addEventListener('change', async (e) => {
+  for (const f of e.target.files) {
+    let img; try { img = await shrink(f); } catch { toast(t('bigPhoto')); continue; }
+    const empty = data.questions.find((q) => !q.text.trim() && !q.image && !q.answers.some(Boolean));
+    if (empty) empty.image = img;
+    else if (data.questions.length < MAX) data.questions.push({ ...blank(), image: img });
+    else { toast(t('tooMany')); break; }
+  }
+  e.target.value = ''; persist(); render();
+});
+
+// ---------------------------------------------------------------- enregistrer : ce fichier, avec les questions dedans
+function save() {
+  data.v = 1; data.lang = lang;
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelector('#list').innerHTML = '';
+  clone.querySelector('#modal').hidden = true;
+  clone.querySelector('#toast').hidden = true;
+  clone.querySelector('#quiz-data').textContent = JSON.stringify(data).replace(/</g, '\\u003c');
+  clone.querySelector('#title').removeAttribute('value');
+  const html = '<!doctype html>\n' + clone.outerHTML;
+  const name = (data.title || t('untitled')).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase() || 'quiz';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+  a.download = `${name}.quizellige.html`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  toast(t('saved'));
+}
+$('save').addEventListener('click', save);
+$('save-top').addEventListener('click', save);
+
+// ---------------------------------------------------------------- aperçu façon jeu
+let pv = 0, picked = null, order = [];
+function shuffle(n) { const a = [...Array(n).keys()]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function drawPreview() {
+  const qs = data.questions.filter(ready);
+  const body = $('p-body');
+  $('p-prev').hidden = $('p-next').hidden = !qs.length;
+  if (!qs.length) { body.innerHTML = `<p class="p-empty">${esc(t('pEmpty'))}</p>`; $('p-n').textContent = ''; $('p-bar').style.width = '0'; return; }
+  pv = Math.max(0, Math.min(pv, qs.length - 1));
+  const q = qs[pv];
+  const ans = q.answers.map((a, k) => ({ a: a.trim(), k })).filter((x) => x.a);
+  if (order.length !== ans.length) order = shuffle(ans.length);
+  $('p-n').textContent = t('pn', { i: pv + 1, n: qs.length });
+  $('p-bar').style.width = ((pv + 1) / qs.length) * 100 + '%';
+  body.innerHTML = `<h2 class="p-q" id="p-q" dir="auto">${esc(q.text)}</h2>${q.image ? `<img class="p-img" src="${q.image}" alt="">` : ''}
+    <div class="p-opts">${order.map((o, n) => { const x = ans[o]; const cls = picked === null ? '' : x.k === 0 ? 'good' : picked === x.k ? 'bad' : ''; return `<button class="p-opt ${cls}" data-k="${x.k}" dir="auto"><span>${'ABCD'[n]}</span>${esc(x.a)}</button>`; }).join('')}</div>`;
+  body.querySelectorAll('.p-opt').forEach((b) => b.addEventListener('click', () => { if (picked === null) { picked = +b.dataset.k; drawPreview(); } }));
+  $('p-prev').disabled = pv === 0; $('p-next').disabled = pv === qs.length - 1;
+}
+function openPreview() { pv = 0; picked = null; order = []; $('modal').hidden = false; drawPreview(); $('p-close').focus(); }
+$('preview').addEventListener('click', openPreview);
+$('preview-top').addEventListener('click', openPreview);
+$('p-close').addEventListener('click', () => ($('modal').hidden = true));
+$('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') $('modal').hidden = true; });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('modal').hidden = true; });
+$('p-prev').addEventListener('click', () => { pv--; picked = null; order = []; drawPreview(); });
+$('p-next').addEventListener('click', () => { pv++; picked = null; order = []; drawPreview(); });
+
+applyLang();
+render();
+})();
+</script>
+</body>
+</html>

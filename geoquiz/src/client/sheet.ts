@@ -257,6 +257,29 @@ export function quizToRows(l: SheetLabels, title: string, qs: SheetQuestion[]): 
   return [[l.title, title], [], head, ...body];
 }
 
+/** Fichier rempli avec le modèle HTML de Quizellige (questions et photos dans le fichier). */
+export function readQuizHtml(text: string): { title: string; questions: SheetQuestion[]; skipped: number } | null {
+  const m = text.match(/<script[^>]*id="quiz-data"[^>]*>([\s\S]*?)<\/script>/);
+  if (!m) return null;
+  let d: { title?: string; questions?: { text?: string; answers?: string[]; image?: string | null }[] };
+  try { d = JSON.parse(m[1]); } catch { return null; }
+  const questions: SheetQuestion[] = [];
+  let skipped = 0;
+  for (const q of d.questions ?? []) {
+    const text = String(q.text ?? '').trim();
+    const [good, ...bad] = (q.answers ?? []).map((a) => String(a ?? '').trim());
+    const seen = new Set([good?.toLowerCase()]);
+    const wrong = bad.filter((a) => a && !seen.has(a.toLowerCase()) && seen.add(a.toLowerCase())).slice(0, 3);
+    if (!text && !good && !q.image) continue; // carte vide
+    if (!text || !good || !wrong.length || questions.length >= 50) { skipped++; continue; }
+    let image: Blob | undefined;
+    const im = typeof q.image === 'string' ? q.image.match(/^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$/) : null;
+    if (im) { const bin = atob(im[2]); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); image = new Blob([u], { type: im[1] }); }
+    questions.push({ text: text.slice(0, 200), answers: [good, ...wrong].map((a) => a.slice(0, 80)), correct: 0, image });
+  }
+  return { title: String(d.title ?? '').trim().slice(0, 80), questions, skipped };
+}
+
 export function download(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
