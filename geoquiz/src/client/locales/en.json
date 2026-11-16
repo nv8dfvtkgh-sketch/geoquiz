@@ -207,7 +207,7 @@
   "game.truefalse": "True or false about the world",
   "game.create": "Your questions, shared with a code",
   "game.countries.long": "Find countries on the map, or name the highlighted one. From the whole world down to a single region.",
-  "game.regions.long": "The regions, states and provinces of every country: Morocco's 12 regions, US states, French departments…",
+  "game.regions.long": "The regions, states and provinces of every country: Morocco's 12 regions, US states, French departments… Morocco map (12 regions, 75 prefectures and provinces): © OpenStreetMap contributors, via geoBoundaries (ODbL licence).",
   "game.flags.long": "Name the country from its flag, or find a country's flag. Watch out for look-alike flags.",
   "game.capitals.long": "Find a country's capital, a capital's country, or place the capital on the map.",
   "game.silhouettes.long": "Only the country's shape is shown: recognize it, then find it on the map.",

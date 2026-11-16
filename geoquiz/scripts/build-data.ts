@@ -17,6 +17,8 @@ import {
   Pt, Ring, ringArea, ringsOf, topoSimplify,
 } from './lib/geo';
 import { DROP_A3, MERGE_INTO, REGION_MAX_DISTANCE_FACTOR } from './config/borders';
+import { MA_PROVINCES } from './config/ma-provinces';
+import { CAPITAL_ALT_DROP, CAPITAL_NAMES, CAPITAL_PICK, CURRENCY_FIX, NOT_COUNTRIES } from './config/facts';
 import { REGION_GROUPS } from './config/regions';
 
 const ROOT = path.resolve(__dirname, '..');
@@ -32,6 +34,9 @@ const FILES = {
   admin1: 'ne_10m_admin_1_states_provinces.geojson',
   places: 'ne_50m_populated_places.geojson',
 };
+// Maroc : Natural Earth n'a que les 16 anciennes régions (avant 2015). On prend les 75 préfectures et
+// provinces de geoBoundaries (OpenStreetMap, ODbL), regroupées ensuite en 12 régions (config/regions.ts).
+const MA_ADM2 = { file: 'gb_MAR_ADM2.geojson', url: 'https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/main/releaseData/gbOpen/MAR/ADM2/geoBoundaries-MAR-ADM2_simplified.geojson' };
 
 // ---------------------------------------------------------------- utilitaires
 const prop = (f: any, k: string): any => {
@@ -58,6 +63,30 @@ async function ensureRaw() {
     if (!res.ok) throw new Error(`Téléchargement impossible (${res.status}) : ${NE_BASE + name}`);
     fs.writeFileSync(file, Buffer.from(await res.arrayBuffer()));
   }
+  const ma = path.join(RAW, MA_ADM2.file);
+  if (!DEMO && !fs.existsSync(ma)) {
+    log(`Téléchargement ${MA_ADM2.file}…`);
+    const res = await fetch(MA_ADM2.url);
+    if (!res.ok) throw new Error(`Téléchargement impossible (${res.status}) : ${MA_ADM2.url}`);
+    fs.writeFileSync(ma, Buffer.from(await res.arrayBuffer()));
+  }
+}
+
+/** Les 75 préfectures/provinces du Maroc, avec des noms propres dans les 4 langues. */
+function moroccoProvinces(): any[] | null {
+  const file = path.join(RAW, MA_ADM2.file);
+  if (!fs.existsSync(file)) return null;
+  const key = (s: string) => ` ${s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()} `;
+  const out: any[] = [];
+  for (const f of readJson(file).features as any[]) {
+    const n = key(String(f.properties.shapeName ?? ''));
+    const hit = MA_PROVINCES.filter((p) => n.includes(` ${p.key} `));
+    if (hit.length !== 1) throw new Error(`Maroc : province non reconnue « ${f.properties.shapeName} »`);
+    const p = hit[0];
+    out.push({ type: 'Feature', geometry: f.geometry, properties: { name: p.fr, name_fr: p.fr, name_en: p.en, name_es: p.es, name_ar: p.ar } });
+  }
+  if (out.length !== MA_PROVINCES.length) throw new Error(`Maroc : ${out.length} provinces au lieu de ${MA_PROVINCES.length}`);
+  return out;
 }
 
 const readJson = (f: string) => JSON.parse(fs.readFileSync(f, 'utf8'));
@@ -229,7 +258,7 @@ async function main() {
   for (const f of places) {
     const cls = String(prop(f, 'FEATURECLA') ?? '');
     if (!/^Admin-0 capital/i.test(cls)) continue;
-    const iso = a3ToIso[prop(f, 'ADM0_A3')] ?? a3ToIso[prop(f, 'SOV_A3')];
+    const iso = a3ToIso[prop(f, 'ADM0_A3')] ?? a3ToIso[prop(f, 'SOV_A3')] ?? validIso(prop(f, 'ISO_A2'));
     if (!iso || !meta[iso]) continue;
     // Une capitale d'un territoire fusionné (ex. Laâyoune) n'est pas la capitale du pays.
     if (MERGE_INTO[prop(f, 'ADM0_A3')]) continue;
@@ -239,14 +268,21 @@ async function main() {
   const worldFeatureMap = Object.fromEntries(world.features.map((f) => [f.id, f]));
   for (const [iso, list] of capFeatures) {
     list.sort((a, b) => Number(/alt/i.test(prop(a, 'FEATURECLA'))) - Number(/alt/i.test(prop(b, 'FEATURECLA'))));
+    const pick = CAPITAL_PICK[iso];
+    if (pick) list.sort((a, b) => Number(prop(b, 'NAME') === pick) - Number(prop(a, 'NAME') === pick));
     const cap = list[0];
     const lon = Number(prop(cap, 'LONGITUDE') ?? cap.geometry.coordinates[0]);
     const lat = Number(prop(cap, 'LATITUDE') ?? cap.geometry.coordinates[1]);
     const xy = world.tx(lon, lat);
     meta[iso].capital = {
       names: namesFrom(cap, prop(cap, 'NAME')),
-      alts: list.slice(1).map((f) => prop(f, 'NAME')).filter(Boolean),
+      alts: list.slice(1).map((f) => prop(f, 'NAME')).filter((n) => n && !(CAPITAL_ALT_DROP[iso] ?? []).includes(n)),
     };
+    const fix = CAPITAL_NAMES[iso];
+    if (fix) {
+      Object.assign(meta[iso].capital.names, fix.names);
+      meta[iso].capital.alts = [...new Set([...meta[iso].capital.alts, ...(fix.alts ?? [])])];
+    }
     (worldFeatureMap[iso] as any).k = [round(xy[0]), round(xy[1])];
   }
   log(`Capitales : ${capFeatures.size}`);
@@ -262,6 +298,9 @@ async function main() {
     if (!byCountry.has(iso)) byCountry.set(iso, []);
     byCountry.get(iso)!.push(f);
   }
+
+  const maProv = moroccoProvinces();
+  if (maProv) byCountry.set('MA', maProv);
 
   let regionCount = 0;
   for (const [iso, feats] of byCountry) {
@@ -367,6 +406,8 @@ async function main() {
   // Monnaies (CLDR) et données des jeux annexes.
   const currencies = readJson(path.join(ROOT, 'data/names/currencies.json'));
   for (const [iso, m] of Object.entries<any>(meta)) if (currencies[iso]) m.currency = currencies[iso];
+  for (const [iso, c] of Object.entries(CURRENCY_FIX)) if (meta[iso]) meta[iso].currency = c;
+  for (const iso of NOT_COUNTRIES) if (meta[iso]) meta[iso].dependency = true;
   for (const f of fs.readdirSync(path.join(ROOT, 'data/games'))) fs.copyFileSync(path.join(ROOT, 'data/games', f), path.join(OUT, f));
 
   fs.writeFileSync(path.join(OUT, 'countries.json'), JSON.stringify(meta));
