@@ -1426,7 +1426,8 @@ const whoamiCat: Category = {
     if (cur && LANG_KEYS.every((l) => !normalize(cur.names[l] ?? '').includes(stem(c.names[l] ?? '')))) clues.push(clue('currency', (l) => cur.names[l] ?? cur.code));
     else clues.push(c.neighbors.length ? clue('nbCount', (l) => c.neighbors.length.toLocaleString(l === 'ar' ? 'ar-MA' : l)) : clue('island'));
     if (CONTINENT_NAMES[c.continent]) clues.push(clue('continent', (l) => CONTINENT_NAMES[c.continent][l]));
-    const nb = c.neighbors.filter((id) => countries[id] && !countries[id].dependency);
+    // Pas de voisin dont le nom contient celui du pays (Biélorussie pour la Russie, Guinée-Bissau pour la Guinée).
+    const nb = c.neighbors.filter((id) => countries[id] && !countries[id].dependency && !normalize(countries[id].names.fr).includes(normalize(c.names.fr)));
     if (nb.length) { const n = nb[Math.floor(rnd() * nb.length)]; clues.push(clue('neighbor', (l) => countries[n].names[l])); }
     if (c.capital) clues.push(clue('capital', (l) => [...(c.capital!.names[l] ?? '')][0]?.toUpperCase() ?? ''));
     const base = { category: 'whoami', target, promptKey: 'q.whoami', clues, answer: c.names, revealFlagIso: target, attempts: 1 };
@@ -1445,10 +1446,10 @@ export const SURVIVAL_GAMES = ['flags', 'capitals', 'countries', 'currencies', '
 export const TRIVIA_THEMES: Record<string, string[]> = {
   geo: ['capitals', 'flags', 'currencies', 'languages', 'peaks', 'records'],
   hist: ['tr_hist', 'tr_hist', 'prog_hist'],
-  sci: ['space', 'body', 'dinos', 'inventions'],
+  sci: ['space', 'body', 'dinos', 'inventions', 'nature', 'tech'],
   sport: ['football', 'tennis', 'rugby', 'basketball', 'olympics', 'motorsport'],
   screens: ['cinema', 'emoji'],
-  arts: ['tr_arts'],
+  arts: ['tr_arts', 'arts', 'litt', 'myth'],
 };
 export const TRIVIA_COUNT = 12;
 const triviaCat = (id: string): Category | undefined => CATEGORIES[id] ?? (extras.packs[id] ? packCat(id, [id]) : undefined);

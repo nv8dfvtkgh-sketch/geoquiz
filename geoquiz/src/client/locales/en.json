@@ -1328,5 +1328,21 @@
   "col.missed": "Missed: this collector is no longer available",
   "col.new": "Collector unlocked!",
   "col.toWin": "Collector to win this week",
-  "col.won": "Collector won ✓"
+  "col.won": "Collector won ✓",
+  "family.culture": "Culture and knowledge",
+  "cat.arts": "Art and music",
+  "game.arts": "Painters, instruments, dances and music from around the world",
+  "game.arts.long": "From Monet to Chaïbia, from the violin to the guembri, from tango to ahidous: 66 questions on painting, music and dance, from Morocco and around the world.",
+  "cat.litt": "Literature",
+  "game.litt": "Tales, novels, poets and writers",
+  "game.litt.long": "From La Fontaine to Choukri, from Imru' al-Qais to Tolkien: 59 questions on tales, novels and poets from all over the world, for young and older readers.",
+  "cat.nature": "Nature and climate",
+  "game.nature": "Weather, plants, animals, energy and climate",
+  "game.nature.long": "From hail to the chergui wind, from the greenhouse effect to the Atlas cedars: 58 questions to understand the planet and protect it.",
+  "cat.myth": "Mythologies",
+  "game.myth": "Gods, heroes and legendary creatures",
+  "game.myth.long": "Zeus, Anubis, Thor, Gilgamesh, the Minotaur, Tin Hinan and the Titan Atlas: 60 questions on Greek, Egyptian, Norse and North African myths.",
+  "cat.tech": "Computers and the Internet",
+  "game.tech": "Computers, code, online safety and digital history",
+  "game.tech.long": "From binary to AI, from al-Khwarizmi to Ada Lovelace, plus the right habits to stay safe online: 53 questions for young and older geeks."
 }

@@ -115,6 +115,7 @@ export const PACK_GAMES: Record<string, string[]> = {
   maroc: ['maroc'], roadsigns: ['roadsigns'], vocab: ['vocab'], hello: ['hello'],
   prog_geo: ['prog_geo'], prog_hist: ['prog_hist'], prog_sci: ['prog_sci'], tifinagh: ['tifinagh'],
   peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
+  arts: ['arts'], litt: ['litt'], nature: ['nature'], myth: ['myth'], tech: ['tech'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */

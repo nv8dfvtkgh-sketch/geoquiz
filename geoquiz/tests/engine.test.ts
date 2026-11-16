@@ -1505,3 +1505,15 @@ test('les rébus de séries pour ados ne sont pas posés aux enfants', () => {
   const big = new Set(Array.from({ length: 30 }, () => drawQuestions(s, Math.random, [], ['fr'], false).map((q) => q.target)).flat());
   assert.ok(teen.some((t) => big.has(t)), 'pour les 13 ans et plus, les rébus restent');
 });
+
+test('Culture et savoirs : 5 jeux d\'au moins 50 questions, dans le quiz général', async () => {
+  const { FAMILIES } = await import('../src/client/games');
+  const fam = FAMILIES.find((f) => f.id === 'culture')!;
+  assert.deepEqual(fam.games.map((g) => g.id).sort(), ['arts', 'litt', 'myth', 'nature', 'tech']);
+  for (const id of ['arts', 'litt', 'myth', 'nature', 'tech']) {
+    const qs = drawQuestions({ category: id, zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
+    assert.equal(qs.length, 10, id);
+    const pool = CATEGORIES[id].pool(zones.get('world')!, 'hard', 200);
+    assert.ok(pool.length >= 50, `${id} : ${pool.length} questions`);
+  }
+});

@@ -1328,5 +1328,21 @@
   "col.missed": "Manqué : ce collector n'est plus disponible",
   "col.new": "Collector débloqué !",
   "col.toWin": "Collector à gagner cette semaine",
-  "col.won": "Collector gagné ✓"
+  "col.won": "Collector gagné ✓",
+  "family.culture": "Culture et savoirs",
+  "cat.arts": "Arts et musique",
+  "game.arts": "Peintres, instruments, danses et musiques du monde",
+  "game.arts.long": "De Monet à Chaïbia, du violon au guembri, du tango à l'ahidous : 66 questions sur la peinture, la musique et la danse, d'ici et d'ailleurs.",
+  "cat.litt": "Littérature",
+  "game.litt": "Contes, romans, poètes et écrivains",
+  "game.litt.long": "De La Fontaine à Choukri, d'Imrou'l Qays à Tolkien : 59 questions sur les contes, les romans et les poètes du monde entier, pour petits et grands lecteurs.",
+  "cat.nature": "Nature et climat",
+  "game.nature": "Météo, plantes, animaux, énergie et climat",
+  "game.nature.long": "De la grêle au chergui, de l'effet de serre aux cèdres de l'Atlas : 58 questions pour comprendre la planète et la protéger.",
+  "cat.myth": "Mythologies",
+  "game.myth": "Dieux, héros et créatures des légendes",
+  "game.myth.long": "Zeus, Anubis, Thor, Gilgamesh, le Minotaure, Tin Hinan et le titan Atlas : 60 questions sur les mythes grecs, égyptiens, nordiques et d'Afrique du Nord.",
+  "cat.tech": "Informatique et internet",
+  "game.tech": "Ordinateurs, code, sécurité en ligne et histoire du numérique",
+  "game.tech.long": "Du binaire à l'IA, d'Al-Khwarizmi à Ada Lovelace, avec les bons réflexes pour se protéger en ligne : 53 questions pour les petits et les grands geeks."
 }

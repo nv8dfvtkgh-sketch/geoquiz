@@ -1328,5 +1328,21 @@
   "col.missed": "Perdido: este coleccionable ya no está disponible",
   "col.new": "¡Coleccionable desbloqueado!",
   "col.toWin": "Coleccionable en juego esta semana",
-  "col.won": "Coleccionable ganado ✓"
+  "col.won": "Coleccionable ganado ✓",
+  "family.culture": "Cultura y saberes",
+  "cat.arts": "Arte y música",
+  "game.arts": "Pintores, instrumentos, bailes y músicas del mundo",
+  "game.arts.long": "De Monet a Chaïbia, del violín al guembri, del tango al ahidus: 66 preguntas sobre pintura, música y danza, de Marruecos y del mundo.",
+  "cat.litt": "Literatura",
+  "game.litt": "Cuentos, novelas, poetas y escritores",
+  "game.litt.long": "De La Fontaine a Chukri, de Imru' al-Qays a Tolkien: 59 preguntas sobre cuentos, novelas y poetas de todo el mundo, para lectores pequeños y grandes.",
+  "cat.nature": "Naturaleza y clima",
+  "game.nature": "Tiempo, plantas, animales, energía y clima",
+  "game.nature.long": "Del granizo al chergui, del efecto invernadero a los cedros del Atlas: 58 preguntas para entender el planeta y protegerlo.",
+  "cat.myth": "Mitologías",
+  "game.myth": "Dioses, héroes y criaturas legendarias",
+  "game.myth.long": "Zeus, Anubis, Thor, Gilgamesh, el Minotauro, Tin Hinan y el titán Atlas: 60 preguntas sobre mitos griegos, egipcios, nórdicos y del norte de África.",
+  "cat.tech": "Informática e Internet",
+  "game.tech": "Ordenadores, código, seguridad en línea e historia digital",
+  "game.tech.long": "Del binario a la IA, de al-Juarismi a Ada Lovelace, con los buenos hábitos para protegerse en línea: 53 preguntas para pequeños y grandes geeks."
 }

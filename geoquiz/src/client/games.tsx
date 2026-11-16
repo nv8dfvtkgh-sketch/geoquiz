@@ -96,6 +96,17 @@ export const FAMILIES: Family[] = [
     ],
   },
   {
+    id: 'culture',
+    tint: 'tint-violet',
+    games: [
+      { id: 'arts', icon: 'palette', fresh: '2026-11-16' },
+      { id: 'litt', icon: 'quill', fresh: '2026-11-16' },
+      { id: 'myth', icon: 'bolt', fresh: '2026-11-16' },
+      { id: 'nature', icon: 'leaf', fresh: '2026-11-16' },
+      { id: 'tech', icon: 'chip', fresh: '2026-11-16' },
+    ],
+  },
+  {
     id: 'screens',
     tint: 'tint-violet',
     games: [
@@ -159,6 +170,11 @@ export const ICONS = {
   dice: <g {...P}><rect x="4" y="4" width="16" height="16" rx="3" /><circle cx="9" cy="9" r=".9" /><circle cx="15" cy="15" r=".9" /><circle cx="15" cy="9" r=".9" /><circle cx="9" cy="15" r=".9" /></g>,
   awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
+  palette: <g {...P}><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-1-1.6-1-2.6 1-1.9 2.2-1.9H18a3 3 0 0 0 3-3C21 6.6 17 3 12 3z" /><circle cx="7.5" cy="11" r="1" /><circle cx="10" cy="7" r="1" /><circle cx="15" cy="7.5" r="1" /></g>,
+  quill: <g {...P}><path d="M20 4C12 4 7 9 5.5 18.5" /><path d="M20 4c0 7-4 11-11 11.5" /><path d="M4 21l1.5-2.5" /><path d="M9 15l3-3" /></g>,
+  bolt: <g {...P}><path d="M13 2L5 13.5h6L10 22l9-12.5h-6z" /></g>,
+  leaf: <g {...P}><path d="M5 19C5 10 10 5 20 4c0 10-5 15-14 15z" /><path d="M5 19l8-8" /></g>,
+  chip: <g {...P}><rect x="6" y="6" width="12" height="12" rx="2" /><rect x="9.5" y="9.5" width="5" height="5" rx=".5" /><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" /></g>,
   bulb: <g {...P}><path d="M9 17h6M10 20h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></g>,
   crown: <g {...P}><path d="M3 8l4.5 4 4.5-7 4.5 7L21 8l-2 11H5z" /><path d="M5 19h14" /></g>,
   bac: <g {...P}><rect x="3" y="3" width="18" height="18" rx="4" /><path d="M9 16l3-8 3 8M10.2 13h3.6" /></g>,
