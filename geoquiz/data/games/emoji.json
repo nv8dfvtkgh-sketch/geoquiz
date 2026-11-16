@@ -1988,7 +1988,8 @@
   },
   "alts": [
    "Squid Game"
-  ]
+  ],
+  "minAge": "13-17"
  },
  {
   "id": "s-got",
@@ -2004,7 +2005,8 @@
   "alts": [
    "Le Trône de fer",
    "Game of Thrones"
-  ]
+  ],
+  "minAge": "13-17"
  },
  {
   "id": "s-breakingbad",
@@ -2016,7 +2018,8 @@
    "en": "Breaking Bad",
    "es": "Breaking Bad",
    "ar": "بريكنغ باد"
-  }
+  },
+  "minAge": "13-17"
  },
  {
   "id": "s-simpsons",
@@ -2071,7 +2074,8 @@
    "en": "The Walking Dead",
    "es": "The Walking Dead",
    "ar": "الموتى السائرون"
-  }
+  },
+  "minAge": "13-17"
  },
  {
   "id": "s-lupin",
@@ -2134,7 +2138,8 @@
    "en": "Peaky Blinders",
    "es": "Peaky Blinders",
    "ar": "بيكي بلايندرز"
-  }
+  },
+  "minAge": "13-17"
  },
  {
   "id": "s-office",

@@ -14,6 +14,8 @@ export interface CountryMeta {
   pop?: number;
   area?: number;
   dependency: boolean;
+  /** sur la carte, mais jamais en question ni en piège (Kosovo, Taïwan : non reconnus par le Maroc) */
+  noQuiz?: boolean;
   names: Names;
   neighbors: string[];
   capital?: { names: Names; alts: string[] };
@@ -64,6 +66,8 @@ export interface EmojiItem {
   country?: string;
   names?: Names;
   alts?: string[];
+  /** Réservé aux 13 ans et plus (séries pour ados) : jamais posé à un enfant. */
+  minAge?: '13-17';
 }
 /** Monument : article Wikipédia (anglais) d'où vient sa photo libre. */
 export interface Monument {

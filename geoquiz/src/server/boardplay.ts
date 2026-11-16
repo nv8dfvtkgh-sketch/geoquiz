@@ -5,13 +5,13 @@ import { CATEGORIES, hiddenFor, localize, type InternalQuestion } from './catego
 import { countries, worldById, zones } from './data';
 
 /** Une question QCM d'un des jeux du thème (pas de carte, pas de photo ni de son). */
-export function boardQuestion(theme: string, difficulty: 'easy' | 'medium' | 'hard', rnd: () => number, avoid: Set<string>, langs: Lang[] = []): InternalQuestion | null {
+export function boardQuestion(theme: string, difficulty: 'easy' | 'medium' | 'hard', rnd: () => number, avoid: Set<string>, langs: Lang[] = [], kids = false): InternalQuestion | null {
   const zone = zones.get('world')!;
   const cats = (BOARD_THEMES[theme] ?? BOARD_THEMES.geo).filter((c) => CATEGORIES[c]?.qtypes.includes('mcq') && !CATEGORIES[c].media);
   for (let tries = 0; tries < 12; tries++) {
     const cat = CATEGORIES[cats[Math.floor(rnd() * cats.length)]];
     if (!cat) continue;
-    const hidden = hiddenFor(cat.id, langs);
+    const hidden = hiddenFor(cat.id, langs, kids);
     const pool = cat.pool(zone, difficulty, 40).filter((t) => !avoid.has(`${cat.id}:${t}`) && !hidden.has(t));
     if (!pool.length) continue;
     const t = pool[Math.floor(rnd() * pool.length)];
@@ -44,7 +44,7 @@ export function boardQuestionsJson(theme: string, difficulty: string, lang: Lang
   const avoid = new Set<string>();
   const out: { q: BoardQ; ok: string }[] = [];
   for (let i = 0; i < Math.min(60, Math.max(1, n)); i++) {
-    const q = boardQuestion(theme, d, Math.random, avoid, [lang]);
+    const q = boardQuestion(theme, d, Math.random, avoid, [lang], true);
     if (q) out.push({ q: boardQ(q, lang), ok: q.revealOption! });
   }
   return JSON.stringify(out);

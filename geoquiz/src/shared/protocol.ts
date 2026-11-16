@@ -228,8 +228,8 @@ export interface ChallengeView { code: string; settings: Settings; by: string; r
 
 // Messages navigateur → serveur
 export type ClientMsg =
-  | { t: 'join'; name: string; lang: Lang }
-  | { t: 'resume'; token: string; lang: Lang }
+  | { t: 'join'; name: string; lang: Lang; kid?: boolean }
+  | { t: 'resume'; token: string; lang: Lang; kid?: boolean }
   | { t: 'quick'; settings: Settings }
   | { t: 'cancelQuick' }
   | { t: 'joker'; kind: 'fifty' | 'double' }

@@ -166,7 +166,7 @@ Que mesure la distance focale d'une lentille ? | la distance entre le centre de 
 Quelle lentille fait converger les rayons lumineux ? | une lentille convergente | une lentille divergente | un miroir plan | une vitre
 Quelle relation lie longueur d'onde, célérité et fréquence ? | λ = v ÷ f | λ = v × f | λ = f ÷ v | λ = v + f
 Quelle couleur de lumière visible a la plus grande longueur d'onde ? | le rouge | le violet | le bleu | le vert
-Quel modèle décrit la lumière comme un flux de particules d'énergie ? | le photon | l'électron | le neutron | le proton
+Comment s'appelle la particule de lumière ? | le photon | l'électron | le neutron | le proton
 ### energie
 Quelle est l'expression de l'énergie potentielle de pesanteur ? | m × g × h | ½ × m × v² | m × v | P × t
 Qu'est-ce que l'effet Joule ? | la transformation d'énergie électrique en chaleur dans un conducteur | la production de lumière par un laser | la fusion nucléaire | la rotation d'un moteur

@@ -110,7 +110,7 @@ Quel organe filtre le sang et fabrique l'urine ? | les reins | le cœur | l'esto
 Comment appelle-t-on un être vivant qui décompose les feuilles mortes ? | un décomposeur | un prédateur | un herbivore | un parasite
 Que fabrique une plante grâce à la lumière ? | sa propre matière (sa nourriture) | de la viande | du plastique | du sel
 Dans la chaîne alimentaire « herbe → lapin → renard », qui est le prédateur ? | le renard | l'herbe | le lapin | aucun
-Quelle est la partie de la fleur qui devient le fruit ? | le pistil | la tige | la racine | la feuille
+Quelle est la partie de la fleur qui devient le fruit ? | le pistil (son ovaire) | la tige | la racine | la feuille
 ### terre-univers
 Comment s'appelle l'ensemble du Soleil et des planètes qui tournent autour ? | le système solaire | la Voie lactée | l'Univers | une constellation
 Combien de planètes compte le système solaire ? | 8 | 9 | 7 | 12
@@ -133,7 +133,7 @@ Qui fut le premier président de la Ve République ? | Charles de Gaulle | Fran�
 En quelle année les femmes ont-elles voté pour la première fois en France ? | 1945 | 1789 | 1918 | 1981
 ### geographie
 Comment appelle-t-on un trajet quotidien entre son domicile et son travail ? | une migration pendulaire | un exode | un voyage d'affaires | une croisière
-Quel réseau de câbles sous-marins sert surtout à transporter ? | les données d'Internet | l'eau potable | le pétrole | le courrier papier
+À quoi servent surtout les câbles sous-marins ? | à transporter les données d'Internet | à transporter l'eau potable | à transporter le pétrole | à transporter le courrier
 Quel outil permet de communiquer instantanément dans le monde entier ? | Internet | le pigeon voyageur | la lettre | le télégraphe à fumée
 
 ## francais

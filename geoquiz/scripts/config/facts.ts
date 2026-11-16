@@ -28,3 +28,10 @@ export const CURRENCY_FIX: Record<string, { code: string; names: Record<'fr' | '
 
 /** Territoires qui ne sont pas des pays : gardés sur la carte, mais pas dans les questions « pays ». */
 export const NOT_COUNTRIES = ['IO', 'FK', 'JE', 'GG', 'IM', 'AW', 'CW', 'AX', 'GL', 'MO', 'HK', 'SX'];
+
+/** Pays que le Maroc ne reconnaît pas : gardés sur la carte, jamais en question ni en piège
+ *  (choix validé le 16 novembre 2026). */
+export const NO_QUIZ = ['XK', 'TW'];
+
+/** Capitales au statut contesté : aucune question n'est posée sur elles (choix validé le 16 novembre 2026). */
+export const CAPITAL_DROP = ['IL'];

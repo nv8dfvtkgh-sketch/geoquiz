@@ -54,7 +54,7 @@ export class Net {
       this.retry = 0;
       this.setOnline(true);
       const s = savedSession();
-      if (s && s.code === target) ws.send(JSON.stringify({ t: 'resume', token: s.token, lang: this.lang }));
+      if (s && s.code === target) ws.send(JSON.stringify({ t: 'resume', token: s.token, lang: this.lang, kid: isKid() }));
       for (const m of this.queue.splice(0)) ws.send(JSON.stringify(m));
     };
     ws.onmessage = (e) => {
@@ -120,11 +120,16 @@ export async function createGame(req: CreateRoomReq, name: string, lang: Lang): 
     if (j.error === 'daily.done') markDailyDone();
     if (!r.ok || !j.code) return j.error ?? 'server';
     net.open(j.code);
-    net.send({ t: 'join', name, lang });
+    net.send({ t: 'join', name, lang, kid: isKid() });
     return null;
   } catch {
     return 'server';
   }
+}
+
+/** Moins de 13 ans, ou âge pas encore donné : le serveur garde les questions pour ados. */
+function isKid(): boolean {
+  try { const a = localStorage.getItem('gq.age'); return a !== '13-17' && a !== '18+'; } catch { return true; }
 }
 
 /** Rejoint une partie existante avec son code. */
@@ -138,7 +143,7 @@ export async function joinGame(code: string, name: string, lang: Lang): Promise<
   }
   saveSession(null);
   net.open(code);
-  net.send({ t: 'join', name, lang });
+  net.send({ t: 'join', name, lang, kid: isKid() });
   return null;
 }
 

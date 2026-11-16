@@ -69,7 +69,7 @@ Quelle est la vitesse de la lumière dans le vide (environ) ? | 300 000 km/s | 3
 Une source primaire de lumière, c'est… | un objet qui produit sa propre lumière | un objet éclairé | un miroir | la Lune
 La Lune est une source de lumière… | secondaire (elle est éclairée) | primaire | artificielle | électrique
 ## histgeo
-Qui est le fondateur de l'islam au VIIe siècle ? | le prophète Mohammed (Mahomet) | Charlemagne | Saint Paul | Constantin
+Qui est le prophète de l'islam, au VIIe siècle ? | le prophète Mohammed (Mahomet) | Charlemagne | Saint Paul | Constantin
 Quelle ville est le premier lieu saint de l'islam ? | La Mecque | Jérusalem | Bagdad | Cordoue
 Quel empire chrétien a Constantinople pour capitale ? | l'Empire byzantin | l'Empire carolingien | l'Empire ottoman | l'Empire romain d'Occident
 En quelle année débute l'hégire ? | 622 | 800 | 1095 | 476

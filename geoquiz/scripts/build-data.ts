@@ -18,7 +18,7 @@ import {
 } from './lib/geo';
 import { DROP_A3, MERGE_INTO, REGION_MAX_DISTANCE_FACTOR } from './config/borders';
 import { MA_PROVINCES } from './config/ma-provinces';
-import { CAPITAL_ALT_DROP, CAPITAL_NAMES, CAPITAL_PICK, CURRENCY_FIX, NOT_COUNTRIES } from './config/facts';
+import { CAPITAL_ALT_DROP, CAPITAL_DROP, CAPITAL_NAMES, CAPITAL_PICK, CURRENCY_FIX, NO_QUIZ, NOT_COUNTRIES } from './config/facts';
 import { REGION_GROUPS } from './config/regions';
 
 const ROOT = path.resolve(__dirname, '..');
@@ -408,6 +408,8 @@ async function main() {
   for (const [iso, m] of Object.entries<any>(meta)) if (currencies[iso]) m.currency = currencies[iso];
   for (const [iso, c] of Object.entries(CURRENCY_FIX)) if (meta[iso]) meta[iso].currency = c;
   for (const iso of NOT_COUNTRIES) if (meta[iso]) meta[iso].dependency = true;
+  for (const iso of NO_QUIZ) if (meta[iso]) Object.assign(meta[iso], { dependency: true, noQuiz: true });
+  for (const iso of CAPITAL_DROP) if (meta[iso]) delete meta[iso].capital;
   for (const f of fs.readdirSync(path.join(ROOT, 'data/games'))) fs.copyFileSync(path.join(ROOT, 'data/games', f), path.join(OUT, f));
 
   fs.writeFileSync(path.join(OUT, 'countries.json'), JSON.stringify(meta));

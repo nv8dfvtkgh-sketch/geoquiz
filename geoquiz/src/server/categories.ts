@@ -114,7 +114,7 @@ function byDifficulty<T>(sorted: T[], difficulty: Difficulty, wanted: number): T
 }
 
 export function countryPool(zone: ZoneCtx, difficulty: Difficulty, wanted: number, filter: (id: string) => boolean = () => true) {
-  const ids = (zone.countryIds ?? []).filter(filter);
+  const ids = (zone.countryIds ?? []).filter((id) => !countries[id]?.noQuiz && filter(id));
   if (difficulty === 'hard') return ids;
   // Du plus connu au moins connu ; territoires dépendants seulement en difficile.
   const fame = (id: string) => countries[id].fame ?? 20 - countries[id].rank;
@@ -128,7 +128,7 @@ export function countryPool(zone: ZoneCtx, difficulty: Difficulty, wanted: numbe
 /** Pièges plausibles : voisins, même sous-région, même continent, puis le reste. */
 function countryDistractors(target: string, n: number, rnd: () => number, filter: (id: string) => boolean, preferred: string[] = []): string[] {
   const m = countries[target];
-  const all = Object.keys(countries).filter((id) => id !== target && filter(id) && worldById[id]);
+  const all = Object.keys(countries).filter((id) => id !== target && !countries[id].noQuiz && filter(id) && worldById[id]);
   const tiers = [
     preferred.filter((id) => all.includes(id)),
     m.neighbors.filter((id) => all.includes(id)),
@@ -587,7 +587,7 @@ const emojiCat: Category = {
   pool: (_zone, d, n) => tierPool(extras.emoji, d, n),
   make(target, kind, _zone, rnd) {
     const item = extras.emoji.find((x) => x.id === target)!;
-    const same = extras.emoji.filter((x) => x.theme === item.theme && x.id !== target);
+    const same = extras.emoji.filter((x) => x.theme === item.theme && x.id !== target && !x.minAge);
     const names = emojiNames(item);
     const base = {
       category: 'emoji', target, answer: names, promptKey: `q.emoji.${item.theme}`,
@@ -734,7 +734,12 @@ function packCat(id: string, packs: string[]): Category {
 }
 const packCats = Object.entries(PACK_GAMES).map(([id, packs]) => packCat(id, packs));
 /** Questions d'un pack à ne pas poser quand l'un des joueurs joue dans une de ces langues. */
-export function hiddenFor(category: string, langs: Lang[]): Set<string> {
+/** Rébus réservés aux 13 ans et plus. */
+export const teenOnly = (category: string, target: string) => category === 'emoji' && !!extras.emoji.find((x) => x.id === target)?.minAge;
+/** Cibles à ne pas tirer : questions qui n'ont pas de sens dans la langue d'un joueur, et
+ *  questions réservées aux 13 ans et plus quand un enfant (ou un joueur sans âge) joue. */
+export function hiddenFor(category: string, langs: Lang[], kids = false): Set<string> {
+  if (category === 'emoji') return new Set(kids ? extras.emoji.filter((x) => x.minAge).map((x) => x.id) : []);
   const packs = PACK_GAMES[category];
   if (!packs || !langs.length) return new Set();
   return new Set(packs.flatMap((p) => extras.packs[p] ?? []).filter((q) => q.skip?.some((l) => langs.includes(l))).map((q) => q.id));
@@ -1300,7 +1305,7 @@ export function dailyQuestions(day = dayKey()): InternalQuestion[] {
   for (const id of DAILY_GAMES) {
     const cat = CATEGORIES[id];
     if (!cat) continue;
-    const pool = cat.pool(world, 'medium', 30).slice().sort();
+    const pool = cat.pool(world, 'medium', 30).filter((t) => day < '2026-11-17' || !teenOnly(id, t)).slice().sort();
     if (!pool.length) continue;
     const t = pool[Math.floor(rnd() * pool.length)];
     const q = cat.make(t, 'mcq', world, rnd);
@@ -1466,7 +1471,7 @@ export function triviaQuestions(rnd: () => number = Math.random, avoid: string[]
       const ids = TRIVIA_THEMES[theme];
       const cat = triviaCat(ids[Math.floor(rnd() * ids.length)]);
       if (!cat || !cat.qtypes.includes('mcq')) continue;
-      const pool = levelPool(cat, zone, level);
+      const pool = levelPool(cat, zone, level).filter((t) => !teenOnly(cat.id, t));
       const fresh = pool.filter((t) => !seen.has(`${cat.id}|${t}`));
       const list = fresh.length ? fresh : tries > 8 ? pool : [];
       if (!list.length) continue;

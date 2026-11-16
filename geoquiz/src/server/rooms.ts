@@ -79,6 +79,8 @@ interface Member {
   token: string;
   name: string;
   lang: Lang;
+  /** Moins de 13 ans (ou âge inconnu) : pas de questions réservées aux ados. */
+  kid?: boolean;
   role: 'player' | 'host';
   conn: Conn | null;
   score: number;
@@ -177,14 +179,14 @@ function cleanName(name: any): string {
 export const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 
 /** Tirage des questions selon les réglages. */
-export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = [], langs: Lang[] = []): InternalQuestion[] {
+export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = [], langs: Lang[] = [], kids = false): InternalQuestion[] {
   if (settings.category === 'daily') return dailyQuestions();
   if (settings.category === 'survival') return survivalQuestions(rnd);
   if (settings.category === 'trivia') return triviaQuestions(rnd, avoid);
   if (settings.category === 'gm') return gmQuestions(settings.gm?.div ?? 'college', settings.count, rnd, avoid);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
-  const hidden = hiddenFor(settings.category, langs);
+  const hidden = hiddenFor(settings.category, langs, kids);
   const strict = cat.pool(zone, settings.difficulty, settings.count).filter((t) => !hidden.has(t));
   let pool = shuffle(strict, rnd);
   if (avoid.length) {
@@ -361,6 +363,7 @@ export class Room {
       const role = this.members.size === 0 && !this.hostPlays ? 'host' : 'player';
       const res = this.addMember(conn, msg.name, msg.lang, role);
       if (typeof res === 'string') return conn.send({ t: 'error', code: res });
+      res.kid = msg.kid !== false;
       if (this.kind === 'solo' && this.state === 'lobby') this.start();
       if (this.autoStartAt) this.armAuto();
       if (this.kind === 'duel' && this.players().length === 2 && this.state === 'lobby') {
@@ -370,6 +373,7 @@ export class Room {
       const m = [...this.members.values()].find((x) => x.token === msg.token);
       if (!m) return conn.send({ t: 'error', code: 'room.expired' });
       m.lang = cleanLang(msg.lang);
+      m.kid = msg.kid !== false;
       this.attach(m, conn);
     } else if (msg.t === 'leave') {
       this.leave(conn);
@@ -382,6 +386,11 @@ export class Room {
   }
 
   // ---------------------------------------------------------------- membres
+  /** Un joueur de moins de 13 ans (ou sans âge) dans la partie. */
+  private hasKid(): boolean {
+    return [...this.members.values()].some((m) => m.role === 'player' && m.kid !== false);
+  }
+
   addMember(conn: Conn, name: string, lang: Lang, role: Member['role']): Member | string {
     if (role === 'player') {
       if (this.players().length >= this.maxPlayers) return 'room.full';
@@ -671,7 +680,7 @@ export class Room {
     this.questions = retry ? retry
       : this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
       : this.challengeItems ? this.challengeQuestions()
-      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid, [...new Set([...this.members.values()].map((m) => m.lang))]);
+      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid, [...new Set([...this.members.values()].map((m) => m.lang))], this.hasKid());
     // Une revanche ne repose pas les mêmes questions.
     if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-400);
     this.madeChallenge = undefined;
@@ -882,7 +891,7 @@ export class Room {
     b.deadline = undefined;
     if (b.s.winner !== null) return this.endBoard(res);
     if (b.s.ask && !b.q) {
-      b.q = boardQuestion(b.s.ask, this.settings.difficulty, Math.random, b.avoid, [...new Set([...this.members.values()].map((m) => m.lang))]) ?? undefined;
+      b.q = boardQuestion(b.s.ask, this.settings.difficulty, Math.random, b.avoid, [...new Set([...this.members.values()].map((m) => m.lang))], this.hasKid()) ?? undefined;
       if (!b.q) { b.s = boardAnswer(b.s, true); return this.boardTick(res); } // plus de question : le coup passe
     }
     if (b.s.game === 'hangman' && b.s.done) {

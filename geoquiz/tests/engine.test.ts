@@ -1493,3 +1493,15 @@ test('« merci en arabe » n\'est pas posé à un joueur arabophone', () => {
   const fr = new Set(Array.from({ length: 20 }, () => drawQuestions(s, Math.random, [], ['fr']).map((q) => q.target)).flat());
   assert.ok(fr.has('hello-1'), 'en français la question reste');
 });
+
+test('les rébus de séries pour ados ne sont pas posés aux enfants', () => {
+  const teen = ['s-squid', 's-got', 's-breakingbad', 's-walkingdead', 's-peaky'];
+  const s = { category: 'emoji', zone: 'world', difficulty: 'hard', qtype: 'mcq', count: 40, timeLimit: 20 } as Settings;
+  for (let n = 0; n < 15; n++) {
+    const qs = drawQuestions(s, Math.random, [], ['fr'], true);
+    assert.ok(!qs.some((q) => teen.includes(q.target)), 'cible ado tirée pour un enfant');
+    assert.ok(!qs.some((q) => q.options?.some((o) => /Squid|Peaky|Breaking Bad|Walking Dead|Game of Thrones|Trônes/i.test(o.label.fr ?? ''))), 'série ado en piège');
+  }
+  const big = new Set(Array.from({ length: 30 }, () => drawQuestions(s, Math.random, [], ['fr'], false).map((q) => q.target)).flat());
+  assert.ok(teen.some((t) => big.has(t)), 'pour les 13 ans et plus, les rébus restent');
+});

@@ -68,7 +68,7 @@ Où vit le poisson ? | dans l'eau | dans un arbre | sous la terre | dans le dés
 Combien de pattes a une araignée ? | 8 | 6 | 4 | 10
 Combien de pattes a un insecte ? | 6 | 8 | 4 | 2
 Quel objet utilise de l'électricité ? | une lampe | un crayon | un livre | une cuillère
-Quel est le numéro des urgences en Europe ? | 112 | 18 | 911 | 123
+Quel est le numéro des urgences en Europe ? | 112 | 999 | 911 | 123
 ## anglais
 Comment dit-on « bonjour » en anglais ? | hello | goodbye | please | thank you
 Comment dit-on « au revoir » en anglais ? | goodbye | hello | yes | sorry
@@ -136,7 +136,7 @@ Que mange la vache ? | de l'herbe | de la viande | des poissons | des insectes
 Comment s'appelle le bébé du chat ? | le chaton | le chiot | le poulain | le veau
 ### matiere
 Que devient l'eau dans un congélateur ? | de la glace | de la vapeur | du sable | du lait
-Quel objet est fait en bois ? | une chaise en bois | une bouteille en verre | une canette en métal | un sac en plastique
+Quel objet est le plus souvent fait en bois ? | une chaise | une bouteille | une canette | une fourchette
 ### espace-temps
 Quel moment vient après le matin ? | l'après-midi | la nuit | la veille | le lendemain matin
 Quelle saison est la plus froide ? | l'hiver | l'été | le printemps | l'automne
