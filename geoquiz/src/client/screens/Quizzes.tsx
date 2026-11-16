@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_SETTINGS, type RoomKind, type Settings } from '../../shared/protocol';
 import { createGame } from '../net';
 import { useApp } from '../state';
+import { download, fileSafe, quizToRows, readDelimited, readTableFile, rowsToQuiz, writeXlsx, type SheetLabels, type SheetQuestion } from '../sheet';
 
 // ------------------------------------------------------------------ outils
 interface MyQuiz { id: string; token: string; title: string }
@@ -128,6 +129,67 @@ export function MyQuizzes() {
 interface EditQ { text: string; answers: string[]; correct: number; image?: string | { data: string } | null; preview?: string }
 const emptyQ = (): EditQ => ({ text: '', answers: ['', '', '', ''], correct: 0, image: null });
 
+/** Libellés du modèle Excel, dans la langue du joueur. */
+function sheetLabels(t: (k: string, p?: Record<string, string | number>) => string): SheetLabels {
+  return {
+    title: t('sheet.titleCell'), question: t('sheet.question'), good: t('sheet.good'), bad: t('sheet.bad'),
+    example: [[t('sheet.ex1q'), t('sheet.ex1a'), t('sheet.ex1b'), t('sheet.ex1c'), t('sheet.ex1d')], [t('sheet.ex2q'), t('sheet.ex2a'), t('sheet.ex2b'), t('sheet.ex2c'), '']],
+    help: [t('sheet.help1'), t('sheet.help2'), t('sheet.help3'), t('sheet.help4')],
+  };
+}
+/** Classeur : feuille « Quiz » (à remplir) et feuille « Mode d'emploi ». */
+function quizWorkbook(t: (k: string, p?: Record<string, string | number>) => string, title: string, qs: SheetQuestion[]) {
+  const l = sheetLabels(t);
+  const rows = quizToRows(l, title, qs);
+  if (!qs.length) rows.push(...l.example);
+  return writeXlsx([
+    { name: 'Quiz', rows, widths: [60, 28, 28, 28, 28], bold: [0, 2] },
+    { name: t('sheet.helpSheet'), rows: l.help.map((h) => [h]), widths: [110] },
+  ]);
+}
+
+/** Import et export Excel / CSV / HTML / copier-coller dans l'éditeur. */
+function SheetTools({ title, qs, onImport }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void }) {
+  const { t } = useApp();
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [paste, setPaste] = useState('');
+  const apply = (rows: string[][]) => {
+    const r = rowsToQuiz(rows);
+    if (!r.questions.length) return setMsg({ ok: false, text: t('sheet.none') });
+    onImport(r.title, r.questions);
+    setMsg({ ok: true, text: t('sheet.done', { n: r.questions.length }) + (r.skipped ? ` ${t('sheet.skipped', { n: r.skipped })}` : '') });
+  };
+  const pick = async (f?: File) => {
+    if (!f) return;
+    try { apply(await readTableFile(f)); }
+    catch (e) { setMsg({ ok: false, text: t((e as Error).message === 'oldFormat' ? 'sheet.oldFormat' : 'sheet.unreadable') }); }
+  };
+  const filled = qs.filter((q) => q.text.trim()).map((q) => {
+    const kept = q.answers.map((a, i) => ({ a: a.trim(), i })).filter((x) => x.a);
+    return { text: q.text.trim(), answers: kept.map((x) => x.a), correct: Math.max(0, kept.findIndex((x) => x.i === q.correct)) };
+  });
+  return (
+    <details className="sheet-tools">
+      <summary>📊 {t('sheet.summary')}</summary>
+      <p className="muted small">{t('sheet.intro')}</p>
+      <div className="row-actions">
+        <button type="button" className="btn ghost" onClick={() => download(quizWorkbook(t, '', []), 'quizellige-modele.xlsx')}>⬇️ {t('sheet.template')}</button>
+        <label className="btn primary sheet-file">
+          <input type="file" className="sr" accept=".xlsx,.csv,.txt,.html,.htm" onChange={(e) => { pick(e.target.files?.[0]); e.target.value = ''; }} />
+          ⬆️ {t('sheet.import')}
+        </label>
+        {filled.length > 0 && <button type="button" className="btn ghost" onClick={() => download(quizWorkbook(t, title, filled), `${fileSafe(title)}.xlsx`)}>{t('sheet.export')}</button>}
+      </div>
+      <label className="field">
+        <span>{t('sheet.paste')}</span>
+        <textarea rows={4} value={paste} onChange={(e) => setPaste(e.target.value)} placeholder={t('sheet.pasteHint')} dir="auto" />
+      </label>
+      <button type="button" className="btn ghost" disabled={!paste.trim()} onClick={() => { apply(readDelimited(paste)); setPaste(''); }}>{t('sheet.pasteBtn')}</button>
+      {msg && <p className={msg.ok ? 'record' : 'error'} role="status">{msg.text}</p>}
+    </details>
+  );
+}
+
 export function QuizEditor() {
   const { t, s, openQuiz } = useApp();
   const editing = s.quiz?.token ? s.quiz : undefined;
@@ -192,6 +254,13 @@ export function QuizEditor() {
     <div className="quizzes editor panel">
       <BackLink onClick={() => openQuiz('myquizzes')} label={t('quiz.mine')} />
       <h1>{editing ? t('quiz.editTitle') : t('quiz.new')}</h1>
+
+      <SheetTools title={title} qs={qs} onImport={(tt, list) => {
+        if (tt && !title.trim()) setTitle(tt);
+        const mine = qs.filter((q) => q.text.trim());
+        const added = list.map((q) => ({ text: q.text, answers: [...q.answers, '', '', ''].slice(0, 4), correct: q.correct, image: null }));
+        setQs([...mine, ...added].slice(0, 50).concat(Array.from({ length: Math.max(0, 3 - mine.length - added.length) }, emptyQ)));
+      }} />
 
       <label className="field">
         <span>{t('quiz.title')}</span>
@@ -371,7 +440,8 @@ export function Admin() {
       <div className="quizzes panel admin-view">
         <BackLink onClick={() => setOpen(null)} label={t('admin.title')} />
         <h1 dir="auto">{open.draft.title}</h1>
-        <p><StatusBadge status={open.status} /> <span className="muted">{t('quiz.codeIs', { code: open.id })}</span></p>
+        <p><StatusBadge status={open.status} /> <span className="muted">{t('quiz.codeIs', { code: open.id })}</span>
+          {' '}<button type="button" className="text-btn" onClick={() => download(quizWorkbook(t, open.draft.title, open.draft.questions), `${open.id}-${fileSafe(open.draft.title)}.xlsx`)}>📊 {t('sheet.export')}</button></p>
         <ol className="admin-questions">
           {open.draft.questions.map((q: any, i: number) => (
             <li key={i}>
@@ -397,6 +467,16 @@ export function Admin() {
   }
 
   const shown = list.filter((q) => q.status === filter);
+  /** Tous les quiz créés, dans un seul fichier Excel (une ligne par question). */
+  const exportAll = async () => {
+    const rows: string[][] = [[t('sheet.code'), t('sheet.titleCell'), t('sheet.status'), t('sheet.question'), t('sheet.good'), `${t('sheet.bad')} 1`, `${t('sheet.bad')} 2`, `${t('sheet.bad')} 3`]];
+    for (const q of list) {
+      const r = await api(`/api/admin/quizzes/${q.id}`, { headers: auth });
+      if (!r.ok) continue;
+      for (const x of r.data.draft.questions) rows.push([q.id, r.data.draft.title, t(`quiz.status.${r.data.status}`), x.text, x.answers[x.correct], ...x.answers.filter((_: string, i: number) => i !== x.correct)]);
+    }
+    download(writeXlsx([{ name: 'Quiz', rows, widths: [9, 30, 12, 60, 26, 26, 26, 26], bold: [0] }]), `quizellige-quiz-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  };
   const tabs = (
     <div className="seg admin-tabs">
       <button type="button" aria-pressed={tab === 'quizzes'} onClick={() => setTab('quizzes')}>{t('admin.tabQuizzes')}</button>
@@ -420,6 +500,7 @@ export function Admin() {
       <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
       <h1>{t('admin.title')}</h1>
       {tabs}
+      {list.length > 0 && <div className="row-actions"><button type="button" className="btn" onClick={exportAll}>📊 {t('admin.exportQuizzes')}</button></div>}
       <div className="seg">
         {(['pending', 'approved', 'rejected'] as const).map((f) => (
           <button type="button" key={f} aria-pressed={filter === f} onClick={() => setFilter(f)}>
