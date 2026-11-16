@@ -1319,5 +1319,14 @@
   "gm.passed": "Question passée (0 point)",
   "gm.final": "Qualification terminée : {pts} points",
   "gm.finalHint": "Ton score compte pour le classement du mois. Rendez-vous le dernier samedi pour le direct si tu es dans les meilleurs !",
-  "gm.seeRanking": "Voir le classement"
+  "gm.seeRanking": "Voir le classement",
+  "col.title": "Collectors",
+  "col.hint": "Un collector par défi de la semaine. Il ne se gagne que pendant cette semaine-là : après, il est introuvable et ne s'échange pas.",
+  "col.week": "Semaine du {from} au {to}",
+  "col.how": "À gagner jusqu'au {until} : au moins la moitié de bonnes réponses au défi",
+  "col.owned": "Dans ta collection · édition limitée",
+  "col.missed": "Manqué : ce collector n'est plus disponible",
+  "col.new": "Collector débloqué !",
+  "col.toWin": "Collector à gagner cette semaine",
+  "col.won": "Collector gagné ✓"
 }

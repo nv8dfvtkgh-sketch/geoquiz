@@ -27,7 +27,7 @@ import { BoardOnline, DuelScreen } from './screens/Duels';
 import { BacOnline, BacSetup } from './screens/Bac';
 import { TriviaScreen } from './screens/Trivia';
 import { GeoMastersScreen } from './screens/GeoMasters';
-import { earnSticker, syncAlbum } from './album';
+import { earnCollector, earnSticker, syncAlbum } from './album';
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -103,6 +103,7 @@ export function App() {
     // solo ou terminée est abandonnée : on reste sur l'accueil.
     let reloadCheck = !!savedSession();
     let ignoring = false;
+    let youId = '';
     const off = net.on((msg) => {
       if (reloadCheck && msg.t !== 'joined' && msg.t !== 'pong') reloadCheck = false; // reprise refusée (partie expirée)
       if (reloadCheck && msg.t === 'joined') {
@@ -121,7 +122,16 @@ export function App() {
       if (msg.t === 'joined' && authRef.current) net.send({ t: 'auth', token: authRef.current });
       if (msg.t === 'reward') setTimeout(refreshMe, 0);
       // Fin de partie : un autocollant pour l'album.
-      if (msg.t === 'finished') { const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; const game = net.category; setTimeout(() => void earnSticker(k, game), 1200); }
+      if (msg.t === 'joined') youId = msg.you;
+      if (msg.t === 'finished') {
+        const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; const game = net.category;
+        setTimeout(() => void earnSticker(k, game), 1200);
+        // Défi de la semaine : le collector, une fois, si au moins la moitié est juste.
+        if (game === 'week') {
+          const ok = msg.solo ? msg.solo.correct : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length;
+          void earnCollector(ok, msg.solo ? msg.solo.total : msg.recap.length);
+        }
+      }
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.
       if (msg.t === 'matched') {
         net.open(msg.code);

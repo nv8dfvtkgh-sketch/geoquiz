@@ -5,7 +5,7 @@
 import type { KV } from './quizzes';
 import { gmCalendar, prevSeason } from './gm';
 import { GM_DIVISIONS, GM_LIVE, gmDivisionsFor, gmSemiSpots, type GmDivision, type GmStage } from '../shared/gm';
-import { isUnlocked, LOOK_BY_ID, STICKER_IDS, type Look } from '../shared/stickers';
+import { COLLECTOR_IDS, isUnlocked, LOOK_BY_ID, STICKER_IDS, type Look } from '../shared/stickers';
 
 // ------------------------------------------------------------------ types
 import { AVATARS, BADGES, UNLOCK_AT, type AgeGroup, type CatStats, type ChallengeEntry, type ChallengeView, type Me, type Reward, type Settings } from '../shared/protocol';
@@ -898,7 +898,7 @@ export class AccountService {
     if (op === 'add') {
       if (!a) throw new AccountError('account.signedOut');
       if (!STICKER_IDS.has(id)) throw new AccountError('album.invalid');
-      a.album![id] = Math.min(99, (a.album![id] ?? 0) + 1);
+      a.album![id] = COLLECTOR_IDS.has(id) ? 1 : Math.min(99, (a.album![id] ?? 0) + 1);
       return save();
     }
     if (op === 'merge') {
@@ -908,7 +908,7 @@ export class AccountService {
     }
     if (op === 'gift') {
       // Doublon offert : un code à donner à un ami (valable 14 jours, une seule fois).
-      if (!STICKER_IDS.has(id)) throw new AccountError('album.invalid');
+      if (!STICKER_IDS.has(id) || COLLECTOR_IDS.has(id)) throw new AccountError('album.invalid');
       if (a) { if ((a.album![id] ?? 0) < 2) throw new AccountError('album.noDuplicate'); a.album![id]--; }
       let code: string;
       do code = [...crypto.getRandomValues(new Uint8Array(6))].map((x) => CODE_CHARS[x % CODE_CHARS.length]).join('');

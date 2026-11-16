@@ -1,6 +1,6 @@
 // Album d'autocollants : un autocollant à chaque partie terminée. Sur l'appareil pour les
 // invités ; sur le compte (et l'appareil) pour les joueurs connectés.
-import { albumPageFor, ALBUM, STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
+import { albumPageFor, ALBUM, COLLECTOR_MIN, COLLECTORS, STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
 import { loadEvents } from './events';
 import { api, savedAuth } from './account';
 
@@ -52,6 +52,22 @@ export async function earnSticker(key?: string, game?: string) {
   window.dispatchEvent(new CustomEvent('gq:sticker', { detail: { id: st.id, isNew } }));
   const tk = savedAuth();
   if (tk) void api('/api/album', { body: { op: 'add', id: st.id }, token: tk });
+}
+
+/** Défi de la semaine terminé : le collector de la semaine si au moins la moitié est juste. */
+export async function earnCollector(correct: number, total: number) {
+  if (!total || correct / total < COLLECTOR_MIN) return;
+  const ev = await loadEvents().catch(() => null);
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Africa/Casablanca' }); // dates des défis : heure du Maroc
+  const c = COLLECTORS.find((x) => x.event === ev?.week?.id && today >= x.from && today <= x.to);
+  if (!c) return;
+  const a = loadAlbum();
+  if (a[c.id]) return;
+  a[c.id] = 1;
+  saveAlbum(a);
+  setTimeout(() => window.dispatchEvent(new CustomEvent('gq:sticker', { detail: { id: c.id, isNew: true } })), 2600);
+  const tk = savedAuth();
+  if (tk) void api('/api/album', { body: { op: 'add', id: c.id }, token: tk });
 }
 
 /** Connexion : l'album de l'appareil et celui du compte sont réunis (le plus grand nombre gagne). */

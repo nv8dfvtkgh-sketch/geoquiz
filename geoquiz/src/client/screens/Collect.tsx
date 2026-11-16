@@ -1,12 +1,13 @@
 // Album d'autocollants, autocollant gagné en fin de partie, avatar habillé.
 import { useEffect, useState } from 'react';
-import { ALBUM, LOOK_BY_ID, LOOK_ITEMS, STICKERS, isUnlocked, type Look, type LookSlot, type Unlock } from '../../shared/stickers';
+import { ALBUM, COLLECTORS, LOOK_BY_ID, LOOK_ITEMS, STICKERS, isUnlocked, type Collector, type Look, type LookSlot, type Unlock } from '../../shared/stickers';
 import { useApp } from '../state';
 import { api } from '../account';
 import { claimSticker, giftSticker, loadAlbum, type Album } from '../album';
 import { PuzzleBack } from './Puzzles';
 
-const BY_ID = Object.fromEntries(STICKERS.map((x) => [x.id, x]));
+const BY_ID: Record<string, { e: string; n: Record<string, string>; rare?: boolean; theme?: string }> = Object.fromEntries([...STICKERS, ...COLLECTORS].map((x) => [x.id, x]));
+const COL_BY_ID = Object.fromEntries(COLLECTORS.map((x) => [x.id, x]));
 
 export function useAlbum(): Album {
   const [a, setA] = useState(loadAlbum);
@@ -102,10 +103,10 @@ export function StickerToast() {
   const x = BY_ID[st.id];
   if (!x) return null;
   return (
-    <div className="sticker-toast" role="status" key={st.k}>
-      <span className={`sticker mini ${x.rare ? 'rare' : ''}`} aria-hidden="true">{x.e}</span>
+    <div className={`sticker-toast ${x.theme ? 'col' : ''}`} role="status" key={st.k}>
+      <span className={`sticker mini ${x.rare ? 'rare' : ''} ${x.theme ? `collector ${x.theme}` : ''}`} aria-hidden="true">{x.e}</span>
       <span className="sticker-toast-text">
-        <strong>{st.isNew ? t('album.new') : t('album.double')}</strong>
+        <strong>{x.theme ? t('col.new') : st.isNew ? t('album.new') : t('album.double')}</strong>
         <small dir="auto">{x.n[lang]}</small>
       </span>
       <button type="button" className="text-btn" onClick={() => { setSt(null); go('album'); }}>{t('album.open')}</button>
@@ -142,6 +143,7 @@ export function AlbumScreen() {
       <p className="muted">{t('album.hint')}</p>
       <p className="passport-total"><strong>{owned}</strong> / {STICKERS.length} {t('album.stickers')}</p>
       {!me && <p className="hint">{t('album.guest')}</p>}
+      <Collectors album={album} />
       <div className="seg album-tabs">
         {ALBUM.map((x) => {
           const n = x.stickers.filter((s) => album[s.id]).length;
@@ -185,5 +187,38 @@ export function AlbumScreen() {
         {claimMsg && <p className="record" role="status">{claimMsg}</p>}
       </section>
     </div>
+  );
+}
+
+// ---------------------------------------------------------------- collectors
+/** Les collectors des défis de la semaine : à gagner pendant la semaine, introuvables ensuite. */
+function Collectors({ album }: { album: Album }) {
+  const { t, lang } = useApp();
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Africa/Casablanca' });
+  const list = COLLECTORS.filter((c) => album[c.id] || today >= c.from);
+  if (!list.length) return null;
+  const loc = lang === 'ar' ? 'ar-MA' : lang;
+  const day = (d: string, o: Intl.DateTimeFormatOptions) => new Date(`${d}T12:00:00Z`).toLocaleDateString(loc, o);
+  const state = (c: Collector) => (album[c.id] ? 'have' : today <= c.to ? 'open' : 'missed');
+  return (
+    <section className="col-shelf" aria-labelledby="col-h">
+      <h2 id="col-h">{t('col.title')} <small>{list.filter((c) => album[c.id]).length}/{list.length}</small></h2>
+      <p className="muted small">{t('col.hint')}</p>
+      <ul>
+        {list.map((c) => {
+          const st = state(c);
+          return (
+            <li key={c.id} className={`col-card ${c.theme} ${st}`}>
+              <span className={`sticker collector ${c.theme}`} aria-hidden="true">{st === 'have' ? c.e : '?'}</span>
+              <span className="col-text">
+                <strong dir="auto">{c.n[lang]}</strong>
+                <small>{t('col.week', { from: day(c.from, { day: 'numeric' }), to: day(c.to, { day: 'numeric', month: 'long', year: 'numeric' }) })}</small>
+                <em>{st === 'have' ? t('col.owned') : st === 'open' ? t('col.how', { until: day(c.to, { weekday: 'long', day: 'numeric', month: 'long' }) }) : t('col.missed')}</em>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }

@@ -108,7 +108,21 @@ export const ALBUM: AlbumPage[] = [
   },
 ];
 export const STICKERS: Sticker[] = ALBUM.flatMap((p) => p.stickers);
-export const STICKER_IDS = new Set(STICKERS.map((x) => x.id));
+
+// ------------------------------------------------------------------ collectors
+// Un collector par défi de la semaine : il ne se gagne que pendant la semaine du défi, en
+// réussissant au moins la moitié des questions. Il ne sort jamais au hasard, ne s'offre pas
+// et ne se retrouve plus ensuite. Dessin sans logo ni visuel officiel (seulement des emojis).
+export interface Collector extends Sticker { event: string; from: string; to: string; theme: string }
+export const COLLECTOR_MIN = 0.5;
+export const COLLECTORS: Collector[] = [
+  {
+    id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'week-gta-2026', from: '2026-11-15', to: '2026-11-22',
+    n: { fr: 'Collector GTA · Los Santos', en: 'GTA collector · Los Santos', es: 'Coleccionable GTA · Los Santos', ar: 'إصدار خاص GTA · لوس سانتوس' },
+  },
+];
+export const COLLECTOR_IDS = new Set(COLLECTORS.map((x) => x.id));
+export const STICKER_IDS = new Set([...STICKERS.map((x) => x.id), ...COLLECTOR_IDS]);
 
 // ------------------------------------------------------------------ page selon le jeu
 // L'autocollant gagné vient de la page qui correspond au jeu joué (un koala après un quiz

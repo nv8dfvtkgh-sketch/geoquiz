@@ -1319,5 +1319,14 @@
   "gm.passed": "Skipped (0 points)",
   "gm.final": "Qualifier done: {pts} points",
   "gm.finalHint": "Your score counts for this month's ranking. See you on the last Saturday for the live round if you're among the best!",
-  "gm.seeRanking": "See the ranking"
+  "gm.seeRanking": "See the ranking",
+  "col.title": "Collectors",
+  "col.hint": "One collector per challenge of the week. You can only win it that week: afterwards it is gone for good and cannot be traded.",
+  "col.week": "Week of {from}–{to}",
+  "col.how": "Win it until {until}: get at least half the challenge right",
+  "col.owned": "In your collection · limited edition",
+  "col.missed": "Missed: this collector is no longer available",
+  "col.new": "Collector unlocked!",
+  "col.toWin": "Collector to win this week",
+  "col.won": "Collector won ✓"
 }

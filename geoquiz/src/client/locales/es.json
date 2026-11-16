@@ -1319,5 +1319,14 @@
   "gm.passed": "Saltada (0 puntos)",
   "gm.final": "Clasificación terminada: {pts} puntos",
   "gm.finalHint": "Tu puntuación cuenta para la clasificación del mes. ¡Nos vemos el último sábado en el directo si estás entre los mejores!",
-  "gm.seeRanking": "Ver la clasificación"
+  "gm.seeRanking": "Ver la clasificación",
+  "col.title": "Coleccionables",
+  "col.hint": "Un coleccionable por cada reto de la semana. Solo se gana esa semana: después ya no se puede conseguir ni intercambiar.",
+  "col.week": "Semana del {from} al {to}",
+  "col.how": "Gánalo hasta el {until}: acierta al menos la mitad del reto",
+  "col.owned": "En tu colección · edición limitada",
+  "col.missed": "Perdido: este coleccionable ya no está disponible",
+  "col.new": "¡Coleccionable desbloqueado!",
+  "col.toWin": "Coleccionable en juego esta semana",
+  "col.won": "Coleccionable ganado ✓"
 }

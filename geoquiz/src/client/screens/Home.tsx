@@ -11,6 +11,8 @@ import { hideInstall, installNow, installOffer } from '../install';
 import type { BoardGame } from '../../shared/boards';
 
 import { useApp } from '../state';
+import { COLLECTORS } from '../../shared/stickers';
+import { loadAlbum } from '../album';
 import { Stars } from './Account';
 import { starsOf } from '../account';
 
@@ -107,6 +109,8 @@ function Games() {
   const streak = dailyStreak();
   const evs = useEvents();
   const week = weekFor(evs);
+  const weekCol = week ? COLLECTORS.find((c) => c.event === week.id) : undefined;
+  const haveCol = !!(weekCol && loadAlbum()[weekCol.id]);
   const theme = evs?.daily ?? null;
   const [install, setInstall] = useState(installOffer);
   useEffect(() => { const on = () => setInstall(installOffer()); window.addEventListener('gq:install', on); return () => window.removeEventListener('gq:install', on); }, []);
@@ -148,7 +152,9 @@ function Games() {
           {week && (
             <button type="button" className="week-card week" onClick={() => openGame('week')}>
               <span className="week-emoji" aria-hidden="true">{week.emoji}</span>
-              <span><small>{t('week.label')}</small><strong>{week.names[lang].replace(/^[^:]*:\s*/, '')}</strong></span>
+              <span><small>{t('week.label')}</small><strong>{week.names[lang].replace(/^[^:]*:\s*/, '')}</strong>
+                {weekCol && <em className="week-col">{haveCol ? t('col.won') : t('col.toWin')}</em>}</span>
+              {weekCol && <span className={`sticker mini collector ${weekCol.theme} ${haveCol ? '' : 'locked'}`} aria-hidden="true">{weekCol.e}</span>}
             </button>
           )}
         </div>
