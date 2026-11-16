@@ -1454,5 +1454,19 @@
   "sheet.ex2a": "7",
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
-  "admin.exportQuizzes": "Exportar todos los quiz (Excel)"
+  "admin.exportQuizzes": "Exportar todos los quiz (Excel)",
+  "sheet.photo": "Foto (nombre del archivo)",
+  "sheet.help5": "Con fotos: escribe el nombre del archivo en la columna F (por ejemplo torre-hassan.jpg). Tras importar, pulsa «Añadir fotos» y elige todas tus fotos a la vez: cada una va a su pregunta.",
+  "sheet.ex3q": "¿Qué monumento es este?",
+  "sheet.ex3a": "La torre Hassan",
+  "sheet.ex3b": "La Kutubía",
+  "sheet.ex3c": "La Giralda",
+  "sheet.ex3photo": "torre-hassan.jpg",
+  "sheet.photosTitle": "Fotos en tu quiz",
+  "sheet.photosHint": "Elige varias fotos a la vez: cada una se convierte en una pregunta y solo tienes que escribir la pregunta y las respuestas. También puedes añadir una foto a cada pregunta más abajo.",
+  "sheet.photosWaiting": "{n} pregunta(s) esperan su foto ({names}): elige esos archivos y cada uno irá a su pregunta.",
+  "sheet.photosBtn": "Añadir fotos",
+  "sheet.photosDone": "Fotos: {n} colocada(s) en su pregunta, {m} pregunta(s) nueva(s) por completar.",
+  "sheet.photosFailed": "{n} foto(s) no añadida(s) (archivo ilegible o más de 50 preguntas).",
+  "sheet.photoExpected": "Foto esperada: {name}"
 }

@@ -1454,5 +1454,19 @@
   "sheet.ex2a": "7",
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
-  "admin.exportQuizzes": "تصدير كل الاختبارات (Excel)"
+  "admin.exportQuizzes": "تصدير كل الاختبارات (Excel)",
+  "sheet.photo": "الصورة (اسم الملف)",
+  "sheet.help5": "مع الصور: اكتب اسم الملف في العمود F (مثلاً tour-hassan.jpg). بعد الاستيراد، اضغط «إضافة صور» واختر كل صورك دفعة واحدة: تذهب كل صورة إلى سؤالها.",
+  "sheet.ex3q": "ما هذا المعلم؟",
+  "sheet.ex3a": "صومعة حسان",
+  "sheet.ex3b": "الكتبية",
+  "sheet.ex3c": "الخيرالدا",
+  "sheet.ex3photo": "tour-hassan.jpg",
+  "sheet.photosTitle": "صور في اختبارك",
+  "sheet.photosHint": "اختر عدة صور دفعة واحدة: تصبح كل صورة سؤالاً، ولا يبقى إلا كتابة السؤال والإجابات. يمكنك أيضاً إضافة صورة لكل سؤال في الأسفل.",
+  "sheet.photosWaiting": "{n} سؤال تنتظر صورتها ({names}): اختر هذه الملفات وستذهب كل صورة إلى سؤالها.",
+  "sheet.photosBtn": "إضافة صور",
+  "sheet.photosDone": "الصور: {n} وُضعت في أسئلتها، و{m} سؤال جديد يجب إكماله.",
+  "sheet.photosFailed": "لم تُضف {n} صورة (ملف غير مقروء أو أكثر من 50 سؤالاً).",
+  "sheet.photoExpected": "الصورة المنتظرة: {name}"
 }

@@ -155,7 +155,7 @@ export async function readTableFile(file: File): Promise<Rows> {
 }
 
 // ---------------------------------------------------------------- quiz ⇄ tableau
-export interface SheetQuestion { text: string; answers: string[]; correct: number }
+export interface SheetQuestion { text: string; answers: string[]; correct: number; photo?: string }
 const TITLE_RX = /^(titre|title|título|titulo|العنوان)/i;
 const HEAD_RX = /^(question|pregunta|سؤال|السؤال)\b/i;
 
@@ -169,21 +169,22 @@ export function rowsToQuiz(rows: Rows, max = 50): { title: string; questions: Sh
     if (!r.some(Boolean)) continue;
     if (TITLE_RX.test(r[0]) && r.filter(Boolean).length <= 2) { title = r[1] || title; continue; }
     if (HEAD_RX.test(r[0]) && questions.length === 0) continue; // ligne d'en-tête
-    const [text, good, ...bad] = r;
+    const [text, good, b1, b2, b3, photo] = r;
+    const bad = [b1, b2, b3];
     // Mauvaises réponses : sans doublon, ni copie de la bonne réponse.
     const seen = new Set([good.toLowerCase()]);
     const wrong = bad.filter((a) => a && !seen.has(a.toLowerCase()) && seen.add(a.toLowerCase())).slice(0, 3);
     if (!text || !good || !wrong.length || questions.length >= max) { skipped++; continue; }
-    questions.push({ text: text.slice(0, 200), answers: [good, ...wrong].map((a) => a.slice(0, 80)), correct: 0 });
+    questions.push({ text: text.slice(0, 200), answers: [good, ...wrong].map((a) => a.slice(0, 80)), correct: 0, photo: photo ? photo.slice(0, 120) : undefined });
   }
   return { title: title.slice(0, 80), questions, skipped };
 }
 
-export interface SheetLabels { title: string; question: string; good: string; bad: string; example: string[][]; help: string[] }
+export interface SheetLabels { title: string; question: string; good: string; bad: string; photo: string; example: string[][]; help: string[] }
 /** Quiz → lignes du tableau (même présentation que le modèle). */
 export function quizToRows(l: SheetLabels, title: string, qs: SheetQuestion[]): Rows {
-  const head = [l.question, l.good, `${l.bad} 1`, `${l.bad} 2`, `${l.bad} 3`];
-  const body = qs.map((q) => [q.text, q.answers[q.correct] ?? '', ...q.answers.filter((_, i) => i !== q.correct)]);
+  const head = [l.question, l.good, `${l.bad} 1`, `${l.bad} 2`, `${l.bad} 3`, l.photo];
+  const body = qs.map((q) => { const bad = q.answers.filter((_, i) => i !== q.correct); return [q.text, q.answers[q.correct] ?? '', bad[0] ?? '', bad[1] ?? '', bad[2] ?? '', q.photo ?? '']; });
   return [[l.title, title], [], head, ...body];
 }
 
@@ -194,4 +195,6 @@ export function download(blob: Blob, name: string) {
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
+/** Nom de photo comparable : sans dossier, sans extension, sans accents ni majuscules. */
+export const photoKey = (s: string) => s.split(/[\\/]/).pop()!.replace(/\.(jpe?g|png|webp|gif|heic)$/i, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 export const fileSafe = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'quiz';

@@ -1454,5 +1454,19 @@
   "sheet.ex2a": "7",
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
-  "admin.exportQuizzes": "Export all quizzes (Excel)"
+  "admin.exportQuizzes": "Export all quizzes (Excel)",
+  "sheet.photo": "Photo (file name)",
+  "sheet.help5": "With photos: write the file name in column F (for example hassan-tower.jpg). After importing, click “Add photos” and pick all your photos at once: each one goes to its question.",
+  "sheet.ex3q": "What is this monument?",
+  "sheet.ex3a": "Hassan Tower",
+  "sheet.ex3b": "The Koutoubia",
+  "sheet.ex3c": "The Giralda",
+  "sheet.ex3photo": "hassan-tower.jpg",
+  "sheet.photosTitle": "Photos in your quiz",
+  "sheet.photosHint": "Pick several photos at once: each becomes a question, you just write the question and answers. You can also add a photo to each question further down.",
+  "sheet.photosWaiting": "{n} question(s) are waiting for a photo ({names}): pick those files and each one will go to its question.",
+  "sheet.photosBtn": "Add photos",
+  "sheet.photosDone": "Photos: {n} placed on their question, {m} new question(s) to fill in.",
+  "sheet.photosFailed": "{n} photo(s) not added (unreadable file or over 50 questions).",
+  "sheet.photoExpected": "Expected photo: {name}"
 }

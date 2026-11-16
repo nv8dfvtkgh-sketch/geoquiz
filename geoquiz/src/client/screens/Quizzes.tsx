@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_SETTINGS, type RoomKind, type Settings } from '../../shared/protocol';
 import { createGame } from '../net';
 import { useApp } from '../state';
-import { download, fileSafe, quizToRows, readDelimited, readTableFile, rowsToQuiz, writeXlsx, type SheetLabels, type SheetQuestion } from '../sheet';
+import { download, fileSafe, photoKey, quizToRows, readDelimited, readTableFile, rowsToQuiz, writeXlsx, type SheetLabels, type SheetQuestion } from '../sheet';
 
 // ------------------------------------------------------------------ outils
 interface MyQuiz { id: string; token: string; title: string }
@@ -126,15 +126,15 @@ export function MyQuizzes() {
 }
 
 // ------------------------------------------------------------------ éditeur
-interface EditQ { text: string; answers: string[]; correct: number; image?: string | { data: string } | null; preview?: string }
+interface EditQ { text: string; answers: string[]; correct: number; image?: string | { data: string } | null; preview?: string; wantPhoto?: string }
 const emptyQ = (): EditQ => ({ text: '', answers: ['', '', '', ''], correct: 0, image: null });
 
 /** Libellés du modèle Excel, dans la langue du joueur. */
 function sheetLabels(t: (k: string, p?: Record<string, string | number>) => string): SheetLabels {
   return {
-    title: t('sheet.titleCell'), question: t('sheet.question'), good: t('sheet.good'), bad: t('sheet.bad'),
-    example: [[t('sheet.ex1q'), t('sheet.ex1a'), t('sheet.ex1b'), t('sheet.ex1c'), t('sheet.ex1d')], [t('sheet.ex2q'), t('sheet.ex2a'), t('sheet.ex2b'), t('sheet.ex2c'), '']],
-    help: [t('sheet.help1'), t('sheet.help2'), t('sheet.help3'), t('sheet.help4')],
+    title: t('sheet.titleCell'), question: t('sheet.question'), good: t('sheet.good'), bad: t('sheet.bad'), photo: t('sheet.photo'),
+    example: [[t('sheet.ex1q'), t('sheet.ex1a'), t('sheet.ex1b'), t('sheet.ex1c'), t('sheet.ex1d'), ''], [t('sheet.ex3q'), t('sheet.ex3a'), t('sheet.ex3b'), t('sheet.ex3c'), '', t('sheet.ex3photo')], [t('sheet.ex2q'), t('sheet.ex2a'), t('sheet.ex2b'), t('sheet.ex2c'), '', '']],
+    help: [t('sheet.help1'), t('sheet.help2'), t('sheet.help3'), t('sheet.help5'), t('sheet.help4')],
   };
 }
 /** Classeur : feuille « Quiz » (à remplir) et feuille « Mode d'emploi ». */
@@ -143,13 +143,13 @@ function quizWorkbook(t: (k: string, p?: Record<string, string | number>) => str
   const rows = quizToRows(l, title, qs);
   if (!qs.length) rows.push(...l.example);
   return writeXlsx([
-    { name: 'Quiz', rows, widths: [60, 28, 28, 28, 28], bold: [0, 2] },
+    { name: 'Quiz', rows, widths: [60, 28, 28, 28, 28, 26], bold: [0, 2] },
     { name: t('sheet.helpSheet'), rows: l.help.map((h) => [h]), widths: [110] },
   ]);
 }
 
 /** Import et export Excel / CSV / HTML / copier-coller dans l'éditeur. */
-function SheetTools({ title, qs, onImport }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void }) {
+function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void; onPhotos: (files: File[]) => Promise<{ matched: number; added: number; failed: number }> }) {
   const { t } = useApp();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [paste, setPaste] = useState('');
@@ -164,6 +164,7 @@ function SheetTools({ title, qs, onImport }: { title: string; qs: EditQ[]; onImp
     try { apply(await readTableFile(f)); }
     catch (e) { setMsg({ ok: false, text: t((e as Error).message === 'oldFormat' ? 'sheet.oldFormat' : 'sheet.unreadable') }); }
   };
+  const waiting = qs.filter((q) => q.wantPhoto && !q.preview).map((q) => q.wantPhoto!);
   const filled = qs.filter((q) => q.text.trim()).map((q) => {
     const kept = q.answers.map((a, i) => ({ a: a.trim(), i })).filter((x) => x.a);
     return { text: q.text.trim(), answers: kept.map((x) => x.a), correct: Math.max(0, kept.findIndex((x) => x.i === q.correct)) };
@@ -185,6 +186,19 @@ function SheetTools({ title, qs, onImport }: { title: string; qs: EditQ[]; onImp
         <textarea rows={4} value={paste} onChange={(e) => setPaste(e.target.value)} placeholder={t('sheet.pasteHint')} dir="auto" />
       </label>
       <button type="button" className="btn ghost" disabled={!paste.trim()} onClick={() => { apply(readDelimited(paste)); setPaste(''); }}>{t('sheet.pasteBtn')}</button>
+      <div className="sheet-photos">
+        <strong>📷 {t('sheet.photosTitle')}</strong>
+        <p className="muted small">{waiting.length ? t('sheet.photosWaiting', { n: waiting.length, names: waiting.slice(0, 4).join(', ') + (waiting.length > 4 ? '…' : '') }) : t('sheet.photosHint')}</p>
+        <label className="btn ghost sheet-file">
+          <input type="file" className="sr" multiple accept="image/jpeg,image/png,image/webp" onChange={async (e) => {
+            const files = Array.from(e.target.files ?? []); e.target.value = '';
+            if (!files.length) return;
+            const r = await onPhotos(files);
+            setMsg({ ok: r.failed === 0, text: t('sheet.photosDone', { n: r.matched, m: r.added }) + (r.failed ? ` ${t('sheet.photosFailed', { n: r.failed })}` : '') });
+          }} />
+          {t('sheet.photosBtn')}
+        </label>
+      </div>
       {msg && <p className={msg.ok ? 'record' : 'error'} role="status">{msg.text}</p>}
     </details>
   );
@@ -255,10 +269,28 @@ export function QuizEditor() {
       <BackLink onClick={() => openQuiz('myquizzes')} label={t('quiz.mine')} />
       <h1>{editing ? t('quiz.editTitle') : t('quiz.new')}</h1>
 
-      <SheetTools title={title} qs={qs} onImport={(tt, list) => {
+      <SheetTools title={title} qs={qs} onPhotos={async (files) => {
+        // Chaque photo va à la question qui porte son nom (colonne « Photo » du fichier) ;
+        // les autres créent une nouvelle question avec la photo, à compléter.
+        let next = [...qs];
+        let matched = 0, added = 0, failed = 0;
+        for (const f of files) {
+          let data: string;
+          try { data = await shrinkImage(f); } catch { failed++; continue; }
+          const k = photoKey(f.name);
+          const i = next.findIndex((q) => q.wantPhoto && photoKey(q.wantPhoto) === k && !q.preview);
+          if (i >= 0) { next[i] = { ...next[i], image: { data }, preview: data }; matched++; continue; }
+          const blank = next.findIndex((q) => !q.text.trim() && !q.preview);
+          const q: EditQ = { ...emptyQ(), image: { data }, preview: data };
+          if (blank >= 0) next[blank] = q; else if (next.length < 50) next.push(q); else { failed++; continue; }
+          added++;
+        }
+        setQs(next);
+        return { matched, added, failed };
+      }} onImport={(tt, list) => {
         if (tt && !title.trim()) setTitle(tt);
         const mine = qs.filter((q) => q.text.trim());
-        const added = list.map((q) => ({ text: q.text, answers: [...q.answers, '', '', ''].slice(0, 4), correct: q.correct, image: null }));
+        const added = list.map((q) => ({ text: q.text, answers: [...q.answers, '', '', ''].slice(0, 4), correct: q.correct, image: null, wantPhoto: q.photo }));
         setQs([...mine, ...added].slice(0, 50).concat(Array.from({ length: Math.max(0, 3 - mine.length - added.length) }, emptyQ)));
       }} />
 
@@ -286,7 +318,7 @@ export function QuizEditor() {
             <label className="q-upload">
               <input type="file" accept="image/jpeg,image/png,image/webp" className="sr" onChange={(e) => pickImage(i, e.target.files?.[0])} />
               <span>{t('quiz.addImage')}</span>
-              <small>{t('quiz.imageHint')}</small>
+              <small>{q.wantPhoto ? t('sheet.photoExpected', { name: q.wantPhoto }) : t('quiz.imageHint')}</small>
             </label>
           )}
           <span className="small muted">{t('quiz.answersHint')}</span>
