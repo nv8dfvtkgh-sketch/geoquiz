@@ -71,6 +71,34 @@ export function shuffle<T>(a: T[], rnd: () => number): T[] {
   return r;
 }
 
+// Deux questions écrites qui « se répondent » ne doivent pas tomber dans la même partie :
+// « Combien de Wimbledon Federer a-t-il gagnés ? » donne la réponse de « Quel joueur a gagné
+// Wimbledon 8 fois ? », et deux formulations du même fait reviennent à poser deux fois la question.
+const OVERLAP_STOP = new Set(('le la les l de des du d un une et en a au aux quel quelle quels quelles qui que qu quoi est sont '
+  + 'ce cet cette ces dans par pour sur avec sans combien comment ou il elle ils elles on se sa son ses leur leurs plus moins '
+  + 'fait faire a-t-il a-t-elle t y ne pas tres tout tous toute toutes etait ont avait avaient '
+  + 'environ appelle appelle-t-on s appelle-t-on nom pays annee annees fois jour jours premier premiere dernier derniere grand grande '
+  + 'gagne gagner remporte quelle ville monde celui celle comme selon depuis entre').split(' '));
+const ovNorm = (s: string) => ` ${s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()} `;
+const ovWords = (s: string) => new Set(ovNorm(s).trim().split(' ').filter((w) => w.length > 2 && !OVERLAP_STOP.has(w)));
+const ovCore = (s: string) => ovNorm(s).trim().replace(/^(le|la|les|l|un|une|en|au|aux|a|d|de|du|des) /, '');
+function ovView(q: InternalQuestion) {
+  if (!q.promptName?.fr || !q.answer?.fr || q.map || q.shape || q.flagIso || q.imageRef || q.sign || q.kit) return null;
+  const text = ovNorm(q.promptName.fr), ans = ovCore(q.answer.fr);
+  return { text, ans, words: ovWords(q.promptName.fr), named: ans.length >= 3 && !/^[0-9 ]+$/.test(ans) };
+}
+/** Vrai si les deux questions se donnent la réponse ou disent la même chose autrement. */
+export function overlaps(a: InternalQuestion, b: InternalQuestion): boolean {
+  const x = ovView(a), y = ovView(b);
+  if (!x || !y) return false;
+  let shared = 0;
+  for (const w of x.words) if (y.words.has(w)) shared++;
+  // la réponse de l'une est écrite dans l'autre, et elles parlent de la même chose
+  if (shared >= 1 && ((x.named && y.text.includes(` ${x.ans} `)) || (y.named && x.text.includes(` ${y.ans} `)))) return true;
+  // même réponse et même sujet (deux mots en commun : « Pour quel pays a brillé… » ne suffit pas)
+  return shared >= 2 && x.named && x.ans === y.ans && !/^(vrai|faux|true|false|verdadero|falso|oui|non)$/.test(x.ans);
+}
+
 const allNames = (n: Names, extra: string[] = []) => [...Object.values(n), ...extra];
 
 /** Saisie : toutes les langues acceptées, une ou deux fautes tolérées, sans confondre deux lieux. */
@@ -705,6 +733,12 @@ function packCat(id: string, packs: string[]): Category {
   };
 }
 const packCats = Object.entries(PACK_GAMES).map(([id, packs]) => packCat(id, packs));
+/** Questions d'un pack à ne pas poser quand l'un des joueurs joue dans une de ces langues. */
+export function hiddenFor(category: string, langs: Lang[]): Set<string> {
+  const packs = PACK_GAMES[category];
+  if (!packs || !langs.length) return new Set();
+  return new Set(packs.flatMap((p) => extras.packs[p] ?? []).filter((q) => q.skip?.some((l) => langs.includes(l))).map((q) => q.id));
+}
 // ------------------------------------------------------------------ révisions scolaires
 // Programme français (CP → Terminale) et américain (K → Grade 12) : une classe ou un cycle,
 // une matière ou toutes. Questions écrites (data/games/school.json) + maths fabriquées au hasard.
@@ -1440,6 +1474,7 @@ export function triviaQuestions(rnd: () => number = Math.random, avoid: string[]
       try {
         const q = cat.make(t, 'mcq', zone, rnd);
         if (!q.options || q.options.length < 2) continue;
+        if (tries < 10 && out.some((o) => overlaps(o, q))) continue;
         if (q.map?.map === 'world') q.map = { ...q.map, active: q.map.active.filter((x) => x === t || !countries[x]?.dependency) };
         seen.add(`${cat.id}|${t}`);
         out.push({ ...q, target: `${cat.id}|${t}`, theme, level });

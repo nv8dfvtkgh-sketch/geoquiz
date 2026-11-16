@@ -11,7 +11,7 @@ import { BacGame } from './bacplay';
 import { gmCalendar, gmQuestions } from './gm';
 import { GM_DIVISIONS, GM_LIVE, GM_QUALIF, type GmDivision, type GmStage } from '../shared/gm';
 import { cleanBac } from '../shared/bac';
-import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, hiddenFor, localize, overlaps, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, ensureSounds, mediaOff, mediaSnapshot, photosLoaded, restoreMedia, setMediaOff, type MediaSnapshot } from './photos';
@@ -177,14 +177,15 @@ function cleanName(name: any): string {
 export const cleanLang = (l: any): Lang => (LANGS.includes(l) ? l : 'fr');
 
 /** Tirage des questions selon les réglages. */
-export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = []): InternalQuestion[] {
+export function drawQuestions(settings: Settings, rnd: () => number = Math.random, avoid: string[] = [], langs: Lang[] = []): InternalQuestion[] {
   if (settings.category === 'daily') return dailyQuestions();
   if (settings.category === 'survival') return survivalQuestions(rnd);
   if (settings.category === 'trivia') return triviaQuestions(rnd, avoid);
   if (settings.category === 'gm') return gmQuestions(settings.gm?.div ?? 'college', settings.count, rnd, avoid);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
-  const strict = cat.pool(zone, settings.difficulty, settings.count);
+  const hidden = hiddenFor(settings.category, langs);
+  const strict = cat.pool(zone, settings.difficulty, settings.count).filter((t) => !hidden.has(t));
   let pool = shuffle(strict, rnd);
   if (avoid.length) {
     // Anti-répétition : d'abord les questions jamais vues de ce niveau, puis celles des niveaux
@@ -193,7 +194,7 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
     const harder = (settings.difficulty === 'easy' ? ['medium', 'hard'] : settings.difficulty === 'medium' ? ['hard'] : []) as Settings['difficulty'][];
     const inStrict = new Set(strict);
     const wide: string[] = [];
-    for (const d of harder) for (const t of shuffle(cat.pool(zone, d, settings.count), rnd)) if (!inStrict.has(t) && !wide.includes(t)) wide.push(t);
+    for (const d of harder) for (const t of shuffle(cat.pool(zone, d, settings.count), rnd)) if (!inStrict.has(t) && !hidden.has(t) && !wide.includes(t)) wide.push(t);
     const fresh = [...pool, ...wide].filter((t) => !seenAt.has(t));
     const seen = [...pool, ...wide].filter((t) => seenAt.has(t)).sort((a, b) => seenAt.get(a)! - seenAt.get(b)!);
     // Assez de questions neuves au bon niveau : on ne va pas chercher plus dur.
@@ -230,7 +231,8 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   for (let i = 0; i < candidates.length && picked.length < settings.count; i++) {
     const q = build(candidates[i], picked.length);
     const k = key(q);
-    if ((count.get(k) ?? 0) >= 2) { spare.push({ q, k }); continue; }
+    // Même énoncé déjà deux fois, ou une question qui donne la réponse d'une autre : en réserve.
+    if ((count.get(k) ?? 0) >= 2 || picked.some((p) => overlaps(p.q, q))) { spare.push({ q, k }); continue; }
     count.set(k, (count.get(k) ?? 0) + 1);
     picked.push({ q, k });
   }
@@ -669,7 +671,7 @@ export class Room {
     this.questions = retry ? retry
       : this.quizContent ? customQuestions(this.settings.quiz!, this.quizContent, Math.random)
       : this.challengeItems ? this.challengeQuestions()
-      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid);
+      : this.reviewItems ? this.reviewQuestions() : drawQuestions(this.settings, Math.random, this.avoid, [...new Set([...this.members.values()].map((m) => m.lang))]);
     // Une revanche ne repose pas les mêmes questions.
     if (!retry) this.avoid = [...this.avoid.filter((t) => !this.questions.some((q) => q.target === t)), ...this.questions.map((q) => q.target)].slice(-400);
     this.madeChallenge = undefined;
@@ -880,7 +882,7 @@ export class Room {
     b.deadline = undefined;
     if (b.s.winner !== null) return this.endBoard(res);
     if (b.s.ask && !b.q) {
-      b.q = boardQuestion(b.s.ask, this.settings.difficulty, Math.random, b.avoid) ?? undefined;
+      b.q = boardQuestion(b.s.ask, this.settings.difficulty, Math.random, b.avoid, [...new Set([...this.members.values()].map((m) => m.lang))]) ?? undefined;
       if (!b.q) { b.s = boardAnswer(b.s, true); return this.boardTick(res); } // plus de question : le coup passe
     }
     if (b.s.game === 'hangman' && b.s.done) {

@@ -35,7 +35,7 @@ Une primitive de 1/x sur ]0 ; +∞[ ? | ln(x) | −1/x² | x | eˣ
 Une primitive de eˣ ? | eˣ | x·eˣ | eˣ⁺¹/(x+1) | ln x
 Une primitive de cos(x) ? | sin(x) | −sin(x) | cos(x) | −cos(x)
 Combien de façons de ranger 4 objets distincts ? | 24 | 16 | 4 | 12
-Que vaut le coefficient binomial (5 parmi 2) ? | 10 | 20 | 25 | 7
+Que vaut le coefficient binomial « 2 parmi 5 » ? | 10 | 20 | 25 | 7
 Espérance d'une loi binomiale B(n ; p) ? | n × p | n + p | p / n | n × p × (1 − p)
 Variance d'une loi binomiale B(n ; p) ? | n × p × (1 − p) | n × p | √(np) | p²
 Que dit le théorème des valeurs intermédiaires ? | une fonction continue prend toutes les valeurs entre f(a) et f(b) | toute fonction est dérivable | une suite croissante converge toujours | f(a) = f(b)

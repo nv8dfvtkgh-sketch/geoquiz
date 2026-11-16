@@ -1,6 +1,6 @@
 // Données du jeu, indépendantes de la plateforme (Node ou Cloudflare Workers).
 // Chaque plateforme charge les fichiers de data/build puis appelle initData().
-import type { Catalog, CategoryId, MapData, MapFeature, Names, ZoneInfo } from '../shared/protocol';
+import type { Catalog, CategoryId, Lang, MapData, MapFeature, Names, ZoneInfo } from '../shared/protocol';
 import { normalize } from './text';
 
 export interface CountryMeta {
@@ -87,7 +87,8 @@ export interface Film {
 }
 export interface Cinema { films: Film[]; people: Record<string, Names> }
 /** Question d'un « pack » (sciences, sport, Maroc…) : la première réponse est la bonne. */
-export interface PackQ { id: string; tier: number; q: Names; a: Names[]; emoji?: string; sign?: string }
+/** `skip` : langues de jeu où la question se répondrait toute seule (« merci en arabe » posé en arabe). */
+export interface PackQ { id: string; tier: number; q: Names; a: Names[]; emoji?: string; sign?: string; skip?: Lang[] }
 /** Événement de la frise chronologique (année négative = avant J.-C.). */
 export interface HistEvent { id: string; year: number; tier: number; names: Names }
 /** Ville et son fuseau horaire IANA (le décalage est calculé le jour même). */

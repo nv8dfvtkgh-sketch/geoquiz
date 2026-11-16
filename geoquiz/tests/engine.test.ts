@@ -1472,3 +1472,24 @@ test('Geo Masters : la salle en direct transmet son classement à la fin', async
   config.gmResult = old;
   r.destroy();
 });
+
+test('deux questions qui se répondent ne tombent pas dans la même partie', () => {
+  const s = { category: 'tennis', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 30, timeLimit: 20 } as Settings;
+  for (let n = 0; n < 40; n++) {
+    const qs = drawQuestions(s);
+    const fr = qs.map((q) => q.promptName?.fr ?? '');
+    const a = fr.some((t) => t.startsWith('Combien de Wimbledon Roger Federer'));
+    const b = fr.some((t) => t.startsWith('Quel joueur a gagné Wimbledon 8 fois'));
+    assert.ok(!(a && b), 'Federer : « combien de Wimbledon » et « 8 fois » dans la même partie');
+  }
+});
+
+test('« merci en arabe » n\'est pas posé à un joueur arabophone', () => {
+  const s = { category: 'hello', zone: 'world', difficulty: 'easy', qtype: 'mcq', count: 40, timeLimit: 20 } as Settings;
+  for (let n = 0; n < 10; n++) {
+    const ar = drawQuestions(s, Math.random, [], ['ar']).map((q) => q.target);
+    assert.ok(!ar.includes('hello-1') && !ar.includes('hello-0'));
+  }
+  const fr = new Set(Array.from({ length: 20 }, () => drawQuestions(s, Math.random, [], ['fr']).map((q) => q.target)).flat());
+  assert.ok(fr.has('hello-1'), 'en français la question reste');
+});
