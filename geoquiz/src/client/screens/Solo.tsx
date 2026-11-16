@@ -4,7 +4,7 @@ import type { MapData } from '../../shared/protocol';
 import { useApp } from '../state';
 import { Confetti } from '../Celebrate';
 import { sfx } from '../sound';
-import { famous, loadGeo, loadWorld, matchCountry, nameOf, shareText, type GeoCountry } from '../geo';
+import { famous, letters, loadGeo, loadWorld, matchCountry, nameOf, shareText, type GeoCountry } from '../geo';
 import { PuzzleBack } from './Puzzles';
 
 /** Partie terminée : prévient le reste de l'appli (album d'autocollants). */
@@ -23,6 +23,9 @@ const setBest = (k: string, v: number) => { try { if (v > best(k)) localStorage.
 
 // ======================================================================= tout nommer
 const SETS = ['africa', 'europe', 'asia', 'north-america', 'south-america', 'oceania', 'world'];
+/** « L:B » : tous les pays (ou capitales) dont le nom commence par B, dans la langue du joueur. */
+const initial = (c: GeoCountry, caps: boolean, lang: string) => letters(caps ? nameOf(c.cap, lang as never) : nameOf(c.n, lang as never))[0] ?? '';
+const inSet = (c: GeoCountry, set: string, caps: boolean, lang: string) => (!caps || !!c.cap) && (set === 'world' || (set.startsWith('L:') ? initial(c, caps, lang) === set.slice(2) : c.co === set));
 
 export function NameAllScreen() {
   const { t, lang, look } = useApp();
@@ -41,13 +44,26 @@ export function NameAllScreen() {
         </div>
         <div className="na-sets">
           {SETS.map((s) => {
-            const n = geo.filter((c) => (s === 'world' || c.co === s) && (!caps || c.cap)).length;
+            const n = geo.filter((c) => inSet(c, s, caps, lang)).length;
             const k = `na.${caps ? 'cap' : 'c'}.${s}`;
             return (
               <button type="button" key={s} className="na-set" onClick={() => setSet(s)}>
                 <strong>{s === 'world' ? t('zone.world') : t(`zone.c.${s}`)}</strong>
                 <small>{t('na.count', { n })} · {t('na.time', { m: Math.ceil(timeFor(n, look === 'kids') / 60) })}</small>
                 {best(k) > 0 && <small className="na-best">🏆 {best(k)} / {n}</small>}
+              </button>
+            );
+          })}
+        </div>
+        <h2 className="na-h">{t('na.byLetter')}</h2>
+        <div className="na-letters">
+          {[...new Set(geo.filter((c) => !caps || c.cap).map((c) => initial(c, caps, lang)))].filter(Boolean).sort((a, b) => a.localeCompare(b, lang)).map((L) => {
+            const n = geo.filter((c) => inSet(c, `L:${L}`, caps, lang)).length;
+            if (n < 3) return null;
+            const k = `na.${caps ? 'cap' : 'c'}.${lang}.L:${L}`;
+            return (
+              <button type="button" key={L} className={`na-letter ${best(k) >= n ? 'done' : ''}`} onClick={() => setSet(`L:${L}`)} aria-label={t('na.letterOf', { l: L })}>
+                <strong>{L}</strong><small>{best(k) > 0 ? `${best(k)}/${n}` : n}</small>
               </button>
             );
           })}
@@ -61,7 +77,8 @@ const timeFor = (n: number, kids: boolean) => Math.min(20 * 60, Math.round((n * 
 
 function NameAllGame({ set, caps, geo, world, onBack, lang }: { set: string; caps: boolean; geo: GeoCountry[]; world: MapData; onBack: () => void; lang: string }) {
   const { t, look } = useApp();
-  const list = useMemo(() => geo.filter((c) => (set === 'world' || c.co === set) && (!caps || c.cap)), [geo, set, caps]);
+  const list = useMemo(() => geo.filter((c) => inSet(c, set, caps, lang)), [geo, set, caps, lang]);
+  const byLetter = set.startsWith('L:');
   const total = timeFor(list.length, look === 'kids');
   const [found, setFound] = useState<string[]>([]);
   const [left, setLeft] = useState(total);
@@ -69,7 +86,7 @@ function NameAllGame({ set, caps, geo, world, onBack, lang }: { set: string; cap
   const [v, setV] = useState('');
   const [flash, setFlash] = useState('');
   const ref = useRef<HTMLInputElement>(null);
-  const k = `na.${caps ? 'cap' : 'c'}.${set}`;
+  const k = byLetter ? `na.${caps ? 'cap' : 'c'}.${lang}.${set}` : `na.${caps ? 'cap' : 'c'}.${set}`;
   useEffect(() => {
     if (over) return;
     const id = setInterval(() => setLeft((l) => { if (l <= 1) { setOver(true); return 0; } return l - 1; }), 1000);
@@ -90,11 +107,11 @@ function NameAllGame({ set, caps, geo, world, onBack, lang }: { set: string; cap
   const ids = new Set(list.map((c) => c.id));
   const feats = world.features.filter((f) => ids.has(f.id));
   const bx = feats.reduce((b, f) => [Math.min(b[0], f.b[0]), Math.min(b[1], f.b[1]), Math.max(b[2], f.b[2]), Math.max(b[3], f.b[3])], [Infinity, Infinity, -Infinity, -Infinity]);
-  const vb = set === 'world' || !feats.length ? `0 ${world.h * 0.04} ${world.w} ${world.h * 0.84}` : `${bx[0] - 8} ${bx[1] - 8} ${bx[2] - bx[0] + 16} ${bx[3] - bx[1] + 16}`;
+  const vb = set === 'world' || byLetter || !feats.length ? `0 ${world.h * 0.04} ${world.w} ${world.h * 0.84}` : `${bx[0] - 8} ${bx[1] - 8} ${bx[2] - bx[0] + 16} ${bx[3] - bx[1] + 16}`;
   const fs = new Set(found);
   const mm = String(Math.floor(left / 60)), ss = String(left % 60).padStart(2, '0');
   const sorted = [...list].sort((a, b) => nameOf(caps ? a.cap : a.n, lang as never).localeCompare(nameOf(caps ? b.cap : b.n, lang as never), lang));
-  const place = set === 'world' ? t('zone.world') : t(`zone.c.${set}`);
+  const place = set === 'world' ? t('zone.world') : byLetter ? t('na.letterOf', { l: set.slice(2) }) : t(`zone.c.${set}`);
   const share = `${t('na.share', { place, n: found.length, total: list.length })}\n${location.origin}`;
   return (
     <div className="pz panel">

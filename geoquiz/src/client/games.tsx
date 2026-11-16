@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters' | 'connex' | 'intrus' | 'mines' | 'borders';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -24,6 +24,7 @@ export const FAMILIES: Family[] = [
       { id: 'daily', icon: 'calendar' },
       { id: 'trivia', icon: 'crown', fresh: '2026-11-16', screen: 'trivia' },
       { id: 'geomasters', icon: 'medal', fresh: '2026-11-16', screen: 'geomasters' },
+      { id: 'connex', icon: 'connex', fresh: '2026-11-16', screen: 'connex' },
       { id: 'globle', icon: 'thermo', screen: 'globle' },
       { id: 'capword', icon: 'grid', screen: 'capword' },
       { id: 'compass', icon: 'compass', screen: 'compass' },
@@ -56,6 +57,10 @@ export const FAMILIES: Family[] = [
       { id: 'capword', icon: 'grid', screen: 'capword' },
       { id: 'compass', icon: 'compass', screen: 'compass' },
       { id: 'nameall', icon: 'list', screen: 'nameall' },
+      { id: 'connex', icon: 'connex', fresh: '2026-11-16', screen: 'connex' },
+      { id: 'intrus', icon: 'odd', fresh: '2026-11-16', screen: 'intrus' },
+      { id: 'mines', icon: 'mine', fresh: '2026-11-16', screen: 'mines' },
+      { id: 'borders', icon: 'border', fresh: '2026-11-16', screen: 'borders' },
       { id: 'cards', icon: 'cards', screen: 'cards' },
       { id: 'colorflag', icon: 'brush', screen: 'colorflag' },
       { id: 'whereami', icon: 'camera' },
@@ -170,6 +175,10 @@ export const ICONS = {
   dice: <g {...P}><rect x="4" y="4" width="16" height="16" rx="3" /><circle cx="9" cy="9" r=".9" /><circle cx="15" cy="15" r=".9" /><circle cx="15" cy="9" r=".9" /><circle cx="9" cy="15" r=".9" /></g>,
   awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
+  connex: <g {...P}><rect x="3" y="3" width="8" height="8" rx="2" /><rect x="13" y="3" width="8" height="8" rx="2" /><rect x="3" y="13" width="8" height="8" rx="2" /><rect x="13" y="13" width="8" height="8" rx="2" /><path d="M11 7h2M7 11v2" /></g>,
+  odd: <g {...P}><circle cx="7" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><rect x="14" y="14" width="6" height="6" rx="1" /></g>,
+  mine: <g {...P}><circle cx="11" cy="13" r="6" /><path d="M15 9l3-3M17 4l1 2 2 1" /><path d="M9 11.5a2 2 0 0 1 2-1.5" /></g>,
+  border: <g {...P}><path d="M4 5l5-2 3 3 5-1 3 4-2 5 2 4-5 2-4-3-5 1-2-5z" /><path d="M12 6v14" strokeDasharray="2 2" /></g>,
   palette: <g {...P}><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-1-1.6-1-2.6 1-1.9 2.2-1.9H18a3 3 0 0 0 3-3C21 6.6 17 3 12 3z" /><circle cx="7.5" cy="11" r="1" /><circle cx="10" cy="7" r="1" /><circle cx="15" cy="7.5" r="1" /></g>,
   quill: <g {...P}><path d="M20 4C12 4 7 9 5.5 18.5" /><path d="M20 4c0 7-4 11-11 11.5" /><path d="M4 21l1.5-2.5" /><path d="M9 15l3-3" /></g>,
   bolt: <g {...P}><path d="M13 2L5 13.5h6L10 22l9-12.5h-6z" /></g>,

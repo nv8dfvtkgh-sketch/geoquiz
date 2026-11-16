@@ -99,7 +99,7 @@ export function geoJson(): string {
       const f = worldById[id];
       // Carte sans projection (démo) : position approximative.
       const ll = world.proj ? (([lon, lat]) => [deg(lat), deg(lon)])(toLonLat(f.c[0], f.c[1])) : [Math.round((306 - f.c[1]) / 3.4), Math.round((f.c[0] - 500) / 2.8)];
-      return { id, n: c.names, cap: c.capital?.names ?? null, ca: c.capital?.alts ?? [], co: c.continent, pop: c.pop ?? 0, area: c.area ?? 0, nb: c.neighbors, fame: Math.round((c.fame ?? 20 - c.rank) * 10) / 10, ll };
+      return { id, n: c.names, cap: c.capital?.names ?? null, ca: c.capital?.alts ?? [], co: c.continent, pop: c.pop ?? 0, area: c.area ?? 0, nb: c.neighbors, sub: c.subregion, cur: c.currency?.code ?? '', fame: Math.round((c.fame ?? 20 - c.rank) * 10) / 10, ll };
     });
   geoCache = JSON.stringify(list);
   return geoCache;

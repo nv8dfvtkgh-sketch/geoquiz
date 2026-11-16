@@ -1517,3 +1517,27 @@ test('Culture et savoirs : 5 jeux d\'au moins 50 questions, dans le quiz génér
     assert.ok(pool.length >= 50, `${id} : ${pool.length} questions`);
   }
 });
+
+test('Connexions, L\'intrus, Champ de mines : grilles sans ambiguïté', async () => {
+  const { geoJson } = await import('../src/server/print');
+  const { criteria, makeConnex, makeIntrus, makeMines, seeded } = await import('../src/client/geofacts');
+  const { famous } = await import('../src/client/geo');
+  const geo = JSON.parse(geoJson());
+  const by = new Map(geo.map((c: { id: string }) => [c.id, c]));
+  for (let s = 0; s < 60; s++) {
+    const g = makeConnex(famous(geo, 130), criteria('fr'), seeded(s))!;
+    assert.ok(g && g.length === 4);
+    const all = g.flatMap((x) => x.ids);
+    assert.equal(new Set(all).size, 16);
+    // Chaque pays n'a que le point commun de son groupe.
+    for (const x of g) for (const id of x.ids) for (const y of g) assert.equal(y.crit.has(by.get(id) as never), x === y, `${id} ${y.crit.id}`);
+    const ix = makeIntrus(famous(geo, 120), criteria('fr'), seeded(s))!;
+    assert.ok(ix && ix.ids.includes(ix.odd));
+    for (const id of ix.ids) assert.equal(ix.crit.has(by.get(id) as never), id !== ix.odd);
+    const pool = famous(geo, 120);
+    const mn = makeMines(pool, criteria('fr', true, pool), seeded(s))!;
+    assert.equal(mn.ids.length, 16);
+    for (const id of mn.ids) assert.equal(mn.crit.has(by.get(id) as never), mn.good.includes(id));
+  }
+  assert.ok(!geo.some((c: { id: string }) => c.id === 'XK' || c.id === 'TW'), 'Kosovo et Taïwan hors des jeux');
+});

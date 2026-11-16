@@ -129,7 +129,7 @@ export const STICKER_IDS = new Set([...STICKERS.map((x) => x.id), ...COLLECTOR_I
 // sur les animaux, une manette après le défi jeux vidéo…).
 const PAGE_OF: Record<string, string> = {};
 const put = (page: string, ids: string) => { for (const id of ids.split(' ')) PAGE_OF[id] = page; };
-put('travel', 'geomasters gm countries regions flags capitals silhouettes currencies languages pin flagreveal higher chain timezones globle capword compass nameall cards colorflag whereami whoami survival hello prog_geo passport');
+put('travel', 'connex intrus mines borders geomasters gm countries regions flags capitals silhouettes currencies languages pin flagreveal higher chain timezones globle capword compass nameall cards colorflag whereami whoami survival hello prog_geo passport');
 put('animals', 'animals sounds');
 put('morocco', 'maroc macities tifinagh prog_hist');
 put('wonders', 'monuments peaks records');

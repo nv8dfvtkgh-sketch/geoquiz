@@ -33,6 +33,10 @@ const QuizEditor = lazy(() => import('./screens/Quizzes').then((m) => ({ default
 const QuizSheet = lazy(() => import('./screens/Quizzes').then((m) => ({ default: m.QuizSheet })));
 const CardsScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.CardsScreen })));
 const ColorFlagScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.ColorFlagScreen })));
+const ConnexScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.ConnexScreen })));
+const IntrusScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.IntrusScreen })));
+const MinesScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.MinesScreen })));
+const BordersScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.BordersScreen })));
 const NameAllScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.NameAllScreen })));
 const BacOnline = lazy(() => import('./screens/Bac').then((m) => ({ default: m.BacOnline })));
 const BacSetup = lazy(() => import('./screens/Bac').then((m) => ({ default: m.BacSetup })));
@@ -226,6 +230,10 @@ export function App() {
           {s.screen === 'cards' && <CardsScreen />}
           {s.screen === 'colorflag' && <ColorFlagScreen />}
           {s.screen === 'album' && <AlbumScreen />}
+          {s.screen === 'connex' && <ConnexScreen />}
+          {s.screen === 'intrus' && <IntrusScreen />}
+          {s.screen === 'mines' && <MinesScreen />}
+          {s.screen === 'borders' && <BordersScreen />}
           </Suspense>
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}

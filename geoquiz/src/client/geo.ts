@@ -5,6 +5,7 @@ import { loadMap } from './MapView';
 
 export interface GeoCountry {
   id: string; n: Names; cap: Names | null; ca: string[]; co: string; pop: number; area: number; nb: string[]; fame: number;
+  sub?: string; cur?: string; // sous-région (ONU) et code de la monnaie
   ll: [number, number]; // latitude, longitude (degrés)
 }
 

@@ -1947,3 +1947,53 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .week-card .sticker.mini.collector + .week-go { margin-inline-start: 0; }
 /* Téléphone en portrait : les réponses descendent vers le pouce */
 @media (max-width: 600px) and (orientation: portrait) { .play.kind-mcq .options { margin-top: auto; } }
+
+/* ---------------------------------------------------------------- jeux de grilles (Connexions, L'intrus, Champ de mines, Frontières) */
+.gx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ix-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.gx-tile { display: grid; justify-items: center; align-content: center; gap: 6px; min-height: 84px; padding: 8px 4px; border: 2px solid transparent; border-radius: 14px; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; font-size: .8rem; font-weight: 600; line-height: 1.15; text-align: center; cursor: pointer; transition: transform .12s, background .2s, border-color .2s; }
+.gx-tile span { overflow-wrap: anywhere; hyphens: auto; }
+.gx-tile img { border-radius: 4px; box-shadow: 0 0 0 1px var(--border); object-fit: cover; }
+.ix-grid .gx-tile { min-height: 110px; font-size: 1rem; }
+.ix-grid .gx-tile img { width: 56px; height: 42px; }
+.gx-tile:active:not(:disabled) { transform: scale(.96); }
+.gx-tile.sel { background: color-mix(in srgb, var(--accent) 16%, var(--card)); border-color: var(--accent); }
+.gx-tile.good { background: color-mix(in srgb, var(--good) 22%, var(--card)); border-color: var(--good); }
+.gx-tile.bad { background: color-mix(in srgb, var(--bad) 18%, var(--card)); border-color: var(--bad); }
+.gx-tile.dim { opacity: .55; }
+.gx-tile.boom { animation: gx-shake .35s; }
+.gx-tile:disabled { cursor: default; }
+.shake { animation: gx-shake .35s; }
+@keyframes gx-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@media (prefers-reduced-motion: reduce) { .shake, .gx-tile.boom { animation: none; } }
+.gx-ask { margin: 0; font-size: 1.1rem; font-weight: 700; }
+.gx-explain { display: grid; gap: 6px; padding: 14px 16px; border-radius: var(--radius-l); background: var(--card); box-shadow: var(--shadow-up); }
+.gx-explain.ok { background: color-mix(in srgb, var(--good) 14%, var(--card)); }
+.gx-explain.ko { background: color-mix(in srgb, var(--bad) 10%, var(--card)); }
+.gx-explain .btn { justify-self: start; margin-top: 4px; }
+.cx-solved { display: grid; gap: 8px; }
+.cx-solved:empty { display: none; }
+.cx-group { display: grid; gap: 2px; padding: 12px 14px; border-radius: 14px; text-align: center; color: #1D1D1F; animation: wd-pop .3s; }
+.cx-group strong { font-size: .95rem; }
+.cx-group span { font-size: .85rem; }
+.cx-group.c0 { background: #F9DF6D; }
+.cx-group.c1 { background: #A0C35A; }
+.cx-group.c2 { background: #B0C4EF; }
+.cx-group.c3 { background: #BA81C5; }
+.cx-lives { margin: 0; display: flex; gap: 6px; align-items: center; justify-content: center; color: var(--ink-2); }
+.cx-lives span { color: var(--fill); font-size: 1.1rem; }
+.cx-lives span.on { color: var(--ink); }
+.cx-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.cx-actions .btn { flex: 1 1 120px; }
+.cx-share { grid-column: 1 / -1; margin: 0; font: inherit; font-size: 1.2rem; line-height: 1.2; letter-spacing: 2px; }
+.mn-lives { display: flex; gap: 2px; }
+.mn-lives span { filter: grayscale(1); opacity: .3; }
+.mn-lives span.on { filter: none; opacity: 1; }
+.pz-land.bd-target { fill: var(--accent); }
+.na-h { margin: 8px 0 0; font-size: 1.1rem; }
+.na-letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; }
+.na-letter { display: grid; justify-items: center; gap: 0; padding: 8px 4px; border: 0; border-radius: 12px; background: var(--card); box-shadow: var(--shadow); color: var(--ink); font: inherit; cursor: pointer; }
+.na-letter strong { font-size: 1.2rem; }
+.na-letter small { color: var(--ink-2); font-size: .75rem; }
+.na-letter.done { background: color-mix(in srgb, var(--good) 20%, var(--card)); }
+@media (max-width: 380px) { .gx-tile { font-size: .72rem; min-height: 76px; } }
