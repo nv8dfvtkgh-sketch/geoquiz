@@ -1389,5 +1389,6 @@
   "bd.nextCountry": "Siguiente país",
   "bd.share": "Quizellige · Fronteras ({name}): {n}/{total}",
   "na.byLetter": "Por letra",
-  "na.letterOf": "con «{l}»"
+  "na.letterOf": "con «{l}»",
+  "col.day": "Solo el {day}"
 }

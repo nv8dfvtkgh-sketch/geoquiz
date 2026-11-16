@@ -1,7 +1,7 @@
 // Album d'autocollants : un autocollant à chaque partie terminée. Sur l'appareil pour les
 // invités ; sur le compte (et l'appareil) pour les joueurs connectés.
 import { albumPageFor, ALBUM, COLLECTOR_MIN, COLLECTORS, STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
-import { loadEvents } from './events';
+import { loadEvents, weekFor } from './events';
 import { api, savedAuth } from './account';
 
 const KEY = 'gq.album';
@@ -29,7 +29,7 @@ function draw(have: Album, page?: string): Sticker {
 async function pageFor(game?: string): Promise<string | undefined> {
   if (game === 'week' || game === 'daily' || game === 'event') {
     const ev = await loadEvents().catch(() => null);
-    const e = game === 'week' ? ev?.week : game === 'daily' ? ev?.daily : ev?.active;
+    const e = game === 'week' ? weekFor(ev) : game === 'daily' ? ev?.daily : ev?.active;
     return e?.album ?? (game === 'daily' ? 'travel' : undefined);
   }
   return albumPageFor(game);
@@ -59,7 +59,7 @@ export async function earnCollector(correct: number, total: number) {
   if (!total || correct / total < COLLECTOR_MIN) return;
   const ev = await loadEvents().catch(() => null);
   const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Africa/Casablanca' }); // dates des défis : heure du Maroc
-  const c = COLLECTORS.find((x) => x.event === ev?.week?.id && today >= x.from && today <= x.to);
+  const c = COLLECTORS.find((x) => x.event === weekFor(ev)?.id && today >= x.from && today <= x.to);
   if (!c) return;
   const a = loadAlbum();
   if (a[c.id]) return;

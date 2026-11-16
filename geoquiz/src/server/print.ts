@@ -67,10 +67,11 @@ export async function printSheet(req: PrintReq): Promise<{ status: number; json:
 /** Événements : celui en cours, et tous (noms des badges). */
 export function eventList() {
   const cur = activeEvent();
-  const wk = activeWeek(), th = activeDailyTheme();
+  const wk = activeWeek(), wkKid = activeWeek(Date.now(), true), th = activeDailyTheme();
   return {
     active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end, album: cur.album } : null,
     week: wk ? { id: wk.id, emoji: wk.emoji, names: wk.names, end: wk.end, minAge: wk.minAge, album: wk.album } : null,
+    weekKid: wkKid && wkKid !== wk ? { id: wkKid.id, emoji: wkKid.emoji, names: wkKid.names, end: wkKid.end, album: wkKid.album } : null,
     daily: th ? { id: th.id, emoji: th.emoji, names: th.names, end: th.end, album: th.album } : null,
     all: extras.events.filter((e) => !e.kind).map(({ id, emoji, names }) => ({ id, emoji, names })),
   };

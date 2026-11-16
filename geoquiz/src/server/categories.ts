@@ -806,6 +806,12 @@ const eventCat: Category = {
   },
 };
 
+/** Défi de la semaine pour une partie avec un enfant : jamais un thème réservé aux plus grands. */
+export const weekCatKids: Category = {
+  id: 'week', noZone: true, qtypes: ['mcq'], zoneKinds: ['world'],
+  pool(zone, d, n) { const ev = activeWeek(Date.now(), true); return ev ? packCat('week', [ev.pack]).pool(zone, d, n) : []; },
+  make(target, kind, zone, rnd) { return weekCat.make(target, kind, zone, rnd); },
+};
 /** Défi de la semaine : le pack du thème de la semaine (vide hors période). */
 const weekCat: Category = {
   id: 'week',
@@ -814,7 +820,7 @@ const weekCat: Category = {
   zoneKinds: ['world'],
   pool(zone, d, n) { const ev = activeWeek(); return ev ? packCat('week', [ev.pack]).pool(zone, d, n) : []; },
   make(target, kind, zone, rnd) {
-    const pack = activeWeek()?.pack ?? extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? '';
+    const pack = extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? activeWeek()?.pack ?? '';
     return packCat('week', [pack]).make(target, kind, zone, rnd);
   },
 };

@@ -126,7 +126,12 @@ const activeOf = (kind: GameEvent['kind'], now: number) => {
 };
 export const activeEvent = (now = Date.now()) => activeOf(undefined, now);
 /** Défi de la semaine en cours. */
-export const activeWeek = (now = Date.now()) => activeOf('week', now);
+export const activeWeek = (now = Date.now(), kid = false) => {
+  const day = new Date(now).toISOString().slice(0, 10);
+  // Un défi spécial d'un jour (placé avant dans la liste) passe devant le défi de la semaine ;
+  // un enfant garde le défi de la semaine si le spécial est réservé aux plus grands.
+  return extras.events.find((e) => e.kind === 'week' && e.start <= day && day <= e.end && (!kid || !e.minAge));
+};
 /** Thème du défi du jour en cours (le défi du jour pioche alors dans ce thème). */
 export const activeDailyTheme = (now = Date.now()) => activeOf('daily', now);
 /** Jeux sans choix de région (la zone est toujours « monde »). */

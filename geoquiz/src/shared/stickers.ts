@@ -117,7 +117,7 @@ export interface Collector extends Sticker { event: string; from: string; to: st
 export const COLLECTOR_MIN = 0.5;
 export const COLLECTORS: Collector[] = [
   {
-    id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'week-gta-2026', from: '2026-11-23', to: '2026-11-29',
+    id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'week-gta-2026', from: '2026-11-19', to: '2026-11-19',
     n: { fr: 'Collector GTA · Los Santos', en: 'GTA collector · Los Santos', es: 'Coleccionable GTA · Los Santos', ar: 'إصدار خاص GTA · لوس سانتوس' },
   },
   {

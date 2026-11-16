@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type { Names } from '../shared/protocol';
 
 export interface EventInfo { id: string; emoji: string; names: Names; end?: string; minAge?: '13-17' | '18+'; album?: string }
-export interface Events { active: EventInfo | null; week?: EventInfo | null; daily?: EventInfo | null; all: EventInfo[] }
+export interface Events { active: EventInfo | null; week?: EventInfo | null; weekKid?: EventInfo | null; daily?: EventInfo | null; all: EventInfo[] }
 
 /** Défi de la semaine visible pour ce joueur (certains thèmes sont réservés aux 13 ans et plus). */
 export function weekFor(e: Events | null): EventInfo | null {
@@ -11,8 +11,9 @@ export function weekFor(e: Events | null): EventInfo | null {
   if (!w) return null;
   let age = '';
   try { age = localStorage.getItem('gq.age') ?? ''; } catch { /* ignoré */ }
-  if (w.minAge === '18+' && age !== '18+') return null;
-  if (w.minAge === '13-17' && age === 'u13') return null;
+  // Thème réservé aux plus grands : le joueur garde le défi de la semaine habituel (s'il y en a un).
+  if (w.minAge === '18+' && age !== '18+') return e?.weekKid ?? null;
+  if (w.minAge === '13-17' && age !== '13-17' && age !== '18+') return e?.weekKid ?? null;
   return w;
 }
 let cache: Promise<Events> | null = null;

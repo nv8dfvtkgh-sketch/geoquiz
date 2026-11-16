@@ -1389,5 +1389,6 @@
   "bd.nextCountry": "البلد التالي",
   "bd.share": "Quizellige · الحدود ({name}): {n}/{total}",
   "na.byLetter": "حسب الحرف",
-  "na.letterOf": "تبدأ بـ«{l}»"
+  "na.letterOf": "تبدأ بـ«{l}»",
+  "col.day": "فقط يوم {day}"
 }

@@ -1542,12 +1542,15 @@ test('Connexions, L\'intrus, Champ de mines : grilles sans ambiguïté', async (
   assert.ok(!geo.some((c: { id: string }) => c.id === 'XK' || c.id === 'TW'), 'Kosovo et Taïwan hors des jeux');
 });
 
-test('Défi de la semaine : le Masters de tennis jusqu\'au 22 novembre, puis GTA ; dimanche, les champions', async () => {
+test('Défi de la semaine : le Masters de tennis, GTA VI le jour de sa sortie, dimanche les champions', async () => {
   const { activeWeek, activeDailyTheme } = await import('../src/server/data');
   const { COLLECTORS } = await import('../src/shared/stickers');
   assert.equal(activeWeek(Date.parse('2026-11-16T22:00:00Z'))?.id, 'week-tennis-2026');
   assert.equal(activeWeek(Date.parse('2026-11-22T20:00:00Z'))?.id, 'week-tennis-2026');
-  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z'))?.id, 'week-gta-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-19T10:00:00Z'))?.id, 'week-gta-2026', 'jour de sortie de GTA VI : défi spécial');
+  assert.equal(activeWeek(Date.parse('2026-11-19T10:00:00Z'), true)?.id, 'week-tennis-2026', 'les enfants gardent le tennis');
+  assert.equal(activeWeek(Date.parse('2026-11-20T10:00:00Z'))?.id, 'week-tennis-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z')), undefined);
   assert.equal(activeDailyTheme(Date.parse('2026-11-21T12:00:00Z'))?.id, 'daily-eurofoot-2026');
   assert.equal(activeDailyTheme(Date.parse('2026-11-22T12:00:00Z'))?.id, 'daily-masters-2026');
   const c = COLLECTORS.find((x) => x.event === 'week-tennis-2026')!;

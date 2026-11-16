@@ -212,7 +212,7 @@ function Collectors({ album }: { album: Album }) {
               <span className={`sticker collector ${c.theme}`} aria-hidden="true">{st === 'have' ? c.e : '?'}</span>
               <span className="col-text">
                 <strong dir="auto">{c.n[lang]}</strong>
-                <small>{t('col.week', { from: day(c.from, { day: 'numeric' }), to: day(c.to, { day: 'numeric', month: 'long', year: 'numeric' }) })}</small>
+                <small>{c.from === c.to ? t('col.day', { day: day(c.from, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) }) : t('col.week', { from: day(c.from, { day: 'numeric' }), to: day(c.to, { day: 'numeric', month: 'long', year: 'numeric' }) })}</small>
                 <em>{st === 'have' ? t('col.owned') : st === 'open' ? t('col.how', { until: day(c.to, { weekday: 'long', day: 'numeric', month: 'long' }) }) : t('col.missed')}</em>
               </span>
             </li>
