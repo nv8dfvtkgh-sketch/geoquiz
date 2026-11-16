@@ -1921,6 +1921,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .sticker.collector { position: relative; overflow: hidden; background: linear-gradient(160deg, #FFB86B, #FF5E8A 55%, #7B3FE4); box-shadow: 0 0 0 3px #fff, 0 0 0 5px #7B3FE4, 0 4px 14px #7B3FE466; transform: none; }
 .sticker.collector::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, #fff9 50%, transparent 60%); animation: col-shine 3.2s ease-in-out infinite; }
 .sticker.collector.locked { filter: grayscale(1) opacity(.55); }
+.sticker.collector.court { background: linear-gradient(160deg, #4FB3FF, #1B5FBF 55%, #0B2A5B); box-shadow: 0 0 0 3px #fff, 0 0 0 5px #D4EB2F, 0 4px 14px #1B5FBF66; }
 .sticker.collector.locked::after { display: none; }
 @keyframes col-shine { 0%, 55% { transform: translateX(-60%); } 100% { transform: translateX(60%); } }
 @media (prefers-reduced-motion: reduce) { .sticker.collector::after { animation: none; display: none; } }

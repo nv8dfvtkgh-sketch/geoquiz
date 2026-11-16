@@ -120,6 +120,10 @@ export const COLLECTORS: Collector[] = [
     id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'week-gta-2026', from: '2026-11-15', to: '2026-11-22',
     n: { fr: 'Collector GTA · Los Santos', en: 'GTA collector · Los Santos', es: 'Coleccionable GTA · Los Santos', ar: 'إصدار خاص GTA · لوس سانتوس' },
   },
+  {
+    id: 'col-tennis-2026', e: '🎾', theme: 'court', event: 'week-tennis-2026', from: '2026-11-23', to: '2026-11-29',
+    n: { fr: 'Collector Masters · Balle de match à Turin', en: 'ATP Finals collector · Match point in Turin', es: 'Coleccionable ATP Finals · Punto de partido en Turín', ar: 'إصدار خاص الماسترز · نقطة المباراة في تورينو' },
+  },
 ];
 export const COLLECTOR_IDS = new Set(COLLECTORS.map((x) => x.id));
 export const STICKER_IDS = new Set([...STICKERS.map((x) => x.id), ...COLLECTOR_IDS]);
