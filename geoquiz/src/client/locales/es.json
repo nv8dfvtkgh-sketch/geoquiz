@@ -1422,7 +1422,7 @@
   "admin.reportDone": "Hecho ✓",
   "err.report.invalid": "Señalamiento incompleto.",
   "sheet.summary": "Importar desde Excel, Google Sheets o una página HTML",
-  "sheet.intro": "Más rápido para un quiz largo: rellena la plantilla de Excel (una pregunta por fila: la pregunta, la respuesta correcta y de 1 a 3 respuestas incorrectas) e impórtala. También sirven los archivos CSV y las páginas HTML con una tabla.",
+  "sheet.intro": "Más rápido para un quiz largo: rellena la plantilla de Excel (una pregunta por fila: la pregunta, la respuesta correcta, de 1 a 3 incorrectas y, si quieres, una foto pegada en la fila) e impórtala. También sirven los archivos CSV y las páginas HTML con una tabla.",
   "sheet.template": "Descargar la plantilla de Excel",
   "sheet.import": "Importar un archivo",
   "sheet.export": "Descargar en Excel",
@@ -1455,8 +1455,8 @@
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
   "admin.exportQuizzes": "Exportar todos los quiz (Excel)",
-  "sheet.photo": "Foto (nombre del archivo)",
-  "sheet.help5": "Con fotos: escribe el nombre del archivo en la columna F (por ejemplo torre-hassan.jpg). Tras importar, pulsa «Añadir fotos» y elige todas tus fotos a la vez: cada una va a su pregunta.",
+  "sheet.photo": "Foto (pégala aquí o escribe el nombre del archivo)",
+  "sheet.help5": "Con fotos, dos maneras: 1) pega la foto directamente en Excel en la fila de su pregunta (Insertar › Imagen, o copiar y pegar), colocándola en la columna F; 2) o escribe el nombre del archivo en la columna F (por ejemplo torre-hassan.jpg) y, tras importar, pulsa «Añadir fotos» y elige todas tus fotos a la vez.",
   "sheet.ex3q": "¿Qué monumento es este?",
   "sheet.ex3a": "La torre Hassan",
   "sheet.ex3b": "La Kutubía",
@@ -1468,5 +1468,6 @@
   "sheet.photosBtn": "Añadir fotos",
   "sheet.photosDone": "Fotos: {n} colocada(s) en su pregunta, {m} pregunta(s) nueva(s) por completar.",
   "sheet.photosFailed": "{n} foto(s) no añadida(s) (archivo ilegible o más de 50 preguntas).",
-  "sheet.photoExpected": "Foto esperada: {name}"
+  "sheet.photoExpected": "Foto esperada: {name}",
+  "sheet.withPhotos": "Fotos encontradas en el archivo: {n}."
 }

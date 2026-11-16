@@ -149,19 +149,20 @@ function quizWorkbook(t: (k: string, p?: Record<string, string | number>) => str
 }
 
 /** Import et export Excel / CSV / HTML / copier-coller dans l'éditeur. */
-function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void; onPhotos: (files: File[]) => Promise<{ matched: number; added: number; failed: number }> }) {
+function SheetTools({ title, qs, onImport, onPhotos }: { title: string; qs: EditQ[]; onImport: (title: string, qs: SheetQuestion[]) => void | Promise<void>; onPhotos: (files: File[]) => Promise<{ matched: number; added: number; failed: number }> }) {
   const { t } = useApp();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [paste, setPaste] = useState('');
-  const apply = (rows: string[][]) => {
-    const r = rowsToQuiz(rows);
+  const apply = (rows: string[][], images?: Map<number, Blob>) => {
+    const r = rowsToQuiz(rows, 50, images);
     if (!r.questions.length) return setMsg({ ok: false, text: t('sheet.none') });
-    onImport(r.title, r.questions);
-    setMsg({ ok: true, text: t('sheet.done', { n: r.questions.length }) + (r.skipped ? ` ${t('sheet.skipped', { n: r.skipped })}` : '') });
+    void onImport(r.title, r.questions);
+    const ph = r.questions.filter((q) => q.image).length;
+    setMsg({ ok: true, text: t('sheet.done', { n: r.questions.length }) + (ph ? ` ${t('sheet.withPhotos', { n: ph })}` : '') + (r.skipped ? ` ${t('sheet.skipped', { n: r.skipped })}` : '') });
   };
   const pick = async (f?: File) => {
     if (!f) return;
-    try { apply(await readTableFile(f)); }
+    try { const tb = await readTableFile(f); apply(tb.rows, tb.images); }
     catch (e) { setMsg({ ok: false, text: t((e as Error).message === 'oldFormat' ? 'sheet.oldFormat' : 'sheet.unreadable') }); }
   };
   const waiting = qs.filter((q) => q.wantPhoto && !q.preview).map((q) => q.wantPhoto!);
@@ -287,10 +288,16 @@ export function QuizEditor() {
         }
         setQs(next);
         return { matched, added, failed };
-      }} onImport={(tt, list) => {
+      }} onImport={async (tt, list) => {
         if (tt && !title.trim()) setTitle(tt);
         const mine = qs.filter((q) => q.text.trim());
-        const added = list.map((q) => ({ text: q.text, answers: [...q.answers, '', '', ''].slice(0, 4), correct: q.correct, image: null, wantPhoto: q.photo }));
+        const added: EditQ[] = [];
+        for (const q of list) {
+          let image: EditQ['image'] = null, preview: string | undefined;
+          // Photo collée dans le fichier Excel, sur la ligne de la question.
+          if (q.image) { try { const data = await shrinkImage(new File([q.image], 'photo', { type: q.image.type })); image = { data }; preview = data; } catch { /* trop grande ou illisible */ } }
+          added.push({ text: q.text, answers: [...q.answers, '', '', ''].slice(0, 4), correct: q.correct, image, preview, wantPhoto: preview ? undefined : q.photo });
+        }
         setQs([...mine, ...added].slice(0, 50).concat(Array.from({ length: Math.max(0, 3 - mine.length - added.length) }, emptyQ)));
       }} />
 

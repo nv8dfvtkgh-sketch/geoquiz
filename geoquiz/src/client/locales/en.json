@@ -1422,7 +1422,7 @@
   "admin.reportDone": "Done ✓",
   "err.report.invalid": "Incomplete report.",
   "sheet.summary": "Import from Excel, Google Sheets or an HTML page",
-  "sheet.intro": "Faster for a long quiz: fill in the Excel template (one question per row: the question, the right answer, then 1 to 3 wrong answers) and import it. CSV files and HTML pages with a table work too.",
+  "sheet.intro": "Faster for a long quiz: fill in the Excel template (one question per row: the question, the right answer, 1 to 3 wrong answers, and a photo pasted on the row if you like) and import it. CSV files and HTML pages with a table work too.",
   "sheet.template": "Download the Excel template",
   "sheet.import": "Import a file",
   "sheet.export": "Download as Excel",
@@ -1455,8 +1455,8 @@
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
   "admin.exportQuizzes": "Export all quizzes (Excel)",
-  "sheet.photo": "Photo (file name)",
-  "sheet.help5": "With photos: write the file name in column F (for example hassan-tower.jpg). After importing, click “Add photos” and pick all your photos at once: each one goes to its question.",
+  "sheet.photo": "Photo (paste it here, or write the file name)",
+  "sheet.help5": "With photos, two ways: 1) paste the photo straight into Excel on its question's row (Insert › Picture, or copy and paste), placing it in column F; 2) or write the file name in column F (for example hassan-tower.jpg), then after importing click “Add photos” and pick all your photos at once.",
   "sheet.ex3q": "What is this monument?",
   "sheet.ex3a": "Hassan Tower",
   "sheet.ex3b": "The Koutoubia",
@@ -1468,5 +1468,6 @@
   "sheet.photosBtn": "Add photos",
   "sheet.photosDone": "Photos: {n} placed on their question, {m} new question(s) to fill in.",
   "sheet.photosFailed": "{n} photo(s) not added (unreadable file or over 50 questions).",
-  "sheet.photoExpected": "Expected photo: {name}"
+  "sheet.photoExpected": "Expected photo: {name}",
+  "sheet.withPhotos": "Photos found in the file: {n}."
 }

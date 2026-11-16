@@ -1422,7 +1422,7 @@
   "admin.reportDone": "Traité ✓",
   "err.report.invalid": "Signalement incomplet.",
   "sheet.summary": "Importer depuis Excel, Google Sheets ou une page HTML",
-  "sheet.intro": "Plus rapide pour un long quiz : remplis le modèle Excel (une question par ligne : la question, la bonne réponse, puis 1 à 3 mauvaises réponses) et importe-le. Les fichiers CSV et les pages HTML avec un tableau marchent aussi.",
+  "sheet.intro": "Plus rapide pour un long quiz : remplis le modèle Excel (une question par ligne : la question, la bonne réponse, 1 à 3 mauvaises réponses, et si tu veux une photo collée sur la ligne) et importe-le. Les fichiers CSV et les pages HTML avec un tableau marchent aussi.",
   "sheet.template": "Télécharger le modèle Excel",
   "sheet.import": "Importer un fichier",
   "sheet.export": "Télécharger en Excel",
@@ -1455,8 +1455,8 @@
   "sheet.ex2b": "5",
   "sheet.ex2c": "9",
   "admin.exportQuizzes": "Exporter tous les quiz (Excel)",
-  "sheet.photo": "Photo (nom du fichier)",
-  "sheet.help5": "Avec des photos : écris le nom du fichier dans la colonne F (par exemple tour-hassan.jpg). Après l'import, clique sur « Ajouter des photos » et choisis toutes tes photos d'un coup : chacune va à sa question.",
+  "sheet.photo": "Photo (colle-la ici, ou écris le nom du fichier)",
+  "sheet.help5": "Avec des photos, deux façons : 1) colle la photo directement dans Excel sur la ligne de sa question (Insertion › Image, ou copier-coller), en la posant dans la colonne F ; 2) ou écris le nom du fichier dans la colonne F (par exemple tour-hassan.jpg), puis après l'import clique sur « Ajouter des photos » et choisis toutes tes photos d'un coup.",
   "sheet.ex3q": "Quel est ce monument ?",
   "sheet.ex3a": "La tour Hassan",
   "sheet.ex3b": "La Koutoubia",
@@ -1468,5 +1468,6 @@
   "sheet.photosBtn": "Ajouter des photos",
   "sheet.photosDone": "Photos : {n} placée(s) sur leur question, {m} nouvelle(s) question(s) à compléter.",
   "sheet.photosFailed": "{n} photo(s) non ajoutée(s) (fichier illisible ou plus de 50 questions).",
-  "sheet.photoExpected": "Photo attendue : {name}"
+  "sheet.photoExpected": "Photo attendue : {name}",
+  "sheet.withPhotos": "Photos trouvées dans le fichier : {n}."
 }

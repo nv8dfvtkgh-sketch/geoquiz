@@ -60,7 +60,8 @@ export function writeXlsx(sheets: { name: string; rows: Rows; widths?: number[];
 }
 
 // ---------------------------------------------------------------- lecture
-async function unzip(buf: ArrayBuffer): Promise<Map<string, () => Promise<string>>> {
+interface ZipEntry { text: () => Promise<string>; bytes: () => Promise<Uint8Array> }
+async function unzip(buf: ArrayBuffer): Promise<Map<string, ZipEntry>> {
   const v = new DataView(buf);
   let e = buf.byteLength - 22;
   while (e >= 0 && v.getUint32(e, true) !== 0x06054b50) e--;
@@ -68,7 +69,7 @@ async function unzip(buf: ArrayBuffer): Promise<Map<string, () => Promise<string
   const n = v.getUint16(e + 10, true);
   let p = v.getUint32(e + 16, true);
   const dec = new TextDecoder();
-  const out = new Map<string, () => Promise<string>>();
+  const out = new Map<string, ZipEntry>();
   for (let i = 0; i < n; i++) {
     if (v.getUint32(p, true) !== 0x02014b50) break;
     const method = v.getUint16(p + 10, true), csize = v.getUint32(p + 20, true);
@@ -76,27 +77,92 @@ async function unzip(buf: ArrayBuffer): Promise<Map<string, () => Promise<string
     const name = dec.decode(new Uint8Array(buf, p + 46, nlen));
     const start = off + 30 + v.getUint16(off + 26, true) + v.getUint16(off + 28, true);
     const raw = new Uint8Array(buf, start, csize);
-    out.set(name, async () => {
-      if (method === 0) return dec.decode(raw);
+    const bytes = async () => {
+      if (method === 0) return raw;
       if (method !== 8 || typeof DecompressionStream === 'undefined') throw new Error('unsupported');
       const s = new Blob([raw as BlobPart]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-      return dec.decode(await new Response(s).arrayBuffer());
-    });
+      return new Uint8Array(await new Response(s).arrayBuffer());
+    };
+    out.set(name, { bytes, text: async () => dec.decode(await bytes()) });
     p += 46 + nlen + xlen + clen;
   }
   return out;
 }
 
-async function readXlsx(buf: ArrayBuffer): Promise<Rows> {
+/** Tableau lu, et photos collées dans le fichier Excel (rangées par numéro de ligne, à partir de 0). */
+export interface Table { rows: Rows; images: Map<number, Blob> }
+
+const MIME: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif' };
+/** Chemin relatif d'une relation (« ../media/image1.png » depuis xl/drawings/) → chemin dans le zip. */
+const resolve = (base: string, target: string) => {
+  if (target.startsWith('/')) return target.slice(1);
+  const parts = base.split('/').slice(0, -1);
+  for (const seg of target.split('/')) { if (seg === '..') parts.pop(); else if (seg !== '.') parts.push(seg); }
+  return parts.join('/');
+};
+/** Éléments par nom local, avec ou sans préfixe (Excel écrit « xdr: », d'autres outils non). */
+const tags = (el: Document | Element, name: string) => Array.from(el.getElementsByTagNameNS('*', name));
+const R_NS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+const rAttr = (el: Element | undefined, name: string) => el?.getAttributeNS(R_NS, name) || el?.getAttribute(`r:${name}`) || '';
+const relsOf = (path: string) => path.replace(/([^/]+)$/, '_rels/$1.rels');
+
+async function readXlsx(buf: ArrayBuffer): Promise<Table> {
   const files = await unzip(buf);
   const xml = (s: string) => new DOMParser().parseFromString(s, 'application/xml');
   const shared: string[] = [];
   const ss = files.get('xl/sharedStrings.xml');
-  if (ss) for (const si of Array.from(xml(await ss()).getElementsByTagName('si'))) shared.push(Array.from(si.getElementsByTagName('t')).map((t) => t.textContent ?? '').join(''));
+  if (ss) for (const si of Array.from(xml(await ss.text()).getElementsByTagName('si'))) shared.push(Array.from(si.getElementsByTagName('t')).map((t) => t.textContent ?? '').join(''));
   const sheetName = [...files.keys()].filter((k) => /^xl\/worksheets\/sheet\d+\.xml$/.test(k)).sort((a, b) => parseInt(a.slice(19)) - parseInt(b.slice(19)))[0];
   if (!sheetName) throw new Error('noSheet');
-  const doc = xml(await files.get(sheetName)!());
+  const doc = xml(await files.get(sheetName)!.text());
   const rows: Rows = [];
+  const images = new Map<number, Blob>();
+  const blobOf = async (path: string) => {
+    const f = files.get(path);
+    const type = MIME[path.split('.').pop()!.toLowerCase()];
+    return f && type ? new Blob([(await f.bytes()) as BlobPart], { type }) : null;
+  };
+  const relMap = async (path: string) => {
+    const m = new Map<string, string>();
+    const f = files.get(relsOf(path));
+    if (f) for (const r of tags(xml(await f.text()), 'Relationship')) m.set(r.getAttribute('Id') ?? '', resolve(path, r.getAttribute('Target') ?? ''));
+    return m;
+  };
+  // 1) Photos posées sur la feuille (Insertion › Image) : rangées sur la ligne de leur coin haut gauche.
+  try {
+    const sheetRels = await relMap(sheetName);
+    for (const d of tags(doc, 'drawing')) {
+      const dPath = sheetRels.get(rAttr(d, 'id'));
+      const df = dPath && files.get(dPath);
+      if (!dPath || !df) continue;
+      const dRels = await relMap(dPath);
+      const dDoc = xml(await df.text());
+      const anchors = [...tags(dDoc, 'twoCellAnchor'), ...tags(dDoc, 'oneCellAnchor')];
+      for (const a of anchors) {
+        const from = tags(a, 'from')[0];
+        const row = Number(from ? tags(from, 'row')[0]?.textContent : NaN);
+        const media = dRels.get(rAttr(tags(a, 'blip')[0], 'embed'));
+        if (!Number.isFinite(row) || !media || images.has(row)) continue;
+        const b = await blobOf(media);
+        if (b) images.set(row, b);
+      }
+    }
+  } catch { /* photos illisibles : on garde le texte */ }
+  // 2) Photos « dans la cellule » (Excel 365 : Insertion › Image › Placer dans la cellule).
+  const cellImage: Blob[] = [];
+  try {
+    const rv = files.get('xl/richData/rdrichvalue.xml'), rel = files.get('xl/richData/richValueRel.xml');
+    if (rv && rel) {
+      const relIds = tags(xml(await rel.text()), 'rel').map((x) => rAttr(x, 'id'));
+      const rRels = await relMap('xl/richData/richValueRel.xml');
+      for (const v of tags(xml(await rv.text()), 'rv')) {
+        const idx = Number(tags(v, 'v')[0]?.textContent);
+        const media = rRels.get(relIds[idx] ?? '');
+        const b = media ? await blobOf(media) : null;
+        cellImage.push(b ?? new Blob());
+      }
+    }
+  } catch { /* idem */ }
   for (const r of Array.from(doc.getElementsByTagName('row'))) {
     const ri = Number(r.getAttribute('r')) - 1;
     const row: string[] = [];
@@ -110,11 +176,14 @@ async function readXlsx(buf: ArrayBuffer): Promise<Rows> {
       else if (tp === 'inlineStr') val = Array.from(c.getElementsByTagName('t')).map((t) => t.textContent ?? '').join('');
       else if (tp === 'b') val = vEl?.textContent === '1' ? 'TRUE' : 'FALSE';
       else val = vEl?.textContent ?? '';
+      const vm = Number(c.getAttribute('vm'));
+      if (vm && cellImage[vm - 1]?.size && !images.has(ri)) { images.set(ri, cellImage[vm - 1]); val = tp === 'e' ? '' : val; }
+      if (tp === 'e') val = ''; // #VALUE! d'une image dans la cellule
       row[col] = val;
     }
     rows[ri >= 0 ? ri : rows.length] = Array.from(row, (x) => x ?? '');
   }
-  return Array.from(rows, (x) => x ?? []);
+  return { rows: Array.from(rows, (x) => x ?? []), images };
 }
 
 /** CSV ou texte collé : séparateur deviné (tabulation, point-virgule ou virgule), guillemets gérés. */
@@ -145,27 +214,27 @@ function readHtml(text: string): Rows {
 }
 
 /** Lit un fichier Excel (.xlsx), CSV, texte ou page HTML (le plus grand tableau). */
-export async function readTableFile(file: File): Promise<Rows> {
+export async function readTableFile(file: File): Promise<Table> {
   const name = file.name.toLowerCase();
   if (name.endsWith('.xlsx') || name.endsWith('.xlsm')) return readXlsx(await file.arrayBuffer());
   if (name.endsWith('.xls') || name.endsWith('.ods')) throw new Error('oldFormat');
   const text = await file.text();
-  if (name.endsWith('.html') || name.endsWith('.htm') || /^\s*<(!doctype|html|table)/i.test(text)) return readHtml(text);
-  return readDelimited(text);
+  if (name.endsWith('.html') || name.endsWith('.htm') || /^\s*<(!doctype|html|table)/i.test(text)) return { rows: readHtml(text), images: new Map() };
+  return { rows: readDelimited(text), images: new Map() };
 }
 
 // ---------------------------------------------------------------- quiz ⇄ tableau
-export interface SheetQuestion { text: string; answers: string[]; correct: number; photo?: string }
+export interface SheetQuestion { text: string; answers: string[]; correct: number; photo?: string; image?: Blob }
 const TITLE_RX = /^(titre|title|título|titulo|العنوان)/i;
 const HEAD_RX = /^(question|pregunta|سؤال|السؤال)\b/i;
 
 /** Lignes du tableau → titre et questions (colonne B : bonne réponse ; C à E : mauvaises réponses). */
-export function rowsToQuiz(rows: Rows, max = 50): { title: string; questions: SheetQuestion[]; skipped: number } {
+export function rowsToQuiz(rows: Rows, max = 50, images?: Map<number, Blob>): { title: string; questions: SheetQuestion[]; skipped: number } {
   let title = '';
   const questions: SheetQuestion[] = [];
   let skipped = 0;
-  for (const raw of rows) {
-    const r = raw.map((c) => String(c ?? '').replace(/\s+/g, ' ').trim());
+  for (const [ri, raw] of rows.entries()) {
+    const r = (raw ?? []).map((c) => String(c ?? '').replace(/\s+/g, ' ').trim());
     if (!r.some(Boolean)) continue;
     if (TITLE_RX.test(r[0]) && r.filter(Boolean).length <= 2) { title = r[1] || title; continue; }
     if (HEAD_RX.test(r[0]) && questions.length === 0) continue; // ligne d'en-tête
@@ -175,7 +244,7 @@ export function rowsToQuiz(rows: Rows, max = 50): { title: string; questions: Sh
     const seen = new Set([good.toLowerCase()]);
     const wrong = bad.filter((a) => a && !seen.has(a.toLowerCase()) && seen.add(a.toLowerCase())).slice(0, 3);
     if (!text || !good || !wrong.length || questions.length >= max) { skipped++; continue; }
-    questions.push({ text: text.slice(0, 200), answers: [good, ...wrong].map((a) => a.slice(0, 80)), correct: 0, photo: photo ? photo.slice(0, 120) : undefined });
+    questions.push({ text: text.slice(0, 200), answers: [good, ...wrong].map((a) => a.slice(0, 80)), correct: 0, photo: photo ? photo.slice(0, 120) : undefined, image: images?.get(ri) });
   }
   return { title: title.slice(0, 80), questions, skipped };
 }
