@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { RevisionScreen } from './screens/Revision';
 import { LANGS, type Catalog, type Lang, type Me, type Settings } from '../shared/protocol';
-import { applyLang, detectLang, LANG_LABELS, makeT } from './i18n';
+import { applyLang, detectLang, LANG_LABELS, loadLang, makeT } from './i18n';
 import { net, saveSession, savedSession } from './net';
 import { api, fetchMe, saveAuth, savedAuth } from './account';
 import { isMuted, setMuted, sfx } from './sound';
@@ -11,7 +11,6 @@ import { Setup } from './screens/Setup';
 import { Lobby, QuickWait } from './screens/Lobby';
 import { Game } from './screens/Game';
 import { Final } from './screens/Final';
-import { Admin, MyQuizzes, QuizEditor, QuizSheet } from './screens/Quizzes';
 import { LeaderboardScreen, OAuthFinish, Profile, SignIn } from './screens/Account';
 import { GeoScreen } from './screens/GeoHub';
 import { PrintScreen } from './screens/Print';
@@ -21,13 +20,22 @@ import { ClassesScreen, ClassJoinScreen, TournamentScreen } from './screens/Scho
 import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
 import { SettingsButton } from './Settings';
 import { CapwordScreen, CompassScreen, GlobleScreen } from './screens/Puzzles';
-import { CardsScreen, ColorFlagScreen, NameAllScreen } from './screens/Solo';
 import { AlbumScreen, StickerToast } from './screens/Collect';
 import { BoardOnline, DuelScreen } from './screens/Duels';
-import { BacOnline, BacSetup } from './screens/Bac';
 import { TriviaScreen } from './screens/Trivia';
 import { GeoMastersScreen } from './screens/GeoMasters';
 import { earnCollector, earnSticker, syncAlbum } from './album';
+
+// Écrans moins fréquents : chargés à la demande (morceaux séparés de app.js).
+const Admin = lazy(() => import('./screens/Quizzes').then((m) => ({ default: m.Admin })));
+const MyQuizzes = lazy(() => import('./screens/Quizzes').then((m) => ({ default: m.MyQuizzes })));
+const QuizEditor = lazy(() => import('./screens/Quizzes').then((m) => ({ default: m.QuizEditor })));
+const QuizSheet = lazy(() => import('./screens/Quizzes').then((m) => ({ default: m.QuizSheet })));
+const CardsScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.CardsScreen })));
+const ColorFlagScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.ColorFlagScreen })));
+const NameAllScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.NameAllScreen })));
+const BacOnline = lazy(() => import('./screens/Bac').then((m) => ({ default: m.BacOnline })));
+const BacSetup = lazy(() => import('./screens/Bac').then((m) => ({ default: m.BacSetup })));
 
 const joinMatch = location.pathname.match(/^\/join\/([A-Za-z0-9]{6})/);
 const quizMatch = location.pathname.match(/^\/quiz\/([A-Za-z0-9]{6})/);
@@ -153,7 +161,7 @@ export function App() {
   const send = useCallback((m: Parameters<typeof net.send>[0]) => net.send(m), []);
   const ctx = {
     s, t, lang, catalog, name, settings, send,
-    setLang: (l: Lang) => { setLangState(l); if (s.room) net.send({ t: 'lang', lang: l }); },
+    setLang: (l: Lang) => { void loadLang(l).then(() => { setLangState(l); if (s.room) net.send({ t: 'lang', lang: l }); }); },
     go: (screen: typeof s.screen, setupKind?: typeof s.setupKind) => dispatch({ type: 'go', screen, setupKind }),
     openGame: (game: string) => { dispatch({ type: 'openGame', game }); window.scrollTo(0, 0); },
     openQuiz: (screen: typeof s.screen, quiz?: { id: string; token?: string }) => { dispatch({ type: 'openQuiz', screen, quiz }); window.scrollTo(0, 0); },
@@ -181,6 +189,7 @@ export function App() {
         <TopBar />
         {!online && <div className="banner" role="status">{t('net.reconnecting')}</div>}
         <main>
+          <Suspense fallback={<div className="loading" />}>
           {s.screen === 'home' && <Home />}
           {s.screen === 'setup' && <Setup />}
           {s.screen === 'lobby' && <Lobby />}
@@ -217,6 +226,7 @@ export function App() {
           {s.screen === 'cards' && <CardsScreen />}
           {s.screen === 'colorflag' && <ColorFlagScreen />}
           {s.screen === 'album' && <AlbumScreen />}
+          </Suspense>
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}
         <StickerToast />

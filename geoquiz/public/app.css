@@ -21,6 +21,7 @@
   --shadow: 0 1px 2px #0000000a, 0 8px 24px #0000000f;
   --shadow-up: 0 2px 4px #0000000d, 0 16px 40px #0000001a;
   --glass: #F5F5F7B8;
+  --glass-strong: #F5F5F7F5;
   --radius: 14px;
   --radius-l: 22px;
   --font-ui: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Tifinagh', sans-serif;
@@ -49,6 +50,7 @@
     --shadow: 0 0 0 1px #FFFFFF14;
     --shadow-up: 0 0 0 1px #FFFFFF24, 0 16px 40px #00000080;
     --glass: #161617C7;
+    --glass-strong: #161617F5;
     color-scheme: dark;
   }
 }
@@ -653,6 +655,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
   --shadow: 0 5px 0 #2B1B5A14;
   --shadow-up: 0 8px 0 #2B1B5A1F;
   --glass: #FFFFFFCC;
+  --glass-strong: #FFFFFFF5;
   --radius: 18px;
   --radius-l: 28px;
   --font-ui: 'Baloo 2', 'Baloo Bhaijaan 2', ui-rounded, 'Arial Rounded MT Bold', system-ui, 'Noto Sans Tifinagh', sans-serif;
@@ -1133,7 +1136,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .prompt > .prompt-text { order: -2; }
 .read-aloud { order: -1; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 86px; text-align: center; }
 .speak-btn { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--fill); font-size: 1.1rem; cursor: pointer; }
-.speak-auto { font-size: .68rem; line-height: 1.15; color: var(--ink-2); display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
+.speak-auto { font-size: .75rem; line-height: 1.15; color: var(--ink-2); display: inline-flex; gap: 4px; align-items: center; cursor: pointer; }
 [data-look='kids'] .speak-btn { background: #7C3AED; color: #fff; width: 48px; height: 48px; font-size: 1.3rem; box-shadow: 0 4px 0 #5B21B6; }
 .challenge-share { display: grid; gap: 10px; margin: 8px 0 14px; justify-items: center; text-align: center; }
 .challenge-share h2 { margin: 0; font-size: 1.15rem; }
@@ -1227,15 +1230,15 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .welcome-later { text-align: center; margin-top: 16px; }
 
 /* ------------------------------------------------------------------ barre de navigation en bas */
-.bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); background: var(--glass); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--border); }
-.bottom-nav button { display: grid; justify-items: center; gap: 2px; min-height: 48px; padding: 4px 0; border: 0; background: none; color: var(--ink-2); font: 600 .7rem var(--font-ui); cursor: pointer; }
+.bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); background: var(--glass-strong); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--border); }
+.bottom-nav button { display: grid; justify-items: center; gap: 2px; min-height: 48px; padding: 4px 0; border: 0; background: none; color: var(--ink-2); font: 600 .75rem var(--font-ui); cursor: pointer; }
 .bottom-nav button.on { color: var(--accent); }
 .nav-ic { position: relative; display: grid; place-items: center; }
 .nav-badge { position: absolute; top: -4px; inset-inline-end: -10px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: #E8590C; color: #fff; font: 700 .65rem/18px var(--font-ui); font-style: normal; text-align: center; }
 .app.has-nav main { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 .app.has-nav .home-foot { margin-bottom: 8px; }
 @media (min-width: 900px) { .bottom-nav { left: 50%; right: auto; transform: translateX(-50%); width: min(520px, 100%); bottom: 14px; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow-up); padding-bottom: 6px; } }
-[data-look='kids'] .bottom-nav { background: #FFFFFFEE; }
+[data-look='kids'] .bottom-nav { background: var(--glass-strong); }
 [data-look='kids'] .bottom-nav button { font-size: .74rem; font-weight: 800; color: #6B5E8C; }
 [data-look='kids'] .bottom-nav button.on { color: #7C3AED; }
 .rankings { display: grid; gap: 12px; }
@@ -1578,7 +1581,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .dresser-items button { display: grid; justify-items: center; gap: 2px; min-width: 56px; min-height: 56px; padding: 6px; border-radius: 14px; border: 2px solid transparent; background: var(--card); box-shadow: var(--shadow); font: inherit; font-size: 1.6rem; cursor: pointer; color: var(--ink); }
 .dresser-items button.on { border-color: var(--accent); }
 .dresser-items button.locked { opacity: .55; cursor: default; max-width: 120px; }
-.dresser-items button small { font-size: .62rem; line-height: 1.2; color: var(--ink-2); text-align: center; }
+.dresser-items button small { font-size: .75rem; line-height: 1.2; color: var(--ink-2); text-align: center; }
 .swatch { width: 28px; height: 28px; border-radius: 50%; display: block; }
 .swatch.zellige { background: conic-gradient(#1E5AA8 0 25%, #1F8A5B 0 50%, #E0A800 0 75%, #E8590C 0); }
 .album-page { display: grid; gap: 12px; }
@@ -1769,7 +1772,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .install-card img { border-radius: 12px; }
 .install-card div { display: grid; gap: 2px; min-width: 0; }
 .install-card small { color: var(--ink-2); }
-.install-x { border: 0; background: none; font-size: 1.4rem; color: var(--ink-2); cursor: pointer; padding: 4px 8px; }
+.install-x { border: 0; background: none; font-size: 1.4rem; color: var(--ink-2); cursor: pointer; min-width: 44px; min-height: 44px; display: grid; place-items: center; border-radius: 12px; }
 @media (max-width: 380px) { .install-card { grid-template-columns: auto 1fr auto; } .install-card .btn { grid-column: 1 / -1; } }
 
 /* Cette semaine : thème du défi du jour et défi de la semaine */
@@ -1938,3 +1941,9 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .week-card .sticker.mini.collector { width: 36px; height: 44px; font-size: 1.3rem; margin-inline-start: auto; cursor: inherit; }
 .sticker-toast.col { box-shadow: 0 0 0 2px #7B3FE4, var(--shadow-up); }
 @media (prefers-color-scheme: dark) { .col-text em { color: #B99AF5; } }
+
+/* Défi de la semaine : bouton « Jouer » comme le défi du jour */
+.week-card .week-go { margin-inline-start: auto; flex: none; padding: 6px 12px; border-radius: 999px; background: #FFFFFF2E; color: #fff; font-weight: 700; font-size: .85rem; }
+.week-card .sticker.mini.collector + .week-go { margin-inline-start: 0; }
+/* Téléphone en portrait : les réponses descendent vers le pouce */
+@media (max-width: 600px) and (orientation: portrait) { .play.kind-mcq .options { margin-top: auto; } }

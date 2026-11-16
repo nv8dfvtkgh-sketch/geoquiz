@@ -51,8 +51,7 @@ function Welcome() {
 }
 
 /** Pastille « Nouveau » : seulement pendant les 14 jours qui suivent la sortie. */
-const FRESH_UNTIL = Date.parse('2026-11-26');
-const isFresh = (g: GameDef) => !!g.fresh && Date.now() < FRESH_UNTIL;
+const isFresh = (g: GameDef) => !!g.fresh && Date.now() < Date.parse(g.fresh) + 7 * 864e5;
 const fold = (x: string) => x.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase();
 
 function Games() {
@@ -141,6 +140,7 @@ function Games() {
               <span><small>{t('week.label')}</small><strong>{week.names[lang].replace(/^[^:]*:\s*/, '')}</strong>
                 {weekCol && <em className="week-col">{haveCol ? t('col.won') : t('col.toWin')}</em>}</span>
               {weekCol && <span className={`sticker mini collector ${weekCol.theme} ${haveCol ? '' : 'locked'}`} aria-hidden="true">{weekCol.e}</span>}
+              <span className="week-go">{t('home.play')}</span>
             </button>
           )}
         </div>

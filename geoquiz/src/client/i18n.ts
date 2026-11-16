@@ -1,12 +1,24 @@
 // Traductions de l'interface. Pour ajouter une langue : un fichier dans locales/ + une ligne ici.
+// Le français est livré avec l'application (langue de secours) ; les autres langues sont des
+// morceaux séparés, chargés seulement quand on en a besoin (loadLang).
 import fr from './locales/fr.json';
-import en from './locales/en.json';
-import ar from './locales/ar.json';
-import es from './locales/es.json';
 import type { Lang } from '../shared/protocol';
 import { revName } from '../shared/school';
 
-const DICTS: Record<Lang, Record<string, string>> = { fr, en, ar, es };
+const DICTS: Partial<Record<Lang, Record<string, string>>> = { fr };
+const LOADERS: Record<Lang, () => Promise<{ default: Record<string, string> }>> = {
+  fr: async () => ({ default: fr }),
+  en: () => import('./locales/en.json'),
+  es: () => import('./locales/es.json'),
+  ar: () => import('./locales/ar.json'),
+};
+export const LANG_CODES = Object.keys(LOADERS) as Lang[];
+/** Charge le dictionnaire d'une langue (une seule fois). En cas d'échec, le français sert. */
+export async function loadLang(lang: Lang): Promise<void> {
+  if (DICTS[lang] || !LOADERS[lang]) return;
+  try { DICTS[lang] = (await LOADERS[lang]()).default; } catch { /* reste en français */ }
+}
+export const langReady = (lang: Lang) => !!DICTS[lang];
 export const LANG_LABELS: Record<Lang, string> = { fr: 'Français', en: 'English', ar: 'العربية', es: 'Español' };
 export const RTL: Lang[] = ['ar'];
 
@@ -32,10 +44,10 @@ function revKey(key: string, d: Record<string, string>): string | undefined {
 export function detectLang(): Lang {
   try {
     const saved = localStorage.getItem('gq.lang') as Lang | null;
-    if (saved && saved in DICTS) return saved;
+    if (saved && saved in LOADERS) return saved;
   } catch {}
   const nav = (navigator.language || 'fr').slice(0, 2) as Lang;
-  return nav in DICTS ? nav : 'fr';
+  return nav in LOADERS ? nav : 'fr';
 }
 
 export function applyLang(lang: Lang) {

@@ -10,9 +10,12 @@ const cf = process.argv.includes('--cf');
 const version = Date.now().toString(36);
 
 const client = {
-  entryPoints: ['src/client/main.tsx'],
+  // Découpage : app.js + morceaux chargés à la demande (langues, gros écrans) dans public/chunks.
+  entryPoints: { app: 'src/client/main.tsx' },
   bundle: true,
-  outfile: 'public/app.js',
+  outdir: 'public',
+  splitting: true,
+  chunkNames: 'chunks/[name]-[hash]',
   format: 'esm',
   target: ['es2020', 'safari15'],
   minify: !watch,
@@ -31,6 +34,7 @@ if (watch) {
   const ctx = await esbuild.context(client);
   await ctx.watch();
 } else if (cf) {
+  fs.rmSync('public/chunks', { recursive: true, force: true });
   await esbuild.build(client);
   // Cloudflare : les données sont servies comme fichiers statiques, lues par le Worker
   // (le Worker bloque l'accès public à /data/*).
@@ -43,6 +47,7 @@ if (watch) {
   console.log('• Données copiées dans public/data');
 } else {
   fs.rmSync('public/data', { recursive: true, force: true });
+  fs.rmSync('public/chunks', { recursive: true, force: true });
   await esbuild.build(client);
   await esbuild.build({
     entryPoints: ['src/server/index.ts'],
