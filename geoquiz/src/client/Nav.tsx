@@ -70,7 +70,6 @@ export function BottomNav() {
 export function TodayScreen() {
   const { t, me, name, setName, openGame, go, lang } = useApp();
   const evs = useEvents();
-  const ev = evs?.active;
   const week = weekFor(evs);
   const theme = evs?.daily;
   const fam = FAMILIES.find((f) => f.id === 'today')!;
@@ -79,7 +78,6 @@ export function TodayScreen() {
     if (g.screen) { cameFrom('today'); go(g.screen); window.scrollTo(0, 0); return; }
     openGame(g.id);
   };
-  const end = ev ? new Date(ev.end).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) : '';
   return (
     <div className="home today">
       <div className="home-head"><h1>{t('nav.today')}</h1><p className="muted">{t('today.hint')}</p></div>
@@ -95,13 +93,6 @@ export function TodayScreen() {
         <button type="button" className="event-card" onClick={() => openGame('week')}>
           <span className="event-emoji" aria-hidden="true">{week.emoji}</span>
           <span><strong>{week.names[lang]}</strong><small>{t('event.until', { date: new Date(week.end!).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) })}</small></span>
-          <span aria-hidden="true">›</span>
-        </button>
-      )}
-      {ev && (
-        <button type="button" className="event-card" onClick={() => openGame('event')}>
-          <span className="event-emoji" aria-hidden="true">{ev.emoji}</span>
-          <span><strong>{ev.names[lang]}</strong><small>{t('event.until', { date: end })}</small></span>
           <span aria-hidden="true">›</span>
         </button>
       )}

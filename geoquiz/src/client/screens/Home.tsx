@@ -17,20 +17,6 @@ import { Stars } from './Account';
 import { starsOf } from '../account';
 
 
-/** Événement du moment (quiz spécial, badge à gagner). */
-function EventCard({ onOpen }: { onOpen: () => void }) {
-  const { t, lang } = useApp();
-  const ev = useEvents()?.active;
-  if (!ev) return null;
-  const end = new Date(ev.end).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' });
-  return (
-    <button type="button" className="event-card" onClick={onOpen}>
-      <span className="event-emoji" aria-hidden="true">{ev.emoji}</span>
-      <span><strong>{ev.names[lang]}</strong><small>{t('event.until', { date: end })}</small></span>
-      <span aria-hidden="true">›</span>
-    </button>
-  );
-}
 export function Home() {
   const { look } = useApp();
   return look ? <Games /> : <Welcome />;
