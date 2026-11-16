@@ -1209,7 +1209,10 @@ export class Room {
   }
 
   finishedMsg(lang: Lang): ServerMsg {
-    const recap: RecapItem[] = this.recap.map((x, i) => ({ index: i, label: localize(x.q.answer, lang), results: x.results, target: x.q.target }));
+    const recap: RecapItem[] = this.recap.map((x, i) => ({
+      index: i, label: localize(x.q.answer, lang), results: x.results, target: x.q.target,
+      pk: x.q.promptKey, pp: { ...(x.q.extraParams ?? {}), ...(x.q.promptName ? { name: localize(x.q.promptName, lang) } : {}) },
+    }));
     let solo;
     if (this.kind === 'solo') {
       const p = this.players()[0];

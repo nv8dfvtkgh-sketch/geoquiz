@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters' | 'connex' | 'intrus' | 'mines' | 'borders';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters' | 'connex' | 'intrus' | 'mines' | 'borders' | 'topten';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -58,6 +58,7 @@ export const FAMILIES: Family[] = [
       { id: 'compass', icon: 'compass', screen: 'compass' },
       { id: 'nameall', icon: 'list', screen: 'nameall' },
       { id: 'connex', icon: 'connex', fresh: '2026-11-16', screen: 'connex' },
+      { id: 'topten', icon: 'top10', fresh: '2026-11-17', screen: 'topten' },
       { id: 'intrus', icon: 'odd', fresh: '2026-11-16', screen: 'intrus' },
       { id: 'mines', icon: 'mine', fresh: '2026-11-16', screen: 'mines' },
       { id: 'borders', icon: 'border', fresh: '2026-11-16', screen: 'borders' },
@@ -175,6 +176,7 @@ export const ICONS = {
   dice: <g {...P}><rect x="4" y="4" width="16" height="16" rx="3" /><circle cx="9" cy="9" r=".9" /><circle cx="15" cy="15" r=".9" /><circle cx="15" cy="9" r=".9" /><circle cx="9" cy="15" r=".9" /></g>,
   awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
+  top10: <g {...P}><path d="M5 5h3v14M5 19h6" /><rect x="13" y="5" width="6" height="14" rx="3" /></g>,
   connex: <g {...P}><rect x="3" y="3" width="8" height="8" rx="2" /><rect x="13" y="3" width="8" height="8" rx="2" /><rect x="3" y="13" width="8" height="8" rx="2" /><rect x="13" y="13" width="8" height="8" rx="2" /><path d="M11 7h2M7 11v2" /></g>,
   odd: <g {...P}><circle cx="7" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><rect x="14" y="14" width="6" height="6" rx="1" /></g>,
   mine: <g {...P}><circle cx="11" cy="13" r="6" /><path d="M15 9l3-3M17 4l1 2 2 1" /><path d="M9 11.5a2 2 0 0 1 2-1.5" /></g>,

@@ -388,7 +388,7 @@ export function BordersScreen() {
         <strong dir="auto">{t('bd.of', { name: nameOf(target.n, lang) })}</strong>
         <span className={`na-clock ${left < 15 && !over ? 'low' : ''}`}>{mm}:{ss}</span>
       </div>
-      <p className="na-score"><b>{found.length}</b> / {nbs.length} {flash && !over && <span className="na-flash" key={flash}>{flash}</span>}</p>
+      <p className="na-score"><b>{found.length}</b> / {nbs.length} {flash && !over && <span className={`na-flash ${flash.startsWith('✓') ? '' : 'no'}`} key={flash}>{flash}</span>}</p>
       {!over ? (
         <div className="pz-field">
           <input ref={ref} autoFocus value={v} onChange={(e) => onChange(e.target.value)} placeholder={t('pz.placeholder')} autoComplete="off" autoCorrect="off" spellCheck={false} dir="auto" />
@@ -420,3 +420,126 @@ export function BordersScreen() {
   );
 }
 const normalizeLen = (s: string) => s.trim().length;
+
+// ======================================================================= Top 10
+// Listes fixes (chiffres de l'ONU, World Population Prospects 2024, et superficies totales officielles).
+type TopKind = 'pop' | 'area' | 'small';
+interface TopList { id: string; e: string; kind: TopKind; n: Record<Lang, string>; ids: string[]; v: number[] }
+const N4 = (fr: string, en: string, es: string, ar: string) => ({ fr, en, es, ar });
+export const TOP_LISTS: TopList[] = [
+  { id: 'pop-world', e: '👥', kind: 'pop', n: N4('Les 10 pays les plus peuplés du monde', 'The 10 most populous countries in the world', 'Los 10 países más poblados del mundo', 'أكثر 10 بلدان سكاناً في العالم'),
+    ids: ['IN', 'CN', 'US', 'ID', 'PK', 'NG', 'BR', 'BD', 'RU', 'ET'], v: [1451, 1419, 345, 283, 251, 233, 212, 174, 145, 132] },
+  { id: 'area-world', e: '🌍', kind: 'area', n: N4('Les 10 plus grands pays du monde', 'The 10 largest countries in the world', 'Los 10 países más grandes del mundo', 'أكبر 10 بلدان مساحةً في العالم'),
+    ids: ['RU', 'CA', 'US', 'CN', 'BR', 'AU', 'IN', 'AR', 'KZ', 'DZ'], v: [17098, 9985, 9834, 9597, 8516, 7741, 3287, 2780, 2725, 2382] },
+  { id: 'pop-africa', e: '🌍', kind: 'pop', n: N4("Les 10 pays les plus peuplés d'Afrique", 'The 10 most populous countries in Africa', 'Los 10 países más poblados de África', 'أكثر 10 بلدان سكاناً في إفريقيا'),
+    ids: ['NG', 'ET', 'EG', 'CD', 'TZ', 'ZA', 'KE', 'SD', 'UG', 'DZ'], v: [233, 132, 116, 109, 69, 64, 56, 50, 50, 47] },
+  { id: 'area-africa', e: '🐪', kind: 'area', n: N4("Les 10 plus grands pays d'Afrique", 'The 10 largest countries in Africa', 'Los 10 países más grandes de África', 'أكبر 10 بلدان مساحةً في إفريقيا'),
+    ids: ['DZ', 'CD', 'SD', 'LY', 'TD', 'NE', 'AO', 'ML', 'ZA', 'ET'], v: [2382, 2345, 1886, 1760, 1284, 1267, 1247, 1240, 1221, 1104] },
+  { id: 'pop-arab', e: '🌙', kind: 'pop', n: N4('Les 10 pays arabes les plus peuplés', 'The 10 most populous Arab countries', 'Los 10 países árabes más poblados', 'أكثر 10 بلدان عربية سكاناً'),
+    ids: ['EG', 'SD', 'DZ', 'IQ', 'YE', 'MA', 'SA', 'SY', 'SO', 'TN'], v: [116, 50, 47, 46, 41, 38, 34, 25, 19, 12] },
+  { id: 'pop-europe', e: '🇪🇺', kind: 'pop', n: N4("Les 10 pays les plus peuplés d'Europe", 'The 10 most populous countries in Europe', 'Los 10 países más poblados de Europa', 'أكثر 10 بلدان سكاناً في أوروبا'),
+    ids: ['RU', 'DE', 'GB', 'FR', 'IT', 'ES', 'PL', 'UA', 'RO', 'NL'], v: [145, 84, 69, 66, 59, 48, 39, 38, 19, 18] },
+  { id: 'pop-asia', e: '🏯', kind: 'pop', n: N4("Les 10 pays les plus peuplés d'Asie", 'The 10 most populous countries in Asia', 'Los 10 países más poblados de Asia', 'أكثر 10 بلدان سكاناً في آسيا'),
+    ids: ['IN', 'CN', 'ID', 'PK', 'BD', 'JP', 'PH', 'VN', 'IR', 'TR'], v: [1451, 1419, 283, 251, 174, 124, 116, 101, 92, 87] },
+  { id: 'area-americas', e: '🌎', kind: 'area', n: N4('Les 10 plus grands pays des Amériques', 'The 10 largest countries in the Americas', 'Los 10 países más grandes de América', 'أكبر 10 بلدان مساحةً في الأمريكتين'),
+    ids: ['CA', 'US', 'BR', 'AR', 'MX', 'PE', 'CO', 'BO', 'VE', 'CL'], v: [9985, 9834, 8516, 2780, 1964, 1285, 1142, 1099, 916, 756] },
+  { id: 'small-world', e: '🔎', kind: 'small', n: N4('Les 10 plus petits pays du monde', 'The 10 smallest countries in the world', 'Los 10 países más pequeños del mundo', 'أصغر 10 بلدان في العالم'),
+    ids: ['VA', 'MC', 'NR', 'TV', 'SM', 'LI', 'MH', 'KN', 'MV', 'MT'], v: [0.44, 2, 21, 26, 61, 160, 181, 261, 298, 316] },
+];
+const TOP_TIME = 180;
+
+function topValue(l: TopList, i: number, lang: Lang, t: (k: string, p?: Record<string, string | number>) => string) {
+  const v = l.v[i];
+  const num = (x: number, d = 0) => x.toLocaleString(lang === 'ar' ? 'ar-MA' : lang, { maximumFractionDigits: d });
+  if (l.kind === 'pop') return t('top.millions', { n: num(v) });
+  if (l.kind === 'area') return t('top.km2', { n: v >= 1000 ? `${num(v / 1000, 1)} ${t('top.million')}` : num(v * 1000) });
+  return t('top.km2', { n: num(v, 2) });
+}
+
+export function TopTenScreen() {
+  const { t, lang } = useApp();
+  const { geo, err } = useGeoWorld();
+  const [list, setList] = useState<TopList | null>(null);
+  const [found, setFound] = useState<string[]>([]);
+  const [left, setLeft] = useState(TOP_TIME);
+  const [over, setOver] = useState(false);
+  const [v, setV] = useState('');
+  const [flash, setFlash] = useState('');
+  const byId = useMemo(() => new Map((geo ?? []).map((c) => [c.id, c])), [geo]);
+  const best = (id: string) => { try { return Number(localStorage.getItem(`gq.top.${id}`)) || 0; } catch { return 0; } };
+  useEffect(() => {
+    if (!list || over) return;
+    const id = setInterval(() => setLeft((l) => { if (l <= 1) { setOver(true); return 0; } return l - 1; }), 1000);
+    return () => clearInterval(id);
+  }, [list, over]);
+  useEffect(() => {
+    if (!over || !list) return;
+    try { if (found.length > best(list.id)) localStorage.setItem(`gq.top.${list.id}`, String(found.length)); } catch { /* ignoré */ }
+    finished('topten', found.length / 10); sfx.end();
+  }, [over]);
+  if (!geo) return <Loading err={err} />;
+  if (!list) {
+    return (
+      <Shell game="topten">
+        <div className="top-lists">
+          {TOP_LISTS.map((l) => (
+            <button type="button" key={l.id} className="top-card" onClick={() => { setList(l); setFound([]); setLeft(TOP_TIME); setOver(false); setV(''); setFlash(''); }}>
+              <span className="top-e" aria-hidden="true">{l.e}</span>
+              <span dir="auto">{l.n[lang]}</span>
+              <small>{best(l.id) ? `${best(l.id)}/10` : ''}</small>
+            </button>
+          ))}
+        </div>
+        <p className="muted small">{t('top.source')}</p>
+      </Shell>
+    );
+  }
+  const onChange = (x: string) => {
+    setV(x);
+    if (x.trim().length < 3) return;
+    const c = matchCountry(x, geo);
+    if (!c) return;
+    if (list.ids.includes(c.id) && !found.includes(c.id)) {
+      const next = [...found, c.id];
+      setFound(next); setV(''); setFlash(`✓ ${nameOf(c.n, lang)}`); sfx.good();
+      if (next.length === 10) setOver(true);
+    } else if (!list.ids.includes(c.id) && x.trim().length >= nameOf(c.n, lang).length) setFlash(t('top.notIn', { name: nameOf(c.n, lang) }));
+  };
+  const mm = String(Math.floor(left / 60)), ss = String(left % 60).padStart(2, '0');
+  return (
+    <Shell game="topten" back={() => setList(null)}>
+      <div className="na-bar">
+        <strong dir="auto">{list.e} {list.n[lang]}</strong>
+        <span className={`na-clock ${left < 20 && !over ? 'low' : ''}`}>{mm}:{ss}</span>
+      </div>
+      <p className="na-score"><b>{found.length}</b> / 10 {flash && !over && <span className={`na-flash ${flash.startsWith('✓') ? '' : 'no'}`} key={flash}>{flash}</span>}</p>
+      {!over ? (
+        <div className="pz-field">
+          <input autoFocus value={v} onChange={(e) => onChange(e.target.value)} placeholder={t('pz.placeholder')} autoComplete="off" autoCorrect="off" spellCheck={false} dir="auto" />
+          <button type="button" className="btn" onClick={() => setOver(true)}>{t('na.stop')}</button>
+        </div>
+      ) : (
+        <div className={`pz-end ${found.length === 10 ? 'won' : ''}`}>
+          {found.length === 10 && <Confetti size="big" />}
+          <span className="na-big">🔟</span>
+          <div><strong>{t('na.result', { n: found.length, total: 10 })}</strong></div>
+          <div className="pz-end-actions">
+            <button type="button" className="btn primary" onClick={() => shareText(`${t('top.share', { list: list.n[lang], n: found.length })}\n${location.origin}`)}>{t('pz.share')}</button>
+            <button type="button" className="btn" onClick={() => setList(null)}>{t('top.other')}</button>
+          </div>
+        </div>
+      )}
+      <ol className="top-ranks">
+        {list.ids.map((id, i) => {
+          const ok = found.includes(id);
+          return (
+            <li key={id} className={ok ? 'ok' : over ? 'miss' : ''}>
+              <b>{i + 1}</b>
+              {ok || over ? <><img src={`/api/flag/${id}.svg`} alt="" width="24" height="18" /><span dir="auto">{nameOf(byId.get(id)?.n, lang)}</span><small>{topValue(list, i, lang, t)}</small></> : <span className="top-blank" />}
+            </li>
+          );
+        })}
+      </ol>
+    </Shell>
+  );
+}

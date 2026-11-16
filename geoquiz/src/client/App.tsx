@@ -20,7 +20,8 @@ import { ClassesScreen, ClassJoinScreen, TournamentScreen } from './screens/Scho
 import { BottomNav, NAV_SCREENS, RankingsScreen, TodayScreen } from './Nav';
 import { SettingsButton } from './Settings';
 import { CapwordScreen, CompassScreen, GlobleScreen } from './screens/Puzzles';
-import { AlbumScreen, StickerToast } from './screens/Collect';
+import { AlbumScreen, BetterToast, StickerToast } from './screens/Collect';
+import { reportPlay } from './stats';
 import { BoardOnline, DuelScreen } from './screens/Duels';
 import { TriviaScreen } from './screens/Trivia';
 import { GeoMastersScreen } from './screens/GeoMasters';
@@ -36,6 +37,7 @@ const ColorFlagScreen = lazy(() => import('./screens/Solo').then((m) => ({ defau
 const ConnexScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.ConnexScreen })));
 const IntrusScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.IntrusScreen })));
 const MinesScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.MinesScreen })));
+const TopTenScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.TopTenScreen })));
 const BordersScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.BordersScreen })));
 const NameAllScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.NameAllScreen })));
 const BacOnline = lazy(() => import('./screens/Bac').then((m) => ({ default: m.BacOnline })));
@@ -138,6 +140,9 @@ export function App() {
       if (msg.t === 'finished') {
         const k = `${net.target}:${msg.recap.length}:${msg.players.map((p) => p.score).join(',')}`; const game = net.category;
         setTimeout(() => void earnSticker(k, game), 1200);
+        // Popularité du jeu et comparaison avec les autres joueurs (sa part de bonnes réponses).
+        const mineOk = msg.solo ? msg.solo.correct / Math.max(1, msg.solo.total) : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length / Math.max(1, msg.recap.length);
+        setTimeout(() => void reportPlay(game, msg.recap.length || msg.solo ? mineOk : undefined, k), 2500);
         // Défi de la semaine : le collector, une fois, si au moins la moitié est juste.
         if (game === 'week') {
           const ok = msg.solo ? msg.solo.correct : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length;
@@ -154,7 +159,11 @@ export function App() {
     });
     net.statusListeners.add(setOnline);
     // Jeux joués dans le navigateur (énigmes, tout nommer…) : un autocollant aussi.
-    const onFinished = (e: Event) => { const game = (e as CustomEvent<{ game?: string }>).detail?.game; setTimeout(() => void earnSticker(undefined, game), 900); };
+    const onFinished = (e: Event) => {
+      const d = (e as CustomEvent<{ game?: string; score?: number }>).detail;
+      setTimeout(() => void earnSticker(undefined, d?.game), 900);
+      setTimeout(() => void reportPlay(d?.game, d?.score), 2500);
+    };
     window.addEventListener('gq:finished', onFinished);
     const session = savedSession();
     if (session) net.open(session.code);
@@ -234,10 +243,12 @@ export function App() {
           {s.screen === 'intrus' && <IntrusScreen />}
           {s.screen === 'mines' && <MinesScreen />}
           {s.screen === 'borders' && <BordersScreen />}
+          {s.screen === 'topten' && <TopTenScreen />}
           </Suspense>
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}
         <StickerToast />
+        <BetterToast />
       </div>
     </AppCtx.Provider>
   );

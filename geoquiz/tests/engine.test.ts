@@ -1558,3 +1558,31 @@ test('Défi de la semaine : le Masters de tennis, GTA VI le jour de sa sortie, d
   const qs = drawQuestions({ category: 'week', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
   assert.ok(qs.length >= 1);
 });
+
+test('Parties jouées : popularité, « mieux que X % », signalements', async () => {
+  const { AccountService, accountRoute } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  const now = Date.UTC(2026, 10, 16, 10);
+  const svc = new AccountService(kv, () => now);
+  for (let i = 0; i < 10; i++) await svc.play({ game: 'flags', score: i / 10 });
+  await svc.play({ game: 'capitals', score: 0.5 });
+  const r = await svc.play({ game: 'flags', score: 1 });
+  assert.equal(r.n, 10);
+  assert.equal(r.better, 100);
+  const low = await svc.play({ game: 'flags', score: 0 });
+  assert.ok((low.better ?? 100) < 10);
+  const pop = await svc.popular();
+  assert.equal(pop[0].game, 'flags');
+  await assert.rejects(svc.play({ game: 'x y' }));
+  await svc.report({ game: 'arts', target: 'arts-3', question: 'Q ?', answer: 'R', reason: 'wrong', comment: 'test' }, null);
+  const rep = await accountRoute(svc, 'GET', '/api/admin/reports', new URLSearchParams(), async () => ({}), '', true);
+  assert.equal((rep!.json as any).items[0].target, 'arts-3');
+  const denied = await accountRoute(svc, 'GET', '/api/admin/reports', new URLSearchParams(), async () => ({}), '', false);
+  assert.equal(denied!.status, 401);
+});

@@ -18,6 +18,8 @@ function nextGame(cat: string): string | null {
   return list[(list.indexOf(cat) + 1) % list.length];
 }
 import { ChallengeShare } from '../Challenge';
+import { api } from '../account';
+import type { RecapItem } from '../../shared/protocol';
 
 export function Final() {
   const { t, s, send, leave, openGame, go } = useApp();
@@ -182,16 +184,50 @@ function DailyShare() {
   );
 }
 
+const REASONS = ['wrong', 'unclear', 'typo', 'translation', 'other'];
+/** Signaler une question : réponse fausse, énoncé pas clair, faute, traduction… (vu par l'administrateur). */
+function ReportForm({ item, onClose }: { item: RecapItem; onClose: () => void }) {
+  const { t, s, lang, auth } = useApp();
+  const [reason, setReason] = useState('');
+  const [comment, setComment] = useState('');
+  const [state, setState] = useState<'edit' | 'sending' | 'sent' | 'error'>('edit');
+  const question = item.pk ? t(item.pk, item.pp as Record<string, string>) : '';
+  const send = async () => {
+    setState('sending');
+    const r = await api('/api/report', { token: auth, body: { game: s.room?.settings.category, target: item.target, question, answer: item.label, reason, comment, lang } });
+    setState(r.ok ? 'sent' : 'error');
+    if (r.ok) setTimeout(onClose, 1800);
+  };
+  if (state === 'sent') return <div className="report-form done" role="status">✅ {t('report.thanks')}</div>;
+  return (
+    <div className="report-form">
+      <p className="muted small" dir="auto">{question ? `${question} → ` : ''}<strong>{item.label}</strong></p>
+      <div className="fb-tags">{REASONS.map((x) => <button type="button" key={x} aria-pressed={reason === x} onClick={() => setReason(x)}>{t(`report.r.${x}`)}</button>)}</div>
+      <label className="field">
+        <span className="sr">{t('report.comment')}</span>
+        <textarea rows={2} maxLength={600} value={comment} onChange={(e) => setComment(e.target.value)} placeholder={t('report.comment')} dir="auto" />
+      </label>
+      {state === 'error' && <p className="error">{t('err.net')}</p>}
+      <div className="row-actions">
+        <button type="button" className="btn ghost" onClick={onClose}>{t('report.cancel')}</button>
+        <button type="button" className="btn primary" disabled={!reason || state === 'sending'} onClick={send}>{t('report.send')}</button>
+      </div>
+    </div>
+  );
+}
+
 function Recap() {
   const { t, s } = useApp();
   const f = s.finished!;
+  const [rep, setRep] = useState<number | null>(null);
   const players = s.room!.kind === 'duel' ? f.players : f.players.filter((p) => p.id === s.you);
+  const canReport = s.room!.settings.category !== 'custom';
   return (
     <details className="recap" open={s.room!.kind === 'duel'}>
       <summary>{t('final.recap')}</summary>
       <table>
         {players.length > 1 && (
-          <thead><tr><th /><th />{players.map((p) => <th key={p.id} dir="auto">{p.name}</th>)}</tr></thead>
+          <thead><tr><th /><th />{players.map((p) => <th key={p.id} dir="auto">{p.name}</th>)}{canReport && <th />}</tr></thead>
         )}
         <tbody>
           {f.recap.map((r) => (
@@ -202,10 +238,12 @@ function Recap() {
                 const res = r.results.find((x) => x.id === p.id);
                 return <td key={p.id} className={res?.correct ? 'good-txt' : 'bad-txt'}>{res?.correct ? (s.room!.kind === 'solo' ? '✓' : `+${res.points}`) : '✗'}</td>;
               })}
+              {canReport && <td className="rep"><button type="button" className="report-btn" onClick={() => setRep(rep === r.index ? null : r.index)} aria-label={t('report.btn')} title={t('report.btn')}>⚑</button></td>}
             </tr>
           ))}
         </tbody>
       </table>
+      {rep !== null && f.recap[rep] && <ReportForm key={rep} item={f.recap[rep]} onClose={() => setRep(null)} />}
     </details>
   );
 }

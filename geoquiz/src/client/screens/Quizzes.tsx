@@ -313,7 +313,7 @@ export function Admin() {
   const [list, setList] = useState<any[] | null>(null);
   const [err, setErr] = useState('');
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected'>('pending');
-  const [tab, setTab] = useState<'quizzes' | 'players' | 'feedback'>('quizzes');
+  const [tab, setTab] = useState<'quizzes' | 'players' | 'feedback' | 'reports'>('quizzes');
   const [open, setOpen] = useState<any>(null);
   const [imgs, setImgs] = useState<Record<string, string>>({});
   const [reason, setReason] = useState('');
@@ -402,15 +402,16 @@ export function Admin() {
       <button type="button" aria-pressed={tab === 'quizzes'} onClick={() => setTab('quizzes')}>{t('admin.tabQuizzes')}</button>
       <button type="button" aria-pressed={tab === 'players'} onClick={() => setTab('players')}>{t('admin.tabPlayers')}</button>
       <button type="button" aria-pressed={tab === 'feedback'} onClick={() => setTab('feedback')}>{t('admin.tabFeedback')}</button>
+      <button type="button" aria-pressed={tab === 'reports'} onClick={() => setTab('reports')}>{t('admin.tabReports')}</button>
     </div>
   );
-  if (tab === 'players' || tab === 'feedback') {
+  if (tab === 'players' || tab === 'feedback' || tab === 'reports') {
     return (
       <div className="quizzes panel">
         <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
         <h1>{t('admin.title')}</h1>
         {tabs}
-        {tab === 'players' ? <PlayersAdmin pwd={pwd} /> : <FeedbackAdmin pwd={pwd} />}
+        {tab === 'players' ? <PlayersAdmin pwd={pwd} /> : tab === 'reports' ? <ReportsAdmin pwd={pwd} /> : <FeedbackAdmin pwd={pwd} />}
       </div>
     );
   }
@@ -510,6 +511,41 @@ function PlayersAdmin({ pwd }: { pwd: string }) {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------ admin : questions signalées
+function ReportsAdmin({ pwd }: { pwd: string }) {
+  const { t, lang } = useApp();
+  const [data, setData] = useState<any>(null);
+  const auth = { Authorization: `Bearer ${pwd}` };
+  const load = () => api('/api/admin/reports', { headers: auth } as never).then((r) => r.ok && setData(r.data));
+  useEffect(() => { load(); }, []);
+  const remove = async (id: string) => {
+    await api(`/api/admin/reports/${id}`, { method: 'DELETE', headers: auth } as never);
+    load();
+  };
+  if (!data) return <div className="loading" />;
+  return (
+    <div className="players-admin">
+      <div className="profile-stats"><div><strong>{data.count}</strong><span>{t('admin.reportsCount')}</span></div></div>
+      {data.items.length === 0 ? <p className="muted">{t('admin.reportsEmpty')}</p> : (
+        <ul className="fb-list">
+          {data.items.map((r: any) => (
+            <li key={r.id}>
+              <div className="fb-row">
+                <span className="fb-face" aria-hidden="true">⚑</span>
+                <span className="muted small">{new Date(r.at).toLocaleString(lang)} · {r.game ? t(`cat.${r.game}`) : ''} · {r.target} · {r.lang}{r.pseudo ? ` · ${r.pseudo}` : ''}</span>
+                <button type="button" className="text-btn" onClick={() => remove(r.id)}>{t('admin.reportDone')}</button>
+              </div>
+              <p className="fb-chips"><span>{t(`report.r.${r.reason}`)}</span></p>
+              <p className="fb-comment" dir="auto">{r.question}{r.question ? ' → ' : ''}<strong>{r.answer}</strong></p>
+              {r.comment && <p className="fb-comment" dir="auto">💬 {r.comment}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

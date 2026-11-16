@@ -17,6 +17,11 @@ interface ChallengeRecord {
   results: ChallengeEntry[];
   createdAt: number;
 }
+/** Signalement d'une question par un joueur. */
+export const REPORT_REASONS = ['wrong', 'unclear', 'typo', 'translation', 'other'];
+interface ReportItem { id: string; at: number; game: string; target: string; question: string; answer: string; reason: string; comment: string; lang: string; pseudo?: string }
+/** Score de 0 à 1 rangé en 21 cases (0 %, 5 %, … 100 %). */
+const HIST_BUCKETS = 21;
 export const FEEDBACK_TAGS = ['fun', 'learn', 'design', 'multi', 'kids', 'bug', 'hard', 'easy', 'unclear', 'slow', 'more'];
 interface FeedbackItem {
   id: string; at: number; rating: number; tags: string[]; comment: string; game: string; games: number;
@@ -963,6 +968,69 @@ export class AccountService {
   }
   async adminFeedbackDelete(id: string) { await this.kv.delete(`fb:${id}`); }
 
+  // ---------------------------------------------------------------- signalements de questions
+  async report(b: any, token: string | null) {
+    const clean = (v: unknown, n: number) => String(v ?? '').replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim().slice(0, n);
+    const reason = REPORT_REASONS.includes(b?.reason) ? b.reason : 'other';
+    const a = token ? await this.byToken(token) : null;
+    const item: ReportItem = {
+      id: `${this.now().toString(36)}${randomHex(3)}`, at: this.now(), reason,
+      game: clean(b?.game, 24), target: clean(b?.target, 64), question: clean(b?.question, 400), answer: clean(b?.answer, 200),
+      comment: clean(b?.comment, 600), lang: clean(b?.lang, 4), pseudo: a?.pseudo,
+    };
+    if (!item.question && !item.target) throw new AccountError('report.invalid');
+    await this.kv.put(`rp:${item.id}`, item);
+    const keys = (await this.kv.list('rp:')).sort();
+    for (const k of keys.slice(0, -2000)) await this.kv.delete(k);
+  }
+  async adminReports() {
+    const items: ReportItem[] = [];
+    for (const k of await this.kv.list('rp:')) { const r = await this.kv.get<ReportItem>(k); if (r) items.push(r); }
+    return { count: items.length, items: items.sort((x, y) => y.at - x.at) };
+  }
+  async adminReportDelete(id: string) { await this.kv.delete(`rp:${id}`); }
+
+  // ---------------------------------------------------------------- parties jouées (popularité, comparaison)
+  /** Une partie terminée : compte du jour par jeu, et score rangé pour situer les joueurs. */
+  async play(b: any) {
+    const game = String(b?.game ?? '');
+    if (!/^[a-z_0-9]{2,24}$/.test(game)) throw new AccountError('play.invalid');
+    const day = dayOf(this.now());
+    const counts = (await this.kv.get<Record<string, number>>(`pl:${day}`)) ?? {};
+    counts[game] = (counts[game] ?? 0) + 1;
+    await this.kv.put(`pl:${day}`, counts);
+    const old = (await this.kv.list('pl:')).sort().slice(0, -15);
+    for (const k of old) await this.kv.delete(k);
+    this.popCache = null;
+    const score = Number(b?.score);
+    if (!(score >= 0 && score <= 1)) return { n: 0 };
+    const h = (await this.kv.get<number[]>(`hist:${game}`)) ?? new Array(HIST_BUCKETS).fill(0);
+    const i = Math.round(score * (HIST_BUCKETS - 1));
+    // Avant d'ajouter ce score : part des parties moins bonnes (les égalités comptent pour moitié).
+    const n = h.reduce((s, x) => s + x, 0);
+    const below = h.slice(0, i).reduce((s, x) => s + x, 0) + h[i] / 2;
+    h[i]++;
+    await this.kv.put(`hist:${game}`, h);
+    return { n, better: n ? Math.round((below / n) * 100) : null };
+  }
+  private popCache: { at: number; list: { game: string; n: number }[] } | null = null;
+  /** Jeux les plus joués sur les 7 derniers jours. */
+  async popular() {
+    if (this.popCache && this.now() - this.popCache.at < 10 * 60_000) return this.popCache.list;
+    const since = dayOf(this.now() - 6 * 86400000);
+    const tot: Record<string, number> = {};
+    for (const k of await this.kv.list('pl:')) {
+      if (k.slice(3) < since) continue;
+      for (const [g, n] of Object.entries((await this.kv.get<Record<string, number>>(k)) ?? {})) tot[g] = (tot[g] ?? 0) + n;
+    }
+    // Les parties des joueurs connectés (depuis le début) départagent quand il y a peu de données.
+    const stats = (await this.kv.get<{ cats: Record<string, number> }>('stats'))?.cats ?? {};
+    for (const [g, n] of Object.entries(stats)) tot[g] = (tot[g] ?? 0) + n / 20;
+    const list = Object.entries(tot).map(([game, n]) => ({ game, n: Math.round(n) })).sort((a, b) => b.n - a.n).slice(0, 40);
+    this.popCache = { at: this.now(), list };
+    return list;
+  }
+
   async adminUsers() {
     const keys = await this.kv.list('acct:');
     const users: Account[] = [];
@@ -1031,6 +1099,17 @@ export async function accountRoute(
       return v ? { status: 200, json: v } : { status: 404, json: { error: 'challenge.notFound' } };
     }
     if (path === '/api/feedback' && method === 'POST') { await svc.feedback(await body(), bearer || null); return { status: 200, json: {} }; }
+    if (path === '/api/report' && method === 'POST') { await svc.report(await body(), bearer || null); return { status: 200, json: {} }; }
+    if (path === '/api/play' && method === 'POST') return { status: 200, json: await svc.play(await body()) };
+    if (path === '/api/popular' && method === 'GET') return { status: 200, json: await svc.popular() };
+    if (path.startsWith('/api/admin/reports')) {
+      if (adminOk === null) return { status: 503, json: { error: 'admin.notConfigured' } };
+      if (!adminOk) return { status: 401, json: { error: 'admin.denied' } };
+      if (path === '/api/admin/reports' && method === 'GET') return { status: 200, json: await svc.adminReports() };
+      const m = path.match(/^\/api\/admin\/reports\/([0-9a-z]{6,20})$/);
+      if (m && method === 'DELETE') { await svc.adminReportDelete(m[1]); return { status: 200, json: {} }; }
+      return null;
+    }
     if (path.startsWith('/api/admin/feedback')) {
       if (adminOk === null) return { status: 503, json: { error: 'admin.notConfigured' } };
       if (!adminOk) return { status: 401, json: { error: 'admin.denied' } };

@@ -214,6 +214,9 @@ export interface RecapItem {
   index: number;
   label: string;
   target?: string; // identifiant de la question (pour ne pas la reposer trop vite)
+  /** Énoncé (clé de traduction et paramètres), pour pouvoir signaler une question. */
+  pk?: string;
+  pp?: Record<string, string | number>;
   results: PlayerRound[];
 }
 

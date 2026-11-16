@@ -114,6 +114,27 @@ export function StickerToast() {
   );
 }
 
+// ---------------------------------------------------------------- comparaison avec les autres joueurs
+/** « Tu as fait mieux que 72 % des joueurs » : en haut de l'écran, quelques secondes après la fin. */
+export function BetterToast() {
+  const { t } = useApp();
+  const [b, setB] = useState<{ game: string; better: number; k: number } | null>(null);
+  useEffect(() => {
+    const on = (ev: Event) => { const d = (ev as CustomEvent).detail; setB({ ...d, k: Date.now() }); };
+    window.addEventListener('gq:better', on);
+    return () => window.removeEventListener('gq:better', on);
+  }, []);
+  useEffect(() => { if (!b) return; const id = setTimeout(() => setB(null), 6500); return () => clearTimeout(id); }, [b]);
+  if (!b) return null;
+  const top = b.better >= 50;
+  return (
+    <div className={`better-toast ${top ? 'top' : ''}`} role="status" key={b.k} onClick={() => setB(null)}>
+      <strong>{b.better >= 99 ? '🏆' : top ? '📈' : '💪'} {top ? t('better.top', { n: b.better }) : t('better.low')}</strong>
+      <small>{t('better.game', { game: t(`cat.${b.game}`) })}</small>
+    </div>
+  );
+}
+
 // ---------------------------------------------------------------- l'album
 export function AlbumScreen() {
   const { t, lang, me } = useApp();

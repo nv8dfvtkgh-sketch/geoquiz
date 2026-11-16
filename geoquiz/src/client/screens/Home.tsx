@@ -3,6 +3,7 @@ import { FAMILIES, findGame, Icon, type GameDef } from '../games';
 import { createGame, joinGame, lastGame } from '../net';
 import { HomeworkCard } from './School';
 import { useEvents, weekFor } from '../events';
+import { loadPopular } from '../stats';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
 import { chooseSystem } from './Revision';
@@ -76,7 +77,13 @@ function Games() {
   const lastDef = last ? findGame(last.category) : undefined;
   const zone = last && catalog?.zones.find((z) => z.id === last.zone);
   const zoneLabel = !zone || zone.id === 'world' ? '' : zone.kind === 'regions' ? zone.names?.[lang] ?? '' : t(`zone.${zone.id.replace(':', '.')}`);
-  const families = FAMILIES.filter((f) => f.id !== 'today');
+  // Jeux les plus joués cette semaine : une rangée en tête, et en premier dans chaque famille.
+  const [popular, setPopular] = useState<string[]>([]);
+  useEffect(() => { loadPopular().then(setPopular); }, []);
+  const rank = (id: string) => { const i = popular.indexOf(id); return i < 0 ? 999 : i; };
+  const families = FAMILIES.filter((f) => f.id !== 'today').map((f) => ({ ...f, games: f.games.map((g, i) => ({ g, i })).sort((a, b) => rank(a.g.id) - rank(b.g.id) || a.i - b.i).map((x) => x.g) }));
+  const tintOf = new Map(families.flatMap((f) => f.games.map((g) => [g.id, f.tint] as const)).reverse());
+  const top = popular.map((id) => families.flatMap((f) => f.games).find((g) => g.id === id && !g.soon)).filter((g): g is GameDef => !!g).filter((g, i, a) => a.indexOf(g) === i).slice(0, 8);
   const q = fold(query.trim());
   const found = q ? families.flatMap((f) => f.games.filter((g) => !g.soon && fold(`${t(`cat.${g.id}`)} ${t(`game.${g.id}`)}`).includes(q)).map((g) => ({ g, tint: f.tint }))) : [];
 
@@ -172,6 +179,12 @@ function Games() {
         found.length ? <div className="tiles">{found.map(({ g, tint }) => tile(g, tint))}</div> : <p className="muted">{t('home.noResult')}</p>
       ) : (
         <>
+          {top.length >= 3 && (
+            <section className="family row-family popular-row">
+              <div className="family-head"><h2>🔥 {t('home.popular')}</h2></div>
+              <div className="tiles-row">{top.map((g) => tile(g, tintOf.get(g.id) ?? ''))}</div>
+            </section>
+          )}
           {families.map((f) => {
             const games = f.games;
             const expanded = !!open[f.id];
