@@ -1491,7 +1491,7 @@ const survivalCat: Category = {
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, triviaCatInfo, ...revCats].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, triviaCatInfo, { ...triviaCatInfo, id: 'gm' }, ...revCats].map((c) => [c.id, c]),
 );
 
 /**

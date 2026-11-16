@@ -108,13 +108,13 @@ export function lastGame(): CreateRoomReq['settings'] | null {
   try { return JSON.parse(localStorage.getItem('gq.last') ?? 'null'); } catch { return null; }
 }
 export async function createGame(req: CreateRoomReq, name: string, lang: Lang): Promise<string | null> {
-  if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event', 'week'].includes(req.settings.category)) {
+  if (!req.challenge && !req.assignment && !['custom', 'daily', 'review', 'event', 'week', 'gm'].includes(req.settings.category)) {
     try { localStorage.setItem('gq.last', JSON.stringify(req.settings)); } catch { /* stockage indisponible */ }
   }
   // Anti-répétition : les questions déjà vues dans ce jeu sur cet appareil.
   if (!req.challenge && !req.avoid) req = { ...req, avoid: seenIn(req.settings.category) };
   try {
-    const tk = req.settings.category === 'daily' ? savedAuth() : null;
+    const tk = req.settings.category === 'daily' || req.settings.category === 'gm' ? savedAuth() : null;
     const r = await fetch('/api/rooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(tk ? { Authorization: `Bearer ${tk}` } : {}) }, body: JSON.stringify(req) });
     const j = await r.json();
     if (j.error === 'daily.done') markDailyDone();

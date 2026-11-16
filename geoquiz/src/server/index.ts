@@ -11,6 +11,7 @@ import { categoryInfos, poolCounts } from './categories';
 import { fetchPhoto } from './photos';
 import { countryList, eventList, flagPath, geoJson, printSheet } from './print';
 import { nextTournament } from './tournament';
+import { gmLiveInfo } from './gm';
 import { catalog, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from './data';
 import { QuickQueue } from './quick';
 import { cleanLang, config, newCode, Room, validSettings, type Conn } from './rooms';
@@ -66,9 +67,21 @@ config.createChallenge = (c) => accounts.createChallenge(c);
 config.loadChallenge = (code) => accounts.challengeData(code);
 config.addChallengeResult = (code, e) => accounts.addChallengeResult(code, e);
 config.loadReview = (token) => accounts.reviewDue(token);
+config.gmResult = (live, ranking) => accounts.gmLive(live, ranking);
 // Copie des médias Wikimedia trouvés (photos, sons) : la partie démarre même si Wikimedia ne répond plus.
 config.loadMedia = async (group) => { try { return JSON.parse(fs.readFileSync(path.join(STORE, `media-${group.replace(/\W/g, '')}.json`), 'utf8')); } catch { return null; } };
 config.saveMedia = async (group, snap) => { try { fs.mkdirSync(STORE, { recursive: true }); fs.writeFileSync(path.join(STORE, `media-${group.replace(/\W/g, '')}.json`), JSON.stringify(snap)); } catch { /* ignoré */ } };
+
+const GM_SECRET = process.env.GM_SECRET || ADMIN_PASSWORD || 'quizellige-geo-masters';
+/** Geo Masters : raison de refuser une qualification (ou null). */
+function gmRefusal(v: { signedIn: boolean; played: string | null; allowed: string[]; div: string; cal: { qualifyEnd: number } }, body: any): string | null {
+  if (!v.signedIn) return 'gm.account';
+  if (body?.kind !== 'solo' || body?.settings?.gm?.stage !== 'qualif') return 'gm.live';
+  if (Date.now() > v.cal.qualifyEnd) return 'gm.closed';
+  if (v.played) return 'gm.played';
+  if (!v.allowed.includes(body.settings.gm?.div)) return 'gm.division';
+  return null;
+}
 
 // ------------------------------------------------------------------ salles
 const rooms = new Map<string, Room>();
@@ -142,6 +155,17 @@ const server = http.createServer(async (req, res) => {
       }
       return send(res, 200, JSON.stringify({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }));
     }
+    if (p === '/api/gm') {
+      const tok = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
+      const view = await accounts.gmView(tok || null, url.searchParams.get('div') ?? undefined);
+      const live = await gmLiveInfo(view, GM_SECRET, async (code, settings, startsAt, info) => {
+        if (rooms.has(code)) return;
+        const room = new Room(code, 'room', settings, true, () => rooms.delete(code));
+        room.autoStartAt = startsAt; room.gmLive = info; room.armAuto();
+        rooms.set(code, room);
+      });
+      return send(res, 200, JSON.stringify({ ...view, live }), 'application/json', 'no-store');
+    }
     if (p === '/api/events') return send(res, 200, JSON.stringify(eventList()), 'application/json', 'public, max-age=600');
     if (p === '/api/boardq') return send(res, 200, boardQuestionsJson(url.searchParams.get('theme') ?? 'geo', url.searchParams.get('d') ?? 'easy', cleanLang(url.searchParams.get('lang')), Number(url.searchParams.get('n')) || 30), 'application/json', 'no-store');
     if (p === '/api/geo') return send(res, 200, geoJson(), 'application/json', 'public, max-age=3600');
@@ -163,6 +187,12 @@ const server = http.createServer(async (req, res) => {
       // Défi du jour : un compte qui l'a déjà joué aujourd'hui attend demain.
       const tok = String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
       if (tok && body?.settings?.category === 'daily' && (await accounts.daily(tok).catch(() => null))?.me) return send(res, 409, JSON.stringify({ error: 'daily.done' }));
+      // Geo Masters : qualification réservée aux comptes, une fois par saison, dans une division permise.
+      if (body?.settings?.category === 'gm') {
+        const v = await accounts.gmView(tok || null, body.settings.gm?.div);
+        const why = gmRefusal(v, body);
+        if (why) return send(res, 409, JSON.stringify({ error: why }));
+      }
       const code = await createRoom(body);
       return typeof code === 'string' ? send(res, 200, JSON.stringify({ code })) : send(res, 400, JSON.stringify(code));
     }

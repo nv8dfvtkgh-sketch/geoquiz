@@ -3,6 +3,7 @@ import type { QuestionMsg, Reveal } from '../../shared/protocol';
 import { MapView, type Mark } from '../MapView';
 import { isMuted, sfx } from '../sound';
 import { TriviaBar, TriviaWheel, winCrown } from './Trivia';
+import { GmBar } from './GeoMasters';
 import { useApp } from '../state';
 import { markDailyDone } from '../dailyLock';
 import { RoadSign } from '../RoadSign';
@@ -145,7 +146,7 @@ function Play({ q }: { q: QuestionMsg }) {
     const k = `${fb.q}:${fb.tried.length}`;
     if (k === lastSeen.current) return;
     lastSeen.current = k;
-    fb.correct ? sfx.good() : sfx.bad();
+    if (fb.value !== '__pass__') fb.correct ? sfx.good() : sfx.bad();
     // Challenge Trivia : bonne réponse à une question difficile = couronne du thème.
     if (fb.done && fb.correct && trivia && q.level === 'hard' && q.theme && winCrown(q.theme)) setCrown(q.theme);
     // Petite vibration sur téléphone (sauf son coupé).
@@ -183,6 +184,7 @@ function Play({ q }: { q: QuestionMsg }) {
       <ModeBar />
 
       {trivia && <TriviaBar q={q} locked={locked} />}
+      {q.endsIn !== undefined && <GmBar endsIn={q.endsIn} qAt={s.qAt ?? performance.now()} locked={locked} onPass={() => send({ t: 'answer', q: q.index, value: '__pass__' })} />}
       {trivia && <TriviaWheel q={q} />}
 
       {q.category === 'tables' && <RaceTrack players={s.room!.players} you={s.you} total={q.total} />}
@@ -303,7 +305,7 @@ function Status({ q }: { q: QuestionMsg }) {
     return (
       <div className={`result-bar ${fb.correct ? 'ok' : 'ko'}`} role="status">
         <div>
-          <strong>{fb.correct ? t('play.correct') : t('play.wrong')}</strong>
+          <strong>{fb.correct ? t('play.correct') : fb.value === '__pass__' ? t('gm.passed') : t('play.wrong')}</strong>
           {fb.km !== undefined && <span className="km">{t('play.km', { n: fb.km.toLocaleString() })} · {t('play.points', { n: fb.points })}</span>}
           {!fb.correct && reveal && <span dir="auto">{t('play.answerWas', { label: reveal.label })}</span>}
           {fb.correct && q.kind === 'type' && reveal && <span dir="auto">{t('play.spelling', { label: reveal.label })}</span>}

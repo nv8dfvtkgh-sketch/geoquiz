@@ -2,7 +2,7 @@
 // Un jeu « disponible » correspond à une catégorie du serveur (src/server/categories.ts).
 // Pour ajouter un jeu : une catégorie côté serveur, une ligne ici, ses textes dans locales/.
 
-export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia';
+export type PageScreen = 'passport' | 'league' | 'tournament' | 'classes' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters';
 export interface GameDef {
   id: string; // = identifiant de catégorie côté serveur
   icon: keyof typeof ICONS;
@@ -23,6 +23,7 @@ export const FAMILIES: Family[] = [
     games: [
       { id: 'daily', icon: 'calendar', fresh: true },
       { id: 'trivia', icon: 'crown', fresh: true, screen: 'trivia' },
+      { id: 'geomasters', icon: 'medal', fresh: true, screen: 'geomasters' },
       { id: 'globle', icon: 'thermo', fresh: true, screen: 'globle' },
       { id: 'capword', icon: 'grid', fresh: true, screen: 'capword' },
       { id: 'compass', icon: 'compass', fresh: true, screen: 'compass' },
@@ -38,6 +39,7 @@ export const FAMILIES: Family[] = [
     id: 'geo',
     tint: 'tint-ocean',
     games: [
+      { id: 'geomasters', icon: 'medal', fresh: true, screen: 'geomasters' },
       { id: 'countries', icon: 'globe' },
       { id: 'regions', icon: 'regions' },
       { id: 'flags', icon: 'flag' },
@@ -164,6 +166,7 @@ export const ICONS = {
   awale: <g {...P}><rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="7" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="17" cy="12" r="1.6" /></g>,
   mountain: <g {...P}><path d="M3 19l6.5-11 4 6.5 2.5-3.5L21 19z" /><path d="M7.6 11.2l1.9 1.3 1.6-1.4" /></g>,
   bulb: <g {...P}><path d="M9 17h6M10 20h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></g>,
+  medal: <g {...P}><circle cx="12" cy="14" r="6" /><path d="M8.5 3h7l-2 6.5h-3zM12 11.5l.9 1.8 2 .3-1.4 1.4.3 2-1.8-1-1.8 1 .3-2-1.4-1.4 2-.3z" /></g>,
   crown: <g {...P}><path d="M3 8l4.5 4 4.5-7 4.5 7L21 8l-2 11H5z" /><path d="M5 19h14" /></g>,
   bac: <g {...P}><rect x="3" y="3" width="18" height="18" rx="4" /><path d="M9 16l3-8 3 8M10.2 13h3.6" /></g>,
   sticker: <g {...P}><path d="M5 4h14v9l-6 7H5z" /><path d="M19 13h-6v7" /><path d="M9 9.5h.01M14 9.5h.01" strokeWidth="2.4" /></g>,

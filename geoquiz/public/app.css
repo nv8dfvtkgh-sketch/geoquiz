@@ -1875,3 +1875,41 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .tw-disc strong { font-size: 1.3rem; }
 .trivia-wheel p { margin: 0; font-weight: 700; font-size: 1.05rem; }
 .trivia-crown-won { margin: 0; padding: 10px 14px; border-radius: 12px; background: #FFF3DF; color: #6B3B00; font-weight: 700; text-align: center; }
+
+/* ------------------------------------------------------------------ Geo Masters */
+.gm { display: grid; gap: 14px; padding-bottom: 110px; }
+.gm-hero { display: grid; gap: 6px; padding: 18px; border-radius: var(--radius-l); background: #0B3B6E; color: #fff; }
+.gm-hero small { color: #CFE2F7; font-weight: 600; }
+.gm-hero h1 { margin: 0; color: #fff; }
+.gm-hero p { margin: 0; color: #E6EEF7; line-height: 1.45; }
+.gm-divs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.gm-divs button { display: grid; gap: 2px; justify-items: start; text-align: start; min-height: 60px; padding: 10px 12px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--paper-2); color: var(--ink); font: inherit; cursor: pointer; }
+.gm-divs button.on { border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
+.gm-divs small { color: var(--ink-2); font-size: .78rem; }
+.gm-divs .gm-lock { color: #B25000; }
+.gm-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.gm-steps > li { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border-radius: var(--radius-l); padding: 14px; box-shadow: var(--shadow); }
+.gm-steps > li > div { display: grid; gap: 6px; flex: 1; min-width: 0; }
+.gm-steps > li p { margin: 0; }
+.gm-num { flex: none; width: 30px; height: 30px; border-radius: 15px; display: grid; place-items: center; background: var(--fill); color: var(--ink-2); font-weight: 800; }
+.gm-steps > li.now .gm-num { background: var(--accent); color: var(--accent-ink); }
+.gm-steps > li.done .gm-num { background: var(--good); color: #fff; }
+.gm-me { font-weight: 700; color: var(--good); }
+.gm-confirm { display: grid; gap: 8px; padding: 12px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+.gm-confirm p, .gm-confirm ul { margin: 0; }
+.gm-confirm ul { padding-inline-start: 18px; }
+.gm-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.gm-row.between { justify-content: space-between; }
+.gm-rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.gm-rank li { display: grid; grid-template-columns: 2.4ch minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline; padding: 6px 8px; border-radius: 10px; }
+.gm-rank li .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gm-rank li .r { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.gm-rank li.in { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.gm-rank li.me { outline: 2px solid var(--accent); }
+.gm-rank.small li { grid-template-columns: 2.4ch minmax(0, 1fr) auto; }
+.gm-hall { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.gm-hall li { display: flex; justify-content: space-between; gap: 8px; }
+.gm-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.gm-bar > span { font-weight: 800; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.gm-bar > span.low { color: var(--bad); }
+.gm-bar .btn { margin-inline-start: auto; min-height: 40px; padding: 6px 14px; }

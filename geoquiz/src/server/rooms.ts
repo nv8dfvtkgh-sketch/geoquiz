@@ -8,6 +8,8 @@ import {
 import { answer as boardAnswer, BOARD_GAMES, BOARD_MAX, BOARD_THEMES, botMove, hangNext, initBoard, legal as boardLegal, play as boardPlay, viewFor, type BoardGame, type BoardState } from '../shared/boards';
 import { boardCtx, boardQ, boardQuestion } from './boardplay';
 import { BacGame } from './bacplay';
+import { gmCalendar, gmQuestions } from './gm';
+import { GM_DIVISIONS, GM_LIVE, GM_QUALIF, type GmDivision, type GmStage } from '../shared/gm';
 import { cleanBac } from '../shared/bac';
 import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, localize, shuffle, survivalQuestions, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
@@ -37,7 +39,10 @@ export const config: {
   /** Copie durable des médias trouvés sur Wikimedia (photos, sons), par jeu. */
   loadMedia: (group: string) => Promise<MediaSnapshot | null>;
   saveMedia: (group: string, snap: MediaSnapshot) => Promise<void>;
+  /** Geo Masters : classement d'une manche en direct ou de la finale. */
+  gmResult: (live: { season: string; div: GmDivision; stage: GmStage }, ranking: { token: string; name: string; score: number }[]) => Promise<void>;
 } = {
+  gmResult: async () => {},
   loadReview: async () => [], loadMedia: async () => null, saveMedia: async () => {},
   maxPlayers: 50, loadQuiz: async () => null, recordGame: async () => null,
   createChallenge: async () => null, loadChallenge: async () => null, addChallengeResult: async () => null,
@@ -153,8 +158,16 @@ export function validSettings(s: any): Settings | null {
     chests: !!s.chests,
     wager: !!s.wager,
     ...(cat.id === 'bac' ? { bac: cleanBac(s.bac) } : {}),
+    ...(cat.id === 'gm' ? gmClean(s) : {}),
     ...(cat.id === 'board' ? { board: BOARD_GAMES.includes(s.board) ? s.board : 'ttt', theme: BOARD_THEMES[s.theme] ? s.theme : 'geo' } : {}),
   };
+}
+
+/** Geo Masters : division, étape, nombre de questions et mode imposés. */
+function gmClean(s: any): Partial<Settings> {
+  const div: GmDivision = GM_DIVISIONS.includes(s?.gm?.div) ? s.gm.div : 'college';
+  const stage = ['qualif', 'semi', 'final'].includes(s?.gm?.stage) ? s.gm.stage : 'qualif';
+  return { gm: { div, stage }, count: stage === 'qualif' ? GM_QUALIF.questions : GM_LIVE[stage as GmStage], qtype: 'mcq', mode: stage === 'qualif' ? 'classic' : 'buzzer', timeLimit: 15 };
 }
 
 function cleanName(name: any): string {
@@ -168,6 +181,7 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   if (settings.category === 'daily') return dailyQuestions();
   if (settings.category === 'survival') return survivalQuestions(rnd);
   if (settings.category === 'trivia') return triviaQuestions(rnd, avoid);
+  if (settings.category === 'gm') return gmQuestions(settings.gm?.div ?? 'college', settings.count, rnd, avoid);
   const cat = CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
   const strict = cat.pool(zone, settings.difficulty, settings.count);
@@ -264,6 +278,11 @@ export class Room {
   /** Devoir de classe joué (« CODE:id ») et tournoi du vendredi. */
   assignment?: string;
   tournament?: boolean;
+  /** Geo Masters : saison de la partie, et étape en direct (salle publique) le cas échéant. */
+  gmSeason?: string;
+  gmLive?: { season: string; div: GmDivision; stage: GmStage };
+  gmTimer?: ReturnType<typeof setTimeout>;
+  gmEndsAt?: number;
   /** Salle automatique (tournoi) : lancée toute seule à cette heure, sans hôte qui décide. */
   autoStartAt?: number;
   autoTimer: ReturnType<typeof setTimeout> | null = null;
@@ -459,6 +478,7 @@ export class Room {
 
   destroy() {
     this.bac?.stop();
+    if (this.gmTimer) clearTimeout(this.gmTimer);
     if (this.board?.timer) clearTimeout(this.board.timer);
     if (this.timer) clearTimeout(this.timer);
     if (this.autoTimer) clearTimeout(this.autoTimer);
@@ -535,6 +555,7 @@ export class Room {
         else if (isHost && this.state === 'question' && this.kind === 'room' && !this.hostPlays) this.endRound();
         break;
       case 'rematch':
+        if (this.settings.category === 'gm') break; // Geo Masters : une seule tentative
         this.rematch(m);
         break;
       case 'kick':
@@ -674,6 +695,14 @@ export class Room {
     this.recap = [];
     this.rematchVotes.clear();
     this.qIndex = -1;
+    // Geo Masters, qualification : 20 minutes pour toute l'épreuve.
+    if (this.gmTimer) clearTimeout(this.gmTimer);
+    this.gmEndsAt = undefined;
+    if (this.settings.gm?.stage === 'qualif') {
+      this.gmSeason = gmCalendar().season;
+      this.gmEndsAt = Date.now() + GM_QUALIF.minutes * 60_000;
+      this.gmTimer = setTimeout(() => { if (this.state === 'question' || this.state === 'reveal') this.finish(); }, GM_QUALIF.minutes * 60_000 + 500);
+    }
     this.nextQuestion();
   }
 
@@ -984,6 +1013,7 @@ export class Room {
       attempts: q.attempts,
       timeLimit: r.deadline ? this.settings.timeLimit * 1000 : null,
       remaining,
+      endsIn: this.gmEndsAt ? Math.max(0, this.gmEndsAt - Date.now()) : undefined,
     };
     r.msgByLang[lang] = msg;
     return msg;
@@ -1036,6 +1066,8 @@ export class Room {
         if (m.streak >= 3) a.points *= 2;
         if (r.doubles?.has(m.id)) a.points *= 2;
       }
+      // Geo Masters, qualification : +2 bonne réponse, 0 question passée, −1 erreur.
+      if (this.settings.gm?.stage === 'qualif') a.points = ok ? GM_QUALIF.good : value === '__pass__' ? GM_QUALIF.pass : GM_QUALIF.bad;
       if (this.mode === 'buzzer') {
         // Buzzer : seul le premier à trouver marque ; une erreur coûte des points.
         if (ok && !r.buzzed) { r.buzzed = m.id; a.points = 1000; }
@@ -1096,7 +1128,7 @@ export class Room {
     const results: PlayerRound[] = this.players().map((p) => {
       const a: AnswerState = r.answers.get(p.id) ?? { attempts: 0, done: true, correct: false, points: 0, timeMs: null, credit: 0 };
       const bet = wagerQ && p.bet ? (a.correct ? p.bet : -p.bet) : undefined;
-      p.score = Math.max(0, p.score + a.points + (bet ?? 0));
+      p.score = this.settings.gm ? p.score + a.points : Math.max(0, p.score + a.points + (bet ?? 0));
       if (a.correct) p.streak++; else p.streak = 0;
       if (this.survival && this.mode !== 'battle' && !a.correct && (r.answers.has(p.id) || this.kind !== 'solo') && p.lives !== undefined && p.lives > 0) { p.lives--; if (!p.lives) p.outAt = this.qIndex + 1; }
       return { id: p.id, correct: a.correct, points: a.points, timeMs: a.timeMs, attempts: a.attempts, answer: a.answer, km: a.km, bet };
@@ -1183,11 +1215,17 @@ export class Room {
   }
 
   finish() {
+    if (this.gmTimer) { clearTimeout(this.gmTimer); this.gmTimer = undefined; }
     this.state = 'finished';
     this.round = null;
     this.broadcastRoom();
     this.broadcast((m) => this.finishedMsg(m.lang));
     this.recordAll();
+    // Geo Masters en direct : classement transmis pour la suite (finale, palmarès).
+    if (this.gmLive) {
+      const ranking = this.publicPlayers().map((x) => this.members.get(x.id)!).filter(Boolean).map((p) => ({ token: p.auth ?? '', name: p.name, score: p.score }));
+      config.gmResult(this.gmLive, ranking).catch((e) => console.error('geo masters', e));
+    }
     // Défi joué : on ajoute le résultat et on renvoie le classement du défi.
     if (this.challenge && this.kind === 'solo' && !this.retrying) {
       const p = this.players()[0];
@@ -1218,9 +1256,10 @@ export class Room {
         found: this.recap.filter((x, i) => res[i]?.correct).map((x) => x.q.target),
         timeMs: res.reduce((t, x) => t + (x?.timeMs ?? (this.settings.timeLimit * 1000)), 0),
         assignment: this.assignment, tournament: this.tournament,
+        gm: this.settings.gm?.stage === 'qualif' && this.gmSeason ? { season: this.gmSeason, div: this.settings.gm.div, points: p.score } : undefined,
         event: this.settings.category === 'event' ? activeEvent()?.id : undefined,
         items: this.recap.map((x, i) => ({
-          c: x.q.category, t: x.q.target, ok: !!res[i]?.correct,
+          c: x.q.category, t: x.q.target.includes('|') && ['trivia', 'gm'].includes(this.settings.category) ? x.q.target.split('|')[1] : x.q.target, ok: !!res[i]?.correct,
           z: this.reviewItems?.[(x.q as any).reviewIndex ?? -1]?.z ?? (this.settings.category === 'daily' ? 'world' : this.settings.zone),
         })),
       };

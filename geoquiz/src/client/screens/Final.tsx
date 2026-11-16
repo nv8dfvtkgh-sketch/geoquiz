@@ -20,7 +20,7 @@ function nextGame(cat: string): string | null {
 import { ChallengeShare } from '../Challenge';
 
 export function Final() {
-  const { t, s, send, leave, openGame } = useApp();
+  const { t, s, send, leave, openGame, go } = useApp();
   const f = s.finished;
   const room = s.room;
   useEffect(() => { sfx.end(); }, []);
@@ -45,6 +45,23 @@ export function Final() {
     const daily = room.settings.category === 'daily';
     const next = nextGame(room.settings.category);
     if (room.settings.category === 'survival') return <SurvivalEnd correct={correct} total={total} fx={fx} />;
+    if (room.settings.category === 'gm') {
+      const me = room.players.find((p) => p.id === s.you);
+      return (
+        <div className="final panel final-solo">
+          <div className="final-top">
+            <p className="survival-big" aria-hidden="true">🌍</p>
+            <h1>{t('gm.final', { pts: me?.score ?? 0 })}</h1>
+            <p className="muted">{t('final.scoreOf', { c: correct, n: total })} · {formatTime(f.solo.timeMs)}{s.reward ? ` · +${s.reward.xp} XP` : ''}</p>
+            <p>{t('gm.finalHint')}</p>
+          </div>
+          <div className="final-actions">
+            <button type="button" className="btn primary big" onClick={() => { leave(); setTimeout(() => go('geomasters'), 60); }}>{t('gm.seeRanking')}</button>
+          </div>
+          <RewardCard />
+        </div>
+      );
+    }
     return (
       <div className="final panel final-solo">
         {fx}

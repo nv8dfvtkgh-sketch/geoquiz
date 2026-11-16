@@ -3,6 +3,8 @@
 // Node, Durable Object « AccountsDO » sur Cloudflare). Tout ce qui rapporte des points est
 // calculé ici, à partir des résultats que la salle envoie : le navigateur ne peut pas tricher.
 import type { KV } from './quizzes';
+import { gmCalendar, prevSeason } from './gm';
+import { GM_DIVISIONS, GM_LIVE, gmDivisionsFor, gmSemiSpots, type GmDivision, type GmStage } from '../shared/gm';
 import { isUnlocked, LOOK_BY_ID, STICKER_IDS, type Look } from '../shared/stickers';
 
 // ------------------------------------------------------------------ types
@@ -43,6 +45,8 @@ export interface GameResult {
   assignment?: string;
   /** Tournoi du vendredi. */
   tournament?: boolean;
+  /** Geo Masters : qualification (saison, division, points +2 / 0 / −1). */
+  gm?: { season: string; div: string; points: number };
   /** Événement du moment joué (badge si au moins 50 %). */
   event?: string;
   /** Chaque question (jeu, cible, zone, réussie ?) : alimente le mode révision. */
@@ -104,6 +108,9 @@ interface SchoolClass {
 }
 const CLASS_LIMITS = { classes: 15, students: 60, assignments: 60 };
 const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+interface GmRow { p: string; av: string; c?: string; pts: number; ok: number; n: number; at: number }
+interface GmLiveRow { id?: string; name: string; score: number }
 
 export class AccountError extends Error {}
 
@@ -554,6 +561,8 @@ export class AccountService {
       for (const id of r.found.slice(0, 300)) if (typeof id === 'string' && id.length <= 24) set.add(id);
       c.found = [...set].slice(0, 2000);
     }
+    // Geo Masters : la première qualification de la saison compte (une seule tentative).
+    if (r.category === 'gm' && r.gm) await this.gmQualify(a, r.gm, correct, total);
     // Meilleur score par difficulté : seulement sur des parties d'au moins 5 questions.
     let best: number | undefined;
     let unlocked: Reward['unlocked'];
@@ -645,6 +654,60 @@ export class AccountService {
       .map(([id, v], i) => ({ id, rank: i + 1, ...v }));
     const me = token ? await this.byToken(token) : null;
     return { week, top: rows.slice(0, 50), me: me ? rows.find((r) => r.id === me.id) ?? null : null };
+  }
+
+  // ---------------------------------------------------------------- Geo Masters
+  private async gmQualify(a: Account, g: { season: string; div: string; points: number }, correct: number, total: number) {
+    const cal = gmCalendar(this.now());
+    const div = g.div as GmDivision;
+    if (g.season !== cal.season || this.now() > cal.qualifyEnd + 30 * 60_000 || !gmDivisionsFor(a.age).includes(div)) return;
+    const key = `gmq:${cal.season}:${div}`;
+    const board = (await this.kv.get<Record<string, GmRow>>(key)) ?? {};
+    if (board[a.id]) return;
+    board[a.id] = { p: a.pseudo, av: a.avatar, c: a.country, pts: Math.round(Number(g.points) || 0), ok: correct, n: total, at: this.now() };
+    await this.kv.put(key, board);
+    // Une seule division par saison.
+    await this.kv.put(`gmd:${cal.season}:${a.id}`, div);
+  }
+  private gmRank(board: Record<string, GmRow>) {
+    return Object.entries(board).sort((x, y) => y[1].pts - x[1].pts || y[1].ok - x[1].ok || x[1].at - y[1].at).map(([id, v], i) => ({ id, rank: i + 1, ...v }));
+  }
+  /** Vue de la saison pour une division : classement, ma place, mon accès au direct, résultats, palmarès. */
+  async gmView(token: string | null, wanted?: string) {
+    const cal = gmCalendar(this.now());
+    const a = token ? await this.byToken(token) : null;
+    const allowed = gmDivisionsFor(a?.age);
+    const played = a ? await this.kv.get<GmDivision>(`gmd:${cal.season}:${a.id}`) : null;
+    const div: GmDivision = GM_DIVISIONS.includes(wanted as GmDivision) ? (wanted as GmDivision) : played ?? allowed[0];
+    const rows = this.gmRank((await this.kv.get<Record<string, GmRow>>(`gmq:${cal.season}:${div}`)) ?? {});
+    const spots = gmSemiSpots(rows.length);
+    const semi = (await this.kv.get<GmLiveRow[]>(`gml:${cal.season}:${div}:semi`)) ?? null;
+    const final = (await this.kv.get<GmLiveRow[]>(`gml:${cal.season}:${div}:final`)) ?? null;
+    const mine = a ? rows.find((r) => r.id === a.id) ?? null : null;
+    const prev = prevSeason(cal.season);
+    const champions: Record<string, string | null> = {};
+    for (const d of GM_DIVISIONS) champions[d] = (await this.kv.get<GmLiveRow[]>(`gml:${prev}:${d}:final`))?.[0]?.name ?? null;
+    const strip = (x: GmLiveRow[] | null) => x?.map(({ name, score, id }) => ({ name, score, me: !!a && id === a.id })) ?? null;
+    return {
+      season: cal.season, cal, div, allowed, signedIn: !!a, played: played ?? null,
+      players: rows.length, spots,
+      top: rows.slice(0, 30).map(({ id, rank, p, av, c, pts, ok, n }) => ({ rank, p, av, c, pts, ok, n, me: !!a && id === a.id })),
+      me: mine ? { rank: mine.rank, pts: mine.pts, ok: mine.ok, n: mine.n, semi: mine.rank <= spots } : null,
+      finalist: !!a && !!semi && semi.slice(0, GM_LIVE.finalists).some((x) => x.id === a.id),
+      semi: strip(semi), final: strip(final), champions, prev,
+    };
+  }
+  /** Fin d'une manche en direct ou de la finale : on garde le classement (comptes reconnus par leur jeton). */
+  async gmLive(live: { season: string; div: string; stage: string }, ranking: { token: string; name: string; score: number }[]) {
+    if (!GM_DIVISIONS.includes(live.div as GmDivision) || !['semi', 'final'].includes(live.stage) || !/^\d{4}-\d{2}$/.test(live.season)) return;
+    const key = `gml:${live.season}:${live.div}:${live.stage as GmStage}`;
+    if (await this.kv.get(key)) return; // la première partie jouée fait foi
+    const rows: GmLiveRow[] = [];
+    for (const r of ranking.slice(0, 60)) {
+      const acc = r.token ? await this.byToken(r.token) : null;
+      rows.push({ id: acc?.id, name: acc?.pseudo ?? String(r.name ?? '').slice(0, 24), score: Math.round(Number(r.score) || 0) });
+    }
+    if (rows.length) await this.kv.put(key, rows);
   }
 
   // ---------------------------------------------------------------- statistiques et admin
@@ -1005,6 +1068,7 @@ export async function accountRoute(
       return v ? { status: 200, json: v } : { status: 401, json: { error: 'account.signedOut' } };
     }
     if (path === '/api/daily' && method === 'GET') return { status: 200, json: await svc.daily(bearer || null) };
+    if (path === '/api/gm' && method === 'GET') return { status: 200, json: await svc.gmView(bearer || null, query.get('div') ?? undefined) };
     if (path === '/api/album' && method === 'POST') return { status: 200, json: await svc.album(bearer ? await svc.byToken(bearer) : null, await body()) };
     if (path.startsWith('/api/account')) {
       const a = await svc.byToken(bearer);

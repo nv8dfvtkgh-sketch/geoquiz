@@ -124,7 +124,7 @@ export const activeWeek = (now = Date.now()) => activeOf('week', now);
 /** Thème du défi du jour en cours (le défi du jour pioche alors dans ce thème). */
 export const activeDailyTheme = (now = Date.now()) => activeOf('daily', now);
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['board', 'bac', 'trivia', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event', 'week'];
+export const NO_ZONE_GAMES = ['board', 'bac', 'trivia', 'gm', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event', 'week'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];

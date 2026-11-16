@@ -11,6 +11,7 @@ import { fetchPhoto } from '../server/photos';
 import { challengeMeta, withMeta } from '../server/sharemeta';
 import { countryList, eventList, flagPath, geoJson, printSheet } from '../server/print';
 import { nextTournament } from '../server/tournament';
+import { gmLiveInfo } from '../server/gm';
 import { catalog, dataReady, ensureRegion, EXTRA_FILES, initData, regionMap, worldJson } from '../server/data';
 import { QuickQueue } from '../server/quick';
 import { cleanLang, config, newCode, Room, validSettings, type Conn } from '../server/rooms';
@@ -50,7 +51,12 @@ export interface Env {
   GOOGLE_CLIENT_SECRET?: string; // secret
   FACEBOOK_APP_ID?: string;
   FACEBOOK_APP_SECRET?: string; // secret
+  GM_SECRET?: string; // secret facultatif : codes des salles en direct de Geo Masters
 }
+const gmSecret = (env: Env) => env.GM_SECRET || env.ADMIN_PASSWORD || 'quizellige-geo-masters';
+type GmView = { signedIn: boolean; played: string | null; allowed: string[]; div: any; me: { semi: boolean } | null; finalist: boolean; cal: any };
+const gmViewOf = async (env: Env, tok: string, div?: string): Promise<GmView> =>
+  (await accountsStub(env).fetch(`https://x/api/gm${div ? `?div=${encodeURIComponent(div)}` : ''}`, { headers: tok ? { Authorization: `Bearer ${tok}` } : {} })).json() as Promise<GmView>;
 
 /** Tous les quiz créés vivent dans un Durable Object unique (stockage SQLite). */
 const quizStub = (env: Env) => env.QUIZZES.get(env.QUIZZES.idFromName('store'));
@@ -150,6 +156,14 @@ export default {
           if (open) await roomStub(env, tn.code).fetch('https://room/init', { method: 'POST', body: JSON.stringify({ code: tn.code, kind: 'room', settings: tn.settings, hostPlays: true, autoStartAt: tn.startsAt }) });
           return json({ startsAt: tn.startsAt, opensAt: tn.opensAt, state: tn.state, category: tn.settings.category, code: open ? tn.code : null }, 200, 'no-store');
         }
+        if (p === '/api/gm') {
+          const tok = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+          const view = await gmViewOf(env, tok, url.searchParams.get('div') ?? undefined);
+          const live = await gmLiveInfo(view, gmSecret(env), async (code, settings, startsAt, info) => {
+            await roomStub(env, code).fetch('https://room/init', { method: 'POST', body: JSON.stringify({ code, kind: 'room', settings, hostPlays: true, autoStartAt: startsAt, gmLive: info }) });
+          });
+          return json({ ...view, live });
+        }
         if (p === '/api/events') return json(eventList(), 200, 'public, max-age=600');
         if (p === '/api/boardq') return new Response(boardQuestionsJson(url.searchParams.get('theme') ?? 'geo', url.searchParams.get('d') ?? 'easy', cleanLang(url.searchParams.get('lang')), Number(url.searchParams.get('n')) || 30), { headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
         if (p === '/api/geo') return new Response(geoJson(), { headers: { 'content-type': 'application/json', 'cache-control': 'public, max-age=3600' } });
@@ -173,6 +187,13 @@ export default {
           try { body = JSON.parse(text); } catch {}
           // Défi du jour : un compte qui l'a déjà joué aujourd'hui attend demain.
           const tok = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+          if ((body as any)?.settings?.category === 'gm') {
+            const b = body as any;
+            const v = await gmViewOf(env, tok, b.settings.gm?.div);
+            const why = !v.signedIn ? 'gm.account' : b.kind !== 'solo' || b.settings.gm?.stage !== 'qualif' ? 'gm.live'
+              : Date.now() > v.cal.qualifyEnd ? 'gm.closed' : v.played ? 'gm.played' : !v.allowed.includes(b.settings.gm?.div) ? 'gm.division' : null;
+            if (why) return json({ error: why }, 409);
+          }
           if (tok && (body as any)?.settings?.category === 'daily') {
             const d = await accountsStub(env).fetch('https://x/api/daily', { headers: { Authorization: `Bearer ${tok}` } }).then((r) => r.json() as any).catch(() => null);
             if (d?.me) return json({ error: 'daily.done' }, 409);
@@ -254,6 +275,7 @@ export class RoomDO {
     config.loadReview = async (token) => (await acct<{ c: string; t: string; z: string }[]>('review', { token })) ?? [];
     config.loadMedia = (group) => acct('media/get', { group });
     config.saveMedia = async (group, snap) => { await acct('media/put', { group, snap }); };
+    config.gmResult = async (live, ranking) => { await acct('gm/live', { live, ranking }); };
     config.recordGame = async (token, result) => {
       const r = await accountsStub(this.env).fetch('https://accounts/internal/record', { method: 'POST', body: JSON.stringify({ token, result }) });
       return r.ok ? r.json() : null;
@@ -273,7 +295,7 @@ export class RoomDO {
 
     if (url.pathname === '/init' && request.method === 'POST') {
       if (this.room) return new Response('exists', { status: 409 });
-      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string; autoStartAt?: number; avoid?: string[] };
+      const b = (await request.json()) as { code: string; kind: Room['kind']; settings: Settings; hostPlays: boolean; quizToken?: string; challenge?: string; reviewToken?: string; assignment?: string; autoStartAt?: number; avoid?: string[]; gmLive?: Room['gmLive'] };
       const settings = validSettings(b.settings);
       if (!settings) return new Response('invalid', { status: 400 });
       this.room = new Room(b.code, b.kind, settings, b.hostPlays, () => { this.room = null; });
@@ -282,7 +304,8 @@ export class RoomDO {
       this.room.reviewToken = b.reviewToken;
       this.room.assignment = b.assignment;
       this.room.avoid = Array.isArray(b.avoid) ? b.avoid : [];
-      if (b.autoStartAt) { this.room.autoStartAt = b.autoStartAt; this.room.tournament = true; this.room.armAuto(); }
+      if (b.gmLive) { this.room.gmLive = b.gmLive; this.room.autoStartAt = b.autoStartAt; this.room.armAuto(); }
+      else if (b.autoStartAt) { this.room.autoStartAt = b.autoStartAt; this.room.tournament = true; this.room.armAuto(); }
       return new Response('ok');
     }
 
@@ -428,6 +451,11 @@ export class AccountsDO {
       const b = (await request.json()) as { token: string };
       return json(await this.svc.reviewDue(String(b.token ?? '')));
       return json(null, 404);
+    }
+    if (url.hostname === 'accounts' && url.pathname === '/internal/gm/live') {
+      const b = (await request.json()) as { live: { season: string; div: string; stage: string }; ranking: { token: string; name: string; score: number }[] };
+      await this.svc.gmLive(b.live, Array.isArray(b.ranking) ? b.ranking : []);
+      return json(true);
     }
     if (url.hostname === 'accounts' && url.pathname === '/internal/record') {
       const b = (await request.json()) as { token: string; result: GameResult };

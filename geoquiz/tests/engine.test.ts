@@ -1348,3 +1348,127 @@ test('Challenge Trivia : 12 questions, 6 thèmes, niveaux qui montent, jokers et
   }
   r.destroy();
 });
+
+test('Geo Masters : calendrier, questions, qualification +2 / 0 / −1, classement, direct', async () => {
+  const { gmCalendar, gmQuestions, gmCode, gmLiveInfo, gmStageState } = await import('../src/server/gm');
+  const { gmSemiSpots, gmDivisionsFor } = await import('../src/shared/gm');
+  // Novembre 2026 : dernier samedi le 28 ; heures données à l'heure du Maroc.
+  const cal = gmCalendar(Date.UTC(2026, 10, 16, 10));
+  const ma = (ms: number) => new Intl.DateTimeFormat('fr-FR', { timeZone: 'Africa/Casablanca', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(ms));
+  assert.equal(cal.season, '2026-11');
+  assert.equal(ma(cal.semi.college), '28 16:00');
+  assert.equal(ma(cal.semi.primaire), '28 15:00');
+  assert.equal(cal.final.college - cal.semi.college, 35 * 60_000);
+  assert.equal(ma(cal.qualifyEnd), '28 00:00');
+  assert.equal(gmCalendar(Date.UTC(2027, 0, 1, 1)).season, '2027-01', 'nouvelle saison le 1er');
+  assert.equal(gmStageState(cal.semi.college, cal.semi.college - 20 * 60_000), 'soon');
+  assert.equal(gmStageState(cal.semi.college, cal.semi.college - 5 * 60_000), 'open');
+  assert.deepEqual(gmDivisionsFor('18+'), ['adultes']);
+  assert.equal(gmSemiSpots(3), 8); assert.equal(gmSemiSpots(40), 20); assert.equal(gmSemiSpots(500), 50);
+  for (const div of ['primaire', 'college', 'lycee', 'adultes'] as const) {
+    const qs = gmQuestions(div, 50);
+    assert.equal(qs.length, 50, `${div} : 50 questions`);
+    assert.equal(new Set(qs.map((q) => q.target)).size, 50);
+    assert.ok(qs.every((q) => q.kind === 'mcq' && q.options!.length >= 3));
+  }
+  assert.equal(await gmCode('2026-11', 'college', 'semi', 's'), await gmCode('2026-11', 'college', 'semi', 's'));
+  assert.notEqual(await gmCode('2026-11', 'college', 'semi', 's'), await gmCode('2026-11', 'college', 'final', 's'));
+
+  // Qualification en salle solo : +2 juste, 0 passée, −1 erreur ; chrono de l'épreuve envoyé.
+  const r = create('solo', settings({ category: 'gm', zone: 'world', gm: { div: 'college', stage: 'qualif' }, count: 50 } as any));
+  const a = client();
+  onMessage(a.conn, r.code, { t: 'join', name: 'A', lang: 'fr' });
+  await new Promise((res) => setTimeout(res, 30));
+  assert.equal(r.questions.length, 50);
+  assert.ok(a.last('question')!.q.endsIn! > 19 * 60_000);
+  onMessage(a.conn, r.code, { t: 'answer', q: 0, value: r.round!.q.revealOption! });
+  assert.equal(a.last('feedback')!.points, 2);
+  onMessage(a.conn, r.code, { t: 'next' });
+  onMessage(a.conn, r.code, { t: 'answer', q: 1, value: '__pass__' });
+  assert.equal(a.last('feedback')!.points, 0);
+  onMessage(a.conn, r.code, { t: 'next' });
+  const wrong = r.round!.q.options!.find((o) => o.id !== r.round!.q.revealOption)!.id;
+  onMessage(a.conn, r.code, { t: 'answer', q: 2, value: wrong });
+  assert.equal(a.last('feedback')!.points, -1);
+  onMessage(a.conn, r.code, { t: 'next' });
+  assert.equal(r.players()[0].score, 1);
+  r.destroy();
+
+  // Comptes : une qualification par saison et par compte, classement, accès au direct et à la finale.
+  const { AccountService } = await import('../src/server/accounts');
+  const store = new Map<string, unknown>();
+  const kv = {
+    get: async (k: string) => (store.has(k) ? structuredClone(store.get(k)) : undefined) as any,
+    put: async (k: string, v: unknown) => { store.set(k, structuredClone(v)); },
+    delete: async (k: string) => { store.delete(k); },
+    list: async (p: string) => [...store.keys()].filter((k) => k.startsWith(p)),
+  };
+  let now = Date.UTC(2026, 10, 16, 10);
+  const svc = new AccountService(kv, () => now);
+  const toks: string[] = [];
+  for (let i = 0; i < 10; i++) toks.push((await svc.register({ pseudo: `Ado${i}x`, password: 'secret1', age: '13-17', email: `a${i}@x.ma` })).token);
+  const adult = (await svc.register({ pseudo: 'Adulte1', password: 'secret1', age: '18+', email: 'ad@x.ma' })).token;
+  const res = (pts: number, div = 'college') => ({ category: 'gm', difficulty: 'medium', kind: 'solo', mode: 'classic', zone: 'world', lang: 'fr', total: 50, correct: 30, accuracy: 60, rank: 1, players: 1, gm: { season: '2026-11', div, points: pts } }) as any;
+  for (let i = 0; i < 10; i++) await svc.record(toks[i], res(10 * i));
+  await svc.record(toks[0], res(99)); // deuxième tentative ignorée
+  await svc.record(adult, res(80, 'college')); // pas sa division
+  let v = await svc.gmView(toks[9], 'college');
+  assert.equal(v.players, 10);
+  assert.equal(v.top[0].pts, 90);
+  assert.equal(v.me!.rank, 1);
+  assert.equal(v.spots, 8);
+  assert.equal(v.played, 'college');
+  assert.equal((await svc.gmView(toks[0], 'college')).me!.pts, 0, 'la première tentative compte');
+  assert.equal((await svc.gmView(toks[0], 'college')).me!.semi, false, '10e : hors des 8 places');
+  assert.deepEqual((await svc.gmView(adult)).allowed, ['adultes']);
+  // Direct : la salle n'est donnée qu'aux qualifiés, à partir de 15 min avant.
+  const made: string[] = [];
+  const ensure = async (code: string) => { made.push(code); };
+  now = cal.semi.college - 10 * 60_000;
+  v = await svc.gmView(toks[9], 'college');
+  let live = await gmLiveInfo(v, 's', ensure, now);
+  assert.ok(live.semi.code && live.semi.state === 'open');
+  assert.equal(live.final.code, null);
+  const out = await gmLiveInfo(await svc.gmView(toks[0], 'college'), 's', ensure, now);
+  assert.equal(out.semi.code, null, 'non qualifié : pas de code');
+  // Fin de la manche : les 8 premiers vont en finale.
+  await svc.gmLive({ season: '2026-11', div: 'college', stage: 'semi' }, toks.slice().reverse().map((tk, i) => ({ token: tk, name: `x${i}`, score: 100 - i })));
+  now = cal.final.college - 5 * 60_000;
+  v = await svc.gmView(toks[9], 'college');
+  assert.equal(v.finalist, true);
+  live = await gmLiveInfo(v, 's', ensure, now);
+  assert.ok(live.final.code);
+  assert.equal((await svc.gmView(toks[0], 'college')).finalist, false);
+  await svc.gmLive({ season: '2026-11', div: 'college', stage: 'final' }, [{ token: toks[5], name: 'x', score: 7 }]);
+  now = Date.UTC(2026, 11, 3);
+  const dec = await svc.gmView(toks[1], 'college');
+  assert.equal(dec.season, '2026-12');
+  assert.equal(dec.champions.college, 'Ado5x', 'palmarès du mois précédent');
+});
+
+test('Geo Masters : la salle en direct transmet son classement à la fin', async () => {
+  const { config } = await import('../src/server/rooms');
+  const { gmSettings } = await import('../src/server/gm');
+  const got: any[] = [];
+  const old = config.gmResult;
+  config.gmResult = async (live, ranking) => { got.push({ live, ranking }); };
+  const r = create('room', gmSettings('lycee', 'final'));
+  r.gmLive = { season: '2026-11', div: 'lycee', stage: 'final' };
+  const a = client(), b = client();
+  onMessage(a.conn, r.code, { t: 'join', name: 'A', lang: 'fr' });
+  onMessage(b.conn, r.code, { t: 'join', name: 'B', lang: 'fr' });
+  onMessage(a.conn, r.code, { t: 'start' });
+  assert.equal(r.mode, 'buzzer');
+  assert.equal(r.questions.length, 15);
+  for (let i = 0; i < 15; i++) {
+    onMessage(a.conn, r.code, { t: 'answer', q: i, value: r.round!.q.revealOption! });
+    onMessage(b.conn, r.code, { t: 'answer', q: i, value: 'x' });
+    r.endRound(); r.nextQuestion();
+  }
+  assert.equal(r.state, 'finished');
+  assert.equal(got.length, 1);
+  assert.equal(got[0].ranking[0].name, 'A');
+  assert.equal(got[0].live.stage, 'final');
+  config.gmResult = old;
+  r.destroy();
+});

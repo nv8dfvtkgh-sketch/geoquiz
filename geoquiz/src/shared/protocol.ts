@@ -30,6 +30,7 @@ export interface Settings {
   board?: string; // jeu de duel sur plateau (catégorie « board »)
   theme?: string; // thème des questions du plateau
   bac?: import('./bac').BacConfig; // Petit Bac : catégories, manches, temps, lettres rares
+  gm?: { div: import('./gm').GmDivision; stage: 'qualif' | import('./gm').GmStage }; // Geo Masters
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -166,6 +167,8 @@ export interface QuestionMsg {
   /** Challenge Trivia : thème tiré à la roue et niveau. */
   theme?: string;
   level?: Difficulty;
+  /** Geo Masters (qualification) : temps restant pour toute l'épreuve, en ms. */
+  endsIn?: number;
   /** pin : placer un point sur la carte ; order : remettre les réponses dans l'ordre */
   kind: QKind;
   promptKey: string; // clé i18n
