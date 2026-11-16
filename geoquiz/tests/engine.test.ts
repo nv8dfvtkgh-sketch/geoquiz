@@ -1542,14 +1542,16 @@ test('Connexions, L\'intrus, Champ de mines : grilles sans ambiguïté', async (
   assert.ok(!geo.some((c: { id: string }) => c.id === 'XK' || c.id === 'TW'), 'Kosovo et Taïwan hors des jeux');
 });
 
-test('Défi de la semaine : GTA jusqu\'au 22 novembre, puis le Masters de tennis', async () => {
-  const { activeWeek } = await import('../src/server/data');
+test('Défi de la semaine : le Masters de tennis jusqu\'au 22 novembre, puis GTA ; dimanche, les champions', async () => {
+  const { activeWeek, activeDailyTheme } = await import('../src/server/data');
   const { COLLECTORS } = await import('../src/shared/stickers');
-  assert.equal(activeWeek(Date.parse('2026-11-22T20:00:00Z'))?.id, 'week-gta-2026');
-  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z'))?.id, 'week-tennis-2026');
-  assert.equal(activeWeek(Date.parse('2026-11-29T20:00:00Z'))?.id, 'week-tennis-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-16T22:00:00Z'))?.id, 'week-tennis-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-22T20:00:00Z'))?.id, 'week-tennis-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z'))?.id, 'week-gta-2026');
+  assert.equal(activeDailyTheme(Date.parse('2026-11-21T12:00:00Z'))?.id, 'daily-eurofoot-2026');
+  assert.equal(activeDailyTheme(Date.parse('2026-11-22T12:00:00Z'))?.id, 'daily-masters-2026');
   const c = COLLECTORS.find((x) => x.event === 'week-tennis-2026')!;
-  assert.equal(c.from, '2026-11-23');
+  assert.equal(c.from, '2026-11-16');
   const qs = drawQuestions({ category: 'week', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
   assert.ok(qs.length >= 1);
 });
