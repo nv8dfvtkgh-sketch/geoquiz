@@ -1249,8 +1249,8 @@ test('Album : chaque jeu donne un autocollant de sa page', async () => {
   assert.equal(ev.find((e: { id: string }) => e.id === 'week-gta-2026').album, 'games');
 });
 
-test('Petit Bac : lettre, STOP, vérification, vote et points', async () => {
-  const { checkWord, BAC_MS } = await import('../src/server/bacplay');
+test('Petit Bac : lettre, STOP, vérification par l\'ordinateur (une faute permise) et points', async () => {
+  const { checkWord, oneTypo, BAC_MS } = await import('../src/server/bacplay');
   // Vérification d'un mot seul.
   assert.equal(checkWord('pays', 'Maroc', 'M', false), 'known');
   assert.equal(checkWord('pays', 'Marrakech', 'M', false), 'bad');
@@ -1259,9 +1259,19 @@ test('Petit Bac : lettre, STOP, vérification, vote et points', async () => {
   assert.equal(checkWord('pays', 'le Mali', 'M', false), 'known');
   assert.equal(checkWord('animal', 'Éléphant', 'E', false), 'known');
   assert.equal(checkWord('animal', 'Marmotte', 'T', false), 'letter');
-  assert.equal(checkWord('prenom', 'Mehdi', 'M', false), 'vote');
-  assert.equal(checkWord('prenom', 'Mehdi', 'M', true), 'unchecked');
-  assert.equal(checkWord('animal', '  ', 'M', false), 'empty');
+  assert.equal(checkWord('prenom', 'Mehdi', 'M'), 'ok', 'prénom : accepté par l\'ordinateur');
+  assert.equal(checkWord('prenom', 'Mzzzt', 'M'), 'rejected', 'pas un vrai mot');
+  assert.equal(checkWord('objet', 'Qsdfgh', 'Q'), 'rejected');
+  assert.equal(checkWord('animal', '  ', 'M'), 'empty');
+  // Une faute d'orthographe acceptée.
+  assert.equal(checkWord('pays', 'Marok', 'M'), 'typo');
+  assert.equal(checkWord('pays', 'Moroc', 'M'), 'typo');
+  assert.equal(checkWord('animal', 'Elefant', 'E'), 'typo');
+  assert.equal(checkWord('animal', 'Girfae', 'G'), 'typo', 'deux lettres inversées');
+  assert.equal(checkWord('capitale', 'Madird', 'M'), 'typo');
+  assert.equal(checkWord('pays', 'Marokk', 'M'), 'bad', 'deux fautes : refusé');
+  assert.equal(checkWord('animal', 'Nasique', 'N'), 'unchecked', 'absent de nos listes : moitié des points');
+  assert.ok(oneTypo('chameau', 'chamaeu') && oneTypo('abc', 'abcd') && !oneTypo('abcd', 'badc'));
 
   const r = create('room', settings({ category: 'bac', zone: 'world', bac: { cats: ['pays', 'prenom', 'animal'], rounds: 1, time: 60, rare: false } } as any));
   assert.deepEqual(r.settings.bac!.cats, ['pays', 'prenom', 'animal']);
@@ -1280,29 +1290,21 @@ test('Petit Bac : lettre, STOP, vérification, vote et points', async () => {
   onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 1, v: `${L}zorglub` });
   onMessage(a.conn, r.code, { t: 'bac', a: 'stop' });
   assert.equal(g.phase, 'write', 'STOP refusé : une case vide');
-  onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 2, v: `${L}xyzanimal` });
+  onMessage(a.conn, r.code, { t: 'bac', a: 'fill', i: 2, v: `${L}xzzzq` });
   onMessage(b.conn, r.code, { t: 'bac', a: 'fill', i: 0, v: country || `${L}nulpart` });
   assert.equal(a.last('bac')!.view.filled[r.players().find((p) => p.name === 'B')!.id], 1, 'les autres voient les cases remplies');
   onMessage(a.conn, r.code, { t: 'bac', a: 'stop' });
-  const v = b.last('bac')!.view;
-  assert.equal(v.phase, 'vote');
-  assert.equal(v.stopBy, 'A');
-  assert.equal(v.votes!.length, 2, 'le prénom et l\'animal inconnus sont votés');
-  const animal = v.votes!.find((x) => x.cat === 2)!;
-  onMessage(b.conn, r.code, { t: 'bac', a: 'veto', key: animal.key });
-  onMessage(a.conn, r.code, { t: 'bac', a: 'veto', key: animal.key }); // pas sur son propre mot
-  assert.equal(b.last('bac')!.view.votes!.find((x) => x.cat === 2)!.rejects, 1);
-  onMessage(a.conn, r.code, { t: 'bac', a: 'done' });
-  onMessage(b.conn, r.code, { t: 'bac', a: 'done' });
+  // Plus de vote : l'ordinateur vérifie directement.
   const end = a.last('bac')!.view;
+  assert.equal(end.stopBy, 'A');
   assert.equal(end.phase, 'end');
   const rowA = end.table!.find((x) => x.name === 'A')!, rowB = end.table!.find((x) => x.name === 'B')!;
   if (country) {
     assert.equal(rowA.cells[0].points, 5, 'même pays que B : 5 points');
     assert.equal(rowB.cells[0].points, 5);
   }
-  assert.equal(rowA.cells[1].points, 10, 'prénom accepté (pas de refus) : 10');
-  assert.equal(rowA.cells[2].status, 'rejected', 'animal refusé par vote');
+  assert.equal(rowA.cells[1].points, 10, 'prénom accepté par l\'ordinateur : 10');
+  assert.equal(rowA.cells[2].status, 'rejected', 'faux mot refusé par l\'ordinateur');
   assert.equal(r.state, 'finished');
   assert.equal(r.players().find((p) => p.name === 'A')!.score, rowA.total);
   assert.ok(BAC_MS.spin > 0);

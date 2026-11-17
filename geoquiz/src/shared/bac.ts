@@ -1,6 +1,6 @@
 // Petit Bac : catégories, préréglages, lettres et vues échangées entre le serveur et le navigateur.
 // Une manche : la roulette tire une lettre, chacun écrit un mot par catégorie ; le premier qui a
-// tout rempli peut crier STOP. Puis vérification (listes connues, sinon vote des joueurs) et points :
+// tout rempli peut crier STOP. Puis vérification par l'ordinateur (listes, une faute permise) et points :
 // 10 pour un mot trouvé seul, 5 pour un mot trouvé par plusieurs, 0 sinon.
 import type { Names } from './protocol';
 
@@ -68,7 +68,8 @@ export function drawLetter(used: string[], rare: boolean, rnd: () => number): st
 
 /** Statut d'un mot après vérification. */
 /** ok : accepté par vote ; known : mot connu ; unchecked : solo, mot inconnu (5 points) ; bad : pas un pays / une capitale. */
-export type BacStatus = 'ok' | 'known' | 'unchecked' | 'vote' | 'bad' | 'letter' | 'empty' | 'rejected';
+/** typo : mot connu écrit avec une faute (acceptée) ; rejected : l'ordinateur ne reconnaît pas un vrai mot. */
+export type BacStatus = 'ok' | 'known' | 'typo' | 'unchecked' | 'vote' | 'bad' | 'letter' | 'empty' | 'rejected';
 export interface BacCell { word: string; status: BacStatus; points: number }
 export interface BacVoteItem { key: string; cat: number; word: string; by: string[]; rejects: number; mine: boolean; voted: boolean }
 

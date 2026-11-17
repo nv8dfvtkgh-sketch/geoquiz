@@ -237,7 +237,7 @@ function Vote({ v }: { v: BacView }) {
   );
 }
 
-const ICON: Record<BacStatus, string> = { ok: '✓', known: '✓', unchecked: '~', vote: '?', bad: '✗', letter: '✗', empty: '–', rejected: '✗' };
+const ICON: Record<BacStatus, string> = { ok: '✓', known: '✓', typo: '✓', unchecked: '~', vote: '?', bad: '✗', letter: '✗', empty: '–', rejected: '✗' };
 function Results({ v }: { v: BacView }) {
   const { t, send, s, lang, leave } = useApp();
   const me = s.you ?? '';
@@ -278,7 +278,7 @@ function Results({ v }: { v: BacView }) {
         </section>
       )}
       {v.solo && mine && <p className="bac-total">{t('bac.total', { n: mine.total })}</p>}
-      {v.solo && mine?.cells.some((c) => c.status === 'unchecked') && <p className="muted small">{t('bac.soloHint')}</p>}
+      {mine?.cells.some((c) => c.status === 'unchecked' || c.status === 'typo') && <p className="muted small">{t('bac.soloHint')}</p>}
       {end ? (
         <div className="bac-go">
           {(room?.kind === 'solo' || isHost) && <button type="button" className="btn primary" onClick={() => send({ t: 'rematch' })}>{t('final.again')}</button>}

@@ -1,5 +1,5 @@
 // Petit Bac côté serveur : manches, STOP, vérification des mots, vote des joueurs, points.
-// Une partie = plusieurs manches ; chaque manche : roulette (lettre) → écriture → vote → résultats.
+// Une partie = plusieurs manches ; chaque manche : roulette (lettre) → écriture → résultats (vérifiés par l'ordinateur).
 import { BAC_BY_ID, drawLetter, type BacCell, type BacConfig, type BacStatus, type BacView } from '../shared/bac';
 import { capitalNameSet, countryNameSet } from './data';
 import { bacWords } from './bacwords';
@@ -20,19 +20,61 @@ export interface BacHost {
 /** Initiale sans accents ni casse (« Él » → « E »). */
 const initial = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').trim().charAt(0).toUpperCase();
 
-/** Vérification d'un mot seul (sans le vote). */
-export function checkWord(cat: string, word: string, letter: string, solo: boolean): BacStatus {
+/** Une seule faute de frappe d'écart : une lettre en plus, en moins, changée, ou deux lettres inversées. */
+export function oneTypo(a: string, b: string): boolean {
+  if (a === b) return true;
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  let i = 0;
+  while (i < la && i < lb && a[i] === b[i]) i++;
+  if (la === lb) {
+    if (a.slice(i + 1) === b.slice(i + 1)) return true; // une lettre changée
+    return a[i] === b[i + 1] && a[i + 1] === b[i] && a.slice(i + 2) === b.slice(i + 2); // deux lettres inversées
+  }
+  return la > lb ? a.slice(i + 1) === b.slice(i) : a.slice(i) === b.slice(i + 1); // une lettre en trop ou en moins
+}
+
+/** Mot de la liste, exact ou à une faute près (mots de 4 lettres et plus) : la forme de la liste, ou rien. */
+function findKnown(set: Set<string> | undefined, norm: string): { key: string; fixed: boolean } | null {
+  if (!set) return null;
+  if (set.has(norm)) return { key: norm, fixed: false };
+  if (norm.replace(/ /g, '').length < 4) return null;
+  for (const k of set) if (k[0] === norm[0] && oneTypo(norm, k)) return { key: k, fixed: true };
+  for (const k of set) if (oneTypo(norm, k)) return { key: k, fixed: true };
+  return null;
+}
+
+/** Ressemble à un vrai mot (pas « zzzzz » ni « qsdfg ») : l'ordinateur décide, plus de vote. */
+export function plausible(w: string): boolean {
+  const n = normalize(w).replace(/[ '-]/g, '');
+  if (n.length < 2) return false;
+  if (/(.)\1\1/.test(n)) return false; // trois fois la même lettre
+  if (/^[a-z]+$/.test(n)) {
+    if (!/[aeiouy]/.test(n)) return false;
+    if (/[bcdfghjklmnpqrstvwxz]{5}/.test(n)) return false;
+  }
+  return true;
+}
+
+/** Vérification d'un mot : listes du site (une faute permise), sinon l'ordinateur juge si c'est un vrai mot.
+ *  `key` : forme qui sert à repérer deux joueurs qui ont écrit le même mot (même avec une faute). */
+export function checkCell(cat: string, word: string, letter: string): { status: BacStatus; key: string } {
   const w = word.trim();
-  if (!w) return 'empty';
+  if (!w) return { status: 'empty', key: '' };
   const norm = normalize(w);
   // « La Paz » : l'initiale compte avec l'article ; « le Mali » : sans.
-  if (initial(w) !== letter && initial(norm) !== letter) return 'letter';
+  if (initial(w) !== letter && initial(norm) !== letter) return { status: 'letter', key: norm };
   const c = BAC_BY_ID[cat];
-  if (c?.check === 'country') return countryNameSet.has(norm) ? 'known' : 'bad';
-  if (c?.check === 'capital') return capitalNameSet.has(norm) ? 'known' : 'bad';
-  if (c?.check === 'list' && bacWords(cat)?.has(norm)) return 'known';
-  return solo ? 'unchecked' : 'vote';
+  const set = c?.check === 'country' ? countryNameSet : c?.check === 'capital' ? capitalNameSet : c?.check === 'list' ? bacWords(cat) : undefined;
+  const k = findKnown(set, norm);
+  if (k) return { status: k.fixed ? 'typo' : 'known', key: k.key };
+  if (c?.check === 'country' || c?.check === 'capital') return { status: 'bad', key: norm };
+  if (!plausible(w)) return { status: 'rejected', key: norm };
+  // Catégorie avec liste (animal, métier…) : mot absent de nos listes, compté à moitié.
+  return { status: c?.check === 'list' ? 'unchecked' : 'ok', key: norm };
 }
+/** Statut seul (ancien nom). */
+export const checkWord = (cat: string, word: string, letter: string, _solo?: boolean): BacStatus => checkCell(cat, word, letter).status;
 
 interface Vote { cat: number; word: string; by: Set<string>; rejects: Set<string> }
 
@@ -98,18 +140,8 @@ export class BacGame {
 
   endWrite() {
     if (this.phase !== 'write') return;
-    if (!this.solo) {
-      // Mots inconnus : soumis au vote des autres joueurs.
-      for (const [id, a] of this.answers) a.forEach((w, i) => {
-        if (checkWord(this.cfg.cats[i], w, this.letter, false) !== 'vote') return;
-        const key = `${i}:${normalize(w)}`;
-        const v = this.votes.get(key) ?? { cat: i, word: w.trim(), by: new Set<string>(), rejects: new Set<string>() };
-        v.by.add(id);
-        this.votes.set(key, v);
-      });
-    }
-    if (this.votes.size) { this.phase = 'vote'; this.at(BAC_MS.vote, () => this.endVote()); this.broadcast(); }
-    else this.endVote();
+    // Plus de vote entre joueurs : l'ordinateur vérifie tout de suite.
+    this.endVote();
   }
 
   veto(id: string, key: string) {
@@ -136,21 +168,27 @@ export class BacGame {
     // Statuts, puis points : 10 seul, 5 si un autre a le même mot.
     const players = this.host.players();
     const cells = new Map<string, BacCell[]>();
+    const keys = new Map<string, string[]>();
     for (const p of players) {
       const a = this.answers.get(p.id) ?? this.cfg.cats.map(() => '');
+      keys.set(p.id, []);
       cells.set(p.id, a.map((w, i) => {
-        let status = checkWord(this.cfg.cats[i], w, this.letter, this.solo);
-        if (status === 'vote') status = refused.has(`${i}:${normalize(w)}`) ? 'rejected' : 'ok';
-        return { word: w.trim(), status, points: 0 };
+        const r = checkCell(this.cfg.cats[i], w, this.letter);
+        keys.get(p.id)!.push(r.key);
+        return { word: w.trim(), status: refused.has(`${i}:${r.key}`) ? 'rejected' : r.status, points: 0 };
       }));
     }
-    const good = (s: BacStatus) => s === 'ok' || s === 'known';
+    const good = (s: BacStatus) => s === 'ok' || s === 'known' || s === 'typo';
     this.cfg.cats.forEach((_, i) => {
+      // Même mot (à une faute près) chez plusieurs joueurs : 5 points chacun au lieu de 10.
       const count = new Map<string, number>();
-      for (const c of cells.values()) if (good(c[i].status)) count.set(normalize(c[i].word), (count.get(normalize(c[i].word)) ?? 0) + 1);
-      for (const c of cells.values()) if (good(c[i].status)) c[i].points = (count.get(normalize(c[i].word)) ?? 0) > 1 ? 5 : 10;
-      // Solo : un mot que le site ne connaît pas compte, mais moitié moins.
-      for (const c of cells.values()) if (c[i].status === 'unchecked') c[i].points = 5;
+      for (const [id, c] of cells) if (good(c[i].status) || c[i].status === 'unchecked') count.set(keys.get(id)![i], (count.get(keys.get(id)![i]) ?? 0) + 1);
+      for (const [id, c] of cells) {
+        const n = count.get(keys.get(id)![i]) ?? 0;
+        if (good(c[i].status)) c[i].points = n > 1 ? 5 : 10;
+        // Mot absent de nos listes (animal, métier…) : compté, mais moitié moins.
+        else if (c[i].status === 'unchecked') c[i].points = 5;
+      }
     });
     this.table = players.map((p) => {
       const cs = cells.get(p.id)!;
