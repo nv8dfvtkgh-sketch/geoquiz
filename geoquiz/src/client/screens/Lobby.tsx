@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { RoomMode } from '../../shared/protocol';
 import { net } from '../net';
 import { useApp } from '../state';
+import { openWhatsApp } from '../geo';
 import { SettingsSummary } from './common';
 import { ReactionBar, ReactionLayer, TeamPicker } from '../Party';
 
@@ -32,7 +33,10 @@ export function Lobby() {
         <p className="link">{link.replace(/^https?:\/\//, '')}</p>
         <div className="share-row">
           <QrCode text={link} />
-          <button type="button" className="btn ghost" onClick={copy}>{copied ? t('lobby.copied') : t('lobby.copy')}</button>
+          <div className="share-btns">
+            <button type="button" className="btn wa" onClick={() => openWhatsApp(t('lobby.waText', { code: room.code, link }))}>{t('lobby.whatsapp')}</button>
+            <button type="button" className="btn ghost" onClick={copy}>{copied ? t('lobby.copied') : t('lobby.copy')}</button>
+          </div>
         </div>
       </section>
 

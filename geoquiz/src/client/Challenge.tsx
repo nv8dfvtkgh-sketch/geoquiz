@@ -1,6 +1,7 @@
 // Défi entre amis : partager un lien après une partie solo ; l'ami joue les mêmes questions.
 import { useEffect, useState } from 'react';
 import type { ChallengeEntry, ChallengeView } from '../shared/protocol';
+import { openWhatsApp } from './geo';
 import { formatTime } from './i18n';
 import { createGame } from './net';
 import { useApp } from './state';
@@ -54,7 +55,7 @@ export function ChallengeShare() {
         <div className="ch-links">
           <p className="muted">{t('ch.sendLink')}</p>
           <div className="row-actions">
-            <a className="btn wa" href={`https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`} target="_blank" rel="noopener">WhatsApp</a>
+            <button type="button" className="btn wa" onClick={() => openWhatsApp(`${text}\n${url}`)}>WhatsApp</button>
             {typeof navigator.share === 'function' && <button type="button" className="btn ghost" onClick={share}>{t('ch.otherApp')}</button>}
             <button type="button" className="btn ghost" onClick={copy}>{copied ? t('lobby.copied') : t('lobby.copy')}</button>
           </div>

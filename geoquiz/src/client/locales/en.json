@@ -1471,5 +1471,7 @@
   "sheet.photoExpected": "Expected photo: {name}",
   "sheet.withPhotos": "Photos found in the file: {n}.",
   "sheet.templateHtml": "Download the HTML template (with photos)",
-  "bac.st.typo": "checked, 1 typo accepted"
+  "bac.st.typo": "checked, 1 typo accepted",
+  "lobby.whatsapp": "Send on WhatsApp",
+  "lobby.waText": "Join my game on Quizellige! Code: {code}\n{link}"
 }

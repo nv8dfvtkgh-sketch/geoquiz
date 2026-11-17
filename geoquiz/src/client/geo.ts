@@ -162,3 +162,30 @@ export function scoreWord(guess: string, target: string): ('g' | 'y' | 'x')[] {
   g.forEach((c, i) => { if (res[i] !== 'g' && left[c]) { res[i] = 'y'; left[c]--; } });
   return res;
 }
+
+/**
+ * Ouvre directement l'appli WhatsApp avec le message déjà écrit : il ne reste qu'à choisir le contact.
+ * Téléphone : schéma whatsapp:// (pas de page intermédiaire) ; si l'appli n'est pas installée, on bascule sur wa.me.
+ * Ordinateur : wa.me (WhatsApp Desktop ou WhatsApp Web).
+ */
+export function openWhatsApp(text: string) {
+  const enc = encodeURIComponent(text);
+  const web = `https://wa.me/?text=${enc}`;
+  const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+  if (!mobile) { window.open(web, '_blank', 'noopener'); return; }
+  if (/Android/i.test(navigator.userAgent)) {
+    // Android : l'intent ouvre WhatsApp, ou wa.me si l'appli n'est pas installée.
+    location.href = `intent://send?text=${enc}#Intent;scheme=whatsapp;package=com.whatsapp;S.browser_fallback_url=${encodeURIComponent(web)};end`;
+    return;
+  }
+  let left = false;
+  const onHide = () => { left = true; };
+  document.addEventListener('visibilitychange', onHide, { once: true });
+  window.addEventListener('pagehide', onHide, { once: true });
+  location.href = `whatsapp://send?text=${enc}`;
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', onHide);
+    window.removeEventListener('pagehide', onHide);
+    if (!left && document.visibilityState === 'visible') location.href = web;
+  }, 1500);
+}

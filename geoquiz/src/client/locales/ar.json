@@ -1471,5 +1471,7 @@
   "sheet.photoExpected": "الصورة المنتظرة: {name}",
   "sheet.withPhotos": "الصور الموجودة في الملف: {n}.",
   "sheet.templateHtml": "تنزيل نموذج HTML (مع الصور)",
-  "bac.st.typo": "تم التحقق، خطأ واحد مقبول"
+  "bac.st.typo": "تم التحقق، خطأ واحد مقبول",
+  "lobby.whatsapp": "أرسل عبر واتساب",
+  "lobby.waText": "انضم إلى مباراتي على Quizellige! الرمز: {code}\n{link}"
 }

@@ -211,6 +211,8 @@ legend { margin-bottom: 6px; padding: 0; }
 .presenter .code span { font-size: clamp(3rem, 8vw, 5.5rem); }
 .link { font-weight: 600; direction: ltr; word-break: break-all; }
 .share-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.share-btns { display: grid; gap: 8px; min-width: 200px; }
+.share-btns .btn { justify-content: center; }
 .qr { background: #fff; padding: 6px; border-radius: 6px; width: 140px; height: 140px; }
 .qr svg { display: block; width: 100%; height: 100%; }
 .presenter .qr { width: 220px; height: 220px; }

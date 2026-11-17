@@ -1471,5 +1471,7 @@
   "sheet.photoExpected": "Foto esperada: {name}",
   "sheet.withPhotos": "Fotos encontradas en el archivo: {n}.",
   "sheet.templateHtml": "Descargar la plantilla HTML (con fotos)",
-  "bac.st.typo": "verificado, 1 falta aceptada"
+  "bac.st.typo": "verificado, 1 falta aceptada",
+  "lobby.whatsapp": "Enviar por WhatsApp",
+  "lobby.waText": "¡Únete a mi partida en Quizellige! Código: {code}\n{link}"
 }

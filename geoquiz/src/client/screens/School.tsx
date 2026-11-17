@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import type { Settings } from '../../shared/protocol';
 import { api } from '../account';
 import { FAMILIES } from '../games';
+import { openWhatsApp } from '../geo';
 import { formatTime } from '../i18n';
 import { createGame, joinGame } from '../net';
 import { useApp } from '../state';
@@ -178,7 +179,7 @@ function ClassDetail({ code, onBack }: { code: string; onBack: () => void }) {
         <p className="link">{link.replace(/^https?:\/\//, '')}</p>
         <div className="row-actions">
           <button type="button" className="btn ghost" onClick={copy}>{copied ? t('lobby.copied') : t('lobby.copy')}</button>
-          <a className="btn wa" href={`https://wa.me/?text=${encodeURIComponent(`${t('class.waText', { name: d.name })}\n${link}`)}`} target="_blank" rel="noopener">WhatsApp</a>
+          <button type="button" className="btn wa" onClick={() => openWhatsApp(`${t('class.waText', { name: d.name })}\n${link}`)}>WhatsApp</button>
         </div>
         <p className="hint">{t('class.codeHint')}</p>
       </section>
