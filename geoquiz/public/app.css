@@ -1944,10 +1944,14 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 @media (prefers-color-scheme: dark) { .col-text em { color: #B99AF5; } }
 
 /* Défi de la semaine : bouton « Jouer » comme le défi du jour */
-.week-card .week-go { margin-inline-start: auto; flex: none; padding: 6px 12px; border-radius: 999px; background: #FFFFFF2E; color: #fff; font-weight: 700; font-size: .85rem; }
+.week-card .week-go { margin-inline-start: auto; flex: none; padding: 7px 14px; border-radius: 999px; background: #fff; color: #9D174D; font-weight: 700; font-size: .85rem; }
 .week-card .sticker.mini.collector + .week-go { margin-inline-start: 0; }
 /* Téléphone en portrait : les réponses descendent vers le pouce */
-@media (max-width: 600px) and (orientation: portrait) { .play.kind-mcq .options { margin-top: auto; } }
+@media (max-width: 600px) and (orientation: portrait) { .play.kind-mcq .options:not(.flags) { margin-top: auto; } .play.kind-mcq .options.flags { margin-top: 12px; } }
+@media (max-width: 420px) {
+  .week-card.week .sticker.mini.collector { display: none; }
+  .gx-tile { min-height: 72px; padding: 6px 2px; font-size: .74rem; gap: 4px; }
+}
 
 /* ---------------------------------------------------------------- jeux de grilles (Connexions, L'intrus, Champ de mines, Frontières) */
 .gx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
