@@ -140,7 +140,7 @@ main { max-width: 980px; margin: 0 auto; padding: 24px max(16px, env(safe-area-i
     </div>
     <div class="top-sp"></div>
     <select class="lang" id="lang" aria-label="Langue">
-      <option value="fr">Français</option><option value="en">English</option><option value="es">Español</option><option value="ar">العربية</option>
+      <option value="fr">Français</option><option value="en">English</option><option value="es">Español</option>
     </select>
     <button class="btn hide-m" id="preview-top" data-t="preview"></button>
     <button class="btn primary hide-m" id="save-top" data-t="save"></button>
@@ -245,7 +245,7 @@ const KEY = 'quizellige-modele';
 if (!data.questions.length) { try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && d.questions) data = d; } catch {} }
 const blank = () => ({ text: '', answers: ['', '', '', ''], image: null });
 while (data.questions.length < 3) data.questions.push(blank());
-let lang = data.lang || (navigator.language || 'fr').slice(0, 2);
+let lang = ['fr', 'en', 'es'].includes(data.lang) ? data.lang : 'fr';
 if (!T[lang]) lang = 'fr';
 const t = (k, p) => (T[lang][k] || T.fr[k] || k).replace(/\{(\w+)\}/g, (_, x) => (p && p[x] != null ? p[x] : ''));
 const $ = (id) => document.getElementById(id);

@@ -1357,7 +1357,7 @@
   "cat.borders": "Fronteras",
   "game.borders": "Nombra todos los vecinos de un país antes de que acabe el tiempo",
   "game.borders.long": "Aparece un país en el mapa: escribe los nombres de todos sus vecinos y se iluminarán uno a uno. Cuantos más vecinos, más tiempo tienes.",
-  "gx.connexHow": "Selecciona 4 países que tengan algo en común y valida. Se permiten 4 errores.",
+  "gx.connexHow": "Forma 4 grupos de 4 países. 4 errores permitidos.",
   "gx.intrusHow": "Tres países tienen algo en común: toca el que no.",
   "gx.minesHow": "Pulsa solo los países que cumplen la consigna. Cada mina te cuesta una vida.",
   "gx.bordersHow": "Escribe los vecinos uno a uno: cada respuesta correcta se valida sola.",

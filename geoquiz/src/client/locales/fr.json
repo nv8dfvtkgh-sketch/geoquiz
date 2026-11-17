@@ -1357,7 +1357,7 @@
   "cat.borders": "Frontières",
   "game.borders": "Nomme tous les voisins d'un pays avant la fin du chrono",
   "game.borders.long": "Un pays apparaît sur la carte : tape les noms de tous ses voisins, ils s'allument un à un. Plus le pays a de voisins, plus tu as de temps.",
-  "gx.connexHow": "Sélectionne 4 pays qui ont un point commun, puis valide. 4 erreurs permises.",
+  "gx.connexHow": "Forme 4 groupes de 4 pays. 4 erreurs permises.",
   "gx.intrusHow": "Trois pays ont un point commun : touche celui qui n'en fait pas partie.",
   "gx.minesHow": "Clique seulement les pays qui suivent la consigne. Chaque mine te coûte une vie.",
   "gx.bordersHow": "Tape les voisins un par un : chaque bonne réponse se valide toute seule.",

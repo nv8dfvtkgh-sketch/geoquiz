@@ -2,7 +2,7 @@
 // Le français est livré avec l'application (langue de secours) ; les autres langues sont des
 // morceaux séparés, chargés seulement quand on en a besoin (loadLang).
 import fr from './locales/fr.json';
-import type { Lang } from '../shared/protocol';
+import { UI_LANGS, type Lang } from '../shared/protocol';
 import { revName } from '../shared/school';
 
 const DICTS: Partial<Record<Lang, Record<string, string>>> = { fr };
@@ -44,10 +44,9 @@ function revKey(key: string, d: Record<string, string>): string | undefined {
 export function detectLang(): Lang {
   try {
     const saved = localStorage.getItem('gq.lang') as Lang | null;
-    if (saved && saved in LOADERS) return saved;
+    if (saved && UI_LANGS.includes(saved)) return saved;
   } catch {}
-  const nav = (navigator.language || 'fr').slice(0, 2) as Lang;
-  return nav in LOADERS ? nav : 'fr';
+  return 'fr';
 }
 
 export function applyLang(lang: Lang) {

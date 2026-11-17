@@ -2,7 +2,7 @@
 import { Avatar } from './screens/Collect';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LANGS, LIMITS, type Lang } from '../shared/protocol';
+import { UI_LANGS, LIMITS, type Lang } from '../shared/protocol';
 import { FeedbackForm } from './Feedback';
 import { LANG_LABELS } from './i18n';
 import { isMuted, setMuted, sfx } from './sound';
@@ -68,7 +68,7 @@ function SettingsSheet({ onClose }: { onClose: () => void }) {
             <div className="set-row">
               <span>{t('lang.label')}</span>
               <div className="seg set-seg">
-                {LANGS.map((l) => <button type="button" key={l} aria-pressed={lang === l} onClick={() => setLang(l as Lang)} lang={l}>{l === 'ar' ? 'ع' : l.toUpperCase()}</button>)}
+                {UI_LANGS.map((l) => <button type="button" key={l} aria-pressed={lang === l} onClick={() => setLang(l)} lang={l}>{l.toUpperCase()}</button>)}
               </div>
             </div>
             <p className="set-lang-name">{LANG_LABELS[lang]}</p>

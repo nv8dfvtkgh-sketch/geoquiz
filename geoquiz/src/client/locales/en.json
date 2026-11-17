@@ -1357,7 +1357,7 @@
   "cat.borders": "Borders",
   "game.borders": "Name all of a country's neighbours before time runs out",
   "game.borders.long": "A country appears on the map: type the names of all its neighbours and watch them light up. The more neighbours, the more time you get.",
-  "gx.connexHow": "Select 4 countries that share something, then submit. 4 mistakes allowed.",
+  "gx.connexHow": "Make 4 groups of 4 countries. 4 mistakes allowed.",
   "gx.intrusHow": "Three countries share something: tap the one that doesn't.",
   "gx.minesHow": "Click only the countries that match the rule. Each mine costs you a life.",
   "gx.bordersHow": "Type the neighbours one by one: each right answer is accepted automatically.",

@@ -2,6 +2,8 @@
 
 export const LANGS = ['fr', 'en', 'ar', 'es'] as const;
 export type Lang = (typeof LANGS)[number];
+/** Langues proposées aux joueurs : le français est la langue officielle (l'arabe reste dans les données). */
+export const UI_LANGS: Lang[] = ['fr', 'en', 'es'];
 export type Names = Record<Lang, string>;
 
 export type CategoryId = 'flags' | 'countries' | 'capitals' | 'regions' | (string & {});
