@@ -1473,5 +1473,9 @@
   "sheet.templateHtml": "Télécharger le modèle HTML (avec photos)",
   "bac.st.typo": "vérifié, 1 faute acceptée",
   "lobby.whatsapp": "Envoyer sur WhatsApp",
-  "lobby.waText": "Rejoins ma partie sur Quizellige ! Code : {code}\n{link}"
+  "lobby.waText": "Rejoins ma partie sur Quizellige ! Code : {code}\n{link}",
+  "cat.month": "Challenge du mois",
+  "game.month": "Un grand thème pendant tout un mois, avec un collector à gagner.",
+  "month.label": "Challenge du mois",
+  "month.colToWin": "Collector à gagner jusqu'au {date}"
 }

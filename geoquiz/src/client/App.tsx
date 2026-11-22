@@ -144,9 +144,9 @@ export function App() {
         const mineOk = msg.solo ? msg.solo.correct / Math.max(1, msg.solo.total) : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length / Math.max(1, msg.recap.length);
         setTimeout(() => void reportPlay(game, msg.recap.length || msg.solo ? mineOk : undefined, k), 2500);
         // Défi de la semaine : le collector, une fois, si au moins la moitié est juste.
-        if (game === 'week') {
+        if (game === 'week' || game === 'month') {
           const ok = msg.solo ? msg.solo.correct : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length;
-          void earnCollector(ok, msg.solo ? msg.solo.total : msg.recap.length);
+          void earnCollector(ok, msg.solo ? msg.solo.total : msg.recap.length, game);
         }
       }
       // Partie rapide : un adversaire est trouvé, on rejoint le duel créé pour nous.

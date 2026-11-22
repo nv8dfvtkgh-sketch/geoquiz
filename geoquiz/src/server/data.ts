@@ -119,7 +119,7 @@ export const PACK_GAMES: Record<string, string[]> = {
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */
-export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily'; minAge?: '13-17' | '18+'; album?: string }
+export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily' | 'month'; minAge?: '13-17' | '18+'; album?: string }
 const activeOf = (kind: GameEvent['kind'], now: number) => {
   const day = new Date(now).toISOString().slice(0, 10);
   return extras.events.find((e) => e.kind === kind && e.start <= day && day <= e.end);
@@ -132,10 +132,15 @@ export const activeWeek = (now = Date.now(), kid = false) => {
   // un enfant garde le défi de la semaine si le spécial est réservé aux plus grands.
   return extras.events.find((e) => e.kind === 'week' && e.start <= day && day <= e.end && (!kid || !e.minAge));
 };
+/** Challenge du mois en cours (un enfant n'a rien si le thème est réservé aux plus grands). */
+export const activeMonth = (now = Date.now(), kid = false) => {
+  const day = new Date(now).toISOString().slice(0, 10);
+  return extras.events.find((e) => e.kind === 'month' && e.start <= day && day <= e.end && (!kid || !e.minAge));
+};
 /** Thème du défi du jour en cours (le défi du jour pioche alors dans ce thème). */
 export const activeDailyTheme = (now = Date.now()) => activeOf('daily', now);
 /** Jeux sans choix de région (la zone est toujours « monde »). */
-export const NO_ZONE_GAMES = ['board', 'bac', 'trivia', 'gm', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event', 'week'];
+export const NO_ZONE_GAMES = ['board', 'bac', 'trivia', 'gm', 'whereami', 'survival', 'tables', 'timezones', 'timeline', 'chain', 'sounds', 'stadiums', 'kits', 'daily', 'review', 'event', 'week', 'month'];
 /** Données des jeux annexes (data/games/*.json). */
 export interface Extras {
   languages: Language[];

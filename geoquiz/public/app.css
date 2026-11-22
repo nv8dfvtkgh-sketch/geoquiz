@@ -1782,6 +1782,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .week-card { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 0; border-radius: 18px; font: inherit; text-align: start; cursor: pointer; color: #fff; box-shadow: var(--shadow); min-width: 0; }
 .week-card.week { background: linear-gradient(135deg, #6D28D9, #DB2777); }
 .week-card.daily { background: linear-gradient(135deg, #0071E3, #16A34A); }
+.week-card.month { width: 100%; margin-top: 10px; background: linear-gradient(135deg, #F97316, #DB2777 55%, #7C3AED); }
+.week-card.month .week-go { color: #C2410C; }
 .week-card > span:nth-child(2) { display: grid; min-width: 0; flex: 1; }
 .week-card small { opacity: .85; font-size: .78rem; }
 .week-card strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1924,6 +1926,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .sticker.collector::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, #fff9 50%, transparent 60%); animation: col-shine 3.2s ease-in-out infinite; }
 .sticker.collector.locked { filter: grayscale(1) opacity(.55); }
 .sticker.collector.court { background: linear-gradient(160deg, #4FB3FF, #1B5FBF 55%, #0B2A5B); box-shadow: 0 0 0 3px #fff, 0 0 0 5px #D4EB2F, 0 4px 14px #1B5FBF66; }
+.sticker.collector.pitch { background: linear-gradient(160deg, #4ADE80, #15803D 55%, #064E3B); box-shadow: 0 0 0 3px #fff, 0 0 0 5px #FACC15, 0 4px 14px #15803D66; }
 .sticker.collector.locked::after { display: none; }
 @keyframes col-shine { 0%, 55% { transform: translateX(-60%); } 100% { transform: translateX(60%); } }
 @media (prefers-reduced-motion: reduce) { .sticker.collector::after { animation: none; display: none; } }
@@ -1951,7 +1954,7 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 /* Téléphone en portrait : les réponses descendent vers le pouce */
 @media (max-width: 600px) and (orientation: portrait) { .play.kind-mcq .options:not(.flags) { margin-top: auto; } .play.kind-mcq .options.flags { margin-top: 12px; } }
 @media (max-width: 420px) {
-  .week-card.week .sticker.mini.collector { display: none; }
+  .week-card.week .sticker.mini.collector, .week-card.month .sticker.mini.collector { display: none; }
 }
 
 /* ---------------------------------------------------------------- jeux de grilles (Connexions, L'intrus, Champ de mines, Frontières) */

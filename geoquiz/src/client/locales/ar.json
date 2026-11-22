@@ -1473,5 +1473,9 @@
   "sheet.templateHtml": "تنزيل نموذج HTML (مع الصور)",
   "bac.st.typo": "تم التحقق، خطأ واحد مقبول",
   "lobby.whatsapp": "أرسل عبر واتساب",
-  "lobby.waText": "انضم إلى مباراتي على Quizellige! الرمز: {code}\n{link}"
+  "lobby.waText": "انضم إلى مباراتي على Quizellige! الرمز: {code}\n{link}",
+  "cat.month": "تحدي الشهر",
+  "game.month": "موضوع كبير طوال شهر كامل، مع إصدار خاص للفوز به.",
+  "month.label": "تحدي الشهر",
+  "month.colToWin": "إصدار خاص للفوز به حتى {date}"
 }

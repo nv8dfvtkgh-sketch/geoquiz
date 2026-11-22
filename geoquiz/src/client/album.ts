@@ -1,7 +1,7 @@
 // Album d'autocollants : un autocollant à chaque partie terminée. Sur l'appareil pour les
 // invités ; sur le compte (et l'appareil) pour les joueurs connectés.
 import { albumPageFor, ALBUM, COLLECTOR_MIN, COLLECTORS, STICKERS, STICKER_IDS, type Sticker } from '../shared/stickers';
-import { loadEvents, weekFor } from './events';
+import { loadEvents, monthFor, weekFor } from './events';
 import { api, savedAuth } from './account';
 
 const KEY = 'gq.album';
@@ -27,9 +27,9 @@ function draw(have: Album, page?: string): Sticker {
 
 /** Page d'album du jeu terminé ; défis du jour, de la semaine et événements : selon leur thème. */
 async function pageFor(game?: string): Promise<string | undefined> {
-  if (game === 'week' || game === 'daily' || game === 'event') {
+  if (game === 'week' || game === 'month' || game === 'daily' || game === 'event') {
     const ev = await loadEvents().catch(() => null);
-    const e = game === 'week' ? weekFor(ev) : game === 'daily' ? ev?.daily : ev?.active;
+    const e = game === 'week' ? weekFor(ev) : game === 'month' ? monthFor(ev) : game === 'daily' ? ev?.daily : ev?.active;
     return e?.album ?? (game === 'daily' ? 'travel' : undefined);
   }
   return albumPageFor(game);
@@ -55,11 +55,11 @@ export async function earnSticker(key?: string, game?: string) {
 }
 
 /** Défi de la semaine terminé : le collector de la semaine si au moins la moitié est juste. */
-export async function earnCollector(correct: number, total: number) {
+export async function earnCollector(correct: number, total: number, game: 'week' | 'month' = 'week') {
   if (!total || correct / total < COLLECTOR_MIN) return;
   const ev = await loadEvents().catch(() => null);
   const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Africa/Casablanca' }); // dates des défis : heure du Maroc
-  const c = COLLECTORS.find((x) => x.event === weekFor(ev)?.id && today >= x.from && today <= x.to);
+  const c = COLLECTORS.find((x) => x.event === (game === 'month' ? monthFor(ev) : weekFor(ev))?.id && today >= x.from && today <= x.to);
   if (!c) return;
   const a = loadAlbum();
   if (a[c.id]) return;

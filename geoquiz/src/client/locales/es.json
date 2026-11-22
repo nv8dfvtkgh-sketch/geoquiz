@@ -1473,5 +1473,9 @@
   "sheet.templateHtml": "Descargar la plantilla HTML (con fotos)",
   "bac.st.typo": "verificado, 1 falta aceptada",
   "lobby.whatsapp": "Enviar por WhatsApp",
-  "lobby.waText": "¡Únete a mi partida en Quizellige! Código: {code}\n{link}"
+  "lobby.waText": "¡Únete a mi partida en Quizellige! Código: {code}\n{link}",
+  "cat.month": "Reto del mes",
+  "game.month": "Un gran tema durante todo un mes, con un coleccionable para ganar.",
+  "month.label": "Reto del mes",
+  "month.colToWin": "Coleccionable para ganar hasta el {date}"
 }

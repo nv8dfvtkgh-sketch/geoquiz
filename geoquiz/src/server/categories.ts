@@ -3,7 +3,7 @@
 // Ajouter une catégorie = ajouter un objet au registre (voir README, « fleuves »).
 import type { CategoryInfo, Difficulty, KitSpec, Lang, MapSpec, Names, QKind } from '../shared/protocol';
 import {
-  activeDailyTheme, activeEvent, activeWeek, capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
+  activeDailyTheme, activeEvent, activeMonth, activeWeek, capitalNameSet, countries, countryNameSet, extras, nameSet, regionMap, world, worldById, zones, ZoneCtx, type CountryItem, type EmojiItem, PACK_GAMES, type PackQ,
 } from './data';
 import { MATH_SUBJECT, revGames, revId, SCHOOL } from '../shared/school';
 import { mathQuestion } from './schoolmath';
@@ -806,6 +806,19 @@ const eventCat: Category = {
   },
 };
 
+/** Challenge du mois : le pack du thème du mois (réservé aux 13 ans et plus selon le thème). */
+const monthCat: Category = {
+  id: 'month', noZone: true, qtypes: ['mcq'], zoneKinds: ['world'],
+  pool(zone, d, n) { const ev = activeMonth(); return ev ? packCat('month', [ev.pack]).pool(zone, d, n) : []; },
+  make(target, kind, zone, rnd) {
+    const pack = extras.events.find((e) => (extras.packs[e.pack] ?? []).some((q) => q.id === target))?.pack ?? activeMonth()?.pack ?? '';
+    return packCat('month', [pack]).make(target, kind, zone, rnd);
+  },
+};
+export const monthCatKids: Category = {
+  ...monthCat,
+  pool(zone, d, n) { const ev = activeMonth(Date.now(), true); return ev ? packCat('month', [ev.pack]).pool(zone, d, n) : []; },
+};
 /** Défi de la semaine pour une partie avec un enfant : jamais un thème réservé aux plus grands. */
 export const weekCatKids: Category = {
   id: 'week', noZone: true, qtypes: ['mcq'], zoneKinds: ['world'],
@@ -1538,7 +1551,7 @@ const survivalCat: Category = {
 
 export const CATEGORIES: Record<string, Category> = Object.fromEntries(
   [countriesCat, flagsCat, capitalsCat, regionsCat, silhouettesCat, currenciesCat, languagesCat, foodCat, animalsCat, monumentsCat, emojiCat, cinemaCat, truefalseCat, calcCat, customCat, ...packCats,
-    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, triviaCatInfo, { ...triviaCatInfo, id: 'gm' }, ...revCats].map((c) => [c.id, c]),
+    higherCat, flagrevealCat, tablesCat, timezonesCat, pinCat, timelineCat, chainCat, soundsCat, stadiumsCat, kitsCat, dailyCat, { ...dailyCat, id: 'review' }, macitiesCat, eventCat, weekCat, monthCat, whereamiCat, whoamiCat, survivalCat, boardCat, bacCat, triviaCatInfo, { ...triviaCatInfo, id: 'gm' }, ...revCats].map((c) => [c.id, c]),
 );
 
 /**

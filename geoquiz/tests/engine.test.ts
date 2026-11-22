@@ -1552,13 +1552,34 @@ test('Défi de la semaine : le Masters de tennis, GTA VI le jour de sa sortie, d
   assert.equal(activeWeek(Date.parse('2026-11-19T10:00:00Z'))?.id, 'week-gta-2026', 'jour de sortie de GTA VI : défi spécial');
   assert.equal(activeWeek(Date.parse('2026-11-19T10:00:00Z'), true)?.id, 'week-tennis-2026', 'les enfants gardent le tennis');
   assert.equal(activeWeek(Date.parse('2026-11-20T10:00:00Z'))?.id, 'week-tennis-2026');
-  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z')), undefined);
+  assert.equal(activeWeek(Date.parse('2026-11-23T08:00:00Z'))?.id, 'week-rugby-2026');
+  assert.equal(activeWeek(Date.parse('2026-11-30T08:00:00Z')), undefined);
   assert.equal(activeDailyTheme(Date.parse('2026-11-21T12:00:00Z'))?.id, 'daily-eurofoot-2026');
   assert.equal(activeDailyTheme(Date.parse('2026-11-22T12:00:00Z'))?.id, 'daily-masters-2026');
   const c = COLLECTORS.find((x) => x.event === 'week-tennis-2026')!;
   assert.equal(c.from, '2026-11-16');
   const qs = drawQuestions({ category: 'week', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
-  assert.ok(qs.length >= 1);
+  if (activeWeek()) assert.ok(qs.length >= 1);
+});
+
+test('Challenge du mois : GTA VI jusqu\'au 20 décembre, réservé aux 13 ans et plus ; rugby la semaine du 23', async () => {
+  const { activeMonth, extras } = await import('../src/server/data');
+  const { COLLECTORS } = await import('../src/shared/stickers');
+  assert.equal(activeMonth(Date.parse('2026-11-25T10:00:00Z'))?.id, 'month-gta-2026');
+  assert.equal(activeMonth(Date.parse('2026-12-20T20:00:00Z'))?.id, 'month-gta-2026');
+  assert.equal(activeMonth(Date.parse('2026-12-21T08:00:00Z')), undefined);
+  assert.equal(activeMonth(Date.parse('2026-11-25T10:00:00Z'), true), undefined, 'pas de GTA pour les enfants');
+  const gta = COLLECTORS.find((x) => x.id === 'col-gta-2026')!;
+  assert.equal(gta.event, 'month-gta-2026');
+  assert.equal(gta.to, '2026-12-20');
+  assert.ok(COLLECTORS.some((x) => x.event === 'week-rugby-2026'));
+  assert.ok(extras.packs.wk_gta.length >= 100);
+  assert.ok(extras.packs.wk_rugby.length >= 50);
+  if (activeMonth()) {
+    const qs = drawQuestions({ category: 'month', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
+    assert.equal(qs.length, 10);
+    assert.equal(drawQuestions({ category: 'month', zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings, Math.random, [], [], true).length, 0);
+  }
 });
 
 test('Parties jouées : popularité, « mieux que X % », signalements', async () => {

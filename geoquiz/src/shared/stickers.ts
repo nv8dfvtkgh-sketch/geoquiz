@@ -117,12 +117,16 @@ export interface Collector extends Sticker { event: string; from: string; to: st
 export const COLLECTOR_MIN = 0.5;
 export const COLLECTORS: Collector[] = [
   {
-    id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'week-gta-2026', from: '2026-11-19', to: '2026-11-19',
+    id: 'col-gta-2026', e: '🌴', theme: 'sunset', event: 'month-gta-2026', from: '2026-11-19', to: '2026-12-20',
     n: { fr: 'Collector GTA · Los Santos', en: 'GTA collector · Los Santos', es: 'Coleccionable GTA · Los Santos', ar: 'إصدار خاص GTA · لوس سانتوس' },
   },
   {
     id: 'col-tennis-2026', e: '🎾', theme: 'court', event: 'week-tennis-2026', from: '2026-11-16', to: '2026-11-22',
     n: { fr: 'Collector Masters · Balle de match à Turin', en: 'ATP Finals collector · Match point in Turin', es: 'Coleccionable ATP Finals · Punto de partido en Turín', ar: 'إصدار خاص الماسترز · نقطة المباراة في تورينو' },
+  },
+  {
+    id: 'col-rugby-2026', e: '🏉', theme: 'pitch', event: 'week-rugby-2026', from: '2026-11-23', to: '2026-11-29',
+    n: { fr: 'Collector rugby · Finale à Twickenham', en: 'Rugby collector · Final at Twickenham', es: 'Coleccionable rugby · Final en Twickenham', ar: 'إصدار خاص الرغبي · النهائي في تويكنهام' },
   },
 ];
 export const COLLECTOR_IDS = new Set(COLLECTORS.map((x) => x.id));

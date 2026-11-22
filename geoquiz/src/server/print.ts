@@ -2,7 +2,7 @@
 // Le serveur tire le contenu (comme une partie) et renvoie aussi le corrigé.
 import { LANGS, type Difficulty, type Lang, type Names } from '../shared/protocol';
 import { CATEGORIES, countryPool, localize, toLonLat } from './categories';
-import { activeDailyTheme, activeEvent, activeWeek, countries, ensureRegion, extras, regionMap, world, worldById, zones } from './data';
+import { activeDailyTheme, activeEvent, activeMonth, activeWeek, countries, ensureRegion, extras, regionMap, world, worldById, zones } from './data';
 import { drawQuestions } from './rooms';
 
 /** Jeux qu'on peut imprimer en quiz à cocher (pas de carte cliquable, de photo ni de son). */
@@ -72,6 +72,7 @@ export function eventList() {
     active: cur ? { id: cur.id, emoji: cur.emoji, names: cur.names, end: cur.end, album: cur.album } : null,
     week: wk ? { id: wk.id, emoji: wk.emoji, names: wk.names, end: wk.end, minAge: wk.minAge, album: wk.album } : null,
     weekKid: wkKid && wkKid !== wk ? { id: wkKid.id, emoji: wkKid.emoji, names: wkKid.names, end: wkKid.end, album: wkKid.album } : null,
+    month: (() => { const m = activeMonth(); return m ? { id: m.id, emoji: m.emoji, names: m.names, end: m.end, minAge: m.minAge, album: m.album } : null; })(),
     daily: th ? { id: th.id, emoji: th.emoji, names: th.names, end: th.end, album: th.album } : null,
     all: extras.events.filter((e) => !e.kind).map(({ id, emoji, names }) => ({ id, emoji, names })),
   };

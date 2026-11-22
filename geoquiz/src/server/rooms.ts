@@ -11,7 +11,7 @@ import { BacGame } from './bacplay';
 import { gmCalendar, gmQuestions } from './gm';
 import { GM_DIVISIONS, GM_LIVE, GM_QUALIF, type GmDivision, type GmStage } from '../shared/gm';
 import { cleanBac } from '../shared/bac';
-import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, hiddenFor, localize, overlaps, shuffle, survivalQuestions, weekCatKids, type InternalQuestion } from './categories';
+import { CATEGORIES, customQuestions, dailyQuestions, triviaQuestions, TRIVIA_COUNT, hiddenFor, localize, overlaps, shuffle, survivalQuestions, weekCatKids, monthCatKids, type InternalQuestion } from './categories';
 import type { QuizContent } from './quizzes';
 import { activeEvent, countries, ensureRegion, extras, regionLoaded, zones } from './data';
 import { ensurePhotos, ensureSounds, mediaOff, mediaSnapshot, photosLoaded, restoreMedia, setMediaOff, type MediaSnapshot } from './photos';
@@ -184,7 +184,7 @@ export function drawQuestions(settings: Settings, rnd: () => number = Math.rando
   if (settings.category === 'survival') return survivalQuestions(rnd);
   if (settings.category === 'trivia') return triviaQuestions(rnd, avoid);
   if (settings.category === 'gm') return gmQuestions(settings.gm?.div ?? 'college', settings.count, rnd, avoid);
-  const cat = settings.category === 'week' && kids ? weekCatKids : CATEGORIES[settings.category];
+  const cat = settings.category === 'week' && kids ? weekCatKids : settings.category === 'month' && kids ? monthCatKids : CATEGORIES[settings.category];
   const zone = zones.get(settings.zone)!;
   const hidden = hiddenFor(settings.category, langs, kids);
   const strict = cat.pool(zone, settings.difficulty, settings.count).filter((t) => !hidden.has(t));

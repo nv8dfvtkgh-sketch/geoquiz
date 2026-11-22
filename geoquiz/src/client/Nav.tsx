@@ -5,7 +5,7 @@ import { api } from './account';
 import { FAMILIES, Icon, type GameDef } from './games';
 import type { Screen } from './state';
 import { useApp } from './state';
-import { useEvents, weekFor } from './events';
+import { monthFor, useEvents, weekFor } from './events';
 import { HomeworkCard } from './screens/School';
 import { DailyBoard } from './screens/Setup';
 import { LeaderboardScreen, Stars } from './screens/Account';
@@ -71,6 +71,7 @@ export function TodayScreen() {
   const { t, me, name, setName, openGame, go, lang } = useApp();
   const evs = useEvents();
   const week = weekFor(evs);
+  const month = monthFor(evs);
   const theme = evs?.daily;
   const fam = FAMILIES.find((f) => f.id === 'today')!;
   const pick = (g: GameDef) => {
@@ -93,6 +94,13 @@ export function TodayScreen() {
         <button type="button" className="event-card" onClick={() => openGame('week')}>
           <span className="event-emoji" aria-hidden="true">{week.emoji}</span>
           <span><strong>{week.names[lang]}</strong><small>{t('event.until', { date: new Date(week.end!).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) })}</small></span>
+          <span aria-hidden="true">›</span>
+        </button>
+      )}
+      {month && (
+        <button type="button" className="event-card" onClick={() => openGame('month')}>
+          <span className="event-emoji" aria-hidden="true">{month.emoji}</span>
+          <span><strong>{month.names[lang]}</strong><small>{t('event.until', { date: new Date(month.end!).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) })}</small></span>
           <span aria-hidden="true">›</span>
         </button>
       )}

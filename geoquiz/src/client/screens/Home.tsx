@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FAMILIES, findGame, Icon, type GameDef } from '../games';
 import { createGame, joinGame, lastGame } from '../net';
 import { HomeworkCard } from './School';
-import { useEvents, weekFor } from '../events';
+import { monthFor, useEvents, weekFor } from '../events';
 import { loadPopular } from '../stats';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
@@ -103,6 +103,9 @@ function Games() {
   const week = weekFor(evs);
   const weekCol = week ? COLLECTORS.find((c) => c.event === week.id) : undefined;
   const haveCol = !!(weekCol && loadAlbum()[weekCol.id]);
+  const month = monthFor(evs);
+  const monthCol = month ? COLLECTORS.find((c) => c.event === month.id) : undefined;
+  const haveMonthCol = !!(monthCol && loadAlbum()[monthCol.id]);
   const theme = evs?.daily ?? null;
   const [install, setInstall] = useState(installOffer);
   useEffect(() => { const on = () => setInstall(installOffer()); window.addEventListener('gq:install', on); return () => window.removeEventListener('gq:install', on); }, []);
@@ -151,6 +154,16 @@ function Games() {
             </button>
           )}
         </div>
+      )}
+
+      {month && (
+        <button type="button" className="week-card month" onClick={() => openGame('month')}>
+          <span className="week-emoji" aria-hidden="true">{month.emoji}</span>
+          <span><small>{t('month.label')}</small><strong>{month.names[lang].replace(/^[^:]*:\s*/, '')}</strong>
+            {monthCol && <em className="week-col">{haveMonthCol ? t('col.won') : t('month.colToWin', { date: new Date(month.end!).toLocaleDateString(lang === 'ar' ? 'ar-MA' : lang, { day: 'numeric', month: 'long' }) })}</em>}</span>
+          {monthCol && <span className={`sticker mini collector ${monthCol.theme} ${haveMonthCol ? '' : 'locked'}`} aria-hidden="true">{monthCol.e}</span>}
+          <span className="week-go">{t('home.play')}</span>
+        </button>
       )}
 
       <div className="quick-row">
