@@ -37,6 +37,7 @@ const ColorFlagScreen = lazy(() => import('./screens/Solo').then((m) => ({ defau
 const ConnexScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.ConnexScreen })));
 const IntrusScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.IntrusScreen })));
 const MinesScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.MinesScreen })));
+const EventsScreen = lazy(() => import('./screens/Events').then((m) => ({ default: m.EventsScreen })));
 const TopTenScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.TopTenScreen })));
 const BordersScreen = lazy(() => import('./screens/Grids').then((m) => ({ default: m.BordersScreen })));
 const NameAllScreen = lazy(() => import('./screens/Solo').then((m) => ({ default: m.NameAllScreen })));
@@ -244,6 +245,7 @@ export function App() {
           {s.screen === 'mines' && <MinesScreen />}
           {s.screen === 'borders' && <BordersScreen />}
           {s.screen === 'topten' && <TopTenScreen />}
+          {s.screen === 'events' && <EventsScreen />}
           </Suspense>
         </main>
         {NAV_SCREENS.includes(s.screen) && look && <BottomNav />}

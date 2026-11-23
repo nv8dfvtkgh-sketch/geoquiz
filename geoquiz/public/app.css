@@ -2046,3 +2046,38 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .sheet-photos { display: grid; gap: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
 .sheet-photos p { margin: 0; }
 .sheet-photos .btn { justify-self: start; }
+
+/* Grands événements : bloc « En direct » de l'accueil et page « Événements » */
+.lv-block { background: #111827; color: #fff; border-radius: var(--radius); padding: 14px 14px 12px; margin-top: 12px; }
+.lv-head { display: flex; align-items: center; gap: 8px; }
+.lv-head strong { font-family: var(--font-display); font-size: 1.02rem; }
+.lv-all { margin-inline-start: auto; background: none; border: 0; color: #93C5FD; font: 600 .88rem var(--font-ui); cursor: pointer; padding: 4px; }
+.lv-dot { width: 9px; height: 9px; border-radius: 50%; background: #F43F5E; flex: none; animation: lv-pulse 1.6s infinite; }
+@keyframes lv-pulse { 0% { box-shadow: 0 0 0 0 #F43F5E99; } 70% { box-shadow: 0 0 0 8px #F43F5E00; } 100% { box-shadow: 0 0 0 0 #F43F5E00; } }
+@media (prefers-reduced-motion: reduce) { .lv-dot { animation: none; } }
+.lv-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin-top: 10px; }
+.lv-chip { border: 0; border-radius: 14px; padding: 10px 6px; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; font: 600 .8rem/1.2 var(--font-ui); background: linear-gradient(160deg, #6366F1, #312E81); }
+.lv-chip .lv-emo { font-size: 1.6rem; line-height: 1.2; }
+.lv-chip .lv-when { font-weight: 500; opacity: .9; font-size: .74rem; }
+.lv-chip:active { transform: scale(.97); }
+.green { --lv: linear-gradient(160deg, #16A34A, #065F46); }
+.blue { --lv: linear-gradient(160deg, #2563EB, #1E3A8A); }
+.red { --lv: linear-gradient(160deg, #DC2626, #7F1D1D); }
+.lv-chip.green, .lv-chip.blue, .lv-chip.red, .lv-top.green, .lv-top.blue, .lv-top.red { background: var(--lv); }
+.lv-page { display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; }
+.lv-page h1 { margin: 0; }
+.lv-sub { color: var(--ink-2); margin: -6px 0 2px; }
+.lv-empty { color: var(--ink-2); }
+.lv-card { border-radius: var(--radius); overflow: hidden; background: var(--card, #fff); border: 1px solid var(--border); }
+.lv-top { color: #fff; padding: 14px 16px; display: flex; gap: 12px; align-items: center; background: linear-gradient(160deg, #6366F1, #312E81); }
+.lv-top .lv-big { font-size: 2rem; flex: none; }
+.lv-top > div { min-width: 0; }
+.lv-top strong { display: block; font-family: var(--font-display); font-size: 1.08rem; line-height: 1.25; }
+.lv-top small { opacity: .92; font-size: .82rem; }
+.lv-badge { margin-inline-start: auto; align-self: flex-start; flex: none; background: #fff; color: #B91C1C; border-radius: 999px; font-size: .72rem; font-weight: 800; padding: 3px 9px; display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; }
+.lv-badge .lv-dot { width: 7px; height: 7px; }
+.lv-badge.over { color: #6B7280; }
+.lv-bottom { padding: 10px 16px 14px; display: flex; align-items: center; gap: 10px; }
+.lv-meta { display: flex; flex-direction: column; font-size: .86rem; color: var(--ink-2); min-width: 0; }
+.lv-meta b { color: var(--ink); }
+.lv-play { margin-inline-start: auto; flex: none; }

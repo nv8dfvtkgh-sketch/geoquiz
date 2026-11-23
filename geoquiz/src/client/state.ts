@@ -6,7 +6,7 @@ import type {
 import { DEFAULT_SETTINGS } from '../shared/protocol';
 import type { T } from './i18n';
 
-export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters' | 'connex' | 'intrus' | 'mines' | 'borders' | 'topten';
+export type Screen = 'home' | 'setup' | 'lobby' | 'game' | 'final' | 'quick' | 'myquizzes' | 'editor' | 'quizsheet' | 'admin' | 'profile' | 'leaderboard' | 'signin' | 'geo' | 'oauth' | 'print' | 'challenge' | 'passport' | 'league' | 'classes' | 'classjoin' | 'tournament' | 'today' | 'rankings' | 'globle' | 'capword' | 'compass' | 'nameall' | 'cards' | 'colorflag' | 'album' | 'duel' | 'revision' | 'bac' | 'trivia' | 'geomasters' | 'connex' | 'intrus' | 'mines' | 'borders' | 'topten' | 'events';
 
 export interface Feedback {
   q: number;

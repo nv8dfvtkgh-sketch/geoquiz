@@ -142,7 +142,7 @@ put('animals', 'animals sounds');
 put('morocco', 'maroc macities tifinagh prog_hist');
 put('wonders', 'monuments peaks records');
 put('space', 'space');
-put('sports', 'sport football tennis rugby basketball afrisport olympics motorsport stadiums kits');
+put('sports', 'sport football tennis rugby basketball afrisport olympics motorsport stadiums kits ev_davis ev_f1');
 put('food', 'food');
 put('games', 'trivia cinema emoji ttt c4q ships hangman dots memory caravan awale c4 board');
 put('school', 'bac calc tables timeline truefalse body dinos vocab roadsigns inventions prog_sci litt tech');

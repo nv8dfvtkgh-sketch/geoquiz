@@ -1609,3 +1609,16 @@ test('Parties jouées : popularité, « mieux que X % », signalements', async (
   const denied = await accountRoute(svc, 'GET', '/api/admin/reports', new URLSearchParams(), async () => ({}), '', false);
   assert.equal(denied!.status, 401);
 });
+
+test('Événements en direct : rugby, Coupe Davis, F1 ; quiz jouables', async () => {
+  const { activeLive, extras } = await import('../src/server/data');
+  const ids = activeLive(Date.parse('2026-11-25T10:00:00Z')).map((e) => e.id);
+  assert.deepEqual(ids.sort(), ['live-davis-2026', 'live-f1-2026', 'live-rugby-2026']);
+  assert.deepEqual(activeLive(Date.parse('2026-12-07T10:00:00Z')).map((e) => e.id), ['live-f1-2026']);
+  assert.equal(activeLive(Date.parse('2026-12-10T10:00:00Z')).length, 0);
+  for (const cat of ['ev_davis', 'ev_f1']) {
+    assert.ok(extras.packs[cat].length >= 35, cat);
+    const qs = drawQuestions({ category: cat, zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
+    assert.equal(qs.length, 10, cat);
+  }
+});

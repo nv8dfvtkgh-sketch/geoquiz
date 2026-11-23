@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { FAMILIES, findGame, Icon, type GameDef } from '../games';
 import { createGame, joinGame, lastGame } from '../net';
 import { HomeworkCard } from './School';
-import { monthFor, useEvents, weekFor } from '../events';
+import { liveFor, monthFor, useEvents, weekFor } from '../events';
+import { LiveBlock } from './Events';
 import { loadPopular } from '../stats';
 import { cameFrom } from './Puzzles';
 import { chooseDuel } from './Duels';
@@ -100,7 +101,9 @@ function Games() {
   // Série de défis du jour joués d'affilée (sur cet appareil).
   const streak = dailyStreak();
   const evs = useEvents();
-  const week = weekFor(evs);
+  const live = liveFor(evs);
+  // Le défi de la semaine est rangé dans le bloc « En direct » quand il en fait partie.
+  const week = live.some((l) => l.game === 'week') ? null : weekFor(evs);
   const weekCol = week ? COLLECTORS.find((c) => c.event === week.id) : undefined;
   const haveCol = !!(weekCol && loadAlbum()[weekCol.id]);
   const month = monthFor(evs);
@@ -134,6 +137,8 @@ function Games() {
           <span className="continue-go">{dailyDoneHere() ? '✅' : t('home.play')}</span>
         </button>
       )}
+
+      <LiveBlock />
 
       {(week || (theme && last && lastDef)) && (
         <div className="week-row">

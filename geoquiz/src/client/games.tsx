@@ -162,7 +162,12 @@ export const FAMILIES: Family[] = [
 export const findGame = (id: string) => {
   const all = FAMILIES.flatMap((f) => f.games.map((g) => ({ ...g, tint: f.tint })));
   // Révisions (rev_fr_cm1_maths…) : la tuile du programme.
-  return all.find((g) => g.id === id) ?? (id.startsWith('rev_') ? all.find((g) => g.id === id.slice(0, 6)) : undefined);
+  // Quiz des grands événements : pas de tuile, mais une illustration sur l'écran du jeu.
+  const extra: Record<string, GameDef & { tint: string }> = {
+    ev_davis: { id: 'ev_davis', icon: 'tennis', tint: 'tint-rose' },
+    ev_f1: { id: 'ev_f1', icon: 'wheel', tint: 'tint-rose' },
+  };
+  return all.find((g) => g.id === id) ?? extra[id] ?? (id.startsWith('rev_') ? all.find((g) => g.id === id.slice(0, 6)) : undefined);
 };
 
 const P = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };

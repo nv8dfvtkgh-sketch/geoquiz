@@ -116,10 +116,19 @@ export const PACK_GAMES: Record<string, string[]> = {
   prog_geo: ['prog_geo'], prog_hist: ['prog_hist'], prog_sci: ['prog_sci'], tifinagh: ['tifinagh'],
   peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
   arts: ['arts'], litt: ['litt'], nature: ['nature'], myth: ['myth'], tech: ['tech'],
+  // Quiz des grands événements du moment (page « Événements »)
+  ev_davis: ['ev_davis'], ev_f1: ['ev_f1'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */
-export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily' | 'month'; minAge?: '13-17' | '18+'; album?: string }
+export interface GameEvent { id: string; pack: string; emoji: string; start: string; end: string; names: Names; kind?: 'week' | 'daily' | 'month' | 'live'; minAge?: '13-17' | '18+'; album?: string;
+  /** « live » : jeu à lancer, dates réelles de l'événement, lieu, couleur de la carte. */
+  game?: string; from?: string; to?: string; place?: Names; color?: string }
+/** Grands événements affichés « En direct » : visibles de start à end (end = quelques jours après la fin). */
+export const activeLive = (now = Date.now()) => {
+  const day = new Date(now).toISOString().slice(0, 10);
+  return extras.events.filter((e) => e.kind === 'live' && e.start <= day && day <= e.end).sort((a, b) => (a.to ?? '').localeCompare(b.to ?? '') || (a.from ?? '').localeCompare(b.from ?? ''));
+};
 const activeOf = (kind: GameEvent['kind'], now: number) => {
   const day = new Date(now).toISOString().slice(0, 10);
   return extras.events.find((e) => e.kind === kind && e.start <= day && day <= e.end);
