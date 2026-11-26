@@ -2091,3 +2091,26 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
   .lv-chip { padding: 8px 10px; font-size: .84rem; grid-template-columns: 1fr; grid-template-rows: auto auto auto; row-gap: 2px; }
   .lv-chip .lv-emo { grid-row: auto; font-size: 1.3rem; }
 }
+/* Le lieu et « Jouer » n'apparaissent que sur grand écran */
+.lv-chip .lv-place, .lv-chip .lv-go { display: none; }
+.lv-list { display: flex; flex-direction: column; gap: 12px; }
+@media (min-width: 720px) {
+  .lv-block { padding: 18px 18px 16px; }
+  .lv-head strong { font-size: 1.15rem; }
+  /* Une rangée de grandes cartes verticales */
+  .lv-chips { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 14px; }
+  .lv-chips > .lv-chip:last-child:nth-child(odd) { grid-column: auto; }
+  .lv-chip { grid-template-columns: 1fr; grid-template-rows: auto; row-gap: 4px; align-content: start; padding: 16px; min-height: 168px; font-size: 1.02rem; border-radius: 18px; transition: transform .15s ease, box-shadow .15s ease; }
+  .lv-chip:hover { transform: translateY(-3px); box-shadow: 0 10px 24px #0006; }
+  .lv-chip .lv-emo { grid-row: auto; font-size: 2.2rem; margin-bottom: 6px; }
+  .lv-chip .lv-name { align-self: auto; font-family: var(--font-display); font-size: 1.12rem; }
+  .lv-chip .lv-when { font-size: .82rem; font-weight: 700; background: #FFFFFF26; border-radius: 999px; padding: 2px 9px; justify-self: start; opacity: 1; }
+  .lv-chip .lv-place { display: block; font-weight: 500; font-size: .82rem; opacity: .85; }
+  .lv-chip .lv-go { display: block; margin-top: auto; padding-top: 10px; font-size: .85rem; font-weight: 700; opacity: .95; }
+  /* Page Événements : 2 colonnes */
+  .lv-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+  .lv-card { display: flex; flex-direction: column; }
+  .lv-top { flex: 1; align-items: flex-start; padding: 18px; }
+  .lv-top .lv-big { font-size: 2.6rem; }
+}
+@media (prefers-reduced-motion: reduce) { .lv-chip:hover { transform: none; } }

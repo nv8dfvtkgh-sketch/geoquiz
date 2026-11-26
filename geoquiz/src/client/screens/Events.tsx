@@ -29,6 +29,8 @@ export function LiveBlock() {
             <span className="lv-emo" aria-hidden="true">{l.emoji}</span>
             <span className="lv-name">{(l.names[lang] ?? l.names.fr).split(/\s*:\s*/)[0]}</span>
             <Badge l={l} short />
+            {l.place && <small className="lv-place">{l.place[lang] ?? l.place.fr}</small>}
+            <span className="lv-go" aria-hidden="true">{t('home.play')} ›</span>
           </button>
         ))}
       </div>
@@ -50,6 +52,7 @@ export function EventsScreen() {
       <h1>{t('live.page')}</h1>
       <p className="lv-sub">{t('live.sub')}</p>
       {!live.length && <p className="lv-empty">{t('live.empty')}</p>}
+      <div className="lv-list">
       {live.map((l) => {
         const col = l.game === 'week' && wk && l.to ? COLLECTORS.find((c) => c.event === wk.id) : undefined;
         const dates = !l.to ? t('live.since', { date: fmt(l.from) }) : l.from === l.to ? fmt(l.from) : `${fmt(l.from)} – ${fmt(l.to)}`;
@@ -68,6 +71,7 @@ export function EventsScreen() {
           </article>
         );
       })}
+      </div>
     </div>
   );
 }
