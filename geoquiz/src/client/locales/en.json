@@ -1547,5 +1547,17 @@
   "admin.st.q.easy": "Best answered",
   "admin.st.q.most": "Most played",
   "admin.st.q.hint": "{n} questions tracked; ranked from {min} answers.",
-  "admin.st.q.n": "{n} answers"
+  "admin.st.q.n": "{n} answers",
+  "admin.st.people": "Players",
+  "admin.st.peopleHint": "Distinct players (one per device). \"No account\": only played as a guest during the period. Counted since {date}.",
+  "admin.st.period": "Period",
+  "admin.st.guests": "No account",
+  "admin.st.withAcct": "With account",
+  "admin.st.guestShare": "Share without account",
+  "admin.st.playsSplit": "Games played without an account: {pct} ({n} of {total})",
+  "admin.st.accounts": "{n} accounts created in total",
+  "admin.st.kGuests": "players without account (7 days)",
+  "admin.st.rowToday": "Today",
+  "admin.st.row7": "Last 7 days",
+  "admin.st.row30": "Last 30 days"
 }

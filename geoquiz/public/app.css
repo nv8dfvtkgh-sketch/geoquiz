@@ -2164,3 +2164,4 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .st-hours { overflow: visible; gap: 2px; }
 .st-detail { margin-top: 14px; border-top: 2px solid var(--border); padding-top: 12px; }
 .st-detail .seg { flex-wrap: wrap; }
+.st-card > p.small { margin: 10px 0 0; }

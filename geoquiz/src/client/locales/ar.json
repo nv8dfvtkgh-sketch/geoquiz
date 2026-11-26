@@ -1547,5 +1547,17 @@
   "admin.st.q.easy": "الأكثر صوابًا",
   "admin.st.q.most": "الأكثر لعبًا",
   "admin.st.q.hint": "{n} سؤالًا متابعًا؛ الترتيب ابتداءً من {min} إجابات.",
-  "admin.st.q.n": "{n} إجابة"
+  "admin.st.q.n": "{n} إجابة",
+  "admin.st.people": "اللاعبون",
+  "admin.st.peopleHint": "لاعبون مختلفون (واحد لكل جهاز). «بدون حساب»: لعب كضيف فقط خلال الفترة. محتسب منذ {date}.",
+  "admin.st.period": "الفترة",
+  "admin.st.guests": "بدون حساب",
+  "admin.st.withAcct": "بحساب",
+  "admin.st.guestShare": "نسبة بدون حساب",
+  "admin.st.playsSplit": "المباريات بدون حساب: {pct} ({n} من {total})",
+  "admin.st.accounts": "{n} حسابًا أُنشئ في المجموع",
+  "admin.st.kGuests": "لاعبون بدون حساب (7 أيام)",
+  "admin.st.rowToday": "اليوم",
+  "admin.st.row7": "آخر 7 أيام",
+  "admin.st.row30": "آخر 30 يومًا"
 }

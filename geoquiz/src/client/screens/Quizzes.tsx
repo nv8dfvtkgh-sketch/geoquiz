@@ -784,7 +784,34 @@ function StatsAdmin({ pwd }: { pwd: string }) {
         <div><strong>{sumDays(7)}</strong><span>{t('admin.st.k7')}</span></div>
         <div><strong>{sumDays(30)}</strong><span>{t('admin.st.k30')}</span></div>
         <div><strong>{pct(total ? ok / total : null)}</strong><span>{t('admin.st.kRate', { n: total })}</span></div>
+        {data.players && <div><strong>{data.players.d7.guests}</strong><span>{t('admin.st.kGuests')}</span></div>}
       </div>
+
+      {data.players && (
+        <section className="st-card">
+          <h2>{t('admin.st.people')}</h2>
+          <div className="st-table-wrap">
+            <table className="st-table">
+              <thead><tr><th>{t('admin.st.period')}</th><th>{t('admin.st.guests')}</th><th>{t('admin.st.withAcct')}</th><th>{t('admin.st.guestShare')}</th></tr></thead>
+              <tbody>
+                {(['today', 'd7', 'd30'] as const).map((k) => {
+                  const p = data.players[k]; const all = p.guests + p.accounts;
+                  return (
+                    <tr key={k}>
+                      <td>{t(`admin.st.row${k === 'today' ? 'Today' : k.slice(1)}`)}</td>
+                      <td><strong>{p.guests}</strong></td><td>{p.accounts}</td>
+                      <td><span className="st-rate"><span className="st-track"><i style={{ width: `${all ? (p.guests / all) * 100 : 0}%`, background: '#8B5CF6' }} /></span><b>{all ? pct(p.guests / all) : '–'}</b></span></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          {(() => { const n = data.playsBy.guest, tot = data.playsBy.guest + data.playsBy.acct; return tot ? <p className="small">{t('admin.st.playsSplit', { pct: pct(n / tot), n, total: tot })}</p> : null; })()}
+          <p className="small"><strong>{t('admin.st.accounts', { n: data.accounts })}</strong></p>
+          <p className="muted small">{t('admin.st.peopleHint', { date: new Date(data.players.since).toLocaleDateString(lang, { day: 'numeric', month: 'long' }) })}</p>
+        </section>
+      )}
 
       <section className="st-card">
         <h2>{t('admin.st.perDay')}</h2>

@@ -1547,5 +1547,17 @@
   "admin.st.q.easy": "Más acertadas",
   "admin.st.q.most": "Más jugadas",
   "admin.st.q.hint": "{n} preguntas seguidas; clasificación desde {min} respuestas.",
-  "admin.st.q.n": "{n} respuestas"
+  "admin.st.q.n": "{n} respuestas",
+  "admin.st.people": "Jugadores",
+  "admin.st.peopleHint": "Jugadores distintos (uno por dispositivo). «Sin cuenta»: solo jugó como invitado en el periodo. Contado desde el {date}.",
+  "admin.st.period": "Periodo",
+  "admin.st.guests": "Sin cuenta",
+  "admin.st.withAcct": "Con cuenta",
+  "admin.st.guestShare": "Parte sin cuenta",
+  "admin.st.playsSplit": "Partidas jugadas sin cuenta: {pct} ({n} de {total})",
+  "admin.st.accounts": "{n} cuentas creadas en total",
+  "admin.st.kGuests": "jugadores sin cuenta (7 días)",
+  "admin.st.rowToday": "Hoy",
+  "admin.st.row7": "Últimos 7 días",
+  "admin.st.row30": "Últimos 30 días"
 }

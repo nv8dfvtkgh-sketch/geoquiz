@@ -1547,5 +1547,17 @@
   "admin.st.q.easy": "Les plus réussies",
   "admin.st.q.most": "Les plus jouées",
   "admin.st.q.hint": "{n} questions suivies ; classement à partir de {min} réponses.",
-  "admin.st.q.n": "{n} réponses"
+  "admin.st.q.n": "{n} réponses",
+  "admin.st.people": "Joueurs",
+  "admin.st.peopleHint": "Joueurs distincts (un par appareil). « Sans compte » : n'a joué qu'en invité sur la période. Compté depuis le {date}.",
+  "admin.st.period": "Période",
+  "admin.st.guests": "Sans compte",
+  "admin.st.withAcct": "Avec compte",
+  "admin.st.guestShare": "Part sans compte",
+  "admin.st.playsSplit": "Parties jouées sans compte : {pct} ({n} sur {total})",
+  "admin.st.accounts": "{n} comptes créés au total",
+  "admin.st.kGuests": "joueurs sans compte (7 jours)",
+  "admin.st.rowToday": "Aujourd'hui",
+  "admin.st.row7": "7 derniers jours",
+  "admin.st.row30": "30 derniers jours"
 }

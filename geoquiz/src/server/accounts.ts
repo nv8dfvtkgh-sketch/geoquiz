@@ -21,7 +21,8 @@ interface ChallengeRecord {
 export const REPORT_REASONS = ['wrong', 'unclear', 'typo', 'translation', 'other'];
 interface ReportItem { id: string; at: number; game: string; target: string; question: string; answer: string; reason: string; comment: string; lang: string; pseudo?: string }
 /** Score de 0 à 1 rangé en 21 cases (0 %, 5 %, … 100 %). */
-interface GameAgg { plays: number; ok: number; total: number; scoreSum: number; scored: number; modes: Record<string, number>; langs: Record<string, number>; hours: number[] }
+const data = (games: any[], k: string) => games.reduce((s, g) => s + (g[k] ?? 0), 0);
+interface GameAgg { guest?: number; acct?: number; plays: number; ok: number; total: number; scoreSum: number; scored: number; modes: Record<string, number>; langs: Record<string, number>; hours: number[] }
 interface QStat { n: number; ok: number; pk?: string; pp?: Record<string, string | number>; a?: string }
 const HIST_BUCKETS = 21;
 export const FEEDBACK_TAGS = ['fun', 'learn', 'design', 'multi', 'kids', 'bug', 'hard', 'easy', 'unclear', 'slow', 'more'];
@@ -1030,7 +1031,20 @@ export class AccountService {
     const lang = ['fr', 'en', 'es', 'ar'].includes(b?.lang) ? b.lang : 'other';
     ag.langs[lang] = (ag.langs[lang] ?? 0) + 1;
     ag.hours[new Date(this.now()).getUTCHours()]++;
+    if (b?.acct) ag.acct = (ag.acct ?? 0) + 1; else ag.guest = (ag.guest ?? 0) + 1;
     await this.kv.put(`ag:${game}`, ag);
+    // Joueurs distincts du jour, avec ou sans compte : identifiant tiré au hasard sur l'appareil (anonyme).
+    const did = String(b?.did ?? '');
+    if (/^[a-z0-9]{8,16}$/.test(did)) {
+      const day = dayOf(this.now());
+      const u = (await this.kv.get<{ g: Record<string, 1>; a: Record<string, 1> }>(`u:${day}`)) ?? { g: {}, a: {} };
+      const side = b?.acct ? u.a : u.g;
+      if (!side[did] && Object.keys(side).length < 50_000) {
+        side[did] = 1;
+        await this.kv.put(`u:${day}`, u);
+        for (const k of (await this.kv.list('u:')).sort().slice(0, -90)) await this.kv.delete(k);
+      }
+    }
     if (!Array.isArray(b?.qs) || !b.qs.length) return;
     const qs = (await this.kv.get<Record<string, QStat>>(`qs:${game}`)) ?? {};
     for (const q of b.qs.slice(0, 60)) {
@@ -1071,10 +1085,22 @@ export class AccountService {
       a.hours.forEach((n, i) => { hours[i] += n; });
       for (const [l, n] of Object.entries(a.langs)) langs[l] = (langs[l] ?? 0) + n;
       for (const [m, n] of Object.entries(a.modes)) modes[m] = (modes[m] ?? 0) + n;
-      games.push({ game: g, plays: a.plays, today: sum(g, today), d7: sum(g, since(7)), d30: sum(g, since(30)), ok: a.ok, total: a.total, rate: a.total ? a.ok / a.total : a.scored ? a.scoreSum / a.scored : null, modes: a.modes, tracked: !!(await this.kv.get(`qs:${g}`)) });
+      games.push({ game: g, guest: a.guest ?? 0, acct: a.acct ?? 0, plays: a.plays, today: sum(g, today), d7: sum(g, since(7)), d30: sum(g, since(30)), ok: a.ok, total: a.total, rate: a.total ? a.ok / a.total : a.scored ? a.scoreSum / a.scored : null, modes: a.modes, tracked: !!(await this.kv.get(`qs:${g}`)) });
     }
     games.sort((x, y) => y.d30 - x.d30 || y.plays - x.plays);
-    return { today, days: days.map(({ day, n }) => ({ day, n })), games, hours, langs, modes };
+    // Joueurs distincts sur une période : « sans compte » = n'a jamais joué connecté sur cette période.
+    const uDays: { day: string; g: Record<string, 1>; a: Record<string, 1> }[] = [];
+    for (const k of (await this.kv.list('u:')).sort()) { const u = await this.kv.get<any>(k); if (u) uDays.push({ day: k.slice(2), ...u }); }
+    const people = (from: string) => {
+      const g = new Set<string>(), a = new Set<string>();
+      for (const d of uDays) if (d.day >= from) { Object.keys(d.g).forEach((x) => g.add(x)); Object.keys(d.a).forEach((x) => a.add(x)); }
+      let guests = 0; for (const x of g) if (!a.has(x)) guests++;
+      return { guests, accounts: a.size };
+    };
+    const players = { today: people(today), d7: people(since(7)), d30: people(since(30)), since: uDays[0]?.day ?? today };
+    const playsBy = { guest: data(games, 'guest'), acct: data(games, 'acct') };
+    const accounts = (await this.kv.list('acct:')).length;
+    return { today, days: days.map(({ day, n }) => ({ day, n })), games, hours, langs, modes, players, playsBy, accounts };
   }
   /** Questions d'un jeu : les plus ratées et les plus réussies. */
   async adminGameQuestions(game: string) {
