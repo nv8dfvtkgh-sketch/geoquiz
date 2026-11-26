@@ -24,7 +24,7 @@ export function LiveBlock() {
         <button type="button" className="lv-all" onClick={() => go('events')}>{t('live.all')} ›</button>
       </div>
       <div className="lv-chips">
-        {live.slice(0, 3).map((l) => (
+        {live.map((l) => (
           <button type="button" key={l.id} className={`lv-chip ${l.color ?? ''}`} onClick={() => openGame(l.game)}>
             <span className="lv-emo" aria-hidden="true">{l.emoji}</span>
             <span className="lv-name">{(l.names[lang] ?? l.names.fr).split(/\s*:\s*/)[0]}</span>
@@ -51,8 +51,8 @@ export function EventsScreen() {
       <p className="lv-sub">{t('live.sub')}</p>
       {!live.length && <p className="lv-empty">{t('live.empty')}</p>}
       {live.map((l) => {
-        const col = l.game === 'week' && wk ? COLLECTORS.find((c) => c.event === wk.id) : undefined;
-        const dates = l.from === l.to ? fmt(l.from) : `${fmt(l.from)} – ${fmt(l.to)}`;
+        const col = l.game === 'week' && wk && l.to ? COLLECTORS.find((c) => c.event === wk.id) : undefined;
+        const dates = !l.to ? t('live.since', { date: fmt(l.from) }) : l.from === l.to ? fmt(l.from) : `${fmt(l.from)} – ${fmt(l.to)}`;
         return (
           <article key={l.id} className="lv-card">
             <div className={`lv-top ${l.color ?? ''}`}>

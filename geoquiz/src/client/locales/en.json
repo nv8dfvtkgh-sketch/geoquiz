@@ -1500,5 +1500,10 @@
   "game.ev_f1": "The special quiz for the end of the Formula 1 season.",
   "game.ev_davis.long": "For the Finals in Bologna: history of the trophy, great nations, records and qualified teams.",
   "game.ev_f1.long": "For the end of the season: the Qatar Grand Prix, the Abu Dhabi finale, the new champion and F1 legends.",
-  "game.month.long": "One big theme for a whole month: 10 questions, replay as much as you like, with a collector to win."
+  "game.month.long": "One big theme for a whole month: 10 questions, replay as much as you like, with a collector to win.",
+  "cat.ev_percy": "Percy Jackson",
+  "game.ev_percy": "The special Percy Jackson quiz: the Disney+ series and the books.",
+  "game.ev_percy.long": "Rick Riordan's saga and the Disney+ series: demigods, monsters, Camp Half-Blood and season 3 (no spoilers about the ending!).",
+  "live.since": "since {date}",
+  "live.about.ev_percy": "Disney+ series and books"
 }

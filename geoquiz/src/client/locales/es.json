@@ -1500,5 +1500,10 @@
   "game.ev_f1": "El quiz especial del final de temporada de Fórmula 1.",
   "game.ev_davis.long": "Para la fase final en Bolonia: historia de la Ensaladera, grandes países, récords y equipos clasificados.",
   "game.ev_f1.long": "Para el final de temporada: el Gran Premio de Catar, la final en Abu Dabi, el nuevo campeón y las leyendas de la F1.",
-  "game.month.long": "Un gran tema durante todo un mes: 10 preguntas, rejugable cuanto quieras, con un coleccionable para ganar."
+  "game.month.long": "Un gran tema durante todo un mes: 10 preguntas, rejugable cuanto quieras, con un coleccionable para ganar.",
+  "cat.ev_percy": "Percy Jackson",
+  "game.ev_percy": "El quiz especial de Percy Jackson: la serie de Disney+ y los libros.",
+  "game.ev_percy.long": "La saga de Rick Riordan y la serie de Disney+: semidioses, monstruos, el Campamento Mestizo y la temporada 3 (¡sin destripar el final!).",
+  "live.since": "desde el {date}",
+  "live.about.ev_percy": "Serie de Disney+ y libros"
 }

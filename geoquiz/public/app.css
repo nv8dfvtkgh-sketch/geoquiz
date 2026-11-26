@@ -2055,7 +2055,10 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .lv-dot { width: 9px; height: 9px; border-radius: 50%; background: #F43F5E; flex: none; animation: lv-pulse 1.6s infinite; }
 @keyframes lv-pulse { 0% { box-shadow: 0 0 0 0 #F43F5E99; } 70% { box-shadow: 0 0 0 8px #F43F5E00; } 100% { box-shadow: 0 0 0 0 #F43F5E00; } }
 @media (prefers-reduced-motion: reduce) { .lv-dot { animation: none; } }
-.lv-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin-top: 10px; }
+.lv-chips { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.lv-chips::-webkit-scrollbar { display: none; }
+.lv-chips > .lv-chip { flex: 1 0 calc((100% - 16px) / 3); scroll-snap-align: start; min-width: 0; }
+.lv-chips:has(> :nth-child(4)) > .lv-chip { flex-basis: calc((100% - 16px) / 3.3); }
 .lv-chip { border: 0; border-radius: 14px; padding: 10px 6px; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; font: 600 .8rem/1.2 var(--font-ui); background: linear-gradient(160deg, #6366F1, #312E81); }
 .lv-chip .lv-emo { font-size: 1.6rem; line-height: 1.2; }
 .lv-chip .lv-when { font-weight: 500; opacity: .9; font-size: .74rem; }
@@ -2063,7 +2066,8 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
 .green { --lv: linear-gradient(160deg, #16A34A, #065F46); }
 .blue { --lv: linear-gradient(160deg, #2563EB, #1E3A8A); }
 .red { --lv: linear-gradient(160deg, #DC2626, #7F1D1D); }
-.lv-chip.green, .lv-chip.blue, .lv-chip.red, .lv-top.green, .lv-top.blue, .lv-top.red { background: var(--lv); }
+.sea { --lv: linear-gradient(160deg, #0EA5E9, #0F766E 60%, #134E4A); }
+.lv-chip.green, .lv-chip.blue, .lv-chip.red, .lv-chip.sea, .lv-top.green, .lv-top.blue, .lv-top.red, .lv-top.sea { background: var(--lv); }
 .lv-page { display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; }
 .lv-page h1 { margin: 0; }
 .lv-sub { color: var(--ink-2); margin: -6px 0 2px; }

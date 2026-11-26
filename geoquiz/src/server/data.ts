@@ -117,7 +117,7 @@ export const PACK_GAMES: Record<string, string[]> = {
   peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
   arts: ['arts'], litt: ['litt'], nature: ['nature'], myth: ['myth'], tech: ['tech'],
   // Quiz des grands événements du moment (page « Événements »)
-  ev_davis: ['ev_davis'], ev_f1: ['ev_f1'],
+  ev_davis: ['ev_davis'], ev_f1: ['ev_f1'], ev_percy: ['ev_percy'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */
@@ -127,7 +127,7 @@ export interface GameEvent { id: string; pack: string; emoji: string; start: str
 /** Grands événements affichés « En direct » : visibles de start à end (end = quelques jours après la fin). */
 export const activeLive = (now = Date.now()) => {
   const day = new Date(now).toISOString().slice(0, 10);
-  return extras.events.filter((e) => e.kind === 'live' && e.start <= day && day <= e.end).sort((a, b) => (a.to ?? '').localeCompare(b.to ?? '') || (a.from ?? '').localeCompare(b.from ?? ''));
+  return extras.events.filter((e) => e.kind === 'live' && e.start <= day && day <= e.end).sort((a, b) => (a.to ?? '9999').localeCompare(b.to ?? '9999') || (a.from ?? '').localeCompare(b.from ?? ''));
 };
 const activeOf = (kind: GameEvent['kind'], now: number) => {
   const day = new Date(now).toISOString().slice(0, 10);

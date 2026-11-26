@@ -166,6 +166,7 @@ export const findGame = (id: string) => {
   const extra: Record<string, GameDef & { tint: string }> = {
     ev_davis: { id: 'ev_davis', icon: 'tennis', tint: 'tint-rose' },
     ev_f1: { id: 'ev_f1', icon: 'wheel', tint: 'tint-rose' },
+    ev_percy: { id: 'ev_percy', icon: 'bolt', tint: 'tint-ocean' },
   };
   return all.find((g) => g.id === id) ?? extra[id] ?? (id.startsWith('rev_') ? all.find((g) => g.id === id.slice(0, 6)) : undefined);
 };
