@@ -1,5 +1,5 @@
 // « Crée ton quiz » : mes quiz, éditeur, fiche d'un quiz à jouer, et espace de validation (admin).
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { DEFAULT_SETTINGS, type RoomKind, type Settings } from '../../shared/protocol';
 import { createGame } from '../net';
 import { useApp } from '../state';
@@ -432,7 +432,7 @@ export function Admin() {
   const [list, setList] = useState<any[] | null>(null);
   const [err, setErr] = useState('');
   const [filter, setFilter] = useState<'pending' | 'approved' | 'rejected'>('pending');
-  const [tab, setTab] = useState<'quizzes' | 'players' | 'feedback' | 'reports'>('quizzes');
+  const [tab, setTab] = useState<'quizzes' | 'players' | 'feedback' | 'reports' | 'stats'>('stats');
   const [open, setOpen] = useState<any>(null);
   const [imgs, setImgs] = useState<Record<string, string>>({});
   const [reason, setReason] = useState('');
@@ -529,19 +529,20 @@ export function Admin() {
   };
   const tabs = (
     <div className="seg admin-tabs">
+      <button type="button" aria-pressed={tab === 'stats'} onClick={() => setTab('stats')}>📊 {t('admin.tabStats')}</button>
       <button type="button" aria-pressed={tab === 'quizzes'} onClick={() => setTab('quizzes')}>{t('admin.tabQuizzes')}</button>
       <button type="button" aria-pressed={tab === 'players'} onClick={() => setTab('players')}>{t('admin.tabPlayers')}</button>
       <button type="button" aria-pressed={tab === 'feedback'} onClick={() => setTab('feedback')}>{t('admin.tabFeedback')}</button>
       <button type="button" aria-pressed={tab === 'reports'} onClick={() => setTab('reports')}>{t('admin.tabReports')}</button>
     </div>
   );
-  if (tab === 'players' || tab === 'feedback' || tab === 'reports') {
+  if (tab === 'players' || tab === 'feedback' || tab === 'reports' || tab === 'stats') {
     return (
       <div className="quizzes panel">
         <BackLink onClick={() => { history.replaceState(null, '', '/'); go('home'); }} label={t('setup.backHome')} />
         <h1>{t('admin.title')}</h1>
         {tabs}
-        {tab === 'players' ? <PlayersAdmin pwd={pwd} /> : tab === 'reports' ? <ReportsAdmin pwd={pwd} /> : <FeedbackAdmin pwd={pwd} />}
+        {tab === 'stats' ? <StatsAdmin pwd={pwd} /> : tab === 'players' ? <PlayersAdmin pwd={pwd} /> : tab === 'reports' ? <ReportsAdmin pwd={pwd} /> : <FeedbackAdmin pwd={pwd} />}
       </div>
     );
   }
@@ -740,6 +741,160 @@ function FeedbackAdmin({ pwd }: { pwd: string }) {
             </li>
           ))}
         </ul>
+      )}
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------ statistiques du site (admin)
+const pct = (x: number | null | undefined) => (x == null ? '–' : `${Math.round(x * 100)} %`);
+const MODES = ['solo', 'duel', 'room'];
+
+/** Tableau de bord : parties par jour, par jeu, taux de bonnes réponses, heures, langues ; détail des questions. */
+function StatsAdmin({ pwd }: { pwd: string }) {
+  const { t, lang } = useApp();
+  const [data, setData] = useState<any>(null);
+  const [sort, setSort] = useState<'d30' | 'd7' | 'today' | 'plays' | 'rate'>('d30');
+  const [open, setOpen] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
+  const auth = { Authorization: `Bearer ${pwd}` };
+  useEffect(() => { api('/api/admin/stats', { headers: auth } as never).then((r) => (r.ok ? setData(r.data) : setFailed(true))); }, []);
+  if (failed) return <p className="error">{t('admin.statsError')}</p>;
+  if (!data) return <div className="loading" />;
+  const name = (g: string) => { const k = `cat.${g}`; const v = t(k); return v === k ? g : v; };
+  const days: { day: string; n: number }[] = data.days.slice(-30);
+  const sumDays = (n: number) => data.days.slice(-n).reduce((s: number, d: any) => s + d.n, 0);
+  const ok = data.games.reduce((s: number, g: any) => s + g.ok, 0);
+  const total = data.games.reduce((s: number, g: any) => s + g.total, 0);
+  const max = Math.max(1, ...days.map((d) => d.n));
+  const hmax = Math.max(1, ...data.hours);
+  const games = [...data.games].sort((a: any, b: any) => (sort === 'rate' ? (a.rate ?? 2) - (b.rate ?? 2) : b[sort] - a[sort]));
+  const langTot = Object.values(data.langs as Record<string, number>).reduce((s, n) => s + n, 0) || 1;
+  const modeTot = Object.values(data.modes as Record<string, number>).reduce((s, n) => s + n, 0) || 1;
+  const exportXlsx = () => {
+    const rows = [[t('admin.st.game'), t('admin.st.today'), t('admin.st.d7'), t('admin.st.d30'), t('admin.st.total'), t('admin.st.rate'), t('admin.st.good'), t('admin.st.answers'), ...MODES.map((m) => t(`admin.st.mode.${m}`))]];
+    for (const g of games) rows.push([name(g.game), g.today, g.d7, g.d30, g.plays, g.rate == null ? '' : Math.round(g.rate * 100), g.ok, g.total, ...MODES.map((m) => g.modes?.[m] ?? 0)]);
+    const daysRows = [[t('admin.st.day'), t('admin.st.plays')], ...data.days.map((d: any) => [d.day, d.n])];
+    download(writeXlsx([{ name: t('admin.st.games'), rows: rows.map((r) => r.map(String)), widths: [28, 8, 8, 8, 8, 12, 10, 10, 8, 8, 8], bold: [0] }, { name: t('admin.st.days'), rows: daysRows.map((r: any[]) => r.map(String)), widths: [14, 10], bold: [0] }]), `quizellige-stats-${data.today}.xlsx`);
+  };
+  return (
+    <div className="stats-admin">
+      <div className="profile-stats st-kpis">
+        <div><strong>{days.find((d) => d.day === data.today)?.n ?? 0}</strong><span>{t('admin.st.kToday')}</span></div>
+        <div><strong>{sumDays(7)}</strong><span>{t('admin.st.k7')}</span></div>
+        <div><strong>{sumDays(30)}</strong><span>{t('admin.st.k30')}</span></div>
+        <div><strong>{pct(total ? ok / total : null)}</strong><span>{t('admin.st.kRate', { n: total })}</span></div>
+      </div>
+
+      <section className="st-card">
+        <h2>{t('admin.st.perDay')}</h2>
+        {days.length === 0 ? <p className="muted">{t('admin.st.empty')}</p> : (
+          <div className="st-bars" role="img" aria-label={t('admin.st.perDay')}>
+            {days.map((d) => (
+              <div key={d.day} className="st-bar" title={`${d.day} : ${d.n}`}>
+                <span className="st-n">{d.n || ''}</span>
+                <i style={{ height: `${(d.n / max) * 100}%` }} />
+                <small>{new Date(d.day).toLocaleDateString(lang, { day: 'numeric', month: 'numeric' })}</small>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="st-card">
+        <div className="st-head">
+          <h2>{t('admin.st.games')}</h2>
+          <button type="button" className="btn" onClick={exportXlsx}>📊 {t('admin.st.export')}</button>
+        </div>
+        <p className="muted small">{t('admin.st.gamesHint')}</p>
+        <div className="st-table-wrap">
+          <table className="st-table">
+            <thead>
+              <tr>
+                <th>{t('admin.st.game')}</th>
+                {(['today', 'd7', 'd30', 'plays', 'rate'] as const).map((k) => (
+                  <th key={k}><button type="button" className={`text-btn ${sort === k ? 'on' : ''}`} onClick={() => setSort(k)}>{t(`admin.st.${k === 'plays' ? 'total' : k}`)}{sort === k ? ' ▾' : ''}</button></th>
+                ))}
+                <th>{t('admin.st.modes')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {games.map((g: any) => (
+                <Fragment key={g.game}>
+                  <tr className={open === g.game ? 'open' : ''}>
+                    <td>{g.tracked ? <button type="button" className="text-btn" onClick={() => setOpen(open === g.game ? null : g.game)}>{open === g.game ? '▾' : '▸'} {name(g.game)}</button> : name(g.game)}</td>
+                    <td>{g.today}</td><td>{g.d7}</td><td>{g.d30}</td><td>{g.plays}</td>
+                    <td><span className="st-rate"><span className="st-track"><i style={{ width: `${(g.rate ?? 0) * 100}%`, background: g.rate == null ? 'transparent' : g.rate < 0.4 ? '#DC2626' : g.rate < 0.7 ? '#F59E0B' : '#16A34A' }} /></span><b>{pct(g.rate)}</b></span></td>
+                    <td className="muted small">{MODES.filter((m) => g.modes?.[m]).map((m) => `${t(`admin.st.mode.${m}`)} ${g.modes[m]}`).join(' · ')}</td>
+                  </tr>
+                </Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {open && (
+          <div className="st-detail">
+            <div className="st-head"><h2>{name(open)}</h2><button type="button" className="text-btn" onClick={() => setOpen(null)}>✕</button></div>
+            <GameQuestions game={open} auth={auth} />
+          </div>
+        )}
+      </section>
+
+      <div className="st-grid">
+        <section className="st-card">
+          <h2>{t('admin.st.hours')}</h2>
+          <div className="st-bars st-hours">
+            {data.hours.map((n: number, h: number) => (
+              <div key={h} className="st-bar" title={`${h} h : ${n}`}><i style={{ height: `${(n / hmax) * 100}%` }} /><small>{h % 3 === 0 ? `${h}h` : ''}</small></div>
+            ))}
+          </div>
+          <p className="muted small">{t('admin.st.hoursHint')}</p>
+        </section>
+        <section className="st-card">
+          <h2>{t('admin.st.langs')}</h2>
+          <ul className="st-split">
+            {Object.entries(data.langs as Record<string, number>).sort((a, b) => b[1] - a[1]).map(([l, n]) => (
+              <li key={l}><span>{l.toUpperCase()}</span><span className="st-rate"><span className="st-track"><i style={{ width: `${(n / langTot) * 100}%` }} /></span><b>{Math.round((n / langTot) * 100)} %</b></span></li>
+            ))}
+          </ul>
+          <h2>{t('admin.st.modes')}</h2>
+          <ul className="st-split">
+            {Object.entries(data.modes as Record<string, number>).sort((a, b) => b[1] - a[1]).map(([m, n]) => (
+              <li key={m}><span>{t(`admin.st.mode.${m}`)}</span><span className="st-rate"><span className="st-track"><i style={{ width: `${(n / modeTot) * 100}%` }} /></span><b>{Math.round((n / modeTot) * 100)} %</b></span></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+/** Questions d'un jeu : les plus ratées (à vérifier) et les plus réussies (trop faciles ?). */
+function GameQuestions({ game, auth }: { game: string; auth: Record<string, string> }) {
+  const { t } = useApp();
+  const [list, setList] = useState<any[] | null>(null);
+  const [view, setView] = useState<'hard' | 'easy' | 'most'>('hard');
+  useEffect(() => { api(`/api/admin/stats/${game}`, { headers: auth } as never).then((r) => setList(r.ok ? r.data : [])); }, [game]);
+  if (!list) return <div className="loading" />;
+  const MIN = 3;
+  const enough = list.filter((q) => q.n >= MIN);
+  const shown = (view === 'most' ? list : view === 'hard' ? [...enough].sort((a, b) => a.rate - b.rate) : [...enough].sort((a, b) => b.rate - a.rate)).slice(0, 15);
+  const text = (q: any) => { if (!q.pk) return q.id; const v = t(q.pk, q.pp ?? {}); return v === q.pk ? q.id : v; };
+  return (
+    <div className="st-questions">
+      <div className="seg">
+        {(['hard', 'easy', 'most'] as const).map((v) => <button type="button" key={v} aria-pressed={view === v} onClick={() => setView(v)}>{t(`admin.st.q.${v}`)}</button>)}
+      </div>
+      <p className="muted small">{t('admin.st.q.hint', { n: list.length, min: MIN })}</p>
+      {shown.length === 0 ? <p className="muted">{t('admin.st.empty')}</p> : (
+        <ol className="st-qlist">
+          {shown.map((q) => (
+            <li key={q.id}>
+              <span className="st-rate"><span className="st-track"><i style={{ width: `${q.rate * 100}%`, background: q.rate < 0.4 ? '#DC2626' : q.rate < 0.7 ? '#F59E0B' : '#16A34A' }} /></span><b>{pct(q.rate)}</b></span>
+              <span dir="auto">{text(q)}{q.a ? <> → <strong>{q.a}</strong></> : null} <span className="muted small">({t('admin.st.q.n', { n: q.n })})</span></span>
+            </li>
+          ))}
+        </ol>
       )}
     </div>
   );

@@ -143,7 +143,10 @@ export function App() {
         setTimeout(() => void earnSticker(k, game), 1200);
         // Popularité du jeu et comparaison avec les autres joueurs (sa part de bonnes réponses).
         const mineOk = msg.solo ? msg.solo.correct / Math.max(1, msg.solo.total) : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length / Math.max(1, msg.recap.length);
-        setTimeout(() => void reportPlay(game, msg.recap.length || msg.solo ? mineOk : undefined, k), 2500);
+        const mine = msg.recap.map((r) => ({ id: r.target ?? `#${r.index}`, ok: r.results.some((x) => x.id === youId && x.correct), pk: r.pk, pp: r.pp, a: r.label }));
+        const okN = msg.solo ? msg.solo.correct : mine.filter((x) => x.ok).length;
+        const totalN = msg.solo ? msg.solo.total : mine.length;
+        setTimeout(() => void reportPlay(game, msg.recap.length || msg.solo ? mineOk : undefined, k, { ok: okN, total: totalN, mode: net.kind, qs: mine.filter((x) => !x.id.startsWith('#')) }), 2500);
         // Défi de la semaine : le collector, une fois, si au moins la moitié est juste.
         if (game === 'week' || game === 'month') {
           const ok = msg.solo ? msg.solo.correct : msg.recap.filter((r) => r.results.some((x) => x.id === youId && x.correct)).length;

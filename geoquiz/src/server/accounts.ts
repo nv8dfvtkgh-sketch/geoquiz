@@ -21,6 +21,8 @@ interface ChallengeRecord {
 export const REPORT_REASONS = ['wrong', 'unclear', 'typo', 'translation', 'other'];
 interface ReportItem { id: string; at: number; game: string; target: string; question: string; answer: string; reason: string; comment: string; lang: string; pseudo?: string }
 /** Score de 0 à 1 rangé en 21 cases (0 %, 5 %, … 100 %). */
+interface GameAgg { plays: number; ok: number; total: number; scoreSum: number; scored: number; modes: Record<string, number>; langs: Record<string, number>; hours: number[] }
+interface QStat { n: number; ok: number; pk?: string; pp?: Record<string, string | number>; a?: string }
 const HIST_BUCKETS = 21;
 export const FEEDBACK_TAGS = ['fun', 'learn', 'design', 'multi', 'kids', 'bug', 'hard', 'easy', 'unclear', 'slow', 'more'];
 interface FeedbackItem {
@@ -999,9 +1001,10 @@ export class AccountService {
     const counts = (await this.kv.get<Record<string, number>>(`pl:${day}`)) ?? {};
     counts[game] = (counts[game] ?? 0) + 1;
     await this.kv.put(`pl:${day}`, counts);
-    const old = (await this.kv.list('pl:')).sort().slice(0, -15);
+    const old = (await this.kv.list('pl:')).sort().slice(0, -90);
     for (const k of old) await this.kv.delete(k);
     this.popCache = null;
+    await this.recordStats(game, b);
     const score = Number(b?.score);
     if (!(score >= 0 && score <= 1)) return { n: 0 };
     const h = (await this.kv.get<number[]>(`hist:${game}`)) ?? new Array(HIST_BUCKETS).fill(0);
@@ -1012,6 +1015,71 @@ export class AccountService {
     h[i]++;
     await this.kv.put(`hist:${game}`, h);
     return { n, better: n ? Math.round((below / n) * 100) : null };
+  }
+  /** Statistiques pour l'administrateur : totaux par jeu (bonnes réponses, mode, langue, heure)
+   *  et, quand la partie les donne, résultats question par question. Aucune donnée personnelle. */
+  private async recordStats(game: string, b: any) {
+    const ag = (await this.kv.get<GameAgg>(`ag:${game}`)) ?? { plays: 0, ok: 0, total: 0, scoreSum: 0, scored: 0, modes: {}, langs: {}, hours: new Array(24).fill(0) };
+    ag.plays++;
+    const score = Number(b?.score);
+    if (score >= 0 && score <= 1) { ag.scoreSum += score; ag.scored++; }
+    const ok = Math.floor(Number(b?.ok)), total = Math.floor(Number(b?.total));
+    if (total > 0 && total <= 200 && ok >= 0 && ok <= total) { ag.ok += ok; ag.total += total; }
+    const mode = ['solo', 'duel', 'room', 'host', 'quick'].includes(b?.mode) ? b.mode : 'other';
+    ag.modes[mode] = (ag.modes[mode] ?? 0) + 1;
+    const lang = ['fr', 'en', 'es', 'ar'].includes(b?.lang) ? b.lang : 'other';
+    ag.langs[lang] = (ag.langs[lang] ?? 0) + 1;
+    ag.hours[new Date(this.now()).getUTCHours()]++;
+    await this.kv.put(`ag:${game}`, ag);
+    if (!Array.isArray(b?.qs) || !b.qs.length) return;
+    const qs = (await this.kv.get<Record<string, QStat>>(`qs:${game}`)) ?? {};
+    for (const q of b.qs.slice(0, 60)) {
+      const id = String(q?.id ?? '').slice(0, 80);
+      if (!id) continue;
+      const s = (qs[id] ??= { n: 0, ok: 0 });
+      s.n++;
+      if (q.ok) s.ok++;
+      if (!s.pk && typeof q.pk === 'string') {
+        s.pk = q.pk.slice(0, 60);
+        if (q.pp && typeof q.pp === 'object') s.pp = Object.fromEntries(Object.entries(q.pp).slice(0, 6).map(([k, v]) => [k.slice(0, 20), typeof v === 'number' ? v : String(v).slice(0, 160)]));
+        if (typeof q.a === 'string') s.a = q.a.slice(0, 120);
+      }
+    }
+    // Pas plus de 3 000 questions suivies par jeu : on garde les plus jouées.
+    const ids = Object.keys(qs);
+    if (ids.length > 3000) for (const id of ids.sort((x, y) => qs[x].n - qs[y].n).slice(0, ids.length - 3000)) delete qs[id];
+    await this.kv.put(`qs:${game}`, qs);
+  }
+  /** Tableau de bord : parties par jour (90 j), par jeu, heures et langues. */
+  async adminStats() {
+    const days: { day: string; n: number; games: Record<string, number> }[] = [];
+    for (const k of (await this.kv.list('pl:')).sort()) {
+      const games = (await this.kv.get<Record<string, number>>(k)) ?? {};
+      days.push({ day: k.slice(3), n: Object.values(games).reduce((s, x) => s + x, 0), games });
+    }
+    const today = dayOf(this.now());
+    const since = (n: number) => dayOf(this.now() - (n - 1) * 86400000);
+    const sum = (game: string, from: string) => days.filter((d) => d.day >= from).reduce((s, d) => s + (d.games[game] ?? 0), 0);
+    const games: any[] = [];
+    const hours = new Array(24).fill(0);
+    const langs: Record<string, number> = {};
+    const modes: Record<string, number> = {};
+    for (const k of await this.kv.list('ag:')) {
+      const g = k.slice(3);
+      const a = await this.kv.get<GameAgg>(k);
+      if (!a) continue;
+      a.hours.forEach((n, i) => { hours[i] += n; });
+      for (const [l, n] of Object.entries(a.langs)) langs[l] = (langs[l] ?? 0) + n;
+      for (const [m, n] of Object.entries(a.modes)) modes[m] = (modes[m] ?? 0) + n;
+      games.push({ game: g, plays: a.plays, today: sum(g, today), d7: sum(g, since(7)), d30: sum(g, since(30)), ok: a.ok, total: a.total, rate: a.total ? a.ok / a.total : a.scored ? a.scoreSum / a.scored : null, modes: a.modes, tracked: !!(await this.kv.get(`qs:${g}`)) });
+    }
+    games.sort((x, y) => y.d30 - x.d30 || y.plays - x.plays);
+    return { today, days: days.map(({ day, n }) => ({ day, n })), games, hours, langs, modes };
+  }
+  /** Questions d'un jeu : les plus ratées et les plus réussies. */
+  async adminGameQuestions(game: string) {
+    const qs = (await this.kv.get<Record<string, QStat>>(`qs:${game}`)) ?? {};
+    return Object.entries(qs).map(([id, s]) => ({ id, ...s, rate: s.n ? s.ok / s.n : 0 })).sort((a, b) => b.n - a.n);
   }
   private popCache: { at: number; list: { game: string; n: number }[] } | null = null;
   /** Jeux les plus joués sur les 7 derniers jours. */
@@ -1102,6 +1170,14 @@ export async function accountRoute(
     if (path === '/api/report' && method === 'POST') { await svc.report(await body(), bearer || null); return { status: 200, json: {} }; }
     if (path === '/api/play' && method === 'POST') return { status: 200, json: await svc.play(await body()) };
     if (path === '/api/popular' && method === 'GET') return { status: 200, json: await svc.popular() };
+    if (path.startsWith('/api/admin/stats')) {
+      if (adminOk === null) return { status: 503, json: { error: 'admin.notConfigured' } };
+      if (!adminOk) return { status: 401, json: { error: 'admin.denied' } };
+      if (path === '/api/admin/stats' && method === 'GET') return { status: 200, json: await svc.adminStats() };
+      const m = path.match(/^\/api\/admin\/stats\/([a-z_0-9]{2,24})$/);
+      if (m && method === 'GET') return { status: 200, json: await svc.adminGameQuestions(m[1]) };
+      return null;
+    }
     if (path.startsWith('/api/admin/reports')) {
       if (adminOk === null) return { status: 503, json: { error: 'admin.notConfigured' } };
       if (!adminOk) return { status: 401, json: { error: 'admin.denied' } };
