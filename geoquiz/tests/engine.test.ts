@@ -1617,7 +1617,7 @@ test('Événements en direct : rugby, Coupe Davis, F1 ; quiz jouables', async ()
   assert.deepEqual(activeLive(Date.parse('2026-12-07T10:00:00Z')).map((e) => e.id), ['live-f1-2026', 'live-percy-2026']);
   assert.deepEqual(activeLive(Date.parse('2026-12-10T10:00:00Z')).map((e) => e.id), ['live-percy-2026']);
   assert.equal(activeLive(Date.parse('2027-02-05T10:00:00Z')).length, 0);
-  for (const cat of ['ev_davis', 'ev_f1', 'ev_percy']) {
+  for (const cat of ['ev_davis', 'ev_f1', 'ev_percy', 'ev_percy_fan']) {
     assert.ok(extras.packs[cat].length >= 35, cat);
     const qs = drawQuestions({ category: cat, zone: 'world', difficulty: 'medium', qtype: 'mcq', count: 10, timeLimit: 20 } as Settings);
     assert.equal(qs.length, 10, cat);

@@ -117,7 +117,7 @@ export const PACK_GAMES: Record<string, string[]> = {
   peaks: ['peaks'], records: ['records'], inventions: ['inventions'], afrisport: ['afrisport'],
   arts: ['arts'], litt: ['litt'], nature: ['nature'], myth: ['myth'], tech: ['tech'],
   // Quiz des grands événements du moment (page « Événements »)
-  ev_davis: ['ev_davis'], ev_f1: ['ev_f1'], ev_percy: ['ev_percy'],
+  ev_davis: ['ev_davis'], ev_f1: ['ev_f1'], ev_percy: ['ev_percy'], ev_percy_fan: ['ev_percy_fan'],
 };
 /** Événement du moment : un pack de questions et un badge, entre deux dates (incluses). */
 /** Événement (sans « kind »), défi de la semaine (kind « week ») ou thème du défi du jour (kind « daily »). */

@@ -1505,5 +1505,10 @@
   "game.ev_percy": "Le quiz spécial Percy Jackson : la série Disney+ et les livres.",
   "game.ev_percy.long": "La saga de Rick Riordan et la série Disney+ : demi-dieux, monstres, la Colonie des Sang-Mêlé et la saison 3 (sans rien dévoiler de la fin !).",
   "live.since": "depuis le {date}",
-  "live.about.ev_percy": "Série Disney+ et livres"
+  "live.about.ev_percy": "Série Disney+ et livres",
+  "diff.fan": "Hyper fan",
+  "cat.ev_percy_fan": "Percy Jackson : Hyper fan",
+  "game.ev_percy_fan": "Le niveau réservé aux vrais fans de Percy Jackson.",
+  "game.ev_percy_fan.long": "Uniquement des questions pointues sur les livres et la série : objets, lieux, répliques, coulisses. Si tu réussis, tu es un vrai demi-dieu ! (Rien sur la fin du tome 3.)",
+  "live.fan": "Hyper fan"
 }

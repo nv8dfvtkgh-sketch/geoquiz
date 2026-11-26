@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { LIMITS, type Difficulty, type QType, type RoomKind, type Settings, type ZoneInfo } from '../../shared/protocol';
-import { findGame, Icon } from '../games';
+import { FAN_BASE, FAN_LEVEL, findGame, Icon } from '../games';
 import { createGame, net } from '../net';
 import { useApp } from '../state';
 import { api, lockedFor } from '../account';
@@ -12,7 +12,7 @@ import { dailyDoneHere, nextDailyTime } from '../dailyLock';
  * (seul, en duel, en salle). Sert aussi à modifier les réglages depuis la salle d'attente.
  */
 export function Setup() {
-  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail, me, auth } = useApp();
+  const { t, s, send, go, catalog, settings, setSettings, name, lang, fail, me, auth, openGame } = useApp();
   const editing = s.setupKind === 'edit';
   const roomKind = editing ? s.room!.kind : null;
   const game = editing ? s.room!.settings.category : s.game;
@@ -20,7 +20,10 @@ export function Setup() {
   // Défi du jour : questions imposées (10, même tirage pour tous).
   const review = game === 'review';
   const fixed = game === 'daily' || review || game === 'survival';
-  const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed]);
+  // Niveau « Hyper fan » : un quiz à part (toutes ses questions sont difficiles), affiché comme 4e niveau.
+  const fanOf = FAN_BASE[game];
+  const fanGame = FAN_LEVEL[game] ?? (fanOf ? game : undefined);
+  const cfg = useMemo(() => fix({ ...raw, category: game, ...(fixed ? { difficulty: 'easy' as const, count: 10, qtype: 'auto' as const } : fanOf ? { difficulty: 'easy' as const } : {}) }, catalog?.zones ?? []), [raw, catalog, game, fixed, fanOf]);
   const [hostPlays, setHostPlays] = useState(true);
   // Défi du jour déjà joué (sur cet appareil, ou sur le compte depuis un autre appareil) : rien avant demain.
   const [dailyDone, setDailyDone] = useState(() => game === 'daily' && dailyDoneHere());
@@ -132,10 +135,13 @@ export function Setup() {
         <legend>{t('setup.difficulty')}</legend>
         <div className="seg">
           {(['easy', 'medium', 'hard'] as Difficulty[]).map((d) => (
-            <button type="button" key={d} aria-pressed={cfg.difficulty === d} onClick={() => set({ difficulty: d })}>
+            <button type="button" key={d} aria-pressed={!fanOf && cfg.difficulty === d} onClick={() => { if (fanOf) { set({ difficulty: d }); openGame(fanOf); } else set({ difficulty: d }); }}>
               {lockedFor(me, cfg.category, d) && !editing ? <span aria-hidden="true">🔒 </span> : null}{cfg.category.startsWith('prog_') ? t(`diff.prog.${d}`) : t(`diff.${d}`)}
             </button>
           ))}
+          {fanGame && !editing && (
+            <button type="button" className="seg-fan" aria-pressed={!!fanOf} onClick={() => { if (!fanOf) openGame(fanGame); }}>🔥 {t('diff.fan')}</button>
+          )}
         </div>
         {cfg.qtype === 'auto' && (cat?.qtypes.length ?? 0) > 1 && <p className="hint">{t('setup.autoHint')}</p>}
       </fieldset>}

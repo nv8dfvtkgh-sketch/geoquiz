@@ -159,6 +159,10 @@ export const FAMILIES: Family[] = [
   },
 ];
 
+/** Jeux qui ont un niveau « Hyper fan » : un quiz à part, proposé comme 4e niveau de difficulté. */
+export const FAN_LEVEL: Record<string, string> = { ev_percy: 'ev_percy_fan' };
+export const FAN_BASE: Record<string, string> = Object.fromEntries(Object.entries(FAN_LEVEL).map(([a, b]) => [b, a]));
+
 export const findGame = (id: string) => {
   const all = FAMILIES.flatMap((f) => f.games.map((g) => ({ ...g, tint: f.tint })));
   // Révisions (rev_fr_cm1_maths…) : la tuile du programme.
@@ -167,6 +171,7 @@ export const findGame = (id: string) => {
     ev_davis: { id: 'ev_davis', icon: 'tennis', tint: 'tint-rose' },
     ev_f1: { id: 'ev_f1', icon: 'wheel', tint: 'tint-rose' },
     ev_percy: { id: 'ev_percy', icon: 'bolt', tint: 'tint-ocean' },
+    ev_percy_fan: { id: 'ev_percy_fan', icon: 'bolt', tint: 'tint-violet' },
   };
   return all.find((g) => g.id === id) ?? extra[id] ?? (id.startsWith('rev_') ? all.find((g) => g.id === id.slice(0, 6)) : undefined);
 };

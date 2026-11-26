@@ -1505,5 +1505,10 @@
   "game.ev_percy": "The special Percy Jackson quiz: the Disney+ series and the books.",
   "game.ev_percy.long": "Rick Riordan's saga and the Disney+ series: demigods, monsters, Camp Half-Blood and season 3 (no spoilers about the ending!).",
   "live.since": "since {date}",
-  "live.about.ev_percy": "Disney+ series and books"
+  "live.about.ev_percy": "Disney+ series and books",
+  "diff.fan": "Superfan",
+  "cat.ev_percy_fan": "Percy Jackson: Superfan",
+  "game.ev_percy_fan": "The level for true Percy Jackson fans.",
+  "game.ev_percy_fan.long": "Only tricky questions on the books and the series: objects, places, lines, behind the scenes. Pass it and you're a true demigod! (Nothing about the end of book 3.)",
+  "live.fan": "Superfan"
 }

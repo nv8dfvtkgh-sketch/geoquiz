@@ -1505,5 +1505,10 @@
   "game.ev_percy": "El quiz especial de Percy Jackson: la serie de Disney+ y los libros.",
   "game.ev_percy.long": "La saga de Rick Riordan y la serie de Disney+: semidioses, monstruos, el Campamento Mestizo y la temporada 3 (¡sin destripar el final!).",
   "live.since": "desde el {date}",
-  "live.about.ev_percy": "Serie de Disney+ y libros"
+  "live.about.ev_percy": "Serie de Disney+ y libros",
+  "diff.fan": "Superfan",
+  "cat.ev_percy_fan": "Percy Jackson: Superfan",
+  "game.ev_percy_fan": "El nivel para los verdaderos fans de Percy Jackson.",
+  "game.ev_percy_fan.long": "Solo preguntas difíciles sobre los libros y la serie: objetos, lugares, frases, rodaje. ¡Si aciertas, eres un auténtico semidiós! (Nada sobre el final del libro 3.)",
+  "live.fan": "Superfan"
 }

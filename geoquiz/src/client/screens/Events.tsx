@@ -3,6 +3,7 @@ import { useApp } from '../state';
 import { liveFor, liveStatus, useEvents, weekFor, type LiveInfo } from '../events';
 import { COLLECTORS } from '../../shared/stickers';
 import { loadAlbum } from '../album';
+import { FAN_LEVEL } from '../games';
 
 function Badge({ l, short }: { l: LiveInfo; short?: boolean }) {
   const { t } = useApp();
@@ -66,7 +67,10 @@ export function EventsScreen() {
             <div className="lv-bottom">
               {col && <span className={`sticker mini collector ${col.theme} ${album[col.id] ? '' : 'locked'}`} aria-hidden="true">{col.e}</span>}
               <div className="lv-meta"><b>{t('live.count', { n: l.count })}</b><span>{col ? (album[col.id] ? t('col.won') : t('live.collector')) : t(`live.about.${l.game}`)}</span></div>
-              <button type="button" className="btn primary lv-play" onClick={() => openGame(l.game)}>{t('home.play')}</button>
+              <div className="lv-btns">
+                {FAN_LEVEL[l.game] && <button type="button" className="btn lv-fan" onClick={() => openGame(FAN_LEVEL[l.game])}>🔥 {t('live.fan')}</button>}
+                <button type="button" className="btn primary lv-play" onClick={() => openGame(l.game)}>{t('home.play')}</button>
+              </div>
             </div>
           </article>
         );

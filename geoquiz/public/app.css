@@ -2114,3 +2114,14 @@ input:focus, select:focus { outline: none; border-color: var(--accent); box-shad
   .lv-top .lv-big { font-size: 2.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { .lv-chip:hover { transform: none; } }
+/* Niveau « Hyper fan » */
+.seg .seg-fan { color: #B45309; font-weight: 700; }
+.seg .seg-fan[aria-pressed="true"] { background: linear-gradient(135deg, #F59E0B, #DC2626); color: #fff; }
+.lv-btns { margin-inline-start: auto; display: flex; gap: 8px; flex: none; }
+.lv-btns .lv-play { margin-inline-start: 0; }
+.btn.lv-fan { background: linear-gradient(135deg, #F59E0B, #DC2626); color: #fff; border: 0; }
+
+.lv-bottom { flex-wrap: wrap; }
+.lv-btns:has(.lv-fan) { width: 100%; }
+.lv-btns:has(.lv-fan) .btn { flex: 1; }
+@media (min-width: 720px) { .lv-btns:has(.lv-fan) { width: auto; } .lv-btns .btn { white-space: nowrap; } }
